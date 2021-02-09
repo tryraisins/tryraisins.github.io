@@ -1,0 +1,275 @@
+
+
+                                                /* FOR DESKTOP SCREENS*/
+
+
+                                                
+
+
+@media only screen and (min-width: 769px) {
+    body {
+        
+        background-color: #20A8AA;
+        
+    }
+    
+    #nav {
+        color: #B16C27; 
+        text-decoration: none;
+    }
+header {
+    text-align: right;
+    font-size: 26px;
+    margin-top: 60px;
+    margin-right: 70px;
+}
+.work {
+    margin-right: 50px;
+    font-family: Raleway sans-serif;
+    text-decoration: none;
+}
+.journal {
+    margin-right: 50px;
+    font-family: Raleway sans-serif;
+    text-decoration: none;
+}
+.connect {
+    margin-right: 50px;
+    font-family: Raleway sans-serif;
+    text-decoration: none;
+}
+#avatar {
+    border-radius: 50%;
+    height: 320px;
+    width: 320px;
+    margin-left: 120px;
+    margin-top: 90px;
+}
+#introduction {
+    width: 700px;
+    height: 240px;
+    font-size: 28px;
+    line-height: 140%;
+}
+#leftbox {
+    float: left ;
+}
+#rightbox {
+    float: right;
+    margin-right: 120px;
+    margin-top: 60px;
+}
+h1 {
+    font-family: 'Josefin sans',sans-serif;
+    font-size: 60px;
+}
+p {
+    font-family: 'Raleway',sans-serif;
+}
+h2 {
+    font-family: 'Josefin sans',sans-serif;
+    font-size: 30px;
+}
+.work {
+    text-align: left;
+    margin-top: 580px;
+    margin-left: 180px;
+    padding-top: 12px;
+}
+.workinfo {
+    margin-left: 180px;
+    padding-bottom: 30px;
+}
+h3 {
+    font-family: 'Josefin sans',sans-serif;
+    font-size: 24px;
+    text-decoration: none;
+}
+#imglink {
+    text-align: center;
+    padding-left: 180px;
+    padding-right: 180px;
+    padding-top: 10px;
+    height: 230px;
+    width: 965px;
+}
+#journal {
+    margin-left: 180px;   
+    margin-top: 40px;
+}
+#lists {
+    margin-left: 180px;
+    font-family: 'Raleway',sans-serif;
+    font-size: 22px;
+}
+#info {
+    font-family: 'Raleway',sans-serif;
+    font-size: 22px; 
+}
+#connect {
+    margin-left: 180px;
+    margin-top: 80px;
+}
+#Email {
+    margin-left: 180px;
+    font-size: 22px;
+}
+#socials {
+    margin-left: 180px;
+    font-size: 22px;
+    font-family: 'Raleway',sans-serif;
+    text-decoration: none;
+    margin-bottom: 140px;
+}
+#twitter {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+}
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+                                                     /* FOR SMALLER SCREENS*/
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 768px) {
+    body {
+        width: fit-content !important;
+        background-color: #20A8AA;
+        margin-left: -8% !important;
+        margin-right: 10% !important;
+    }
+    
+    #nav {
+        color: #B16C27; 
+        text-decoration: none;
+    }
+    
+    header {
+        text-align: right;
+        font-size: 26px;
+        margin-top: 60px;
+        margin-right: 70px;
+    }
+    
+    .about-me{
+        display: inline !important;
+        
+    }
+    .work {
+        margin-right: 50px;
+        font-family: Raleway sans-serif;
+        text-decoration: none;
+    }
+    .journal {
+        margin-right: 50px;
+        font-family: Raleway sans-serif;
+        text-decoration: none;
+    }
+    .connect {
+        margin-right: 50px;
+        font-family: Raleway sans-serif;
+        text-decoration: none;
+    }
+    #avatar {
+        border-radius: 50%;
+        height: 320px;
+        width: 320px;
+        margin-left: 120px;
+        margin-top: 90px;
+    }
+    #introduction {
+        width: 700px;
+        height: 240px;
+        font-size: 28px;
+        line-height: 140%;
+    }
+    
+    h1 {
+        font-family: 'Josefin sans',sans-serif;
+        font-size: 60px;
+    }
+    p {
+        font-family: 'Raleway',sans-serif;
+    }
+    h2 {
+        font-family: 'Josefin sans',sans-serif;
+        font-size: 30px;
+    }
+    .work {
+        text-align: left;
+        margin-top: 580px;
+        margin-left: 180px;
+        padding-top: 12px;
+    }
+    .workinfo {
+        margin-left: 180px;
+        padding-bottom: 30px;
+    }
+    h3 {
+        font-family: 'Josefin sans',sans-serif;
+        font-size: 24px;
+        text-decoration: none;
+    }
+    #imglink {
+        text-align: center;
+        padding-left: 180px;
+        padding-right: 180px;
+        padding-top: 10px;
+        height: 230px;
+        width: 965px;
+    }
+    #journal {
+        margin-left: 180px;   
+        margin-top: 40px;
+    }
+    #lists {
+        margin-left: 180px;
+        font-family: 'Raleway',sans-serif;
+        font-size: 22px;
+    }
+    #info {
+        font-family: 'Raleway',sans-serif;
+        font-size: 22px; 
+    }
+    #connect {
+        margin-left: 180px;
+        margin-top: 80px;
+    }
+    #Email {
+        margin-left: 180px;
+        font-size: 22px;
+    }
+    #socials {
+        margin-left: 180px;
+        font-size: 22px;
+        font-family: 'Raleway',sans-serif;
+        text-decoration: none;
+        margin-bottom: 140px;
+    }
+    #twitter {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    
+    
+}
