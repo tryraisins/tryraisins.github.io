@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
     <nav ref={navRef} className="bg-gray-900 bg-opacity-90 backdrop-blur-sm fixed w-full z-50 shadow-lg top-0">
       <div className="container mx-auto px-2 py-3 flex justify-between items-center w-100">
         <div className="text-2xl font-bold text-purple-500">
-          
+          {/* Your logo or site title can go here */}
         </div>
         <div className="md:hidden">
           <button onClick={toggleMenu} className="text-gray-300 hover:text-purple-400 focus:outline-none">
@@ -65,7 +65,8 @@ const Navbar: React.FC = () => {
           </button>
         </div>
         <div className={`md:flex ${isOpen ? 'block' : 'hidden'} absolute md:static top-full left-0 w-full md:w-auto bg-gray-900 md:bg-transparent shadow-lg md:shadow-none py-4 md:py-0`}>
-          <div className="flex flex-col md:flex-row md:space-x-6 space-y-2 md:space-y-0 px-4 md:px-0">
+          {/* Added 'items-end' for right alignment on mobile */}
+          <div className="flex flex-col md:flex-row md:space-x-6 space-y-2 md:space-y-0 px-4 md:px-0 items-end"> 
             <NavLink to="home" label="Home" icon={Home} onClick={() => scrollToSection('home')} />
             <NavLink to="about" label="About" icon={User} onClick={() => scrollToSection('about')} />
             <NavLink to="skills" label="Skills" icon={Code} onClick={() => scrollToSection('skills')} />
