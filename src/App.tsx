@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Navbar from './components/navbar';
+import Hero from './components/hero';
+import About from './components/about';
+import Skills from './components/skills';
+import Projects from './components/projects';
+import Contact from './components/contact';
+import Footer from './components/footer';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <ParallaxProvider>
+    <div className="min-h-screen bg-gray-900 font-sans text-gray-100">
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
     </div>
+    </ParallaxProvider>
   );
-}
+};
 
 export default App;
