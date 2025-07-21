@@ -55,7 +55,7 @@ const Projects: React.FC = () => {
             imageSrc={portfolioV1Image}
             title="Portfolio Website V1"
             description="The first iteration of my personal portfolio, showcasing my growth/ subtle changes."
-            liveLink="#"
+            liveLink="https://tryraisinsfolio.netlify.app/"
             githubLink="https://github.com/tryraisins/portfolio-V1"
           />
         </div>
