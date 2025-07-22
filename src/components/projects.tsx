@@ -54,7 +54,7 @@ const Projects: React.FC = () => {
           <ProjectCard
             imageSrc={portfolioV1Image}
             title="Portfolio Website V1"
-            description="The first iteration of my personal portfolio, showcasing my growth/ subtle changes."
+            description="The first iteration of my personal portfolio, showcasing my growth/ subtle changes. Built with ParcelJS"
             liveLink="https://tryraisinsfolio.netlify.app/"
             githubLink="https://github.com/tryraisins/portfolio-V1"
           />
