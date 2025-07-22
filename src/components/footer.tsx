@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
           &copy; {new Date().getFullYear()} TryRaisins. All rights reserved.
         </p>
         <p className="text-xs mt-2">
-          Built with React and Tailwind CSS.
+          Built by me with React and Tailwind CSS.
         </p>
       </div>
     </footer>
