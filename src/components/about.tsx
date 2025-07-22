@@ -1,9 +1,18 @@
 import React from 'react';
 import SectionTitle from '../utils/sectionTitle';
+import { useInView } from 'react-intersection-observer';
+
 
 const About: React.FC = () => {
+  const { ref, inView } = useInView({
+      triggerOnce: true, // Animation only plays once when it enters the viewport
+      threshold: 0.5,    // Element is 50% visible
+    });
+  
   return (
-    <section id="about" className="py-20 px-4 bg-gray-800 text-gray-100">
+    <section id="about" ref={ref} className={`py-20 px-4 bg-gray-800 text-gray-100 transition-opacity duration-1000 transform
+        ${inView ? 'opacity-100 translate-y-0 animate-fade-in-section' : 'opacity-0 translate-y-10'}
+      `}>
 
       <div className="container mx-auto">
         <SectionTitle>About Me</SectionTitle>

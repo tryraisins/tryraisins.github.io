@@ -1,10 +1,18 @@
 import React from 'react';
-
+import { useInView } from 'react-intersection-observer';
 const Hero: React.FC = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Animation only plays once when it enters the viewport
+    threshold: 0.2,    // Element is 20% visible
+  });
+
   return (
     <section
       id="home"
-      className="relative h-screen flex items-center justify-center text-white overflow-hidden"
+      ref={ref}
+      className={`relative h-screen flex items-center justify-center text-white overflow-hidden transition-opacity duration-1000 transform
+        ${inView ? 'opacity-100 translate-y-0 animate-fade-in-section' : 'opacity-0 translate-y-10'}
+      `}
       style={{ background: 'linear-gradient(135deg, #111828 0%, #202938 100%)' }}
     >
       {/* Animated Grid Background */}

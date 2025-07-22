@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import SectionTitle from '../utils/sectionTitle';
+import { useInView } from 'react-intersection-observer';
+
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -44,9 +46,14 @@ const Contact: React.FC = () => {
       setStatus('error');
     }
   };
-
+ const { ref, inView } = useInView({
+      triggerOnce: true, // Animation only plays once when it enters the viewport
+      threshold: 0.5,    // Element is 50% visible
+    });
+  
   return (
-    <section id="contact" className="py-20 px-4 bg-gray-900 text-gray-100 relative">
+    <section id="contact" ref={ref}  className={`py-20 px-4 bg-gray-900 text-gray-100 relative transition-opacity duration-1000 transform
+        ${inView ? 'opacity-100 translate-y-0 animate-fade-in-section' : 'opacity-0 translate-y-10'}`}>
       {/* Background decoration */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>

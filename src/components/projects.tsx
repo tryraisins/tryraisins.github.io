@@ -1,8 +1,9 @@
 import React from 'react';
 import SectionTitle from '../utils/sectionTitle';
 import ProjectCard from '../utils/projectCard';
+import { useInView } from 'react-intersection-observer';
 
-// Import images
+
 import faceidImage from '../assets/images/faceid.jpg';
 import yeknalBakeryImage from '../assets/images/yeknal-bakery.png';
 import issTrackerImage from '../assets/images/iss-tracker.jpg';
@@ -11,8 +12,14 @@ import roboYearbookImage from '../assets/images/Robo-Yearbook.jpg';
 import portfolioV1Image from '../assets/images/portfolio-v1.png';
 
 const Projects: React.FC = () => {
+   const { ref, inView } = useInView({
+        triggerOnce: true, // Animation only plays once when it enters the viewport
+        threshold: 0.35,    // Element is 350% visible
+      });
   return (
-    <section id="projects" className="py-20 px-4 bg-gray-800 text-gray-100">
+    <section id="projects" ref={ref} className={`py-20 px-4 bg-gray-800 text-gray-100 transition-opacity duration-1000 transform
+        ${inView ? 'opacity-100 translate-y-0 animate-fade-in-section' : 'opacity-0 translate-y-10'}
+      `}>
       <div className="container mx-auto">
         <SectionTitle>My Projects</SectionTitle>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
