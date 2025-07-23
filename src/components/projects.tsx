@@ -14,7 +14,7 @@ import portfolioV1Image from '../assets/images/portfolio-v1.png';
 const Projects: React.FC = () => {
    const { ref, inView } = useInView({
         triggerOnce: true, // Animation only plays once when it enters the viewport
-        threshold: 0.35,    // Element is 350% visible
+        threshold: 0.1,    // Element is 35% visible
       });
   return (
     <section id="projects" ref={ref} className={`py-20 px-4 bg-gray-800 text-gray-100 transition-opacity duration-1000 transform

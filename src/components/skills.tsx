@@ -81,7 +81,7 @@ const Skills: React.FC = () => {
   ];
    const { ref, inView } = useInView({
         triggerOnce: true, // Animation only plays once when it enters the viewport
-        threshold: 0.35,    // Element is 35% visible
+        threshold: 0.1,    // Element is 35% visible
       });
 
   return (
