@@ -6,10 +6,11 @@ import { useInView } from 'react-intersection-observer';
 
 import faceidImage from '../assets/images/faceid.jpg';
 import yeknalBakeryImage from '../assets/images/yeknal-bakery.png';
-import issTrackerImage from '../assets/images/iss-tracker.jpg';
+// import issTrackerImage from '../assets/images/iss-tracker.jpg';
 import expenseImage from '../assets/images/expense.jpg';
 import roboYearbookImage from '../assets/images/Robo-Yearbook.jpg';
 import portfolioV1Image from '../assets/images/portfolio-v1.png';
+import echolistImgae from '../assets/images/echolist.png';
 
 const Projects: React.FC = () => {
    const { ref, inView } = useInView({
@@ -37,12 +38,19 @@ const Projects: React.FC = () => {
             liveLink="https://yeknal-bakery.netlify.app/"
             // githubLink="#"
           />
-          <ProjectCard
+          {/* <ProjectCard
             imageSrc={issTrackerImage}
             title="International Space Station Tracker"
             description="A simple react app that fetches the current location of the International Space Staion. It also shows the number of people in space at the moment, who they are and where they are."
             // liveLink="#"
             githubLink="https://github.com/tryraisins/iss-tracker"
+          /> */}
+          <ProjectCard
+            imageSrc={echolistImgae}
+            title="Echo List"
+            description="A tool to Seamlessly convert your Shazam discoveries into curated YouTube playlists."
+            liveLink="https://echolist.vercel.app/"
+            // githubLink="https://github.com/tryraisins/shazam-to-youtube"
           />
           <ProjectCard
             imageSrc={expenseImage}
