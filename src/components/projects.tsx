@@ -5,12 +5,14 @@ import { useInView } from 'react-intersection-observer';
 
 
 import faceidImage from '../assets/images/faceid.jpg';
-import yeknalBakeryImage from '../assets/images/yeknal-bakery.png';
+// import yeknalBakeryImage from '../assets/images/yeknal-bakery.png';
 // import issTrackerImage from '../assets/images/iss-tracker.jpg';
+import issTrackerImage from '../assets/images/iss-tracker.png';
 import expenseImage from '../assets/images/expense.jpg';
 import roboYearbookImage from '../assets/images/Robo-Yearbook.jpg';
 import portfolioV1Image from '../assets/images/portfolio-v1.png';
 import echolistImgae from '../assets/images/echolist.png';
+import billQuickImage from '../assets/images/bill-quick.png';
 
 const Projects: React.FC = () => {
    const { ref, inView } = useInView({
@@ -31,20 +33,20 @@ const Projects: React.FC = () => {
             liveLink="https://faceid.netlify.app/"
             // githubLink="#"
           />
-          <ProjectCard
+          {/* <ProjectCard
             imageSrc={yeknalBakeryImage}
             title="Yeknal Bakery"
             description="A small bakery business site template built with Astro on ReactJS and Bootstrap."
             liveLink="https://yeknal-bakery.netlify.app/"
             // githubLink="#"
-          />
-          {/* <ProjectCard
-            imageSrc={issTrackerImage}
-            title="International Space Station Tracker"
-            description="A simple react app that fetches the current location of the International Space Staion. It also shows the number of people in space at the moment, who they are and where they are."
-            // liveLink="#"
-            githubLink="https://github.com/tryraisins/iss-tracker"
           /> */}
+          <ProjectCard
+            imageSrc={issTrackerImage}
+            title="International Space Station Tracker V2.0"
+            description="A simple app that fetches the current location of the International Space Staion. It also shows the number of people in space at the moment, who they are and where they are."
+            liveLink="https://isstracker-v2.vercel.app/"
+            // githubLink="https://github.com/tryraisins/iss-tracker-v2"
+          />
           <ProjectCard
             imageSrc={echolistImgae}
             title="Echo List"
@@ -59,11 +61,18 @@ const Projects: React.FC = () => {
             liveLink="https://expenses-manager1.netlify.app/"
             // githubLink="#"
           />
-          <ProjectCard
+          {/* <ProjectCard
             imageSrc={roboYearbookImage}
             title="Robo Yearbook"
             description="A simple react app that fetches data from a server and uses it to create and display an output of 10 'cards', each with an image, name and email. It also has a search function that filters through the cards."
             liveLink="https://robo-yearbook.netlify.app/"
+            // githubLink="#"
+          /> */}
+           <ProjectCard
+            imageSrc={billQuickImage}
+            title="Bill Quick"
+            description="A web app that allows users to quickly generate bills and invoices in minutes for free. Pro services to be included gradually. "
+            liveLink="https://billquick.vercel.app/"
             // githubLink="#"
           />
           <ProjectCard
