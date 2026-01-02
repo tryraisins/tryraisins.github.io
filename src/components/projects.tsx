@@ -5,13 +5,14 @@ import { useInView } from 'react-intersection-observer';
 
 
 import faceidImage from '../assets/images/faceid.jpg';
-import yeknalBakeryImage from '../assets/images/yeknal-bakery.png';
+// import yeknalBakeryImage from '../assets/images/yeknal-bakery.png';
 // import issTrackerImage from '../assets/images/iss-tracker.jpg';
 import issTrackerImage from '../assets/images/iss-tracker.png';
 import expenseImage from '../assets/images/expense.jpg';
 import roboYearbookImage from '../assets/images/Robo-Yearbook.jpg';
 import portfolioV1Image from '../assets/images/portfolio-v1.png';
 import echolistImgae from '../assets/images/echolist.png';
+import billQuickImage from '../assets/images/bill-quick.png';
 
 const Projects: React.FC = () => {
    const { ref, inView } = useInView({
@@ -60,11 +61,18 @@ const Projects: React.FC = () => {
             liveLink="https://expenses-manager1.netlify.app/"
             // githubLink="#"
           />
-          <ProjectCard
+          {/* <ProjectCard
             imageSrc={roboYearbookImage}
             title="Robo Yearbook"
             description="A simple react app that fetches data from a server and uses it to create and display an output of 10 'cards', each with an image, name and email. It also has a search function that filters through the cards."
             liveLink="https://robo-yearbook.netlify.app/"
+            // githubLink="#"
+          /> */}
+           <ProjectCard
+            imageSrc={billQuickImage}
+            title="Bill Quick"
+            description="A NextJS app that allows users to quickly generate bills and invoices  ."
+            liveLink="https://billquick.vercel.app/"
             // githubLink="#"
           />
           <ProjectCard
