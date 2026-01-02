@@ -71,7 +71,7 @@ const Projects: React.FC = () => {
            <ProjectCard
             imageSrc={billQuickImage}
             title="Bill Quick"
-            description="A NextJS app that allows users to quickly generate bills and invoices  ."
+            description="A web app that allows users to quickly generate bills and invoices in minutes for free. Pro services to be included gradually. "
             liveLink="https://billquick.vercel.app/"
             // githubLink="#"
           />
