@@ -44,14 +44,14 @@ const Projects: React.FC = () => {
             imageSrc={issTrackerImage}
             title="International Space Station Tracker V2.0"
             description="A simple app that fetches the current location of the International Space Staion. It also shows the number of people in space at the moment, who they are and where they are."
-            liveLink="https://isstracker-v2.vercel.app/"
+            liveLink="isstracker.tryraisins.dev"
             // githubLink="https://github.com/tryraisins/iss-tracker-v2"
           />
           <ProjectCard
             imageSrc={echolistImgae}
             title="Echo List"
             description="A tool to Seamlessly convert your Shazam discoveries into curated YouTube playlists."
-            liveLink="https://echolist.vercel.app/"
+            liveLink="https://echolist.tryraisins.dev/"
             // githubLink="https://github.com/tryraisins/shazam-to-youtube"
           />
           <ProjectCard
@@ -72,7 +72,7 @@ const Projects: React.FC = () => {
             imageSrc={billQuickImage}
             title="QuickBillz"
             description="A web app that allows users to quickly generate bills and invoices in minutes for free. Pro services to be included gradually. "
-            liveLink="https://billquick.vercel.app/"
+            liveLink="https://quickbillz.tryraisins.dev/"
             // githubLink="#"
           />
           <ProjectCard
