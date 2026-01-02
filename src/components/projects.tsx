@@ -44,7 +44,7 @@ const Projects: React.FC = () => {
             imageSrc={issTrackerImage}
             title="International Space Station Tracker V2.0"
             description="A simple app that fetches the current location of the International Space Staion. It also shows the number of people in space at the moment, who they are and where they are."
-            liveLink="isstracker.tryraisins.dev"
+            liveLink="https://isstracker.tryraisins.dev/"
             // githubLink="https://github.com/tryraisins/iss-tracker-v2"
           />
           <ProjectCard
