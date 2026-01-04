@@ -11,7 +11,7 @@ import { ParallaxProvider } from 'react-scroll-parallax';
 const App: React.FC = () => {
   return (
     <ParallaxProvider>
-    <div className="min-h-screen bg-gray-900 font-sans text-gray-100">
+    <div className="min-h-screen bg-gray-900 text-gray-100">
         <style>{`
           @keyframes fadeInSection {
             from {
