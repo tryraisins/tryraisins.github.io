@@ -56,8 +56,9 @@ const Projects: React.FC = () => {
           />
           <ProjectCard
             imageSrc={expenseImage}
-            title="SpendEx (Expenses Manager)"
-            description="A web app that allows users view expenses made."
+            title="SpendEx (Expense Manager)"
+            description="A comprehensive expense tracking web app that helps users manage their spending across multiple currencies with analytics, reporting, and customization features"
+            
             liveLink="https://spendex.tryraisins.dev/"
             // githubLink="#"
           />
