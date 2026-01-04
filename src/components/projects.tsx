@@ -8,7 +8,7 @@ import faceidImage from '../assets/images/faceid.jpg';
 // import yeknalBakeryImage from '../assets/images/yeknal-bakery.png';
 // import issTrackerImage from '../assets/images/iss-tracker.jpg';
 import issTrackerImage from '../assets/images/iss-tracker.png';
-import expenseImage from '../assets/images/expense.jpg';
+import expenseImage from '../assets/images/expenses.png';
 import roboYearbookImage from '../assets/images/Robo-Yearbook.jpg';
 import portfolioV1Image from '../assets/images/portfolio-v1.png';
 import echolistImgae from '../assets/images/echolist.png';
@@ -56,9 +56,9 @@ const Projects: React.FC = () => {
           />
           <ProjectCard
             imageSrc={expenseImage}
-            title="Expenses Manager"
-            description="A web app that allows employees view expenses made with the company's account and let's them add receipts, as well as, sort, filter and search through."
-            liveLink="https://expenses-manager1.netlify.app/"
+            title="SpendEx (Expenses Manager)"
+            description="A web app that allows users view expenses made."
+            liveLink="https://spendex.tryraisins.dev/"
             // githubLink="#"
           />
           {/* <ProjectCard
@@ -70,7 +70,7 @@ const Projects: React.FC = () => {
           /> */}
            <ProjectCard
             imageSrc={billQuickImage}
-            title="QuickBillz"
+            title="QuickBillz (Invoice Generator)"
             description="A web app that allows users to quickly generate bills and invoices in minutes for free. Pro services to be included gradually. "
             liveLink="https://quickbillz.tryraisins.dev/"
             // githubLink="#"
