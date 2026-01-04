@@ -480,7 +480,7 @@ const Footer: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900 font-sans text-gray-100">
+    <div className="min-h-screen bg-gray-900 text-gray-100">
       <Navbar />
       <main>
         <Hero />
