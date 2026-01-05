@@ -171,7 +171,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.3, delay: 0.3 }}
           className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight metal-text"
         >
-          <ScrambleText text="Try Raisins" delay={300} trigger={inView} />
+          <ScrambleText text="Seun Sowemimo" delay={300} trigger={inView} />
         </motion.h1>
         
         <motion.p
