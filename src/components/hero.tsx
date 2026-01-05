@@ -12,7 +12,17 @@ interface ScrambleTextProps {
 const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger, duration = 50 }) => {
   const [displayText, setDisplayText] = useState('');
   const [isComplete, setIsComplete] = useState(false);
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+const characters =
+  '0123456789!@#$%^&*' +
+  '☀☁☂☃☄★☆☉☊☋☌☍☾☽' +
+  '☠☢☣☮☯☸☹☺☻' +
+  '✈✉✌✍✎✏✒✔✖✘✚✝✞✟' +
+  '➔➜➤➥➦➧➨➩➪➫' +
+  '▲▼◀▶◆◇○●◐◑◒◓◔◕' +
+  '♠♣♥♦♤♧♡♢' +
+  '⚡⚠⚔⚖⚙⚛⚜⚡' +
+  '♩♪♫♬' +
+  '☽☾⚘⚶⚷⚸⚹⚺';
 
   useEffect(() => {
     if (!trigger) return;
@@ -53,7 +63,7 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger, d
     }, delay);
 
     return () => clearTimeout(timeout);
-  }, [text, delay, trigger, duration]);
+  }, [text, delay, trigger, duration, characters]);
 
   return (
     <span className={`transition-all duration-300 ${isComplete ? 'opacity-100' : 'opacity-90'}`}>
@@ -188,7 +198,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.2, delay: 0.3 }}
           className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight metal-text"
         >
-          <ScrambleText text="Seun Sowemimo" delay={0} trigger={inView} duration={3} />
+          <ScrambleText text="Seun Sowemimo" delay={400} trigger={inView} duration={3} />
         </motion.h1>
         
         <motion.p
@@ -197,7 +207,7 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.1, delay: 0 }}
           className="text-2xl md:text-3xl text-gray-400 mb-8"
         >
-          <ScrambleText text="A Fullstack Web Developer" delay={400} trigger={inView} duration={4.5} />
+          <ScrambleText text="A Fullstack Web Developer" delay={1000} trigger={inView} duration={3} />
         </motion.p>
         
         {/* Conditionally render button with animation when inView is true */}
