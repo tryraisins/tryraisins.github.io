@@ -10,8 +10,11 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ imageSrc, title, description, liveLink, githubLink }) => {
-  // Handle link click with better mobile support
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
+  // Handle link click to prevent card hover effects interfering
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Prevent any parent handlers from interfering
+    e.stopPropagation();
+    
     // For iOS Safari, we want to ensure the link opens directly
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
     
@@ -19,13 +22,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ imageSrc, title, description,
       // For iOS, we'll prevent default and use window.open
       // which tends to work better than anchor clicks
       e.preventDefault();
-      window.open(url, '_blank', 'noopener,noreferrer');
+      // Small delay to allow visual feedback
+      setTimeout(() => {
+        window.open(e.currentTarget.href, '_blank', 'noopener,noreferrer');
+      }, 100);
     }
     // For other devices, let the default anchor behavior work
   };
 
   return (
-    <div className="bg-gray-700 rounded-lg shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group">
+    <div className="bg-gray-700 rounded-lg shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group active:scale-100">
       <img
         src={imageSrc}
         alt={title}
@@ -44,12 +50,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ imageSrc, title, description,
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => handleLinkClick(e, liveLink)}
-              className="inline-flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 active:scale-95 touch-manipulation cursor-pointer"
+              onClick={handleLinkClick}
+              className="inline-flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 active:scale-95 touch-manipulation cursor-pointer select-none relative z-10"
               style={{
-                // iOS Safari specific enhancements
                 WebkitTapHighlightColor: 'transparent',
                 touchAction: 'manipulation',
+                // Ensure link is above any parent elements
+                position: 'relative',
+              }}
+              onTouchStart={(e) => {
+                // Add visual feedback for touch
+                e.currentTarget.style.transform = 'scale(0.95)';
+              }}
+              onTouchEnd={(e) => {
+                e.currentTarget.style.transform = '';
               }}
             >
               <ExternalLink size={20} />
@@ -61,12 +75,18 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ imageSrc, title, description,
               href={githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={(e) => handleLinkClick(e, githubLink)}
-              className="inline-flex items-center space-x-2 bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 active:scale-95 touch-manipulation cursor-pointer"
+              onClick={handleLinkClick}
+              className="inline-flex items-center space-x-2 bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 active:scale-95 touch-manipulation cursor-pointer select-none relative z-10"
               style={{
-                // iOS Safari specific enhancements
                 WebkitTapHighlightColor: 'transparent',
                 touchAction: 'manipulation',
+                position: 'relative',
+              }}
+              onTouchStart={(e) => {
+                e.currentTarget.style.transform = 'scale(0.95)';
+              }}
+              onTouchEnd={(e) => {
+                e.currentTarget.style.transform = '';
               }}
             >
               <Github size={20} />
