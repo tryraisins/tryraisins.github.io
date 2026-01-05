@@ -3,7 +3,6 @@ import SectionTitle from '../utils/sectionTitle';
 import ProjectCard from '../utils/projectCard';
 import { useInView } from 'react-intersection-observer';
 
-
 import faceidImage from '../assets/images/faceid.jpg';
 // import yeknalBakeryImage from '../assets/images/yeknal-bakery.png';
 // import issTrackerImage from '../assets/images/iss-tracker.jpg';
@@ -81,7 +80,7 @@ const Projects: React.FC = () => {
             title="Portfolio Website V1"
             description="The first iteration of my personal portfolio, showcasing my growth/ subtle changes. Built with ParcelJS"
             liveLink="https://tryraisinsfolio.netlify.app/"
-            githubLink="https://github.com/tryraisins/portfolio-V1"
+            // githubLink="https://github.com/tryraisins/portfolio-V1"
           />
         </div>
       </div>
