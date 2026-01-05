@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Github, ExternalLink } from 'lucide-react';
 
 interface ProjectCardProps {
@@ -10,48 +10,26 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ imageSrc, title, description, liveLink, githubLink }) => {
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-  
-  // Detect touch device on mount
-  useEffect(() => {
-    const checkTouchDevice = () => {
-      // Check for touch capability
-      const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      // Check for mobile user agent as well
-      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      setIsTouchDevice(isTouch || isMobile);
-    };
-    
-    checkTouchDevice();
-    // Re-check on resize in case of device rotation or virtual keyboard
-    window.addEventListener('resize', checkTouchDevice);
-    return () => window.removeEventListener('resize', checkTouchDevice);
-  }, []);
-
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.stopPropagation();
-    
-    // For iOS Safari
+  // Handle link click with better mobile support
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
+    // For iOS Safari, we want to ensure the link opens directly
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
     
     if (isIOS) {
+      // For iOS, we'll prevent default and use window.open
+      // which tends to work better than anchor clicks
       e.preventDefault();
-      setTimeout(() => {
-        window.open(e.currentTarget.href, '_blank', 'noopener,noreferrer');
-      }, 100);
+      window.open(url, '_blank', 'noopener,noreferrer');
     }
+    // For other devices, let the default anchor behavior work
   };
 
   return (
-    <div className={`bg-gray-700 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 ${
-      !isTouchDevice ? 'hover:scale-105 hover:shadow-2xl group' : 'active:scale-100'
-    }`}>
+    <div className="bg-gray-700 rounded-lg shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 group">
       <img
         src={imageSrc}
         alt={title}
-        className={`w-full h-auto transition-opacity duration-300 ${
-          !isTouchDevice ? 'group-hover:opacity-80' : ''
-        }`}
+        className="w-full h-auto group-hover:opacity-80 transition-opacity duration-300"
         onError={(e) => {
           (e.target as HTMLImageElement).onerror = null;
           (e.target as HTMLImageElement).src = `https://placehold.co/600x400/4B5563/F9FAFB?text=${encodeURIComponent(title)}`;
@@ -66,29 +44,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ imageSrc, title, description,
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleLinkClick}
-              className={`inline-flex items-center space-x-2 bg-purple-600 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 select-none relative ${
-                !isTouchDevice ? 'hover:bg-purple-700' : 'active:scale-95 active:bg-purple-700'
-              }`}
+              onClick={(e) => handleLinkClick(e, liveLink)}
+              className="inline-flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 active:scale-95 touch-manipulation cursor-pointer"
               style={{
+                // iOS Safari specific enhancements
                 WebkitTapHighlightColor: 'transparent',
                 touchAction: 'manipulation',
-                minHeight: '44px',
-                minWidth: '44px',
-                // Remove focus outline for mobile
-                outline: isTouchDevice ? 'none' : undefined,
-              }}
-              onTouchStart={(e) => {
-                e.currentTarget.style.transform = 'scale(0.95)';
-                e.currentTarget.style.backgroundColor = '#7c3aed'; // purple-700
-              }}
-              onTouchEnd={(e) => {
-                e.currentTarget.style.transform = '';
-                e.currentTarget.style.backgroundColor = '';
-              }}
-              onTouchCancel={(e) => {
-                e.currentTarget.style.transform = '';
-                e.currentTarget.style.backgroundColor = '';
               }}
             >
               <ExternalLink size={20} />
@@ -100,28 +61,12 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ imageSrc, title, description,
               href={githubLink}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={handleLinkClick}
-              className={`inline-flex items-center space-x-2 bg-gray-600 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 select-none relative ${
-                !isTouchDevice ? 'hover:bg-gray-700' : 'active:scale-95 active:bg-gray-700'
-              }`}
+              onClick={(e) => handleLinkClick(e, githubLink)}
+              className="inline-flex items-center space-x-2 bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-6 rounded-full transition-all duration-300 active:scale-95 touch-manipulation cursor-pointer"
               style={{
+                // iOS Safari specific enhancements
                 WebkitTapHighlightColor: 'transparent',
                 touchAction: 'manipulation',
-                minHeight: '44px',
-                minWidth: '44px',
-                outline: isTouchDevice ? 'none' : undefined,
-              }}
-              onTouchStart={(e) => {
-                e.currentTarget.style.transform = 'scale(0.95)';
-                e.currentTarget.style.backgroundColor = '#374151'; // gray-700
-              }}
-              onTouchEnd={(e) => {
-                e.currentTarget.style.transform = '';
-                e.currentTarget.style.backgroundColor = '';
-              }}
-              onTouchCancel={(e) => {
-                e.currentTarget.style.transform = '';
-                e.currentTarget.style.backgroundColor = '';
               }}
             >
               <Github size={20} />
