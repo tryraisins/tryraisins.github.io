@@ -6,9 +6,10 @@ interface ScrambleTextProps {
   text: string;
   delay?: number;
   trigger: boolean;
+  duration?: number; // Add duration prop
 }
 
-const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger }) => {
+const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger, duration = 50 }) => {
   const [displayText, setDisplayText] = useState('');
   const [isComplete, setIsComplete] = useState(false);
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
@@ -19,7 +20,10 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger })
     setIsComplete(false);
     let iteration = 0;
     const maxIterations = 50;
-    const intervalDuration = 100;
+    const intervalDuration = 100; // Time between each frame
+    const totalDuration = duration * 1000; // Convert seconds to milliseconds
+    const totalFrames = totalDuration / intervalDuration;
+    const incrementPerFrame = text.length / totalFrames;
 
     const timeout = setTimeout(() => {
       const interval = setInterval(() => {
@@ -36,7 +40,7 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger })
             .join('')
         );
 
-        iteration += 1 / 3;
+        iteration += incrementPerFrame;
 
         if (iteration >= text.length) {
           setDisplayText(text);
@@ -49,7 +53,7 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger })
     }, delay);
 
     return () => clearTimeout(timeout);
-  }, [text, delay, trigger]);
+  }, [text, delay, trigger, duration]);
 
   return (
     <span className={`transition-all duration-300 ${isComplete ? 'opacity-100' : 'opacity-90'}`}>
@@ -63,6 +67,19 @@ const Hero: React.FC = () => {
     triggerOnce: false,
     threshold: 0.2,
   });
+
+  const [showButton, setShowButton] = useState(false);
+
+  // Reset button visibility when section comes into view
+  useEffect(() => {
+    if (inView) {
+      // Show button immediately when section comes into view
+      setShowButton(true);
+    } else {
+      // Hide button when section leaves view (optional)
+      setShowButton(false);
+    }
+  }, [inView]);
 
   return (
     <section
@@ -123,7 +140,7 @@ const Hero: React.FC = () => {
           y: [0, -10, 0],
         }}
         transition={{
-          duration: 10,
+          duration: 5.5,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 4
@@ -137,7 +154,7 @@ const Hero: React.FC = () => {
           opacity: [0.3, 0.6, 0.3],
         }}
         transition={{
-          duration: 3,
+          duration: 4,
           repeat: Infinity,
           ease: "easeInOut"
         }}
@@ -148,7 +165,7 @@ const Hero: React.FC = () => {
           opacity: [0.3, 0.6, 0.3],
         }}
         transition={{
-          duration: 3,
+          duration: 5,
           repeat: Infinity,
           ease: "easeInOut",
           delay: 1
@@ -159,7 +176,7 @@ const Hero: React.FC = () => {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
           className="text-xl md:text-2xl text-gray-300 mb-4"
         >
           Hello, I'm
@@ -168,36 +185,39 @@ const Hero: React.FC = () => {
         <motion.h1
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, delay: 0.3 }}
+          transition={{ duration: 0.2, delay: 0.3 }}
           className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight metal-text"
         >
-          <ScrambleText text="Seun Sowemimo" delay={300} trigger={inView} />
+          <ScrambleText text="Seun Sowemimo" delay={0} trigger={inView} duration={3} />
         </motion.h1>
         
         <motion.p
           initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.3, delay: 1000 }}
+          transition={{ duration: 0.1, delay: 0 }}
           className="text-2xl md:text-3xl text-gray-400 mb-8"
         >
-          <ScrambleText text="A Fullstack Web Developer" delay={500} trigger={inView} />
+          <ScrambleText text="A Fullstack Web Developer" delay={400} trigger={inView} duration={4.5} />
         </motion.p>
         
-        <motion.a
-          href="#projects"
-          onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-            e.preventDefault();
-            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-          }}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 5.2 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 ease-in-out hover:shadow-purple-500/25 hover:shadow-xl"
-        >
-          View My Work
-        </motion.a>
+        {/* Conditionally render button with animation when inView is true */}
+        {showButton && (
+          <motion.a
+            href="#projects"
+            onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+              e.preventDefault();
+              document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 ease-in-out hover:shadow-purple-500/25 hover:shadow-xl"
+          >
+            View My Work
+          </motion.a>
+        )}
       </div>
 
       <style>{`
