@@ -23,9 +23,10 @@ const Projects: React.FC = () => {
         ${inView ? 'opacity-100 translate-y-0 animate-fade-in-section' : 'opacity-0 translate-y-10'}
       `}
       style={{
-        // Prevent unwanted text selection on mobile
         WebkitUserSelect: 'none',
         userSelect: 'none',
+        // Prevent blue highlight on mobile tap
+        WebkitTapHighlightColor: 'transparent',
       }}
     >
       <div className="container mx-auto">
