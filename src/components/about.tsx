@@ -33,26 +33,41 @@ const About: React.FC = () => {
             <div className="mb-6">
               <p className="mb-4 text-slate-200">My technical toolkit includes:</p>
               <div className="bg-slate-700/30 rounded-lg p-4 backdrop-blur-sm border border-slate-600/50">
-               <ul className="list-none space-y-2 text-slate-300">
-  <li className="flex items-center gap-2">
-    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-    <strong className="text-blue-300">Frontend:</strong> React, TypeScript, JavaScript, jQuery
-    <span className="flex-1 border-t border-slate-600/50 ml-4"></span>
+             <ul className="list-none space-y-4 text-slate-300">
+  <li className="flex flex-col sm:flex-row sm:items-center gap-2 pb-4 border-b border-slate-600/50 sm:border-b-0">
+    <div className="flex items-center gap-2">
+      <span className="w-3 h-3 bg-blue-500 rounded-full flex-shrink-0"></span>
+      <strong className="text-blue-300">Frontend:</strong>
+      <span className="text-slate-100 ml-1">React, TypeScript, JavaScript, jQuery</span>
+    </div>
+    <span className="hidden sm:block flex-1 border-t border-slate-600/50 ml-4"></span>
+    <span className="sm:hidden w-full h-px bg-slate-600/50 mt-2"></span>
   </li>
-  <li className="flex items-center gap-2">
-    <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
-    <strong className="text-emerald-300">Backend:</strong> Node.js, Python, Azure Functions
-    <span className="flex-1 border-t border-slate-600/50 ml-4"></span>
+  <li className="flex flex-col sm:flex-row sm:items-center gap-2 pb-4 border-b border-slate-600/50 sm:border-b-0">
+    <div className="flex items-center gap-2">
+      <span className="w-3 h-3 bg-emerald-500 rounded-full flex-shrink-0"></span>
+      <strong className="text-emerald-300">Backend:</strong>
+      <span className="text-slate-100 ml-1">Node.js, Python, Azure Functions</span>
+    </div>
+    <span className="hidden sm:block flex-1 border-t border-slate-600/50 ml-4"></span>
+    <span className="sm:hidden w-full h-px bg-slate-600/50 mt-2"></span>
   </li>
-  <li className="flex items-center gap-2">
-    <span className="w-2 h-2 bg-slate-500 rounded-full"></span>
-    <strong className="text-slate-300">Tools:</strong> GitHub, CI/CD platforms, MongoDB
-    <span className="flex-1 border-t border-slate-600/50 ml-4"></span>
+  <li className="flex flex-col sm:flex-row sm:items-center gap-2 pb-4 border-b border-slate-600/50 sm:border-b-0">
+    <div className="flex items-center gap-2">
+      <span className="w-3 h-3 bg-slate-500 rounded-full flex-shrink-0"></span>
+      <strong className="text-slate-300">Tools:</strong>
+      <span className="text-slate-100 ml-1">GitHub, CI/CD platforms, MongoDB</span>
+    </div>
+    <span className="hidden sm:block flex-1 border-t border-slate-600/50 ml-4"></span>
+    <span className="sm:hidden w-full h-px bg-slate-600/50 mt-2"></span>
   </li>
-  <li className="flex items-center gap-2">
-    <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
-    <strong className="text-amber-300">Enterprise:</strong> Low-code platforms, workflow automation, Microsoft Enterprise Solutions
-    <span className="flex-1 border-t border-slate-600/50 ml-4"></span>
+  <li className="flex flex-col sm:flex-row sm:items-center gap-2 pb-4">
+    <div className="flex items-center gap-2">
+      <span className="w-3 h-3 bg-amber-500 rounded-full flex-shrink-0"></span>
+      <strong className="text-amber-300">Enterprise:</strong>
+      <span className="text-slate-100 ml-1">Low-code platforms, workflow automation, Microsoft Enterprise Solutions</span>
+    </div>
+    <span className="hidden sm:block flex-1 border-t border-slate-600/50 ml-4"></span>
   </li>
 </ul>
               </div>
