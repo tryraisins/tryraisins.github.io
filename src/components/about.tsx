@@ -33,24 +33,28 @@ const About: React.FC = () => {
             <div className="mb-6">
               <p className="mb-4 text-slate-200">My technical toolkit includes:</p>
               <div className="bg-slate-700/30 rounded-lg p-4 backdrop-blur-sm border border-slate-600/50">
-                <ul className="list-none space-y-2 text-slate-300">
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                    <strong className="text-blue-300">Frontend:</strong> React, TypeScript, JavaScript, jQuery
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
-                    <strong className="text-emerald-300">Backend:</strong> Node.js, Python, Azure Functions
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-slate-500 rounded-full"></span>
-                    <strong className="text-slate-300">Tools:</strong> GitHub, CI/CD platforms, MongoDB
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
-                    <strong className="text-amber-300">Enterprise:</strong> Low-code platforms, workflow automation, Microsoft Enterprise Solutions
-                  </li>
-                </ul>
+               <ul className="list-none space-y-2 text-slate-300">
+  <li className="flex items-center gap-2">
+    <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
+    <strong className="text-blue-300">Frontend:</strong> React, TypeScript, JavaScript, jQuery
+    <span className="flex-1 border-t border-slate-600/50 ml-4"></span>
+  </li>
+  <li className="flex items-center gap-2">
+    <span className="w-2 h-2 bg-emerald-500 rounded-full"></span>
+    <strong className="text-emerald-300">Backend:</strong> Node.js, Python, Azure Functions
+    <span className="flex-1 border-t border-slate-600/50 ml-4"></span>
+  </li>
+  <li className="flex items-center gap-2">
+    <span className="w-2 h-2 bg-slate-500 rounded-full"></span>
+    <strong className="text-slate-300">Tools:</strong> GitHub, CI/CD platforms, MongoDB
+    <span className="flex-1 border-t border-slate-600/50 ml-4"></span>
+  </li>
+  <li className="flex items-center gap-2">
+    <span className="w-2 h-2 bg-amber-500 rounded-full"></span>
+    <strong className="text-amber-300">Enterprise:</strong> Low-code platforms, workflow automation, Microsoft Enterprise Solutions
+    <span className="flex-1 border-t border-slate-600/50 ml-4"></span>
+  </li>
+</ul>
               </div>
             </div>
           

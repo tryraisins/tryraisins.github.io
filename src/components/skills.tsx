@@ -145,12 +145,12 @@ const Skills: React.FC = () => {
         </div>
         
         {/* Bottom decoration */}
-        <div className="mt-20 text-center">
+        {/* <div className="mt-20 text-center">
           <div className="inline-flex items-center gap-2 px-6 py-3 bg-slate-800/30 backdrop-blur-sm rounded-full border border-slate-700/50">
             <Zap className="w-5 h-5 text-yellow-500" />
             <span className="text-slate-300 font-medium">Always learning and evolving</span>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

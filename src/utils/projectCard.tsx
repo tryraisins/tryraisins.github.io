@@ -35,10 +35,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ imageSrc, title, description,
           (e.target as HTMLImageElement).src = `https://placehold.co/600x400/4B5563/F9FAFB?text=${encodeURIComponent(title)}`;
         }}
       />
-      <div className="p-6">
-        <h3 className="text-2xl font-semibold mb-3 text-white">{title}</h3>
+      <div className="p-6 ">
+        <h3 className="text-2xl font-semibold mb-3 text-white text-center">{title}</h3>
         <p className="text-gray-300 mb-4">{description}</p>
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 justify-center">
           {liveLink && (
             <a
               href={liveLink}
