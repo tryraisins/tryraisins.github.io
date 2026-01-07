@@ -6,37 +6,47 @@ interface ScrambleTextProps {
   text: string;
   delay?: number;
   trigger: boolean;
-  duration?: number; // Add duration prop
+  duration?: number;
 }
 
-const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger, duration = 50 }) => {
-  const [displayText, setDisplayText] = useState('');
+const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger, duration = 1.5 }) => {
+  // Using alphanumeric characters that render properly with CSS text gradients
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
+
+  // Generate initial scrambled text
+  const getScrambledText = React.useCallback(() => {
+    return text
+      .split('')
+      .map((char) => (char === ' ' ? ' ' : characters[Math.floor(Math.random() * characters.length)]))
+      .join('');
+  }, [text, characters]);
+
+  const [displayText, setDisplayText] = useState(() => getScrambledText());
   const [isComplete, setIsComplete] = useState(false);
-const characters =
-  '0123456789!@#$%^&*' +
-  '☀☁☂☃☄★☆☉☊☋☌☍☾☽' +
-  '☠☢☣☮☯☸☹☺☻' +
-  '✈✉✌✍✎✏✒✔✖✘✚✝✞✟' +
-  '➔➜➤➥➦➧➨➩➪➫' +
-  '▲▼◀▶◆◇○●◐◑◒◓◔◕' +
-  '♠♣♥♦♤♧♡♢' +
-  '⚡⚠⚔⚖⚙⚛⚜⚡' +
-  '♩♪♫♬' +
-  '☽☾⚘⚶⚷⚸⚹⚺';
 
   useEffect(() => {
-    if (!trigger) return;
+    if (!trigger) {
+      // Reset when not in view
+      setDisplayText(getScrambledText());
+      setIsComplete(false);
+      return;
+    }
 
-    setIsComplete(false);
-    let iteration = 0;
-    const maxIterations = 50;
-    const intervalDuration = 100; // Time between each frame
-    const totalDuration = duration * 1000; // Convert seconds to milliseconds
-    const totalFrames = totalDuration / intervalDuration;
-    const incrementPerFrame = text.length / totalFrames;
+    // Start scrambling immediately when triggered
+    const scrambleInterval = setInterval(() => {
+      setDisplayText(getScrambledText());
+    }, 60);
 
     const timeout = setTimeout(() => {
-      const interval = setInterval(() => {
+      clearInterval(scrambleInterval);
+
+      let iteration = 0;
+      const intervalDuration = 40; // Fast interval for smooth animation
+      const totalDuration = duration * 1000;
+      const totalFrames = totalDuration / intervalDuration;
+      const incrementPerFrame = text.length / totalFrames;
+
+      const revealInterval = setInterval(() => {
         setDisplayText(
           text
             .split('')
@@ -55,19 +65,22 @@ const characters =
         if (iteration >= text.length) {
           setDisplayText(text);
           setIsComplete(true);
-          clearInterval(interval);
+          clearInterval(revealInterval);
         }
       }, intervalDuration);
 
-      return () => clearInterval(interval);
+      return () => clearInterval(revealInterval);
     }, delay);
 
-    return () => clearTimeout(timeout);
-  }, [text, delay, trigger, duration, characters]);
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(scrambleInterval);
+    };
+  }, [trigger, delay, duration, text, getScrambledText, characters]);
 
   return (
-    <span className={`transition-all duration-300 ${isComplete ? 'opacity-100' : 'opacity-90'}`}>
-      {displayText || text.split('').map(() => ' ').join('')}
+    <span className={`inline-block ${isComplete ? 'opacity-100' : 'opacity-100'}`}>
+      {displayText}
     </span>
   );
 };
@@ -80,13 +93,10 @@ const Hero: React.FC = () => {
 
   const [showButton, setShowButton] = useState(false);
 
-  // Reset button visibility when section comes into view
   useEffect(() => {
     if (inView) {
-      // Show button immediately when section comes into view
       setShowButton(true);
     } else {
-      // Hide button when section leaves view (optional)
       setShowButton(false);
     }
   }, [inView]);
@@ -95,122 +105,155 @@ const Hero: React.FC = () => {
     <section
       id="home"
       ref={ref}
-      className={`relative h-screen flex items-center justify-center text-white overflow-hidden transition-opacity duration-1000 transform
-        ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
-      `}
-      style={{ background: 'linear-gradient(135deg, #111828 0%, #202938 100%)' }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Animated Grid Background */}
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-slate-400/8 to-transparent animate-slide-right"></div>
-        <div className="grid-pattern"></div>
-      </div>
+      {/* Atmospheric Background */}
+      <div className="absolute inset-0 atmosphere-gradient" />
 
-      {/* Floating Geometric Shapes */}
+      {/* Organic Flow Animation */}
+      <div className="absolute inset-0 organic-flow" />
+
+      {/* Grain Texture */}
+      <div className="absolute inset-0 grain-overlay" />
+
+      {/* Dot Pattern */}
+      <div className="absolute inset-0 dot-pattern opacity-50" />
+
+      {/* Floating Orbs */}
       <motion.div
-        className="absolute top-20 left-10 w-20 h-20 border-2 border-slate-400/20 rotate-45"
+        className="floating-orb coral"
+        style={{ width: '400px', height: '400px', top: '10%', left: '10%' }}
         animate={{
-          y: [0, -20, 0],
-          rotate: [45, 225, 45],
+          y: [0, -30, 0],
+          x: [0, 20, 0],
         }}
         transition={{
-          duration: 6,
+          duration: 10,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: 'easeInOut',
         }}
       />
       <motion.div
-        className="absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-slate-400/15 to-slate-500/15 rounded-lg"
+        className="floating-orb blue"
+        style={{ width: '300px', height: '300px', bottom: '20%', right: '15%' }}
+        animate={{
+          y: [0, 25, 0],
+          x: [0, -15, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 2,
+        }}
+      />
+      <motion.div
+        className="floating-orb lavender"
+        style={{ width: '250px', height: '250px', top: '60%', left: '5%' }}
+        animate={{
+          y: [0, -20, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: 'easeInOut',
+          delay: 4,
+        }}
+      />
+
+      {/* Geometric Accent Lines */}
+      <motion.div
+        className="absolute top-1/4 right-[20%] w-px h-32 bg-gradient-to-b from-[#ff6b4a]/40 to-transparent"
+        initial={{ scaleY: 0, opacity: 0 }}
+        animate={{ scaleY: 1, opacity: 1 }}
+        transition={{ duration: 1.5, delay: 1 }}
+        style={{ transformOrigin: 'top' }}
+      />
+      <motion.div
+        className="absolute bottom-1/3 left-[15%] w-24 h-px bg-gradient-to-r from-[#5b8def]/40 to-transparent"
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: 1, opacity: 1 }}
+        transition={{ duration: 1.5, delay: 1.3 }}
+        style={{ transformOrigin: 'left' }}
+      />
+
+      {/* Floating Geometric Shapes */}
+      <motion.div
+        className="absolute top-24 left-16 w-16 h-16 border border-[#faf9f6]/10 rotate-45"
+        animate={{
+          y: [0, -20, 0],
+          rotate: [45, 225, 45],
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+      <motion.div
+        className="absolute top-40 right-24 w-12 h-12 rounded-lg bg-gradient-to-br from-[#ff6b4a]/10 to-[#ff6b4a]/5"
         animate={{
           y: [0, -15, 0],
           rotate: [0, 180, 360],
         }}
         transition={{
-          duration: 8,
+          duration: 10,
           repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2
+          ease: 'easeInOut',
         }}
       />
       <motion.div
-        className="absolute bottom-32 left-1/4 w-12 h-12 border border-slate-300/25 rounded-full"
+        className="absolute bottom-32 left-1/4 w-10 h-10 border border-[#5b8def]/20 rounded-full"
         animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.5, 0.8, 0.5],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-1/3 w-8 h-20 bg-gradient-to-t from-slate-400/20 to-transparent"
-        animate={{
-          y: [0, -10, 0],
-        }}
-        transition={{
-          duration: 5.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 4
-        }}
-      />
-
-      {/* Subtle Light Rays */}
-      <motion.div
-        className="absolute top-0 left-1/2 w-1 h-32 bg-gradient-to-b from-slate-300/30 to-transparent"
-        animate={{
-          opacity: [0.3, 0.6, 0.3],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-      <motion.div
-        className="absolute top-20 right-1/4 w-1 h-24 bg-gradient-to-b from-slate-400/25 to-transparent"
-        animate={{
-          opacity: [0.3, 0.6, 0.3],
+          scale: [1, 1.3, 1],
+          opacity: [0.4, 0.8, 0.4],
         }}
         transition={{
           duration: 5,
           repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1
+          ease: 'easeInOut',
         }}
       />
 
-      <div className="text-center z-10 p-4">
+      {/* Main Content */}
+      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+        {/* Eyebrow Text */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="text-xl md:text-2xl text-gray-300 mb-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-[#a1a1aa] text-lg md:text-xl tracking-[0.3em] uppercase mb-6"
+          style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 500 }}
         >
           Hello, I'm
         </motion.p>
-        
+
+        {/* Main Name */}
         <motion.h1
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2, delay: 0.3 }}
-          className="text-5xl md:text-7xl font-extrabold mb-6 leading-tight metal-text"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.3, delay: 0.1 }}
+          className="text-5xl md:text-7xl lg:text-8xl mb-8 leading-[0.95]"
+          style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600 }}
         >
-          <ScrambleText text="Seun Sowemimo" delay={400} trigger={inView} duration={3} />
+          <span className="hero-name-gradient">
+            <ScrambleText text="Seun Sowemimo" delay={200} trigger={inView} duration={1.5} />
+          </span>
         </motion.h1>
-        
+
+        {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.1, delay: 0 }}
-          className="text-2xl md:text-3xl text-gray-400 mb-8"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.3, delay: 0.2 }}
+          className="text-2xl md:text-3xl lg:text-4xl text-[#71717a] mb-12"
+          style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400, fontStyle: 'italic' }}
         >
-          <ScrambleText text="A Fullstack Web Developer" delay={1000} trigger={inView} duration={3} />
+          <ScrambleText text="A Fullstack Web Developer" delay={600} trigger={inView} duration={1.8} />
         </motion.p>
-        
-        {/* Conditionally render button with animation when inView is true */}
+
+        {/* CTA Button */}
         {showButton && (
           <motion.a
             href="#projects"
@@ -218,70 +261,72 @@ const Hero: React.FC = () => {
               e.preventDefault();
               document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
             }}
-            initial={{ opacity: 0, y: 20, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 ease-in-out hover:shadow-purple-500/25 hover:shadow-xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ scale: 1.05, y: -3 }}
+            whileTap={{ scale: 0.98 }}
+            className="btn-primary inline-flex"
           >
-            View My Work
+            <span>View My Work</span>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
           </motion.a>
         )}
+
+        {/* Scroll Indicator */}
+        <motion.div
+          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+        >
+          <motion.div
+            className="w-6 h-10 rounded-full border-2 border-[#faf9f6]/20 flex justify-center pt-2"
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <motion.div
+              className="w-1.5 h-3 rounded-full bg-[#ff6b4a]"
+              animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          </motion.div>
+        </motion.div>
       </div>
 
+      {/* Hero-specific Styles */}
       <style>{`
-        @keyframes slideRight {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-        
-        .animate-slide-right {
-          animation: slideRight 20s linear infinite;
-        }
-        
-        .grid-pattern {
-          background-image: 
-            linear-gradient(rgba(147, 51, 234, 0.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(147, 51, 234, 0.08) 1px, transparent 1px);
-          background-size: 50px 50px;
-          width: 100%;
-          height: 100%;
-        }
-        
-        .metal-text {
+        .hero-name-gradient {
           background: linear-gradient(
             135deg,
-            #b8bcc8 0%,
-            #ffffff 20%,
-            #e8eaed 40%,
-            #ffffff 50%,
-            #d1d5db 60%,
-            #ffffff 80%,
-            #9ca3af 100%
+            #faf9f6 0%,
+            #ff8f73 30%,
+            #ff6b4a 50%,
+            #faf9f6 70%,
+            #a1a1aa 100%
           );
-          background-size: 200% 200%;
+          background-size: 300% 300%;
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
-          text-shadow: 
-            0 2px 10px rgba(255, 255, 255, 0.3),
-            0 0 20px rgba(255, 255, 255, 0.2);
-          position: relative;
-          animation: shine 3s ease-in-out infinite;
+          animation: heroGradientShift 8s ease-in-out infinite;
         }
         
-        @keyframes shine {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
+        @keyframes heroGradientShift {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
         }
       `}</style>
     </section>
