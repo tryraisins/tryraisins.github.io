@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 import faceidImage from '../assets/images/faceid.jpg';
 import issTrackerImage from '../assets/images/iss-tracker.png';
-import expenseImage from '../assets/images/expenses.png';
+import expenseImage from '../assets/images/spendex.png';
 import portfolioV1Image from '../assets/images/portfolio-v1.png';
 import echolistImgae from '../assets/images/echolist.png';
 import billQuickImage from '../assets/images/bill-quick.png';
