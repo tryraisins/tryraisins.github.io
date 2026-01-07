@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import SectionTitle from '../utils/sectionTitle';
 import { useInView } from 'react-intersection-observer';
-
+import { motion } from 'framer-motion';
+import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -15,25 +16,25 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus('submitting');
-    
+
     try {
       const response = await fetch('https://formsubmit.co/ajax/tryraisins@gmail.com', {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          Accept: 'application/json',
         },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
           message: formData.message,
           _subject: 'New message from your portfolio',
-          _template: 'table' // Optional: makes email more readable
-        })
+          _template: 'table',
+        }),
       });
 
       const result = await response.json();
-      
+
       if (response.ok) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
@@ -46,37 +47,97 @@ const Contact: React.FC = () => {
       setStatus('error');
     }
   };
- const { ref, inView } = useInView({
-      triggerOnce: true, // Animation only plays once when it enters the viewport
-      threshold: 0.5,    // Element is 50% visible
-    });
-  
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.3,
+  });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { 
+      duration: 0.6, 
+      ease: [0.16, 1, 0.3, 1] as const // Add "as const"
+    },
+  },
+};
   return (
-    <section id="contact" ref={ref}  className={`py-20 px-4 bg-gray-900 text-gray-100 relative transition-opacity duration-1000 transform
-        ${inView ? 'opacity-100 translate-y-0 animate-fade-in-section' : 'opacity-0 translate-y-10'}`}>
-      {/* Background decoration */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl"></div>
-      </div>
-      
-      <div className="container mx-auto max-w-2xl relative">
+    <section
+      id="contact"
+      ref={ref}
+      className="relative py-24 px-6 overflow-hidden section-container"
+      style={{ background: 'var(--obsidian-900)' }}
+    >
+      {/* Background */}
+      <div className="absolute inset-0 atmosphere-gradient" />
+      <div className="absolute inset-0 grain-overlay" />
+
+      {/* Floating Orbs */}
+      <motion.div
+        className="absolute top-24 left-[10%] w-80 h-80 rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(91, 141, 239, 0.08) 0%, transparent 70%)',
+          filter: 'blur(60px)',
+        }}
+        animate={{ y: [0, -25, 0], x: [0, 10, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-20 right-[8%] w-64 h-64 rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(255, 107, 74, 0.08) 0%, transparent 70%)',
+          filter: 'blur(50px)',
+        }}
+        animate={{ y: [0, 20, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+      />
+
+      <motion.div
+        className="container mx-auto max-w-2xl relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        animate={inView ? 'visible' : 'hidden'}
+      >
         <SectionTitle>Get In Touch</SectionTitle>
-        <p className="text-center text-lg mb-10 text-gray-300">
+
+        <motion.p
+          variants={itemVariants}
+          className="text-center text-lg mb-12"
+          style={{ fontFamily: "'Manrope', sans-serif", color: 'var(--text-secondary)' }}
+        >
           Have a question or want to work together? Feel free to reach out!
-        </p>
-        
-        <form 
+        </motion.p>
+
+        <motion.form
+          variants={itemVariants}
           onSubmit={handleSubmit}
-          className="bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700"
+          className="p-8 md:p-10 rounded-3xl glass-card"
         >
           {/* Hidden FormSubmit fields */}
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_next" value="https://yourdomain.com/thanks" />
-          
+
+          {/* Name Field */}
           <div className="mb-6">
-            <label htmlFor="name" className="block text-gray-300 text-sm font-bold mb-2">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium mb-2"
+              style={{ fontFamily: "'Manrope', sans-serif", color: 'var(--text-secondary)' }}
+            >
               Name
             </label>
             <input
@@ -85,14 +146,25 @@ const Contact: React.FC = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="shadow appearance-none border border-gray-600 rounded-lg w-full py-3 px-4 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-700 transition-colors duration-200"
+              className="w-full py-3.5 px-5 rounded-xl text-base transition-all duration-300 focus:ring-2 focus:ring-[#ff6b4a]"
+              style={{
+                fontFamily: "'Manrope', sans-serif",
+                background: 'var(--obsidian-700)',
+                border: '1px solid var(--glass-border)',
+                color: 'var(--text-primary)',
+              }}
               placeholder="Your Name"
               required
             />
           </div>
-          
+
+          {/* Email Field */}
           <div className="mb-6">
-            <label htmlFor="email" className="block text-gray-300 text-sm font-bold mb-2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium mb-2"
+              style={{ fontFamily: "'Manrope', sans-serif", color: 'var(--text-secondary)' }}
+            >
               Email
             </label>
             <input
@@ -101,14 +173,25 @@ const Contact: React.FC = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="shadow appearance-none border border-gray-600 rounded-lg w-full py-3 px-4 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-700 transition-colors duration-200"
+              className="w-full py-3.5 px-5 rounded-xl text-base transition-all duration-300 focus:ring-2 focus:ring-[#ff6b4a]"
+              style={{
+                fontFamily: "'Manrope', sans-serif",
+                background: 'var(--obsidian-700)',
+                border: '1px solid var(--glass-border)',
+                color: 'var(--text-primary)',
+              }}
               placeholder="your.email@example.com"
               required
             />
           </div>
-          
+
+          {/* Message Field */}
           <div className="mb-8">
-            <label htmlFor="message" className="block text-gray-300 text-sm font-bold mb-2">
+            <label
+              htmlFor="message"
+              className="block text-sm font-medium mb-2"
+              style={{ fontFamily: "'Manrope', sans-serif", color: 'var(--text-secondary)' }}
+            >
               Message
             </label>
             <textarea
@@ -117,30 +200,75 @@ const Contact: React.FC = () => {
               value={formData.message}
               onChange={handleChange}
               rows={6}
-              className="shadow appearance-none border border-gray-600 rounded-lg w-full py-3 px-4 text-gray-100 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-700 transition-colors duration-200 resize-y"
+              className="w-full py-3.5 px-5 rounded-xl text-base transition-all duration-300 resize-y min-h-[140px] focus:ring-2 focus:ring-[#ff6b4a]"
+              style={{
+                fontFamily: "'Manrope', sans-serif",
+                background: 'var(--obsidian-700)',
+                border: '1px solid var(--glass-border)',
+                color: 'var(--text-primary)',
+              }}
               placeholder="Your message here..."
               required
-            ></textarea>
+            />
           </div>
-          
-          <div className="flex items-center justify-between">
-            <button
+
+          {/* Submit Button & Status */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <motion.button
               type="submit"
-              className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline transform hover:scale-105 transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-primary w-full sm:w-auto"
               disabled={status === 'submitting'}
+              whileHover={{ scale: 1.03, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+              style={{ opacity: status === 'submitting' ? 0.7 : 1 }}
             >
-              {status === 'submitting' ? 'Sending...' : 'Send Message'}
-            </button>
-            
+              {status === 'submitting' ? (
+                <>
+                  <motion.span
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                    className="inline-block"
+                  >
+                    ⟳
+                  </motion.span>
+                  <span>Sending...</span>
+                </>
+              ) : (
+                <>
+                  <Send size={18} />
+                  <span>Send Message</span>
+                </>
+              )}
+            </motion.button>
+
             {status === 'success' && (
-              <p className="text-green-400 text-sm font-semibold">Message sent successfully!</p>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center gap-2 text-sm font-medium"
+                style={{ color: '#34d399' }}
+              >
+                <CheckCircle size={18} />
+                <span>Message sent successfully!</span>
+              </motion.div>
             )}
             {status === 'error' && (
-              <p className="text-red-400 text-sm font-semibold">Failed to send message. Please try again.</p>
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="flex items-center gap-2 text-sm font-medium"
+                style={{ color: '#fb7185' }}
+              >
+                <AlertCircle size={18} />
+                <span>Failed to send. Please try again.</span>
+              </motion.div>
             )}
           </div>
-        </form>
-      </div>
+        </motion.form>
+      </motion.div>
+
+      {/* Section Divider */}
+      <div className="absolute bottom-0 left-0 right-0 section-divider" />
     </section>
   );
 };

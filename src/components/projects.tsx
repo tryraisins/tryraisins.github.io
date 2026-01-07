@@ -2,88 +2,170 @@ import React from 'react';
 import SectionTitle from '../utils/sectionTitle';
 import ProjectCard from '../utils/projectCard';
 import { useInView } from 'react-intersection-observer';
-
+import { motion } from 'framer-motion';
 
 import faceidImage from '../assets/images/faceid.jpg';
-// import yeknalBakeryImage from '../assets/images/yeknal-bakery.png';
-// import issTrackerImage from '../assets/images/iss-tracker.jpg';
 import issTrackerImage from '../assets/images/iss-tracker.png';
-import expenseImage from '../assets/images/expenses.png';
-import roboYearbookImage from '../assets/images/Robo-Yearbook.jpg';
+import expenseImage from '../assets/images/spendex.png';
 import portfolioV1Image from '../assets/images/portfolio-v1.png';
 import echolistImgae from '../assets/images/echolist.png';
 import billQuickImage from '../assets/images/bill-quick.png';
 
 const Projects: React.FC = () => {
-   const { ref, inView } = useInView({
-        triggerOnce: true, // Animation only plays once when it enters the viewport
-        threshold: 0.1,    // Element is 35% visible
-      });
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const projects = [
+    {
+      imageSrc: faceidImage,
+      title: 'Face Detection App',
+      description:
+        'A react app with a sample login page that detect the faces on any image captured via camera and tried to guess the users age and facial expression',
+      liveLink: 'https://faceid.netlify.app/',
+    },
+    {
+      imageSrc: issTrackerImage,
+      title: 'International Space Station Tracker V2.0',
+      description:
+        "A simple app that fetches the current location of the International Space Staion. It also shows the number of people in space at the moment, who they are and where they are.",
+      liveLink: 'https://isstracker.tryraisins.dev/',
+    },
+    {
+      imageSrc: echolistImgae,
+      title: 'Echo List',
+      description:
+        'A tool to Seamlessly convert your Shazam discoveries into curated YouTube playlists.',
+      liveLink: 'https://echolist.tryraisins.dev/',
+    },
+    {
+      imageSrc: expenseImage,
+      title: 'SpendEx (Expense Manager)',
+      description:
+        'A comprehensive expense tracking web app that helps users manage their spending across multiple currencies with analytics, reporting, and customization features',
+      liveLink: 'https://spendex.tryraisins.dev/',
+    },
+    {
+      imageSrc: billQuickImage,
+      title: 'QuickBillz (Invoice Generator)',
+      description:
+        'A web app that allows users to quickly generate bills and invoices in minutes for free. Pro services to be included gradually.',
+      liveLink: 'https://quickbillz.tryraisins.dev/',
+    },
+    {
+      imageSrc: portfolioV1Image,
+      title: 'Portfolio Website V1',
+      description:
+        'The first iteration of my personal portfolio, showcasing my growth/ subtle changes. Built with ParcelJS',
+      liveLink: 'https://tryraisinsfolio.netlify.app/',
+    },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+ const cardVariants = {
+  hidden: { opacity: 0, y: 60 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { 
+      duration: 0.8, 
+      ease: [0.16, 1, 0.3, 1] as const // Add "as const"
+    },
+  },
+};
+
   return (
-    <section id="projects" ref={ref} className={`py-20 px-4 bg-gray-800 text-gray-100 transition-opacity duration-1000 transform
-        ${inView ? 'opacity-100 translate-y-0 animate-fade-in-section' : 'opacity-0 translate-y-10'}
-      `}>
-      <div className="container mx-auto">
+    <section
+      id="projects"
+      ref={ref}
+      className="relative py-24 px-6 overflow-hidden section-container"
+      style={{ background: 'var(--obsidian-800)' }}
+    >
+      {/* Background */}
+      <div className="absolute inset-0 dot-pattern opacity-40" />
+      <div className="absolute inset-0 grain-overlay" />
+
+      {/* Floating Decorative Elements */}
+      <motion.div
+        className="absolute top-40 right-[5%] w-72 h-72 rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(255, 107, 74, 0.08) 0%, transparent 70%)',
+          filter: 'blur(50px)',
+        }}
+        animate={{ y: [0, -30, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute bottom-40 left-[8%] w-64 h-64 rounded-full"
+        style={{
+          background: 'radial-gradient(circle, rgba(167, 139, 250, 0.06) 0%, transparent 70%)',
+          filter: 'blur(50px)',
+        }}
+        animate={{ y: [0, 25, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
+      />
+
+      {/* Geometric Accents */}
+      <motion.div
+        className="absolute top-24 left-[15%] w-px h-24 bg-gradient-to-b from-[#ff6b4a]/30 to-transparent"
+        initial={{ scaleY: 0 }}
+        animate={inView ? { scaleY: 1 } : {}}
+        transition={{ duration: 1, delay: 0.5 }}
+        style={{ transformOrigin: 'top' }}
+      />
+      <motion.div
+        className="absolute bottom-32 right-[20%] w-20 h-px bg-gradient-to-r from-[#5b8def]/30 to-transparent"
+        initial={{ scaleX: 0 }}
+        animate={inView ? { scaleX: 1 } : {}}
+        transition={{ duration: 1, delay: 0.8 }}
+        style={{ transformOrigin: 'left' }}
+      />
+
+      <div className="container mx-auto relative z-10">
         <SectionTitle>My Projects</SectionTitle>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          <ProjectCard
-            imageSrc={faceidImage}
-            title="Face Detection App"
-            description="A react app with a sample login page that detect the faces on any image captured via camera and tried to guess the users age and facial expression"
-            liveLink="https://faceid.netlify.app/"
-            // githubLink="#"
-          />
-          {/* <ProjectCard
-            imageSrc={yeknalBakeryImage}
-            title="Yeknal Bakery"
-            description="A small bakery business site template built with Astro on ReactJS and Bootstrap."
-            liveLink="https://yeknal-bakery.netlify.app/"
-            // githubLink="#"
-          /> */}
-          <ProjectCard
-            imageSrc={issTrackerImage}
-            title="International Space Station Tracker V2.0"
-            description="A simple app that fetches the current location of the International Space Staion. It also shows the number of people in space at the moment, who they are and where they are."
-            liveLink="https://isstracker.tryraisins.dev/"
-            // githubLink="https://github.com/tryraisins/iss-tracker-v2"
-          />
-          <ProjectCard
-            imageSrc={echolistImgae}
-            title="Echo List"
-            description="A tool to Seamlessly convert your Shazam discoveries into curated YouTube playlists."
-            liveLink="https://echolist.tryraisins.dev/"
-            // githubLink="https://github.com/tryraisins/shazam-to-youtube"
-          />
-          <ProjectCard
-            imageSrc={expenseImage}
-            title="SpendEx (Expenses Manager)"
-            description="A web app that allows users view expenses made."
-            liveLink="https://spendex.tryraisins.dev/"
-            // githubLink="#"
-          />
-          {/* <ProjectCard
-            imageSrc={roboYearbookImage}
-            title="Robo Yearbook"
-            description="A simple react app that fetches data from a server and uses it to create and display an output of 10 'cards', each with an image, name and email. It also has a search function that filters through the cards."
-            liveLink="https://robo-yearbook.netlify.app/"
-            // githubLink="#"
-          /> */}
-           <ProjectCard
-            imageSrc={billQuickImage}
-            title="QuickBillz (Invoice Generator)"
-            description="A web app that allows users to quickly generate bills and invoices in minutes for free. Pro services to be included gradually. "
-            liveLink="https://quickbillz.tryraisins.dev/"
-            // githubLink="#"
-          />
-          <ProjectCard
-            imageSrc={portfolioV1Image}
-            title="Portfolio Website V1"
-            description="The first iteration of my personal portfolio, showcasing my growth/ subtle changes. Built with ParcelJS"
-            liveLink="https://tryraisinsfolio.netlify.app/"
-            githubLink="https://github.com/tryraisins/portfolio-V1"
-          />
-        </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-center mt-6 mb-16 text-lg max-w-2xl mx-auto"
+          style={{ fontFamily: "'Manrope', sans-serif", color: 'var(--text-secondary)' }}
+        >
+          A selection of projects that showcase my skills and passion for creating impactful digital experiences
+        </motion.p>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? 'visible' : 'hidden'}
+        >
+          {projects.map((project, index) => (
+            <motion.div key={index} variants={cardVariants}>
+              <ProjectCard
+                imageSrc={project.imageSrc}
+                title={project.title}
+                description={project.description}
+                liveLink={project.liveLink}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
+
+      {/* Section Divider */}
+      <div className="absolute bottom-0 left-0 right-0 section-divider" />
     </section>
   );
 };
