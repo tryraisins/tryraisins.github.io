@@ -1,6 +1,5 @@
 import React from 'react';
 import { Github, ExternalLink } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 interface ProjectCardProps {
   imageSrc: string;
@@ -17,28 +16,27 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   liveLink,
   githubLink,
 }) => {
+  // Direct link handler for iOS compatibility
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
+    e.stopPropagation(); // Prevent card from capturing the click
+
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
 
     if (isIOS) {
       e.preventDefault();
-      window.open(url, '_blank', 'noopener,noreferrer');
+      // Use location.href for more reliable iOS navigation
+      window.location.href = url;
     }
   };
 
   return (
-    <motion.div
-      className="group relative rounded-2xl overflow-hidden glass-card h-full flex flex-col"
-      whileHover={{ y: -8 }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <div className="group relative rounded-2xl overflow-hidden glass-card h-full flex flex-col transition-transform duration-400 hover:-translate-y-2">
       {/* Image Container */}
       <div className="relative overflow-hidden">
-        <motion.img
+        <img
           src={imageSrc}
           alt={title}
-          className="w-full h-52 object-cover transition-transform duration-700"
-          whileHover={{ scale: 1.08 }}
+          className="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-105"
           onError={(e) => {
             (e.target as HTMLImageElement).onerror = null;
             (e.target as HTMLImageElement).src = `https://placehold.co/600x400/111113/faf9f6?text=${encodeURIComponent(
@@ -48,11 +46,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         />
 
         {/* Image Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b]/90 via-[#0a0a0b]/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b]/90 via-[#0a0a0b]/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none" />
 
         {/* Hover Glow Effect */}
         <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
           style={{
             background: 'radial-gradient(circle at 50% 100%, rgba(255, 107, 74, 0.15) 0%, transparent 60%)',
           }}
@@ -75,43 +73,43 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           {description}
         </p>
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap gap-3 justify-center">
+        {/* Action Buttons - Using regular anchor tags for iOS compatibility */}
+        <div className="flex flex-wrap gap-3 justify-center relative z-20">
           {liveLink && (
-            <motion.a
+            <a
               href={liveLink}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => handleLinkClick(e, liveLink)}
-              className="btn-primary text-sm py-2.5 px-5"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
+              className="btn-primary text-sm py-2.5 px-5 inline-flex items-center gap-2 cursor-pointer active:scale-95 transition-transform"
               style={{
-                WebkitTapHighlightColor: 'transparent',
+                WebkitTapHighlightColor: 'rgba(255, 107, 74, 0.3)',
                 touchAction: 'manipulation',
+                position: 'relative',
+                zIndex: 30,
               }}
             >
               <ExternalLink size={16} />
               <span>Live Demo</span>
-            </motion.a>
+            </a>
           )}
           {githubLink && (
-            <motion.a
+            <a
               href={githubLink}
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => handleLinkClick(e, githubLink)}
-              className="btn-secondary text-sm py-2.5 px-5"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
+              className="btn-secondary text-sm py-2.5 px-5 inline-flex items-center gap-2 cursor-pointer active:scale-95 transition-transform"
               style={{
-                WebkitTapHighlightColor: 'transparent',
+                WebkitTapHighlightColor: 'rgba(255, 107, 74, 0.3)',
                 touchAction: 'manipulation',
+                position: 'relative',
+                zIndex: 30,
               }}
             >
               <Github size={16} />
               <span>GitHub</span>
-            </motion.a>
+            </a>
           )}
         </div>
       </div>
@@ -123,7 +121,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           boxShadow: 'inset 0 0 0 1px rgba(255, 107, 74, 0.3)',
         }}
       />
-    </motion.div>
+    </div>
   );
 };
 

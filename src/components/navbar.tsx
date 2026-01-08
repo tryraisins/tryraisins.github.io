@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const navRef = useRef<HTMLElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -64,53 +64,61 @@ const Navbar: React.FC = () => {
   }, [navRef]);
 
   return (
-    <motion.nav
-      ref={navRef}
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-      className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${scrolled ? 'top-4' : 'top-6'
-        }`}
-    >
-      {/* Desktop Navigation - Floating Glass Pill */}
-      <div
-        className={`hidden md:flex items-center gap-1 px-2 py-2 rounded-full glass-navbar transition-all duration-500 ${scrolled ? 'scale-95' : 'scale-100'
+    <>
+      {/* Desktop Navigation - Centered Floating Glass Pill */}
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        className={`hidden md:block fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${scrolled ? 'top-4' : 'top-6'
           }`}
       >
-        {/* Logo/Brand Mark */}
-        <motion.div
-          className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-[#ff6b4a] to-[#e64d2e] mr-2"
-          whileHover={{ scale: 1.1, rotate: 5 }}
-          whileTap={{ scale: 0.95 }}
+        <div
+          className={`flex items-center gap-1 px-2 py-2 rounded-full glass-navbar transition-all duration-500 ${scrolled ? 'scale-95' : 'scale-100'
+            }`}
         >
-          <span
-            className="text-[#0a0a0b] font-bold text-lg"
-            style={{ fontFamily: "'Cormorant Garamond', serif" }}
+          {/* Logo/Brand Mark */}
+          <motion.div
+            className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-[#ff6b4a] to-[#e64d2e] mr-2"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            whileTap={{ scale: 0.95 }}
           >
-            S
-          </span>
-        </motion.div>
+            <span
+              className="text-[#0a0a0b] font-bold text-lg"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
+            >
+              S
+            </span>
+          </motion.div>
 
-        {/* Navigation Links */}
-        <NavLink to="home" label="Home" icon={Home} onClick={() => scrollToSection('home')} />
-        <NavLink to="about" label="About" icon={User} onClick={() => scrollToSection('about')} />
-        <NavLink to="skills" label="Skills" icon={Code} onClick={() => scrollToSection('skills')} />
-        <NavLink
-          to="projects"
-          label="Projects"
-          icon={Briefcase}
-          onClick={() => scrollToSection('projects')}
-        />
-        <NavLink
-          to="contact"
-          label="Contact"
-          icon={Mail}
-          onClick={() => scrollToSection('contact')}
-        />
-      </div>
+          {/* Navigation Links */}
+          <NavLink to="home" label="Home" icon={Home} onClick={() => scrollToSection('home')} />
+          <NavLink to="about" label="About" icon={User} onClick={() => scrollToSection('about')} />
+          <NavLink to="skills" label="Skills" icon={Code} onClick={() => scrollToSection('skills')} />
+          <NavLink
+            to="projects"
+            label="Projects"
+            icon={Briefcase}
+            onClick={() => scrollToSection('projects')}
+          />
+          <NavLink
+            to="contact"
+            label="Contact"
+            icon={Mail}
+            onClick={() => scrollToSection('contact')}
+          />
+        </div>
+      </motion.nav>
 
-      {/* Mobile Navigation */}
-      <div className="md:hidden">
+      {/* Mobile Navigation - Positioned to far right */}
+      <motion.div
+        ref={navRef}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+        className={`md:hidden fixed right-6 z-50 transition-all duration-500 ${scrolled ? 'top-4' : 'top-6'
+          }`}
+      >
         {/* Mobile Toggle Button */}
         <motion.button
           onClick={toggleMenu}
@@ -189,8 +197,8 @@ const Navbar: React.FC = () => {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-    </motion.nav>
+      </motion.div>
+    </>
   );
 };
 

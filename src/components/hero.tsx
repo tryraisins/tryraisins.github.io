@@ -2,69 +2,68 @@ import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 
-interface ScrambleTextProps {
-  text: string;
-  delay?: number;
-  trigger: boolean;
-  duration?: number;
-}
+const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger, duration = 1.5, useGradient = false }) => {
+  // Using alphanumeric characters
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
-const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger, duration = 1.5 }) => {
-  // Using alphanumeric characters that render properly with CSS text gradients
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*';
-
-  // Generate initial scrambled text
-  const getScrambledText = React.useCallback(() => {
-    return text
-      .split('')
-      .map((char) => (char === ' ' ? ' ' : characters[Math.floor(Math.random() * characters.length)]))
-      .join('');
-  }, [text, characters]);
-
-  const [displayText, setDisplayText] = useState(() => getScrambledText());
+  const [displayText, setDisplayText] = useState(text);
   const [isComplete, setIsComplete] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     if (!trigger) {
-      // Reset when not in view
-      setDisplayText(getScrambledText());
+      setDisplayText(text);
       setIsComplete(false);
+      setIsAnimating(false);
       return;
     }
 
+    setIsAnimating(true);
+
+    // Generate scrambled text
+    const getScrambled = () => {
+      return text
+        .split('')
+        .map((char) => (char === ' ' ? ' ' : characters[Math.floor(Math.random() * characters.length)]))
+        .join('');
+    };
+
+    // Initial scramble
+    setDisplayText(getScrambled());
+
     // Start scrambling immediately when triggered
     const scrambleInterval = setInterval(() => {
-      setDisplayText(getScrambledText());
-    }, 60);
+      setDisplayText(getScrambled());
+    }, 50);
 
     const timeout = setTimeout(() => {
       clearInterval(scrambleInterval);
 
       let iteration = 0;
-      const intervalDuration = 40; // Fast interval for smooth animation
+      const intervalDuration = 35;
       const totalDuration = duration * 1000;
       const totalFrames = totalDuration / intervalDuration;
       const incrementPerFrame = text.length / totalFrames;
 
       const revealInterval = setInterval(() => {
-        setDisplayText(
-          text
-            .split('')
-            .map((char: string, index: number) => {
-              if (char === ' ') return ' ';
-              if (index < iteration) {
-                return text[index];
-              }
-              return characters[Math.floor(Math.random() * characters.length)];
-            })
-            .join('')
-        );
+        const newText = text
+          .split('')
+          .map((char: string, index: number) => {
+            if (char === ' ') return ' ';
+            if (index < iteration) {
+              return text[index];
+            }
+            return characters[Math.floor(Math.random() * characters.length)];
+          })
+          .join('');
 
+        setDisplayText(newText);
         iteration += incrementPerFrame;
 
         if (iteration >= text.length) {
           setDisplayText(text);
           setIsComplete(true);
+          setIsAnimating(false);
           clearInterval(revealInterval);
         }
       }, intervalDuration);
@@ -76,14 +75,38 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger, d
       clearTimeout(timeout);
       clearInterval(scrambleInterval);
     };
-  }, [trigger, delay, duration, text, getScrambledText, characters]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [trigger]);
 
+  // For iOS compatibility: only use gradient when complete, otherwise use solid color
+  if (useGradient && isComplete) {
+    return (
+      <span className="hero-name-gradient">
+        {displayText}
+      </span>
+    );
+  }
+
+  // During animation or for non-gradient text, use solid visible color
   return (
-    <span className={`inline-block ${isComplete ? 'opacity-100' : 'opacity-100'}`}>
+    <span style={{
+      color: useGradient ? '#faf9f6' : 'inherit',
+      opacity: 1,
+      visibility: 'visible'
+    }}>
       {displayText}
     </span>
   );
 };
+
+// Extended props interface
+interface ScrambleTextProps {
+  text: string;
+  delay?: number;
+  trigger: boolean;
+  duration?: number;
+  useGradient?: boolean;
+}
 
 const Hero: React.FC = () => {
   const { ref, inView } = useInView({
@@ -237,9 +260,7 @@ const Hero: React.FC = () => {
           className="text-5xl md:text-7xl lg:text-8xl mb-8 leading-[0.95]"
           style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 600 }}
         >
-          <span className="hero-name-gradient">
-            <ScrambleText text="Seun Sowemimo" delay={200} trigger={inView} duration={1.5} />
-          </span>
+          <ScrambleText text="Seun Sowemimo" delay={200} trigger={inView} duration={1.5} useGradient={true} />
         </motion.h1>
 
         {/* Subtitle */}
