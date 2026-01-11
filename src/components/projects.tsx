@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 
 import faceidImage from '../assets/images/faceid.jpg';
-import issTrackerImage from '../assets/images/iss-tracker.png';
+import issTrackerImage from '../assets/images/isstracker.png';
 import expenseImage from '../assets/images/spendex.png';
 import portfolioV1Image from '../assets/images/portfolio-v1.png';
 import echolistImgae from '../assets/images/echolist.png';
@@ -28,7 +28,7 @@ const Projects: React.FC = () => {
     },
     {
       imageSrc: issTrackerImage,
-      title: 'International Space Station Tracker V2.0',
+      title: 'International Space Station Tracker',
       description:
         "A simple app that fetches the current location of the International Space Staion. It also shows the number of people in space at the moment, who they are and where they are.",
       liveLink: 'https://isstracker.tryraisins.dev/',
@@ -65,7 +65,7 @@ const Projects: React.FC = () => {
       imageSrc: portfolioV1Image,
       title: 'Portfolio Website V1',
       description:
-        'The first iteration of my personal portfolio, showcasing my growth/ subtle changes. Built with ParcelJS',
+        'The first iteration of my personal portfolio, Built with ParcelJS',
       liveLink: 'https://tryraisinsfolio.netlify.app/',
     },
   ];
