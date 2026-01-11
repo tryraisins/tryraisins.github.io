@@ -10,6 +10,7 @@ import expenseImage from '../assets/images/spendex.png';
 import portfolioV1Image from '../assets/images/portfolio-v1.png';
 import echolistImgae from '../assets/images/echolist.png';
 import billQuickImage from '../assets/images/bill-quick.png';
+import streamSlipImage from '../assets/images/streamslip.png';
 
 const Projects: React.FC = () => {
   const { ref, inView } = useInView({
@@ -52,6 +53,13 @@ const Projects: React.FC = () => {
       description:
         'A web app that allows users to quickly generate bills and invoices in minutes for free. Pro services to be included gradually.',
       liveLink: 'https://quickbillz.tryraisins.dev/',
+    },
+     {
+      imageSrc: streamSlipImage,
+      title: 'StreamSlip',
+      description:
+        'Transform your YouTube Music listening history into beautiful, shareable receipts.',
+      liveLink: 'https://streamslip.tryraisins.dev/',
     },
     {
       imageSrc: portfolioV1Image,
