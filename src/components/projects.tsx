@@ -11,6 +11,7 @@ import portfolioV1Image from '../assets/images/portfolio-v1.png';
 import echolistImgae from '../assets/images/echolist.png';
 import billQuickImage from '../assets/images/bill-quick.png';
 import streamSlipImage from '../assets/images/streamslip.png';
+import betPicksImage from '../assets/images/BetPicks.png'
 
 const Projects: React.FC = () => {
   const { ref, inView } = useInView({
@@ -23,8 +24,15 @@ const Projects: React.FC = () => {
       imageSrc: faceidImage,
       title: 'Face Detection App',
       description:
-        'A react app with a sample login page that detect the faces on any image captured via camera and tried to guess the users age and facial expression',
+        'A crude react app with a sample login page that detect the faces on any image captured via camera and tried to guess the users age and facial expression',
       liveLink: 'https://faceid.netlify.app/',
+    },
+    {
+      imageSrc: betPicksImage,
+      title: 'BetPicks',
+      description:
+        'A a modern Next.js application that provides detailed sports match predictions for NBA and Soccer, leveraging advanced caching strategies to optimize API usage and ensure high performance.',
+      liveLink: 'https://betpicks.tryraisins.dev/',
     },
     {
       imageSrc: issTrackerImage,
