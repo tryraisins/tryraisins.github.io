@@ -129,6 +129,7 @@ const Hero: React.FC = () => {
       id="home"
       ref={ref}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      aria-label="Hero section introducing Seun Sowemimo"
     >
       {/* Atmospheric Background */}
       <div className="absolute inset-0 atmosphere-gradient" />

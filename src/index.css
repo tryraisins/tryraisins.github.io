@@ -675,3 +675,63 @@ textarea:focus {
 .animate-fade-in-section {
   animation: fadeInSection 1s var(--ease-out-expo) forwards;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Screen reader only - visually hidden but accessible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Remove sr-only when focused (for skip links) */
+.sr-only:focus,
+.sr-only.focus:focus,
+.focus\:not-sr-only:focus {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-gentle-float,
+  .floating-orb,
+  .organic-flow::before {
+    animation: none !important;
+  }
+}
+
+/* Focus visible for better keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--coral-400);
+  outline-offset: 2px;
+}
+
+/* Skip link styling when focused */
+a[href="#main-content"]:focus {
+  z-index: 9999;
+}

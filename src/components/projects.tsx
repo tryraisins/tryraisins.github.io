@@ -11,7 +11,7 @@ import portfolioV1Image from '../assets/images/portfolio-v1.png';
 import echolistImgae from '../assets/images/echolist.png';
 import billQuickImage from '../assets/images/bill-quick.png';
 import streamSlipImage from '../assets/images/streamslip.png';
-import betPicksImage from '../assets/images/BetPicks.png'
+import betPicksImage from '../assets/images/BetPicks.png';
 
 const Projects: React.FC = () => {
   const { ref, inView } = useInView({
@@ -62,7 +62,7 @@ const Projects: React.FC = () => {
         'A web app that allows users to quickly generate bills and invoices in minutes for free. Pro services to be included gradually.',
       liveLink: 'https://quickbillz.tryraisins.dev/',
     },
-     {
+    {
       imageSrc: streamSlipImage,
       title: 'StreamSlip',
       description:
@@ -89,17 +89,17 @@ const Projects: React.FC = () => {
     },
   };
 
- const cardVariants = {
-  hidden: { opacity: 0, y: 60 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { 
-      duration: 0.8, 
-      ease: [0.16, 1, 0.3, 1] as const // Add "as const"
+  const cardVariants = {
+    hidden: { opacity: 0, y: 60 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] as const // Add "as const"
+      },
     },
-  },
-};
+  };
 
   return (
     <section
@@ -107,6 +107,7 @@ const Projects: React.FC = () => {
       ref={ref}
       className="relative py-24 px-6 overflow-hidden section-container"
       style={{ background: 'var(--obsidian-800)' }}
+      aria-label="Projects portfolio section"
     >
       {/* Background */}
       <div className="absolute inset-0 dot-pattern opacity-40" />

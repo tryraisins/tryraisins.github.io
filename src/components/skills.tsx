@@ -89,24 +89,25 @@ const Skills: React.FC = () => {
     },
   };
 
- const cardVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { 
-      duration: 0.6, 
-      ease: [0.16, 1, 0.3, 1] as const // Add "as const"
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1] as const // Add "as const"
+      },
     },
-  },
-};
+  };
   return (
     <section
       id="skills"
       ref={ref}
       className="relative py-24 px-6 overflow-hidden section-container"
       style={{ background: 'var(--obsidian-900)' }}
+      aria-label="Technical skills and technologies"
     >
       {/* Background */}
       <div className="absolute inset-0 atmosphere-gradient" />

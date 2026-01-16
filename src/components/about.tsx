@@ -19,18 +19,18 @@ const About: React.FC = () => {
       },
     },
   };
-  
-const itemVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { 
-      duration: 0.8, 
-      ease: [0.16, 1, 0.3, 1] as const // Add "as const" 
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] as const // Add "as const" 
+      },
     },
-  },
-};
+  };
 
   return (
     <section
@@ -38,6 +38,7 @@ const itemVariants = {
       ref={ref}
       className="relative py-24 px-6 overflow-hidden section-container"
       style={{ background: 'var(--obsidian-800)' }}
+      aria-label="About Seun Sowemimo - Background and skills"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 dot-pattern opacity-30" />
