@@ -12,6 +12,7 @@ import echolistImgae from '../assets/images/echolist.png';
 import billQuickImage from '../assets/images/bill-quick.png';
 import streamSlipImage from '../assets/images/streamslip.png';
 import betPicksImage from '../assets/images/BetPicks.png';
+import talentHunter from '../assets/images/talent-hunter.png'
 
 const Projects: React.FC = () => {
   const { ref, inView } = useInView({
@@ -20,61 +21,69 @@ const Projects: React.FC = () => {
   });
 
   const projects = [
-    {
-      imageSrc: faceidImage,
-      title: 'Face Detection App',
-      description:
-        'A crude react app with a sample login page that detect the faces on any image captured via camera and tried to guess the users age and facial expression',
-      liveLink: 'https://faceid.netlify.app/',
-    },
+   
     {
       imageSrc: betPicksImage,
       title: 'BetPicks',
       description:
-        'A a modern Next.js application that provides detailed sports match predictions for NBA and Soccer, leveraging advanced caching strategies to optimize API usage and ensure high performance.',
-      liveLink: 'https://betpicks.tryraisins.dev/',
+        'A modern Next.js application that provides detailed sports match predictions for NBA and Soccer, leveraging advanced caching strategies to optimize API usage and ensure high performance.',
+      liveLink: 'https://betpicks.tryraisins.dev',
+    },
+     {
+      imageSrc: talentHunter,
+      title: 'Talent Hunter',
+      description:
+        'A Vite powered resume screening app that helps recruiters, HR professionals, and hiring managers find the best candidates faster than ever before.',
+      liveLink: 'https://talenthunter.tryraisins.dev',
     },
     {
       imageSrc: issTrackerImage,
       title: 'International Space Station Tracker',
       description:
         "A simple app that fetches the current location of the International Space Staion. It also shows the number of people in space at the moment, who they are and where they are.",
-      liveLink: 'https://isstracker.tryraisins.dev/',
+      liveLink: 'https://isstracker.tryraisins.dev',
     },
     {
       imageSrc: echolistImgae,
       title: 'Echo List',
       description:
         'A tool to Seamlessly convert your Shazam discoveries into curated YouTube playlists.',
-      liveLink: 'https://echolist.tryraisins.dev/',
+      liveLink: 'https://echolist.tryraisins.dev',
     },
     {
       imageSrc: expenseImage,
       title: 'SpendEx (Expense Manager)',
       description:
         'A comprehensive expense tracking web app that helps users manage their spending across multiple currencies with analytics, reporting, and customization features',
-      liveLink: 'https://spendex.tryraisins.dev/',
+      liveLink: 'https://spendex.tryraisins.dev',
     },
     {
       imageSrc: billQuickImage,
       title: 'QuickBillz (Invoice Generator)',
       description:
         'A web app that allows users to quickly generate bills and invoices in minutes for free. Pro services to be included gradually.',
-      liveLink: 'https://quickbillz.tryraisins.dev/',
+      liveLink: 'https://quickbillz.tryraisins.dev',
     },
     {
       imageSrc: streamSlipImage,
       title: 'StreamSlip',
       description:
         'Transform your YouTube Music listening history into beautiful, shareable receipts.',
-      liveLink: 'https://streamslip.tryraisins.dev/',
+      liveLink: 'https://streamslip.tryraisins.dev',
+    },
+     {
+      imageSrc: faceidImage,
+      title: 'Face Detection App',
+      description:
+        'A crude react app with a sample login page that detect the faces on any image captured via camera and tried to guess the users age and facial expression',
+      liveLink: 'https://faceid.netlify.app',
     },
     {
       imageSrc: portfolioV1Image,
       title: 'Portfolio Website V1',
       description:
         'The first iteration of my personal portfolio, Built with ParcelJS',
-      liveLink: 'https://tryraisinsfolio.netlify.app/',
+      liveLink: 'https://tryraisinsfolio.netlify.app',
     },
   ];
 
