@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.bebbd5d3.css",
-    "main.js": "/static/js/main.b2ef1774.js",
+    "main.js": "/static/js/main.366e80fe.js",
     "static/js/453.438d9e50.chunk.js": "/static/js/453.438d9e50.chunk.js",
     "static/media/isstracker.png": "/static/media/isstracker.209c66687a56323cd989.png",
     "static/media/BetPicks.png": "/static/media/BetPicks.c091d44499edf48a1880.png",
@@ -9,15 +9,16 @@
     "static/media/spendex.png": "/static/media/spendex.46c312faae07e35ebc9d.png",
     "static/media/echolist.png": "/static/media/echolist.a5bc12e58c9ca6cfd837.png",
     "static/media/streamslip.png": "/static/media/streamslip.2e4afd83deb566ecf3be.png",
+    "static/media/talent-hunter.png": "/static/media/talent-hunter.ecb834e9982dcf994d8a.png",
     "static/media/faceid.jpg": "/static/media/faceid.171e67f944d38461c81d.jpg",
     "static/media/portfolio-v1.png": "/static/media/portfolio-v1.d3423d8a3df9d62780e1.png",
     "index.html": "/index.html",
     "main.bebbd5d3.css.map": "/static/css/main.bebbd5d3.css.map",
-    "main.b2ef1774.js.map": "/static/js/main.b2ef1774.js.map",
+    "main.366e80fe.js.map": "/static/js/main.366e80fe.js.map",
     "453.438d9e50.chunk.js.map": "/static/js/453.438d9e50.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bebbd5d3.css",
-    "static/js/main.b2ef1774.js"
+    "static/js/main.366e80fe.js"
   ]
 }
