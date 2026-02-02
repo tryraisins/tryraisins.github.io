@@ -1,5 +1,6 @@
-import React from 'react';
-import { Github, ExternalLink } from 'lucide-react';
+import React, { useState } from 'react';
+import { Github, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface ProjectCardProps {
   imageSrc: string;
@@ -16,27 +17,38 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
   liveLink,
   githubLink,
 }) => {
-  // Direct link handler for iOS compatibility
+  const [isHovered, setIsHovered] = useState(false);
+
+  // iOS specific handler
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, url: string) => {
-    e.stopPropagation(); // Prevent card from capturing the click
-
+    e.stopPropagation();
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
-
     if (isIOS) {
       e.preventDefault();
-      // Use location.href for more reliable iOS navigation
       window.location.href = url;
     }
   };
 
   return (
-    <div className="group relative rounded-2xl overflow-hidden glass-card h-full flex flex-col transition-transform duration-400 hover:-translate-y-2">
-      {/* Image Container */}
-      <div className="relative overflow-hidden">
+    <motion.div
+      className="group relative h-[420px] w-full rounded-2xl overflow-hidden bg-zinc-900 cursor-pointer"
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Background Image with Zoom Effect */}
+      <motion.div
+        className="absolute inset-0 w-full h-full"
+        animate={{ scale: isHovered ? 1.05 : 1 }}
+        transition={{ duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
+      >
         <img
           src={imageSrc}
           alt={title}
-          className="w-full h-52 object-cover transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700"
           onError={(e) => {
             (e.target as HTMLImageElement).onerror = null;
             (e.target as HTMLImageElement).src = `https://placehold.co/600x400/111113/faf9f6?text=${encodeURIComponent(
@@ -44,84 +56,78 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             )}`;
           }}
         />
+        {/* Cinematic Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+      </motion.div>
 
-        {/* Image Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0b]/90 via-[#0a0a0b]/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500 pointer-events-none" />
-
-        {/* Hover Glow Effect */}
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{
-            background: 'radial-gradient(circle at 50% 100%, rgba(255, 107, 74, 0.15) 0%, transparent 60%)',
-          }}
-        />
-      </div>
-
-      {/* Content */}
-      <div className="p-6 flex-1 flex flex-col">
-        <h3
-          className="text-2xl font-semibold mb-3 text-center group-hover:text-[#ff6b4a] transition-colors duration-300"
-          style={{ fontFamily: "'Cormorant Garamond', serif", color: 'var(--text-primary)' }}
-        >
-          {title}
-        </h3>
-
-        <p
-          className="text-sm leading-relaxed mb-6 flex-1 text-center"
-          style={{ fontFamily: "'Manrope', sans-serif", color: 'var(--text-muted)' }}
-        >
-          {description}
-        </p>
-
-        {/* Action Buttons - Using regular anchor tags for iOS compatibility */}
-        <div className="flex flex-wrap gap-3 justify-center relative z-20">
-          {liveLink && (
-            <a
-              href={liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => handleLinkClick(e, liveLink)}
-              className="btn-primary text-sm py-2.5 px-5 inline-flex items-center gap-2 cursor-pointer active:scale-95 transition-transform"
-              style={{
-                WebkitTapHighlightColor: 'rgba(255, 107, 74, 0.3)',
-                touchAction: 'manipulation',
-                position: 'relative',
-                zIndex: 30,
-              }}
+      {/* Content Container */}
+      <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
+        <div className="relative z-10">
+          {/* Title Area */}
+          <motion.div
+            animate={{ y: isHovered ? -10 : 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
+            <h3
+              className="text-3xl font-bold text-white mb-2 leading-tight"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
-              <ExternalLink size={16} />
-              <span>Live Demo</span>
-            </a>
-          )}
-          {githubLink && (
-            <a
-              href={githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => handleLinkClick(e, githubLink)}
-              className="btn-secondary text-sm py-2.5 px-5 inline-flex items-center gap-2 cursor-pointer active:scale-95 transition-transform"
-              style={{
-                WebkitTapHighlightColor: 'rgba(255, 107, 74, 0.3)',
-                touchAction: 'manipulation',
-                position: 'relative',
-                zIndex: 30,
-              }}
-            >
-              <Github size={16} />
-              <span>GitHub</span>
-            </a>
-          )}
+              {title}
+            </h3>
+          </motion.div>
+
+          {/* Description & Links - Hidden initially or truncated */}
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{
+              height: isHovered ? 'auto' : 0,
+              opacity: isHovered ? 1 : 0
+            }}
+            transition={{ duration: 0.4, ease: "circOut" }}
+            className="overflow-hidden"
+          >
+            <p className="text-zinc-300 text-sm leading-relaxed mb-6 font-medium max-w-[90%]">
+              {description}
+            </p>
+
+            <div className="flex items-center gap-4 pt-2">
+              {liveLink && (
+                <a
+                  href={liveLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => handleLinkClick(e, liveLink)}
+                  className="flex items-center gap-2 text-white border-b border-white/30 pb-1 hover:border-white transition-colors text-sm uppercase tracking-wider font-semibold"
+                >
+                  <ExternalLink size={14} className="text-coral-400" />
+                  Live Demo
+                </a>
+              )}
+              {githubLink && (
+                <a
+                  href={githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => handleLinkClick(e, githubLink)}
+                  className="flex items-center gap-2 text-zinc-400 border-b border-transparent hover:text-white pb-1 transition-colors text-sm uppercase tracking-wider font-semibold"
+                >
+                  <Github size={14} />
+                  Code
+                </a>
+              )}
+            </div>
+          </motion.div>
         </div>
       </div>
 
-      {/* Border Glow on Hover */}
-      <div
-        className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{
-          boxShadow: 'inset 0 0 0 1px rgba(255, 107, 74, 0.3)',
-        }}
-      />
-    </div>
+      {/* Top Right Decorative Icon */}
+      <div className="absolute top-6 right-6 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+        <div className="bg-white/10 backdrop-blur-md p-2 rounded-full border border-white/10">
+          <ArrowUpRight className="text-white w-5 h-5" />
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
