@@ -45,13 +45,7 @@ const About: React.FC = () => {
                 Building digital experiences that <span className="text-[var(--coral-400)] italic">matter</span>.
               </h2>
 
-              <div className="mt-12 hidden lg:block">
-                <div className="w-24 h-1 bg-[var(--coral-400)] rounded-full mb-8" />
-                <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase">
-                  Based in Nubiaville<br />
-                  Available for remote work
-                </p>
-              </div>
+           
             </motion.div>
           </div>
 
