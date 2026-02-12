@@ -38,14 +38,10 @@ const About: React.FC = () => {
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <SectionTitle>About Me</SectionTitle>
-              <h2
-                className="mt-8 text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                Building digital experiences that <span className="text-[var(--coral-400)] italic">matter</span>.
-              </h2>
 
-           
+
+
+
             </motion.div>
           </div>
 
@@ -59,16 +55,12 @@ const About: React.FC = () => {
             >
               <p className="text-xl leading-relaxed text-zinc-300 font-light">
                 Hello! I'm <strong className="text-white font-medium">Oluwaseun Sowemimo</strong>.
-                Use me to turn complex problems into elegant, user-friendly solutions.
-                I bridge the gap between design and engineering, ensuring that every pixel serves a purpose
-                and every line of code adds value.
+                
               </p>
 
               <p className="text-lg leading-relaxed text-zinc-400">
-                Currently, I engineer enterprise-scale applications at <span className="text-white border-b border-[var(--coral-400)] pb-0.5">[REDACTED]</span>,
-                leveraging the power of the React ecosystem and Serverless architectures.
-                My background spans from rapid prototyping in startups to rigorous development cycles in
-                corporate environments, giving me a unique perspective on adaptability and code quality.
+                Currently, I engineer enterprise-scale applications leveraging the React ecosystem and Serverless architectures.
+               
               </p>
 
               {/* Stats Row */}

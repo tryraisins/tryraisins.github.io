@@ -111,45 +111,10 @@ const Footer: React.FC = () => {
             <span style={{ color: 'var(--coral-400)' }}>TryRaisins</span>. All rights reserved.
           </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-xs"
-            style={{ fontFamily: "'Manrope', sans-serif", color: 'var(--text-muted)', opacity: 0.7 }}
-          >
-            Designed & Built with{' '}
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
-              className="inline-block"
-              style={{ color: 'var(--coral-400)' }}
-            >
-              ♥
-            </motion.span>{' '}
-            using React & Tailwind CSS
-          </motion.p>
+          
         </div>
 
-        {/* Decorative Label */}
-        <motion.div
-          className="mt-10 flex justify-center"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          <span
-            className="px-4 py-2 rounded-full text-xs tracking-wider uppercase"
-            style={{
-              fontFamily: "'Manrope', sans-serif",
-              background: 'var(--obsidian-700)',
-              color: 'var(--text-muted)',
-              border: '1px solid var(--glass-border)',
-            }}
-          >
-            Portfolio V2.0
-          </span>
-        </motion.div>
+     
       </div>
     </footer>
   );
