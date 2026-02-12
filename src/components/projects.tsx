@@ -60,10 +60,10 @@ const Projects: React.FC = () => {
       liveLink: 'https://faceid.netlify.app',
     },
     {
-      title: 'Portfolio Website V1',
+      title: 'Terror Tracker',
       description:
-        'The first iteration of my personal portfolio, Built with ParcelJS',
-      liveLink: 'https://tryraisinsfolio.netlify.app',
+        'Real-time intelligence on terrorist and insurgent activities across Nigeria',
+      liveLink: 'https://terrortracker.tryraisins.dev',
     },
   ];
 
