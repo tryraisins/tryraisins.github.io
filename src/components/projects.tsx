@@ -35,30 +35,14 @@ const Projects: React.FC = () => {
         'A tool to Seamlessly convert your Shazam discoveries into curated YouTube playlists.',
       liveLink: 'https://echolist.tryraisins.dev',
     },
-    {
-      title: 'SpendEx (Expense Manager)',
-      description:
-        'A comprehensive expense tracking web app that helps users manage their spending across multiple currencies with analytics, reporting, and customization features',
-      liveLink: 'https://spendex.tryraisins.dev',
-    },
-    {
-      title: 'QuickBillz (Invoice Generator)',
-      description:
-        'A web app that allows users to quickly generate bills and invoices in minutes for free. Pro services to be included gradually.',
-      liveLink: 'https://quickbillz.tryraisins.dev',
-    },
+   
     {
       title: 'StreamSlip',
       description:
         'Transform your YouTube Music listening history into beautiful, shareable receipts.',
       liveLink: 'https://streamslip.tryraisins.dev',
     },
-    {
-      title: 'Face Detection App',
-      description:
-        'A crude react app with a sample login page that detect the faces on any image captured via camera and tried to guess the users age and facial expression',
-      liveLink: 'https://faceid.netlify.app',
-    },
+   
     {
       title: 'Terror Tracker',
       description:
