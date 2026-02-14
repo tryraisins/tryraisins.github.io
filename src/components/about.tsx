@@ -59,7 +59,7 @@ const About: React.FC = () => {
               </p>
 
               <p className="text-lg leading-relaxed text-zinc-400">
-                Currently, I engineer enterprise-scale applications leveraging the React ecosystem and Serverless architectures.
+                Currently, I engineer enterprise-scale applications leveraging the Javascript ecosystem. I also dabble in Python.
                
               </p>
 
