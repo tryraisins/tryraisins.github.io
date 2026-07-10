@@ -130,7 +130,7 @@ const Contact: React.FC = () => {
         >
           {/* Hidden FormSubmit fields */}
           <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="https://yourdomain.com/thanks" />
+          <input type="hidden" name="_next" value="https://tryraisins.dev/#contact" />
 
           {/* Name Field */}
           <div className="mb-6">
