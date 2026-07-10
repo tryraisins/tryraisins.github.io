@@ -1,6 +1,5 @@
 import Intro from '@/components/intro';
 import CursorPill from '@/components/cursor-pill';
-import ScrollRail from '@/components/scroll-rail';
 import ScrollCounter from '@/components/scroll-counter';
 import Nav from '@/components/nav';
 import Hero from '@/components/hero';
@@ -15,7 +14,6 @@ export default function Page() {
     <>
       <Intro />
       <CursorPill />
-      <ScrollRail />
       <ScrollCounter />
       <Nav />
       <main id="main" className="relative z-10">

@@ -82,24 +82,34 @@ export default function CursorPill() {
 
   if (!enabled) return null;
 
+  // Solid coral fill; ring outline gives it edge against any background.
+  // No mix-blend — that was disappearing over darker patches.
+  const isLink = mode === 'link';
+  const isText = mode === 'text';
+
   return (
     <div
       ref={dotRef}
       aria-hidden="true"
       className="fixed top-0 left-0 z-[120] pointer-events-none flex items-center justify-center"
       style={{
-        transition: 'width 0.35s cubic-bezier(0.7,0,0.15,1), height 0.35s cubic-bezier(0.7,0,0.15,1), background 0.25s, color 0.25s, border-radius 0.25s',
-        mixBlendMode: 'difference',
+        transition:
+          'width 0.35s cubic-bezier(0.7,0,0.15,1), height 0.35s cubic-bezier(0.7,0,0.15,1), background 0.25s, border-radius 0.25s, box-shadow 0.25s',
         willChange: 'transform, width, height',
-        width: mode === 'link' ? '120px' : mode === 'text' ? '2px' : '18px',
-        height: mode === 'link' ? '44px' : mode === 'text' ? '28px' : '18px',
-        borderRadius: mode === 'text' ? '0' : '999px',
-        background: mode === 'text' ? '#f5f2eb' : '#f5f2eb',
-        color: '#0d0c0a',
+        width: isLink ? '120px' : isText ? '3px' : '22px',
+        height: isLink ? '44px' : isText ? '30px' : '22px',
+        borderRadius: isText ? '2px' : '999px',
+        background: isLink ? '#ff6b4a' : isText ? '#f5f2eb' : '#f5f2eb',
+        color: isLink ? '#0d0c0a' : '#0d0c0a',
+        boxShadow: isLink
+          ? '0 0 0 1px rgba(245,242,235,0.15)'
+          : isText
+            ? 'none'
+            : '0 0 0 2px rgba(255,107,74,0.55), 0 0 20px rgba(255,107,74,0.25)',
       }}
     >
-      {mode === 'link' && (
-        <span className="font-mono text-[10px] tracking-[0.2em] uppercase font-medium">{label}</span>
+      {isLink && (
+        <span className="font-mono text-[10px] tracking-[0.2em] uppercase font-semibold">{label}</span>
       )}
     </div>
   );
