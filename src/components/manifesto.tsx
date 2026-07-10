@@ -4,7 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 const LINES = [
-  { l: 'I build things that ship.' },
+  { l: 'TryRaisins builds things that ship.' },
   { l: 'Not portfolios of concepts — actual apps in front of actual users.' },
   { l: 'BetPicks. Talent Hunter. Terror Tracker. Live domains, real traffic.' },
   { l: 'Five years across React, TypeScript, Node, Python, and enough infra to keep it up.' },
@@ -43,7 +43,7 @@ export default function Manifesto() {
               </h2>
               <div className="mt-8 font-mono text-[10px] tracking-widest uppercase text-ink-300 flex items-center gap-3">
                 <span className="w-6 h-px bg-flame-500" />
-                <span>Oluwaseun Sowemimo · @tryraisins</span>
+                <span>@tryraisins</span>
               </div>
             </motion.div>
           </div>
@@ -70,7 +70,7 @@ export default function Manifesto() {
             {[
               { v: '5+', l: 'Years shipping' },
               { v: '20+', l: 'Projects live' },
-              { v: 'NG', l: 'Based in Lagos' },
+              { v: '∞', l: 'Coffee consumed' },
             ].map((s) => (
               <div key={s.l}>
                 <div className="font-display font-bold text-4xl md:text-6xl leading-none tracking-[-0.04em] text-ink-50">{s.v}</div>

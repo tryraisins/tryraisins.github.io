@@ -36,23 +36,6 @@ body {
 }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* Slot-machine title: two stacked versions swap on group-hover */
-.slot {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
-  line-height: 0.95;
-}
-.slot > span {
-  display: block;
-  transform: translateY(0);
-  transition: transform 0.55s cubic-bezier(0.7, 0, 0.15, 1);
-}
-.group:hover .slot > span,
-.slot-row:hover .slot > span {
-  transform: translateY(-100%);
-}
-
 /* Shear-on-hover used on the contact CTA word */
 .shear {
   display: inline-block;

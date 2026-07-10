@@ -11,7 +11,7 @@ const ITEMS = [
   'Node',
   'Python',
   'Next.js',
-  'Lagos ·',
+  'Shipping',
   '2026',
 ];
 

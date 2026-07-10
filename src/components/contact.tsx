@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 const CHANNELS = [
   { label: 'Email',    value: 'tryraisins@gmail.com',                              href: 'mailto:tryraisins@gmail.com' },
   { label: 'GitHub',   value: 'tryraisins',                                        href: 'https://github.com/tryraisins' },
-  { label: 'LinkedIn', value: 'Seun Sowemimo',                                     href: 'https://www.linkedin.com/in/seun-sowemimo-8518b7249/' },
+  { label: 'LinkedIn', value: 'TryRaisins',                                        href: 'https://www.linkedin.com/in/seun-sowemimo-8518b7249/' },
   { label: 'Medium',   value: 'TryRaisins',                                        href: 'https://medium.com/@TryRaisins' },
 ];
 
