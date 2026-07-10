@@ -118,18 +118,17 @@ export default function Hero() {
 
         {/* Tagline — word-by-word mask reveal */}
         <p className="mt-10 md:mt-14 font-display text-2xl md:text-4xl lg:text-5xl leading-[1.1] tracking-[-0.02em] text-ink-100 max-w-4xl">
-          <WordReveal text="I build" delay={2.0} />{' '}
+          <WordReveal text="I make things for the" delay={2.0} />{' '}
           <span className="inline-block overflow-hidden align-baseline">
             <motion.span
               initial={{ y: '110%' }}
               animate={{ y: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 2.15 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 2.35 }}
               className="inline-block italic text-flame-500"
             >
-              web&nbsp;apps
+              web.
             </motion.span>
-          </span>{' '}
-          <WordReveal text="people actually use." delay={2.25} />
+          </span>
         </p>
 
         {/* CTA row — direct email + secondary "see the work" — visible without scrolling */}

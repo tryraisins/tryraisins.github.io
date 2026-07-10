@@ -4,11 +4,11 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 const LINES = [
-  { l: 'I build things that ship.' },
-  { l: 'Not portfolios of concepts — actual apps in front of actual users.' },
-  { l: 'BetPicks. Talent Hunter. Terror Tracker. Live domains, real traffic.' },
-  { l: 'Five years across React, TypeScript, Node, Python, and enough infra to keep it up.' },
-  { l: 'If your project needs someone who owns the whole stack from schema to CSS, we should talk.' },
+  { l: 'I like making things.' },
+  { l: 'Small tools, side projects, the occasional experiment.' },
+  { l: 'BetPicks, Talent Hunter, Terror Tracker — the ones I keep tinkering with.' },
+  { l: 'Been at this about five years now. Mostly React, TypeScript, Node, and some Python.' },
+  { l: 'If you’re working on something interesting, drop me a note.' },
 ];
 
 // Sticky-scroll manifesto: title pins on the left while the right-side lines
@@ -35,11 +35,11 @@ export default function Manifesto() {
           <div className="sticky top-32">
             <motion.div style={{ x: titleX, opacity: titleOpacity }}>
               <div className="font-mono text-[10px] tracking-widest uppercase text-flame-500 mb-4">
-                About &nbsp;·&nbsp; The Person
+                About &nbsp;·&nbsp; A bit about me
               </div>
               <h2 className="font-display font-bold text-6xl md:text-8xl leading-[0.85] tracking-[-0.05em] text-ink-50">
-                So who&apos;s<br />
-                <span className="italic text-flame-500">building this?</span>
+                About<br />
+                <span className="italic text-flame-500">me.</span>
               </h2>
               <div className="mt-8 font-mono text-[10px] tracking-widest uppercase text-ink-300 flex items-center gap-3">
                 <span className="w-6 h-px bg-flame-500" />
@@ -68,8 +68,8 @@ export default function Manifesto() {
           {/* Stat blocks */}
           <div className="grid grid-cols-3 gap-4 md:gap-8 pt-10 mt-10 border-t border-ink-50/10">
             {[
-              { v: '5+', l: 'Years shipping' },
-              { v: '20+', l: 'Projects live' },
+              { v: '5+', l: 'Years writing code' },
+              { v: '20+', l: 'Projects out there' },
               { v: '∞', l: 'Coffee consumed' },
             ].map((s) => (
               <div key={s.l}>

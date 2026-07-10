@@ -69,8 +69,8 @@ export default function Work() {
               Work &nbsp;·&nbsp; 2024 – 2026
             </div>
             <h2 className="font-display font-bold text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-[-0.04em] text-ink-50">
-              Shipped<br />
-              <span className="italic text-flame-500">recently.</span>
+              Some things<br />
+              <span className="italic text-flame-500">I&apos;ve made.</span>
             </h2>
           </div>
           <div className="hidden md:block text-right font-mono text-[10px] tracking-widest uppercase text-ink-300">

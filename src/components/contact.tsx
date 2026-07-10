@@ -29,19 +29,19 @@ export default function Contact() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="font-display font-bold text-6xl md:text-8xl lg:text-[10rem] leading-[0.85] tracking-[-0.05em]"
         >
-          <span className="block text-ink-50">Got an idea?</span>
-          <span className="block italic text-ink-200">Let&apos;s make</span>
+          <span className="block italic text-ink-200">Working on</span>
+          <span className="block text-ink-50">something?</span>
           <span className="block">
+            <span className="text-ink-50">Say&nbsp;</span>
             <a
               href="mailto:tryraisins@gmail.com"
               data-cursor="link"
               data-cursor-label="EMAIL →"
               className="shear underline-draw text-flame-500 hover:text-flame-400 transition-colors"
             >
-              it real
+              hi
             </a>
             <span className="text-ink-50">.</span>
-            <span className="caret text-ink-50" />
           </span>
         </motion.h2>
 

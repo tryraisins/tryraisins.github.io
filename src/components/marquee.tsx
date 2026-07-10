@@ -4,13 +4,13 @@ import { motion, useMotionValue, useAnimationFrame, useTransform } from 'framer-
 import { wrap } from '@/lib/wrap';
 
 const ITEMS = [
-  'Fullstack',
   'React',
   'TypeScript',
-  'Node',
+  'Node.js',
   'Python',
   'Next.js',
-  'Shipping',
+  'Tailwind',
+  'Design',
   '2026',
 ];
 
