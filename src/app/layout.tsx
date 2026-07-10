@@ -1,20 +1,13 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, Manrope, JetBrains_Mono } from 'next/font/google';
+import { Instrument_Sans, JetBrains_Mono } from 'next/font/google';
 import Script from 'next/script';
 import { PersonSchema, WebsiteSchema, CollectionSchema } from '@/components/schema';
 import './globals.css';
 
-const serif = Cormorant_Garamond({
+const display = Instrument_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-serif',
-  display: 'swap',
-});
-
-const sans = Manrope({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
-  variable: '--font-sans',
+  variable: '--font-display',
   display: 'swap',
 });
 
@@ -32,10 +25,7 @@ const DESCRIPTION =
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: TITLE,
-    template: '%s — TryRaisins',
-  },
+  title: { default: TITLE, template: '%s — TryRaisins' },
   description: DESCRIPTION,
   keywords: [
     'Seun Sowemimo',
@@ -56,14 +46,8 @@ export const metadata: Metadata = {
   authors: [{ name: 'Seun Sowemimo', url: SITE_URL }],
   creator: 'Seun Sowemimo',
   publisher: 'Seun Sowemimo',
-  alternates: {
-    canonical: SITE_URL,
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
+  alternates: { canonical: SITE_URL },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   openGraph: {
     type: 'website',
     url: SITE_URL,
@@ -72,12 +56,7 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     locale: 'en_US',
     images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Seun Sowemimo — Fullstack Web Developer Portfolio',
-      },
+      { url: '/og-image.png', width: 1200, height: 630, alt: 'Seun Sowemimo — Fullstack Web Developer Portfolio' },
     ],
   },
   twitter: {
@@ -87,11 +66,7 @@ export const metadata: Metadata = {
     creator: '@tryraisins',
     images: ['/og-image.png'],
   },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.png',
-  },
+  icons: { icon: '/favicon.ico', shortcut: '/favicon.ico', apple: '/favicon.png' },
   manifest: '/manifest.webmanifest',
   other: {
     'geo.region': 'NG',
@@ -101,7 +76,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0a0a0b',
+  themeColor: '#0d0c0a',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -109,16 +84,16 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable} ${mono.variable}`}>
+    <html lang="en" className={`${display.variable} ${mono.variable}`}>
       <head>
         <PersonSchema />
         <WebsiteSchema />
         <CollectionSchema />
       </head>
-      <body className="font-sans bg-ink-950 text-bone-50 antialiased selection:bg-coral-500/30 selection:text-bone-50">
+      <body className="font-sans bg-canvas-900 text-ink-50 antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-coral-500 focus:text-ink-950 focus:rounded"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-flame-500 focus:text-canvas-950 focus:rounded"
         >
           Skip to main content
         </a>
@@ -132,10 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           })(window, document, "clarity", "script", "vgp526jgr5");`}
         </Script>
 
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-YMCW9KY30X"
-          strategy="afterInteractive"
-        />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-YMCW9KY30X" strategy="afterInteractive" />
         <Script id="ga" strategy="afterInteractive">
           {`window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}

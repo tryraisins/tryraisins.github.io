@@ -5,33 +5,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Warm charcoal — not the cold blue-black of v1
+        canvas: {
+          950: '#0a0908',
+          900: '#0d0c0a',
+          800: '#141210',
+          700: '#1c1a17',
+          600: '#26231f',
+        },
         ink: {
-          950: '#050506',
-          900: '#0a0a0b',
-          800: '#101012',
-          700: '#17171a',
-          600: '#1f1f24',
+          50: '#f5f2eb',
+          100: '#e8e4d9',
+          200: '#c2bcae',
+          300: '#8a857a',
+          400: '#5c584f',
         },
-        bone: {
-          50: '#faf9f6',
-          100: '#e8e6df',
-          200: '#c7c5be',
-          300: '#8f8d86',
-          400: '#5e5c56',
-        },
-        coral: {
+        flame: {
           400: '#ff8f73',
           500: '#ff6b4a',
           600: '#e8552f',
         },
       },
       fontFamily: {
-        serif: ['var(--font-serif)', 'Cormorant Garamond', 'serif'],
-        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-display)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
-      },
-      letterSpacing: {
-        widest: '0.32em',
       },
     },
   },

@@ -1,90 +1,109 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 
-// Split a phrase into word-level mask-reveal spans with staggered delays.
-function KineticPhrase({ text, className, delay = 0 }: { text: string; className?: string; delay?: number }) {
-  const words = text.split(' ');
+// Big hero name — each letter flips on hover (rotateY) with slight stagger.
+// The whole page has already had its intro sequence so we jump straight
+// into the composed layout here.
+const NAME = 'SEUN'.split('');
+
+function FlipLetter({ char, i }: { char: string; i: number }) {
   return (
-    <span className={className}>
-      {words.map((w, i) => (
-        <span key={i} className="mask-reveal align-baseline">
-          <span style={{ animationDelay: `${delay + i * 90}ms` }}>{w}</span>
-          {i < words.length - 1 && <>&nbsp;</>}
-        </span>
-      ))}
-    </span>
+    <motion.span
+      whileHover={{ rotateY: 180 }}
+      transition={{ duration: 0.7, ease: [0.7, 0, 0.15, 1], delay: i * 0.05 }}
+      style={{ transformStyle: 'preserve-3d', display: 'inline-block' }}
+      data-cursor="text"
+    >
+      {char}
+    </motion.span>
   );
 }
 
 export default function Hero() {
-  const ref = useRef<HTMLElement | null>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  // Parallax: name drifts up slower than scroll, subtitle stays put, cue fades
-  const nameY = useTransform(scrollYProgress, [0, 1], ['0%', '-40%']);
-  const nameOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const cueOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
   return (
     <section
       id="top"
-      ref={ref}
-      className="relative min-h-screen flex items-center justify-center px-6 md:px-10"
+      className="relative min-h-[100dvh] flex flex-col justify-between px-5 md:px-10 pt-24 pb-16"
       aria-label="Introduction"
     >
-      {/* Corner registration marks — pure atmosphere, telegraphs "designed" */}
-      <div className="absolute top-24 left-6 md:left-10 font-mono text-[10px] tracking-widest uppercase text-bone-300/60">
-        <div className="flex items-center gap-3">
-          <span className="w-6 h-px bg-bone-300/40" />
-          <span>SW / 01</span>
+      {/* Top corner: availability chip */}
+      <div className="flex items-center justify-between font-mono text-[10px] tracking-widest uppercase text-ink-300">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-flame-500 animate-pulse" />
+          <span>Available for freelance · 2026</span>
         </div>
-      </div>
-      <div className="absolute top-24 right-6 md:right-10 font-mono text-[10px] tracking-widest uppercase text-bone-300/60 text-right">
-        <div>LAGOS · NG</div>
-        <div className="text-coral-500 mt-1">◆ AVAILABLE FOR WORK</div>
+        <div className="hidden md:block">Lagos, Nigeria · GMT+1</div>
       </div>
 
-      <motion.div
-        style={{ y: nameY, opacity: nameOpacity }}
-        className="relative z-10 text-center"
-      >
-        <div className="font-mono text-[10px] md:text-xs tracking-widest uppercase text-bone-300 mb-6 md:mb-10">
-          <KineticPhrase text="Portfolio · 2026" />
-        </div>
+      {/* Hero copy — center weighted, huge SEUN as visual mass */}
+      <div className="flex-1 flex flex-col justify-center py-16">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display text-lg md:text-2xl text-ink-200 max-w-3xl"
+          data-cursor="text"
+        >
+          Hey — I&apos;m Seun.
+        </motion.p>
 
-        <h1 className="font-serif font-normal leading-[0.88] tracking-[-0.02em]">
-          <span className="block text-6xl md:text-8xl lg:text-[9.5rem] text-bone-50">
-            <KineticPhrase text="Seun" delay={200} />
+        <motion.h1
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 1.5 }}
+          className="mt-4 md:mt-6 font-display font-bold leading-[0.82] tracking-[-0.05em] text-ink-50"
+          style={{ perspective: '1000px' }}
+        >
+          <span className="block text-[24vw] md:text-[22vw] lg:text-[20vw]">
+            {NAME.map((c, i) => (
+              <FlipLetter key={i} char={c} i={i} />
+            ))}
+            <span className="text-flame-500">.</span>
           </span>
-          <span className="block text-6xl md:text-8xl lg:text-[9.5rem] italic text-bone-100">
-            <KineticPhrase text="Sowemimo." delay={340} />
-          </span>
-        </h1>
+        </motion.h1>
 
-        <div className="mt-10 md:mt-14 flex items-center justify-center gap-6 md:gap-10">
-          <span className="hidden md:block w-16 h-px bg-bone-300/40" />
-          <p className="font-mono text-xs md:text-sm tracking-widest uppercase text-bone-300">
-            <KineticPhrase text="Fullstack Web Developer" delay={720} />
-          </p>
-          <span className="hidden md:block w-16 h-px bg-bone-300/40" />
-        </div>
-      </motion.div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.9, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-6 md:mt-8 font-display text-2xl md:text-4xl lg:text-5xl leading-[1.05] tracking-[-0.02em] text-ink-100 max-w-4xl"
+          data-cursor="text"
+        >
+          I build <span className="italic text-flame-500">web apps</span> people
+          actually use. Fullstack. 5+ years. Ready when you are<span className="caret" />
+        </motion.p>
+      </div>
 
-      {/* Scroll cue */}
-      <motion.div
-        style={{ opacity: cueOpacity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
-      >
-        <span className="font-mono text-[10px] tracking-widest uppercase text-bone-300">Scroll</span>
-        <div className="w-px h-16 bg-gradient-to-b from-bone-300/40 to-transparent overflow-hidden relative">
-          <motion.div
-            className="absolute top-0 left-0 w-full h-4 bg-coral-500"
-            animate={{ y: [0, 64, 0] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-          />
-        </div>
-      </motion.div>
+      {/* Bottom row: scroll cue + tech stack */}
+      <div className="flex items-end justify-between gap-6">
+        <motion.a
+          href="#work"
+          data-cursor="link"
+          data-cursor-label="SCROLL"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.2, duration: 0.6 }}
+          className="group flex items-center gap-3 font-mono text-[10px] tracking-widest uppercase text-ink-200 hover:text-flame-500 transition-colors"
+        >
+          <span>Scroll to see the work</span>
+          <span className="inline-block w-8 h-px bg-current group-hover:w-14 transition-all duration-500" />
+        </motion.a>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.4, duration: 0.6 }}
+          className="hidden md:flex items-center gap-4 font-mono text-[10px] tracking-widest uppercase text-ink-300"
+        >
+          <span>React</span>
+          <span className="text-ink-400">·</span>
+          <span>TypeScript</span>
+          <span className="text-ink-400">·</span>
+          <span>Node</span>
+          <span className="text-ink-400">·</span>
+          <span>Python</span>
+        </motion.div>
+      </div>
     </section>
   );
 }

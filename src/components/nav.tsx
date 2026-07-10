@@ -10,28 +10,32 @@ const LINKS = [
 
 export default function Nav() {
   const { scrollY } = useScroll();
-  const bg = useTransform(scrollY, [0, 100], ['rgba(5,5,6,0)', 'rgba(5,5,6,0.7)']);
-  const blur = useTransform(scrollY, [0, 100], ['blur(0px)', 'blur(12px)']);
-  const border = useTransform(scrollY, [0, 100], ['rgba(232,230,223,0)', 'rgba(232,230,223,0.06)']);
+  const bg = useTransform(scrollY, [0, 100], ['rgba(13,12,10,0)', 'rgba(13,12,10,0.75)']);
+  const blur = useTransform(scrollY, [0, 100], ['blur(0px)', 'blur(14px)']);
+  const border = useTransform(scrollY, [0, 100], ['rgba(245,242,235,0)', 'rgba(245,242,235,0.08)']);
 
   return (
     <motion.header
       style={{ background: bg, backdropFilter: blur, borderBottom: '1px solid', borderBottomColor: border }}
-      className="fixed top-0 left-0 right-0 z-50"
+      className="fixed top-0 left-0 right-0 z-[90]"
     >
-      <nav className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-5 md:px-10 h-16 flex items-center justify-between">
         <a
           href="#top"
-          className="font-mono text-xs tracking-widest uppercase text-bone-100 hover:text-coral-500 transition-colors"
+          data-cursor="link"
+          data-cursor-label="TOP"
+          className="font-display font-bold text-sm tracking-tight text-ink-50 hover:text-flame-500 transition-colors"
         >
-          <span className="text-coral-500">/</span>tryraisins
+          Tryraisins<span className="text-flame-500">.</span>
         </a>
-        <ul className="flex items-center gap-8 md:gap-10">
+        <ul className="flex items-center gap-6 md:gap-9">
           {LINKS.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="font-mono text-xs tracking-widest uppercase text-bone-300 hover:text-bone-50 transition-colors"
+                data-cursor="link"
+                data-cursor-label="GO"
+                className="font-mono text-[11px] tracking-widest uppercase text-ink-200 hover:text-flame-500 transition-colors"
               >
                 {l.label}
               </a>
