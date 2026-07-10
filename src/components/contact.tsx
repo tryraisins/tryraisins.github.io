@@ -1,277 +1,74 @@
-import React, { useState } from 'react';
-import SectionTitle from '../utils/sectionTitle';
-import { useInView } from 'react-intersection-observer';
+'use client';
+
 import { motion } from 'framer-motion';
-import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
-const Contact: React.FC = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+const CHANNELS = [
+  { label: 'Email', value: 'tryraisins@gmail.com', href: 'mailto:tryraisins@gmail.com' },
+  { label: 'GitHub', value: '/tryraisins', href: 'https://github.com/tryraisins' },
+  { label: 'LinkedIn', value: '/seun-sowemimo', href: 'https://www.linkedin.com/in/seun-sowemimo-8518b7249/' },
+  { label: 'Medium', value: '@TryRaisins', href: 'https://medium.com/@TryRaisins' },
+];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('submitting');
-
-    try {
-      const response = await fetch('https://formsubmit.co/ajax/tryraisins@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          _subject: 'New message from your portfolio',
-          _template: 'table',
-        }),
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        console.error('Form submission failed:', result);
-        setStatus('error');
-      }
-    } catch (error) {
-      console.error('Network error:', error);
-      setStatus('error');
-    }
-  };
-
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.3,
-  });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1] as const // Add "as const"
-      },
-    },
-  };
+export default function Contact() {
   return (
     <section
       id="contact"
-      ref={ref}
-      className="relative py-24 px-6 overflow-hidden section-container"
-      style={{ background: 'var(--obsidian-900)' }}
-      aria-label="Contact form to reach Seun Sowemimo"
+      className="relative py-32 md:py-48 px-6 md:px-10"
+      aria-label="Contact"
     >
-      {/* Background */}
-      <div className="absolute inset-0 atmosphere-gradient" />
-      <div className="absolute inset-0 grain-overlay" />
+      <div className="max-w-6xl mx-auto">
+        <div className="font-mono text-[10px] tracking-widest uppercase text-coral-500 mb-10">
+          — 003 / Say Hello
+        </div>
 
-      {/* Floating Orbs */}
-      <motion.div
-        className="absolute top-24 left-[10%] w-80 h-80 rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(91, 141, 239, 0.08) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-        }}
-        animate={{ y: [0, -25, 0], x: [0, 10, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-[8%] w-64 h-64 rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(255, 107, 74, 0.08) 0%, transparent 70%)',
-          filter: 'blur(50px)',
-        }}
-        animate={{ y: [0, 20, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-      />
-
-      <motion.div
-        className="container mx-auto max-w-2xl relative z-10"
-        variants={containerVariants}
-        initial="hidden"
-        animate={inView ? 'visible' : 'hidden'}
-      >
-        <SectionTitle>Get In Touch</SectionTitle>
-
-        <motion.p
-          variants={itemVariants}
-          className="text-center text-lg mb-12"
-          style={{ fontFamily: "'Manrope', sans-serif", color: 'var(--text-secondary)' }}
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-serif text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-[-0.03em]"
         >
-          Have a question or want to work together? Feel free to reach out!
-        </motion.p>
+          Let&apos;s build<br />
+          <span className="italic text-bone-100">something worth</span><br />
+          <a
+            href="mailto:tryraisins@gmail.com"
+            className="relative inline-block text-coral-500 hover:text-coral-400 transition-colors group"
+          >
+            shipping.
+            <span className="absolute left-0 -bottom-2 h-[2px] w-full bg-coral-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]" />
+          </a>
+        </motion.h2>
 
-        <motion.form
-          variants={itemVariants}
-          onSubmit={handleSubmit}
-          className="p-8 md:p-10 rounded-3xl glass-card"
-        >
-          {/* Hidden FormSubmit fields */}
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_next" value="https://tryraisins.dev/#contact" />
-
-          {/* Name Field */}
-          <div className="mb-6">
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium mb-2"
-              style={{ fontFamily: "'Manrope', sans-serif", color: 'var(--text-secondary)' }}
+        <div className="mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10 border-t border-bone-100/10 pt-12">
+          {CHANNELS.map((c, i) => (
+            <motion.a
+              key={c.label}
+              href={c.href}
+              target={c.href.startsWith('http') ? '_blank' : undefined}
+              rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="group flex items-center justify-between border-b border-bone-100/10 pb-4 hover:border-coral-500/40 transition-colors"
             >
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full py-3.5 px-5 rounded-xl text-base transition-all duration-300 focus:ring-2 focus:ring-[#ff6b4a]"
-              style={{
-                fontFamily: "'Manrope', sans-serif",
-                background: 'var(--obsidian-700)',
-                border: '1px solid var(--glass-border)',
-                color: 'var(--text-primary)',
-              }}
-              placeholder="Your Name"
-              required
-            />
-          </div>
-
-          {/* Email Field */}
-          <div className="mb-6">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium mb-2"
-              style={{ fontFamily: "'Manrope', sans-serif", color: 'var(--text-secondary)' }}
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full py-3.5 px-5 rounded-xl text-base transition-all duration-300 focus:ring-2 focus:ring-[#ff6b4a]"
-              style={{
-                fontFamily: "'Manrope', sans-serif",
-                background: 'var(--obsidian-700)',
-                border: '1px solid var(--glass-border)',
-                color: 'var(--text-primary)',
-              }}
-              placeholder="your.email@example.com"
-              required
-            />
-          </div>
-
-          {/* Message Field */}
-          <div className="mb-8">
-            <label
-              htmlFor="message"
-              className="block text-sm font-medium mb-2"
-              style={{ fontFamily: "'Manrope', sans-serif", color: 'var(--text-secondary)' }}
-            >
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              rows={6}
-              className="w-full py-3.5 px-5 rounded-xl text-base transition-all duration-300 resize-y min-h-[140px] focus:ring-2 focus:ring-[#ff6b4a]"
-              style={{
-                fontFamily: "'Manrope', sans-serif",
-                background: 'var(--obsidian-700)',
-                border: '1px solid var(--glass-border)',
-                color: 'var(--text-primary)',
-              }}
-              placeholder="Your message here..."
-              required
-            />
-          </div>
-
-          {/* Submit Button & Status */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <motion.button
-              type="submit"
-              className="btn-primary w-full sm:w-auto"
-              disabled={status === 'submitting'}
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-              style={{ opacity: status === 'submitting' ? 0.7 : 1 }}
-            >
-              {status === 'submitting' ? (
-                <>
-                  <motion.span
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                    className="inline-block"
-                  >
-                    ⟳
-                  </motion.span>
-                  <span>Sending...</span>
-                </>
-              ) : (
-                <>
-                  <Send size={18} />
-                  <span>Send Message</span>
-                </>
-              )}
-            </motion.button>
-
-            {status === 'success' && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="flex items-center gap-2 text-sm font-medium"
-                style={{ color: '#34d399' }}
-              >
-                <CheckCircle size={18} />
-                <span>Message sent successfully!</span>
-              </motion.div>
-            )}
-            {status === 'error' && (
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className="flex items-center gap-2 text-sm font-medium"
-                style={{ color: '#fb7185' }}
-              >
-                <AlertCircle size={18} />
-                <span>Failed to send. Please try again.</span>
-              </motion.div>
-            )}
-          </div>
-        </motion.form>
-      </motion.div>
-
-      {/* Section Divider */}
-      <div className="absolute bottom-0 left-0 right-0 section-divider" />
+              <div>
+                <div className="font-mono text-[10px] tracking-widest uppercase text-bone-300 mb-2">
+                  {c.label}
+                </div>
+                <div className="font-serif text-2xl md:text-3xl text-bone-50 group-hover:text-coral-500 transition-colors">
+                  {c.value}
+                </div>
+              </div>
+              <ArrowUpRight
+                className="w-5 h-5 text-bone-300 group-hover:text-coral-500 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform"
+                aria-hidden="true"
+              />
+            </motion.a>
+          ))}
+        </div>
+      </div>
     </section>
   );
-};
-
-export default Contact;
+}
