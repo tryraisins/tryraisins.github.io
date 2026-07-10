@@ -131,6 +131,51 @@ export default function Hero() {
           </span>{' '}
           <WordReveal text="people actually use." delay={2.25} />
         </p>
+
+        {/* CTA row — direct email + secondary "see the work" — visible without scrolling */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 2.7, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-10 md:mt-12 flex flex-wrap items-center justify-center gap-3 md:gap-4"
+        >
+          <a
+            href="mailto:tryraisins@gmail.com"
+            data-cursor="link"
+            data-cursor-label="EMAIL"
+            className="group inline-flex items-center gap-3 rounded-full bg-flame-500 hover:bg-flame-400 text-ink-950 pl-6 pr-5 py-4 font-display font-semibold text-base md:text-lg transition-colors"
+          >
+            <span>Email me</span>
+            <span aria-hidden="true" className="text-xl transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </a>
+          <a
+            href="#work"
+            data-cursor="link"
+            data-cursor-label="WORK"
+            className="group inline-flex items-center gap-3 rounded-full border border-ink-50/20 hover:border-flame-500 text-ink-100 hover:text-flame-500 px-6 py-4 font-display font-semibold text-base md:text-lg transition-colors"
+          >
+            <span>See the work</span>
+            <span aria-hidden="true" className="text-xl transition-transform duration-300 group-hover:translate-y-1">↓</span>
+          </a>
+        </motion.div>
+
+        {/* Direct email line — also readable copy for someone who wants to save the address */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 3.0 }}
+          className="mt-6 font-mono text-[11px] tracking-widest uppercase text-ink-300"
+        >
+          Or copy&nbsp;·&nbsp;
+          <a
+            href="mailto:tryraisins@gmail.com"
+            data-cursor="link"
+            data-cursor-label="COPY"
+            className="text-ink-100 hover:text-flame-500 transition-colors"
+          >
+            tryraisins@gmail.com
+          </a>
+        </motion.p>
       </div>
     </section>
   );

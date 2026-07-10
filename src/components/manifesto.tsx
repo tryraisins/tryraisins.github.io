@@ -4,11 +4,11 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 const LINES = [
-  { l: 'TryRaisins builds things that ship.' },
+  { l: 'I build things that ship.' },
   { l: 'Not portfolios of concepts — actual apps in front of actual users.' },
   { l: 'BetPicks. Talent Hunter. Terror Tracker. Live domains, real traffic.' },
   { l: 'Five years across React, TypeScript, Node, Python, and enough infra to keep it up.' },
-  { l: 'If your project needs someone who owns the whole stack from schema to CSS, you’ve met the right person.' },
+  { l: 'If your project needs someone who owns the whole stack from schema to CSS, we should talk.' },
 ];
 
 // Sticky-scroll manifesto: title pins on the left while the right-side lines

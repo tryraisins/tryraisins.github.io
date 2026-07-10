@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 const LINKS = [
   { href: '#work', label: 'Work' },
   { href: '#about', label: 'About' },
-  { href: '#contact', label: 'Contact' },
 ];
 
 export default function Nav() {
@@ -28,20 +27,29 @@ export default function Nav() {
         >
           Tryraisins<span className="text-flame-500">.</span>
         </a>
-        <ul className="flex items-center gap-6 md:gap-9">
+
+        <div className="flex items-center gap-5 md:gap-8">
           {LINKS.map((l) => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                data-cursor="link"
-                data-cursor-label="GO"
-                className="font-mono text-[11px] tracking-widest uppercase text-ink-200 hover:text-flame-500 transition-colors"
-              >
-                {l.label}
-              </a>
-            </li>
+            <a
+              key={l.href}
+              href={l.href}
+              data-cursor="link"
+              data-cursor-label="GO"
+              className="font-mono text-[11px] tracking-widest uppercase text-ink-200 hover:text-flame-500 transition-colors"
+            >
+              {l.label}
+            </a>
           ))}
-        </ul>
+          <a
+            href="mailto:tryraisins@gmail.com"
+            data-cursor="link"
+            data-cursor-label="EMAIL"
+            className="group inline-flex items-center gap-2 rounded-full bg-flame-500 hover:bg-flame-400 text-ink-950 px-4 py-2 font-mono text-[11px] tracking-widest uppercase font-semibold transition-colors"
+          >
+            <span>Email me</span>
+            <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </a>
+        </div>
       </nav>
     </motion.header>
   );
