@@ -56,77 +56,80 @@ const PROJECTS: Project[] = [
   },
 ];
 
-function ProjectRow({ project, index }: { project: Project; index: number }) {
-  const isEven = index % 2 === 0;
+function ProjectFeature({ project, index, total }: { project: Project; index: number; total: number }) {
   const number = String(index + 1).padStart(2, '0');
+  const totalStr = String(total).padStart(2, '0');
 
   const ref = useRef<HTMLElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
-  // Image drifts opposite to text, creating the parallax feel
-  const imageY = useTransform(scrollYProgress, [0, 1], ['12%', '-12%']);
-  const textY = useTransform(scrollYProgress, [0, 1], ['-6%', '6%']);
-  // Row fades in from below on entry, sits fully visible in mid-scroll,
-  // fades and drifts as it exits the top
-  const rowOpacity = useTransform(scrollYProgress, [0, 0.15, 0.8, 1], [0, 1, 1, 0.2]);
+  // Image parallax: drifts up slower than page scroll — gives depth
+  const imageY = useTransform(scrollYProgress, [0, 1], ['15%', '-15%']);
+  // Title drifts subtly opposite for magazine-spread feel
+  const titleY = useTransform(scrollYProgress, [0, 1], ['-4%', '4%']);
 
   return (
     <motion.article
       ref={ref}
-      style={{ opacity: rowOpacity }}
-      className="group grid grid-cols-12 gap-x-4 md:gap-x-8 gap-y-6 md:gap-y-0 items-start"
+      className="group relative"
     >
-      {/* Image column — 7 cols; sides alternate */}
       <a
         href={project.url}
         target="_blank"
         rel="noopener noreferrer"
-        className={`card block relative overflow-hidden rounded-md bg-paper-100 col-span-12 md:col-span-7 aspect-[16/10] ${
-          isEven ? 'md:order-1' : 'md:order-2 md:col-start-6'
-        }`}
+        className="block"
         aria-label={`Visit ${project.title}`}
       >
-        <motion.div style={{ y: imageY }} className="card-media absolute inset-0">
-          <Image
-            src={`/work/${project.slug}.png`}
-            alt={`${project.title} — ${project.tagline}`}
-            fill
-            sizes="(max-width: 768px) 100vw, 60vw"
-            className="object-cover object-top"
-          />
-        </motion.div>
-        <div className="absolute top-4 right-4 rounded-full bg-paper-50 text-ink-950 px-3.5 py-1.5 font-mono text-[10px] tracking-widest uppercase font-medium opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
-          Visit ↗
-        </div>
-      </a>
-
-      {/* Text column — 4 cols; parallaxes opposite direction */}
-      <motion.div
-        style={{ y: textY }}
-        className={`col-span-12 md:col-span-4 flex flex-col self-end pb-2 ${
-          isEven ? 'md:order-2 md:col-start-9' : 'md:order-1 md:col-start-1'
-        }`}
-      >
-        <div className="flex items-baseline gap-4 mb-6">
-          <span className="font-display font-medium text-5xl md:text-7xl leading-none text-ink-950 tracking-[-0.03em]">
-            {number}
-          </span>
-          <span className="font-mono text-[11px] tracking-widest uppercase text-ink-500">
-            {project.year}
+        {/* Metadata rail: index · year · categories · visit */}
+        <div className="flex items-center justify-between gap-4 border-t border-ink-950 pt-4 mb-10 md:mb-14 font-mono text-[11px] tracking-widest uppercase">
+          <div className="flex items-center gap-3 md:gap-5 text-ink-500 min-w-0">
+            <span className="text-ink-950">{number} <span className="text-ink-300">/</span> {totalStr}</span>
+            <span className="hidden md:inline">·</span>
+            <span className="hidden md:inline">{project.year}</span>
+            <span className="hidden md:inline">·</span>
+            <span className="hidden lg:inline truncate">{project.categories.join(' · ')}</span>
+          </div>
+          <span className="flex items-center gap-1.5 text-ink-950 group-hover:text-flame-500 transition-colors">
+            <span>Visit</span>
+            <span aria-hidden="true" className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-1 group-hover:-translate-y-0.5">↗</span>
           </span>
         </div>
 
-        <h3 className="font-display font-medium text-3xl md:text-4xl leading-[1.05] tracking-[-0.02em] text-ink-950 group-hover:text-flame-500 transition-colors duration-300">
-          {project.title}
-        </h3>
+        {/* Title + tagline */}
+        <div className="grid grid-cols-12 gap-4 mb-10 md:mb-14">
+          <motion.h3
+            style={{ y: titleY }}
+            className="col-span-12 md:col-span-8 font-display font-medium text-5xl md:text-7xl lg:text-8xl leading-[0.9] tracking-[-0.03em] text-ink-950 group-hover:text-flame-500 transition-colors duration-500"
+          >
+            {project.title}
+          </motion.h3>
+          <p className="col-span-12 md:col-span-4 md:pt-3 font-display text-base md:text-lg leading-snug text-ink-700 max-w-md">
+            {project.tagline}
+          </p>
+        </div>
 
-        <p className="mt-4 font-display text-base md:text-lg leading-snug text-ink-700 max-w-md">
-          {project.tagline}
-        </p>
+        {/* Full-width image */}
+        <div className="card relative overflow-hidden rounded-md bg-paper-100 aspect-[16/9]">
+          <motion.div style={{ y: imageY }} className="card-media absolute inset-[-15%]">
+            <Image
+              src={`/work/${project.slug}.png`}
+              alt={`${project.title} — ${project.tagline}`}
+              fill
+              sizes="(max-width: 768px) 100vw, 1200px"
+              className="object-cover object-top"
+            />
+          </motion.div>
+          {/* Subtle floating Visit chip */}
+          <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 flex items-center gap-2 rounded-full bg-paper-50 text-ink-950 pl-4 pr-3 py-2 font-mono text-[10px] tracking-widest uppercase font-medium opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
+            <span>Open Site</span>
+            <span aria-hidden="true">↗</span>
+          </div>
+        </div>
 
-        <div className="mt-6 flex flex-wrap gap-1.5">
+        {/* Bottom rail: category chips */}
+        <div className="mt-6 md:hidden flex flex-wrap gap-1.5">
           {project.categories.map((c) => (
             <span
               key={c}
@@ -136,16 +139,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             </span>
           ))}
         </div>
-
-        <a
-          href={project.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-8 link-draw self-start font-display text-base text-ink-950 hover:text-flame-500 transition-colors"
-        >
-          Visit {project.title} ↗
-        </a>
-      </motion.div>
+      </a>
     </motion.article>
   );
 }
@@ -153,8 +147,8 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
 export default function Work() {
   return (
     <section id="work" className="relative py-20 md:py-28 px-6 md:px-10" aria-label="Selected work">
-      <div className="max-w-[1400px] mx-auto">
-        <header className="flex items-baseline justify-between gap-6 mb-16 md:mb-24 border-b border-ink-200 pb-6">
+      <div className="max-w-[1200px] mx-auto">
+        <header className="flex items-baseline justify-between gap-6 mb-14 md:mb-20 border-b border-ink-200 pb-6">
           <h2 className="font-display font-medium text-2xl md:text-3xl tracking-tight text-ink-950">
             Selected work
           </h2>
@@ -163,9 +157,9 @@ export default function Work() {
           </span>
         </header>
 
-        <div className="space-y-24 md:space-y-40">
+        <div className="space-y-28 md:space-y-40">
           {PROJECTS.map((p, i) => (
-            <ProjectRow key={p.slug} project={p} index={i} />
+            <ProjectFeature key={p.slug} project={p} index={i} total={PROJECTS.length} />
           ))}
         </div>
       </div>
