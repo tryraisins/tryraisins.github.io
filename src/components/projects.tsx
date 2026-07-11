@@ -12,42 +12,40 @@ const Projects: React.FC = () => {
 
   const projects = [
     {
-      title: 'BetPicks',
+      title: 'QuickBillz',
       description:
-        'A modern Next.js application that provides detailed sports match predictions for NBA and Soccer, leveraging advanced caching strategies to optimize API usage and ensure high performance.',
-      liveLink: 'https://betpicks.tryraisins.dev',
+        'Generate professional invoices in seconds — custom styling, multiple export formats, and typography that does not look like a template. Built with Next.js, TypeScript, and Tailwind.',
+      liveLink: 'https://quickbillz.tryraisins.dev',
+    },
+    {
+      title: 'Terror Tracker',
+      description:
+        'A live map of insurgent activity across Nigeria — verified incident reports, casualty counts, and threat clusters, updated as the news comes in. Next.js, MongoDB, and Node.js data pipelines.',
+      liveLink: 'https://terrortracker.tryraisins.dev',
     },
     {
       title: 'Talent Hunter',
       description:
-        'A Vite powered resume screening app that helps recruiters, HR professionals, and hiring managers find the best candidates faster than ever before.',
+        'For recruiters drowning in resumes: paste a job spec, upload the pile, get a ranked shortlist in minutes instead of hours. Vite, React, TypeScript, and NLP-driven matching.',
       liveLink: 'https://talenthunter.tryraisins.dev',
-    },
-    {
-      title: 'International Space Station Tracker',
-      description:
-        "A simple app that fetches the current location of the International Space Staion. It also shows the number of people in space at the moment, who they are and where they are.",
-      liveLink: 'https://isstracker.tryraisins.dev',
     },
     {
       title: 'Echo List',
       description:
-        'A tool to Seamlessly convert your Shazam discoveries into curated YouTube playlists.',
+        'Your Shazam history is a graveyard of songs you meant to save. Upload the CSV and get a curated YouTube playlist in one go. React, TypeScript, and the YouTube Data API.',
       liveLink: 'https://echolist.tryraisins.dev',
     },
-   
     {
       title: 'StreamSlip',
       description:
-        'Transform your YouTube Music listening history into beautiful, shareable receipts.',
+        'Your YouTube Music listening history, printed as a receipt you can screenshot. Wrapped-style stats whenever you want them. Next.js, Canvas rendering, and OAuth.',
       liveLink: 'https://streamslip.tryraisins.dev',
     },
-   
     {
-      title: 'Terror Tracker',
+      title: 'International Space Station Tracker',
       description:
-        'Real-time intelligence on terrorist and insurgent activities across Nigeria',
-      liveLink: 'https://terrortracker.tryraisins.dev',
+        'The International Space Station is somewhere over Earth right now. See exactly where — plus who is onboard and where they are from. React with live API polling and mapping.',
+      liveLink: 'https://isstracker.tryraisins.dev',
     },
   ];
 
