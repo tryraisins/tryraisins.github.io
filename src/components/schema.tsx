@@ -55,31 +55,40 @@ const WEBSITE = {
 
 const PROJECTS = [
   {
+    name: 'QuickBillz',
+    description:
+      'Freelance invoicing without the SaaS subscription. Generate professional invoices in seconds with custom styling, multiple export formats, and typography that does not look like a template. Built with Next.js, TypeScript, and Tailwind.',
+    url: 'https://quickbillz.tryraisins.dev/',
+  },
+  {
     name: 'Terror Tracker',
-    description: 'Real-time intelligence on terrorist and insurgent activities across Nigeria.',
+    description:
+      'A live map of insurgent activity across Nigeria — verified incident reports, casualty counts, and threat clusters, updated as the news comes in. Built with Next.js, MongoDB, and Node.js data pipelines.',
     url: 'https://terrortracker.tryraisins.dev/',
   },
   {
+    name: 'Talent Hunter',
+    description:
+      'A resume screening tool for recruiters drowning in resumes: paste a job spec, upload the pile, get a ranked shortlist in minutes instead of hours. Built with Vite and React with NLP-driven candidate matching.',
+    url: 'https://talenthunter.tryraisins.dev/',
+  },
+  {
     name: 'Echo List',
-    description: 'A tool to seamlessly convert your Shazam discoveries into curated YouTube playlists.',
+    description:
+      'Resurrects your Shazam discovery history as a curated YouTube playlist — one upload, done. Built with React, Vite, and the YouTube Data API.',
     url: 'https://echolist.tryraisins.dev/',
   },
   {
     name: 'StreamSlip',
-    description: 'Transform your YouTube Music listening history into beautiful, shareable receipts.',
+    description:
+      'Your YouTube Music listening history, printed as a shareable receipt. Wrapped-style stats whenever you want them. Built with Next.js, canvas rendering, and OAuth.',
     url: 'https://streamslip.tryraisins.dev/',
   },
   {
     name: 'International Space Station Tracker',
     description:
-      'A simple app that fetches the current location of the International Space Station, the number of people in space, who they are, and where they are.',
+      'A live tracker showing exactly where the International Space Station is over Earth right now, plus who is onboard and where they are from. Built with React, live API polling, and interactive mapping.',
     url: 'https://isstracker.tryraisins.dev/',
-  },
-  {
-    name: 'Talent Hunter',
-    description:
-      'A Vite powered resume screening app that helps recruiters, HR professionals, and hiring managers find the best candidates faster than ever before.',
-    url: 'https://talenthunter.tryraisins.dev/',
   },
 ];
 
