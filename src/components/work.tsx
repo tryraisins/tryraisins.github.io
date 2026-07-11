@@ -15,7 +15,7 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     title: 'Terror Tracker',
-    tagline: 'Real-time intelligence on incidents across Nigeria — a live dashboard sourced from verified reports.',
+    tagline: 'A live map of insurgent activity across Nigeria. Verified incident reports, casualty counts, and threat clusters — updated as the news comes in.',
     categories: ['Data', 'React', 'Dashboard'],
     url: 'https://terrortracker.tryraisins.dev',
     domain: 'terrortracker.tryraisins.dev',
@@ -23,7 +23,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: 'Echo List',
-    tagline: 'Shazam discoveries, converted to curated YouTube playlists in a few clicks.',
+    tagline: 'Your Shazam history is a graveyard of songs you meant to save. This resurrects it as a YouTube playlist. One upload, done.',
     categories: ['Web App', 'API'],
     url: 'https://echolist.tryraisins.dev',
     domain: 'echolist.tryraisins.dev',
@@ -31,7 +31,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: 'StreamSlip',
-    tagline: 'Turn your YouTube Music listening history into a beautiful, shareable receipt.',
+    tagline: 'Your YouTube Music listening history, printed as a receipt you can actually screenshot. Wrapped-style stats, whenever you want them.',
     categories: ['Web App', 'Canvas'],
     url: 'https://streamslip.tryraisins.dev',
     domain: 'streamslip.tryraisins.dev',
@@ -39,7 +39,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: 'ISS Tracker',
-    tagline: 'Where the International Space Station is right now, who is on it, and where they are from.',
+    tagline: 'The International Space Station is somewhere over Earth right now. Here is exactly where — plus who is onboard and where they are from.',
     categories: ['Web App', 'Live Data'],
     url: 'https://isstracker.tryraisins.dev',
     domain: 'isstracker.tryraisins.dev',
@@ -47,7 +47,7 @@ const PROJECTS: Project[] = [
   },
   {
     title: 'Talent Hunter',
-    tagline: 'Resume screening that saves recruiters hours per role — an internal SaaS tool.',
+    tagline: 'For recruiters drowning in resumes: paste a job spec, upload the pile, get a ranked shortlist in minutes instead of hours.',
     categories: ['SaaS', 'React', 'NLP'],
     url: 'https://talenthunter.tryraisins.dev',
     domain: 'talenthunter.tryraisins.dev',
