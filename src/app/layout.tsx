@@ -76,7 +76,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#0d0c0a',
+  themeColor: '#faf9f4',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -90,10 +90,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <WebsiteSchema />
         <CollectionSchema />
       </head>
-      <body className="font-sans bg-canvas-900 text-ink-50 antialiased">
+      <body className="font-sans bg-paper-50 text-ink-950 antialiased">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-flame-500 focus:text-canvas-950 focus:rounded"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-4 focus:py-2 focus:bg-ink-950 focus:text-paper-50 focus:rounded"
         >
           Skip to main content
         </a>

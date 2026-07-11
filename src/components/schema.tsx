@@ -55,22 +55,9 @@ const WEBSITE = {
 
 const PROJECTS = [
   {
-    name: 'BetPicks',
-    description:
-      'A modern Next.js application that provides detailed sports match predictions for NBA and Soccer, leveraging advanced caching strategies to optimize API usage and ensure high performance.',
-    url: 'https://betpicks.tryraisins.dev/',
-  },
-  {
-    name: 'Talent Hunter',
-    description:
-      'A Vite powered resume screening app that helps recruiters, HR professionals, and hiring managers find the best candidates faster than ever before.',
-    url: 'https://talenthunter.tryraisins.dev/',
-  },
-  {
-    name: 'International Space Station Tracker',
-    description:
-      'A simple app that fetches the current location of the International Space Station, the number of people in space, who they are, and where they are.',
-    url: 'https://isstracker.tryraisins.dev/',
+    name: 'Terror Tracker',
+    description: 'Real-time intelligence on terrorist and insurgent activities across Nigeria.',
+    url: 'https://terrortracker.tryraisins.dev/',
   },
   {
     name: 'Echo List',
@@ -83,9 +70,16 @@ const PROJECTS = [
     url: 'https://streamslip.tryraisins.dev/',
   },
   {
-    name: 'Terror Tracker',
-    description: 'Real-time intelligence on terrorist and insurgent activities across Nigeria.',
-    url: 'https://terrortracker.tryraisins.dev/',
+    name: 'International Space Station Tracker',
+    description:
+      'A simple app that fetches the current location of the International Space Station, the number of people in space, who they are, and where they are.',
+    url: 'https://isstracker.tryraisins.dev/',
+  },
+  {
+    name: 'Talent Hunter',
+    description:
+      'A Vite powered resume screening app that helps recruiters, HR professionals, and hiring managers find the best candidates faster than ever before.',
+    url: 'https://talenthunter.tryraisins.dev/',
   },
 ];
 

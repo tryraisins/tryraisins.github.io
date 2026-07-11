@@ -3,91 +3,64 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
-  --flame-500: #ff6b4a;
+  color-scheme: light;
 }
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.15) transparent;
 }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
 
 body {
-  background: #0d0c0a;
-  color: #f5f2eb;
+  background: #faf9f4;
+  color: #0a0908;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-/* Blinking caret used on hero + contact CTA */
-.caret {
-  display: inline-block;
-  width: 0.06em;
-  height: 0.9em;
-  background: currentColor;
-  margin-left: 0.08em;
-  vertical-align: -0.05em;
-  animation: blink 1.05s steps(1) infinite;
-}
-@keyframes blink { 50% { opacity: 0; } }
+/* Selection: coral tint on the warm paper */
+::selection { background: rgba(255,107,74,0.25); color: #0a0908; }
 
-/* Shear-on-hover used on the contact CTA word */
-.shear {
-  display: inline-block;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  transform-origin: bottom left;
-}
-.shear:hover { transform: skew(-8deg, -1.5deg); }
-
-/* Curved underline draw for contact CTA */
-.underline-draw {
+/* Subtle underline that draws in on hover — used for text links */
+.link-draw {
   position: relative;
+  display: inline-block;
 }
-.underline-draw::after {
+.link-draw::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -0.05em;
-  height: 12px;
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q 50 -2, 100 6 T 198 6' stroke='%23ff6b4a' stroke-width='2.5' fill='none' stroke-linecap='round'/></svg>") no-repeat center/100% 100%;
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.7s cubic-bezier(0.7, 0, 0.15, 1);
+  bottom: -0.08em;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.55s cubic-bezier(0.7, 0, 0.15, 1);
 }
-.underline-draw:hover::after { clip-path: inset(0 0 0 0); }
-
-/* Sticky manifesto title exit — the parent gets .sticky-out when scrolling past */
-.sticky-title {
-  position: sticky;
-  top: 6rem;
-  transition: transform 0.6s cubic-bezier(0.7, 0, 0.15, 1), opacity 0.6s;
+.link-draw:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
-/* Hide the native scrollbar entirely — the page has its own visual UI */
-html { scrollbar-width: none; -ms-overflow-style: none; }
-::-webkit-scrollbar { width: 0; height: 0; display: none; }
-
-/* Marquee — pure CSS, translates by exactly half the row width so the
-   duplicated second half takes over seamlessly */
-@keyframes marquee {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
-}
-.animate-marquee {
-  animation: marquee 60s linear infinite;
+/* Card image zoom on hover — subtle, editorial */
+.card-media img {
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
+.card:hover .card-media img {
+  transform: scale(1.04);
+}
 
-/* Selection */
-::selection { background: rgba(255,107,74,0.35); color: #f5f2eb; }
-
-/* Reduced motion — kill all animation */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .caret { animation: none; }
-  html { cursor: auto !important; }
 }

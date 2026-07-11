@@ -1,81 +1,45 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 
-const LINES = [
-  { l: 'I like making things.' },
-  { l: 'Small tools, side projects, the occasional experiment.' },
-  { l: 'BetPicks, Talent Hunter, Terror Tracker — the ones I keep tinkering with.' },
-  { l: 'Been at this about five years now. Mostly React, TypeScript, Node, and some Python.' },
-  { l: 'If you’re working on something interesting, drop me a note.' },
+const PARAGRAPHS = [
+  'I make things for the internet. Small tools, side projects, the occasional experiment — the ones on this page are the ones I keep coming back to.',
+  'Been at this about five years now. Mostly React, TypeScript, Node, and some Python. Comfortable across the whole stack, particular about interfaces, curious about most things.',
+  'If you’re working on something interesting and want a second pair of hands, drop me a note.',
 ];
 
-// Sticky-scroll manifesto: title pins on the left while the right-side lines
-// scroll past. When the section leaves, the title slides out.
 export default function Manifesto() {
-  const wrapRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: wrapRef,
-    offset: ['start start', 'end end'],
-  });
-  const titleX = useTransform(scrollYProgress, [0.9, 1], ['0%', '-30%']);
-  const titleOpacity = useTransform(scrollYProgress, [0.85, 1], [1, 0]);
-
   return (
-    <section
-      id="about"
-      ref={wrapRef}
-      className="relative py-32 md:py-48 px-5 md:px-10"
-      aria-label="About"
-    >
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-20">
-        {/* Sticky left column — title pins in place */}
-        <div className="md:col-span-5">
-          <div className="sticky top-32">
-            <motion.div style={{ x: titleX, opacity: titleOpacity }}>
-              <div className="font-mono text-[10px] tracking-widest uppercase text-flame-500 mb-4">
-                About &nbsp;·&nbsp; A bit about me
-              </div>
-              <h2 className="font-display font-bold text-6xl md:text-8xl leading-[0.85] tracking-[-0.05em] text-ink-50">
-                About<br />
-                <span className="italic text-flame-500">me.</span>
-              </h2>
-              <div className="mt-8 font-mono text-[10px] tracking-widest uppercase text-ink-300 flex items-center gap-3">
-                <span className="w-6 h-px bg-flame-500" />
-                <span>@tryraisins</span>
-              </div>
-            </motion.div>
+    <section id="about" className="relative py-24 md:py-32 px-6 md:px-10" aria-label="About">
+      <div className="max-w-[1400px] mx-auto">
+        <header className="border-b border-ink-200 pb-6 mb-10 md:mb-16">
+          <h2 className="font-display font-medium text-2xl md:text-3xl tracking-tight text-ink-950">
+            About
+          </h2>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16">
+          <div className="md:col-span-4 md:col-start-1">
+            <div className="font-mono text-[11px] tracking-widest uppercase text-ink-500 space-y-2">
+              <div>Fullstack developer</div>
+              <div>Based on the internet</div>
+              <div className="pt-4 text-ink-700">React · TypeScript</div>
+              <div className="text-ink-700">Node · Python · Next.js</div>
+            </div>
           </div>
-        </div>
 
-        {/* Right column — long-form lines each faded/lifted in on scroll */}
-        <div className="md:col-span-7 md:pt-4 space-y-8 md:space-y-10">
-          {LINES.map((line, i) => (
-            <motion.p
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.9, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-              data-cursor="text"
-              className="font-display text-2xl md:text-3xl lg:text-4xl leading-[1.2] tracking-[-0.02em] text-ink-100"
-            >
-              {line.l}
-            </motion.p>
-          ))}
-
-          {/* Stat blocks */}
-          <div className="grid grid-cols-3 gap-4 md:gap-8 pt-10 mt-10 border-t border-ink-50/10">
-            {[
-              { v: '5+', l: 'Years writing code' },
-              { v: '20+', l: 'Projects out there' },
-              { v: '∞', l: 'Coffee consumed' },
-            ].map((s) => (
-              <div key={s.l}>
-                <div className="font-display font-bold text-4xl md:text-6xl leading-none tracking-[-0.04em] text-ink-50">{s.v}</div>
-                <div className="mt-2 font-mono text-[10px] tracking-widest uppercase text-ink-300">{s.l}</div>
-              </div>
+          <div className="md:col-span-7 md:col-start-6 space-y-6 md:space-y-8">
+            {PARAGRAPHS.map((p, i) => (
+              <motion.p
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.8, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="font-display text-lg md:text-2xl leading-[1.35] tracking-tight text-ink-700"
+              >
+                {p}
+              </motion.p>
             ))}
           </div>
         </div>

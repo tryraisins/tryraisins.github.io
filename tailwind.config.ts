@@ -5,20 +5,20 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Warm charcoal — not the cold blue-black of v1
-        canvas: {
-          950: '#0a0908',
-          900: '#0d0c0a',
-          800: '#141210',
-          700: '#1c1a17',
-          600: '#26231f',
+        // Warm off-white paper background
+        paper: {
+          50: '#faf9f4',
+          100: '#f3f1e9',
+          200: '#e6e2d3',
         },
+        // Near-black ink for text
         ink: {
-          50: '#f5f2eb',
-          100: '#e8e4d9',
-          200: '#c2bcae',
-          300: '#8a857a',
-          400: '#5c584f',
+          950: '#0a0908',
+          900: '#141210',
+          700: '#2a2724',
+          500: '#6b6660',
+          300: '#a09b91',
+          200: '#c5c0b3',
         },
         flame: {
           400: '#ff8f73',
