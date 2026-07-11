@@ -1,7 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 import { Mail, Github, Linkedin } from 'lucide-react';
 
 function MediumIcon({ className }: { className?: string }) {
@@ -25,32 +24,7 @@ const CHANNELS = [
   { label: 'Medium',   handle: '@TryRaisins',          href: 'https://medium.com/@TryRaisins',                       Icon: MediumIcon },
 ];
 
-// Word gets a slice of the scroll timeline; opacity ramps low → 1 across
-// that slice so words appear one after another as the section scrolls in.
-function ScrollWord({ children, progress, range }: { children: React.ReactNode; progress: MotionValue<number>; range: [number, number] }) {
-  const opacity = useTransform(progress, range, [0.15, 1]);
-  return (
-    <motion.span style={{ opacity }} className="inline-block mr-[0.22em]">
-      {children}
-    </motion.span>
-  );
-}
-
 export default function Contact() {
-  const headlineRef = useRef<HTMLHeadingElement | null>(null);
-  const { scrollYProgress } = useScroll({
-    target: headlineRef,
-    offset: ['start 0.9', 'start 0.15'],
-  });
-
-  // Split the headline so each word can reveal in sequence
-  const parts: Array<{ w: string; link?: boolean }> = [
-    { w: 'Say' },
-    { w: 'hi' },
-    { w: 'at' },
-    { w: 'tryraisins@gmail.com.', link: true },
-  ];
-
   return (
     <section id="contact" className="relative pt-20 md:pt-28 pb-24 md:pb-40 px-6 md:px-10" aria-label="Contact">
       <div className="max-w-[1400px] mx-auto">
@@ -60,30 +34,22 @@ export default function Contact() {
           </h2>
         </header>
 
-        <h3
-          ref={headlineRef}
+        <motion.h3
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="font-display font-medium text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-[-0.02em] text-ink-950 max-w-4xl"
         >
-          {parts.map((p, i) => {
-            const start = i / parts.length;
-            const end = start + 1 / parts.length;
-            const content = p.link ? (
-              <a
-                href="mailto:tryraisins@gmail.com"
-                className="link-draw text-flame-500 hover:text-flame-600 transition-colors"
-              >
-                {p.w}
-              </a>
-            ) : (
-              p.w
-            );
-            return (
-              <ScrollWord key={i} progress={scrollYProgress} range={[start, end]}>
-                {content}
-              </ScrollWord>
-            );
-          })}
-        </h3>
+          Say hi at{' '}
+          <a
+            href="mailto:tryraisins@gmail.com"
+            className="link-draw text-flame-500 hover:text-flame-600 transition-colors"
+          >
+            tryraisins@gmail.com
+          </a>
+          .
+        </motion.h3>
 
         <div className="mt-16 md:mt-24">
           <div className="font-mono text-[11px] tracking-widest uppercase text-ink-500 mb-6">
