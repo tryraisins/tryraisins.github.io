@@ -37,10 +37,9 @@ export default function Nav() {
           ))}
           <a
             href="mailto:tryraisins@gmail.com"
-            className="inline-flex items-center gap-2 rounded-full bg-ink-950 hover:bg-flame-500 text-paper-50 px-4 py-2 font-display font-medium text-sm transition-colors"
+            className="inline-flex items-center rounded-full bg-ink-950 hover:bg-flame-500 text-paper-50 px-4 py-2 font-display font-medium text-sm transition-colors"
           >
-            <span>Email me</span>
-            <span aria-hidden="true">→</span>
+            Get in touch
           </a>
         </div>
       </nav>

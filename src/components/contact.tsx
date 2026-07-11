@@ -75,12 +75,6 @@ export default function Contact() {
                   <span className="font-display text-sm text-ink-950 group-hover:text-paper-50 transition-colors">
                     {c.handle}
                   </span>
-                  <span
-                    aria-hidden="true"
-                    className="font-mono text-xs text-ink-500 group-hover:text-paper-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"
-                  >
-                    ↗
-                  </span>
                 </motion.a>
               );
             })}

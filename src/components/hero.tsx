@@ -3,8 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 // A&I-style intro. Enters with a small stagger on load, exits with an
-// opacity + upward drift as you start scrolling — the whole block feels
-// like it lifts out of the way to reveal the work below.
+// opacity + upward drift as you start scrolling.
 export default function Hero() {
   const { scrollY } = useScroll();
   const opacity = useTransform(scrollY, [0, 400], [1, 0]);
@@ -37,24 +36,24 @@ export default function Hero() {
           <span className="italic text-ink-500">for the internet</span>.
         </motion.h1>
 
+        {/* CTAs: primary filled pill + secondary outlined pill. No decorative arrows. */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 md:mt-14 flex flex-wrap items-center gap-6 md:gap-8"
+          className="mt-10 md:mt-14 flex flex-wrap items-center gap-3"
         >
           <a
-            href="#work"
-            className="link-draw font-display text-base text-ink-700 hover:text-ink-950 transition-colors"
-          >
-            See selected work ↓
-          </a>
-          <span className="hidden md:inline text-ink-300">·</span>
-          <a
             href="mailto:tryraisins@gmail.com"
-            className="link-draw font-display text-base text-ink-700 hover:text-flame-500 transition-colors"
+            className="inline-flex items-center gap-2.5 rounded-full bg-ink-950 hover:bg-flame-500 text-paper-50 px-6 py-3.5 font-display font-medium text-sm md:text-base transition-colors"
           >
-            tryraisins@gmail.com ↗
+            <span>Get in touch</span>
+          </a>
+          <a
+            href="#work"
+            className="inline-flex items-center gap-2.5 rounded-full border border-ink-950 hover:bg-ink-950 hover:text-paper-50 text-ink-950 px-6 py-3.5 font-display font-medium text-sm md:text-base transition-colors"
+          >
+            <span>Read about the work</span>
           </a>
         </motion.div>
       </motion.div>
