@@ -1,17 +1,22 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-// Small A&I-style intro: brand line, one-sentence positioning, one CTA.
-// The work grid does the heavy lifting from here on.
+// A&I-style intro. Enters with a small stagger on load, exits with an
+// opacity + upward drift as you start scrolling — the whole block feels
+// like it lifts out of the way to reveal the work below.
 export default function Hero() {
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const y = useTransform(scrollY, [0, 400], [0, -60]);
+
   return (
     <section
       id="top"
       className="relative pt-40 md:pt-56 pb-20 md:pb-28 px-6 md:px-10"
       aria-label="Introduction"
     >
-      <div className="max-w-[1400px] mx-auto">
+      <motion.div style={{ opacity, y }} className="max-w-[1400px] mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -52,7 +57,7 @@ export default function Hero() {
             tryraisins@gmail.com ↗
           </a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }

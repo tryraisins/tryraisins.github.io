@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 type Project = {
   slug: string;
@@ -59,15 +60,25 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
   const isEven = index % 2 === 0;
   const number = String(index + 1).padStart(2, '0');
 
+  const ref = useRef<HTMLElement | null>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
+  // Image drifts opposite to text, creating the parallax feel
+  const imageY = useTransform(scrollYProgress, [0, 1], ['12%', '-12%']);
+  const textY = useTransform(scrollYProgress, [0, 1], ['-6%', '6%']);
+  // Row fades in from below on entry, sits fully visible in mid-scroll,
+  // fades and drifts as it exits the top
+  const rowOpacity = useTransform(scrollYProgress, [0, 0.15, 0.8, 1], [0, 1, 1, 0.2]);
+
   return (
     <motion.article
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+      ref={ref}
+      style={{ opacity: rowOpacity }}
       className="group grid grid-cols-12 gap-x-4 md:gap-x-8 gap-y-6 md:gap-y-0 items-start"
     >
-      {/* Image column — 7 cols wide, sides alternate */}
+      {/* Image column — 7 cols; sides alternate */}
       <a
         href={project.url}
         target="_blank"
@@ -77,7 +88,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
         }`}
         aria-label={`Visit ${project.title}`}
       >
-        <div className="card-media absolute inset-0">
+        <motion.div style={{ y: imageY }} className="card-media absolute inset-0">
           <Image
             src={`/work/${project.slug}.png`}
             alt={`${project.title} — ${project.tagline}`}
@@ -85,20 +96,19 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             sizes="(max-width: 768px) 100vw, 60vw"
             className="object-cover object-top"
           />
-        </div>
-        {/* Visit chip — appears on hover in the corner */}
+        </motion.div>
         <div className="absolute top-4 right-4 rounded-full bg-paper-50 text-ink-950 px-3.5 py-1.5 font-mono text-[10px] tracking-widest uppercase font-medium opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]">
           Visit ↗
         </div>
       </a>
 
-      {/* Text column — 4 cols wide */}
-      <div
+      {/* Text column — 4 cols; parallaxes opposite direction */}
+      <motion.div
+        style={{ y: textY }}
         className={`col-span-12 md:col-span-4 flex flex-col self-end pb-2 ${
           isEven ? 'md:order-2 md:col-start-9' : 'md:order-1 md:col-start-1'
         }`}
       >
-        {/* Big project number */}
         <div className="flex items-baseline gap-4 mb-6">
           <span className="font-display font-medium text-5xl md:text-7xl leading-none text-ink-950 tracking-[-0.03em]">
             {number}
@@ -135,7 +145,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
         >
           Visit {project.title} ↗
         </a>
-      </div>
+      </motion.div>
     </motion.article>
   );
 }
