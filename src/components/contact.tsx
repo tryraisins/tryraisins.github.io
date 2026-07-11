@@ -1,12 +1,29 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Mail, Github, Linkedin } from 'lucide-react';
+
+// Medium doesn't ship in lucide — a small SVG that matches the stroke/weight of
+// the others so the row reads consistently.
+function MediumIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
+    </svg>
+  );
+}
 
 const CHANNELS = [
-  { label: 'Email',    value: 'tryraisins@gmail.com', href: 'mailto:tryraisins@gmail.com' },
-  { label: 'GitHub',   value: 'tryraisins',           href: 'https://github.com/tryraisins' },
-  { label: 'LinkedIn', value: 'TryRaisins',           href: 'https://www.linkedin.com/in/seun-sowemimo-8518b7249/' },
-  { label: 'Medium',   value: 'TryRaisins',           href: 'https://medium.com/@TryRaisins' },
+  { label: 'Email',    handle: 'tryraisins@gmail.com', href: 'mailto:tryraisins@gmail.com',                          Icon: Mail },
+  { label: 'GitHub',   handle: '@tryraisins',          href: 'https://github.com/tryraisins',                        Icon: Github },
+  { label: 'LinkedIn', handle: 'TryRaisins',           href: 'https://www.linkedin.com/in/seun-sowemimo-8518b7249/', Icon: Linkedin },
+  { label: 'Medium',   handle: '@TryRaisins',          href: 'https://medium.com/@TryRaisins',                       Icon: MediumIcon },
 ];
 
 export default function Contact() {
@@ -36,32 +53,41 @@ export default function Contact() {
           .
         </motion.p>
 
-        <div className="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-2 max-w-4xl">
-          {CHANNELS.map((c, i) => (
-            <motion.a
-              key={c.label}
-              href={c.href}
-              target={c.href.startsWith('http') ? '_blank' : undefined}
-              rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
-              className="group flex items-center justify-between border-b border-ink-200 py-5 hover:border-ink-950 transition-colors"
-            >
-              <div className="flex items-center gap-6">
-                <span className="font-mono text-[11px] tracking-widest uppercase text-ink-500 w-16 md:w-20">
-                  {c.label}
-                </span>
-                <span className="font-display text-lg md:text-xl text-ink-950 group-hover:text-flame-500 transition-colors">
-                  {c.value}
-                </span>
-              </div>
-              <span className="font-mono text-ink-500 group-hover:text-flame-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" aria-hidden="true">
-                ↗
-              </span>
-            </motion.a>
-          ))}
+        {/* Compact channel row — icons with tooltips-style handles below */}
+        <div className="mt-16 md:mt-24">
+          <div className="font-mono text-[11px] tracking-widest uppercase text-ink-500 mb-6">
+            Or find me on
+          </div>
+          <div className="flex flex-wrap gap-3 md:gap-4">
+            {CHANNELS.map((c, i) => {
+              const { Icon } = c;
+              return (
+                <motion.a
+                  key={c.label}
+                  href={c.href}
+                  target={c.href.startsWith('http') ? '_blank' : undefined}
+                  rel={c.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  aria-label={`${c.label} — ${c.handle}`}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                  className="group inline-flex items-center gap-3 rounded-full border border-ink-200 hover:border-ink-950 hover:bg-ink-950 px-5 py-3 transition-colors"
+                >
+                  <Icon className="w-4 h-4 text-ink-950 group-hover:text-paper-50 transition-colors" />
+                  <span className="font-display text-sm text-ink-950 group-hover:text-paper-50 transition-colors">
+                    {c.handle}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="font-mono text-xs text-ink-500 group-hover:text-paper-50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition"
+                  >
+                    ↗
+                  </span>
+                </motion.a>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

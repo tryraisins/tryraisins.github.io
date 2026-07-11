@@ -11,8 +11,8 @@ export default function Page() {
       <Nav />
       <main id="main">
         <Hero />
-        <Work />
         <Manifesto />
+        <Work />
         <Contact />
       </main>
       <Footer />
