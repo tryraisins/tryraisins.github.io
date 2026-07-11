@@ -9,12 +9,6 @@
 
 html {
   scroll-behavior: smooth;
-  cursor: none; /* handed off to custom cursor pill */
-}
-
-/* Only hide default cursor on non-touch pointer devices */
-@media (pointer: coarse) {
-  html { cursor: auto; }
 }
 
 body {
@@ -68,9 +62,20 @@ body {
   transition: transform 0.6s cubic-bezier(0.7, 0, 0.15, 1), opacity 0.6s;
 }
 
-/* Hide the native scrollbar entirely — scroll % counter is the UI */
+/* Hide the native scrollbar entirely — the page has its own visual UI */
 html { scrollbar-width: none; -ms-overflow-style: none; }
 ::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+/* Marquee — pure CSS, translates by exactly half the row width so the
+   duplicated second half takes over seamlessly */
+@keyframes marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+  will-change: transform;
+}
 
 /* Selection */
 ::selection { background: rgba(255,107,74,0.35); color: #f5f2eb; }
