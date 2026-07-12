@@ -3,10 +3,12 @@ import SectionTitle from '../utils/sectionTitle';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { useMagnetic } from '../utils/useMagnetic';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const submitMagnetic = useMagnetic<HTMLButtonElement>(10);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -213,14 +215,23 @@ const Contact: React.FC = () => {
             />
           </div>
 
-          {/* Submit Button & Status */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Submit Button & Status — centered on every breakpoint */}
+          <div className="flex flex-col items-center justify-center gap-4">
             <motion.button
+              ref={submitMagnetic.ref}
               type="submit"
-              className="btn-primary w-full sm:w-auto"
+              className="btn-primary w-full sm:w-auto justify-center"
               disabled={status === 'submitting'}
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
+              onMouseMove={status === 'submitting' ? undefined : submitMagnetic.onMouseMove}
+              onMouseEnter={status === 'submitting' ? undefined : submitMagnetic.onMouseEnter}
+              onMouseLeave={status === 'submitting' ? undefined : submitMagnetic.onMouseLeave}
+              animate={{
+                x: submitMagnetic.x,
+                y: submitMagnetic.y,
+                scale: submitMagnetic.hovered ? 1.03 : 1,
+              }}
+              transition={{ type: 'spring', stiffness: 220, damping: 20, mass: 0.5 }}
+              whileTap={{ scale: 0.96 }}
               style={{ opacity: status === 'submitting' ? 0.7 : 1 }}
             >
               {status === 'submitting' ? (

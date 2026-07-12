@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface ProjectCardProps {
@@ -35,10 +35,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           >
             {title}
           </h3>
-          <ExternalLink
-            size={20}
-            className="text-zinc-500 group-hover:text-[#ff6b4a] transition-colors shrink-0"
-          />
+          <span
+            className="shrink-0 grid place-items-center w-9 h-9 rounded-full border border-white/10 text-zinc-400 group-hover:border-[#ff6b4a] group-hover:bg-[#ff6b4a]/10 group-hover:text-[#ff6b4a] transition-all duration-300"
+            aria-hidden="true"
+          >
+            <ArrowUpRight
+              size={16}
+              strokeWidth={2.25}
+              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </span>
         </div>
 
         <p className="text-zinc-400 text-sm leading-relaxed">

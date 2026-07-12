@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import { useMagnetic } from '../utils/useMagnetic';
 
 const ScrambleText: React.FC<ScrambleTextProps> = ({ text, delay = 0, trigger, duration = 1.5, useGradient = false }) => {
   // Using alphanumeric characters
@@ -115,6 +117,7 @@ const Hero: React.FC = () => {
   });
 
   const [showButton, setShowButton] = useState(false);
+  const magnetic = useMagnetic<HTMLAnchorElement>(14);
 
   useEffect(() => {
     if (inView) {
@@ -278,32 +281,32 @@ const Hero: React.FC = () => {
         {/* CTA Button */}
         {showButton && (
           <motion.a
+            ref={magnetic.ref}
             href="#projects"
             onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
               e.preventDefault();
               document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
             }}
+            onMouseMove={magnetic.onMouseMove}
+            onMouseEnter={magnetic.onMouseEnter}
+            onMouseLeave={magnetic.onMouseLeave}
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            whileHover={{ scale: 1.05, y: -3 }}
-            whileTap={{ scale: 0.98 }}
-            className="btn-primary inline-flex"
+            animate={{
+              opacity: 1,
+              x: magnetic.x,
+              y: magnetic.y,
+              scale: magnetic.hovered ? 1.05 : 1,
+            }}
+            transition={{ type: 'spring', stiffness: 220, damping: 20, mass: 0.5 }}
+            whileTap={{ scale: 0.96 }}
+            className="btn-primary group inline-flex"
           >
             <span>View My Work</span>
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="7" y1="17" x2="17" y2="7" />
-              <polyline points="7 7 17 7 17 17" />
-            </svg>
+            <ArrowUpRight
+              size={20}
+              strokeWidth={2.25}
+              className="transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </motion.a>
         )}
 

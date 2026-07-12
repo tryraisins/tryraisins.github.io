@@ -2,13 +2,17 @@ import React from 'react';
 import SectionTitle from '../utils/sectionTitle';
 import { useInView } from 'react-intersection-observer';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Coffee, ArrowRight } from 'lucide-react';
+import { Calendar, MapPin, Coffee, ArrowUpRight } from 'lucide-react';
+import { useMagnetic } from '../utils/useMagnetic';
 
 const About: React.FC = () => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
+
+  const contactMagnetic = useMagnetic<HTMLAnchorElement>(12);
+  const githubMagnetic = useMagnetic<HTMLAnchorElement>(12);
 
   const stats = [
     { label: 'Years Experience', value: '5+' },
@@ -79,23 +83,50 @@ const About: React.FC = () => {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-5 pt-4">
-                <a
-                  href="mailto:tryraisins@gmail.com"
-                  className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[var(--coral-400)] text-zinc-900 rounded-full font-bold text-sm tracking-wide overflow-hidden transition-transform hover:-translate-y-1"
+                <motion.a
+                  ref={contactMagnetic.ref}
+                  href="#contact"
+                  onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                    e.preventDefault();
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  onMouseMove={contactMagnetic.onMouseMove}
+                  onMouseEnter={contactMagnetic.onMouseEnter}
+                  onMouseLeave={contactMagnetic.onMouseLeave}
+                  animate={{
+                    x: contactMagnetic.x,
+                    y: contactMagnetic.y,
+                    scale: contactMagnetic.hovered ? 1.04 : 1,
+                  }}
+                  transition={{ type: 'spring', stiffness: 220, damping: 20, mass: 0.5 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[var(--coral-400)] text-zinc-900 rounded-full font-bold text-sm tracking-wide overflow-hidden"
                 >
                   <span className="relative z-10">Get in Touch</span>
-                  <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowUpRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity" />
-                </a>
+                </motion.a>
 
-                <a
+                <motion.a
+                  ref={githubMagnetic.ref}
                   href="https://github.com/tryraisins"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-transparent border border-zinc-700 text-white rounded-full font-medium text-sm tracking-wide hover:border-[var(--coral-400)] hover:text-[var(--coral-400)] transition-colors"
+                  onMouseMove={githubMagnetic.onMouseMove}
+                  onMouseEnter={githubMagnetic.onMouseEnter}
+                  onMouseLeave={githubMagnetic.onMouseLeave}
+                  animate={{
+                    x: githubMagnetic.x,
+                    y: githubMagnetic.y,
+                    scale: githubMagnetic.hovered ? 1.04 : 1,
+                  }}
+                  transition={{ type: 'spring', stiffness: 220, damping: 20, mass: 0.5 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="relative inline-flex items-center gap-3 px-8 py-4 bg-transparent border border-zinc-700 text-white rounded-full font-medium text-sm tracking-wide overflow-hidden group hover:border-[var(--coral-400)] transition-colors duration-300"
                 >
-                  View GitHub
-                </a>
+                  <span className="absolute inset-0 -z-10 bg-[var(--coral-400)] origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-out" />
+                  <span className="relative z-10 group-hover:text-zinc-900 transition-colors duration-300">View GitHub</span>
+                </motion.a>
               </div>
             </motion.div>
           </div>
