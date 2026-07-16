@@ -1,0 +1,162 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Seun Sowemimo (TryRaisins) — Fullstack Web Developer',
+  description = 'Portfolio of Seun (Oluwaseun) Sowemimo — TryRaisins — a Fullstack Web Developer in Lagos, Nigeria with 5+ years of experience in React, TypeScript, Node.js, and Python.',
+} = Astro.props;
+
+const SITE_URL = 'https://tryraisins.dev';
+const OG_IMAGE = `${SITE_URL}/og-image.png`;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Seun Sowemimo',
+  alternateName: 'TryRaisins',
+  url: SITE_URL,
+  image: OG_IMAGE,
+  jobTitle: 'Fullstack Web Developer',
+  description: 'Fullstack Web Developer with 5+ years of experience specializing in React, TypeScript, Node.js, and Python.',
+  email: 'mailto:tryraisins@gmail.com',
+  givenName: 'Oluwaseun',
+  familyName: 'Sowemimo',
+  sameAs: [
+    'https://github.com/tryraisins',
+    'https://www.linkedin.com/in/seun-sowemimo-8518b7249/',
+    'https://medium.com/@TryRaisins',
+    SITE_URL,
+  ],
+  knowsAbout: ['React', 'TypeScript', 'JavaScript', 'Node.js', 'Python', 'MongoDB', 'Azure Functions', 'Web Development', 'Frontend Development', 'Backend Development'],
+  homeLocation: { '@type': 'Place', name: 'Lagos, Nigeria' },
+  worksFor: { '@type': 'Organization', name: 'Freelance / Professional' },
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'TryRaisins Portfolio',
+  alternateName: 'Seun Sowemimo Developer Portfolio',
+  url: SITE_URL,
+  description: 'Portfolio website of Seun Sowemimo, a Fullstack Web Developer specializing in React, TypeScript, Node.js, and Python.',
+  author: { '@type': 'Person', name: 'Seun Sowemimo' },
+};
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Web Development Projects',
+  description: 'A collection of web development projects showcasing expertise in React, TypeScript, Node.js, and modern web technologies.',
+  url: `${SITE_URL}/#projects`,
+  author: { '@type': 'Person', name: 'Seun Sowemimo' },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, item: { '@type': 'SoftwareApplication', name: 'QuickBillz', url: 'https://quickbillz.tryraisins.dev/', description: 'Freelance invoicing without the SaaS subscription. Generate professional invoices in seconds.' } },
+      { '@type': 'ListItem', position: 2, item: { '@type': 'SoftwareApplication', name: 'Terror Tracker', url: 'https://terrortracker.tryraisins.dev/', description: 'A live map of insurgent activity across Nigeria — verified incident reports and threat clusters.' } },
+      { '@type': 'ListItem', position: 3, item: { '@type': 'SoftwareApplication', name: 'Talent Hunter', url: 'https://talenthunter.tryraisins.dev/', description: 'Resume screening tool for recruiters: paste a job spec, upload resumes, get a ranked shortlist.' } },
+      { '@type': 'ListItem', position: 4, item: { '@type': 'SoftwareApplication', name: 'Echo List', url: 'https://echolist.tryraisins.dev/', description: 'Convert your Shazam history into curated YouTube playlists.' } },
+      { '@type': 'ListItem', position: 5, item: { '@type': 'SoftwareApplication', name: 'StreamSlip', url: 'https://streamslip.tryraisins.dev/', description: 'Your YouTube Music listening history as a shareable receipt.' } },
+      { '@type': 'ListItem', position: 6, item: { '@type': 'SoftwareApplication', name: 'ISS Tracker', url: 'https://isstracker.tryraisins.dev/', description: 'Live tracker showing exactly where the International Space Station is over Earth.' } },
+    ],
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Seun Sowemimo, Oluwaseun Sowemimo, TryRaisins, Fullstack Developer, Web Developer, React Developer, TypeScript, Node.js, Python, Frontend Developer, Backend Developer, JavaScript, Portfolio, Lagos Nigeria Developer" />
+    <meta name="author" content="Seun Sowemimo" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#111828" />
+    <meta name="geo.region" content="NG" />
+    <meta name="geo.placename" content="Lagos, Nigeria" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={SITE_URL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={OG_IMAGE} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Seun Sowemimo — Fullstack Web Developer Portfolio" />
+    <meta property="og:site_name" content="TryRaisins Portfolio" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={OG_IMAGE} />
+    <meta name="twitter:creator" content="@tryraisins" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+
+    <!-- Webmanifest -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(collectionSchema)} />
+  </head>
+
+  <body class="min-h-screen bg-gray-900 text-gray-100 font-sans antialiased">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-purple-600 focus:text-white focus:rounded-lg">
+      Skip to main content
+    </a>
+
+    <slot />
+
+    <!-- Scroll-reveal observer -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
+    </script>
+
+    <!-- Google Analytics -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-YMCW9KY30X"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-YMCW9KY30X');
+    </script>
+
+    <!-- Microsoft Clarity -->
+    <script is:inline>
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window,document,"clarity","script","vgp526jgr5");
+    </script>
+  </body>
+</html>

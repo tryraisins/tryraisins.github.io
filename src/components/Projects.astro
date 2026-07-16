@@ -1,0 +1,134 @@
+---
+const projects = [
+  {
+    title: 'QuickBillz',
+    tagline: 'Freelance invoicing without the SaaS subscription. Generate professional invoices in seconds with custom styling and multiple export formats.',
+    categories: ['Next.js', 'TypeScript', 'PDF'],
+    url: 'https://quickbillz.tryraisins.dev',
+    domain: 'quickbillz.tryraisins.dev',
+    year: '2026',
+  },
+  {
+    title: 'Terror Tracker',
+    tagline: 'A live map of insurgent activity across Nigeria — verified incident reports, casualty counts, and threat clusters, updated as the news comes in.',
+    categories: ['Next.js', 'MongoDB', 'Dashboard'],
+    url: 'https://terrortracker.tryraisins.dev',
+    domain: 'terrortracker.tryraisins.dev',
+    year: '2026',
+  },
+  {
+    title: 'Talent Hunter',
+    tagline: 'Recruiters drowning in resumes: paste a job spec, upload the pile, get a ranked shortlist in minutes instead of hours.',
+    categories: ['React', 'Vite', 'NLP'],
+    url: 'https://talenthunter.tryraisins.dev',
+    domain: 'talenthunter.tryraisins.dev',
+    year: '2026',
+  },
+  {
+    title: 'Echo List',
+    tagline: 'Your Shazam history is a graveyard of songs you meant to save. This resurrects it as a YouTube playlist — one upload, done.',
+    categories: ['React', 'Vite', 'YouTube API'],
+    url: 'https://echolist.tryraisins.dev',
+    domain: 'echolist.tryraisins.dev',
+    year: '2025',
+  },
+  {
+    title: 'StreamSlip',
+    tagline: 'Your YouTube Music listening history, printed as a receipt you can actually screenshot. Wrapped-style stats, whenever you want them.',
+    categories: ['Next.js', 'Canvas', 'OAuth'],
+    url: 'https://streamslip.tryraisins.dev',
+    domain: 'streamslip.tryraisins.dev',
+    year: '2025',
+  },
+  {
+    title: 'ISS Tracker',
+    tagline: 'The International Space Station is somewhere over Earth right now. Here is exactly where — plus who is onboard.',
+    categories: ['React', 'Live Data', 'Mapping'],
+    url: 'https://isstracker.tryraisins.dev',
+    domain: 'isstracker.tryraisins.dev',
+    year: '2024',
+  },
+];
+
+const total = String(projects.length).padStart(2, '0');
+---
+
+<section id="projects" class="py-20 px-4 md:px-10 bg-gray-800 text-gray-100">
+  <div class="max-w-6xl mx-auto">
+    <!-- Section header -->
+    <div class="flex items-baseline justify-between gap-6 mb-14 md:mb-20 animate-on-scroll">
+      <h2 class="text-3xl md:text-4xl font-bold text-white">
+        My Projects
+        <span class="block w-16 h-1 bg-purple-500 mt-3 rounded-full"></span>
+      </h2>
+      <span class="font-mono text-xs tracking-widest uppercase text-gray-500">
+        {projects.length} projects · 2024–2026
+      </span>
+    </div>
+
+    <!-- Project list -->
+    <div>
+      {projects.map((project, i) => {
+        const num = String(i + 1).padStart(2, '0');
+        return (
+          <article class="animate-on-scroll group relative border-t border-gray-700 py-10 md:py-14">
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block"
+              aria-label={`Open ${project.title} — ${project.domain}`}
+            >
+              <!-- Purple hover wash -->
+              <span
+                aria-hidden="true"
+                class="absolute inset-0 bg-purple-500/5 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-in-out pointer-events-none rounded"
+              />
+
+              <div class="relative grid grid-cols-12 gap-4 md:gap-8 items-start">
+                <!-- Index -->
+                <div class="col-span-2 md:col-span-1">
+                  <span class="font-mono text-xs md:text-sm tracking-widest text-gray-500 group-hover:text-purple-400 transition-colors">
+                    {num}<span class="text-gray-700"> / {total}</span>
+                  </span>
+                </div>
+
+                <!-- Title + tagline + tags -->
+                <div class="col-span-10 md:col-span-8">
+                  <h3 class="font-bold text-4xl md:text-6xl lg:text-7xl leading-none tracking-tight text-gray-100 group-hover:text-purple-400 transition-colors duration-500">
+                    {project.title}
+                  </h3>
+
+                  <p class="mt-5 md:mt-6 text-base md:text-lg leading-relaxed text-gray-400 group-hover:text-gray-200 transition-colors duration-500 max-w-2xl">
+                    {project.tagline}
+                  </p>
+
+                  <div class="mt-5 flex flex-wrap gap-2">
+                    {project.categories.map(cat => (
+                      <span class="font-mono text-[10px] tracking-widest uppercase text-gray-500 border border-gray-600 group-hover:border-purple-500/60 group-hover:text-purple-400 rounded-full px-3 py-1 transition-colors duration-300">
+                        {cat}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <!-- Year + domain -->
+                <div class="col-span-12 md:col-span-3 md:text-right">
+                  <span class="font-mono text-xs md:text-sm tracking-widest text-gray-500 group-hover:text-purple-400 transition-colors">
+                    {project.year}
+                  </span>
+                  <div class="hidden md:block mt-4 overflow-hidden h-4">
+                    <span class="font-mono text-[11px] tracking-widest lowercase text-gray-500 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 block">
+                      {project.domain}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </article>
+        );
+      })}
+      <div class="border-t border-gray-700"></div>
+    </div>
+  </div>
+</section>

@@ -10,6 +10,16 @@
 
 # production
 /build
+/dist
+
+# Astro
+.astro/
+
+# Backup files
+*.cra-backup
+
+# Claude Code internal files
+.claude/
 
 # misc
 .DS_Store
