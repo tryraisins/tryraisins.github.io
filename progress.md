@@ -26,3 +26,4 @@ TODO:
 - Browser smoke-tested all three games; build passes.
 - 2026-07-19 mobile fix: added real external links to all visible concept projects, made Glyph Serpent playable by touch controls on mobile, constrained the game console/canvas layout for small screens, and changed Five-ish to standard 5-letter Wordle-style play with real-word validation and duplicate-aware scoring.
 - Verification: `npm run build` passes. The provided web-game Playwright client could not run because `npx playwright install chromium` timed out twice, so validation used local Chrome through Playwright instead: mobile Wordle rejects non-words and solves `GAMES`, snake touch controls are visible and advance state, project hrefs are populated, no console/page errors.
+- 2026-07-19 mobile decision: user requested removing the game section from mobile view instead of keeping mobile controls. Hid the Play/game section and floating game trigger at mobile widths while leaving desktop games intact.
