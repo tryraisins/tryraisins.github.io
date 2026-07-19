@@ -24,3 +24,5 @@ TODO:
 - Five-ish derives a 5–8 letter target from Play copy and supports six guesses with exact/present/absent scoring.
 - Stack Architect requires UI → API → DATA → SHIP and exposes clickable dependency nodes.
 - Browser smoke-tested all three games; build passes.
+- 2026-07-19 mobile fix: added real external links to all visible concept projects, made Glyph Serpent playable by touch controls on mobile, constrained the game console/canvas layout for small screens, and changed Five-ish to standard 5-letter Wordle-style play with real-word validation and duplicate-aware scoring.
+- Verification: `npm run build` passes. The provided web-game Playwright client could not run because `npx playwright install chromium` timed out twice, so validation used local Chrome through Playwright instead: mobile Wordle rejects non-words and solves `GAMES`, snake touch controls are visible and advance state, project hrefs are populated, no console/page errors.

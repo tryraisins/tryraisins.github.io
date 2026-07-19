@@ -2,10 +2,10 @@
 import '../styles/global.css';
 
 const projects = [
-  { number: '01', name: 'QuickBillz', type: 'Product / Invoicing', year: '2026', accent: '#ff5c35' },
-  { number: '02', name: 'Terror Tracker', type: 'Live intelligence map', year: '2026', accent: '#b8ff32' },
-  { number: '03', name: 'Talent Hunter', type: 'Applied NLP', year: '2026', accent: '#74a7ff' },
-  { number: '04', name: 'Echo List', type: 'Music utility', year: '2025', accent: '#ffcf40' },
+  { number: '01', name: 'QuickBillz', type: 'Product / Invoicing', year: '2026', accent: '#ff5c35', href: 'https://quickbillz.tryraisins.dev/' },
+  { number: '02', name: 'Terror Tracker', type: 'Live intelligence map', year: '2026', accent: '#b8ff32', href: 'https://terrortracker.tryraisins.dev/' },
+  { number: '03', name: 'Talent Hunter', type: 'Applied NLP', year: '2026', accent: '#74a7ff', href: 'https://talenthunter.tryraisins.dev/' },
+  { number: '04', name: 'Echo List', type: 'Music utility', year: '2025', accent: '#ffcf40', href: 'https://echolist.tryraisins.dev/' },
   { number: '05', name: 'BetPicks', type: 'Sports picks product', year: '2026', accent: '#ff78bd', href: 'https://betpicks.tryraisins.dev/' },
 ];
 
@@ -233,6 +233,12 @@ const seoSchema = {
           <div class="console-topbar"><span class="console-kicker">Playable system / <b id="console-game-name">—</b></span><button class="console-close" type="button" aria-label="Close game">×</button></div>
           <p class="console-status" id="console-status">Choose a game to begin.</p>
           <canvas id="game-canvas" width="840" height="420" aria-label="Game canvas"></canvas>
+          <div class="touch-controls" hidden aria-label="Snake touch controls">
+            <button type="button" data-direction="up" aria-label="Move up">Up</button>
+            <button type="button" data-direction="left" aria-label="Move left">Left</button>
+            <button type="button" data-direction="right" aria-label="Move right">Right</button>
+            <button type="button" data-direction="down" aria-label="Move down">Down</button>
+          </div>
           <div class="wordle-ui" hidden><div class="wordle-grid" id="wordle-grid"></div><input id="wordle-input" class="wordle-input" maxlength="12" autocomplete="off" aria-label="Wordle guess" placeholder="TYPE A WORD" /><button id="wordle-submit" class="console-action" type="button">Submit guess</button></div>
           <div class="stack-ui" hidden><p>Connect the stack in order. Select the next layer.</p><div class="stack-nodes" id="stack-nodes"></div></div>
           <div class="console-controls">Esc closes · R restarts · F toggles fullscreen</div>
@@ -436,6 +442,7 @@ const seoSchema = {
       const wordleInput = document.querySelector('#wordle-input');
       const wordleSubmit = document.querySelector('#wordle-submit');
       const stackNodes = document.querySelector('#stack-nodes');
+      const touchControls = document.querySelector('.touch-controls');
       const closeGame = document.querySelector('.console-close');
       let activeGameId = '';
       let stopActiveGame = () => {};
@@ -446,7 +453,34 @@ const seoSchema = {
         if (gameCanvas instanceof HTMLCanvasElement) gameCanvas.hidden = mode !== 'canvas';
         if (wordleUi instanceof HTMLElement) wordleUi.hidden = mode !== 'wordle';
         if (stackUi instanceof HTMLElement) stackUi.hidden = mode !== 'stack';
+        if (touchControls instanceof HTMLElement) touchControls.hidden = mode !== 'canvas';
       };
+
+      const commonFiveLetterWords = new Set([
+        'about', 'above', 'actor', 'acute', 'adapt', 'after', 'again', 'agent', 'agree', 'alert', 'alien', 'align', 'allow', 'alone', 'alter', 'amber', 'angel', 'angry', 'apple', 'apply', 'arena', 'arise', 'array', 'audio', 'avoid', 'award',
+        'basic', 'beach', 'begin', 'below', 'bench', 'birth', 'black', 'blame', 'blend', 'block', 'board', 'boost', 'brain', 'brand', 'brave', 'bread', 'break', 'bring', 'brown', 'build', 'built', 'burst',
+        'cable', 'carry', 'cause', 'chain', 'chair', 'chart', 'chase', 'check', 'clear', 'click', 'clock', 'cloud', 'coach', 'coder', 'color', 'count', 'court', 'cover', 'craft', 'cream', 'cross', 'curve',
+        'daily', 'dance', 'debug', 'delay', 'depth', 'digit', 'draft', 'dream', 'drive',
+        'earth', 'eight', 'elite', 'empty', 'entry', 'event', 'every', 'exact',
+        'false', 'field', 'final', 'first', 'fixed', 'flash', 'fleet', 'floor', 'focus', 'force', 'found', 'frame', 'fresh', 'front',
+        'games', 'ghost', 'given', 'glyph', 'grade', 'graph', 'great', 'green', 'group', 'guess',
+        'happy', 'heart', 'heavy', 'hello', 'hidden', 'human',
+        'ideas', 'image', 'index', 'inner', 'input',
+        'joint', 'known',
+        'label', 'large', 'later', 'layer', 'learn', 'level', 'light', 'lines', 'links', 'local', 'logic',
+        'magic', 'major', 'maker', 'match', 'metal', 'model', 'money', 'month', 'motion',
+        'never', 'night', 'nodes', 'noise', 'normal',
+        'ocean', 'offer', 'often', 'orbit', 'order', 'other',
+        'panel', 'paper', 'pause', 'phase', 'piece', 'pilot', 'place', 'plain', 'plate', 'plays', 'point', 'power', 'press', 'proof', 'pulse',
+        'quick', 'quiet',
+        'range', 'reach', 'react', 'ready', 'relay', 'reply', 'right', 'river', 'round', 'route', 'rules',
+        'score', 'scope', 'sense', 'serve', 'shade', 'shape', 'share', 'shift', 'shine', 'ships', 'skill', 'snake', 'solid', 'solve', 'sound', 'space', 'stack', 'stage', 'start', 'state', 'steam', 'still', 'story', 'style',
+        'table', 'target', 'teach', 'theme', 'there', 'thing', 'think', 'three', 'throw', 'timer', 'today', 'touch', 'trace', 'trial', 'trust', 'truth', 'types',
+        'under', 'union', 'upper',
+        'valid', 'value', 'video', 'view',
+        'water', 'wheel', 'where', 'white', 'words', 'works', 'world', 'write', 'wrong',
+        'yield', 'young'
+      ]);
 
       function startSnake() {
         stopActiveGame(); setGameMode('canvas');
@@ -459,19 +493,80 @@ const seoSchema = {
         const placeFood = () => { if (state.foodIndex === 0) { state.foodPos = { x: 20, y: 7 }; return; } const taken = occupied(); for (let attempt = 0; attempt < 100; attempt++) { const x = (state.foodIndex * 7 + 5 + attempt) % cols; const y = (state.foodIndex * 11 + 2 + attempt * 3) % rows; if (!taken.has(`${x},${y}`)) { state.foodPos = { x, y }; return; } } };
         const render = () => { ctx.fillStyle = '#10100d'; ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height); ctx.strokeStyle = 'rgba(240,237,228,.08)'; ctx.lineWidth = 1; for (let x = 0; x <= cols; x++) { ctx.beginPath(); ctx.moveTo(x * cellW, 0); ctx.lineTo(x * cellW, gameCanvas.height); ctx.stroke(); } for (let y = 0; y <= rows; y++) { ctx.beginPath(); ctx.moveTo(0, y * cellH); ctx.lineTo(gameCanvas.width, y * cellH); ctx.stroke(); } ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.font = '600 16px DM Mono'; ctx.fillStyle = '#ff5c35'; ctx.fillText(food[state.foodIndex] || '✓', (state.foodPos.x + .5) * cellW, (state.foodPos.y + .5) * cellH); state.snake.forEach((part, index) => { ctx.fillStyle = index === 0 ? '#b8ff32' : 'rgba(184,255,50,.72)'; ctx.fillRect(part.x * cellW + 2, part.y * cellH + 2, cellW - 4, cellH - 4); ctx.fillStyle = '#111'; ctx.fillText(part.char, (part.x + .5) * cellW, (part.y + .5) * cellH); }); ctx.textAlign = 'left'; ctx.font = '500 11px DM Mono'; ctx.fillStyle = 'rgba(240,237,228,.62)'; ctx.fillText(`${state.score}/${food.length} glyphs consumed`, 14, gameCanvas.height - 12); };
         const update = () => { if (state.mode !== 'playing') return; state.dir = state.queued; const head = state.snake[0]; const next = { x: (head.x + state.dir.x + cols) % cols, y: (head.y + state.dir.y + rows) % rows, char: food[state.foodIndex] || '✓' }; if (state.snake.some((part) => part.x === next.x && part.y === next.y)) { state.mode = 'lost'; setGameStatus('Snake crossed its own trail. Press R to try again.'); return; } state.snake.unshift(next); if (next.x === state.foodPos.x && next.y === state.foodPos.y) { state.score++; state.foodIndex++; if (state.score >= food.length) { state.mode = 'won'; setGameStatus(`Glyph Serpent cleared all ${food.length} characters.`); } else placeFood(); } else state.snake.pop(); };
-        const onKey = (event) => { const key = event.key.toLowerCase(); const dirs = { arrowup: { x: 0, y: -1 }, w: { x: 0, y: -1 }, arrowdown: { x: 0, y: 1 }, s: { x: 0, y: 1 }, arrowleft: { x: -1, y: 0 }, a: { x: -1, y: 0 }, arrowright: { x: 1, y: 0 }, d: { x: 1, y: 0 } }; const next = dirs[key]; if (!next || (next.x === -state.dir.x && next.y === -state.dir.y)) return; event.preventDefault(); state.queued = next; };
+        const queueDirection = (next) => { if (!next || (next.x === -state.dir.x && next.y === -state.dir.y)) return; state.queued = next; };
+        const dirs = { up: { x: 0, y: -1 }, down: { x: 0, y: 1 }, left: { x: -1, y: 0 }, right: { x: 1, y: 0 } };
+        const onKey = (event) => { const key = event.key.toLowerCase(); const keyboardDirs = { arrowup: dirs.up, w: dirs.up, arrowdown: dirs.down, s: dirs.down, arrowleft: dirs.left, a: dirs.left, arrowright: dirs.right, d: dirs.right }; const next = keyboardDirs[key]; if (!next) return; event.preventDefault(); queueDirection(next); };
+        const onTouchControl = (event) => { const button = event.target instanceof HTMLElement ? event.target.closest('[data-direction]') : null; if (!(button instanceof HTMLElement)) return; event.preventDefault(); queueDirection(dirs[button.dataset.direction]); };
         const renderText = () => JSON.stringify({ game: 'Glyph Serpent', coordinateSystem: 'origin top-left, x right, y down', mode: state.mode, score: state.score, target: food.length, snakeLength: state.snake.length, head: state.snake[0], food: { char: food[state.foodIndex] || null, ...state.foodPos } });
         const loop = (time) => { if (state.mode !== 'playing') return; if (!state.last || time - state.last >= 150) { state.last = time; update(); render(); } gameFrame = requestAnimationFrame(loop); };
-        placeFood(); window.addEventListener('keydown', onKey); window.render_game_to_text = renderText; window.advanceTime = (ms) => { for (let t = 0; t < ms; t += 150) update(); render(); }; stopActiveGame = () => { cancelAnimationFrame(gameFrame); window.removeEventListener('keydown', onKey); delete window.render_game_to_text; delete window.advanceTime; }; setGameStatus(`Eat every character from this section · ${food.length} glyphs loaded.`); render(); gameFrame = requestAnimationFrame(loop);
+        placeFood(); window.addEventListener('keydown', onKey); touchControls?.addEventListener('pointerdown', onTouchControl); window.render_game_to_text = renderText; window.advanceTime = (ms) => { for (let t = 0; t < ms; t += 150) update(); render(); }; stopActiveGame = () => { cancelAnimationFrame(gameFrame); window.removeEventListener('keydown', onKey); touchControls?.removeEventListener('pointerdown', onTouchControl); delete window.render_game_to_text; delete window.advanceTime; }; setGameStatus(`Eat every character from this section · ${food.length} glyphs loaded.`); render(); gameFrame = requestAnimationFrame(loop);
       }
 
       function startWordle() {
         stopActiveGame(); setGameMode('wordle');
         if (!(wordleGrid instanceof HTMLElement) || !(wordleInput instanceof HTMLInputElement) || !(wordleSubmit instanceof HTMLButtonElement)) return;
-        const words = [...new Set((playText().match(/[A-Za-z]{5,10}/g) || []).map((word) => word.toLowerCase()))]; const target = (words.find((word) => word.length >= 5) || 'build').slice(0, 8); const guesses = []; let row = 0;
-        wordleGrid.innerHTML = ''; wordleGrid.style.gridTemplateColumns = `repeat(${target.length}, minmax(32px, 48px))`; for (let i = 0; i < 6 * target.length; i++) { const cell = document.createElement('span'); cell.className = 'wordle-cell'; wordleGrid.appendChild(cell); }
-        const submit = () => { const guess = wordleInput.value.trim().toLowerCase(); if (guess.length !== target.length) { setGameStatus(`Use exactly ${target.length} letters.`); return; } const cells = [...wordleGrid.children].slice(row * target.length, (row + 1) * target.length); [...guess].forEach((letter, index) => { cells[index].textContent = letter.toUpperCase(); cells[index].classList.add(letter === target[index] ? 'correct' : target.includes(letter) ? 'present' : 'absent'); }); guesses.push(guess); row++; wordleInput.value = ''; if (guess === target) { setGameStatus(`Solved in ${row} ${row === 1 ? 'guess' : 'guesses'}: ${target.toUpperCase()}.`); wordleInput.disabled = true; wordleSubmit.disabled = true; } else if (row >= 6) { setGameStatus(`Out of guesses. The section word was ${target.toUpperCase()}.`); wordleInput.disabled = true; wordleSubmit.disabled = true; } else setGameStatus(`Attempt ${row + 1}/6 · letters are drawn from this section.`); };
-        wordleSubmit.onclick = submit; wordleInput.onkeydown = (event) => { if (event.key === 'Enter') submit(); }; wordleInput.disabled = false; wordleSubmit.disabled = false; window.render_game_to_text = () => JSON.stringify({ game: 'Five-ish', coordinateSystem: 'rows top-to-bottom', mode: row >= 6 || guesses.includes(target) ? 'ended' : 'playing', wordLength: target.length, attempts: row, guesses }); window.advanceTime = () => {}; stopActiveGame = () => { wordleSubmit.onclick = null; wordleInput.onkeydown = null; delete window.render_game_to_text; delete window.advanceTime; }; setGameStatus(`Guess the ${target.length}-letter word hidden in the section.`); wordleInput.focus();
+        const sectionWords = [...new Set((playText().match(/[A-Za-z]{5}/g) || []).map((word) => word.toLowerCase()).filter((word) => commonFiveLetterWords.has(word)))];
+        const target = sectionWords.find((word) => ['games', 'words', 'glyph', 'snake', 'stack', 'build'].includes(word)) || sectionWords[0] || 'games';
+        const validWords = new Set([...commonFiveLetterWords, ...sectionWords]);
+        const guesses = [];
+        let row = 0;
+        let ended = false;
+        wordleGrid.innerHTML = '';
+        wordleGrid.style.gridTemplateColumns = 'repeat(5, minmax(34px, 48px))';
+        wordleInput.maxLength = 5;
+        for (let i = 0; i < 30; i++) {
+          const cell = document.createElement('span');
+          cell.className = 'wordle-cell';
+          wordleGrid.appendChild(cell);
+        }
+        const scoreGuess = (guess) => {
+          const marks = Array(5).fill('absent');
+          const remaining = {};
+          [...target].forEach((letter, index) => {
+            if (guess[index] === letter) marks[index] = 'correct';
+            else remaining[letter] = (remaining[letter] || 0) + 1;
+          });
+          [...guess].forEach((letter, index) => {
+            if (marks[index] === 'correct' || !remaining[letter]) return;
+            marks[index] = 'present';
+            remaining[letter]--;
+          });
+          return marks;
+        };
+        const submit = () => {
+          if (ended) return;
+          const guess = wordleInput.value.trim().toLowerCase();
+          if (!/^[a-z]{5}$/.test(guess)) { setGameStatus('Use exactly five letters.'); return; }
+          if (!validWords.has(guess)) { setGameStatus('That is not in the word list. Try a real five-letter word.'); return; }
+          const cells = [...wordleGrid.children].slice(row * 5, (row + 1) * 5);
+          scoreGuess(guess).forEach((mark, index) => {
+            cells[index].textContent = guess[index].toUpperCase();
+            cells[index].classList.add(mark);
+          });
+          guesses.push(guess);
+          row++;
+          wordleInput.value = '';
+          if (guess === target) {
+            ended = true;
+            setGameStatus(`Solved in ${row} ${row === 1 ? 'guess' : 'guesses'}: ${target.toUpperCase()}.`);
+            wordleInput.disabled = true;
+            wordleSubmit.disabled = true;
+          } else if (row >= 6) {
+            ended = true;
+            setGameStatus(`Out of guesses. The section word was ${target.toUpperCase()}.`);
+            wordleInput.disabled = true;
+            wordleSubmit.disabled = true;
+          } else setGameStatus(`Attempt ${row + 1}/6. Guess a real five-letter word.`);
+        };
+        wordleSubmit.onclick = submit;
+        wordleInput.onkeydown = (event) => { if (event.key === 'Enter') submit(); };
+        wordleInput.disabled = false;
+        wordleSubmit.disabled = false;
+        window.render_game_to_text = () => JSON.stringify({ game: 'Five-ish', coordinateSystem: 'rows top-to-bottom, columns left-to-right', mode: ended ? 'ended' : 'playing', wordLength: 5, attempts: row, guesses });
+        window.advanceTime = () => {};
+        stopActiveGame = () => { wordleSubmit.onclick = null; wordleInput.onkeydown = null; delete window.render_game_to_text; delete window.advanceTime; };
+        setGameStatus('Guess the real five-letter word hidden in this section.');
+        wordleInput.focus();
       }
 
       function startStack() {
@@ -481,10 +576,10 @@ const seoSchema = {
         window.render_game_to_text = () => JSON.stringify({ game: 'Stack Architect', coordinateSystem: 'sequence left-to-right', mode: cursor === expected.length ? 'won' : 'playing', connected: expected.slice(0, cursor), next: expected[cursor] || null }); window.advanceTime = () => {}; stopActiveGame = () => { delete window.render_game_to_text; delete window.advanceTime; }; setGameStatus('Connect the stack: interface → API → data → deployment.');
       }
 
-      const launchGame = (id) => { if (!(gameConsole instanceof HTMLElement)) return; gameConsole.hidden = false; activeGameId = id; if (gameName) gameName.textContent = id === 'glyph-serpent' ? 'Glyph Serpent' : id === 'five-ish' ? 'Five-ish' : 'Stack Architect'; if (id === 'glyph-serpent') startSnake(); if (id === 'five-ish') startWordle(); if (id === 'stack-architect') startStack(); gameConsole.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+      const launchGame = (id) => { if (!(gameConsole instanceof HTMLElement)) return; gameConsole.hidden = false; activeGameId = id; if (gameName) gameName.textContent = id === 'glyph-serpent' ? 'Glyph Serpent' : id === 'five-ish' ? 'Five-ish' : 'Stack Architect'; if (id === 'glyph-serpent') startSnake(); if (id === 'five-ish') startWordle(); if (id === 'stack-architect') startStack(); gameConsole.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
       document.querySelectorAll('.game-launch').forEach((button) => button.addEventListener('click', () => launchGame(button.dataset.game || 'glyph-serpent')));
       closeGame?.addEventListener('click', () => { stopActiveGame(); if (gameConsole instanceof HTMLElement) gameConsole.hidden = true; });
-      window.addEventListener('keydown', (event) => { if (event.key === 'Escape' && gameConsole instanceof HTMLElement && !gameConsole.hidden) { stopActiveGame(); gameConsole.hidden = true; } if (event.key.toLowerCase() === 'r' && activeGameId) launchGame(activeGameId); if (event.key.toLowerCase() === 'f' && gameConsole instanceof HTMLElement && !gameConsole.hidden) { if (document.fullscreenElement) document.exitFullscreen(); else gameConsole.requestFullscreen?.(); } });
+      window.addEventListener('keydown', (event) => { const target = event.target; const isTyping = target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement || (target instanceof HTMLElement && target.isContentEditable); if (event.key === 'Escape' && gameConsole instanceof HTMLElement && !gameConsole.hidden) { stopActiveGame(); gameConsole.hidden = true; } if (!isTyping && event.key.toLowerCase() === 'r' && activeGameId) launchGame(activeGameId); if (!isTyping && event.key.toLowerCase() === 'f' && gameConsole instanceof HTMLElement && !gameConsole.hidden) { if (document.fullscreenElement) document.exitFullscreen(); else gameConsole.requestFullscreen?.(); } });
     </script>
   </body>
 </html>
@@ -679,15 +774,22 @@ const seoSchema = {
   .game-state { margin-top: auto; color: var(--acid); opacity: 1; }
   .game-launch { margin-top: auto; align-self: flex-start; padding: 11px 0; border: 0; border-bottom: 1px solid var(--acid); background: transparent; color: var(--acid); font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; transition: color .25s, border-color .25s, transform .25s; }
   .game-launch:hover { color: #fff; border-color: #fff; transform: translateX(7px); }
-  .game-console { margin-top: 2vw; padding: 18px; border: 1px solid color-mix(in srgb, var(--panel-ink) 36%, transparent); background: #0d0d0b; color: var(--panel-ink); }
+  .game-console { margin-top: 2vw; padding: 18px; scroll-margin-top: 118px; border: 1px solid color-mix(in srgb, var(--panel-ink) 36%, transparent); background: #0d0d0b; color: var(--panel-ink); }
   .game-console[hidden], .wordle-ui[hidden], .stack-ui[hidden] { display: none; }
   .console-topbar { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); }
   .console-kicker, .console-controls { font: 400 9px/1.4 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; opacity: .65; }
   .console-kicker b { color: var(--acid); font-weight: 500; }
   .console-close { border: 0; background: none; color: inherit; font-size: 26px; line-height: .7; }
   .console-status { min-height: 22px; margin: 16px 0 10px; color: var(--acid); font: 400 11px/1.4 'DM Mono', monospace; }
-  #game-canvas { display: block; width: 100%; max-height: 420px; border: 1px solid color-mix(in srgb, var(--panel-ink) 18%, transparent); background: #12120f; }
+  #game-canvas { display: block; width: 100%; aspect-ratio: 2 / 1; max-height: 420px; border: 1px solid color-mix(in srgb, var(--panel-ink) 18%, transparent); background: #12120f; touch-action: none; }
   .console-controls { padding-top: 12px; }
+  .touch-controls { width: min(230px, 100%); margin: 14px auto 2px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; touch-action: manipulation; }
+  .touch-controls[hidden] { display: none; }
+  .touch-controls button { min-height: 46px; border: 1px solid rgba(240,237,228,.35); background: rgba(240,237,228,.06); color: var(--panel-ink); font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; }
+  .touch-controls button[data-direction="up"], .touch-controls button[data-direction="down"] { grid-column: 2; }
+  .touch-controls button[data-direction="left"] { grid-column: 1; }
+  .touch-controls button[data-direction="right"] { grid-column: 3; }
+  .touch-controls button:active { background: var(--acid); color: #111; }
   .wordle-ui, .stack-ui { padding: 6px 0 8px; }
   .wordle-grid { display: grid; grid-template-columns: repeat(6, minmax(36px, 48px)); gap: 7px; margin-bottom: 14px; }
   .wordle-cell { aspect-ratio: 1; display: grid; place-items: center; border: 1px solid rgba(240,237,228,.32); color: var(--panel-ink); font: 500 16px/1 'DM Mono', monospace; text-transform: uppercase; }
@@ -865,6 +967,13 @@ const seoSchema = {
     .game-list { grid-template-columns: 1fr; }
     .game-card { border-right: 0; border-bottom: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); min-height: 220px; }
     .game-card h3 { margin-top: 34px; }
+    .game-console { margin-inline: -4px; padding: 12px; scroll-margin-top: 126px; }
+    .console-topbar { gap: 12px; }
+    .console-status { min-height: 38px; }
+    #game-canvas { height: auto; max-height: none; }
+    .wordle-grid { grid-template-columns: repeat(5, minmax(0, 1fr)) !important; gap: 6px; }
+    .wordle-cell { min-width: 0; font-size: 14px; }
+    .wordle-input { width: 100%; }
     .stack-nodes { grid-template-columns: 1fr 1fr; }
     .console-action { margin: 10px 0 0; }
     .stage-topbar span:first-child, .stage-caption p { display: none; }
