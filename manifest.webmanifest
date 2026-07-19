@@ -1,11 +1,11 @@
 {
-  "name": "TryRaisins | Seun Sowemimo Portfolio",
+  "name": "TryRaisins — Seun Sowemimo Portfolio",
   "short_name": "TryRaisins",
-  "description": "Portfolio of Seun Sowemimo — Fullstack Web Developer in Lagos, Nigeria",
+  "description": "Seun Sowemimo (TryRaisins), a fullstack developer building useful web products in Lagos, Nigeria.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#111828",
-  "theme_color": "#111828",
+  "background_color": "#11110f",
+  "theme_color": "#f0ede4",
   "icons": [
     { "src": "/favicon.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/logo512.png", "sizes": "512x512", "type": "image/png" }
