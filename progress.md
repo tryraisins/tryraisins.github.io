@@ -16,3 +16,11 @@ Progress:
 
 TODO:
 - Consider adding a dedicated project Playwright test setup if this portfolio starts carrying more canvas games.
+
+2026-07-19 update:
+- Promoted the concept page to the root homepage; `/concept/` now redirects to `/`.
+- Added functional Glyph Serpent, Five-ish, and Stack Architect games to the Play section.
+- Glyph Serpent uses section characters as food, keyboard movement, edge wrapping, self-collision, canvas rendering, and deterministic state hooks.
+- Five-ish derives a 5–8 letter target from Play copy and supports six guesses with exact/present/absent scoring.
+- Stack Architect requires UI → API → DATA → SHIP and exposes clickable dependency nodes.
+- Browser smoke-tested all three games; build passes.
