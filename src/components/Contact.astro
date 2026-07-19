@@ -1,63 +1,64 @@
 ---
 ---
 
-<section id="contact" class="py-20 px-4 bg-gray-900 text-gray-100 relative">
+<section id="contact" class="py-20 px-4 relative" style="background: #17130f; color: #f0e2c9;">
   <!-- Background glows -->
   <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style="background: rgba(194, 89, 58, 0.1);"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style="background: rgba(217, 165, 92, 0.08);"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full blur-3xl" style="background: rgba(184, 149, 106, 0.05);"></div>
   </div>
 
   <div class="container mx-auto max-w-2xl relative animate-on-scroll">
     <div class="text-center mb-12">
-      <h2 class="text-3xl md:text-4xl font-bold text-white">
+      <h2 class="text-3xl md:text-4xl font-bold" style="color: #f5ead5;">
         Get In Touch
-        <span class="block w-16 h-1 bg-purple-500 mx-auto mt-3 rounded-full"></span>
+        <span class="block w-16 h-1 mx-auto mt-3 rounded-full" style="background: #c2593a;"></span>
       </h2>
-      <p class="mt-4 text-lg text-gray-300">
+      <p class="mt-4 text-lg" style="color: #d9cbb0;">
         Have a question or want to work together? Feel free to reach out!
       </p>
     </div>
 
     <form
       id="contact-form"
-      class="bg-gray-800 p-8 rounded-lg shadow-xl border border-gray-700"
+      class="p-8 rounded-lg shadow-xl border"
+      style="background: #1f1912; border-color: #3a2f24;"
       novalidate
     >
       <div class="mb-6">
-        <label for="name" class="block text-gray-300 text-sm font-bold mb-2">Name</label>
+        <label for="name" class="block text-sm font-bold mb-2" style="color: #d9cbb0;">Name</label>
         <input
           type="text"
           id="name"
           name="name"
           placeholder="Your Name"
           required
-          class="w-full border border-gray-600 rounded-lg py-3 px-4 text-gray-100 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200 placeholder-gray-500"
+          class="contact-input w-full border rounded-lg py-3 px-4 focus:outline-none focus:ring-2 transition-colors duration-200"
         />
       </div>
 
       <div class="mb-6">
-        <label for="email" class="block text-gray-300 text-sm font-bold mb-2">Email</label>
+        <label for="email" class="block text-sm font-bold mb-2" style="color: #d9cbb0;">Email</label>
         <input
           type="email"
           id="email"
           name="email"
           placeholder="your.email@example.com"
           required
-          class="w-full border border-gray-600 rounded-lg py-3 px-4 text-gray-100 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200 placeholder-gray-500"
+          class="contact-input w-full border rounded-lg py-3 px-4 focus:outline-none focus:ring-2 transition-colors duration-200"
         />
       </div>
 
       <div class="mb-8">
-        <label for="message" class="block text-gray-300 text-sm font-bold mb-2">Message</label>
+        <label for="message" class="block text-sm font-bold mb-2" style="color: #d9cbb0;">Message</label>
         <textarea
           id="message"
           name="message"
           rows="6"
           placeholder="Your message here..."
           required
-          class="w-full border border-gray-600 rounded-lg py-3 px-4 text-gray-100 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200 resize-y placeholder-gray-500"
+          class="contact-input w-full border rounded-lg py-3 px-4 focus:outline-none focus:ring-2 transition-colors duration-200 resize-y"
         ></textarea>
       </div>
 
@@ -65,7 +66,10 @@
         <button
           id="submit-btn"
           type="submit"
-          class="bg-purple-600 hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold py-3 px-6 rounded-full hover:scale-105 transition-all duration-300"
+          class="disabled:opacity-50 disabled:cursor-not-allowed font-bold py-3 px-6 rounded-full hover:scale-105 transition-all duration-300"
+          style="background: #c2593a; color: #f5ead5;"
+          onmouseover="if(!this.disabled) this.style.background='#a8482d';"
+          onmouseout="this.style.background='#c2593a';"
         >
           Send Message
         </button>
@@ -74,6 +78,19 @@
     </form>
   </div>
 </section>
+
+<style>
+  #contact .contact-input {
+    background: #2d251c;
+    border-color: #3a2f24;
+    color: #f0e2c9;
+  }
+  #contact .contact-input::placeholder { color: #6d5f4d; }
+  #contact .contact-input:focus {
+    --tw-ring-color: #c2593a;
+    border-color: #c2593a;
+  }
+</style>
 
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement;

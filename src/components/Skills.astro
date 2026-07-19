@@ -3,36 +3,36 @@ const skills = [
   {
     title: 'Frontend Development',
     description: 'React, TypeScript, JavaScript, jQuery, HTML5, CSS3, TailwindCSS, Bootstrap 5, Astro JS, Vue JS, responsive web design',
-    gradient: 'from-blue-500 to-purple-600',
-    shadow: 'hover:shadow-blue-500/20',
+    gradient: 'from-amber-500 to-orange-600',
+    shadow: 'hover:shadow-amber-500/20',
     icon: `<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>`,
   },
   {
     title: 'Backend Integration',
     description: 'Node.js, Python, REST APIs, Azure Functions, MongoDB, API integration',
-    gradient: 'from-green-500 to-emerald-600',
-    shadow: 'hover:shadow-green-500/20',
+    gradient: 'from-orange-500 to-red-600',
+    shadow: 'hover:shadow-orange-500/20',
     icon: `<rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>`,
   },
   {
     title: 'Cloud & Deployment',
     description: 'Vercel, MongoDB, Cloudflare, Netlify, CI/CD pipelines, cloud functions',
-    gradient: 'from-cyan-500 to-blue-600',
-    shadow: 'hover:shadow-cyan-500/20',
+    gradient: 'from-yellow-600 to-amber-700',
+    shadow: 'hover:shadow-amber-600/20',
     icon: `<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>`,
   },
   {
     title: 'Enterprise Solutions',
     description: 'Power Apps, Power Automate, SharePoint, workflow automation',
-    gradient: 'from-orange-500 to-red-600',
-    shadow: 'hover:shadow-orange-500/20',
+    gradient: 'from-red-500 to-rose-700',
+    shadow: 'hover:shadow-red-500/20',
     icon: `<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>`,
   },
   {
     title: 'Version Control',
     description: 'Git, GitHub, collaborative development, code reviews',
-    gradient: 'from-purple-500 to-pink-600',
-    shadow: 'hover:shadow-purple-500/20',
+    gradient: 'from-orange-400 to-red-500',
+    shadow: 'hover:shadow-orange-400/20',
     icon: `<line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/>`,
   },
   {
@@ -45,42 +45,42 @@ const skills = [
   {
     title: 'UI/UX Implementation',
     description: 'Translating designs to code, user-centered interfaces, accessibility',
-    gradient: 'from-pink-500 to-rose-600',
-    shadow: 'hover:shadow-pink-500/20',
+    gradient: 'from-rose-500 to-red-600',
+    shadow: 'hover:shadow-rose-500/20',
     icon: `<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>`,
   },
   {
     title: 'Data Management',
     description: 'MongoDB databases, SharePoint lists, large data processing',
-    gradient: 'from-indigo-500 to-purple-600',
-    shadow: 'hover:shadow-indigo-500/20',
+    gradient: 'from-amber-600 to-orange-700',
+    shadow: 'hover:shadow-amber-600/20',
     icon: `<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>`,
   },
   {
     title: 'Problem Solving',
     description: 'Analytical thinking, solution architecture, technical troubleshooting',
-    gradient: 'from-emerald-500 to-teal-600',
-    shadow: 'hover:shadow-emerald-500/20',
+    gradient: 'from-yellow-600 to-amber-800',
+    shadow: 'hover:shadow-amber-700/20',
     icon: `<rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/>`,
   },
 ];
 ---
 
-<section id="skills" class="relative py-20 px-4 bg-gray-900 text-gray-100 overflow-hidden">
+<section id="skills" class="relative py-20 px-4 overflow-hidden" style="background: #17130f; color: #f0e2c9;">
   <!-- Background glows -->
   <div class="absolute inset-0 pointer-events-none">
-    <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-20 left-10 w-72 h-72 rounded-full blur-3xl" style="background: rgba(194, 89, 58, 0.1);"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 rounded-full blur-3xl" style="background: rgba(217, 165, 92, 0.08);"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full blur-3xl" style="background: rgba(184, 149, 106, 0.05);"></div>
   </div>
 
   <div class="container mx-auto relative z-10">
     <div class="text-center mb-16 animate-on-scroll">
-      <h2 class="text-3xl md:text-4xl font-bold text-white">
+      <h2 class="text-3xl md:text-4xl font-bold" style="color: #f5ead5;">
         My Skills
-        <span class="block w-16 h-1 bg-purple-500 mx-auto mt-3 rounded-full"></span>
+        <span class="block w-16 h-1 mx-auto mt-3 rounded-full" style="background: #c2593a;"></span>
       </h2>
-      <p class="mt-4 text-gray-400 text-lg max-w-2xl mx-auto">
+      <p class="mt-4 text-lg max-w-2xl mx-auto" style="color: #a89b82;">
         A comprehensive toolkit of technologies and expertise I bring to every project
       </p>
     </div>
@@ -88,15 +88,16 @@ const skills = [
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {skills.map((skill, i) => (
         <div
-          class={`animate-on-scroll delay-${Math.min(i + 1, 6)} group relative p-6 bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-gray-600/50 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${skill.shadow}`}
+          class={`animate-on-scroll delay-${Math.min(i + 1, 6)} group relative p-6 backdrop-blur-sm rounded-2xl border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${skill.shadow}`}
+          style="background: rgba(31, 25, 18, 0.5); border-color: rgba(74, 60, 46, 0.6);"
         >
           <!-- Card glow on hover -->
           <div class={`absolute inset-0 bg-gradient-to-r ${skill.gradient} opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-500`}></div>
 
           <!-- Icon -->
           <div class={`relative w-16 h-16 mb-6 rounded-xl bg-gradient-to-r ${skill.gradient} p-0.5 group-hover:scale-110 transition-transform duration-300`}>
-            <div class="w-full h-full bg-gray-800 rounded-xl flex items-center justify-center">
-              <svg class="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <div class="w-full h-full rounded-xl flex items-center justify-center" style="background: #1f1912;">
+              <svg class="w-8 h-8" style="color: #f5ead5;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <Fragment set:html={skill.icon} />
               </svg>
             </div>
@@ -104,8 +105,8 @@ const skills = [
 
           <!-- Content -->
           <div class="relative z-10">
-            <h3 class="text-xl font-bold mb-3 text-white">{skill.title}</h3>
-            <p class="text-gray-400 leading-relaxed text-sm group-hover:text-gray-300 transition-colors duration-300">
+            <h3 class="text-xl font-bold mb-3" style="color: #f5ead5;">{skill.title}</h3>
+            <p class="leading-relaxed text-sm transition-colors duration-300" style="color: #a89b82;">
               {skill.description}
             </p>
           </div>
@@ -116,14 +117,5 @@ const skills = [
       ))}
     </div>
 
-    <!-- Bottom badge -->
-    <div class="mt-20 text-center animate-on-scroll">
-      <div class="inline-flex items-center gap-2 px-6 py-3 bg-gray-800/30 backdrop-blur-sm rounded-full border border-gray-700/50">
-        <svg class="w-5 h-5 text-yellow-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-        </svg>
-        <span class="text-gray-300 font-medium">Always learning and evolving</span>
-      </div>
-    </div>
   </div>
 </section>

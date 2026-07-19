@@ -53,15 +53,15 @@ const projects = [
 const total = String(projects.length).padStart(2, '0');
 ---
 
-<section id="projects" class="py-20 px-4 md:px-10 bg-gray-800 text-gray-100">
+<section id="projects" class="py-20 px-4 md:px-10" style="background: #1f1912; color: #f0e2c9;">
   <div class="max-w-6xl mx-auto">
     <!-- Section header -->
     <div class="flex items-baseline justify-between gap-6 mb-14 md:mb-20 animate-on-scroll">
-      <h2 class="text-3xl md:text-4xl font-bold text-white">
+      <h2 class="text-3xl md:text-4xl font-bold" style="color: #f5ead5;">
         My Projects
-        <span class="block w-16 h-1 bg-purple-500 mt-3 rounded-full"></span>
+        <span class="block w-16 h-1 mt-3 rounded-full" style="background: #c2593a;"></span>
       </h2>
-      <span class="font-mono text-xs tracking-widest uppercase text-gray-500">
+      <span class="font-mono text-xs tracking-widest uppercase" style="color: #857762;">
         {projects.length} projects · 2024–2026
       </span>
     </div>
@@ -71,7 +71,7 @@ const total = String(projects.length).padStart(2, '0');
       {projects.map((project, i) => {
         const num = String(i + 1).padStart(2, '0');
         return (
-          <article class="animate-on-scroll group relative border-t border-gray-700 py-10 md:py-14">
+          <article class="animate-on-scroll group relative border-t py-10 md:py-14" style="border-color: #3a2f24;">
             <a
               href={project.url}
               target="_blank"
@@ -79,46 +79,39 @@ const total = String(projects.length).padStart(2, '0');
               class="block"
               aria-label={`Open ${project.title} — ${project.domain}`}
             >
-              <!-- Purple hover wash -->
+              <!-- Terracotta hover wash -->
               <span
                 aria-hidden="true"
-                class="absolute inset-0 bg-purple-500/5 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-in-out pointer-events-none rounded"
+                class="absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-in-out pointer-events-none rounded"
+                style="background: rgba(194, 89, 58, 0.06);"
               />
 
               <div class="relative grid grid-cols-12 gap-4 md:gap-8 items-start">
                 <!-- Index -->
                 <div class="col-span-2 md:col-span-1">
-                  <span class="font-mono text-xs md:text-sm tracking-widest text-gray-500 group-hover:text-purple-400 transition-colors">
-                    {num}<span class="text-gray-700"> / {total}</span>
+                  <span class="font-mono text-xs md:text-sm tracking-widest project-index transition-colors">
+                    {num}<span class="project-index-total"> / {total}</span>
                   </span>
                 </div>
 
                 <!-- Title + tagline + tags -->
                 <div class="col-span-10 md:col-span-8">
-                  <h3 class="font-bold text-4xl md:text-6xl lg:text-7xl leading-none tracking-tight text-gray-100 group-hover:text-purple-400 transition-colors duration-500">
+                  <h3 class="font-bold text-4xl md:text-6xl lg:text-7xl leading-none tracking-tight project-title transition-colors duration-500">
                     {project.title}
                   </h3>
 
-                  <p class="mt-5 md:mt-6 text-base md:text-lg leading-relaxed text-gray-400 group-hover:text-gray-200 transition-colors duration-500 max-w-2xl">
+                  <p class="mt-5 md:mt-6 text-base md:text-lg leading-relaxed project-tagline transition-colors duration-500 max-w-2xl">
                     {project.tagline}
                   </p>
-
-                  <div class="mt-5 flex flex-wrap gap-2">
-                    {project.categories.map(cat => (
-                      <span class="font-mono text-[10px] tracking-widest uppercase text-gray-500 border border-gray-600 group-hover:border-purple-500/60 group-hover:text-purple-400 rounded-full px-3 py-1 transition-colors duration-300">
-                        {cat}
-                      </span>
-                    ))}
-                  </div>
                 </div>
 
                 <!-- Year + domain -->
                 <div class="col-span-12 md:col-span-3 md:text-right">
-                  <span class="font-mono text-xs md:text-sm tracking-widest text-gray-500 group-hover:text-purple-400 transition-colors">
+                  <span class="font-mono text-xs md:text-sm tracking-widest project-year transition-colors">
                     {project.year}
                   </span>
                   <div class="hidden md:block mt-4 overflow-hidden h-4">
-                    <span class="font-mono text-[11px] tracking-widest lowercase text-gray-500 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 block">
+                    <span class="font-mono text-[11px] tracking-widest lowercase project-domain translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 block">
                       {project.domain}
                     </span>
                   </div>
@@ -128,7 +121,21 @@ const total = String(projects.length).padStart(2, '0');
           </article>
         );
       })}
-      <div class="border-t border-gray-700"></div>
+      <div class="border-t" style="border-color: #3a2f24;"></div>
     </div>
   </div>
 </section>
+
+<style>
+  #projects .project-index { color: #857762; }
+  #projects .project-index-total { color: #4a3c2e; }
+  #projects .project-title { color: #f0e2c9; }
+  #projects .project-tagline { color: #a89b82; }
+  #projects .project-year { color: #857762; }
+  #projects .project-domain { color: #857762; }
+
+  #projects .group:hover .project-index { color: #d97742; }
+  #projects .group:hover .project-title { color: #d97742; }
+  #projects .group:hover .project-tagline { color: #e8dcc4; }
+  #projects .group:hover .project-year { color: #d97742; }
+</style>

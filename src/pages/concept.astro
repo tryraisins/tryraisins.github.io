@@ -1,0 +1,720 @@
+---
+import '../styles/global.css';
+
+const projects = [
+  { number: '01', name: 'QuickBillz', type: 'Product / Invoicing', year: '2026', accent: '#ff5c35' },
+  { number: '02', name: 'Terror Tracker', type: 'Live intelligence map', year: '2026', accent: '#b8ff32' },
+  { number: '03', name: 'Talent Hunter', type: 'Applied NLP', year: '2026', accent: '#74a7ff' },
+  { number: '04', name: 'Echo List', type: 'Music utility', year: '2025', accent: '#ffcf40' },
+  { number: '05', name: 'BetPicks', type: 'Sports picks product', year: '2026', accent: '#ff78bd', href: 'https://betpicks.tryraisins.dev/' },
+];
+
+const games = [
+  { key: '01', name: 'Glyph Serpent', note: 'A section-sized snake consumes every visible character. Each glyph becomes a body segment; the copy restores when the run ends.' },
+  { key: '02', name: 'Five-ish', note: 'A Wordle-style deduction game generated only from words longer than four letters in the active section.' },
+  { key: '03', name: 'Stack Architect', note: 'Build a valid product architecture by connecting drifting frontend, data, API, and deployment nodes under real constraints.' },
+];
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#f0ede4" />
+    <title>TryRaisins — Design Concept</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+    <script is:inline>if (location.hash.includes('figmacapture=')) document.documentElement.classList.add('figma-capture');</script>
+    <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
+  </head>
+  <body>
+    <div class="grain" aria-hidden="true"></div>
+    <canvas class="systems-map" aria-hidden="true"></canvas>
+    <div class="cursor-orbit" aria-hidden="true"></div>
+
+    <nav class="nav-shell" aria-label="Concept navigation">
+      <a class="brand" href="#top" aria-label="TryRaisins home">
+        <span class="brand-dot"></span>
+        TRYRAISINS
+      </a>
+      <div class="nav-links">
+        <a href="#work">Work</a>
+        <a href="#play">Play</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="theme-toggle" type="button" aria-label="Toggle color theme">
+        <span class="theme-icon">◐</span>
+        <span class="theme-label">Invert</span>
+      </button>
+    </nav>
+
+    <main id="top">
+      <section class="hero section-scene" data-section="hero" data-scheme="paper">
+        <svg class="hero-line" viewBox="0 0 1200 720" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-80 490 C120 200 230 705 410 390 S700 90 725 410 S995 720 1280 220" />
+          <path class="line-echo" d="M-30 560 C200 370 320 700 510 450 S810 205 840 490 S1080 640 1240 350" />
+        </svg>
+
+        <div class="hero-kicker">
+          <span>Fullstack developer</span>
+          <span>Lagos, NG</span>
+          <span>Available for ambitious work</span>
+        </div>
+
+        <div class="hero-title" aria-label="Building things that work">
+          <div class="title-row"><span>BUILDING</span><i>01</i></div>
+          <div class="title-row title-shift"><span>THINGS</span><i>02</i></div>
+          <div class="title-row title-outline"><span>THAT WORK.</span><i>03</i></div>
+        </div>
+
+        <div class="hero-foot">
+          <p>I turn difficult ideas into fast, useful digital products—then hide a little mischief in the details.</p>
+          <a class="round-link" href="#work" aria-label="See selected work"><span>↓</span></a>
+        </div>
+      </section>
+
+      <section class="capabilities section-scene" data-section="capabilities" data-scheme="signal" aria-labelledby="capabilities-title">
+        <div class="cap-intro reveal">
+          <p class="eyebrow">Capabilities / no empty scrolling</p>
+          <h2 id="capabilities-title">ONE BUILDER.<br /><em>FOUR SYSTEMS.</em></h2>
+          <p>A compact map of how ideas move from interface to production. Hover a lane to trace the signal.</p>
+        </div>
+        <div class="cap-grid">
+          <article class="cap-card reveal" style="--delay:0ms"><span>01 / Interface</span><h3>Make it felt.</h3><p>React · TypeScript · Motion · Accessibility</p><i>UI</i></article>
+          <article class="cap-card reveal" style="--delay:80ms"><span>02 / Systems</span><h3>Make it hold.</h3><p>Node · APIs · Data · Architecture</p><i>API</i></article>
+          <article class="cap-card reveal" style="--delay:160ms"><span>03 / Intelligence</span><h3>Make it think.</h3><p>Python · NLP · Automation · Search</p><i>AI</i></article>
+          <article class="cap-card reveal" style="--delay:240ms"><span>04 / Delivery</span><h3>Make it real.</h3><p>Cloud · CI/CD · Observability · Scale</p><i>SHIP</i></article>
+        </div>
+      </section>
+
+      <section id="work" class="work section-scene" data-section="work" data-scheme="warm">
+        <header class="section-head reveal">
+          <p class="eyebrow">Selected output / 2024—2026</p>
+          <h2>WORK THAT<br /><em>EARNS</em> ATTENTION.</h2>
+          <p class="head-note">The projects stay central. Motion supports the story; it never buries the proof.</p>
+        </header>
+
+        <div class="project-list">
+          {projects.map((project) => (
+            <a class="project reveal" href={project.href ?? '#'} target={project.href ? '_blank' : undefined} rel={project.href ? 'noopener noreferrer' : undefined} style={`--project-accent:${project.accent}`}>
+              <span class="project-number">{project.number}</span>
+              <span class="project-name">{project.name}</span>
+              <span class="project-meta">{project.type}</span>
+              <span class="project-year">{project.year}</span>
+              <span class="project-arrow">↗</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section id="play" class="play section-scene" data-section="play" data-scheme="ink">
+        <div class="play-intro reveal">
+          <p class="eyebrow">The page plays back</p>
+          <h2>NOT AN ARCADE.<br />A LIVING <em>PORTFOLIO.</em></h2>
+          <p>Games emerge from the section you are reading. The words, skills, and projects are the pieces—not decoration pasted over the work.</p>
+        </div>
+
+        <div class="game-stage reveal">
+          <div class="stage-topbar">
+            <span>Hidden systems / preview</span>
+            <span class="stage-status"><i></i> section content detected</span>
+          </div>
+          <div class="snake-demo" aria-hidden="true">
+            <div class="demo-copy">BUILD <span>DIGITAL</span> PRODUCTS WITH PURPOSE</div>
+            <div class="snake">
+              <i>T</i><i>R</i><i>Y</i><i>R</i><i>•</i><i>•</i><i class="snake-head">›</i>
+            </div>
+            <div class="food">A</div>
+          </div>
+          <div class="stage-caption">
+            <span>GLYPH SERPENT</span>
+            <p>The snake literally grows from the portfolio’s type.</p>
+          </div>
+        </div>
+
+        <div class="game-list">
+          {games.map((game) => (
+            <article class="game-card reveal">
+              <span class="game-key">{game.key}</span>
+              <h3>{game.name}</h3>
+              <p>{game.note}</p>
+              <span class="game-state">Proposed</span>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section id="about" class="about section-scene" data-section="about" data-scheme="orange">
+        <svg class="about-scribble" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M-40 180 C90 20 170 390 305 205 C430 35 450 440 590 220 C720 20 775 430 1040 120" />
+        </svg>
+        <p class="about-index">05 / About the builder</p>
+        <p class="about-copy reveal">I’m TryRaisins, a fullstack developer who likes useful systems, strong opinions, and interfaces with a pulse.</p>
+      </section>
+
+      <section id="contact" class="contact section-scene" data-section="contact" data-scheme="contact" aria-labelledby="contact-title">
+        <div class="contact-topline">
+          <p>06 / Start a conversation</p>
+          <p>Lagos, Nigeria · Available worldwide</p>
+        </div>
+        <div class="contact-center reveal">
+          <p class="contact-kicker">Have a difficult idea?</p>
+          <h2 id="contact-title">LET’S BUILD<br /><em>SOMETHING</em><br />THAT WORKS.</h2>
+          <a class="contact-email" href="mailto:tryraisins@gmail.com">tryraisins@gmail.com <span>↗</span></a>
+        </div>
+        <div class="contact-footer">
+          <p>Find TryRaisins elsewhere</p>
+          <div class="contact-socials">
+            <a href="https://github.com/tryraisins" target="_blank" rel="noopener noreferrer"><span>GitHub</span><i>Code / experiments</i><b>↗</b></a>
+            <a href="https://medium.com/@TryRaisins" target="_blank" rel="noopener noreferrer"><span>Medium</span><i>Ideas / writing</i><b>↗</b></a>
+          </div>
+          <p>© {new Date().getFullYear()} TryRaisins</p>
+        </div>
+        <div class="contact-orbit" aria-hidden="true"><span>OPEN TO GOOD PROBLEMS · OPEN TO GOOD PEOPLE · </span></div>
+      </section>
+    </main>
+
+    <button class="game-trigger" type="button" aria-label="Preview hidden game system">
+      <span class="trigger-pulse"></span>
+      Play this section
+      <b>⌁</b>
+    </button>
+
+    <div class="concept-note" role="dialog" aria-modal="true" aria-labelledby="concept-title" hidden>
+      <button class="concept-close" type="button" aria-label="Close">×</button>
+      <span class="concept-tag">Prototype interaction</span>
+      <h2 id="concept-title">The game launcher follows context.</h2>
+      <p>In the final build, this opens a challenge generated from the section currently in view. It stays optional, compact, and out of the way of hiring managers who only want the work.</p>
+      <button class="concept-ok" type="button">Got it</button>
+    </div>
+
+    <script>
+      const root = document.documentElement;
+      const toggle = document.querySelector('.theme-toggle');
+      const orbit = document.querySelector('.cursor-orbit');
+      const launcher = document.querySelector('.game-trigger');
+      const dialog = document.querySelector('.concept-note');
+      const closeButtons = dialog?.querySelectorAll('.concept-close, .concept-ok');
+
+      toggle?.addEventListener('click', () => {
+        root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      });
+
+      if (orbit instanceof HTMLElement && matchMedia('(pointer:fine)').matches) {
+        let targetX = innerWidth / 2;
+        let targetY = innerHeight / 2;
+        let x = targetX;
+        let y = targetY;
+        addEventListener('pointermove', (event) => {
+          targetX = event.clientX;
+          targetY = event.clientY;
+        }, { passive: true });
+        const follow = () => {
+          x += (targetX - x) * .14;
+          y += (targetY - y) * .14;
+          orbit.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+          requestAnimationFrame(follow);
+        };
+        follow();
+      }
+
+      const mapCanvas = document.querySelector('.systems-map');
+      const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (mapCanvas instanceof HTMLCanvasElement) {
+        const context = mapCanvas.getContext('2d');
+        const labels = ['UI', 'API', 'DATA', 'SHIP', 'BUILD', 'PLAY', 'IDEA', 'USE'];
+        let width = innerWidth;
+        let height = innerHeight;
+        let pointerX = width * .72;
+        let pointerY = height * .35;
+        let nodes = [];
+
+        const resizeMap = () => {
+          width = innerWidth;
+          height = innerHeight;
+          const ratio = Math.min(devicePixelRatio || 1, 1.6);
+          mapCanvas.width = width * ratio;
+          mapCanvas.height = height * ratio;
+          mapCanvas.style.width = `${width}px`;
+          mapCanvas.style.height = `${height}px`;
+          context?.setTransform(ratio, 0, 0, ratio, 0, 0);
+          nodes = labels.map((label, index) => ({
+            label,
+            x: (width / labels.length) * (index + .55),
+            y: height * (.2 + ((index * 37) % 58) / 100),
+            vx: ((index % 3) - 1) * .055,
+            vy: ((index % 2) ? 1 : -1) * .045,
+          }));
+        };
+
+        const drawMap = () => {
+          if (!context) return;
+          context.clearRect(0, 0, width, height);
+          const ink = getComputedStyle(document.body).color;
+          context.strokeStyle = ink;
+          context.fillStyle = ink;
+          context.globalAlpha = .16;
+          context.lineWidth = 1;
+          context.setLineDash([3, 8]);
+          nodes.forEach((node, index) => {
+            const next = nodes[(index + 1) % nodes.length];
+            const pullX = (pointerX - node.x) * .00008;
+            const pullY = (pointerY - node.y) * .00008;
+            if (!reduceMotion) {
+              node.x += node.vx + pullX;
+              node.y += node.vy + pullY;
+              if (node.x < 20 || node.x > width - 20) node.vx *= -1;
+              if (node.y < 90 || node.y > height - 40) node.vy *= -1;
+            }
+            context.beginPath();
+            context.moveTo(node.x, node.y);
+            context.quadraticCurveTo((node.x + next.x) / 2, pointerY * .18 + height * .28, next.x, next.y);
+            context.stroke();
+            context.setLineDash([]);
+            context.beginPath();
+            context.arc(node.x, node.y, index % 2 ? 4 : 7, 0, Math.PI * 2);
+            context.stroke();
+            context.font = '9px DM Mono';
+            context.fillText(node.label, node.x + 11, node.y + 3);
+            context.setLineDash([3, 8]);
+          });
+          context.globalAlpha = 1;
+          requestAnimationFrame(drawMap);
+        };
+        addEventListener('pointermove', (event) => { pointerX = event.clientX; pointerY = event.clientY; }, { passive: true });
+        addEventListener('resize', resizeMap, { passive: true });
+        resizeMap();
+        drawMap();
+      }
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .12 });
+      document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+      let activeSection = '';
+      const scenes = [...document.querySelectorAll('.section-scene')];
+      const switchScene = (section) => {
+        const name = section.dataset.section || 'hero';
+        if (name === activeSection) return;
+        activeSection = name;
+        root.dataset.scene = section.dataset.scheme || 'paper';
+        const activeIndex = scenes.indexOf(section);
+        scenes.forEach((item, index) => {
+          item.classList.toggle('scene-active', item === section);
+          item.classList.toggle('scene-before', index < activeIndex);
+          item.classList.toggle('scene-after', index > activeIndex);
+        });
+        launcher?.setAttribute('data-current', name);
+      };
+
+      const visibleSections = new Map();
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => visibleSections.set(entry.target, entry.intersectionRatio));
+        const current = [...visibleSections.entries()].sort((a, b) => b[1] - a[1])[0];
+        if (current?.[0] instanceof HTMLElement && current[1] > 0) switchScene(current[0]);
+      }, { threshold: [0, .15, .35, .55, .75] });
+      scenes.forEach((el) => sectionObserver.observe(el));
+      const firstScene = document.querySelector('.section-scene');
+      if (firstScene instanceof HTMLElement) switchScene(firstScene);
+
+      launcher?.addEventListener('click', () => {
+        if (dialog instanceof HTMLElement) dialog.hidden = false;
+      });
+      closeButtons?.forEach((button) => button.addEventListener('click', () => {
+        if (dialog instanceof HTMLElement) dialog.hidden = true;
+      }));
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --paper: #f0ede4;
+    --ink: #11110f;
+    --soft-ink: #5d5a52;
+    --rule: rgba(17, 17, 15, .22);
+    --acid: #b8ff32;
+    --orange: #ff5c35;
+    --panel: #151513;
+    --panel-ink: #f4f0e7;
+  }
+
+  [data-theme='dark'] {
+    --paper: #11110f;
+    --ink: #f0ede4;
+    --soft-ink: #aaa69c;
+    --rule: rgba(240, 237, 228, .2);
+    --panel: #f0ede4;
+    --panel-ink: #11110f;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(--paper); }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Manrope', sans-serif;
+    overflow-x: hidden;
+    transition: background .45s ease, color .45s ease;
+  }
+  main { position: relative; z-index: 1; }
+  a, button { cursor: pointer; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: .045;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+  }
+
+  .systems-map {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: .82;
+    transition: opacity .5s ease, filter .5s ease;
+  }
+  [data-scene='ink'] .systems-map { opacity: .28; filter: invert(1); }
+  [data-scene='orange'] .systems-map { opacity: .55; }
+
+  .section-scene {
+    position: relative;
+    isolation: isolate;
+    opacity: 1;
+  }
+
+  .cursor-orbit {
+    position: fixed;
+    width: 38px;
+    height: 38px;
+    margin: -19px 0 0 -19px;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    z-index: 99;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    opacity: .5;
+  }
+
+  .nav-shell {
+    position: fixed;
+    z-index: 90;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(820px, calc(100% - 28px));
+    height: 52px;
+    padding: 6px 8px 6px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--paper) 78%, transparent);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 12px 45px rgba(0,0,0,.1);
+    font: 500 11px/1 'DM Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .brand { display: flex; align-items: center; gap: 8px; }
+  .brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 4px color-mix(in srgb, var(--orange) 18%, transparent); }
+  .nav-links { display: flex; gap: clamp(16px, 4vw, 42px); }
+  .nav-links a { position: relative; }
+  .nav-links a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: -5px; height: 1px; background: var(--ink); transition: right .25s ease; }
+  .nav-links a:hover::after { right: 0; }
+  .theme-toggle { border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); padding: 10px 14px; display: flex; align-items: center; gap: 7px; text-transform: uppercase; font-size: 10px; letter-spacing: .06em; }
+
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    padding: 100px 4vw 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  .hero-kicker, .hero-foot { position: relative; z-index: 2; }
+  .hero-kicker { display: flex; justify-content: space-between; gap: 20px; font: 400 10px/1 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .hero-title { position: relative; z-index: 2; padding: 5vh 0 3vh; }
+  .title-row { display: flex; align-items: flex-start; gap: 14px; font: 400 clamp(4.4rem, 12.8vw, 12rem)/.77 'Archivo Black', sans-serif; letter-spacing: -.08em; white-space: nowrap; }
+  .title-row i { font: 400 9px/1 'DM Mono', monospace; letter-spacing: 0; color: var(--orange); }
+  .title-shift { padding-left: 13vw; }
+  .title-outline span { color: transparent; -webkit-text-stroke: clamp(1px, .12vw, 2px) var(--ink); }
+  .hero-line { position: absolute; z-index: 1; inset: 8% -4% 0; width: 108%; height: 88%; fill: none; stroke: var(--orange); stroke-width: 6; stroke-linecap: round; filter: drop-shadow(0 9px 0 var(--acid)); }
+  .hero-line path { stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: drawLine 2.4s cubic-bezier(.22,1,.36,1) .35s forwards; }
+  .hero-line .line-echo { stroke: var(--ink); stroke-width: 1.5; filter: none; animation-delay: .65s; }
+  .hero-foot { display: flex; align-items: end; justify-content: space-between; }
+  .hero-foot p { max-width: 490px; margin: 0; font-size: clamp(1rem, 1.6vw, 1.35rem); line-height: 1.35; }
+  .round-link { width: 58px; height: 58px; border: 1px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-size: 24px; transition: color .25s, background .25s, transform .25s; }
+  .round-link:hover { color: var(--paper); background: var(--ink); transform: rotate(-35deg); }
+
+  .capabilities {
+    padding: 7vw 4vw 8vw;
+    background: var(--acid);
+    color: #111;
+  }
+  .cap-intro { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 30px; align-items: start; margin-bottom: 5vw; }
+  .cap-intro h2 { margin: 0; font: 400 clamp(3rem, 7.3vw, 7.4rem)/.87 'Archivo Black', sans-serif; letter-spacing: -.07em; }
+  .cap-intro h2 em { color: transparent; -webkit-text-stroke: 1.5px #111; font-style: normal; }
+  .cap-intro > p:last-child { margin: 0; font-size: 14px; line-height: 1.55; }
+  .cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid rgba(17,17,15,.35); }
+  .cap-card { position: relative; min-height: 245px; padding: 22px; overflow: hidden; border-right: 1px solid rgba(17,17,15,.35); transition-delay: var(--delay); }
+  .cap-card:last-child { border-right: 0; }
+  .cap-card::before { content: ''; position: absolute; inset: auto 0 0; height: 7px; background: #111; transform: scaleX(.08); transform-origin: left; transition: transform .55s cubic-bezier(.22,1,.36,1); }
+  .cap-card:hover::before { transform: scaleX(1); }
+  .cap-card span { font: 500 9px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
+  .cap-card h3 { margin: 54px 0 16px; font: 400 clamp(1.65rem, 2.7vw, 3rem)/.92 'Archivo Black', sans-serif; letter-spacing: -.055em; }
+  .cap-card p { margin: 0; max-width: 220px; font: 400 10px/1.6 'DM Mono', monospace; text-transform: uppercase; }
+  .cap-card i { position: absolute; right: 14px; bottom: 10px; color: rgba(17,17,15,.1); font: 400 clamp(3.7rem, 6vw, 7rem)/1 'Archivo Black', sans-serif; letter-spacing: -.1em; font-style: normal; transition: transform .5s ease, color .5s ease; }
+  .cap-card:hover i { color: rgba(17,17,15,.22); transform: translateY(-9px) rotate(-4deg); }
+
+  .work { padding: 10vw 4vw 11vw; background: #f0ede4; color: #11110f; }
+  .section-head { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 30px; align-items: start; margin-bottom: 9vw; }
+  .eyebrow { font: 500 10px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
+  .section-head h2, .play-intro h2 { margin: 0; font: 400 clamp(3rem, 7.3vw, 7.4rem)/.87 'Archivo Black', sans-serif; letter-spacing: -.07em; }
+  .section-head h2 em, .play-intro h2 em { color: var(--orange); font-style: normal; }
+  .head-note { margin: 0; color: var(--soft-ink); line-height: 1.55; font-size: 14px; }
+  .project-list { border-top: 1px solid var(--rule); }
+  .project { position: relative; display: grid; grid-template-columns: 8% 45% 1fr 9% 44px; align-items: center; min-height: 140px; border-bottom: 1px solid var(--rule); overflow: hidden; isolation: isolate; }
+  .project::before { content: ''; position: absolute; z-index: -1; inset: 0; background: var(--project-accent); transform: translateY(101%); transition: transform .45s cubic-bezier(.22,1,.36,1); }
+  .project:hover::before { transform: translateY(0); }
+  .project-number, .project-meta, .project-year { font: 400 10px/1.3 'DM Mono', monospace; text-transform: uppercase; }
+  .project-name { font: 400 clamp(2.3rem, 5.5vw, 5.5rem)/1 'Archivo Black', sans-serif; letter-spacing: -.065em; transition: transform .45s cubic-bezier(.22,1,.36,1); }
+  .project:hover .project-name { transform: translateX(18px); }
+  .project-arrow { width: 42px; height: 42px; border: 1px solid currentColor; border-radius: 50%; display: grid; place-items: center; transition: transform .35s; }
+  .project:hover .project-arrow { transform: rotate(45deg); }
+
+  .play { background: var(--panel); color: var(--panel-ink); padding: 10vw 4vw; transition: background .45s, color .45s; }
+  .play-intro { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 30px; align-items: start; }
+  .play-intro p:last-child { margin: 0; font-size: 14px; line-height: 1.55; opacity: .68; }
+  .game-stage { margin: 8vw 0 2vw; border: 1px solid color-mix(in srgb, var(--panel-ink) 30%, transparent); min-height: 500px; border-radius: 2px; overflow: hidden; }
+  .stage-topbar { padding: 14px 18px; border-bottom: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); display: flex; justify-content: space-between; font: 400 9px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
+  .stage-status { display: flex; align-items: center; gap: 7px; }
+  .stage-status i { width: 7px; height: 7px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 12px var(--acid); }
+  .snake-demo { position: relative; height: 370px; display: grid; place-items: center; overflow: hidden; background: repeating-linear-gradient(0deg, transparent 0 38px, color-mix(in srgb, var(--panel-ink) 6%, transparent) 39px); }
+  .demo-copy { font: 400 clamp(2rem, 6vw, 6.5rem)/.88 'Archivo Black', sans-serif; letter-spacing: -.06em; text-align: center; opacity: .2; max-width: 900px; }
+  .demo-copy span { color: transparent; -webkit-text-stroke: 1px var(--panel-ink); }
+  .snake { position: absolute; left: 16%; top: 54%; display: flex; align-items: center; animation: snakeDrift 4s ease-in-out infinite; }
+  .snake i, .food { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--acid); color: #111; border: 2px solid #111; margin-left: -4px; font: 500 12px/1 'DM Mono', monospace; font-style: normal; box-shadow: 0 5px 0 #111; }
+  .snake .snake-head { background: var(--orange); font-size: 26px; }
+  .food { position: absolute; right: 18%; top: 38%; background: var(--panel-ink); color: var(--panel); animation: foodPulse 1.2s ease-in-out infinite; }
+  .stage-caption { min-height: 84px; border-top: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); display: grid; grid-template-columns: 1fr 2fr; gap: 20px; align-items: center; padding: 18px; }
+  .stage-caption span { color: var(--acid); font: 500 11px/1 'DM Mono', monospace; }
+  .stage-caption p { margin: 0; font-size: 14px; opacity: .7; }
+  .game-list { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); }
+  .game-card { padding: 30px 24px; min-height: 280px; border-right: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); display: flex; flex-direction: column; }
+  .game-card:last-child { border-right: 0; }
+  .game-key, .game-state { font: 400 9px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; opacity: .55; }
+  .game-card h3 { margin: 45px 0 18px; font: 400 clamp(1.8rem, 3vw, 3.2rem)/.9 'Archivo Black', sans-serif; letter-spacing: -.06em; }
+  .game-card p { margin: 0 0 30px; font-size: 13px; line-height: 1.55; opacity: .65; }
+  .game-state { margin-top: auto; color: var(--acid); opacity: 1; }
+
+  .about { position: relative; min-height: 90svh; padding: 7vw 4vw 4vw; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; background: var(--orange); color: #111; }
+  .about-index { font: 400 10px/1 'DM Mono', monospace; text-transform: uppercase; }
+  .about-copy { position: relative; z-index: 2; max-width: 1220px; margin: auto 0; font: 400 clamp(3rem, 7.8vw, 8rem)/.95 'Archivo Black', sans-serif; letter-spacing: -.07em; }
+  .about-links { display: flex; gap: 16px; justify-content: flex-end; }
+  .about-links a { min-width: 220px; border-bottom: 1px solid var(--ink); padding: 12px 0; display: flex; justify-content: space-between; font: 500 11px/1 'DM Mono', monospace; text-transform: uppercase; }
+  .about-scribble { position: absolute; inset: 12% -5% 0; width: 110%; height: 78%; fill: none; stroke: var(--orange); stroke-width: 8; stroke-linecap: round; filter: drop-shadow(0 10px 0 var(--acid)); }
+
+  .contact {
+    min-height: 100svh;
+    padding: 92px 4vw 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    background: #11110f;
+    color: #f0ede4;
+  }
+  .contact-topline, .contact-footer { position: relative; z-index: 2; display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; }
+  .contact-topline { border-top: 1px solid rgba(240,237,228,.32); padding-top: 14px; }
+  .contact-topline p, .contact-footer > p { margin: 0; font: 400 9px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
+  .contact-center { position: relative; z-index: 2; margin: 5vh 0; }
+  .contact-kicker { margin: 0 0 18px; color: var(--acid); font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .12em; }
+  .contact h2 { margin: 0; font: 400 clamp(4rem, 10.8vw, 11rem)/.77 'Archivo Black', sans-serif; letter-spacing: -.08em; }
+  .contact h2 em { color: transparent; -webkit-text-stroke: clamp(1px, .12vw, 2px) #f0ede4; font-style: normal; }
+  .contact-email { display: flex; align-items: center; justify-content: space-between; width: min(760px, 100%); margin-top: 38px; padding: 15px 0; border-block: 1px solid rgba(240,237,228,.45); font: 500 clamp(.9rem, 1.6vw, 1.3rem)/1 'DM Mono', monospace; transition: color .25s, padding .35s ease; }
+  .contact-email:hover { color: var(--acid); padding-inline: 12px; }
+  .contact-footer { align-items: flex-end; border-top: 1px solid rgba(240,237,228,.32); padding-top: 18px; }
+  .contact-socials { display: flex; width: min(620px, 52vw); }
+  .contact-socials a { flex: 1; display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; padding: 15px 18px; border-left: 1px solid rgba(240,237,228,.32); transition: color .25s, background .25s; }
+  .contact-socials a:last-child { border-right: 1px solid rgba(240,237,228,.32); }
+  .contact-socials span { font: 400 clamp(1.5rem, 2.5vw, 2.8rem)/1 'Archivo Black', sans-serif; letter-spacing: -.06em; }
+  .contact-socials i { grid-column: 1; color: rgba(240,237,228,.52); font: 400 9px/1 'DM Mono', monospace; text-transform: uppercase; font-style: normal; }
+  .contact-socials b { grid-column: 2; grid-row: 1 / 3; align-self: center; font-weight: 400; }
+  .contact-socials a:hover { background: var(--acid); color: #111; }
+  .contact-socials a:hover i { color: rgba(17,17,15,.62); }
+  .contact-orbit { position: absolute; z-index: 1; right: -9vw; top: 18%; width: 33vw; height: 33vw; min-width: 300px; min-height: 300px; border: 1px solid rgba(184,255,50,.4); border-radius: 50%; animation: contactFloat 7s ease-in-out infinite; }
+  .contact-orbit::before, .contact-orbit::after { content: ''; position: absolute; border-radius: 50%; }
+  .contact-orbit::before { inset: 17%; border: 1px dashed rgba(240,237,228,.32); animation: orbitSpin 18s linear infinite; }
+  .contact-orbit::after { width: 22px; height: 22px; left: 12%; top: 12%; background: var(--acid); box-shadow: 0 0 0 10px rgba(184,255,50,.1); }
+  .contact-orbit span { position: absolute; left: 8%; bottom: 20%; width: 60%; font: 500 9px/1.5 'DM Mono', monospace; letter-spacing: .11em; color: var(--acid); }
+
+  .game-trigger { position: fixed; z-index: 80; right: 22px; bottom: 22px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; background: #111; color: #fff; box-shadow: 0 14px 45px rgba(0,0,0,.24); padding: 13px 16px; display: flex; gap: 10px; align-items: center; font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .06em; }
+  .trigger-pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 0 0 rgba(184,255,50,.7); animation: pulse 2s infinite; }
+  .game-trigger b { color: var(--acid); }
+
+  .concept-note { position: fixed; z-index: 110; right: 22px; bottom: 78px; width: min(420px, calc(100% - 44px)); padding: 28px; background: var(--acid); color: #111; box-shadow: 0 18px 70px rgba(0,0,0,.32); border: 2px solid #111; }
+  .concept-note[hidden] { display: none; }
+  .concept-close { position: absolute; right: 14px; top: 10px; border: 0; background: none; font-size: 28px; }
+  .concept-tag { font: 500 9px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
+  .concept-note h2 { margin: 30px 0 15px; font: 400 2.2rem/.95 'Archivo Black', sans-serif; letter-spacing: -.06em; }
+  .concept-note p { font-size: 13px; line-height: 1.55; }
+  .concept-ok { margin-top: 12px; border: 0; border-radius: 999px; background: #111; color: #fff; padding: 11px 18px; font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; }
+
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s ease, transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .figma-capture .reveal { opacity: 1; transform: none; }
+
+  /* Every scene owns its entrance and exit; there is no transition overlay. */
+  .hero-kicker, .hero-title, .hero-foot, .hero-line,
+  .cap-intro, .cap-card,
+  .section-head, .project,
+  .play-intro, .game-stage, .game-card,
+  .about-copy, .about-index, .about-scribble,
+  .contact-topline, .contact-center, .contact-footer, .contact-orbit {
+    transition-property: transform, opacity, filter, clip-path;
+    transition-duration: .85s;
+    transition-timing-function: cubic-bezier(.22,1,.36,1);
+    will-change: transform, opacity, filter;
+  }
+
+  /* Hero exits upward in three layers, like a poster being pulled apart. */
+  .hero.scene-before .hero-kicker { opacity: 0; transform: translateY(-45px); }
+  .hero.scene-before .hero-title { opacity: 0; transform: translateY(-15vh) skewY(-3deg); filter: blur(10px); }
+  .hero.scene-before .hero-foot { opacity: 0; transform: translateY(55px); }
+  .hero.scene-before .hero-line { opacity: 0; transform: scale(1.12) rotate(3deg); }
+
+  /* Capabilities assemble from opposing directions; they scatter on exit. */
+  .capabilities.scene-after .cap-intro { opacity: 0; transform: perspective(900px) rotateX(16deg) translateY(90px); }
+  .capabilities.scene-after .cap-card:nth-child(odd) { opacity: 0; transform: translateX(-90px); clip-path: inset(0 100% 0 0); }
+  .capabilities.scene-after .cap-card:nth-child(even) { opacity: 0; transform: translateX(90px); clip-path: inset(0 0 0 100%); }
+  .capabilities.scene-before .cap-intro { opacity: 0; transform: translateX(-12vw); filter: blur(8px); }
+  .capabilities.scene-before .cap-card { opacity: 0; transform: translateY(-75px) scale(.94); }
+  .capabilities .cap-card:nth-child(2) { transition-delay: 70ms; }
+  .capabilities .cap-card:nth-child(3) { transition-delay: 140ms; }
+  .capabilities .cap-card:nth-child(4) { transition-delay: 210ms; }
+
+  /* Work rows cut in horizontally, then peel away at alternating angles. */
+  .work.scene-after .section-head { opacity: 0; transform: translateY(80px); clip-path: inset(100% 0 0); }
+  .work.scene-after .project:nth-child(odd) { opacity: 0; transform: translateX(-12vw) skewX(-7deg); }
+  .work.scene-after .project:nth-child(even) { opacity: 0; transform: translateX(12vw) skewX(7deg); }
+  .work.scene-before .section-head { opacity: 0; transform: translateY(-90px) scale(.94); filter: blur(7px); }
+  .work.scene-before .project:nth-child(odd) { opacity: 0; transform: translateX(10vw); }
+  .work.scene-before .project:nth-child(even) { opacity: 0; transform: translateX(-10vw); }
+  .work .project:nth-child(2) { transition-delay: 55ms; }
+  .work .project:nth-child(3) { transition-delay: 110ms; }
+  .work .project:nth-child(4) { transition-delay: 165ms; }
+  .work .project:nth-child(5) { transition-delay: 220ms; }
+
+  /* Play arrives through depth: the stage irises open and cards turn forward. */
+  .play.scene-after .play-intro { opacity: 0; transform: perspective(900px) translateZ(-180px) rotateX(8deg); filter: blur(12px); }
+  .play.scene-after .game-stage { opacity: 0; transform: scale(.78) rotate(-2deg); clip-path: circle(12% at 50% 50%); }
+  .play.scene-after .game-card { opacity: 0; transform: perspective(800px) rotateY(28deg) translateX(70px); }
+  .play.scene-before .play-intro { opacity: 0; transform: translateY(-90px); }
+  .play.scene-before .game-stage { opacity: 0; transform: scale(1.08); filter: blur(10px); clip-path: circle(70% at 50% 50%); }
+  .play.scene-before .game-card { opacity: 0; transform: translateY(-70px) rotate(-2deg); }
+  .play .game-card:nth-child(2) { transition-delay: 90ms; }
+  .play .game-card:nth-child(3) { transition-delay: 180ms; }
+
+  /* About behaves like oversized type landing on the page. */
+  .about.scene-after .about-index { opacity: 0; transform: translateX(-80px); }
+  .about.scene-after .about-copy { opacity: 0; transform: scale(.72) rotate(-4deg) translateY(100px); transform-origin: left center; filter: blur(10px); }
+  .about.scene-after .about-scribble { opacity: 0; transform: scaleX(.2); transform-origin: left; }
+  .about.scene-before .about-copy { opacity: 0; transform: translateX(16vw) rotate(3deg); filter: blur(9px); }
+  .about.scene-before .about-scribble { opacity: 0; transform: translateX(-14vw) scaleX(1.15); }
+
+  /* Contact rises line-by-line while the system orbit resolves behind it. */
+  .contact.scene-after .contact-topline { opacity: 0; transform: translateY(-35px); }
+  .contact.scene-after .contact-center { opacity: 0; transform: translateY(130px) skewY(4deg); filter: blur(8px); }
+  .contact.scene-after .contact-footer { opacity: 0; transform: translateY(80px); }
+  .contact.scene-after .contact-orbit { opacity: 0; transform: scale(.35) rotate(-90deg); }
+  .contact.scene-before .contact-center { opacity: 0; transform: translateY(-130px) scale(1.06); filter: blur(10px); }
+  .contact.scene-before .contact-footer { opacity: 0; transform: translateY(70px); }
+  .contact.scene-before .contact-orbit { opacity: 0; transform: scale(1.35) rotate(90deg); }
+  .contact.scene-after .contact-orbit, .contact.scene-before .contact-orbit { animation: none; }
+
+  .figma-capture .section-scene * { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; }
+
+  @keyframes drawLine { to { stroke-dashoffset: 0; } }
+  @keyframes snakeDrift { 0%,100% { transform: translate(0, 0); } 50% { transform: translate(14vw, -45px); } }
+  @keyframes foodPulse { 50% { transform: scale(1.3) rotate(12deg); } }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 9px rgba(184,255,50,0); } 100% { box-shadow: 0 0 0 0 rgba(184,255,50,0); } }
+  @keyframes orbitSpin { to { transform: rotate(360deg); } }
+  @keyframes contactFloat { 50% { transform: translate(-3vw, 4vh) rotate(8deg); } }
+
+  @media (max-width: 800px) {
+    .nav-links { display: none; }
+    .theme-label { display: none; }
+    .hero { padding-inline: 18px; }
+    .hero-kicker span:nth-child(2) { display: none; }
+    .title-row { font-size: clamp(3.8rem, 18vw, 7.5rem); line-height: .84; }
+    .title-row.title-outline { font-size: 14.2vw; }
+    .title-shift { padding-left: 0; }
+    .hero-line { height: 70%; top: 18%; }
+    .hero-foot { width: 100%; }
+    .hero-foot p { max-width: 100%; font-size: .95rem; }
+    .round-link { display: none; }
+    .section-head, .play-intro { grid-template-columns: 1fr; }
+    .cap-intro { grid-template-columns: 1fr; }
+    .cap-grid { grid-template-columns: 1fr 1fr; }
+    .cap-card { min-height: 210px; border-bottom: 1px solid rgba(17,17,15,.35); }
+    .cap-card:nth-child(2) { border-right: 0; }
+    .cap-card:nth-child(3), .cap-card:nth-child(4) { border-bottom: 0; }
+    .section-head h2, .play-intro h2 { font-size: 14vw; }
+    .head-note, .play-intro p:last-child { max-width: 480px; }
+    .project { grid-template-columns: 10% 1fr 40px; min-height: 112px; }
+    .project-meta, .project-year { display: none; }
+    .project-name { font-size: clamp(2rem, 9vw, 4rem); }
+    .game-list { grid-template-columns: 1fr; }
+    .game-card { border-right: 0; border-bottom: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); min-height: 220px; }
+    .game-card h3 { margin-top: 34px; }
+    .stage-topbar span:first-child, .stage-caption p { display: none; }
+    .stage-topbar { justify-content: flex-end; }
+    .stage-caption { grid-template-columns: 1fr; }
+    .snake { left: 4%; transform: scale(.8); transform-origin: left center; }
+    .food { right: 8%; }
+    .about-links { flex-direction: column; }
+    .about-links a { min-width: 0; }
+    .contact { padding-inline: 18px; }
+    .contact-topline p:last-child { display: none; }
+    .contact h2 { font-size: clamp(3.5rem, 15vw, 7rem); }
+    .contact-footer { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    .contact-socials { width: 100%; }
+    .contact-footer > p:last-child { justify-self: end; }
+    .contact-orbit { opacity: .55; right: -45vw; top: 26%; width: 90vw; height: 90vw; }
+    .cursor-orbit { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    .reveal { opacity: 1; transform: none; }
+    .cursor-orbit { display: none; }
+    .section-scene * { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; }
+  }
+
+  @media (max-width: 520px) {
+    .cap-grid { grid-template-columns: 1fr; }
+    .cap-card { min-height: 185px; border-right: 0; border-bottom: 1px solid rgba(17,17,15,.35) !important; }
+    .cap-card:last-child { border-bottom: 0 !important; }
+    .cap-card h3 { margin-top: 36px; }
+  }
+</style>
