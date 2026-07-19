@@ -188,7 +188,7 @@ const seoSchema = {
               <span class="project-name">{project.name}</span>
               <span class="project-meta">{project.type}</span>
               <span class="project-year">{project.year}</span>
-              <span class="project-arrow">↗</span>
+              <span class="project-arrow" aria-hidden="true"></span>
             </a>
           ))}
         </div>
@@ -225,7 +225,7 @@ const seoSchema = {
               <span class="game-key">{game.key}</span>
               <h3>{game.name}</h3>
               <p>{game.note}</p>
-              <button class="game-launch" type="button" data-game={game.name.toLowerCase().replace(/\s+/g, '-')}>Play this game <span>↗</span></button>
+              <button class="game-launch" type="button" data-game={game.name.toLowerCase().replace(/\s+/g, '-')}>Play this game <span class="link-arrow" aria-hidden="true"></span></button>
             </article>
           ))}
         </div>
@@ -261,13 +261,13 @@ const seoSchema = {
         <div class="contact-center reveal">
           <p class="contact-kicker">Have a difficult idea?</p>
           <h2 id="contact-title">LET’S BUILD<br /><em>SOMETHING</em><br />THAT WORKS.</h2>
-          <a class="contact-email" href="mailto:tryraisins@gmail.com">tryraisins@gmail.com <span>↗</span></a>
+          <a class="contact-email" href="mailto:tryraisins@gmail.com">tryraisins@gmail.com <span class="link-arrow" aria-hidden="true"></span></a>
         </div>
         <div class="contact-footer">
           <p>Find TryRaisins elsewhere</p>
           <div class="contact-socials">
-            <a href="https://github.com/tryraisins" target="_blank" rel="noopener noreferrer"><span>GitHub</span><i>Code / experiments</i><b>↗</b></a>
-            <a href="https://medium.com/@TryRaisins" target="_blank" rel="noopener noreferrer"><span>Medium</span><i>Ideas / writing</i><b>↗</b></a>
+            <a href="https://github.com/tryraisins" target="_blank" rel="noopener noreferrer"><span>GitHub</span><i>Code / experiments</i><b class="link-arrow" aria-hidden="true"></b></a>
+            <a href="https://medium.com/@TryRaisins" target="_blank" rel="noopener noreferrer"><span>Medium</span><i>Ideas / writing</i><b class="link-arrow" aria-hidden="true"></b></a>
           </div>
           <p>© {new Date().getFullYear()} TryRaisins</p>
         </div>
@@ -745,7 +745,19 @@ const seoSchema = {
   .project-number, .project-meta, .project-year { font: 400 10px/1.3 'DM Mono', monospace; text-transform: uppercase; }
   .project-name { font: 400 clamp(2.3rem, 5.5vw, 5.5rem)/1 'Archivo Black', sans-serif; letter-spacing: -.065em; transition: transform .45s cubic-bezier(.22,1,.36,1); }
   .project:hover .project-name { transform: translateX(18px); }
-  .project-arrow { width: 42px; height: 42px; border: 1px solid currentColor; border-radius: 50%; display: grid; place-items: center; transition: transform .35s; }
+  .project-arrow { width: 42px; height: 42px; border: 1px solid currentColor; border-radius: 50%; display: block; position: relative; transition: transform .35s; }
+  .project-arrow::before, .link-arrow::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1em;
+    height: 1em;
+    background: currentColor;
+    transform: translate(-50%, -50%);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7'/%3E%3Cpath d='M9 7h8v8'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7'/%3E%3Cpath d='M9 7h8v8'/%3E%3C/svg%3E") center / contain no-repeat;
+  }
   .project:hover .project-arrow { transform: rotate(45deg); }
 
   .play { background: var(--panel); color: var(--panel-ink); padding: 10vw 4vw; transition: background .45s, color .45s; }
@@ -773,6 +785,7 @@ const seoSchema = {
   .game-card p { margin: 0 0 30px; font-size: 13px; line-height: 1.55; opacity: .65; }
   .game-state { margin-top: auto; color: var(--acid); opacity: 1; }
   .game-launch { margin-top: auto; align-self: flex-start; padding: 11px 0; border: 0; border-bottom: 1px solid var(--acid); background: transparent; color: var(--acid); font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; transition: color .25s, border-color .25s, transform .25s; }
+  .link-arrow { width: 1em; height: 1em; display: inline-block; position: relative; font-size: 1em; line-height: 1; vertical-align: -.08em; }
   .game-launch:hover { color: #fff; border-color: #fff; transform: translateX(7px); }
   .game-console { margin-top: 2vw; padding: 18px; scroll-margin-top: 118px; border: 1px solid color-mix(in srgb, var(--panel-ink) 36%, transparent); background: #0d0d0b; color: var(--panel-ink); }
   .game-console[hidden], .wordle-ui[hidden], .stack-ui[hidden] { display: none; }
