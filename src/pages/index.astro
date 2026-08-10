@@ -15,22 +15,36 @@ const games = [
 ];
 
 const siteUrl = 'https://tryraisins.dev/';
-const pageTitle = 'TryRaisins — Fullstack Developer';
-const pageDescription = 'TryRaisins builds useful web products, sharp interfaces, and dependable digital systems.';
+const pageTitle = 'Seun Sowemimo (TryRaisins) — Fullstack Developer, Lagos';
+const pageDescription = 'Seun Sowemimo, known as TryRaisins, is a Lagos-based fullstack developer building reliable web products with React, TypeScript, Node.js, and Python.';
 const socialImage = `${siteUrl}og-image.png?v=2`;
 const seoSchema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
+      '@type': 'Person',
+      '@id': `${siteUrl}#person`,
+      name: 'Seun Sowemimo',
+      alternateName: 'TryRaisins',
+      url: siteUrl,
+      image: socialImage,
+      jobTitle: 'Fullstack Developer',
+      description: pageDescription,
+      email: 'mailto:tryraisins@gmail.com',
+      homeLocation: { '@type': 'Place', name: 'Lagos, Nigeria' },
+      sameAs: [
+        'https://github.com/tryraisins',
+        'https://www.linkedin.com/in/seun-sowemimo-8518b7249/',
+        'https://medium.com/@TryRaisins',
+      ],
+      knowsAbout: ['React', 'TypeScript', 'JavaScript', 'Node.js', 'Python', 'Web development', 'Frontend development', 'Backend development'],
+    },
+    {
       '@type': 'Organization',
       '@id': `${siteUrl}#brand`,
       name: 'TryRaisins',
       url: siteUrl,
-      image: socialImage,
-      description: pageDescription,
-      email: 'mailto:tryraisins@gmail.com',
-      sameAs: ['https://github.com/tryraisins', 'https://medium.com/@TryRaisins'],
-      knowsAbout: ['React', 'TypeScript', 'JavaScript', 'Node.js', 'Python', 'Web development', 'Frontend development', 'Backend development'],
+      founder: { '@id': `${siteUrl}#person` },
     },
     {
       '@type': 'WebSite',
@@ -47,7 +61,7 @@ const seoSchema = {
       name: pageTitle,
       description: pageDescription,
       isPartOf: { '@id': `${siteUrl}#website` },
-      mainEntity: { '@id': `${siteUrl}#brand` },
+      mainEntity: { '@id': `${siteUrl}#person` },
     },
     {
       '@type': 'ItemList',
@@ -134,13 +148,13 @@ const seoSchema = {
           <path class="line-echo" d="M-30 560 C200 370 320 700 510 450 S810 205 840 490 S1080 640 1240 350" />
         </svg>
 
-        <div class="hero-kicker">
+        <h1 class="hero-kicker">
+          <span>Seun Sowemimo / TryRaisins</span>
           <span>Fullstack developer</span>
-          <span>Lagos, NG</span>
-          <span>Available for ambitious work</span>
-        </div>
+          <span>Lagos, Nigeria</span>
+        </h1>
 
-        <div class="hero-title" aria-label="Building things that work">
+        <div class="hero-title">
           <div class="title-row"><span>BUILDING</span><i>01</i></div>
           <div class="title-row title-shift"><span>THINGS</span><i>02</i></div>
           <div class="title-row title-outline"><span>THAT WORK.</span><i>03</i></div>
@@ -257,6 +271,7 @@ const seoSchema = {
           <p>Find TryRaisins elsewhere</p>
           <div class="contact-socials">
             <a href="https://github.com/tryraisins" target="_blank" rel="noopener noreferrer"><span>GitHub</span><i>Code / experiments</i><b class="link-arrow" aria-hidden="true"></b></a>
+            <a href="https://www.linkedin.com/in/seun-sowemimo-8518b7249/" target="_blank" rel="noopener noreferrer"><span>LinkedIn</span><i>Professional profile</i><b class="link-arrow" aria-hidden="true"></b></a>
             <a href="https://medium.com/@TryRaisins" target="_blank" rel="noopener noreferrer"><span>Medium</span><i>Ideas / writing</i><b class="link-arrow" aria-hidden="true"></b></a>
           </div>
           <p>© {new Date().getFullYear()} TryRaisins</p>
@@ -620,7 +635,7 @@ const seoSchema = {
     overflow: hidden;
   }
   .hero-kicker, .hero-foot { position: relative; z-index: 2; }
-  .hero-kicker { display: flex; justify-content: space-between; gap: 20px; font: 400 10px/1 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .hero-kicker { margin: 0; display: flex; justify-content: space-between; gap: 20px; font: 400 10px/1 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
   .hero-title { position: relative; z-index: 2; padding: 5vh 0 3vh; }
   .title-row { display: flex; align-items: flex-start; gap: 14px; font: 400 clamp(4.4rem, 12.8vw, 12rem)/.77 'Archivo Black', sans-serif; letter-spacing: -.08em; white-space: nowrap; }
   .title-row i { font: 400 9px/1 'DM Mono', monospace; letter-spacing: 0; color: var(--orange); }
@@ -866,7 +881,7 @@ const seoSchema = {
     .theme-label { display: none; }
     .play, .game-trigger { display: none; }
     .hero { padding-inline: 18px; }
-    .hero-kicker span:nth-child(2) { display: none; }
+    .hero-kicker span:nth-child(3) { display: none; }
     .title-row { font-size: clamp(3.8rem, 18vw, 7.5rem); line-height: .84; }
     .title-row.title-outline { font-size: 14.2vw; }
     .title-shift { padding-left: 0; }
