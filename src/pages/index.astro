@@ -74,7 +74,7 @@ const seoSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="theme-color" content="#f0ede4" />
+    <meta id="theme-color" name="theme-color" content="#f0ede4" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="author" content="TryRaisins" />
@@ -121,7 +121,7 @@ const seoSchema = {
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </div>
-      <button class="theme-toggle" type="button" aria-label="Toggle color theme">
+      <button class="theme-toggle" type="button" aria-label="Invert page colors" aria-pressed="false">
         <span class="theme-icon">◐</span>
         <span class="theme-label">Invert</span>
       </button>
@@ -287,8 +287,20 @@ const seoSchema = {
       const dialog = document.querySelector('.concept-note');
       const closeButtons = dialog?.querySelectorAll('.concept-close, .concept-ok');
 
+      const themeLabel = toggle?.querySelector('.theme-label');
+      const themeColor = document.querySelector('#theme-color');
+      const setTheme = (theme) => {
+        const isInverted = theme === 'dark';
+        root.dataset.theme = isInverted ? 'dark' : 'light';
+        toggle?.setAttribute('aria-pressed', String(isInverted));
+        toggle?.setAttribute('aria-label', isInverted ? 'Restore page colors' : 'Invert page colors');
+        if (themeLabel) themeLabel.textContent = isInverted ? 'Restore' : 'Invert';
+        if (themeColor instanceof HTMLMetaElement) themeColor.content = isInverted ? '#11110f' : '#f0ede4';
+      };
+
+      setTheme(root.dataset.theme);
       toggle?.addEventListener('click', () => {
-        root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
       });
 
       if (orbit instanceof HTMLElement && matchMedia('(pointer:fine)').matches) {
@@ -491,6 +503,12 @@ const seoSchema = {
     --orange: #ff5c35;
     --panel: #151513;
     --panel-ink: #f4f0e7;
+    --work-surface: #f0ede4;
+    --work-ink: #11110f;
+    --contact-surface: #11110f;
+    --contact-ink: #f0ede4;
+    --console-surface: #0d0d0b;
+    --console-canvas: #12120f;
   }
 
   [data-theme='dark'] {
@@ -500,6 +518,12 @@ const seoSchema = {
     --rule: rgba(240, 237, 228, .2);
     --panel: #f0ede4;
     --panel-ink: #11110f;
+    --work-surface: #11110f;
+    --work-ink: #f0ede4;
+    --contact-surface: #f0ede4;
+    --contact-ink: #11110f;
+    --console-surface: #e6e1d7;
+    --console-canvas: #d9d4c9;
   }
 
   * { box-sizing: border-box; }
@@ -630,7 +654,7 @@ const seoSchema = {
   .cap-card i { position: absolute; right: 14px; bottom: 10px; color: rgba(17,17,15,.1); font: 400 clamp(3.7rem, 6vw, 7rem)/1 'Archivo Black', sans-serif; letter-spacing: -.1em; font-style: normal; transition: transform .5s ease, color .5s ease; }
   .cap-card:hover i { color: rgba(17,17,15,.22); transform: translateY(-9px) rotate(-4deg); }
 
-  .work { padding: 10vw 4vw 11vw; background: #f0ede4; color: #11110f; }
+  .work { padding: 10vw 4vw 11vw; background: var(--work-surface); color: var(--work-ink); transition: background .45s ease, color .45s ease; }
   .section-head { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 30px; align-items: start; margin-bottom: 9vw; }
   .eyebrow { font: 500 10px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
   .section-head h2, .play-intro h2 { margin: 0; font: 400 clamp(3rem, 7.3vw, 7.4rem)/.87 'Archivo Black', sans-serif; letter-spacing: -.07em; }
@@ -685,14 +709,14 @@ const seoSchema = {
   .game-launch { margin-top: auto; align-self: flex-start; padding: 11px 0; border: 0; border-bottom: 1px solid var(--acid); background: transparent; color: var(--acid); font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; transition: color .25s, border-color .25s, transform .25s; }
   .link-arrow { width: 1em; height: 1em; display: inline-block; position: relative; font-size: 1em; line-height: 1; vertical-align: -.08em; }
   .game-launch:hover { color: #fff; border-color: #fff; transform: translateX(7px); }
-  .game-console { margin-top: 2vw; padding: 18px; scroll-margin-top: 118px; border: 1px solid color-mix(in srgb, var(--panel-ink) 36%, transparent); background: #0d0d0b; color: var(--panel-ink); }
+  .game-console { margin-top: 2vw; padding: 18px; scroll-margin-top: 118px; border: 1px solid color-mix(in srgb, var(--panel-ink) 36%, transparent); background: var(--console-surface); color: var(--panel-ink); transition: background .45s ease, color .45s ease; }
   .game-console[hidden] { display: none; }
   .console-topbar { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); }
   .console-kicker, .console-controls { font: 400 9px/1.4 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; opacity: .65; }
   .console-kicker b { color: var(--acid); font-weight: 500; }
   .console-close { border: 0; background: none; color: inherit; font-size: 26px; line-height: .7; }
   .console-status { min-height: 22px; margin: 16px 0 10px; color: var(--acid); font: 400 11px/1.4 'DM Mono', monospace; }
-  #game-canvas { display: block; width: 100%; aspect-ratio: 2 / 1; max-height: 420px; border: 1px solid color-mix(in srgb, var(--panel-ink) 18%, transparent); background: #12120f; touch-action: none; }
+  #game-canvas { display: block; width: 100%; aspect-ratio: 2 / 1; max-height: 420px; border: 1px solid color-mix(in srgb, var(--panel-ink) 18%, transparent); background: var(--console-canvas); touch-action: none; }
   .console-controls { padding-top: 12px; }
   .touch-controls { width: min(230px, 100%); margin: 14px auto 2px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; touch-action: manipulation; }
   .touch-controls[hidden] { display: none; }
@@ -715,34 +739,35 @@ const seoSchema = {
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    background: #11110f;
-    color: #f0ede4;
+    background: var(--contact-surface);
+    color: var(--contact-ink);
+    transition: background .45s ease, color .45s ease;
   }
   .contact-topline, .contact-footer { position: relative; z-index: 2; display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; }
-  .contact-topline { border-top: 1px solid rgba(240,237,228,.32); padding-top: 14px; }
+  .contact-topline { border-top: 1px solid color-mix(in srgb, var(--contact-ink) 32%, transparent); padding-top: 14px; }
   .contact-topline p, .contact-footer > p { margin: 0; font: 400 9px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
   .contact-center { position: relative; z-index: 2; margin: 5vh 0; }
   .contact-kicker { margin: 0 0 18px; color: var(--acid); font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .12em; }
   .contact h2 { margin: 0; font: 400 clamp(4rem, 10.8vw, 11rem)/.77 'Archivo Black', sans-serif; letter-spacing: -.08em; }
-  .contact h2 em { color: transparent; -webkit-text-stroke: clamp(1px, .12vw, 2px) #f0ede4; font-style: normal; }
-  .contact-email { display: flex; align-items: center; justify-content: space-between; width: min(760px, 100%); margin-top: 38px; padding: 15px 0; border-block: 1px solid rgba(240,237,228,.45); font: 500 clamp(.9rem, 1.6vw, 1.3rem)/1 'DM Mono', monospace; transition: color .25s, padding .35s ease; }
+  .contact h2 em { color: transparent; -webkit-text-stroke: clamp(1px, .12vw, 2px) var(--contact-ink); font-style: normal; }
+  .contact-email { display: flex; align-items: center; justify-content: space-between; width: min(760px, 100%); margin-top: 38px; padding: 15px 0; border-block: 1px solid color-mix(in srgb, var(--contact-ink) 45%, transparent); font: 500 clamp(.9rem, 1.6vw, 1.3rem)/1 'DM Mono', monospace; transition: color .25s, padding .35s ease; }
   .contact-email:hover { color: var(--acid); padding-inline: 12px; }
-  .contact-footer { align-items: flex-end; border-top: 1px solid rgba(240,237,228,.32); padding-top: 18px; }
+  .contact-footer { align-items: flex-end; border-top: 1px solid color-mix(in srgb, var(--contact-ink) 32%, transparent); padding-top: 18px; }
   .contact-socials { display: flex; width: min(620px, 52vw); }
-  .contact-socials a { flex: 1; display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; padding: 15px 18px; border-left: 1px solid rgba(240,237,228,.32); transition: color .25s, background .25s; }
-  .contact-socials a:last-child { border-right: 1px solid rgba(240,237,228,.32); }
+  .contact-socials a { flex: 1; display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; padding: 15px 18px; border-left: 1px solid color-mix(in srgb, var(--contact-ink) 32%, transparent); transition: color .25s, background .25s; }
+  .contact-socials a:last-child { border-right: 1px solid color-mix(in srgb, var(--contact-ink) 32%, transparent); }
   .contact-socials span { font: 400 clamp(1.5rem, 2.5vw, 2.8rem)/1 'Archivo Black', sans-serif; letter-spacing: -.06em; }
-  .contact-socials i { grid-column: 1; color: rgba(240,237,228,.52); font: 400 9px/1 'DM Mono', monospace; text-transform: uppercase; font-style: normal; }
+  .contact-socials i { grid-column: 1; color: color-mix(in srgb, var(--contact-ink) 52%, transparent); font: 400 9px/1 'DM Mono', monospace; text-transform: uppercase; font-style: normal; }
   .contact-socials b { grid-column: 2; grid-row: 1 / 3; align-self: center; font-weight: 400; }
   .contact-socials a:hover { background: var(--acid); color: #111; }
   .contact-socials a:hover i { color: rgba(17,17,15,.62); }
   .contact-orbit { position: absolute; z-index: 1; right: -9vw; top: 18%; width: 33vw; height: 33vw; min-width: 300px; min-height: 300px; border: 1px solid rgba(184,255,50,.4); border-radius: 50%; animation: contactFloat 7s ease-in-out infinite; }
   .contact-orbit::before, .contact-orbit::after { content: ''; position: absolute; border-radius: 50%; }
-  .contact-orbit::before { inset: 17%; border: 1px dashed rgba(240,237,228,.32); animation: orbitSpin 18s linear infinite; }
+  .contact-orbit::before { inset: 17%; border: 1px dashed color-mix(in srgb, var(--contact-ink) 32%, transparent); animation: orbitSpin 18s linear infinite; }
   .contact-orbit::after { width: 22px; height: 22px; left: 12%; top: 12%; background: var(--acid); box-shadow: 0 0 0 10px rgba(184,255,50,.1); }
   .contact-orbit span { position: absolute; left: 8%; bottom: 20%; width: 60%; font: 500 9px/1.5 'DM Mono', monospace; letter-spacing: .11em; color: var(--acid); }
 
-  .game-trigger { position: fixed; z-index: 80; right: 22px; bottom: 22px; border: 1px solid rgba(255,255,255,.25); border-radius: 999px; background: #111; color: #fff; box-shadow: 0 14px 45px rgba(0,0,0,.24); padding: 13px 16px; display: flex; gap: 10px; align-items: center; font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .06em; }
+  .game-trigger { position: fixed; z-index: 80; right: 22px; bottom: 22px; border: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); border-radius: 999px; background: var(--panel); color: var(--panel-ink); box-shadow: 0 14px 45px rgba(0,0,0,.24); padding: 13px 16px; display: flex; gap: 10px; align-items: center; font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .06em; transition: background .45s ease, color .45s ease; }
   .trigger-pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--acid); box-shadow: 0 0 0 0 rgba(184,255,50,.7); animation: pulse 2s infinite; }
   .game-trigger b { color: var(--acid); }
 
