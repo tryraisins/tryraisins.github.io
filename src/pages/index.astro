@@ -15,23 +15,20 @@ const games = [
 ];
 
 const siteUrl = 'https://tryraisins.dev/';
-const pageTitle = 'Seun Sowemimo (TryRaisins) — Fullstack Developer in Lagos';
-const pageDescription = 'Seun Sowemimo, also known as Oluwaseun Sowemimo and TryRaisins, is a Lagos-based fullstack developer building useful web products with React, TypeScript, Node.js, and Python.';
-const socialImage = `${siteUrl}og-image.png`;
+const pageTitle = 'TryRaisins — Fullstack Developer';
+const pageDescription = 'TryRaisins builds useful web products, sharp interfaces, and dependable digital systems.';
+const socialImage = `${siteUrl}og-image.png?v=2`;
 const seoSchema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'Person',
-      '@id': `${siteUrl}#person`,
-      name: 'Seun Sowemimo',
-      alternateName: ['Oluwaseun Sowemimo', 'TryRaisins'],
+      '@type': 'Organization',
+      '@id': `${siteUrl}#brand`,
+      name: 'TryRaisins',
       url: siteUrl,
       image: socialImage,
-      jobTitle: 'Fullstack Developer',
       description: pageDescription,
       email: 'mailto:tryraisins@gmail.com',
-      homeLocation: { '@type': 'Place', name: 'Lagos, Nigeria' },
       sameAs: ['https://github.com/tryraisins', 'https://medium.com/@TryRaisins'],
       knowsAbout: ['React', 'TypeScript', 'JavaScript', 'Node.js', 'Python', 'Web development', 'Frontend development', 'Backend development'],
     },
@@ -40,9 +37,8 @@ const seoSchema = {
       '@id': `${siteUrl}#website`,
       url: siteUrl,
       name: 'TryRaisins',
-      alternateName: ['Seun Sowemimo Portfolio', 'Oluwaseun Sowemimo Developer Portfolio'],
       description: pageDescription,
-      publisher: { '@id': `${siteUrl}#person` },
+      publisher: { '@id': `${siteUrl}#brand` },
     },
     {
       '@type': 'ProfilePage',
@@ -51,7 +47,7 @@ const seoSchema = {
       name: pageTitle,
       description: pageDescription,
       isPartOf: { '@id': `${siteUrl}#website` },
-      mainEntity: { '@id': `${siteUrl}#person` },
+      mainEntity: { '@id': `${siteUrl}#brand` },
     },
     {
       '@type': 'ItemList',
@@ -81,29 +77,26 @@ const seoSchema = {
     <meta name="theme-color" content="#f0ede4" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
-    <meta name="author" content="Seun Sowemimo" />
-    <meta name="keywords" content="Seun Sowemimo, Oluwaseun Sowemimo, TryRaisins, fullstack developer Lagos, React developer Nigeria, TypeScript developer, Node.js developer, Python developer, web developer portfolio" />
+    <meta name="author" content="TryRaisins" />
+    <meta name="keywords" content="TryRaisins, fullstack developer, React developer, TypeScript developer, Node.js developer, Python developer, web developer portfolio" />
     <link rel="canonical" href={siteUrl} />
-    <meta property="og:type" content="profile" />
+    <meta property="og:type" content="website" />
     <meta property="og:url" content={siteUrl} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:site_name" content="TryRaisins" />
     <meta property="og:locale" content="en_NG" />
-    <meta property="profile:first_name" content="Seun" />
-    <meta property="profile:last_name" content="Sowemimo" />
-    <meta property="profile:username" content="TryRaisins" />
     <meta property="og:image" content={socialImage} />
     <meta property="og:image:secure_url" content={socialImage} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="TryRaisins — Seun Sowemimo fullstack developer portfolio" />
+    <meta property="og:image:alt" content="TryRaisins — Fullstack developer portfolio" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={socialImage} />
-    <meta name="twitter:image:alt" content="TryRaisins — Seun Sowemimo fullstack developer portfolio" />
+    <meta name="twitter:image:alt" content="TryRaisins — Fullstack developer portfolio" />
     <meta name="twitter:creator" content="@tryraisins" />
     <script id="structured-data" type="application/ld+json" set:html={JSON.stringify(seoSchema)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
