@@ -27,3 +27,10 @@ TODO:
 - 2026-07-19 mobile fix: added real external links to all visible concept projects, made Glyph Serpent playable by touch controls on mobile, constrained the game console/canvas layout for small screens, and changed Five-ish to standard 5-letter Wordle-style play with real-word validation and duplicate-aware scoring.
 - Verification: `npm run build` passes. The provided web-game Playwright client could not run because `npx playwright install chromium` timed out twice, so validation used local Chrome through Playwright instead: mobile Wordle rejects non-words and solves `GAMES`, snake touch controls are visible and advance state, project hrefs are populated, no console/page errors.
 - 2026-07-19 mobile decision: user requested removing the game section from mobile view instead of keeping mobile controls. Hid the Play/game section and floating game trigger at mobile widths while leaving desktop games intact.
+
+2026-08-12 update:
+- Replaced Echo List in the active homepage work list with StreamSlip and its Vercel destination.
+- Added concise per-project context that is revealed only on project hover (and keyboard focus for accessibility).
+- Rebuilt Glyph Serpent as a classic pixel snake game: a three-part snake, apple pickups, wall/body collisions, growth, speed ramp, pause/restart, high score storage, particle bursts, and deterministic test hooks.
+- Verification: `npm run build` passed. Desktop browser checks confirmed Echo List is absent, StreamSlip resolves to `https://streamslip.vercel.app/`, the description is hidden before hover and visible on hover, and no page/console errors occurred. Glyph Serpent was visually checked during gameplay and at game-over; deterministic checks verified pause, apple collection/growth, wall loss, restart, and directional movement.
+- Follow-up: fixed Escape so it exits fullscreen before closing the game; browser verification confirmed F enters fullscreen and Escape exits while keeping the game open.
