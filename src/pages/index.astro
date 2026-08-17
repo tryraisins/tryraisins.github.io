@@ -617,13 +617,27 @@ const seoSchema = {
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; background: var(--paper); overflow-x: hidden; }
+  html {
+    scroll-behavior: smooth;
+    background: var(--paper);
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
   body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
     font-family: 'Manrope', sans-serif;
     overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     transition: background .45s ease, color .45s ease;
   }
   main { position: relative; z-index: 1; }
