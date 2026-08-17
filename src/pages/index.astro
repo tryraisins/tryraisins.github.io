@@ -166,17 +166,27 @@ const seoSchema = {
         </div>
       </section>
 
-      <section class="capabilities section-scene" data-section="capabilities" data-scheme="signal" aria-labelledby="capabilities-title">
-        <div class="cap-intro reveal">
-          <p class="eyebrow">Capabilities / no empty scrolling</p>
-          <h2 id="capabilities-title">ONE BUILDER.<br /><em>FOUR SYSTEMS.</em></h2>
-          <p>A compact map of how ideas move from interface to production. Hover a lane to trace the signal.</p>
+      <section id="about" class="about section-scene" data-section="about" data-scheme="signal" aria-labelledby="about-title">
+        <div class="about-topline">
+          <p class="about-index">02 / About the builder</p>
+          <p class="about-note">Fullstack by trade &middot; product-minded by default</p>
         </div>
-        <div class="cap-grid">
+        <div class="cap-intro reveal">
+          <div class="about-heading">
+            <p class="eyebrow">How I work</p>
+            <h2 id="about-title">ONE BUILDER.<br /><em>MANY SYSTEMS.</em></h2>
+          </div>
+          <p class="about-copy reveal">I'm TryRaisins - a fullstack developer who turns difficult ideas into useful products. I move from interface to infrastructure with the same question: does this make the work clearer, faster, or more human?</p>
+        </div>
+        <div class="cap-grid about-grid">
           <article class="cap-card reveal" style="--delay:0ms"><span>01 / Interface</span><h3>Make it felt.</h3><p>React · TypeScript · Motion · Accessibility</p><i>UI</i></article>
           <article class="cap-card reveal" style="--delay:80ms"><span>02 / Systems</span><h3>Make it hold.</h3><p>Node · APIs · Data · Architecture</p><i>API</i></article>
           <article class="cap-card reveal" style="--delay:160ms"><span>03 / Intelligence</span><h3>Make it think.</h3><p>Python · NLP · Automation · Search</p><i>AI</i></article>
           <article class="cap-card reveal" style="--delay:240ms"><span>04 / Delivery</span><h3>Make it real.</h3><p>Cloud · CI/CD · Observability · Scale</p><i>SHIP</i></article>
+        </div>
+        <div class="about-footer">
+          <span>Interface - systems - delivery</span>
+          <a class="about-work-link" href="#work">See the work <span class="link-arrow" aria-hidden="true"></span></a>
         </div>
       </section>
 
@@ -256,17 +266,9 @@ const seoSchema = {
         </div>
       </section>
 
-      <section id="about" class="about section-scene" data-section="about" data-scheme="orange">
-        <svg class="about-scribble" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M-40 180 C90 20 170 390 305 205 C430 35 450 440 590 220 C720 20 775 430 1040 120" />
-        </svg>
-        <p class="about-index">05 / About the builder</p>
-        <p class="about-copy reveal">I’m TryRaisins, a fullstack developer who likes useful systems, strong opinions, and interfaces with a pulse.</p>
-      </section>
-
       <section id="contact" class="contact section-scene" data-section="contact" data-scheme="contact" aria-labelledby="contact-title">
         <div class="contact-topline">
-          <p>06 / Start a conversation</p>
+          <p>05 / Start a conversation</p>
           <p>Lagos, Nigeria · Available worldwide</p>
         </div>
         <div class="contact-center reveal">
@@ -713,25 +715,38 @@ const seoSchema = {
   .round-link { width: 58px; height: 58px; border: 1px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-size: 24px; transition: color .25s, background .25s, transform .25s; }
   .round-link:hover { color: var(--paper); background: var(--ink); transform: rotate(-35deg); }
 
-  .capabilities {
-    padding: 7vw 4vw 8vw;
+  .about {
+    position: relative;
+    min-height: 100svh;
+    padding: clamp(88px, 7vw, 112px) 4vw 28px;
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    gap: clamp(24px, 3vw, 44px);
+    overflow: hidden;
     background: var(--acid);
     color: #111;
   }
-  .cap-intro { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 30px; align-items: start; margin-bottom: 5vw; }
-  .cap-intro h2 { margin: 0; font: 400 clamp(3rem, 7.3vw, 7.4rem)/.87 'Archivo Black', sans-serif; letter-spacing: -.07em; }
+  .about > *:not(.about-scribble) { position: relative; z-index: 2; }
+  .about-topline, .about-footer { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; font: 400 10px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
+  .about-topline p, .about-footer span { margin: 0; }
+  .about-note { text-align: right; }
+  .cap-intro { display: grid; grid-template-columns: 1.35fr .65fr; gap: 30px; align-items: end; margin: 0; }
+  .cap-intro .eyebrow { margin: 0 0 16px; }
+  .cap-intro h2 { margin: 0; font: 400 clamp(3.5rem, 7.8vw, 8rem)/.84 'Archivo Black', sans-serif; letter-spacing: -.07em; }
   .cap-intro h2 em { color: transparent; -webkit-text-stroke: 1.5px #111; font-style: normal; }
-  .cap-intro > p:last-child { margin: 0; font-size: 14px; line-height: 1.55; }
-  .cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); border: 1px solid rgba(17,17,15,.35); }
-  .cap-card { position: relative; min-height: 245px; padding: 22px; overflow: hidden; border-right: 1px solid rgba(17,17,15,.35); transition-delay: var(--delay); }
+  .about-copy { margin: 0; max-width: 38rem; align-self: end; font: 500 clamp(1rem, 1.45vw, 1.25rem)/1.35 'Manrope', sans-serif; }
+  .cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); align-self: stretch; border: 1px solid rgba(17,17,15,.35); }
+  .cap-card { position: relative; min-height: 0; padding: 18px; overflow: hidden; border-right: 1px solid rgba(17,17,15,.35); transition-delay: var(--delay); }
   .cap-card:last-child { border-right: 0; }
   .cap-card::before { content: ''; position: absolute; inset: auto 0 0; height: 7px; background: #111; transform: scaleX(.08); transform-origin: left; transition: transform .55s cubic-bezier(.22,1,.36,1); }
   .cap-card:hover::before { transform: scaleX(1); }
   .cap-card span { font: 500 9px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
-  .cap-card h3 { margin: 54px 0 16px; font: 400 clamp(1.65rem, 2.7vw, 3rem)/.92 'Archivo Black', sans-serif; letter-spacing: -.055em; }
+  .cap-card h3 { margin: 42px 0 12px; font: 400 clamp(1.5rem, 2.4vw, 2.7rem)/.92 'Archivo Black', sans-serif; letter-spacing: -.055em; }
   .cap-card p { margin: 0; max-width: 220px; font: 400 10px/1.6 'DM Mono', monospace; text-transform: uppercase; }
   .cap-card i { position: absolute; right: 14px; bottom: 10px; color: rgba(17,17,15,.1); font: 400 clamp(3.7rem, 6vw, 7rem)/1 'Archivo Black', sans-serif; letter-spacing: -.1em; font-style: normal; transition: transform .5s ease, color .5s ease; }
   .cap-card:hover i { color: rgba(17,17,15,.22); transform: translateY(-9px) rotate(-4deg); }
+  .about-work-link { display: inline-flex; align-items: center; gap: 8px; color: inherit; border-bottom: 1px solid currentColor; padding-bottom: 8px; transition: gap .25s ease; }
+  .about-work-link:hover { gap: 14px; }
 
   .work { padding: 10vw 4vw 11vw; background: var(--work-surface); color: var(--work-ink); transition: background .45s ease, color .45s ease; }
   .section-head { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 30px; align-items: start; margin-bottom: 9vw; }
@@ -824,12 +839,7 @@ const seoSchema = {
   .touch-controls button[data-direction="left"] { grid-column: 1; }
   .touch-controls button[data-direction="right"] { grid-column: 3; }
   .touch-controls button:active { background: var(--acid); color: #111; }
-  .about { position: relative; min-height: 90svh; padding: 7vw 4vw 4vw; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; background: var(--orange); color: #111; }
-  .about-index { font: 400 10px/1 'DM Mono', monospace; text-transform: uppercase; }
-  .about-copy { position: relative; z-index: 2; max-width: min(1220px, 100%); margin: auto 0; font: 400 clamp(3rem, 7.8vw, 8rem)/.95 'Archivo Black', sans-serif; letter-spacing: 0; overflow-wrap: anywhere; }
-  .about-links { display: flex; gap: 16px; justify-content: flex-end; }
-  .about-links a { min-width: 220px; border-bottom: 1px solid var(--ink); padding: 12px 0; display: flex; justify-content: space-between; font: 500 11px/1 'DM Mono', monospace; text-transform: uppercase; }
-  .about-scribble { position: absolute; inset: 12% -5% 0; width: 110%; height: 78%; fill: none; stroke: var(--orange); stroke-width: 8; stroke-linecap: round; filter: drop-shadow(0 10px 0 var(--acid)); }
+  .about-scribble { position: absolute; z-index: 1; inset: 12% -5% 0; width: 110%; height: 78%; fill: none; stroke: rgba(17,17,15,.14); stroke-width: 8; stroke-linecap: round; filter: drop-shadow(0 10px 0 rgba(17,17,15,.12)); }
 
   .contact {
     min-height: 100svh;
@@ -872,10 +882,9 @@ const seoSchema = {
 
   /* Every scene owns its entrance and exit; there is no transition overlay. */
   .hero-kicker, .hero-title, .hero-foot, .hero-line,
-  .cap-intro, .cap-card,
+  .about-topline, .cap-intro, .cap-card, .about-copy, .about-scribble, .about-footer,
   .section-head, .project,
   .play-intro, .game-stage, .game-card,
-  .about-copy, .about-index, .about-scribble,
   .contact-topline, .contact-center, .contact-footer, .contact-orbit {
     transition-property: transform, opacity, filter, clip-path;
     transition-duration: .85s;
@@ -889,15 +898,21 @@ const seoSchema = {
   .hero.scene-before .hero-foot { opacity: 0; transform: translateY(55px); }
   .hero.scene-before .hero-line { opacity: 0; transform: scale(1.12) rotate(3deg); }
 
-  /* Capabilities assemble from opposing directions; they scatter on exit. */
-  .capabilities.scene-after .cap-intro { opacity: 0; transform: perspective(900px) rotateX(16deg) translateY(90px); }
-  .capabilities.scene-after .cap-card:nth-child(odd) { opacity: 0; transform: translateX(-90px); clip-path: inset(0 100% 0 0); }
-  .capabilities.scene-after .cap-card:nth-child(even) { opacity: 0; transform: translateX(90px); clip-path: inset(0 0 0 100%); }
-  .capabilities.scene-before .cap-intro { opacity: 0; transform: translateX(-12vw); filter: blur(8px); }
-  .capabilities.scene-before .cap-card { opacity: 0; transform: translateY(-75px) scale(.94); }
-  .capabilities .cap-card:nth-child(2) { transition-delay: 70ms; }
-  .capabilities .cap-card:nth-child(3) { transition-delay: 140ms; }
-  .capabilities .cap-card:nth-child(4) { transition-delay: 210ms; }
+  /* About assembles from opposing directions; it scatters on exit. */
+  .about.scene-after .about-topline { opacity: 0; transform: translateY(35px); }
+  .about.scene-after .cap-intro { opacity: 0; transform: perspective(900px) rotateX(16deg) translateY(90px); }
+  .about.scene-after .cap-card:nth-child(odd) { opacity: 0; transform: translateX(-90px); clip-path: inset(0 100% 0 0); }
+  .about.scene-after .cap-card:nth-child(even) { opacity: 0; transform: translateX(90px); clip-path: inset(0 0 0 100%); }
+  .about.scene-after .about-footer { opacity: 0; transform: translateY(35px); }
+  .about.scene-after .about-scribble { opacity: 0; transform: scaleX(.2); transform-origin: left; }
+  .about.scene-before .about-topline { opacity: 0; transform: translateX(-12vw); filter: blur(8px); }
+  .about.scene-before .cap-intro { opacity: 0; transform: translateY(-75px) scale(.94); }
+  .about.scene-before .cap-card { opacity: 0; transform: translateY(-75px) scale(.94); }
+  .about.scene-before .about-footer { opacity: 0; transform: translateY(60px); }
+  .about.scene-before .about-scribble { opacity: 0; transform: translateX(-14vw) scaleX(1.15); }
+  .about .cap-card:nth-child(2) { transition-delay: 70ms; }
+  .about .cap-card:nth-child(3) { transition-delay: 140ms; }
+  .about .cap-card:nth-child(4) { transition-delay: 210ms; }
 
   /* Work rows cut in horizontally, then peel away at alternating angles. */
   .work.scene-after .section-head { opacity: 0; transform: translateY(80px); clip-path: inset(100% 0 0); }
@@ -921,13 +936,6 @@ const seoSchema = {
   .play.scene-before .game-card { opacity: 0; transform: translateY(-70px) rotate(-2deg); }
   .play .game-card:nth-child(2) { transition-delay: 90ms; }
   .play .game-card:nth-child(3) { transition-delay: 180ms; }
-
-  /* About behaves like oversized type landing on the page. */
-  .about.scene-after .about-index { opacity: 0; transform: translateX(-80px); }
-  .about.scene-after .about-copy { opacity: 0; transform: scale(.72) rotate(-4deg) translateY(100px); transform-origin: left center; filter: blur(10px); }
-  .about.scene-after .about-scribble { opacity: 0; transform: scaleX(.2); transform-origin: left; }
-  .about.scene-before .about-copy { opacity: 0; transform: translateX(16vw) rotate(3deg); filter: blur(9px); }
-  .about.scene-before .about-scribble { opacity: 0; transform: translateX(-14vw) scaleX(1.15); }
 
   /* Contact rises line-by-line while the system orbit resolves behind it. */
   .contact.scene-after .contact-topline { opacity: 0; transform: translateY(-35px); }
@@ -989,11 +997,17 @@ const seoSchema = {
     .stage-caption { grid-template-columns: 1fr; }
     .snake { left: 4%; transform: scale(.8); transform-origin: left center; }
     .food { right: 8%; }
-    .about { min-height: auto; padding: 84px 18px 72px; }
-    .about-copy { font-size: clamp(2.25rem, 13vw, 4.4rem); line-height: 1; }
+    .about { min-height: 100svh; padding: 84px 18px 28px; gap: 18px; }
+    .about-topline, .about-footer { font-size: 9px; }
+    .about-note { max-width: 48%; }
+    .cap-intro { gap: 14px; }
+    .cap-intro h2 { font-size: clamp(2.8rem, 12.5vw, 4.5rem); }
+    .about-copy { font-size: 1rem; line-height: 1.4; }
     .about-scribble { inset-inline: 0; width: 100%; }
-    .about-links { flex-direction: column; }
-    .about-links a { min-width: 0; }
+    .cap-card { padding: 14px; }
+    .cap-card h3 { margin: 22px 0 8px; font-size: clamp(1.3rem, 6vw, 1.8rem); }
+    .cap-card p { font-size: 8px; line-height: 1.4; }
+    .cap-card i { right: 8px; bottom: 7px; font-size: 3rem; }
     .contact { padding-inline: 18px; }
     .contact-topline p:last-child { display: none; }
     .contact h2 { font-size: clamp(3.5rem, 15vw, 7rem); }
@@ -1013,9 +1027,9 @@ const seoSchema = {
   }
 
   @media (max-width: 520px) {
-    .cap-grid { grid-template-columns: 1fr; }
-    .cap-card { min-height: 185px; border-right: 0; border-bottom: 1px solid rgba(17,17,15,.35) !important; }
-    .cap-card:last-child { border-bottom: 0 !important; }
-    .cap-card h3 { margin-top: 36px; }
+    .cap-grid { grid-template-columns: repeat(2, 1fr); }
+    .cap-card { min-height: 0; border-right: 1px solid rgba(17,17,15,.35) !important; border-bottom: 1px solid rgba(17,17,15,.35) !important; }
+    .cap-card:nth-child(2n) { border-right: 0 !important; }
+    .cap-card:nth-child(n+3) { border-bottom: 0 !important; }
   }
 </style>
