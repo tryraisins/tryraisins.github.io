@@ -1,18 +1,27 @@
 ---
 import '../styles/global.css';
 
+import quickBillzCover from '../assets/images/quickbillz-cover.png';
+import terrorTrackerCover from '../assets/images/terror-tracker-cover.png';
+import talentHunterCover from '../assets/images/talent-hunter-cover.png';
+import streamSlipCover from '../assets/images/streamslip-cover.png';
+
 const projects = [
-  { number: '01', name: 'QuickBillz', type: 'Product / Invoicing', description: 'A subscription-free invoicing tool for creating polished, shareable bills in seconds.', year: '2026', accent: '#ff5c35', href: 'https://quickbillz.tryraisins.dev/' },
-  { number: '02', name: 'Terror Tracker', type: 'Live intelligence map', description: 'A live map of insurgent activity across Nigeria, built around verified incidents and threat clusters.', year: '2026', accent: '#b8ff32', href: 'https://terrortracker.tryraisins.dev/' },
-  { number: '03', name: 'Talent Hunter', type: 'Applied NLP', description: 'A recruiter workflow that turns a job brief and a pile of resumes into a ranked shortlist.', year: '2026', accent: '#74a7ff', href: 'https://talenthunter.tryraisins.dev/' },
+  { number: '01', name: 'QuickBillz', type: 'Product / Invoicing', description: 'A subscription-free invoicing tool for creating polished, shareable bills in seconds.', year: '2026', accent: '#ff5c35', href: 'https://quickbillz.tryraisins.dev/', cover: quickBillzCover, coverAlt: 'QuickBillz invoice workspace' },
+  { number: '02', name: 'Terror Tracker', type: 'Live intelligence map', description: 'A live map of insurgent activity across Nigeria, built around verified incidents and threat clusters.', year: '2026', accent: '#b8ff32', href: 'https://terrortracker.tryraisins.dev/', cover: terrorTrackerCover, coverAlt: 'NATracker Nigeria attack tracker dashboard' },
+  { number: '03', name: 'Talent Hunter', type: 'Applied NLP', description: 'A recruiter workflow that turns a job brief and a pile of resumes into a ranked shortlist.', year: '2026', accent: '#74a7ff', href: 'https://talenthunter.tryraisins.dev/', cover: talentHunterCover, coverAlt: 'Talent Hunter resume screening landing page' },
   { number: '04', name: 'yeknal', type: 'NPM CLI / Agent skills', description: 'A developer CLI for creating, packaging, and sharing reusable agent skills and project guidance.', year: '2026', accent: '#00c2a8', href: 'https://www.npmjs.com/package/yeknal' },
-  { number: '05', name: 'StreamSlip', type: 'Music recap utility', description: 'Turns YouTube Music listening history into a shareable receipt with a clean, personal recap.', year: '2025', accent: '#ffcf40', href: 'https://streamslip.vercel.app/' },
+  { number: '05', name: 'StreamSlip', type: 'Music recap utility', description: 'Turns YouTube Music listening history into a shareable receipt with a clean, personal recap.', year: '2025', accent: '#ffcf40', href: 'https://streamslip.vercel.app/', cover: streamSlipCover, coverAlt: 'StreamSlip music receipts landing page' },
   { number: '06', name: 'BetPicks', type: 'Sports picks product', description: 'A focused sports-picks experience for exploring fixtures, odds, and informed predictions.', year: '2026', accent: '#ff78bd', href: 'https://betpicks.tryraisins.dev/' },
 ];
 
 const games = [
   { key: '01', name: 'Glyph Serpent', note: 'An 8-bit snake run with classic wall and body collisions, apple pickups, speed ramps, and a persistent high score.' },
+  { key: '02', name: 'Space Invaders', note: 'A hand-drawn alien armada with shifting formations, return fire from every surviving column, and escalating waves.' },
+  { key: '03', name: 'Dino Run', note: 'A kinetic sunset sprint with a running dino, rolling dunes, drifting dust, and a desert that speeds up beneath your feet.' },
 ];
+
+const leaderboardApiUrl = import.meta.env.PUBLIC_LEADERBOARD_API_URL ?? 'https://tryraisins-arcade-api.vercel.app/api/leaderboard';
 
 const siteUrl = 'https://tryraisins.dev/';
 const pageTitle = 'Seun Sowemimo (TryRaisins) — Fullstack Developer, Lagos';
@@ -197,7 +206,7 @@ const seoSchema = {
 
         <div class="project-list">
           {projects.map((project) => (
-            <article class="project reveal" style={`--project-accent:${project.accent}`}>
+            <article class:list={['project', 'reveal', { 'has-cover': project.cover }]} style={`--project-accent:${project.accent}`}>
               <a class="project-row-link" href={project.href ?? '#'} target={project.href ? '_blank' : undefined} rel={project.href ? 'noopener noreferrer' : undefined} aria-label={`Open ${project.name}`}></a>
               <span class="project-number">{project.number}</span>
               <span class="project-details">
@@ -210,6 +219,13 @@ const seoSchema = {
                 <span class="project-action-label">Open</span>
                 <span class="project-arrow" aria-hidden="true"></span>
               </a>
+              {project.cover && (
+                <figure class="project-preview">
+                  <span class="project-preview-frame">
+                    <img src={project.cover.src} alt={project.coverAlt} loading="lazy" />
+                  </span>
+                </figure>
+              )}
             </article>
           ))}
         </div>
@@ -253,14 +269,25 @@ const seoSchema = {
         <div class="game-console" hidden aria-live="polite">
           <div class="console-topbar"><span class="console-kicker">Playable system / <b id="console-game-name">—</b></span><button class="console-close" type="button" aria-label="Close game">×</button></div>
           <p class="console-status" id="console-status">Choose a game to begin.</p>
+          <form id="score-form" class="score-entry" hidden>
+            <label for="score-name">You made the board. Save your arcade name.</label>
+            <div class="score-form-row"><input id="score-name" name="name" type="text" maxlength="5" minlength="1" pattern="[A-Za-z0-9]{1,5}" autocomplete="off" placeholder="NAME" aria-describedby="score-form-hint" /><button type="submit">Save score</button></div>
+            <small id="score-form-hint">1–5 letters or numbers · score <span id="score-form-score">0</span></small>
+          </form>
           <canvas id="game-canvas" width="840" height="420" aria-label="Game canvas"></canvas>
-          <div class="touch-controls" hidden aria-label="Snake touch controls">
-            <button type="button" data-direction="up" aria-label="Move up">Up</button>
-            <button type="button" data-direction="left" aria-label="Move left">Left</button>
-            <button type="button" data-direction="right" aria-label="Move right">Right</button>
-            <button type="button" data-direction="down" aria-label="Move down">Down</button>
+          <div class="touch-controls" hidden aria-label="Game touch controls">
+            <button type="button" data-control="up" aria-label="Move up">Up</button>
+            <button type="button" data-control="left" aria-label="Move left">Left</button>
+            <button type="button" data-control="right" aria-label="Move right">Right</button>
+            <button type="button" data-control="down" aria-label="Move down">Down</button>
+            <button type="button" data-control="fire" aria-label="Fire">Fire</button>
+            <button type="button" data-control="jump" aria-label="Jump">Jump</button>
           </div>
           <div class="console-controls">Arrows / WASD move · P pauses · R restarts · F toggles fullscreen · Esc closes</div>
+          <aside class="leaderboard-panel" data-api-url={leaderboardApiUrl} aria-live="polite">
+            <div class="leaderboard-head"><span>Top 10 / <b id="leaderboard-game">—</b></span><span id="leaderboard-source">Board loading…</span></div>
+            <ol id="leaderboard-list"><li>Choose a game to see the board.</li></ol>
+          </aside>
         </div>
       </section>
 
@@ -428,9 +455,73 @@ const seoSchema = {
         if (touchControls instanceof HTMLElement) touchControls.hidden = mode !== 'canvas';
       };
 
+      const leaderboardPanel = document.querySelector('.leaderboard-panel');
+      const leaderboardGame = document.querySelector('#leaderboard-game');
+      const leaderboardSource = document.querySelector('#leaderboard-source');
+      const leaderboardList = document.querySelector('#leaderboard-list');
+      const scoreForm = document.querySelector('#score-form');
+      const scoreName = document.querySelector('#score-name');
+      const scoreFormScore = document.querySelector('#score-form-score');
+      const leaderboardApi = leaderboardPanel instanceof HTMLElement ? leaderboardPanel.dataset.apiUrl?.replace(/\/$/, '') || '' : '';
+      const leaderboardLocalKey = 'tryraisins-arcade-leaderboards';
+      let pendingScore = null;
+      let activeLeaderboardGame = '';
+      let leaderboardRows = [];
+
+      const gameLabels = { 'glyph-serpent': 'Glyph Serpent', 'space-invaders': 'Space Invaders', 'dino-run': 'Dino Run' };
+      const localBoards = () => {
+        try { return JSON.parse(localStorage.getItem(leaderboardLocalKey) || '{}'); } catch { return {}; }
+      };
+      const sortScores = (rows) => [...rows].sort((a, b) => Number(b.score) - Number(a.score) || Number(b.level) - Number(a.level)).slice(0, 10);
+      const renderLeaderboard = (game, rows, source = '') => {
+        leaderboardRows = sortScores(rows);
+        activeLeaderboardGame = game;
+        if (leaderboardGame) leaderboardGame.textContent = gameLabels[game] || game;
+        if (leaderboardSource) leaderboardSource.textContent = source || (leaderboardApi ? 'ONLINE BOARD' : 'LOCAL PREVIEW');
+        if (leaderboardList) leaderboardList.innerHTML = leaderboardRows.length ? leaderboardRows.map((row, index) => `<li><span>${String(index + 1).padStart(2, '0')} ${String(row.name || '-----').slice(0, 5).toUpperCase()}</span><b>${Number(row.score) || 0}</b><small>LV ${Number(row.level) || 1}</small></li>`).join('') : '<li>No scores yet. Take the first slot.</li>';
+      };
+      const fetchLeaderboard = async (game) => {
+        const local = localBoards()[game] || [];
+        if (!leaderboardApi) { renderLeaderboard(game, local, 'LOCAL PREVIEW'); return local; }
+        try {
+          const response = await fetch(`${leaderboardApi}?game=${encodeURIComponent(game)}`);
+          if (!response.ok) throw new Error(`Leaderboard request failed: ${response.status}`);
+          const rows = await response.json(); renderLeaderboard(game, rows, 'ONLINE BOARD'); return rows;
+        } catch (error) { console.warn('Leaderboard unavailable; using local preview.', error); renderLeaderboard(game, local, 'LOCAL FALLBACK'); return local; }
+      };
+      const qualifiesForBoard = (score) => leaderboardRows.length < 10 || Number(score) > Number(leaderboardRows[leaderboardRows.length - 1]?.score || 0);
+      const offerScoreSave = async (game, score, level) => {
+        await fetchLeaderboard(game);
+        if (!qualifiesForBoard(score) || !scoreForm) return;
+        pendingScore = { game, score, level };
+        scoreForm.hidden = false;
+        if (scoreFormScore) scoreFormScore.textContent = String(score);
+        if (scoreName instanceof HTMLInputElement) { scoreName.value = ''; window.setTimeout(() => scoreName.focus(), 0); }
+        setGameStatus(`Top 10 score: ${score}. Save a 1–5 character arcade name.`);
+      };
+      const saveLeaderboardScore = async (entry) => {
+        const name = String(entry.name || '').replace(/[^a-z0-9]/gi, '').slice(0, 5).toUpperCase();
+        if (!name) return;
+        const cleanEntry = { game: entry.game, name, score: Number(entry.score) || 0, level: Number(entry.level) || 1 };
+        let savedOnline = false;
+        if (leaderboardApi) {
+          try {
+            const response = await fetch(leaderboardApi, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(cleanEntry) });
+            if (!response.ok) throw new Error(`Leaderboard save failed: ${response.status}`);
+            savedOnline = true;
+          } catch (error) { console.warn('Online score save failed; saving locally.', error); }
+        }
+        const boards = localBoards(); boards[cleanEntry.game] = sortScores([...(boards[cleanEntry.game] || []), cleanEntry]); localStorage.setItem(leaderboardLocalKey, JSON.stringify(boards));
+        if (scoreForm) scoreForm.hidden = true; pendingScore = null; renderLeaderboard(cleanEntry.game, savedOnline ? await fetchLeaderboard(cleanEntry.game) : boards[cleanEntry.game], savedOnline ? 'ONLINE BOARD' : 'LOCAL PREVIEW');
+        setGameStatus(`${cleanEntry.name} saved at ${cleanEntry.score}. Keep climbing.`);
+      };
+      scoreForm?.addEventListener('submit', (event) => { event.preventDefault(); if (pendingScore && scoreName instanceof HTMLInputElement) saveLeaderboardScore({ ...pendingScore, name: scoreName.value }); });
+      const finishScore = (game, score, level, message) => { setGameStatus(`${message} Score ${score}, level ${level}.`); void offerScoreSave(game, score, level); };
+      const setTouchLayout = (game) => { touchControls?.querySelectorAll('[data-control]').forEach((button) => { const control = button.dataset.control; const visible = game === 'glyph-serpent' ? ['up', 'left', 'right', 'down'].includes(control) : game === 'space-invaders' ? ['left', 'right', 'fire'].includes(control) : control === 'jump'; button.hidden = !visible; }); };
+
 
       function startSnake() {
-        stopActiveGame(); setGameMode('canvas');
+        stopActiveGame(); setGameMode('canvas'); setTouchLayout('glyph-serpent');
         if (!(gameCanvas instanceof HTMLCanvasElement)) return;
         const ctx = gameCanvas.getContext('2d'); if (!ctx) return;
         const cols = 28, rows = 16, hudHeight = 38, cellW = gameCanvas.width / cols, cellH = (gameCanvas.height - hudHeight) / rows;
@@ -492,7 +583,7 @@ const seoSchema = {
             ctx.fillStyle = '#f4f0e7'; ctx.font = '500 12px DM Mono'; ctx.fillText(state.mode === 'paused' ? 'PRESS P TO RESUME' : 'PRESS R TO RUN IT BACK', gameCanvas.width / 2, gameCanvas.height / 2 + 23);
           }
         };
-        const endGame = (reason) => { state.mode = 'lost'; setGameStatus(`${reason} Score ${state.score}. Press R to run it back.`); };
+        const endGame = (reason) => { state.mode = 'lost'; finishScore('glyph-serpent', state.score, 1, reason); };
         const update = () => {
           if (state.mode !== 'playing') return;
           state.dir = state.queued;
@@ -511,25 +602,114 @@ const seoSchema = {
         const queueDirection = (next) => { if (!next || (next.x === -state.dir.x && next.y === -state.dir.y)) return; state.queued = next; };
         const dirs = { up: { x: 0, y: -1 }, down: { x: 0, y: 1 }, left: { x: -1, y: 0 }, right: { x: 1, y: 0 } };
         const onKey = (event) => { const key = event.key.toLowerCase(); if (key === 'p') { event.preventDefault(); state.mode = state.mode === 'paused' ? 'playing' : state.mode === 'playing' ? 'paused' : state.mode; state.last = performance.now(); setGameStatus(state.mode === 'paused' ? 'Paused. Press P to continue.' : 'Back in motion.'); render(); return; } const keyboardDirs = { arrowup: dirs.up, w: dirs.up, arrowdown: dirs.down, s: dirs.down, arrowleft: dirs.left, a: dirs.left, arrowright: dirs.right, d: dirs.right }; const next = keyboardDirs[key]; if (!next) return; event.preventDefault(); queueDirection(next); };
-        const onTouchControl = (event) => { const button = event.target instanceof HTMLElement ? event.target.closest('[data-direction]') : null; if (!(button instanceof HTMLElement)) return; event.preventDefault(); queueDirection(dirs[button.dataset.direction]); };
+        const onTouchControl = (event) => { const button = event.target instanceof HTMLElement ? event.target.closest('[data-control]') : null; if (!(button instanceof HTMLElement)) return; event.preventDefault(); queueDirection(dirs[button.dataset.control]); };
         const renderText = () => JSON.stringify({ game: 'Glyph Serpent', coordinateSystem: 'origin top-left, x right, y down; board begins below a 38px HUD', mode: state.mode, score: state.score, highScore: state.highScore, speedMs: state.stepMs, snakeLength: state.snake.length, head: state.snake[0], food: state.foodPos });
         const loop = (time) => { if (state.mode === 'playing' && (!state.last || time - state.last >= state.stepMs)) { state.last = time; update(); } render(); gameFrame = requestAnimationFrame(loop); };
         placeFood(); window.addEventListener('keydown', onKey); touchControls?.addEventListener('pointerdown', onTouchControl); window.render_game_to_text = renderText; window.advanceTime = (ms) => { for (let elapsed = 0; elapsed < ms; elapsed += state.stepMs) update(); render(); }; stopActiveGame = () => { cancelAnimationFrame(gameFrame); window.removeEventListener('keydown', onKey); touchControls?.removeEventListener('pointerdown', onTouchControl); delete window.render_game_to_text; delete window.advanceTime; stopActiveGame = () => {}; }; setGameStatus('Eat the apple, grow longer, and stay clear of the walls and your own trail.'); render(); gameFrame = requestAnimationFrame(loop);
       }
 
 
+      function startSpaceInvaders() {
+        stopActiveGame(); setGameMode('canvas'); setTouchLayout('space-invaders');
+        if (!(gameCanvas instanceof HTMLCanvasElement)) return;
+        const ctx = gameCanvas.getContext('2d'); if (!ctx) return;
+        const width = gameCanvas.width, height = gameCanvas.height, hudHeight = 38;
+        const stars = Array.from({ length: 88 }, (_, index) => ({ x: (index * 97 + 41) % width, y: hudHeight + (index * 53 + 19) % (height - hudHeight - 16), size: 1 + (index % 3) * .45, phase: index * .73 }));
+        const state = { mode: 'playing', score: 0, level: 1, playerX: width / 2, bullets: [], enemyBullets: [], invaders: [], bursts: [], direction: 1, enemyClock: 0, enemyShotClock: 0, enemyShotSerial: 0, shotCooldown: 0, time: 0, last: 0, highScore: Math.max(0, ...(localBoards()['space-invaders'] || []).map((row) => Number(row.score) || 0)) };
+        const spawnWave = () => { const rows = Math.min(6, 3 + state.level), cols = 11; state.invaders = []; for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) state.invaders.push({ x: 80 + col * 68, y: 84 + row * 43, row, col, type: (row + state.level) % 3, phase: (col * .37 + row * .61) % (Math.PI * 2) }); state.direction = 1; state.enemyClock = 0; state.enemyShotSerial = state.level; };
+        const fire = () => { if (state.mode !== 'playing' || state.shotCooldown > 0) return; state.bullets.push({ x: state.playerX, y: height - 76, trail: 0 }); state.shotCooldown = .22; };
+        const endGame = (reason) => { if (state.mode !== 'playing') return; state.mode = 'lost'; finishScore('space-invaders', state.score, state.level, reason); };
+        const makeBurst = (x, y, color) => { for (let index = 0; index < 14; index++) { const angle = index / 14 * Math.PI * 2; state.bursts.push({ x, y, dx: Math.cos(angle) * (36 + (index % 4) * 16), dy: Math.sin(angle) * (36 + (index % 3) * 18), life: .42 + (index % 3) * .06, color }); } };
+        const update = (dt) => {
+          if (state.mode !== 'playing') return;
+          state.time += dt; state.shotCooldown = Math.max(0, state.shotCooldown - dt); state.enemyClock += dt; state.enemyShotClock += dt;
+          state.bullets = state.bullets.map((bullet) => ({ ...bullet, y: bullet.y - 520 * dt, trail: Math.min(1, bullet.trail + dt * 8) })).filter((bullet) => bullet.y > hudHeight);
+          state.enemyBullets = state.enemyBullets.map((bullet) => ({ ...bullet, y: bullet.y + (225 + state.level * 9) * dt, trail: Math.min(1, bullet.trail + dt * 8) })).filter((bullet) => bullet.y < height);
+          state.bursts = state.bursts.map((burst) => ({ ...burst, x: burst.x + burst.dx * dt, y: burst.y + burst.dy * dt, life: burst.life - dt })).filter((burst) => burst.life > 0);
+          if (state.enemyClock > Math.max(.19, .62 - state.level * .04)) { const edge = state.invaders.some((invader) => invader.x > width - 52 || invader.x < 52); if (edge) { state.direction *= -1; state.invaders.forEach((invader) => { invader.y += 17; }); } state.invaders.forEach((invader) => { invader.x += state.direction * (9 + state.level * 1.25); }); state.enemyClock = 0; }
+          if (state.enemyShotClock > Math.max(.48, 1.26 - state.level * .045) && state.invaders.length) {
+            const frontByColumn = new Map();
+            state.invaders.forEach((invader) => { const current = frontByColumn.get(invader.col); if (!current || invader.y > current.y) frontByColumn.set(invader.col, invader); });
+            const frontline = [...frontByColumn.values()].sort((a, b) => a.col - b.col);
+            const shots = state.level > 3 && frontline.length > 2 ? 2 : 1;
+            for (let index = 0; index < shots; index++) { const shooter = frontline[(state.enemyShotSerial + index * 4) % frontline.length]; state.enemyBullets.push({ x: shooter.x, y: shooter.y + 22, trail: 0 }); }
+            state.enemyShotSerial += 3; state.enemyShotClock = 0;
+          }
+          state.bullets.forEach((bullet) => { const hitIndex = state.invaders.findIndex((invader) => Math.abs(invader.x - bullet.x) < 24 && Math.abs(invader.y - bullet.y) < 20); if (hitIndex >= 0) { const [hit] = state.invaders.splice(hitIndex, 1); bullet.y = -100; makeBurst(hit.x, hit.y, hit.type === 1 ? '#ffcf40' : '#8de7ff'); state.score += 10 + hit.row * 2; state.highScore = Math.max(state.highScore, state.score); } });
+          if (state.enemyBullets.some((bullet) => Math.abs(bullet.x - state.playerX) < 27 && bullet.y > height - 100)) { makeBurst(state.playerX, height - 62, '#ff725a'); endGame('An alien bolt broke through your shields.'); return; }
+          if (state.invaders.some((invader) => invader.y > height - 100)) { endGame('The wave reached your line.'); return; }
+          if (!state.invaders.length) { state.level += 1; spawnWave(); setGameStatus(`Wave cleared. Level ${state.level} incoming.`); }
+        };
+        const drawAlien = (invader) => {
+          const bob = Math.sin(state.time * 4.6 + invader.phase) * 2.2;
+          const palette = invader.type === 0 ? ['#77dcff', '#d9f8ff', '#2669bf'] : invader.type === 1 ? ['#ffcc52', '#fff0a7', '#c65e21'] : ['#b8f46a', '#efffc4', '#4a9b39'];
+          ctx.save(); ctx.translate(invader.x, invader.y + bob); ctx.shadowColor = palette[0]; ctx.shadowBlur = 12; ctx.fillStyle = palette[0]; ctx.strokeStyle = palette[1]; ctx.lineWidth = 2;
+          if (invader.type === 0) {
+            ctx.beginPath(); ctx.ellipse(0, -2, 18, 13, 0, Math.PI, 0); ctx.lineTo(14, 12); ctx.lineTo(7, 8); ctx.lineTo(0, 14); ctx.lineTo(-7, 8); ctx.lineTo(-14, 12); ctx.closePath(); ctx.fill(); ctx.stroke();
+            ctx.fillStyle = '#101828'; ctx.fillRect(-10, -2, 5, 5); ctx.fillRect(5, -2, 5, 5);
+          } else if (invader.type === 1) {
+            ctx.beginPath(); ctx.roundRect(-18, -8, 36, 20, 9); ctx.fill(); ctx.stroke(); ctx.fillRect(-23, -3, 7, 4); ctx.fillRect(16, -3, 7, 4); ctx.fillRect(-17, 10, 8, 5); ctx.fillRect(9, 10, 8, 5);
+            ctx.fillStyle = '#101828'; ctx.fillRect(-10, -2, 5, 5); ctx.fillRect(5, -2, 5, 5);
+          } else {
+            ctx.beginPath(); ctx.ellipse(0, -3, 18, 15, 0, Math.PI, 0); ctx.lineTo(15, 13); ctx.lineTo(9, 9); ctx.lineTo(4, 15); ctx.lineTo(-2, 10); ctx.lineTo(-8, 15); ctx.lineTo(-13, 9); ctx.lineTo(-18, 13); ctx.closePath(); ctx.fill(); ctx.stroke();
+            ctx.fillStyle = '#101828'; ctx.fillRect(-10, -5, 5, 6); ctx.fillRect(5, -5, 5, 6);
+          }
+          ctx.shadowBlur = 0; ctx.fillStyle = palette[1]; ctx.globalAlpha = .68; ctx.fillRect(-7, -10, 14, 2); ctx.restore();
+        };
+        const drawShip = () => { const pulse = 1 + Math.sin(state.time * 7) * .035; ctx.save(); ctx.translate(state.playerX, height - 55); ctx.scale(pulse, pulse); ctx.shadowColor = '#7de7ff'; ctx.shadowBlur = 18; ctx.fillStyle = '#d7f7ff'; ctx.beginPath(); ctx.moveTo(0, -22); ctx.lineTo(27, 14); ctx.lineTo(8, 11); ctx.lineTo(0, 18); ctx.lineTo(-8, 11); ctx.lineTo(-27, 14); ctx.closePath(); ctx.fill(); ctx.fillStyle = '#2f8de1'; ctx.beginPath(); ctx.moveTo(0, -16); ctx.lineTo(8, 8); ctx.lineTo(-8, 8); ctx.closePath(); ctx.fill(); ctx.fillStyle = '#ffcf40'; ctx.fillRect(-3, 14, 6, 8); ctx.restore(); };
+        const render = () => {
+          const sky = ctx.createLinearGradient(0, 0, 0, height); sky.addColorStop(0, '#070b1b'); sky.addColorStop(.58, '#101b3d'); sky.addColorStop(1, '#07111f'); ctx.fillStyle = sky; ctx.fillRect(0, 0, width, height);
+          stars.forEach((star) => { ctx.globalAlpha = .24 + (Math.sin(state.time * 2 + star.phase) + 1) * .18; ctx.fillStyle = '#d9f8ff'; ctx.fillRect(star.x, star.y, star.size, star.size); }); ctx.globalAlpha = 1;
+          ctx.fillStyle = 'rgba(126,205,255,.09)'; ctx.fillRect(0, hudHeight, width, 2); ctx.font = '500 12px DM Mono'; ctx.textBaseline = 'middle'; ctx.textAlign = 'left'; ctx.fillStyle = '#f4f0e7'; ctx.fillText(`SCORE ${String(state.score).padStart(4, '0')}`, 14, 19); ctx.textAlign = 'center'; ctx.fillStyle = '#8de7ff'; ctx.fillText(`SPACE INVADERS / WAVE ${state.level}`, width / 2, 19); ctx.textAlign = 'right'; ctx.fillStyle = 'rgba(244,240,231,.72)'; ctx.fillText(`BEST ${String(state.highScore).padStart(4, '0')}`, width - 14, 19);
+          state.invaders.forEach(drawAlien);
+          ctx.lineCap = 'round'; ctx.strokeStyle = '#ffef8f'; ctx.lineWidth = 3; state.bullets.forEach((bullet) => { ctx.globalAlpha = bullet.trail; ctx.beginPath(); ctx.moveTo(bullet.x, bullet.y + 18); ctx.lineTo(bullet.x, bullet.y - 4); ctx.stroke(); }); ctx.strokeStyle = '#ff725a'; ctx.lineWidth = 4; state.enemyBullets.forEach((bullet) => { ctx.globalAlpha = bullet.trail; ctx.beginPath(); ctx.moveTo(bullet.x, bullet.y - 9); ctx.lineTo(bullet.x, bullet.y + 13); ctx.stroke(); }); ctx.globalAlpha = 1;
+          state.bursts.forEach((burst) => { ctx.globalAlpha = Math.min(1, burst.life * 2); ctx.fillStyle = burst.color; ctx.fillRect(burst.x - 2, burst.y - 2, 4, 4); }); ctx.globalAlpha = 1; drawShip();
+          if (state.mode !== 'playing') { ctx.fillStyle = 'rgba(8,11,19,.8)'; ctx.fillRect(0, hudHeight, width, height - hudHeight); ctx.textAlign = 'center'; ctx.fillStyle = '#ff5c35'; ctx.font = '400 38px Archivo Black'; ctx.fillText('GAME OVER', width / 2, height / 2 - 18); ctx.fillStyle = '#f4f0e7'; ctx.font = '500 12px DM Mono'; ctx.fillText('PRESS R TO RUN IT BACK', width / 2, height / 2 + 23); }
+        };
+        const move = (amount) => { state.playerX = Math.max(28, Math.min(width - 28, state.playerX + amount)); };
+        const onKey = (event) => { const key = event.key.toLowerCase(); if (key === 'arrowleft' || key === 'a') { event.preventDefault(); move(-34); } else if (key === 'arrowright' || key === 'd') { event.preventDefault(); move(34); } else if (key === ' ' || key === 'spacebar') { event.preventDefault(); fire(); } else if (key === 'p') { event.preventDefault(); state.mode = state.mode === 'paused' ? 'playing' : state.mode === 'playing' ? 'paused' : state.mode; setGameStatus(state.mode === 'paused' ? 'Paused. Press P to continue.' : 'Back in motion.'); render(); } };
+        const onTouchControl = (event) => { const button = event.target instanceof HTMLElement ? event.target.closest('[data-control]') : null; if (!(button instanceof HTMLElement)) return; event.preventDefault(); if (button.dataset.control === 'left') move(-38); if (button.dataset.control === 'right') move(38); if (button.dataset.control === 'fire') fire(); };
+        const renderText = () => JSON.stringify({ game: 'Space Invaders', coordinateSystem: 'origin top-left, x right, y down; HUD is 38px high', mode: state.mode, score: state.score, level: state.level, playerX: Math.round(state.playerX), invadersRemaining: state.invaders.length, bullets: state.bullets.length });
+        const loop = (time) => { const dt = state.last ? Math.min(.05, (time - state.last) / 1000) : 0; state.last = time; update(dt); render(); gameFrame = requestAnimationFrame(loop); };
+        spawnWave(); window.addEventListener('keydown', onKey); touchControls?.addEventListener('pointerdown', onTouchControl); window.render_game_to_text = renderText; window.advanceTime = (ms) => { for (let elapsed = 0; elapsed < ms; elapsed += 16.67) update(1 / 60); render(); }; stopActiveGame = () => { cancelAnimationFrame(gameFrame); window.removeEventListener('keydown', onKey); touchControls?.removeEventListener('pointerdown', onTouchControl); delete window.render_game_to_text; delete window.advanceTime; stopActiveGame = () => {}; }; setGameStatus('Move, fire, and clear the whole alien armada. Every surviving column can fire back.'); void fetchLeaderboard('space-invaders'); render(); gameFrame = requestAnimationFrame(loop);
+      }
+
+      function startDinoRun() {
+        stopActiveGame(); setGameMode('canvas'); setTouchLayout('dino-run');
+        if (!(gameCanvas instanceof HTMLCanvasElement)) return;
+        const ctx = gameCanvas.getContext('2d'); if (!ctx) return;
+        const width = gameCanvas.width, height = gameCanvas.height, hudHeight = 38, ground = height - 58;
+        const state = { mode: 'playing', score: 0, level: 1, playerY: ground - 54, velocityY: 0, onGround: true, obstacles: [], dust: [], spawnClock: .8, spawnSerial: 0, runCycle: 0, time: 0, last: 0, highScore: Math.max(0, ...(localBoards()['dino-run'] || []).map((row) => Number(row.score) || 0)) };
+        const jump = () => { if (state.mode === 'playing' && state.onGround) { state.velocityY = -535; state.onGround = false; for (let index = 0; index < 8; index++) state.dust.push({ x: 125, y: ground + 1, dx: -45 - index * 9, dy: -15 - (index % 3) * 12, life: .34 + index * .02, size: 3 + index % 3 }); } };
+        const endGame = (reason) => { if (state.mode !== 'playing') return; state.mode = 'lost'; finishScore('dino-run', Math.floor(state.score), state.level, reason); };
+        const update = (dt) => { if (state.mode !== 'playing') return; state.time += dt; state.score += dt * 10; state.level = 1 + Math.floor(state.score / 100); state.highScore = Math.max(state.highScore, Math.floor(state.score)); const speed = 245 + state.level * 30; state.runCycle += dt * (state.onGround ? 12 + state.level * .45 : 3); state.velocityY += 1420 * dt; state.playerY += state.velocityY * dt; if (state.playerY >= ground - 54) { if (!state.onGround) { for (let index = 0; index < 12; index++) state.dust.push({ x: 128, y: ground + 1, dx: -25 - index * 10, dy: -8 - (index % 4) * 8, life: .28 + (index % 3) * .05, size: 3 + index % 3 }); } state.playerY = ground - 54; state.velocityY = 0; state.onGround = true; } state.spawnClock -= dt; if (state.spawnClock <= 0) { const kind = state.spawnSerial++ % 3 === 2 ? 'rock' : 'cactus'; const h = kind === 'rock' ? 25 + (state.level % 2) * 7 : 38 + (state.spawnSerial % 3) * 10; state.obstacles.push({ x: width + 30, w: kind === 'rock' ? 42 : 26 + (state.spawnSerial % 2) * 12, h, kind }); state.spawnClock = Math.max(.68, 1.32 - state.level * .026) + (state.spawnSerial % 3) * .1; } state.obstacles = state.obstacles.map((obstacle) => ({ ...obstacle, x: obstacle.x - speed * dt })).filter((obstacle) => obstacle.x > -70); state.dust = state.dust.map((particle) => ({ ...particle, x: particle.x + particle.dx * dt, y: particle.y + particle.dy * dt, life: particle.life - dt, dy: particle.dy + 22 * dt })).filter((particle) => particle.life > 0); if (state.obstacles.some((obstacle) => obstacle.x < 156 && obstacle.x + obstacle.w > 104 && state.playerY + 49 > ground - obstacle.h + 3)) endGame('You clipped an obstacle.'); };
+        const drawDino = () => { const stride = Math.sin(state.runCycle) * (state.onGround ? 8 : 2); const bob = state.onGround ? Math.abs(Math.sin(state.runCycle)) * 2 : 0; ctx.save(); ctx.translate(112, state.playerY + bob); ctx.shadowColor = 'rgba(88,44,40,.3)'; ctx.shadowBlur = 8; ctx.fillStyle = '#313e46'; ctx.beginPath(); ctx.moveTo(6, 30); ctx.lineTo(-36, 20); ctx.lineTo(-53, 31); ctx.lineTo(-24, 37); ctx.lineTo(2, 44); ctx.closePath(); ctx.fill(); ctx.fillStyle = '#45606a'; ctx.beginPath(); ctx.ellipse(4, 18, 28, 22, -.15, 0, Math.PI * 2); ctx.fill(); ctx.beginPath(); ctx.ellipse(27, 0, 19, 17, -.14, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = '#31464f'; ctx.fillRect(13, 10, 13, 21); ctx.strokeStyle = '#24333a'; ctx.lineWidth = 7; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(-4, 34); ctx.lineTo(-5 + stride, 53); ctx.lineTo(8 + stride, 53); ctx.moveTo(16, 35); ctx.lineTo(18 - stride, 53); ctx.lineTo(31 - stride, 53); ctx.stroke(); ctx.fillStyle = '#eff1cf'; ctx.beginPath(); ctx.arc(31, -4, 4.6, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = '#18232a'; ctx.beginPath(); ctx.arc(32, -4, 2.1, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = '#f3b45a'; ctx.fillRect(35, 7, 7, 2); ctx.restore(); };
+        const drawObstacle = (obstacle) => { ctx.save(); ctx.translate(obstacle.x, ground); if (obstacle.kind === 'rock') { ctx.fillStyle = '#865849'; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(8, -obstacle.h + 7); ctx.lineTo(obstacle.w - 10, -obstacle.h); ctx.lineTo(obstacle.w, 0); ctx.closePath(); ctx.fill(); ctx.fillStyle = '#bd7b59'; ctx.globalAlpha = .7; ctx.beginPath(); ctx.moveTo(9, -obstacle.h + 10); ctx.lineTo(obstacle.w - 12, -obstacle.h + 5); ctx.lineTo(obstacle.w - 18, -obstacle.h + 15); ctx.closePath(); ctx.fill(); } else { ctx.strokeStyle = '#35654f'; ctx.lineWidth = 10; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(obstacle.w / 2, 0); ctx.lineTo(obstacle.w / 2, -obstacle.h); ctx.moveTo(obstacle.w / 2, -obstacle.h * .55); ctx.lineTo(4, -obstacle.h * .66); ctx.lineTo(4, -obstacle.h * .82); ctx.moveTo(obstacle.w / 2, -obstacle.h * .36); ctx.lineTo(obstacle.w - 3, -obstacle.h * .47); ctx.lineTo(obstacle.w - 3, -obstacle.h * .61); ctx.stroke(); ctx.strokeStyle = '#79a661'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(obstacle.w / 2 - 3, -5); ctx.lineTo(obstacle.w / 2 - 3, -obstacle.h + 5); ctx.stroke(); } ctx.restore(); };
+        const render = () => { const sky = ctx.createLinearGradient(0, hudHeight, 0, height); sky.addColorStop(0, '#f6d9a9'); sky.addColorStop(.42, '#f6a66f'); sky.addColorStop(1, '#cc7658'); ctx.fillStyle = sky; ctx.fillRect(0, 0, width, height); ctx.fillStyle = 'rgba(44,53,64,.08)'; ctx.fillRect(0, 0, width, hudHeight); ctx.fillStyle = '#ffe3a3'; ctx.beginPath(); ctx.arc(width * .74, 105, 40, 0, Math.PI * 2); ctx.fill(); ctx.fillStyle = 'rgba(255,245,206,.35)'; for (let index = 0; index < 5; index++) { const cloudX = ((index * 190 - state.score * 5) % (width + 160)) - 60; ctx.beginPath(); ctx.ellipse(cloudX, 77 + index % 2 * 25, 36, 7, 0, 0, Math.PI * 2); ctx.fill(); } ctx.fillStyle = '#b76050'; ctx.beginPath(); ctx.moveTo(0, ground - 50); for (let x = 0; x <= width + 60; x += 60) ctx.lineTo(x, ground - 55 - Math.sin((x + state.score * 12) * .015) * 20); ctx.lineTo(width, ground + 10); ctx.lineTo(0, ground + 10); ctx.closePath(); ctx.fill(); ctx.fillStyle = '#d98a5c'; ctx.beginPath(); ctx.moveTo(0, ground - 21); for (let x = 0; x <= width + 50; x += 50) ctx.lineTo(x, ground - 25 - Math.sin((x + state.score * 23) * .029) * 12); ctx.lineTo(width, ground + 12); ctx.lineTo(0, ground + 12); ctx.closePath(); ctx.fill(); ctx.fillStyle = '#e8aa6c'; ctx.fillRect(0, ground, width, height - ground); ctx.fillStyle = 'rgba(114,70,55,.22)'; for (let x = -40; x < width + 40; x += 44) { const lineX = x - (state.score * 28 % 44); ctx.fillRect(lineX, ground + 13, 22, 2); } ctx.fillStyle = '#70483d'; ctx.fillRect(0, ground, width, 3); ctx.font = '500 12px DM Mono'; ctx.textBaseline = 'middle'; ctx.textAlign = 'left'; ctx.fillStyle = '#27313a'; ctx.fillText(`SCORE ${String(Math.floor(state.score)).padStart(4, '0')}`, 14, 19); ctx.textAlign = 'center'; ctx.fillStyle = '#a73f39'; ctx.fillText(`DINO RUN / LV ${state.level}`, width / 2, 19); ctx.textAlign = 'right'; ctx.fillStyle = 'rgba(39,49,58,.7)'; ctx.fillText(`BEST ${String(state.highScore).padStart(4, '0')}`, width - 14, 19); state.obstacles.forEach(drawObstacle); state.dust.forEach((particle) => { ctx.globalAlpha = Math.min(1, particle.life * 3); ctx.fillStyle = '#8d5946'; ctx.beginPath(); ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2); ctx.fill(); }); ctx.globalAlpha = 1; drawDino(); if (state.mode !== 'playing') { ctx.fillStyle = 'rgba(255,229,188,.76)'; ctx.fillRect(0, hudHeight, width, height - hudHeight); ctx.textAlign = 'center'; ctx.fillStyle = '#a73f39'; ctx.font = '400 38px Archivo Black'; ctx.fillText('RUN OVER', width / 2, height / 2 - 18); ctx.fillStyle = '#27313a'; ctx.font = '500 12px DM Mono'; ctx.fillText('PRESS R TO RUN IT BACK', width / 2, height / 2 + 23); } };
+        const onKey = (event) => { const key = event.key.toLowerCase(); if (key === ' ' || key === 'arrowup' || key === 'w') { event.preventDefault(); jump(); } else if (key === 'p') { event.preventDefault(); state.mode = state.mode === 'paused' ? 'playing' : state.mode === 'playing' ? 'paused' : state.mode; setGameStatus(state.mode === 'paused' ? 'Paused. Press P to continue.' : 'Back in motion.'); render(); } };
+        const onTouchControl = (event) => { const button = event.target instanceof HTMLElement ? event.target.closest('[data-control]') : null; if (button instanceof HTMLElement && button.dataset.control === 'jump') { event.preventDefault(); jump(); } };
+        const renderText = () => JSON.stringify({ game: 'Dino Run', coordinateSystem: 'origin top-left, x right, y down; HUD is 38px high', mode: state.mode, score: Math.floor(state.score), level: state.level, playerY: Math.round(state.playerY), obstacles: state.obstacles.map((obstacle) => ({ x: Math.round(obstacle.x), h: obstacle.h })) });
+        const loop = (time) => { const dt = state.last ? Math.min(.05, (time - state.last) / 1000) : 0; state.last = time; update(dt); render(); gameFrame = requestAnimationFrame(loop); };
+        window.addEventListener('keydown', onKey); touchControls?.addEventListener('pointerdown', onTouchControl); window.render_game_to_text = renderText; window.advanceTime = (ms) => { for (let elapsed = 0; elapsed < ms; elapsed += 16.67) update(1 / 60); render(); }; stopActiveGame = () => { cancelAnimationFrame(gameFrame); window.removeEventListener('keydown', onKey); touchControls?.removeEventListener('pointerdown', onTouchControl); delete window.render_game_to_text; delete window.advanceTime; stopActiveGame = () => {}; }; setGameStatus('Jump through the sunset. The longer you run, the faster the desert moves.'); void fetchLeaderboard('dino-run'); render(); gameFrame = requestAnimationFrame(loop);
+      }
+
       const launchGame = (id) => {
         if (!(gameConsole instanceof HTMLElement)) return;
         stopActiveGame();
-        if (id !== 'glyph-serpent') {
+        pendingScore = null;
+        if (scoreForm) scoreForm.hidden = true;
+        if (!['glyph-serpent', 'space-invaders', 'dino-run'].includes(id)) {
           activeGameId = '';
           gameConsole.hidden = true;
           return;
         }
         gameConsole.hidden = false;
         activeGameId = id;
-        if (gameName) gameName.textContent = 'Glyph Serpent';
-        startSnake();
+        if (gameName) gameName.textContent = gameLabels[id] || id;
+        if (id === 'glyph-serpent') startSnake();
+        if (id === 'space-invaders') startSpaceInvaders();
+        if (id === 'dino-run') startDinoRun();
+        void fetchLeaderboard(id);
         gameConsole.scrollIntoView({ behavior: 'smooth', block: 'start' });
       };
       document.querySelectorAll('.game-launch').forEach((button) => button.addEventListener('click', () => launchGame(button.dataset.game || 'glyph-serpent')));
@@ -731,9 +911,14 @@ const seoSchema = {
   .head-note { margin: 0; color: var(--soft-ink); line-height: 1.55; font-size: 14px; }
   .project-list { border-top: 1px solid var(--rule); }
   .project { position: relative; display: grid; grid-template-columns: 8% 45% 1fr 9% auto; align-items: center; min-height: 140px; border-bottom: 1px solid var(--rule); overflow: hidden; isolation: isolate; }
+  .project.has-cover { min-height: 220px; }
   .project::before { content: ''; position: absolute; z-index: -1; inset: 0; background: var(--project-accent); transform: translateY(101%); transition: transform .45s cubic-bezier(.22,1,.36,1); }
   .project-row-link { position: absolute; z-index: 0; inset: 0; cursor: pointer; }
   .project > *:not(.project-row-link) { position: relative; z-index: 1; pointer-events: none; }
+  .project > .project-preview { position: absolute; z-index: 2; top: 50%; right: 13%; width: min(23vw, 320px); margin: 0; opacity: 0; pointer-events: none; transform: translate(24px, -50%) rotate(2.5deg) scale(.88); transition: opacity .35s ease, transform .55s cubic-bezier(.22,1,.36,1); }
+  .project-preview-frame { display: block; padding: 6px; background: var(--paper); box-shadow: 12px 16px 0 color-mix(in srgb, var(--ink) 12%, transparent), 0 20px 44px rgba(0,0,0,.16); }
+  .project-preview img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); filter: saturate(.9) contrast(.98); }
+  .project.has-cover:hover .project-preview, .project.has-cover:focus-within .project-preview { opacity: 1; transform: translate(0, -50%) rotate(-3deg) scale(1); }
   .project-action { display: flex; align-items: center; justify-content: flex-end; gap: 10px; color: inherit; text-decoration: none; pointer-events: auto !important; cursor: pointer; }
   .project-action-label { display: none; font: 500 10px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
   .project-number, .project-meta, .project-year { font: 400 10px/1.3 'DM Mono', monospace; text-transform: uppercase; }
@@ -788,7 +973,7 @@ const seoSchema = {
   .stage-caption { min-height: 84px; border-top: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); display: grid; grid-template-columns: 1fr 2fr; gap: 20px; align-items: center; padding: 18px; }
   .stage-caption span { color: var(--acid-ink); font: 500 11px/1 'DM Mono', monospace; }
   .stage-caption p { margin: 0; font-size: 14px; opacity: .7; }
-  .game-list { display: grid; grid-template-columns: 1fr; border-top: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); }
+  .game-list { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); }
   .game-card { padding: 30px 24px; min-height: 280px; border-right: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); display: flex; flex-direction: column; }
   .game-card:last-child { border-right: 0; }
   .game-key, .game-state { font: 400 9px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; opacity: .55; }
@@ -800,6 +985,21 @@ const seoSchema = {
   .game-launch:hover { color: var(--panel-ink); border-color: var(--panel-ink); transform: translateX(7px); }
   .game-console { margin-top: 2vw; padding: 18px; scroll-margin-top: 118px; border: 1px solid color-mix(in srgb, var(--panel-ink) 36%, transparent); background: var(--console-surface); color: var(--panel-ink); transition: background .45s ease, color .45s ease; }
   .game-console[hidden] { display: none; }
+  .leaderboard-panel { margin-top: 18px; padding: 14px 0 0; border-top: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); }
+  .leaderboard-head { display: flex; justify-content: space-between; gap: 14px; color: color-mix(in srgb, var(--panel-ink) 65%, transparent); font: 400 9px/1.4 'DM Mono', monospace; letter-spacing: .08em; text-transform: uppercase; }
+  .leaderboard-head b { color: var(--acid-ink); font-weight: 500; }
+  .leaderboard-head span:last-child { text-align: right; }
+  #leaderboard-list { display: grid; gap: 6px; margin: 12px 0 0; padding: 0; list-style: none; font: 400 11px/1.2 'DM Mono', monospace; }
+  #leaderboard-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto 42px; gap: 12px; padding: 7px 0; border-bottom: 1px solid color-mix(in srgb, var(--panel-ink) 12%, transparent); color: color-mix(in srgb, var(--panel-ink) 78%, transparent); }
+  #leaderboard-list li b { color: var(--acid-ink); font-weight: 500; }
+  #leaderboard-list li small { text-align: right; color: color-mix(in srgb, var(--panel-ink) 48%, transparent); font: inherit; }
+  #score-form { margin-top: 16px; padding: 12px; border: 1px solid color-mix(in srgb, var(--acid) 42%, transparent); background: color-mix(in srgb, var(--acid) 8%, transparent); }
+  #score-form[hidden] { display: none; }
+  #score-form label { display: block; margin-bottom: 10px; color: var(--acid-ink); font: 500 10px/1.3 'DM Mono', monospace; text-transform: uppercase; }
+  .score-form-row { display: flex; gap: 8px; }
+  .score-form-row input { width: 8ch; min-width: 0; border: 1px solid color-mix(in srgb, var(--panel-ink) 38%, transparent); background: transparent; color: var(--panel-ink); padding: 9px; font: 500 14px/1 'DM Mono', monospace; letter-spacing: .14em; text-transform: uppercase; }
+  .score-form-row button { border: 1px solid var(--acid); background: var(--acid); color: #111; padding: 9px 12px; font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; }
+  #score-form small { display: block; margin-top: 8px; color: color-mix(in srgb, var(--panel-ink) 55%, transparent); font: 400 9px/1.3 'DM Mono', monospace; }
   .console-topbar { display: flex; justify-content: space-between; align-items: center; padding-bottom: 14px; border-bottom: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); }
   .console-kicker, .console-controls { font: 400 9px/1.4 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; opacity: .65; }
   .console-kicker b { color: var(--acid-ink); font-weight: 500; }
@@ -810,9 +1010,9 @@ const seoSchema = {
   .touch-controls { width: min(230px, 100%); margin: 14px auto 2px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; touch-action: manipulation; }
   .touch-controls[hidden] { display: none; }
   .touch-controls button { min-height: 46px; border: 1px solid rgba(240,237,228,.35); background: rgba(240,237,228,.06); color: var(--panel-ink); font: 500 10px/1 'DM Mono', monospace; text-transform: uppercase; }
-  .touch-controls button[data-direction="up"], .touch-controls button[data-direction="down"] { grid-column: 2; }
-  .touch-controls button[data-direction="left"] { grid-column: 1; }
-  .touch-controls button[data-direction="right"] { grid-column: 3; }
+  .touch-controls button[data-control="up"], .touch-controls button[data-control="down"] { grid-column: 2; }
+  .touch-controls button[data-control="left"] { grid-column: 1; }
+  .touch-controls button[data-control="right"] { grid-column: 3; }
   .touch-controls button:active { background: var(--acid); color: #111; }
   .about-scribble { position: absolute; z-index: 1; inset: 12% -5% 0; width: 110%; height: 78%; fill: none; stroke: rgba(17,17,15,.14); stroke-width: 8; stroke-linecap: round; filter: drop-shadow(0 10px 0 rgba(17,17,15,.12)); }
 
@@ -957,11 +1157,15 @@ const seoSchema = {
     .head-note, .play-intro p:last-child { max-width: 480px; }
     .project-row-link { display: none; }
     .project { grid-template-columns: 10% minmax(0, 1fr) auto; min-height: 0; padding-block: 20px; align-items: start; }
+    .project.has-cover { min-height: 0; }
     .project-meta, .project-year { display: none; }
-    .project-name { font-size: clamp(2rem, 9vw, 4rem); }
+    .project-name { font-size: clamp(1.9rem, 8.2vw, 3.5rem); }
     .project .project-name, .project:focus-within .project-name { transform: none; }
     .project .project-description, .project:focus-within .project-description { max-height: none; margin-top: 10px; overflow: visible; opacity: .84; visibility: visible; transform: none; transition: none; }
     .project > *:not(.project-row-link) { pointer-events: auto; }
+    .project > .project-preview { position: relative; top: auto; right: auto; grid-column: 2 / -1; width: 100%; margin: 16px 0 0; opacity: 1; transform: none; transition: none; }
+    .project-preview-frame { padding: 4px; box-shadow: 8px 10px 0 color-mix(in srgb, var(--ink) 10%, transparent); }
+    .project-preview img { aspect-ratio: 16 / 9; }
     .project-action-label { display: inline; }
     .project-arrow { width: 36px; height: 36px; }
     .game-list { grid-template-columns: 1fr; }
