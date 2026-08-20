@@ -1232,7 +1232,11 @@ const seoSchema = {
     .contact-topline p:last-child { display: none; }
     .contact h2 { font-size: clamp(3.5rem, 15vw, 7rem); }
     .contact-footer { display: grid; grid-template-columns: 1fr; gap: 18px; }
-    .contact-socials { width: 100%; }
+    .contact-socials { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; overflow: hidden; }
+    .contact-socials a { position: relative; min-width: 0; display: flex; flex-direction: column; padding: 14px 8px; gap: 8px; overflow: hidden; }
+    .contact-socials span { min-width: 0; padding-right: 14px; font-size: clamp(.86rem, 4.6vw, 1.25rem); white-space: normal; overflow-wrap: normal; word-break: normal; hyphens: none; }
+    .contact-socials i { min-width: 0; font-size: 7px; line-height: 1.2; white-space: normal; overflow-wrap: normal; word-break: normal; hyphens: none; }
+    .contact-socials b { position: absolute; top: 14px; right: 8px; font-size: .85rem; }
     .contact-footer > p:last-child { justify-self: end; }
     .contact-orbit { opacity: .55; right: -45vw; top: 26%; width: 90vw; height: 90vw; }
   }
