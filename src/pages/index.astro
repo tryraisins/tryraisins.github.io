@@ -151,50 +151,34 @@ const seoSchema = {
     </nav>
 
     <main id="top">
-      <section class="hero section-scene" data-section="hero" data-scheme="paper">
+      <section id="about" class="hero-about section-scene" data-section="hero-about" data-scheme="paper" aria-labelledby="hero-about-title">
         <svg class="hero-line" viewBox="0 0 1200 720" preserveAspectRatio="none" aria-hidden="true">
           <path d="M-80 490 C120 200 230 705 410 390 S700 90 725 410 S995 720 1280 220" />
           <path class="line-echo" d="M-30 560 C200 370 320 700 510 450 S810 205 840 490 S1080 640 1240 350" />
         </svg>
 
-        <h1 class="hero-kicker">
+        <div class="hero-kicker">
           <span>Seun Sowemimo / TryRaisins</span>
           <span>Fullstack developer</span>
           <span>Lagos, Nigeria</span>
+        </div>
+
+        <h1 id="hero-about-title" class="hero-title">
+          <span class="title-row"><span>BUILDING</span><i>01</i></span>
+          <span class="title-row title-shift"><span>THINGS</span><i>02</i></span>
+          <span class="title-row title-outline"><span>THAT WORK.</span><i>03</i></span>
         </h1>
 
-        <div class="hero-title">
-          <div class="title-row"><span>BUILDING</span><i>01</i></div>
-          <div class="title-row title-shift"><span>THINGS</span><i>02</i></div>
-          <div class="title-row title-outline"><span>THAT WORK.</span><i>03</i></div>
-        </div>
-
-        <div class="hero-foot">
-          <p>I turn difficult ideas into fast, useful digital products—then hide a little mischief in the details.</p>
-          <a class="round-link" href="#work" aria-label="See selected work"><span>↓</span></a>
-        </div>
-      </section>
-
-      <section id="about" class="about section-scene" data-section="about" data-scheme="signal" aria-labelledby="about-title">
-        <div class="about-topline">
-          <p class="about-index">02 / About the builder</p>
-        </div>
-        <div class="cap-intro reveal">
-          <div class="about-heading">
-            <p class="eyebrow">How I work</p>
-            <h2 id="about-title">ONE BUILDER.<br /><em>MANY SYSTEMS.</em></h2>
+        <div class="hero-about-lower">
+          <div class="hero-about-heading">
+            <p class="eyebrow">01 / About the builder</p>
+            <h2>ONE BUILDER.<br /><em>MANY SYSTEMS.</em></h2>
           </div>
-          <p class="about-copy reveal">I'm TryRaisins - a fullstack developer who turns difficult ideas into useful products. I move from interface to infrastructure with the same question: does this make the work clearer, faster, or more human?</p>
-        </div>
-        <div class="cap-grid about-grid">
-          <article class="cap-card reveal" style="--delay:0ms"><span>01 / Interface</span><h3>Make it felt.</h3><p>React · TypeScript · Motion · Accessibility</p><i>UI</i></article>
-          <article class="cap-card reveal" style="--delay:80ms"><span>02 / Systems</span><h3>Make it hold.</h3><p>Node · APIs · Data · Architecture</p><i>API</i></article>
-          <article class="cap-card reveal" style="--delay:160ms"><span>03 / Intelligence</span><h3>Make it think.</h3><p>Python · NLP · Automation · Search</p><i>AI</i></article>
-          <article class="cap-card reveal" style="--delay:240ms"><span>04 / Delivery</span><h3>Make it real.</h3><p>Cloud · CI/CD · Observability · Scale</p><i>SHIP</i></article>
-        </div>
-        <div class="about-footer">
-          <span>Interface - systems - delivery</span>
-          <a class="about-work-link" href="#work">See the work <span class="link-arrow" aria-hidden="true"></span></a>
+          <p class="hero-about-copy">I'm TryRaisins — a fullstack developer who turns difficult ideas into useful products. I move from interface to infrastructure with the same question: does this make the work clearer, faster, or more human?</p>
+          <div class="hero-about-footer">
+            <span>Interface · systems · delivery</span>
+            <a class="about-work-link" href="#work">See the work <span class="link-arrow" aria-hidden="true"></span></a>
+          </div>
         </div>
       </section>
 
@@ -303,7 +287,7 @@ const seoSchema = {
 
       <section id="contact" class="contact section-scene" data-section="contact" data-scheme="contact" aria-labelledby="contact-title">
         <div class="contact-topline">
-          <p>05 / Start a conversation</p>
+          <p>04 / Start a conversation</p>
           <p>Lagos, Nigeria · Available worldwide</p>
         </div>
         <div class="contact-center reveal">
@@ -863,18 +847,18 @@ const seoSchema = {
   .nav-links a:hover::after { right: 0; }
   .theme-toggle { border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); padding: 10px 14px; display: flex; align-items: center; gap: 7px; text-transform: uppercase; font-size: 10px; letter-spacing: .06em; }
 
-  .hero {
+  .hero-about {
     position: relative;
-    min-height: 100svh;
-    padding: 100px 4vw 34px;
+    min-height: 100dvh;
+    padding: 100px 4vw 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
   }
-  .hero-kicker, .hero-foot { position: relative; z-index: 2; }
+  .hero-kicker, .hero-title, .hero-about-lower { position: relative; z-index: 2; }
   .hero-kicker { margin: 0; display: flex; justify-content: space-between; gap: 20px; font: 400 10px/1 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
-  .hero-title { position: relative; z-index: 2; padding: 5vh 0 3vh; }
+  .hero-title { margin: 0; padding: 5vh 0 3vh; }
   .title-row { display: flex; align-items: flex-start; gap: 14px; font: 400 clamp(4.4rem, 12.8vw, 12rem)/.77 'Archivo Black', sans-serif; letter-spacing: -.08em; white-space: nowrap; }
   .title-row i { font: 400 9px/1 'DM Mono', monospace; letter-spacing: 0; color: var(--orange); }
   .title-shift { padding-left: 13vw; }
@@ -882,48 +866,14 @@ const seoSchema = {
   .hero-line { position: absolute; z-index: 1; inset: 8% -4% 0; width: 108%; height: 88%; fill: none; stroke: var(--orange); stroke-width: 6; stroke-linecap: round; filter: drop-shadow(0 9px 0 var(--acid)); }
   .hero-line path { stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: drawLine 2.4s cubic-bezier(.22,1,.36,1) .35s forwards; }
   .hero-line .line-echo { stroke: var(--ink); stroke-width: 1.5; filter: none; animation-delay: .65s; }
-  .hero-foot { display: flex; align-items: end; justify-content: space-between; }
-  .hero-foot p { max-width: 490px; margin: 0; font-size: clamp(1rem, 1.6vw, 1.35rem); line-height: 1.35; }
+  .hero-about-lower { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr) auto; gap: clamp(24px, 4vw, 64px); align-items: end; padding-top: 22px; border-top: 1px solid var(--rule); }
+  .hero-about-heading .eyebrow { margin: 0 0 14px; }
+  .hero-about-heading h2 { margin: 0; font: 400 clamp(2rem, 3.7vw, 4.2rem)/.88 'Archivo Black', sans-serif; letter-spacing: -.065em; }
+  .hero-about-heading h2 em { color: transparent; -webkit-text-stroke: 1px var(--ink); font-style: normal; }
+  .hero-about-copy { max-width: 34rem; margin: 0; font: 500 clamp(.95rem, 1.25vw, 1.15rem)/1.45 'Manrope', sans-serif; }
+  .hero-about-footer { display: grid; gap: 20px; justify-items: end; align-items: end; font: 400 9px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; white-space: nowrap; }
   .round-link { width: 58px; height: 58px; border: 1px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-size: 24px; transition: color .25s, background .25s, transform .25s; }
   .round-link:hover { color: var(--paper); background: var(--ink); transform: rotate(-35deg); }
-
-  .about {
-    position: relative;
-    min-height: 100svh;
-    padding: clamp(88px, 7vw, 112px) 4vw 28px;
-    display: grid;
-    grid-template-rows: auto auto minmax(0, 1fr) auto;
-    gap: clamp(24px, 3vw, 44px);
-    overflow: hidden;
-    background: var(--acid);
-    color: #111;
-  }
-  .about > *:not(.about-scribble) { position: relative; z-index: 2; }
-  .about-topline, .about-footer { display: flex; justify-content: space-between; gap: 24px; align-items: flex-start; font: 400 10px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
-  .about-topline p, .about-footer span { margin: 0; }
-  .cap-intro { display: grid; grid-template-columns: 1.35fr .65fr; gap: 30px; align-items: end; margin: 0; }
-  .cap-intro .eyebrow { margin: 0 0 16px; }
-  .cap-intro h2 { margin: 0; font: 400 clamp(3.5rem, 7.8vw, 8rem)/.84 'Archivo Black', sans-serif; letter-spacing: -.07em; }
-  .cap-intro h2 em { color: transparent; -webkit-text-stroke: 1.5px #111; font-style: normal; }
-  .about-copy { margin: 0; max-width: 38rem; align-self: end; font: 500 clamp(1rem, 1.45vw, 1.25rem)/1.35 'Manrope', sans-serif; }
-  .cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); align-self: stretch; border: 1px solid rgba(17,17,15,.35); }
-  .cap-card { position: relative; min-height: 0; padding: 18px; overflow: hidden; isolation: isolate; border-right: 1px solid rgba(17,17,15,.35); transition: background-color .35s ease, border-color .35s ease; transition-delay: var(--delay); }
-  .cap-card:last-child { border-right: 0; }
-  .cap-card::before { content: ''; position: absolute; z-index: 2; inset: auto 0 0; height: 7px; background: #111; transform: scaleX(.08); transform-origin: left; transition: transform .55s cubic-bezier(.22,1,.36,1); }
-  .cap-card::after { content: ''; position: absolute; z-index: 0; pointer-events: none; opacity: .48; transition: opacity .35s ease; }
-  .cap-card > span, .cap-card > h3, .cap-card > p, .cap-card > i { position: relative; z-index: 1; }
-  .cap-card:hover { background: rgba(17,17,15,.045); }
-  .cap-card:hover::before { transform: scaleX(1); }
-  .cap-card:hover::after { opacity: .86; }
-  .cap-card span { font: 500 9px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
-  .cap-card h3 { margin: 42px 0 12px; font: 400 clamp(1.5rem, 2.4vw, 2.7rem)/.92 'Archivo Black', sans-serif; letter-spacing: -.055em; }
-  .cap-card p { margin: 0; max-width: 220px; font: 400 10px/1.6 'DM Mono', monospace; text-transform: uppercase; }
-  .cap-card i { position: absolute; right: 14px; bottom: 10px; color: rgba(17,17,15,.1); font: 400 clamp(3.7rem, 6vw, 7rem)/1 'Archivo Black', sans-serif; letter-spacing: -.1em; font-style: normal; transition: transform .5s ease, color .5s ease; }
-  .cap-card:hover i { color: rgba(17,17,15,.22); transform: translateY(-9px) rotate(-4deg); }
-  .cap-card:nth-child(1)::after { width: 118px; aspect-ratio: 1; right: 12%; bottom: 14%; border: 1px solid rgba(17,17,15,.25); border-radius: 50%; background: radial-gradient(circle at 15% 18%, #111 0 3px, transparent 4px); box-shadow: 0 0 0 18px rgba(17,17,15,.035), 0 0 0 36px rgba(17,17,15,.025); animation: capOrbit 11s linear infinite; }
-  .cap-card:nth-child(2)::after { width: 46%; height: 42%; right: 10%; bottom: 17%; background: linear-gradient(rgba(17,17,15,.23) 1px, transparent 1px), linear-gradient(90deg, rgba(17,17,15,.23) 1px, transparent 1px); background-size: 16px 16px; transform: perspective(500px) rotate(-18deg); mask-image: linear-gradient(90deg, transparent, #000 18%, #000 82%, transparent); animation: capGridShift 8s ease-in-out infinite; }
-  .cap-card:nth-child(3)::after { width: 104px; aspect-ratio: 1; right: 14%; bottom: 18%; border: 1px solid rgba(17,17,15,.27); transform: rotate(45deg); box-shadow: 0 0 0 16px rgba(17,17,15,.035), inset 0 0 0 16px rgba(17,17,15,.035); animation: capThink 7s ease-in-out infinite; }
-  .cap-card:nth-child(4)::after { width: 46%; height: 44%; right: 10%; bottom: 15%; background: repeating-linear-gradient(90deg, transparent 0 12px, rgba(17,17,15,.28) 12px 14px); clip-path: polygon(0 100%, 0 72%, 15% 72%, 15% 52%, 30% 52%, 30% 38%, 45% 38%, 45% 20%, 60% 20%, 60% 0, 75% 0, 75% 18%, 90% 18%, 90% 100%); transform-origin: bottom; animation: capBars 4.5s ease-in-out infinite; }
   .about-work-link { display: inline-flex; align-items: center; gap: 8px; color: inherit; border-bottom: 1px solid currentColor; padding-bottom: 8px; transition: gap .25s ease; }
   .about-work-link:hover { gap: 14px; }
 
@@ -1046,8 +996,6 @@ const seoSchema = {
   .touch-controls button[data-control="left"] { grid-column: 1; }
   .touch-controls button[data-control="right"] { grid-column: 3; }
   .touch-controls button:active { background: var(--acid); color: #111; }
-  .about-scribble { position: absolute; z-index: 1; inset: 12% -5% 0; width: 110%; height: 78%; fill: none; stroke: rgba(17,17,15,.14); stroke-width: 8; stroke-linecap: round; filter: drop-shadow(0 10px 0 rgba(17,17,15,.12)); }
-
   .contact {
     min-height: 100svh;
     padding: 92px 4vw 28px;
@@ -1088,8 +1036,7 @@ const seoSchema = {
   .figma-capture .reveal { opacity: 1; transform: none; }
 
   /* Every scene owns its entrance and exit; there is no transition overlay. */
-  .hero-kicker, .hero-title, .hero-foot, .hero-line,
-  .about-topline, .cap-intro, .cap-card, .about-copy, .about-scribble, .about-footer,
+  .hero-kicker, .hero-title, .hero-about-lower, .hero-line,
   .section-head, .project,
   .play-intro, .game-stage, .game-card,
   .contact-topline, .contact-center, .contact-footer, .contact-orbit {
@@ -1099,27 +1046,15 @@ const seoSchema = {
     will-change: transform, opacity, filter;
   }
 
-  /* Hero exits upward in three layers, like a poster being pulled apart. */
-  .hero.scene-before .hero-kicker { opacity: 0; transform: translateY(-45px); }
-  .hero.scene-before .hero-title { opacity: 0; transform: translateY(-15vh) skewY(-3deg); filter: blur(10px); }
-  .hero.scene-before .hero-foot { opacity: 0; transform: translateY(55px); }
-  .hero.scene-before .hero-line { opacity: 0; transform: scale(1.12) rotate(3deg); }
-
-  /* About assembles from opposing directions; it scatters on exit. */
-  .about.scene-after .about-topline { opacity: 0; transform: translateY(35px); }
-  .about.scene-after .cap-intro { opacity: 0; transform: perspective(900px) rotateX(16deg) translateY(90px); }
-  .about.scene-after .cap-card:nth-child(odd) { opacity: 0; transform: translateX(-90px); clip-path: inset(0 100% 0 0); }
-  .about.scene-after .cap-card:nth-child(even) { opacity: 0; transform: translateX(90px); clip-path: inset(0 0 0 100%); }
-  .about.scene-after .about-footer { opacity: 0; transform: translateY(35px); }
-  .about.scene-after .about-scribble { opacity: 0; transform: scaleX(.2); transform-origin: left; }
-  .about.scene-before .about-topline { opacity: 0; transform: translateX(-12vw); filter: blur(8px); }
-  .about.scene-before .cap-intro { opacity: 0; transform: translateY(-75px) scale(.94); }
-  .about.scene-before .cap-card { opacity: 0; transform: translateY(-75px) scale(.94); }
-  .about.scene-before .about-footer { opacity: 0; transform: translateY(60px); }
-  .about.scene-before .about-scribble { opacity: 0; transform: translateX(-14vw) scaleX(1.15); }
-  .about .cap-card:nth-child(2) { transition-delay: 70ms; }
-  .about .cap-card:nth-child(3) { transition-delay: 140ms; }
-  .about .cap-card:nth-child(4) { transition-delay: 210ms; }
+  /* The merged hero/about scene moves as one editorial composition. */
+  .hero-about.scene-before .hero-kicker { opacity: 0; transform: translateY(-45px); }
+  .hero-about.scene-before .hero-title { opacity: 0; transform: translateY(-15vh) skewY(-3deg); filter: blur(10px); }
+  .hero-about.scene-before .hero-about-lower { opacity: 0; transform: translateY(55px); }
+  .hero-about.scene-before .hero-line { opacity: 0; transform: scale(1.12) rotate(3deg); }
+  .hero-about.scene-after .hero-kicker { opacity: 0; transform: translateY(35px); }
+  .hero-about.scene-after .hero-title { opacity: 0; transform: perspective(900px) rotateX(10deg) translateY(90px); filter: blur(8px); }
+  .hero-about.scene-after .hero-about-lower { opacity: 0; transform: translateY(70px); }
+  .hero-about.scene-after .hero-line { opacity: 0; transform: scale(.84) rotate(-3deg); }
 
   /* Work rows cut in horizontally, then peel away at alternating angles. */
   .work.scene-after .section-head { opacity: 0; transform: translateY(80px); clip-path: inset(100% 0 0); }
@@ -1161,30 +1096,23 @@ const seoSchema = {
   @keyframes foodPulse { 50% { transform: scale(1.3) rotate(12deg); } }
   @keyframes orbitSpin { to { transform: rotate(360deg); } }
   @keyframes contactFloat { 50% { transform: translate(-3vw, 4vh) rotate(8deg); } }
-  @keyframes capOrbit { to { transform: rotate(360deg); } }
-  @keyframes capGridShift { 0%,100% { transform: perspective(500px) rotate(-18deg) translate(0, 0); } 50% { transform: perspective(500px) rotate(-18deg) translate(-10px, -6px); } }
-  @keyframes capThink { 0%,100% { transform: rotate(45deg) scale(.92); } 50% { transform: rotate(135deg) scale(1.06); } }
-  @keyframes capBars { 0%,100% { transform: scaleY(.72); opacity: .24; } 50% { transform: scaleY(1.04); opacity: .58; } }
 
   @media (max-width: 800px) {
     .nav-links { display: none; }
     .theme-label { display: none; }
     .play { display: none; }
-    .hero { padding-inline: 18px; }
+    .hero-about { padding: 84px 18px 24px; }
     .hero-kicker span:nth-child(3) { display: none; }
     .title-row { font-size: clamp(3.8rem, 18vw, 7.5rem); line-height: .84; }
     .title-row.title-outline { font-size: 14.2vw; }
     .title-shift { padding-left: 0; }
     .hero-line { height: 70%; top: 18%; }
-    .hero-foot { width: 100%; }
-    .hero-foot p { max-width: 100%; font-size: .95rem; }
+    .hero-about-lower { grid-template-columns: 1fr; gap: 18px; padding-top: 18px; }
+    .hero-about-heading h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
+    .hero-about-copy { max-width: 34rem; font-size: .95rem; }
+    .hero-about-footer { display: flex; justify-content: space-between; align-items: center; justify-items: initial; white-space: normal; }
     .round-link { display: none; }
     .section-head, .play-intro { grid-template-columns: 1fr; }
-    .cap-intro { grid-template-columns: 1fr; }
-    .cap-grid { grid-template-columns: 1fr 1fr; }
-    .cap-card { min-height: 210px; border-bottom: 1px solid rgba(17,17,15,.35); }
-    .cap-card:nth-child(2) { border-right: 0; }
-    .cap-card:nth-child(3), .cap-card:nth-child(4) { border-bottom: 0; }
     .section-head h2, .play-intro h2 { font-size: 14vw; }
     .head-note, .play-intro p:last-child { max-width: 480px; }
     .project-row-link { display: none; }
@@ -1214,20 +1142,6 @@ const seoSchema = {
     .stage-caption { grid-template-columns: 1fr; }
     .snake { left: 4%; transform: scale(.8); transform-origin: left center; }
     .food { right: 8%; }
-    .about { min-height: 100svh; padding: 84px 18px 28px; gap: 18px; }
-    .about-topline, .about-footer { font-size: 9px; }
-    .cap-intro { gap: 14px; }
-    .cap-intro h2 { font-size: clamp(2.8rem, 12.5vw, 4.5rem); }
-    .about-copy { font-size: 1rem; line-height: 1.4; }
-    .about-scribble { inset-inline: 0; width: 100%; }
-    .cap-card { padding: 14px; }
-    .cap-card h3 { margin: 22px 0 8px; font-size: clamp(1.3rem, 6vw, 1.8rem); }
-    .cap-card p { font-size: 8px; line-height: 1.4; }
-    .cap-card i { right: 8px; bottom: 7px; font-size: 3rem; }
-    .cap-card:nth-child(1)::after { width: 76px; right: 8%; bottom: 12%; }
-    .cap-card:nth-child(2)::after { width: 52%; height: 38%; right: 5%; bottom: 14%; background-size: 11px 11px; }
-    .cap-card:nth-child(3)::after { width: 68px; right: 8%; bottom: 17%; }
-    .cap-card:nth-child(4)::after { width: 54%; height: 40%; right: 5%; bottom: 12%; }
     .contact { padding-inline: 18px; }
     .contact-topline p:last-child { display: none; }
     .contact h2 { font-size: clamp(3.5rem, 15vw, 7rem); }
@@ -1253,9 +1167,6 @@ const seoSchema = {
   }
 
   @media (max-width: 520px) {
-    .cap-grid { grid-template-columns: repeat(2, 1fr); }
-    .cap-card { min-height: 0; border-right: 1px solid rgba(17,17,15,.35) !important; border-bottom: 1px solid rgba(17,17,15,.35) !important; }
-    .cap-card:nth-child(2n) { border-right: 0 !important; }
-    .cap-card:nth-child(n+3) { border-bottom: 0 !important; }
+    .hero-about-footer { gap: 12px; font-size: 8px; }
   }
 </style>
