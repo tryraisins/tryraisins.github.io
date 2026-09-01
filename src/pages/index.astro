@@ -171,7 +171,6 @@ const seoSchema = {
 
         <div class="hero-about-lower">
           <div class="hero-about-heading">
-            <p class="eyebrow">01 / About the builder</p>
             <h2>ONE BUILDER.<br /><em>MANY SYSTEMS.</em></h2>
           </div>
           <p class="hero-about-copy">I'm TryRaisins — a fullstack developer who turns difficult ideas into useful products. I move from interface to infrastructure with the same question: does this make the work clearer, faster, or more human?</p>
@@ -858,17 +857,16 @@ const seoSchema = {
   }
   .hero-kicker, .hero-title, .hero-about-lower { position: relative; z-index: 2; }
   .hero-kicker { margin: 0; display: flex; justify-content: space-between; gap: 20px; font: 400 10px/1 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
-  .hero-title { margin: 0; padding: 5vh 0 3vh; }
-  .title-row { display: flex; align-items: flex-start; gap: 14px; font: 400 clamp(4.4rem, 12.8vw, 12rem)/.77 'Archivo Black', sans-serif; letter-spacing: -.08em; white-space: nowrap; }
+  .hero-title { margin: 0; padding: 4vh 0 2vh; }
+  .title-row { display: flex; align-items: flex-start; gap: 14px; font: 400 clamp(3.6rem, 9.6vw, 9.2rem)/.8 'Archivo Black', sans-serif; letter-spacing: -.08em; white-space: nowrap; }
   .title-row i { font: 400 9px/1 'DM Mono', monospace; letter-spacing: 0; color: var(--orange); }
   .title-shift { padding-left: 13vw; }
   .title-outline span { color: transparent; -webkit-text-stroke: clamp(1px, .12vw, 2px) var(--ink); }
   .hero-line { position: absolute; z-index: 1; inset: 8% -4% 0; width: 108%; height: 88%; fill: none; stroke: var(--orange); stroke-width: 6; stroke-linecap: round; filter: drop-shadow(0 9px 0 var(--acid)); }
   .hero-line path { stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: drawLine 2.4s cubic-bezier(.22,1,.36,1) .35s forwards; }
   .hero-line .line-echo { stroke: var(--ink); stroke-width: 1.5; filter: none; animation-delay: .65s; }
-  .hero-about-lower { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr) auto; gap: clamp(24px, 4vw, 64px); align-items: end; padding-top: 22px; border-top: 1px solid var(--rule); }
-  .hero-about-heading .eyebrow { margin: 0 0 14px; }
-  .hero-about-heading h2 { margin: 0; font: 400 clamp(2rem, 3.7vw, 4.2rem)/.88 'Archivo Black', sans-serif; letter-spacing: -.065em; }
+  .hero-about-lower { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr) auto; gap: clamp(24px, 4vw, 64px); align-items: end; padding-top: 12px; }
+  .hero-about-heading h2 { margin: 0; font: 400 clamp(1.9rem, 3.35vw, 3.8rem)/.88 'Archivo Black', sans-serif; letter-spacing: -.065em; }
   .hero-about-heading h2 em { color: transparent; -webkit-text-stroke: 1px var(--ink); font-style: normal; }
   .hero-about-copy { max-width: 34rem; margin: 0; font: 500 clamp(.95rem, 1.25vw, 1.15rem)/1.45 'Manrope', sans-serif; }
   .hero-about-footer { display: grid; gap: 20px; justify-items: end; align-items: end; font: 400 9px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; white-space: nowrap; }
@@ -1103,12 +1101,12 @@ const seoSchema = {
     .play { display: none; }
     .hero-about { padding: 84px 18px 24px; }
     .hero-kicker span:nth-child(3) { display: none; }
-    .title-row { font-size: clamp(3.8rem, 18vw, 7.5rem); line-height: .84; }
-    .title-row.title-outline { font-size: 14.2vw; }
+    .title-row { font-size: clamp(3.25rem, 15vw, 6.3rem); line-height: .86; }
+    .title-row.title-outline { font-size: 12.4vw; }
     .title-shift { padding-left: 0; }
     .hero-line { height: 70%; top: 18%; }
     .hero-about-lower { grid-template-columns: 1fr; gap: 18px; padding-top: 18px; }
-    .hero-about-heading h2 { font-size: clamp(2rem, 10vw, 3.5rem); }
+    .hero-about-heading h2 { font-size: clamp(1.85rem, 9vw, 3rem); }
     .hero-about-copy { max-width: 34rem; font-size: .95rem; }
     .hero-about-footer { display: flex; justify-content: space-between; align-items: center; justify-items: initial; white-space: normal; }
     .round-link { display: none; }
