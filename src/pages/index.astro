@@ -152,31 +152,36 @@ const seoSchema = {
 
     <main id="top">
       <section id="about" class="hero-about section-scene" data-section="hero-about" data-scheme="paper" aria-labelledby="hero-about-title">
-        <svg class="hero-line" viewBox="0 0 1200 720" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M-80 490 C120 200 230 705 410 390 S700 90 725 410 S995 720 1280 220" />
-          <path class="line-echo" d="M-30 560 C200 370 320 700 510 450 S810 205 840 490 S1080 640 1240 350" />
-        </svg>
-
-        <div class="hero-kicker">
+        <div class="hero-about-topline">
+          <span>01 / About</span>
           <span>Seun Sowemimo / TryRaisins</span>
-          <span>Fullstack developer</span>
-          <span>Lagos, Nigeria</span>
+          <span>Fullstack developer · Lagos, Nigeria</span>
         </div>
 
-        <h1 id="hero-about-title" class="hero-title">
-          <span class="title-row"><span>BUILDING</span><i>01</i></span>
-          <span class="title-row title-shift"><span>THINGS</span><i>02</i></span>
-          <span class="title-row title-outline"><span>THAT WORK.</span><i>03</i></span>
-        </h1>
-
-        <div class="hero-about-lower">
-          <div class="hero-about-heading">
-            <h2>ONE BUILDER.<br /><em>MANY SYSTEMS.</em></h2>
+        <div class="hero-about-layout">
+          <div class="hero-about-rail" aria-hidden="true">
+            <span class="hero-about-rail-line"></span>
+            <span>Interface<br />Systems<br />Delivery</span>
           </div>
-          <p class="hero-about-copy">I'm TryRaisins — a fullstack developer who turns difficult ideas into useful products. I move from interface to infrastructure with the same question: does this make the work clearer, faster, or more human?</p>
-          <div class="hero-about-footer">
-            <span>Interface · systems · delivery</span>
-            <a class="about-work-link" href="#work">See the work <span class="link-arrow" aria-hidden="true"></span></a>
+
+          <div class="hero-about-main">
+            <div class="hero-about-heading">
+              <p class="hero-about-kicker">Independent builder / useful by design</p>
+              <h1 id="hero-about-title">DIFFICULT <em>IDEAS.</em><br />USEFUL PRODUCTS.</h1>
+            </div>
+
+            <div class="hero-about-lower">
+              <p class="hero-about-copy">I'm TryRaisins — a fullstack developer who turns difficult ideas into useful products. I move from interface to infrastructure with the same question: does this make the work clearer, faster, or more human?</p>
+              <div class="hero-about-footer">
+                <span>React · TypeScript · Node · Python</span>
+                <a class="about-work-link" href="#work">See the work <span class="link-arrow" aria-hidden="true"></span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-about-mark" aria-hidden="true">
+            <span class="hero-about-mark-core"></span>
+            <span class="hero-about-mark-label">Ideas in /<br />products out</span>
           </div>
         </div>
       </section>
@@ -849,29 +854,31 @@ const seoSchema = {
   .hero-about {
     position: relative;
     min-height: 100dvh;
-    padding: 100px 4vw 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    padding: 100px 4vw 36px;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 28px;
     overflow: hidden;
   }
-  .hero-kicker, .hero-title, .hero-about-lower { position: relative; z-index: 2; }
-  .hero-kicker { margin: 0; display: flex; justify-content: space-between; gap: 20px; font: 400 10px/1 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
-  .hero-title { margin: 0; padding: 4vh 0 2vh; }
-  .title-row { display: flex; align-items: flex-start; gap: 14px; font: 400 clamp(3.6rem, 9.6vw, 9.2rem)/.8 'Archivo Black', sans-serif; letter-spacing: -.08em; white-space: nowrap; }
-  .title-row i { font: 400 9px/1 'DM Mono', monospace; letter-spacing: 0; color: var(--orange); }
-  .title-shift { padding-left: 13vw; }
-  .title-outline span { color: transparent; -webkit-text-stroke: clamp(1px, .12vw, 2px) var(--ink); }
-  .hero-line { position: absolute; z-index: 1; inset: 8% -4% 0; width: 108%; height: 88%; fill: none; stroke: var(--orange); stroke-width: 6; stroke-linecap: round; filter: drop-shadow(0 9px 0 var(--acid)); }
-  .hero-line path { stroke-dasharray: 2400; stroke-dashoffset: 2400; animation: drawLine 2.4s cubic-bezier(.22,1,.36,1) .35s forwards; }
-  .hero-line .line-echo { stroke: var(--ink); stroke-width: 1.5; filter: none; animation-delay: .65s; }
-  .hero-about-lower { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr) auto; gap: clamp(24px, 4vw, 64px); align-items: end; padding-top: 12px; }
-  .hero-about-heading h2 { margin: 0; font: 400 clamp(1.9rem, 3.35vw, 3.8rem)/.88 'Archivo Black', sans-serif; letter-spacing: -.065em; }
-  .hero-about-heading h2 em { color: transparent; -webkit-text-stroke: 1px var(--ink); font-style: normal; }
-  .hero-about-copy { max-width: 34rem; margin: 0; font: 500 clamp(.95rem, 1.25vw, 1.15rem)/1.45 'Manrope', sans-serif; }
-  .hero-about-footer { display: grid; gap: 20px; justify-items: end; align-items: end; font: 400 9px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; white-space: nowrap; }
-  .round-link { width: 58px; height: 58px; border: 1px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font-size: 24px; transition: color .25s, background .25s, transform .25s; }
-  .round-link:hover { color: var(--paper); background: var(--ink); transform: rotate(-35deg); }
+  .hero-about-topline, .hero-about-layout { position: relative; z-index: 2; }
+  .hero-about-topline { display: flex; justify-content: space-between; gap: 20px; font: 400 10px/1.3 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
+  .hero-about-layout { min-height: 0; display: grid; grid-template-columns: minmax(72px, .15fr) minmax(0, 1.35fr) minmax(180px, .55fr); gap: clamp(24px, 4vw, 68px); align-items: stretch; }
+  .hero-about-rail { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; padding: 8px 0 10px; color: var(--soft-ink); font: 400 9px/1.7 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
+  .hero-about-rail-line { width: 1px; height: min(24vh, 210px); background: var(--orange); transform-origin: top; animation: aboutRailReveal 1s cubic-bezier(.22,1,.36,1) .35s both; }
+  .hero-about-main { min-width: 0; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(2vh, 4vw, 6vh) 0 2vh; }
+  .hero-about-heading { max-width: 980px; }
+  .hero-about-kicker { margin: 0 0 18px; color: var(--orange); font: 500 10px/1.3 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; }
+  .hero-about-heading h1 { margin: 0; font: 400 clamp(3.5rem, 8.6vw, 9.5rem)/.82 'Archivo Black', sans-serif; letter-spacing: -.08em; text-wrap: balance; }
+  .hero-about-heading h1 em { color: transparent; -webkit-text-stroke: clamp(1px, .12vw, 2px) var(--ink); font-style: normal; }
+  .hero-about-lower { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(24px, 5vw, 90px); align-items: end; padding-top: 24px; border-top: 1px solid var(--rule); }
+  .hero-about-copy { max-width: 36rem; margin: 0; font: 500 clamp(1rem, 1.35vw, 1.2rem)/1.48 'Manrope', sans-serif; }
+  .hero-about-footer { display: grid; gap: 18px; justify-items: end; align-items: end; font: 400 9px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; white-space: nowrap; }
+  .hero-about-mark { position: relative; align-self: center; justify-self: end; width: min(27vw, 340px); aspect-ratio: 1; border: 1px solid var(--rule); border-radius: 50%; transform: rotate(-14deg); animation: aboutMarkFloat 7s ease-in-out infinite; }
+  .hero-about-mark::before, .hero-about-mark::after { content: ''; position: absolute; border-radius: 50%; }
+  .hero-about-mark::before { inset: 13%; border: 1px dashed color-mix(in srgb, var(--ink) 42%, transparent); animation: aboutMarkSpin 22s linear infinite; }
+  .hero-about-mark::after { inset: 28%; border: 1px solid var(--orange); box-shadow: 0 0 0 16px color-mix(in srgb, var(--orange) 12%, transparent); }
+  .hero-about-mark-core { position: absolute; z-index: 1; top: 47%; left: 47%; width: 7%; aspect-ratio: 1; border-radius: 50%; background: var(--orange); box-shadow: 0 0 0 8px color-mix(in srgb, var(--orange) 17%, transparent); }
+  .hero-about-mark-label { position: absolute; z-index: 2; right: 6%; bottom: 20%; color: var(--soft-ink); font: 400 9px/1.45 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; transform: rotate(14deg); }
   .about-work-link { display: inline-flex; align-items: center; gap: 8px; color: inherit; border-bottom: 1px solid currentColor; padding-bottom: 8px; transition: gap .25s ease; }
   .about-work-link:hover { gap: 14px; }
 
@@ -1034,7 +1041,7 @@ const seoSchema = {
   .figma-capture .reveal { opacity: 1; transform: none; }
 
   /* Every scene owns its entrance and exit; there is no transition overlay. */
-  .hero-kicker, .hero-title, .hero-about-lower, .hero-line,
+  .hero-about-topline, .hero-about-main, .hero-about-rail, .hero-about-mark, .hero-about-lower,
   .section-head, .project,
   .play-intro, .game-stage, .game-card,
   .contact-topline, .contact-center, .contact-footer, .contact-orbit {
@@ -1045,14 +1052,14 @@ const seoSchema = {
   }
 
   /* The merged hero/about scene moves as one editorial composition. */
-  .hero-about.scene-before .hero-kicker { opacity: 0; transform: translateY(-45px); }
-  .hero-about.scene-before .hero-title { opacity: 0; transform: translateY(-15vh) skewY(-3deg); filter: blur(10px); }
-  .hero-about.scene-before .hero-about-lower { opacity: 0; transform: translateY(55px); }
-  .hero-about.scene-before .hero-line { opacity: 0; transform: scale(1.12) rotate(3deg); }
-  .hero-about.scene-after .hero-kicker { opacity: 0; transform: translateY(35px); }
-  .hero-about.scene-after .hero-title { opacity: 0; transform: perspective(900px) rotateX(10deg) translateY(90px); filter: blur(8px); }
-  .hero-about.scene-after .hero-about-lower { opacity: 0; transform: translateY(70px); }
-  .hero-about.scene-after .hero-line { opacity: 0; transform: scale(.84) rotate(-3deg); }
+  .hero-about.scene-before .hero-about-topline { opacity: 0; transform: translateY(-35px); }
+  .hero-about.scene-before .hero-about-main { opacity: 0; transform: translateY(-8vh) skewY(-2deg); filter: blur(8px); }
+  .hero-about.scene-before .hero-about-rail { opacity: 0; transform: translateY(45px); }
+  .hero-about.scene-before .hero-about-mark { opacity: 0; transform: scale(.78) rotate(-36deg); }
+  .hero-about.scene-after .hero-about-topline { opacity: 0; transform: translateY(35px); }
+  .hero-about.scene-after .hero-about-main { opacity: 0; transform: translateY(8vh) skewY(2deg); filter: blur(8px); }
+  .hero-about.scene-after .hero-about-rail { opacity: 0; transform: translateY(-45px); }
+  .hero-about.scene-after .hero-about-mark { opacity: 0; transform: scale(1.16) rotate(24deg); }
 
   /* Work rows cut in horizontally, then peel away at alternating angles. */
   .work.scene-after .section-head { opacity: 0; transform: translateY(80px); clip-path: inset(100% 0 0); }
@@ -1089,7 +1096,9 @@ const seoSchema = {
 
   .figma-capture .section-scene * { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; }
 
-  @keyframes drawLine { to { stroke-dashoffset: 0; } }
+  @keyframes aboutRailReveal { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+  @keyframes aboutMarkSpin { to { transform: rotate(360deg); } }
+  @keyframes aboutMarkFloat { 50% { transform: translateY(-12px) rotate(-8deg); } }
   @keyframes snakeDrift { 0%,100% { transform: translate(0, 0); } 50% { transform: translate(14vw, -45px); } }
   @keyframes foodPulse { 50% { transform: scale(1.3) rotate(12deg); } }
   @keyframes orbitSpin { to { transform: rotate(360deg); } }
@@ -1099,17 +1108,19 @@ const seoSchema = {
     .nav-links { display: none; }
     .theme-label { display: none; }
     .play { display: none; }
-    .hero-about { padding: 84px 18px 24px; }
-    .hero-kicker span:nth-child(3) { display: none; }
-    .title-row { font-size: clamp(3.25rem, 15vw, 6.3rem); line-height: .86; }
-    .title-row.title-outline { font-size: 12.4vw; }
-    .title-shift { padding-left: 0; }
-    .hero-line { height: 70%; top: 18%; }
+    .hero-about { padding: 84px 18px 24px; gap: 18px; }
+    .hero-about-topline { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 12px; font-size: 9px; }
+    .hero-about-topline span:nth-child(2) { display: none; }
+    .hero-about-topline span:last-child { justify-self: end; max-width: 13rem; text-align: right; }
+    .hero-about-layout { display: block; }
+    .hero-about-rail { display: none; }
+    .hero-about-main { position: relative; z-index: 1; gap: 22px; padding: 4vh 0 0; }
+    .hero-about-kicker { margin-bottom: 14px; }
+    .hero-about-heading h1 { font-size: clamp(2.8rem, 14vw, 5.8rem); line-height: .85; }
     .hero-about-lower { grid-template-columns: 1fr; gap: 18px; padding-top: 18px; }
-    .hero-about-heading h2 { font-size: clamp(1.85rem, 9vw, 3rem); }
     .hero-about-copy { max-width: 34rem; font-size: .95rem; }
     .hero-about-footer { display: flex; justify-content: space-between; align-items: center; justify-items: initial; white-space: normal; }
-    .round-link { display: none; }
+    .hero-about-mark { position: absolute; z-index: 0; top: 28%; right: 0; width: min(43vw, 180px); opacity: .48; }
     .section-head, .play-intro { grid-template-columns: 1fr; }
     .section-head h2, .play-intro h2 { font-size: 14vw; }
     .head-note, .play-intro p:last-child { max-width: 480px; }
