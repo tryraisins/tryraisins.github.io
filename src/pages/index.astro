@@ -8,12 +8,12 @@ import talentHunterCover from '../assets/images/talent-hunter-cover.png';
 import streamSlipCover from '../assets/images/streamslip-cover.png';
 
 const projects = [
-  { number: '01', name: 'QuickBillz', type: 'Product / Invoicing', description: 'A subscription-free invoicing tool for creating polished, shareable bills in seconds.', year: '2026', accent: '#ff5c35', href: 'https://quickbillz.tryraisins.dev/', cover: quickBillzCover, coverAlt: 'QuickBillz invoice workspace' },
-  { number: '02', name: 'Terror Tracker', type: 'Live intelligence map', description: 'A live map of insurgent activity across Nigeria, built around verified incidents and threat clusters.', year: '2026', accent: '#b8ff32', href: 'https://terrortracker.tryraisins.dev/', cover: terrorTrackerCover, coverAlt: 'NATracker Nigeria attack tracker dashboard' },
-  { number: '03', name: 'Talent Hunter', type: 'Applied NLP', description: 'A recruiter workflow that turns a job brief and a pile of resumes into a ranked shortlist.', year: '2026', accent: '#74a7ff', href: 'https://talenthunter.tryraisins.dev/', cover: talentHunterCover, coverAlt: 'Talent Hunter resume screening landing page' },
-  { number: '04', name: 'yeknal', type: 'NPM CLI / Agent skills', description: 'A developer CLI for creating, packaging, and sharing reusable agent skills and project guidance.', year: '2026', accent: '#00c2a8', href: 'https://www.npmjs.com/package/yeknal' },
-  { number: '05', name: 'StreamSlip', type: 'Music recap utility', description: 'Turns YouTube Music listening history into a shareable receipt with a clean, personal recap.', year: '2025', accent: '#ffcf40', href: 'https://streamslip.vercel.app/', cover: streamSlipCover, coverAlt: 'StreamSlip music receipts landing page' },
-  { number: '06', name: 'BetPicks', type: 'Sports picks product', description: 'A focused sports-picks experience for exploring fixtures, odds, and informed predictions.', year: '2026', accent: '#ff78bd', href: 'https://betpicks.tryraisins.dev/' },
+  { number: '01', name: 'QuickBillz', type: 'Product / Invoicing', description: 'A subscription-free invoicing tool for creating polished, shareable bills in seconds.', year: '2026', href: 'https://quickbillz.tryraisins.dev/', cover: quickBillzCover, coverAlt: 'QuickBillz invoice workspace' },
+  { number: '02', name: 'Terror Tracker', type: 'Live intelligence map', description: 'A live map of insurgent activity across Nigeria, built around verified incidents and threat clusters.', year: '2026', href: 'https://terrortracker.tryraisins.dev/', cover: terrorTrackerCover, coverAlt: 'NATracker Nigeria attack tracker dashboard' },
+  { number: '03', name: 'Talent Hunter', type: 'Applied NLP', description: 'A recruiter workflow that turns a job brief and a pile of resumes into a ranked shortlist.', year: '2026', href: 'https://talenthunter.tryraisins.dev/', cover: talentHunterCover, coverAlt: 'Talent Hunter resume screening landing page' },
+  { number: '04', name: 'yeknal', type: 'NPM CLI / Agent skills', description: 'A developer CLI for creating, packaging, and sharing reusable agent skills and project guidance.', year: '2026', href: 'https://www.npmjs.com/package/yeknal' },
+  { number: '05', name: 'StreamSlip', type: 'Music recap utility', description: 'Turns YouTube Music listening history into a shareable receipt with a clean, personal recap.', year: '2025', href: 'https://streamslip.vercel.app/', cover: streamSlipCover, coverAlt: 'StreamSlip music receipts landing page' },
+  { number: '06', name: 'BetPicks', type: 'Sports picks product', description: 'A focused sports-picks experience for exploring fixtures, odds, and informed predictions.', year: '2026', href: 'https://betpicks.tryraisins.dev/' },
 ];
 
 const games = [
@@ -163,26 +163,31 @@ const seoSchema = {
           </div>
         </section>
 
-      <section id="work" class="work section-scene" data-section="work" data-scheme="warm">
+      <section id="work" class="work section-scene" data-section="work" data-scheme="warm" aria-labelledby="work-title">
         <header class="section-head reveal">
           <p class="eyebrow">Selected output / 2024—2026</p>
-          <h2>WORK THAT<br /><em>EARNS</em> ATTENTION.</h2>
+          <div class="section-title-block">
+            <span class="section-count" aria-hidden="true">01—06</span>
+            <h2 id="work-title">WORK THAT<br /><em>EARNS</em> ATTENTION.</h2>
+          </div>
           <p class="head-note">The projects stay central. Motion supports the story; it never buries the proof.</p>
         </header>
 
-        <div class="project-list">
+        <div class="project-list" aria-label="Selected projects">
           {projects.map((project) => (
-            <article class:list={['project', 'reveal', { 'has-cover': project.cover }]} style={`--project-accent:${project.accent}`}>
+            <article class:list={['project', 'reveal', { 'has-cover': project.cover }]}>
               <a class="project-row-link" href={project.href ?? '#'} target={project.href ? '_blank' : undefined} rel={project.href ? 'noopener noreferrer' : undefined} aria-label={`Open ${project.name}`}></a>
               <span class="project-number">{project.number}</span>
               <span class="project-details">
                 <span class="project-name">{project.name}</span>
                 <span class="project-description">{project.description}</span>
+                <span class="project-info">
+                  <span class="project-meta">{project.type}</span>
+                  <span class="project-year">{project.year}</span>
+                </span>
               </span>
-              <span class="project-meta">{project.type}</span>
-              <span class="project-year">{project.year}</span>
               <a class="project-action" href={project.href ?? '#'} target={project.href ? '_blank' : undefined} rel={project.href ? 'noopener noreferrer' : undefined} aria-label={`Open ${project.name}`}>
-                <span class="project-action-label">Open</span>
+                <span class="project-action-label">View project</span>
                 <span class="project-arrow" aria-hidden="true"></span>
               </a>
               {project.cover && (
@@ -198,12 +203,18 @@ const seoSchema = {
                       loading="lazy"
                       class="project-cover-image"
                     />
+                    <figcaption>Interface preview</figcaption>
                   </span>
                 </figure>
               )}
             </article>
           ))}
         </div>
+
+        <footer class="work-footer reveal">
+          <span>Six shipped systems / more in progress</span>
+          <a href="#contact">Have a difficult idea? <span class="link-arrow" aria-hidden="true"></span></a>
+        </footer>
       </section>
 
       <section id="play" class="play section-scene" data-section="play" data-scheme="ink">
@@ -849,33 +860,41 @@ const seoSchema = {
   .about-work-link { display: inline-flex; align-items: center; gap: 8px; color: inherit; border-bottom: 1px solid currentColor; padding-bottom: 8px; transition: gap .25s ease; }
   .about-work-link:hover { gap: 14px; }
 
-  .work { padding: 10vw 4vw 11vw; background: var(--work-surface); color: var(--work-ink); transition: background .45s ease, color .45s ease; }
-  .section-head { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 30px; align-items: start; margin-bottom: 9vw; }
+  .work { padding: clamp(84px, 10vw, 150px) clamp(20px, 4vw, 64px) clamp(96px, 11vw, 164px); background: var(--work-surface); color: var(--work-ink); transition: background .45s ease, color .45s ease; }
+  .section-head { display: grid; grid-template-columns: minmax(120px, 1fr) minmax(0, 2fr) minmax(180px, 1fr); gap: clamp(22px, 3vw, 48px); align-items: start; margin-bottom: clamp(68px, 9vw, 132px); }
   .eyebrow { font: 500 10px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
   .section-head h2, .play-intro h2 { margin: 0; font: 400 clamp(3rem, 7.3vw, 7.4rem)/.87 'Archivo Black', sans-serif; letter-spacing: -.07em; }
   .section-head h2 em, .play-intro h2 em { color: var(--orange); font-style: normal; }
-  .head-note { margin: 0; color: var(--soft-ink); line-height: 1.55; font-size: 14px; }
+  .section-title-block { position: relative; }
+  .section-count { display: block; margin-bottom: 18px; color: var(--soft-ink); font: 400 10px/1 'DM Mono', monospace; letter-spacing: .12em; }
+  .head-note { max-width: 250px; margin: 0; color: var(--soft-ink); line-height: 1.55; font-size: 14px; }
   .project-list { border-top: 1px solid var(--rule); }
-  .project { position: relative; display: grid; grid-template-columns: 8% 45% 1fr 9% auto; align-items: center; min-height: 140px; border-bottom: 1px solid var(--rule); overflow: hidden; isolation: isolate; }
-  .project.has-cover { min-height: 220px; }
-  .project::before { content: ''; position: absolute; z-index: -1; inset: 0; background: var(--project-accent); transform: translateY(101%); transition: transform .45s cubic-bezier(.22,1,.36,1); }
+  .project { position: relative; display: grid; grid-template-columns: clamp(44px, 8%, 100px) minmax(0, 1fr) auto; align-items: center; min-height: 184px; padding: 20px 0; border-bottom: 1px solid var(--rule); overflow: hidden; isolation: isolate; transition: background .35s ease; }
+  .project.has-cover { min-height: 224px; }
+  .project::before { content: ''; position: absolute; z-index: -1; left: 0; top: 0; bottom: 0; width: 4px; background: var(--orange); transform: scaleY(0); transform-origin: top; transition: transform .45s cubic-bezier(.22,1,.36,1); }
   .project-row-link { position: absolute; z-index: 0; inset: 0; cursor: pointer; }
   .project > *:not(.project-row-link) { position: relative; z-index: 1; pointer-events: none; }
-  .project > .project-preview { --preview-frame-pad: 6px; position: absolute; z-index: 2; top: 50%; right: 13%; width: min(23vw, 320px); margin: 0; opacity: 0; pointer-events: none; transform: translate(24px, -50%) rotate(2.5deg) scale(.88); transition: opacity .35s ease, transform .55s cubic-bezier(.22,1,.36,1); }
+  .project > .project-preview { --preview-frame-pad: 6px; position: absolute; z-index: 2; top: 50%; right: clamp(90px, 13%, 180px); width: min(23vw, 320px); margin: 0; opacity: 0; pointer-events: none; transform: translate(24px, -50%) rotate(2.5deg) scale(.88); transition: opacity .35s ease, transform .55s cubic-bezier(.22,1,.36,1); }
   .project-preview-frame { position: relative; display: block; padding: var(--preview-frame-pad); overflow: hidden; background: var(--paper); box-shadow: 12px 16px 0 color-mix(in srgb, var(--ink) 12%, transparent), 0 20px 44px rgba(0,0,0,.16); }
   .project-preview-skeleton { position: absolute; z-index: 0; inset: var(--preview-frame-pad); overflow: hidden; background: linear-gradient(110deg, color-mix(in srgb, var(--ink) 7%, transparent) 8%, color-mix(in srgb, var(--ink) 15%, transparent) 18%, color-mix(in srgb, var(--ink) 7%, transparent) 33%); background-size: 200% 100%; animation: projectPreviewShimmer 1.4s linear infinite; transition: opacity .3s ease; }
   .project-preview-skeleton::after { content: ''; position: absolute; inset: 18% 12%; border: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); opacity: .7; }
   .project-preview picture { position: relative; z-index: 1; display: block; }
   .project-preview img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top center; border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); filter: saturate(.9) contrast(.98); opacity: 0; transition: opacity .35s ease; }
+  .project-preview figcaption { position: absolute; right: 12px; bottom: 10px; z-index: 2; color: var(--ink); font: 500 8px/1 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; mix-blend-mode: multiply; }
   .project-preview.is-loaded .project-preview-skeleton { opacity: 0; animation-play-state: paused; }
   .project-preview.is-loaded img { opacity: 1; }
-  .project-action { display: flex; align-items: center; justify-content: flex-end; gap: 10px; color: inherit; text-decoration: none; pointer-events: auto !important; cursor: pointer; }
-  .project-action-label { display: none; font: 500 10px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
+  .project-action { display: flex; align-items: center; justify-content: flex-end; gap: 10px; min-width: 128px; padding-left: 24px; color: inherit; text-decoration: none; pointer-events: auto !important; cursor: pointer; }
+  .project-action-label { display: inline; font: 500 10px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
   .project-number, .project-meta, .project-year { font: 400 10px/1.3 'DM Mono', monospace; text-transform: uppercase; }
-  .project-details { min-width: 0; display: grid; align-content: center; }
-  .project-name { font: 400 clamp(2.3rem, 5.5vw, 5.5rem)/1 'Archivo Black', sans-serif; letter-spacing: -.065em; transition: transform .45s cubic-bezier(.22,1,.36,1); }
-  .project-description { max-width: 48rem; max-height: 0; margin: 0; overflow: hidden; opacity: 0; visibility: hidden; transform: translateY(-8px); color: currentColor; font: 500 11px/1.55 'DM Mono', monospace; letter-spacing: .01em; transition: max-height .45s cubic-bezier(.22,1,.36,1), margin .45s cubic-bezier(.22,1,.36,1), opacity .25s ease, transform .45s cubic-bezier(.22,1,.36,1), visibility 0s linear .45s; }
+  .project-number { align-self: start; padding-top: 8px; color: var(--soft-ink); letter-spacing: .12em; }
+  .project-details { min-width: 0; display: grid; align-content: center; padding-right: 24px; transition: transform .45s cubic-bezier(.22,1,.36,1); }
+  .project-name { display: block; font: 400 clamp(2.3rem, 5.5vw, 5.5rem)/1 'Archivo Black', sans-serif; letter-spacing: -.065em; transition: color .35s ease; }
+  .project-description { display: block; max-width: 40rem; margin-top: 13px; color: color-mix(in srgb, currentColor 72%, transparent); font: 500 11px/1.55 'DM Mono', monospace; letter-spacing: .01em; transition: color .35s ease; }
+  .project-info { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 21px; color: var(--soft-ink); }
+  .project-year { position: relative; padding-left: 14px; }
+  .project-year::before { content: ''; position: absolute; left: 0; top: 50%; width: 4px; height: 4px; border-radius: 50%; background: var(--orange); transform: translateY(-50%); }
   .project-arrow { width: 42px; height: 42px; border: 1px solid currentColor; border-radius: 50%; display: block; position: relative; transition: transform .35s; }
+  .project-action:focus-visible, .work-footer a:focus-visible { outline: 2px solid var(--orange); outline-offset: 5px; }
   .project-arrow::before, .link-arrow::before {
     content: '';
     position: absolute;
@@ -890,19 +909,25 @@ const seoSchema = {
   }
   @media (min-width: 801px) {
     .project.has-cover:focus-within .project-preview { opacity: 1; transform: translate(0, -50%) rotate(-3deg) scale(1); }
-    .project:focus-within::before { transform: translateY(0); }
-    .project:focus-within .project-name { transform: translateX(18px); }
-    .project:focus-within .project-description { max-height: 4rem; margin-top: 12px; opacity: .84; visibility: visible; transform: translateY(0); transition-delay: 0s; }
-    .project:focus-within { outline: 2px solid var(--project-accent); outline-offset: -2px; }
+    .project:focus-within::before { transform: scaleY(1); }
+    .project:focus-within { background: color-mix(in srgb, var(--orange) 7%, transparent); }
+    .project:focus-within .project-details { transform: translateX(18px); }
+    .project:focus-within .project-description { color: currentColor; }
+    .project:focus-within { outline: 2px solid var(--orange); outline-offset: -2px; }
     .project:focus-within .project-arrow { transform: rotate(45deg); }
   }
   @media (hover: hover) and (pointer: fine) and (min-width: 801px) {
     .project.has-cover:hover .project-preview { opacity: 1; transform: translate(0, -50%) rotate(-3deg) scale(1); }
-    .project:hover::before { transform: translateY(0); }
-    .project:hover .project-name { transform: translateX(18px); }
-    .project:hover .project-description { max-height: 4rem; margin-top: 12px; opacity: .84; visibility: visible; transform: translateY(0); transition-delay: 0s; }
+    .project:hover::before { transform: scaleY(1); }
+    .project:hover { background: color-mix(in srgb, var(--orange) 7%, transparent); }
+    .project:hover .project-details { transform: translateX(18px); }
+    .project:hover .project-description { color: currentColor; }
     .project:hover .project-arrow { transform: rotate(45deg); }
   }
+
+  .work-footer { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--rule); color: var(--soft-ink); font: 400 9px/1.4 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .08em; }
+  .work-footer a { display: inline-flex; align-items: center; gap: 8px; color: var(--work-ink); border-bottom: 1px solid currentColor; padding-bottom: 8px; transition: gap .25s ease, color .25s ease; }
+  .work-footer a:hover { gap: 14px; color: var(--orange); }
 
   .play { background: var(--panel); color: var(--panel-ink); padding: 10vw 4vw; transition: background .45s, color .45s; }
   .play-intro { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 30px; align-items: start; }
@@ -1034,6 +1059,9 @@ const seoSchema = {
   .work .project:nth-child(4) { transition-delay: 165ms; }
   .work .project:nth-child(5) { transition-delay: 220ms; }
   .work .project:nth-child(6) { transition-delay: 275ms; }
+  .work-footer { transition-property: transform, opacity, filter, clip-path; transition-duration: .85s; transition-timing-function: cubic-bezier(.22,1,.36,1); will-change: transform, opacity, filter; }
+  .work.scene-after .work-footer { opacity: 0; transform: translateY(80px); }
+  .work.scene-before .work-footer { opacity: 0; transform: translateY(-80px); }
 
   /* Play arrives through depth: the stage irises open and cards turn forward. */
   .play.scene-after .play-intro { opacity: 0; transform: perspective(900px) translateZ(-180px) rotateX(8deg); filter: blur(12px); }
@@ -1077,10 +1105,11 @@ const seoSchema = {
     .section-head h2, .play-intro h2 { font-size: 14vw; }
     .head-note, .play-intro p:last-child { max-width: 480px; }
     .project-row-link { display: none; }
-    .project { grid-template-columns: 10% minmax(0, 1fr) auto; min-height: 0; padding-block: 20px; align-items: start; }
+    .project { grid-template-columns: 38px minmax(0, 1fr) auto; min-height: 0; padding-block: 22px; align-items: start; }
     .work .project { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; transition: none !important; }
     .project.has-cover { min-height: 0; }
-    .project-meta, .project-year { display: none; }
+    .project-info { margin-top: 18px; gap: 10px; }
+    .project-meta, .project-year { font-size: 8px; }
     .project-name { font-size: clamp(1.9rem, 8.2vw, 3.5rem); }
     .project .project-name, .project:focus-within .project-name { transform: none; }
     .project .project-description, .project:focus-within .project-description { max-height: none; margin-top: 10px; overflow: visible; opacity: .84; visibility: visible; transform: none; transition: none; }
@@ -1089,8 +1118,10 @@ const seoSchema = {
     .project-preview-frame { box-shadow: 8px 10px 0 color-mix(in srgb, var(--ink) 10%, transparent); }
     .project-preview-skeleton { animation: none; }
     .project-preview img { aspect-ratio: 16 / 9; transition: none; }
-    .project-action-label { display: inline; }
+    .project-action { min-width: 0; padding-left: 12px; gap: 7px; }
+    .project-action-label { display: inline; font-size: 8px; }
     .project-arrow { width: 36px; height: 36px; }
+    .work-footer { align-items: flex-start; flex-direction: column; gap: 18px; margin-top: 18px; line-height: 1.6; }
     .game-list { grid-template-columns: 1fr; }
     .game-card { border-right: 0; border-bottom: 1px solid color-mix(in srgb, var(--panel-ink) 25%, transparent); min-height: 220px; }
     .game-card h3 { margin-top: 34px; }
