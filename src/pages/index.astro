@@ -165,12 +165,14 @@ const seoSchema = {
 
       <section id="work" class="work section-scene" data-section="work" data-scheme="warm" aria-labelledby="work-title">
         <header class="section-head reveal">
-          <p class="eyebrow">Selected output / 2024—2026</p>
           <div class="section-title-block">
-            <span class="section-count" aria-hidden="true">01—06</span>
-            <h2 id="work-title">WORK THAT<br /><em>EARNS</em> ATTENTION.</h2>
+            <p class="eyebrow">Selected output / 2024—2026</p>
+            <h2 id="work-title">Selected <em>work.</em></h2>
           </div>
-          <p class="head-note">The projects stay central. Motion supports the story; it never buries the proof.</p>
+          <div class="section-head-side">
+            <span class="section-count" aria-hidden="true">01—06</span>
+            <p class="head-note">Interfaces, tools, and systems made useful.</p>
+          </div>
         </header>
 
         <div class="project-list" aria-label="Selected projects">
@@ -861,13 +863,16 @@ const seoSchema = {
   .about-work-link:hover { gap: 14px; }
 
   .work { padding: clamp(84px, 10vw, 150px) clamp(20px, 4vw, 64px) clamp(96px, 11vw, 164px); background: var(--work-surface); color: var(--work-ink); transition: background .45s ease, color .45s ease; }
-  .section-head { display: grid; grid-template-columns: minmax(120px, 1fr) minmax(0, 2fr) minmax(180px, 1fr); gap: clamp(22px, 3vw, 48px); align-items: start; margin-bottom: clamp(68px, 9vw, 132px); }
+  .section-head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: clamp(22px, 3vw, 48px); align-items: end; margin-bottom: clamp(54px, 6vw, 86px); }
   .eyebrow { font: 500 10px/1.3 'DM Mono', monospace; text-transform: uppercase; letter-spacing: .1em; }
   .section-head h2, .play-intro h2 { margin: 0; font: 400 clamp(3rem, 7.3vw, 7.4rem)/.87 'Archivo Black', sans-serif; letter-spacing: -.07em; }
+  .section-head h2 { font-size: clamp(2.6rem, 5.6vw, 5.6rem); line-height: .92; }
   .section-head h2 em, .play-intro h2 em { color: var(--orange); font-style: normal; }
   .section-title-block { position: relative; }
-  .section-count { display: block; margin-bottom: 18px; color: var(--soft-ink); font: 400 10px/1 'DM Mono', monospace; letter-spacing: .12em; }
-  .head-note { max-width: 250px; margin: 0; color: var(--soft-ink); line-height: 1.55; font-size: 14px; }
+  .section-title-block .eyebrow { margin: 0 0 18px; }
+  .section-head-side { display: flex; align-items: flex-end; gap: 24px; }
+  .section-count { display: block; color: var(--soft-ink); font: 400 10px/1 'DM Mono', monospace; letter-spacing: .12em; }
+  .head-note { max-width: 210px; margin: 0; color: var(--soft-ink); line-height: 1.5; font-size: 13px; }
   .project-list { border-top: 1px solid var(--rule); }
   .project { position: relative; display: grid; grid-template-columns: clamp(44px, 8%, 100px) minmax(0, 1fr) auto; align-items: center; min-height: 184px; padding: 20px 0; border-bottom: 1px solid var(--rule); overflow: hidden; isolation: isolate; transition: background .35s ease; }
   .project.has-cover { min-height: 224px; }
@@ -1102,7 +1107,9 @@ const seoSchema = {
     .hero-about-detail { margin-top: 18px; font-size: clamp(1.3rem, 6.5vw, 2.7rem); line-height: 1.08; }
     .hero-about-footer { align-items: center; margin-top: 42px; }
     .section-head, .play-intro { grid-template-columns: 1fr; }
-    .section-head h2, .play-intro h2 { font-size: 14vw; }
+    .section-head h2 { font-size: clamp(2.6rem, 11vw, 4rem); }
+    .play-intro h2 { font-size: 14vw; }
+    .section-head-side { align-items: flex-start; gap: 16px; }
     .head-note, .play-intro p:last-child { max-width: 480px; }
     .project-row-link { display: none; }
     .project { grid-template-columns: 38px minmax(0, 1fr) auto; min-height: 0; padding-block: 22px; align-items: start; }
