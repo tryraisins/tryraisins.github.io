@@ -98,7 +98,7 @@ const seoSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta id="theme-color" name="theme-color" content="#f0ede4" />
+    <meta id="theme-color" name="theme-color" content="#17130f" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="author" content="TryRaisins" />
@@ -683,24 +683,24 @@ const seoSchema = {
 
 <style is:global>
   :root {
-    --paper: #f1ede3;
-    --paper-deep: #e8e1d4;
-    --ink: #1c1a17;
-    --muted: #6d675e;
-    --faint: #9d9589;
-    --rule: rgba(28, 26, 23, .22);
-    --rule-strong: rgba(28, 26, 23, .52);
-    --rust: #b34f35;
-    --rust-dark: #7e3524;
-    --night: #1d1b18;
-    --night-soft: #27241f;
-    --night-ink: #f1ede3;
+    --paper: #17130f;
+    --paper-deep: #211a14;
+    --ink: #f5ead5;
+    --muted: #b9aa97;
+    --faint: #887968;
+    --rule: rgba(245, 234, 213, .2);
+    --rule-strong: rgba(245, 234, 213, .5);
+    --rust: #c2593a;
+    --rust-dark: #df8b69;
+    --night: #0f0c09;
+    --night-soft: #1f1912;
+    --night-ink: #f5ead5;
     --acid: #b8ff32;
     --acid-ink: #b8ff32;
     --orange: #ff5c35;
-    --panel-ink: #f4f0e7;
-    --console-surface: #11110e;
-    --console-canvas: #0c0c0a;
+    --panel-ink: #f5ead5;
+    --console-surface: #0c0a08;
+    --console-canvas: #0a0806;
     --page-gutter: max(24px, 4vw);
     --page-max: 1440px;
   }
@@ -724,7 +724,7 @@ const seoSchema = {
     margin: 0;
     overflow-x: clip;
     background:
-      radial-gradient(circle at 82% 8%, rgba(255,255,255,.42), transparent 28rem),
+      radial-gradient(circle at 82% 8%, rgba(194,89,58,.14), transparent 28rem),
       var(--paper);
     color: var(--ink);
     font-family: 'Manrope', sans-serif;
@@ -747,6 +747,7 @@ const seoSchema = {
     left: 10px;
     padding: 10px 14px;
     min-height: 44px;
+    display: inline-flex;
     align-items: center;
     background: var(--ink);
     color: var(--paper);
@@ -761,8 +762,8 @@ const seoSchema = {
     z-index: 20;
     inset: 0;
     pointer-events: none;
-    opacity: .16;
-    mix-blend-mode: multiply;
+    mix-blend-mode: screen;
+    opacity: .08;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
   }
 
@@ -778,7 +779,7 @@ const seoSchema = {
     align-items: center;
     gap: 32px;
     border-bottom: 1px solid var(--rule);
-    background: rgba(241, 237, 227, .94);
+    background: rgba(23, 19, 15, .94);
     backdrop-filter: blur(10px);
     color: var(--ink);
     transition: none;
@@ -852,7 +853,7 @@ const seoSchema = {
     margin: 24px auto 0;
     padding: clamp(54px, 7vw, 100px) clamp(44px, 7vw, 104px) 38px;
     display: flex;
-    border: 1px solid rgba(28, 26, 23, .12);
+    border: 1px solid rgba(245, 234, 213, .16);
   }
   .hero-rule {
     position: absolute;
@@ -1007,7 +1008,7 @@ const seoSchema = {
     transform: translate(18px, -50%) rotate(1.5deg);
     transition: opacity .25s ease, transform .4s cubic-bezier(.22,1,.36,1);
   }
-  .project-preview-frame { display: block; padding: 6px; background: #f8f4eb; border: 1px solid var(--rule); box-shadow: 10px 14px 28px rgba(43,35,25,.14); }
+  .project-preview-frame { display: block; padding: 6px; background: #241b14; border: 1px solid var(--rule); box-shadow: 10px 14px 28px rgba(0,0,0,.3); }
   .project-preview img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; opacity: 0; filter: saturate(.82); transition: opacity .2s ease; }
   .project-preview.is-loaded img { opacity: 1; }
   .project-preview-skeleton { position: absolute; inset: 6px 6px 24px; background: var(--paper-deep); }
@@ -1332,7 +1333,7 @@ const seoSchema = {
       opacity: 1;
       transform: none;
     }
-    .project-preview-frame { padding: 4px; box-shadow: 7px 9px 20px rgba(43,35,25,.1); }
+    .project-preview-frame { padding: 4px; box-shadow: 7px 9px 20px rgba(0,0,0,.25); }
     .project-preview-skeleton { inset: 4px 4px 20px; }
     .project:hover .project-name,
     .project:focus-within .project-name { transform: none; }
