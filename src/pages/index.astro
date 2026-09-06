@@ -113,10 +113,10 @@ const seoSchema = {
     <script id="structured-data" type="application/ld+json" set:html={JSON.stringify(seoSchema)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <a class="skip-link" href="#work">Skip to selected work</a>
+    <a class="skip-link" href="#work">Skip to work</a>
     <div class="paper-grain" aria-hidden="true"></div>
 
     <div class="site-shell">
@@ -129,13 +129,11 @@ const seoSchema = {
       <main id="top" class="portfolio">
         <section class="identity" aria-labelledby="hero-title">
           <div class="identity-copy">
-            <p class="eyebrow">Independent engineer / selected output</p>
-            <h1 id="hero-title">Difficult ideas.<br />Useful software.</h1>
+            <h1 id="hero-title">I’m at my best<br />when the problem<br />is still messy.</h1>
             <p class="intro">I’m TryRaisins. I design and build reliable products, interfaces, and systems for real use.</p>
           </div>
 
           <div class="identity-footer">
-            <p class="hand-note" aria-hidden="true">built with patience.</p>
             <nav class="social-links" aria-label="Social profiles">
               {socials.map((social) => (
                 <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`Visit TryRaisins on ${social.name}`}>
@@ -159,7 +157,7 @@ const seoSchema = {
           <header class="work-header">
             <div>
               <p class="eyebrow">Portfolio index / 2024 to 2026</p>
-              <h2 id="work-title">Selected work</h2>
+              <h2 id="work-title">Work</h2>
             </div>
             <span class="work-count" aria-label="Six projects">01 / 06</span>
           </header>
@@ -322,7 +320,7 @@ const seoSchema = {
 
   .identity h1 {
     max-width: 760px;
-    margin: clamp(30px, 7vh, 82px) 0 0;
+    margin: 0;
     font: 400 clamp(4rem, 6.4vw, 7.2rem)/.86 'Newsreader', Georgia, serif;
     letter-spacing: -.065em;
     text-wrap: balance;
@@ -339,14 +337,6 @@ const seoSchema = {
   }
 
   .identity-footer { margin-top: 38px; }
-
-  .hand-note {
-    width: max-content;
-    margin: 0 0 14px auto;
-    color: var(--accent);
-    font: 500 clamp(1.25rem, 1.8vw, 1.7rem)/1 'Caveat', cursive;
-    transform: rotate(-3deg);
-  }
 
   .social-links {
     display: grid;
@@ -459,7 +449,7 @@ const seoSchema = {
     .site-shell { border-inline: 0; }
     .portfolio { min-height: auto; grid-template-columns: 1fr; }
     .identity { min-height: 46dvh; border-right: 0; border-bottom: 1px solid var(--line-strong); }
-    .identity h1 { margin-top: 34px; font-size: clamp(4rem, 12vw, 7rem); }
+    .identity h1 { font-size: clamp(4rem, 12vw, 7rem); }
     .intro { margin-top: 24px; }
     .identity-footer { margin-top: 42px; }
     .work-board { min-height: 54dvh; }
@@ -471,10 +461,9 @@ const seoSchema = {
     .location { display: none; }
     .portfolio { min-height: calc(100dvh - 52px); }
     .identity { min-height: 0; padding-block: 22px 18px; }
-    .identity h1 { margin-top: 20px; font-size: clamp(3.4rem, 16vw, 5rem); }
+    .identity h1 { font-size: clamp(3.4rem, 16vw, 5rem); }
     .intro { max-width: 35rem; margin-top: 16px; font-size: .94rem; line-height: 1.48; }
     .identity-footer { margin-top: 20px; }
-    .hand-note { display: none; }
     .social-links a { min-height: 44px; padding-inline: 6px; gap: 7px; font-size: 9px; }
     .social-links svg { width: 15px; height: 15px; }
     .work-board { min-height: 0; padding-block: 20px 14px; }
@@ -512,10 +501,9 @@ const seoSchema = {
     .portfolio { min-height: calc(100dvh - 52px); }
     .identity,
     .work-board { padding-block: 24px 20px; }
-    .identity h1 { margin-top: 30px; font-size: clamp(3.6rem, 5.7vw, 6rem); }
+    .identity h1 { font-size: clamp(3.6rem, 5.7vw, 6rem); }
     .intro { margin-top: 22px; font-size: 1rem; }
     .identity-footer { margin-top: 24px; }
-    .hand-note { margin-bottom: 8px; }
     .work-header { padding-bottom: 14px; }
     .work-header h2 { font-size: 2.6rem; }
     .project-list { grid-template-rows: repeat(6, minmax(54px, 1fr)); }
