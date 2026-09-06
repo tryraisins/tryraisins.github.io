@@ -1,70 +1,19 @@
 # TryRaisins portfolio
 
-## Arcade leaderboard
+A compact, dark editorial portfolio built with Astro and deployed to GitHub Pages.
 
-The Play section includes Glyph Serpent, Space Invaders, and Dino Run. Scores are saved to a Neon Postgres top 10 per game through a small serverless API. The browser only receives the API URL:
+The interface keeps the Quiet Workshop direction through restrained typography, drafting-grid details, fine rules, and minimal motion. The page presents the full project index, contact details, and social profiles in a single desktop viewport. The previous game section is no longer part of the site.
 
-```text
-PUBLIC_LEADERBOARD_API_URL=https://your-leaderboard-api.vercel.app/api/leaderboard
+## Commands
+
+```sh
+npm install
+npm run dev
+npm run build
+npm run preview
+npm run deploy
 ```
 
-The API deployment needs Neon’s pooled connection string privately:
+## Deployment
 
-```text
-DATABASE_URL=postgresql://user:password@...-pooler.../neondb?sslmode=require
-```
-
-Create a Neon project, run [`neon/leaderboard.sql`](neon/leaderboard.sql) in the Neon SQL Editor, and deploy [`api/leaderboard.js`](api/leaderboard.js) to Vercel with `DATABASE_URL`. The current API URL is built in as the default; `PUBLIC_LEADERBOARD_API_URL` is only needed if you move the API. Without an API URL, the games use a local preview board.
-
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm run deploy`
-
-Deploys to github pages\
-
-
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Pushes to `main` are built and published through the GitHub Pages workflow in `.github/workflows/deploy-pages.yml`.
