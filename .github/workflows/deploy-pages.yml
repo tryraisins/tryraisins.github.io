@@ -32,6 +32,8 @@ jobs:
 
       - name: Build site
         run: npm run build
+        env:
+          PUBLIC_LEADERBOARD_API_URL: ${{ secrets.PUBLIC_LEADERBOARD_API_URL }}
 
       - name: Publish to gh-pages
         uses: peaceiris/actions-gh-pages@v4

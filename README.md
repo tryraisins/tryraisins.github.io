@@ -1,3 +1,21 @@
+# TryRaisins portfolio
+
+## Arcade leaderboard
+
+The Play section includes Glyph Serpent, Space Invaders, and Dino Run. Scores are saved to a Neon Postgres top 10 per game through a small serverless API. The browser only receives the API URL:
+
+```text
+PUBLIC_LEADERBOARD_API_URL=https://your-leaderboard-api.vercel.app/api/leaderboard
+```
+
+The API deployment needs Neon’s pooled connection string privately:
+
+```text
+DATABASE_URL=postgresql://user:password@...-pooler.../neondb?sslmode=require
+```
+
+Create a Neon project, run [`neon/leaderboard.sql`](neon/leaderboard.sql) in the Neon SQL Editor, and deploy [`api/leaderboard.js`](api/leaderboard.js) to Vercel with `DATABASE_URL`. The current API URL is built in as the default; `PUBLIC_LEADERBOARD_API_URL` is only needed if you move the API. Without an API URL, the games use a local preview board.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

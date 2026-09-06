@@ -34,3 +34,12 @@ TODO:
 - Rebuilt Glyph Serpent as a classic pixel snake game: a three-part snake, apple pickups, wall/body collisions, growth, speed ramp, pause/restart, high score storage, particle bursts, and deterministic test hooks.
 - Verification: `npm run build` passed. Desktop browser checks confirmed Echo List is absent, StreamSlip resolves to `https://streamslip.vercel.app/`, the description is hidden before hover and visible on hover, and no page/console errors occurred. Glyph Serpent was visually checked during gameplay and at game-over; deterministic checks verified pause, apple collection/growth, wall loss, restart, and directional movement.
 - Follow-up: fixed Escape so it exits fullscreen before closing the game; browser verification confirmed F enters fullscreen and Escape exits while keeping the game open.
+
+2026-08-18 update:
+- Added Space Invaders and Dino Run to the embedded Play section alongside Glyph Serpent.
+- Space Invaders has escalating glyph waves, enemy fire, movement, shooting, levels, pause, restart, and deterministic game hooks.
+- Dino Run has jump timing, cactus collisions, score-based levels, speed ramps, pause, restart, and deterministic game hooks.
+- Added a top-10 leaderboard UI with 1–5 character arcade names. It uses a Neon-backed serverless API when `PUBLIC_LEADERBOARD_API_URL` is configured, with localStorage fallback for development or backend outages.
+- Added `api/leaderboard.js` for validated GET/POST access, `neon/leaderboard.sql` with table checks and ranking index, and `.env.example`.
+- Provisioned dedicated Neon project `tryraisins-arcade`, created and verified `game_scores`, deployed the API to `tryraisins-arcade-api.vercel.app`, and stored its private pooled `DATABASE_URL` as a sensitive Vercel production variable.
+- The deployed API was smoke-tested for CORS/GET behavior and invalid-game rejection. The static site now defaults to the deployed API URL.
