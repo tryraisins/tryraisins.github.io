@@ -1,13 +1,20 @@
 ---
 import '../styles/global.css';
+import { Picture } from 'astro:assets';
+
+import quickBillzCover from '../assets/images/quickbillz-cover.png';
+import terrorTrackerCover from '../assets/images/terror-tracker-cover.png';
+import talentHunterCover from '../assets/images/talent-hunter-cover.png';
+import yeknalCover from '../assets/images/yeknal-bakery.png';
+import streamSlipCover from '../assets/images/streamslip-cover.png';
 
 const projects = [
-  { number: '01', name: 'QuickBillz', type: 'Product / Invoicing', year: '2026', href: 'https://quickbillz.tryraisins.dev/' },
-  { number: '02', name: 'Terror Tracker', type: 'Live intelligence map', year: '2026', href: 'https://terrortracker.tryraisins.dev/' },
-  { number: '03', name: 'Talent Hunter', type: 'Applied NLP', year: '2026', href: 'https://talenthunter.tryraisins.dev/' },
-  { number: '04', name: 'yeknal', type: 'NPM CLI / Agent skills', year: '2026', href: 'https://www.npmjs.com/package/yeknal' },
-  { number: '05', name: 'StreamSlip', type: 'Music recap utility', year: '2025', href: 'https://streamslip.vercel.app/' },
-  { number: '06', name: 'BetPicks', type: 'Sports picks product', year: '2026', href: 'https://betpicks.tryraisins.dev/' },
+  { number: '01', name: 'QuickBillz', type: 'Product / Invoicing', description: 'Create polished, shareable invoices without a subscription.', year: '2026', href: 'https://quickbillz.tryraisins.dev/', cover: quickBillzCover, coverAlt: 'QuickBillz invoice workspace' },
+  { number: '02', name: 'Terror Tracker', type: 'Live intelligence map', description: 'Maps verified security incidents and threat patterns across Nigeria.', year: '2026', href: 'https://terrortracker.tryraisins.dev/', cover: terrorTrackerCover, coverAlt: 'Nigeria security incident tracker dashboard' },
+  { number: '03', name: 'Talent Hunter', type: 'Applied NLP', description: 'Ranks resumes against a job brief for faster, clearer shortlists.', year: '2026', href: 'https://talenthunter.tryraisins.dev/', cover: talentHunterCover, coverAlt: 'Talent Hunter resume screening interface' },
+  { number: '04', name: 'yeknal', type: 'NPM CLI / Agent skills', description: 'Packages reusable agent skills and project guidance from the command line.', year: '2026', href: 'https://www.npmjs.com/package/yeknal', cover: yeknalCover, coverAlt: 'yeknal command line tool artwork' },
+  { number: '05', name: 'StreamSlip', type: 'Music recap utility', description: 'Turns YouTube Music history into a clean, shareable listening receipt.', year: '2025', href: 'https://streamslip.vercel.app/', cover: streamSlipCover, coverAlt: 'StreamSlip music receipt interface' },
+  { number: '06', name: 'BetPicks', type: 'Sports picks product', description: 'Brings fixtures, odds, and informed predictions into one focused view.', year: '2026', href: 'https://betpicks.tryraisins.dev/', monogram: 'BP' },
 ];
 
 const socials = [
@@ -163,8 +170,26 @@ const seoSchema = {
               <li>
                 <a class="project" href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name}`}>
                   <span class="project-number">{project.number}</span>
-                  <span class="project-name">{project.name}</span>
-                  <span class="project-type">{project.type}</span>
+                  <span class="project-main">
+                    <span class="project-name">{project.name}</span>
+                    <span class="project-type">{project.type}</span>
+                  </span>
+                  <span class="project-description">{project.description}</span>
+                  <span class="project-preview">
+                    {project.cover ? (
+                      <Picture
+                        src={project.cover}
+                        alt={project.coverAlt}
+                        widths={[128, 192]}
+                        sizes="74px"
+                        formats={['avif', 'webp']}
+                        loading="lazy"
+                        class="project-cover-image"
+                      />
+                    ) : (
+                      <span class="project-placeholder" aria-hidden="true">{project.monogram}</span>
+                    )}
+                  </span>
                   <span class="project-year">{project.year}</span>
                   <span class="project-arrow" aria-hidden="true">↗</span>
                 </a>
@@ -384,9 +409,9 @@ const seoSchema = {
     height: 100%;
     min-height: 58px;
     display: grid;
-    grid-template-columns: 32px minmax(160px, 1.1fr) minmax(150px, .9fr) 46px 28px;
+    grid-template-columns: 28px minmax(130px, .72fr) minmax(170px, 1.28fr) 74px 40px 20px;
     align-items: center;
-    gap: clamp(10px, 1.5vw, 24px);
+    gap: clamp(8px, 1.1vw, 16px);
   }
 
   .project-number,
@@ -395,8 +420,33 @@ const seoSchema = {
   .project-arrow { font-family: 'IBM Plex Mono', monospace; }
 
   .project-number { color: var(--accent); font-size: 10px; }
-  .project-name { min-width: 0; font: 400 clamp(1.4rem, 2vw, 2.2rem)/1 'Fraunces', Georgia, serif; letter-spacing: -.035em; }
-  .project-type { min-width: 0; color: var(--muted); font-size: 9px; line-height: 1.35; letter-spacing: .04em; text-transform: uppercase; }
+  .project-main { min-width: 0; display: grid; gap: 5px; }
+  .project-name { min-width: 0; font: 400 clamp(1.25rem, 1.65vw, 1.8rem)/.95 'Fraunces', Georgia, serif; letter-spacing: -.035em; }
+  .project-type { min-width: 0; overflow: hidden; color: var(--faint); font: 400 8px/1.25 'IBM Plex Mono', monospace; letter-spacing: .035em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+  .project-description {
+    min-width: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    color: var(--muted);
+    font: 400 clamp(10px, .76vw, 11.5px)/1.4 'Space Grotesk', sans-serif;
+    letter-spacing: -.01em;
+    text-wrap: pretty;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .project-preview {
+    width: 74px;
+    height: 46px;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    background: var(--paper-raised);
+  }
+  .project-preview picture,
+  .project-cover-image { width: 100%; height: 100%; display: block; }
+  .project-cover-image { object-fit: cover; filter: saturate(.72) contrast(.96); transition: filter 180ms ease-out, transform 180ms ease-out; }
+  .project-placeholder { color: var(--accent); font: 500 13px/1 'IBM Plex Mono', monospace; letter-spacing: .08em; }
   .project-year { color: var(--faint); font-size: 9px; }
   .project-arrow { color: var(--accent); font-size: 14px; text-align: right; }
 
@@ -421,6 +471,7 @@ const seoSchema = {
     .social-links a:hover { color: var(--paper-raised); background: var(--accent); }
     .project:hover { padding-inline: 12px 8px; background: var(--accent-soft); }
     .project:hover .project-name { color: var(--accent); }
+    .project:hover .project-cover-image { filter: saturate(1) contrast(1); transform: scale(1.04); }
   }
 
   @media (max-width: 980px) {
@@ -445,21 +496,23 @@ const seoSchema = {
     .work-board { min-height: 0; padding-block: 20px 14px; }
     .work-header { padding-bottom: 14px; }
     .work-header h2 { font-size: 2.4rem; }
-    .project-list { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(82px, auto)); }
-    .project-list li:nth-child(odd) { border-right: 1px solid var(--line); }
+    .project-list { grid-template-columns: 1fr; grid-template-rows: none; }
     .project {
-      min-height: 82px;
-      padding: 12px;
-      grid-template-columns: 24px minmax(0, 1fr) 20px;
+      min-height: 96px;
+      padding: 12px 0;
+      grid-template-columns: 26px minmax(0, 1fr) 58px 18px;
       grid-template-rows: auto auto;
-      gap: 7px 6px;
+      gap: 7px 10px;
       align-content: center;
     }
     .project-number { grid-row: 1 / 3; align-self: start; padding-top: 3px; }
-    .project-name { font-size: clamp(1.25rem, 6vw, 1.7rem); line-height: .95; }
-    .project-type { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 8px; }
+    .project-main { grid-column: 2; grid-row: 1; gap: 4px; }
+    .project-name { font-size: clamp(1.4rem, 6vw, 1.75rem); line-height: .95; }
+    .project-type { font-size: 8px; }
+    .project-description { grid-column: 2; grid-row: 2; font-size: 11px; line-height: 1.35; }
+    .project-preview { grid-column: 3; grid-row: 1 / 3; width: 58px; height: 42px; }
     .project-year { display: none; }
-    .project-arrow { grid-column: 3; grid-row: 1 / 3; align-self: center; }
+    .project-arrow { grid-column: 4; grid-row: 1 / 3; align-self: center; }
     .work-footer { min-height: 40px; padding-top: 12px; font-size: 9px; }
     .work-footer p { display: none; }
     .work-footer a { margin-left: auto; }
@@ -468,8 +521,10 @@ const seoSchema = {
   @media (max-width: 360px) {
     .social-links a span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     .social-links svg { width: 18px; height: 18px; }
-    .project { padding-inline: 8px; grid-template-columns: 20px minmax(0, 1fr) 16px; }
-    .project-name { font-size: 1.2rem; }
+    .project { grid-template-columns: 22px minmax(0, 1fr) 16px; }
+    .project-preview { display: none; }
+    .project-arrow { grid-column: 3; }
+    .project-name { font-size: 1.35rem; }
   }
 
   @media (min-width: 981px) and (max-height: 720px) {
