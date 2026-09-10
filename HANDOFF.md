@@ -8,7 +8,7 @@ Pocket Playground is the selected TryRaisins portfolio direction. The page now u
 
 ## Current State
 
-- `src/prototypes/portfolio-redesign/Play.astro` renders the portfolio on one continuous notebook surface, with three transparent pencil drawings behind hero/work content, a marker-drawn yellow sticky-note contact section, and the 3D scene. The hero leads with TryRaisins identity, followed by the serious-things thesis.
+- `src/prototypes/portfolio-redesign/Play.astro` renders the portfolio on one continuous notebook surface, with three transparent pencil drawings behind hero/work content, a marker-drawn yellow sticky-note contact section, and the 3D scene. The hero uses a desk-label identity, the practical proposition “Software for the parts people actually have to use.”, a concise product/interface/systems explanation, and direct work/contact actions.
 - `src/prototypes/portfolio-redesign/spinning-tops.js` contains the Three.js models, lighting, fixed-step physics, top-to-top and pointer collisions, shadows, and reduced-motion handling. Page text and other DOM elements are not physics obstacles; the canvas remains below the hero content in stacking order.
 - `src/prototypes/portfolio-redesign/doodle-notes.js` contains the 20 sketch definitions and the IDLE/DRAWING/COMPLETE/REVERSING lifecycle for each drawing.
 - Five tops use original procedural geometry: beveled fins, metal weight rings, hubs, drivers, and colored enamel materials. They move for roughly 85 seconds, spawn from a randomized left/center/right region each cycle, collide with stronger variable knockback, wobble and tip over independently, cast shadows, settle, then restart.
@@ -18,7 +18,7 @@ Pocket Playground is the selected TryRaisins portfolio direction. The page now u
 ## Verification
 
 - `npm run build` passed on 2026-09-10. Astro emitted only the existing stale Browserslist database warning.
-- The contact and hero revision was browser-checked at desktop and 390px. The page stayed within the viewport, the project note rendered with marker-like pencil styling, and the DOM contained zero copy-email controls and zero footer elements.
+- The contact and hero revision was browser-checked at desktop and 390px. The page stayed within the viewport, the revised hero actions remained accessible, the project note rendered with marker-like pencil styling, and the DOM contained zero copy-email controls and zero footer elements.
 - Desktop browser check rendered five 3D models with shadows and transparent pencil canvases on the ruled page.
 - Mobile layout stays bounded at 390px with no horizontal overflow; the copy-email control and footer are no longer rendered. Reduced-motion disables the continuous simulation and leaves the reveal content visible.
 - Runtime checks confirmed zero `[data-battle-obstacle]` markers, battlefield `z-index: 0`, hero title `z-index: 1`, rendered tops, and nonzero top-to-top hit counts at 1280px; the same layering and no-overflow checks passed at 390px.
