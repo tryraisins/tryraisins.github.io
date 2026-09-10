@@ -341,17 +341,20 @@ const {
     .play-desk ol { min-height: 0; display: grid; gap: 24px; padding: 0; }
     .play-tile { width: 100%; min-width: 0; position: static; transform: none !important; }
     .play-tile a { min-height: 0; grid-template-rows: 190px auto; }
-    .play-contact { padding: 76px 20px 82px; }
-    .play-contact-sheet { padding: 32px 24px 34px; grid-template-columns: 1fr; box-shadow: 7px 9px 0 var(--play-red), 11px 14px 0 rgba(23,23,25,.14); transform: rotate(-.35deg); }
-    .play-contact-meta { margin-bottom: 46px; align-items: flex-start; }
-    .play-contact-availability { max-width: 130px; justify-content: flex-end; text-align: right; }
+    .play-contact { padding: 58px 20px 64px; }
+    .play-contact-sheet { padding: 26px 20px 24px; grid-template-columns: 1fr; box-shadow: 7px 9px 0 var(--play-red), 11px 14px 0 rgba(23,23,25,.14); transform: rotate(-.35deg); }
+    .play-contact-meta { margin-bottom: 26px; padding-bottom: 10px; align-items: center; border-bottom-width: 3px; }
+    .play-contact-availability { display: none; }
     .play-contact-heading { padding-right: 0; }
-    .play-contact-heading h2 { max-width: 390px; margin-bottom: 22px; }
-    .play-contact-body { margin-top: 46px; padding: 24px 0 0; border-top: 4px solid var(--play-ink); border-left: 0; }
-    .play-contact-email { min-height: 64px; }
-    .play-contact-aside { margin-top: 50px; }
-    .play-contact-aside nav { display: grid; grid-template-columns: 1fr; gap: 10px; }
-    .play-contact-aside a { min-width: 0; }
+    .play-contact-heading h2 { max-width: 390px; margin: 10px 0 14px; font-size: clamp(2.55rem, 12.5vw, 3.4rem); }
+    .play-contact-heading > p:last-child { font-size: 15px; line-height: 1.42; }
+    .play-contact-body { margin-top: 26px; padding: 17px 0 0; border-top: 3px solid var(--play-ink); border-left: 0; }
+    .play-contact-email { min-height: 54px; margin-top: 9px; padding-bottom: 8px; border-bottom-width: 4px; }
+    .play-contact-location { margin-top: 14px; }
+    .play-contact-aside { margin-top: 26px; padding-top: 12px; border-top-width: 3px; }
+    .play-contact-aside nav { margin-top: 8px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .play-contact-aside a { min-width: 0; min-height: 44px; padding: 0; gap: 6px; border-bottom-width: 3px; font-size: 10px; }
+    .play-contact-social-action { display: none; }
   }
   @media (max-width: 380px) {
     .play-contact { padding-inline: 14px; }
