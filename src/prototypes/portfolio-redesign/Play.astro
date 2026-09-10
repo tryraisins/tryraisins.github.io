@@ -27,7 +27,7 @@ const {
         <p>I work across product, interface and the awkward bits behind them, turning complex jobs into calmer, clearer tools.</p>
         <nav class="play-hero-actions" aria-label="Portfolio introduction">
           <a class="play-hero-primary" href="#play-desk">See selected work <span aria-hidden="true">↓</span></a>
-          <a class="play-hero-secondary" href="#play-contact">Start a conversation <span aria-hidden="true">↘</span></a>
+          <a class="play-hero-secondary" href="#play-contact">Start a conversation</a>
         </nav>
       </div>
     </section>
@@ -44,7 +44,7 @@ const {
       <ol data-play-grid>
         {projects.map((project, index) => (
           <li data-play-tile class={`play-tile play-tile-${index + 1}`} style={`--play-tile-index: ${index}`}>
-            <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name}`}>
+            <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} in a new tab`}>
               <span class="play-pin" aria-hidden="true"></span>
               <span class="play-photo">
                 {project.cover ? (
@@ -67,7 +67,7 @@ const {
                 <span>{project.number} / {project.type}</span>
                 <strong>{project.name}</strong>
                 <p>{project.description}</p>
-                <em>{project.year} · open ↗</em>
+                <em>{project.year} · View project</em>
               </span>
             </a>
           </li>
@@ -96,7 +96,6 @@ const {
           <p class="play-contact-label">Quickest route</p>
           <a class="play-contact-email" href={`mailto:${email}?subject=Project%20enquiry`}>
             <span>{email}</span>
-            <span class="play-contact-email-arrow" aria-hidden="true">↗</span>
           </a>
           <p class="play-contact-location">Based in Lagos, Nigeria · Replies personally</p>
         </div>
@@ -107,7 +106,7 @@ const {
               <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.name}, opens in a new tab`}>
                 <span class="play-contact-social-number" aria-hidden="true">0{index + 1}</span>
                 <span>{social.name}</span>
-                <span class="play-contact-social-action" aria-hidden="true">Visit ↗</span>
+                <span class="play-contact-social-action" aria-hidden="true">View profile</span>
               </a>
             ))}
           </nav>
@@ -284,7 +283,6 @@ const {
   .play-contact-body { min-width: 0; padding: 4px 0 0 clamp(28px, 4vw, 56px); border-left: 4px solid var(--play-ink); transform: rotate(.35deg); }
   .play-contact-email { width: 100%; min-height: 70px; margin-top: 17px; padding: 0 0 11px; display: flex; align-items: center; justify-content: space-between; gap: 18px; border-bottom: 5px solid var(--play-red); font: 400 clamp(1.45rem, 2.55vw, 2.75rem)/1 'Fraunces', Georgia, serif; letter-spacing: -.035em; }
   .play-contact-email > span:first-child { min-width: 0; overflow-wrap: anywhere; }
-  .play-contact-email-arrow { width: 42px; height: 42px; flex: 0 0 42px; display: grid; place-items: center; color: var(--play-red); font: 600 26px/1 'Space Grotesk', sans-serif; transform: rotate(-8deg); transition: transform 140ms var(--play-ease-out), color 140ms ease; }
   .play-contact-location { margin: 30px 0 0; color: rgba(23,23,25,.55); font-size: 10px; line-height: 1.5; }
   .play-contact-aside { grid-column: 1 / -1; margin-top: clamp(48px, 7vw, 82px); padding-top: 18px; border-top: 4px solid var(--play-ink); transform: rotate(-.25deg); }
   .play-contact-aside nav { margin-top: 13px; display: flex; flex-wrap: wrap; gap: 12px clamp(24px, 5vw, 76px); }
@@ -316,7 +314,6 @@ const {
     .play-tile:hover .play-photo img { filter: saturate(1); transform: scale(1.025); }
     .play-hero-primary:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--play-ink); }
     .play-hero-secondary:hover { color: var(--play-blue); border-color: currentColor; }
-    .play-contact-email:hover .play-contact-email-arrow { color: var(--play-ink); transform: translate(3px, -3px) rotate(4deg); }
     .play-contact-aside a:hover { z-index: 1; background: rgba(240,206,78,.62); border-color: var(--play-red); transform: translateY(-3px) rotate(-1deg); }
   }
   @media (max-width: 980px) {
@@ -361,7 +358,6 @@ const {
     .play-contact-sheet { padding-inline: 18px; }
     .play-contact-meta { gap: 12px; }
     .play-contact-email { font-size: 1.3rem; }
-    .play-contact-email-arrow { width: 38px; height: 38px; flex-basis: 38px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .play-world * { transition-duration: .01ms !important; }

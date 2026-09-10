@@ -7,7 +7,7 @@ import { email, projects, socials } from './data';
     <a href="#system-top">tryraisins://home</a>
     <p><span aria-hidden="true"></span> operator available</p>
     <p>Lagos local / WAT</p>
-    <a href={`mailto:${email}`}>new_message ↗</a>
+    <a href={`mailto:${email}`}>new_message</a>
   </header>
 
   <main id="system-top" class="system-main">
@@ -36,7 +36,7 @@ import { email, projects, socials } from './data';
       <ol>
         {projects.map((project) => (
           <li>
-            <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Inspect ${project.name}`}>
+            <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Inspect ${project.name} in a new tab`}>
               <span class="system-card-top"><b>{project.number}</b><em>SHIPPED</em></span>
               <span class="system-thumb">
                 {project.cover ? <img src={project.cover.src} alt={project.coverAlt} loading="lazy" /> : <strong aria-hidden="true">{project.monogram}</strong>}
@@ -45,7 +45,7 @@ import { email, projects, socials } from './data';
                 <strong>{project.name}</strong>
                 <span>{project.description}</span>
               </span>
-              <span class="system-card-bottom"><span>{project.type}</span><span>{project.year}</span><b>inspect ↗</b></span>
+              <span class="system-card-bottom"><span>{project.type}</span><span>{project.year}</span><b>View project</b></span>
             </a>
           </li>
         ))}
@@ -67,7 +67,7 @@ import { email, projects, socials } from './data';
     </section>
 
     <footer class="system-footer">
-      <div><span>READY FOR INPUT</span><a href={`mailto:${email}`}>{email} ↗</a></div>
+      <div><span>READY FOR INPUT</span><a href={`mailto:${email}`}>{email}</a></div>
       <nav aria-label="Social profiles">{socials.map((social) => <a href={social.href} target="_blank" rel="noopener noreferrer">[{social.name}]</a>)}</nav>
     </footer>
   </main>

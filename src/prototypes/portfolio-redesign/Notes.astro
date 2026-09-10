@@ -14,7 +14,6 @@ import { email, projects, socials } from './data';
       <p>No. 09</p>
       <p>Written from<br />Lagos, Nigeria</p>
       <p>Updated<br />September 2026</p>
-      <span aria-hidden="true">↘</span>
     </aside>
 
     <div class="notes-pages">
@@ -37,12 +36,12 @@ import { email, projects, socials } from './data';
           {projects.map((project) => (
             <li>
               <div class="notes-entry-number">{project.number}<span>{project.year}</span></div>
-              <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Read ${project.name} project`}>
+              <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Read ${project.name} project in a new tab`}>
                 <span class="notes-entry-copy">
                   <span class="notes-entry-type">{project.type}</span>
                   <strong>{project.name}</strong>
                   <span>{project.description}</span>
-                  <em>Open the project ↗</em>
+                  <em>View project</em>
                 </span>
                 <span class="notes-entry-image">
                   {project.cover ? <img src={project.cover.src} alt={project.coverAlt} loading="lazy" /> : <b aria-hidden="true">{project.monogram}</b>}
@@ -56,7 +55,7 @@ import { email, projects, socials } from './data';
 
       <footer class="notes-footer">
         <p>The next page is unwritten.</p>
-        <a href={`mailto:${email}`}>{email} ↗</a>
+        <a href={`mailto:${email}`}>{email}</a>
         <nav aria-label="Social profiles">
           {socials.map((social) => <a href={social.href} target="_blank" rel="noopener noreferrer">{social.name}</a>)}
         </nav>
@@ -87,7 +86,6 @@ import { email, projects, socials } from './data';
   .notes-book { width: min(1500px, 100%); margin: 0 auto; display: grid; grid-template-columns: clamp(132px, 15vw, 230px) 1fr; }
   .notes-margin { min-height: 100dvh; padding: 48px 28px; display: flex; flex-direction: column; gap: 34px; border-right: 1px solid var(--notes-ink); color: var(--notes-blue); font-size: 10px; line-height: 1.6; text-transform: uppercase; }
   .notes-margin p { margin: 0; }
-  .notes-margin > span { margin-top: auto; color: var(--notes-red); font: 400 56px/1 'Fraunces', Georgia, serif; }
   .notes-pages { min-width: 0; }
   .notes-opening { min-height: 72dvh; padding: clamp(38px, 7vw, 110px) clamp(24px, 6vw, 100px) 50px; display: flex; flex-direction: column; justify-content: space-between; background-image: linear-gradient(var(--notes-rule) 1px, transparent 1px); background-size: 100% 32px; }
   .notes-date { width: fit-content; margin: 0; padding-right: 12px; background: var(--notes-paper); color: var(--notes-red); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; }
@@ -126,7 +124,7 @@ import { email, projects, socials } from './data';
   @media (max-width: 860px) {
     .notes-book { grid-template-columns: 1fr; }
     .notes-margin { min-height: auto; padding: 16px 20px; flex-direction: row; align-items: center; justify-content: space-between; border-right: 0; border-bottom: 1px solid var(--notes-ink); }
-    .notes-margin p:nth-child(3), .notes-margin > span { display: none; }
+    .notes-margin p:nth-child(3) { display: none; }
     .notes-opening { min-height: 78dvh; }
     .notes-index li { grid-template-columns: 52px minmax(0, 1fr); }
     .notes-index li > a { grid-template-columns: minmax(0, 1fr) 180px; }

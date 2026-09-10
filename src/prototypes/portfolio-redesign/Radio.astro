@@ -6,7 +6,7 @@ import { email, projects, socials } from './data';
   <header class="radio-top">
     <a href="#radio-top" class="radio-station">TR<span>106.3</span></a>
     <p>Independent transmissions from Lagos</p>
-    <a href={`mailto:${email}`}>Call the studio ↗</a>
+    <a href={`mailto:${email}`}>Call the studio</a>
   </header>
 
   <main id="radio-top">
@@ -53,7 +53,7 @@ import { email, projects, socials } from './data';
                 <h3>{project.name}</h3>
                 <p>{project.description}</p>
                 <blockquote>“{project.note}”</blockquote>
-                <a href={project.href} target="_blank" rel="noopener noreferrer">Visit this project ↗</a>
+                <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.name} in a new tab`}>View project</a>
               </div>
             </article>
           ))}
@@ -67,7 +67,7 @@ import { email, projects, socials } from './data';
         <a href={`mailto:${email}`}>{email}</a>
       </div>
       <nav aria-label="Social profiles">
-        {socials.map((social) => <a href={social.href} target="_blank" rel="noopener noreferrer">{social.name} ↗</a>)}
+        {socials.map((social) => <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.name}, opens in a new tab`}>{social.name}</a>)}
       </nav>
       <p class="radio-signoff">TR 106.3<br />Lagos, Nigeria</p>
     </footer>
