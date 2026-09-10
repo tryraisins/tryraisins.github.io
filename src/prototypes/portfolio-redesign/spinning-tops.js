@@ -64,7 +64,7 @@ export function mountSpinningTops(host, hero) {
   const particles=[];
   const sparkGeometry=new THREE.SphereGeometry(1.3,4,3);
   const sparkMaterial=new THREE.MeshBasicMaterial({color:0xffba4a});
-  let width=1,height=1,obstacles=[],pointer=null,frame=0,last=0,accumulator=0,hold=0,elapsed=0,disposed=false,visible=true;
+  let width=1,height=1,pointer=null,frame=0,last=0,accumulator=0,hold=0,elapsed=0,disposed=false,visible=true;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const random=(a,b)=>a+Math.random()*(b-a);
   const world=(x,y)=>[x-width/2,(y-height/2)/projection];
@@ -92,11 +92,6 @@ export function mountSpinningTops(host, hero) {
     camera.position.set(0,Math.sin(viewAngle)*1800,Math.cos(viewAngle)*1800);camera.lookAt(0,0,0);camera.updateProjectionMatrix();
     const reach=Math.max(width,height); light.shadow.camera.left=-reach;light.shadow.camera.right=reach;light.shadow.camera.top=reach;light.shadow.camera.bottom=-reach;light.shadow.camera.far=3000;light.shadow.camera.updateProjectionMatrix();
     states.forEach(s=>{s.radius=width<620?26:43;s.model.scale.setScalar(s.radius);});
-    obstacles=[...hero.querySelectorAll('[data-battle-obstacle]')].flatMap(el=>{
-      // Text lines use individual rectangles so their empty bounding box is not a wall.
-      const rects=el.tagName==='H1'?(()=>{const range=document.createRange();range.selectNodeContents(el);return [...range.getClientRects()];})():[el.getBoundingClientRect()];
-      return rects.map(r=>({l:r.left-box.left,r:r.right-box.left,t:r.top-box.top,b:r.bottom-box.top}));
-    });
     reset(); pose();renderer.render(scene,camera);
   }
   function burst(x,y,speed) {
@@ -131,12 +126,6 @@ export function mountSpinningTops(host, hero) {
       const r=s.radius+5;
       if(s.x<r)wall(s,1,0,r-s.x,r,s.y);if(s.x>width-r)wall(s,-1,0,s.x-width+r,width-r,s.y);
       if(s.y<r)wall(s,0,1,r-s.y,s.x,r);if(s.y>height-r)wall(s,0,-1,s.y-height+r,s.x,height-r);
-      for(const o of obstacles){
-        const cx=Math.max(o.l,Math.min(s.x,o.r)),cy=Math.max(o.t,Math.min(s.y,o.b));
-        const dx=s.x-cx,dy=s.y-cy,d=Math.hypot(dx,dy);
-        if(d>0&&d<r)wall(s,dx/d,dy/d,r-d,cx,cy);
-        else if(d===0){const choices=[[s.x-o.l,-1,0],[o.r-s.x,1,0],[s.y-o.t,0,-1],[o.b-s.y,0,1]].sort((a,b)=>a[0]-b[0]);const [depth,nx,ny]=choices[0];wall(s,nx,ny,depth+r,s.x,s.y);}
-      }
       if(pointer){const dx=s.x-pointer.x,dy=s.y-pointer.y,d=Math.hypot(dx,dy);if(d>0&&d<r+12)wall(s,dx/d,dy/d,r+12-d,pointer.x,pointer.y);}
     });
     states.forEach((a,i)=>states.slice(i+1).forEach(b=>{

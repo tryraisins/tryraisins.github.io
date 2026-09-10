@@ -111,8 +111,8 @@ function drawSecondary(context, name, time, width, height) {
 }
 
 export function mountDoodles(root) {
-  const notes = [...root.querySelectorAll('[data-doodle]')].map((note, index) => ({
-    note, canvas: note.querySelector('[data-doodle-canvas]'), sketch: index % sketches.length, phase: 'drawing', started: performance.now() + index * 500, userStrokes: [], activeStroke: null,
+  const drawings = [...root.querySelectorAll('[data-doodle]')].map((drawing, index) => ({
+    drawing, canvas: drawing.querySelector('[data-doodle-canvas]'), sketch: index % sketches.length, phase: 'drawing', started: performance.now() + index * 500, userStrokes: [], activeStroke: null,
   })).filter((state) => state.canvas instanceof HTMLCanvasElement);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let frame = 0;
@@ -131,9 +131,9 @@ export function mountDoodles(root) {
       if (state.activeStroke.length > 1) state.userStrokes.push(state.activeStroke);
       state.activeStroke = null;
     }
-    state.note.dataset.doodleState = state.phase;
+    state.drawing.dataset.doodleState = state.phase;
     context.clearRect(0, 0, width, height);
-    context.strokeStyle = 'rgba(48, 49, 43, .82)'; context.lineWidth = 2.1; context.lineJoin = 'round'; context.lineCap = 'round';
+    context.strokeStyle = 'rgba(48, 49, 43, .76)'; context.lineWidth = Math.max(1.2, width / 155); context.lineJoin = 'round'; context.lineCap = 'round'; context.globalCompositeOperation = 'multiply';
     const paths = sketches[state.sketch].paths;
     if (state.phase === 'drawing') drawAuto(context, paths, phase / 8000, width, height);
     if (state.phase === 'complete') {
@@ -145,10 +145,10 @@ export function mountDoodles(root) {
     if (state.activeStroke && state.phase === 'complete') drawPath(context, state.activeStroke, 1, width, height);
     if (state.phase === 'reversing' && phase >= 22980) { state.userStrokes = []; state.activeStroke = null; state.sketch = (state.sketch + 1 + indexOf(state)) % sketches.length; state.started = now; }
   };
-  const indexOf = (state) => notes.indexOf(state);
-  const loopFrame = (now) => { notes.forEach((state) => draw(state, now)); frame = requestAnimationFrame(loopFrame); };
+  const indexOf = (state) => drawings.indexOf(state);
+  const loopFrame = (now) => { drawings.forEach((state) => draw(state, now)); frame = requestAnimationFrame(loopFrame); };
   const point = (event, canvas) => { const rect = canvas.getBoundingClientRect(); return [(event.clientX - rect.left) * canvas.width / rect.width, (event.clientY - rect.top) * canvas.height / rect.height]; };
-  const cleanups = notes.map((state) => {
+  const cleanups = drawings.map((state) => {
     const canvas = state.canvas;
     const down = (event) => { if (state.phase !== 'complete') return; canvas.setPointerCapture(event.pointerId); state.activeStroke = [point(event, canvas)]; };
     const move = (event) => { if (!state.activeStroke || state.phase !== 'complete') return; state.activeStroke.push(point(event, canvas)); };
