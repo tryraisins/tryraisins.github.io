@@ -1,0 +1,178 @@
+---
+import { email, projects, socials } from './data';
+---
+
+<div class="radio-world" data-radio-root>
+  <header class="radio-top">
+    <a href="#radio-top" class="radio-station">TR<span>106.3</span></a>
+    <p>Independent transmissions from Lagos</p>
+    <a href={`mailto:${email}`}>Call the studio ↗</a>
+  </header>
+
+  <main id="radio-top">
+    <section class="radio-hero" aria-labelledby="radio-title">
+      <div class="radio-signal" aria-hidden="true"><span></span></div>
+      <p class="radio-eyebrow">You have left the usual internet</p>
+      <h1 id="radio-title">This is TryRaisins,<br />broadcasting after hours.</h1>
+      <p class="radio-intro">Software engineer. Product builder. Six useful signals, tuned and shipped from Lagos.</p>
+      <a class="radio-down" href="#radio-desk">Tune the work <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section id="radio-desk" class="radio-desk" aria-labelledby="radio-work-title">
+      <header class="radio-desk-title">
+        <p>Now broadcasting</p>
+        <h2 id="radio-work-title">Choose a frequency</h2>
+      </header>
+
+      <div class="radio-console">
+        <div class="radio-tuner" role="group" aria-label="Choose a project frequency">
+          <span class="radio-frequency-label">FM</span>
+          {projects.map((project, index) => (
+            <button type="button" data-radio-option={index} aria-pressed={index === 0 ? 'true' : 'false'}>
+              <span>{(88.1 + index * 2.7).toFixed(1)}</span>
+              <strong>{project.name}</strong>
+              <em>{project.type}</em>
+            </button>
+          ))}
+        </div>
+
+        <div class="radio-receiver">
+          <div class="radio-scale" aria-hidden="true">
+            <span>88</span><i></i><span>92</span><i></i><span>96</span><i></i><span>100</span><i></i><span>104</span><i></i><span>108</span>
+            <b></b>
+          </div>
+
+          {projects.map((project, index) => (
+            <article data-radio-panel={index} hidden={index !== 0}>
+              <div class="radio-art">
+                {project.cover ? <img src={project.cover.src} alt={project.coverAlt} loading="lazy" /> : <span aria-hidden="true">{project.monogram}</span>}
+                <div class="radio-scan" aria-hidden="true"></div>
+              </div>
+              <div class="radio-copy">
+                <span>Transmission {project.number} / {project.year}</span>
+                <h3>{project.name}</h3>
+                <p>{project.description}</p>
+                <blockquote>“{project.note}”</blockquote>
+                <a href={project.href} target="_blank" rel="noopener noreferrer">Visit this project ↗</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <footer class="radio-footer">
+      <div>
+        <p>One good signal deserves a reply.</p>
+        <a href={`mailto:${email}`}>{email}</a>
+      </div>
+      <nav aria-label="Social profiles">
+        {socials.map((social) => <a href={social.href} target="_blank" rel="noopener noreferrer">{social.name} ↗</a>)}
+      </nav>
+      <p class="radio-signoff">TR 106.3<br />Lagos, Nigeria</p>
+    </footer>
+  </main>
+</div>
+
+<style>
+  .radio-world {
+    --radio-night: #08121b;
+    --radio-panel: #101e28;
+    --radio-cream: #eee6cf;
+    --radio-dim: #92a0a5;
+    --radio-amber: #f3a93b;
+    --radio-red: #e15d4c;
+    min-height: 100dvh;
+    background: var(--radio-night);
+    color: var(--radio-cream);
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .radio-world * { box-sizing: border-box; }
+  .radio-world a { color: inherit; text-decoration: none; }
+  .radio-world a:focus-visible,
+  .radio-world button:focus-visible { outline: 2px solid var(--radio-amber); outline-offset: 4px; }
+  .radio-top { min-height: 62px; padding: 0 clamp(18px, 3.5vw, 56px); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; border-bottom: 1px solid rgba(238,230,207,.18); font-size: 11px; }
+  .radio-top p { margin: 0; color: var(--radio-dim); letter-spacing: .04em; }
+  .radio-top > a:last-child { justify-self: end; min-height: 44px; display: inline-flex; align-items: center; color: var(--radio-amber); }
+  .radio-station { display: inline-flex; align-items: baseline; gap: 8px; font: 400 25px/1 'Instrument Serif', Georgia, serif; }
+  .radio-station span { color: var(--radio-amber); font: 600 9px/1 'Space Grotesk', sans-serif; letter-spacing: .12em; }
+  .radio-hero { min-height: calc(100dvh - 62px); padding: clamp(36px, 6vw, 90px) clamp(18px, 6vw, 96px); display: grid; grid-template-columns: minmax(0, 1fr) minmax(220px, 360px); grid-template-rows: auto 1fr auto; align-items: end; gap: 30px; position: relative; overflow: hidden; }
+  .radio-hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 76% 22%, rgba(243,169,59,.14), transparent 27%), linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px); background-size: auto, 100% 6px; }
+  .radio-signal { position: absolute; top: clamp(74px, 12vh, 130px); right: clamp(18px, 6vw, 96px); width: clamp(180px, 28vw, 450px); height: clamp(180px, 28vw, 450px); border: 1px solid rgba(238,230,207,.15); border-radius: 50%; }
+  .radio-signal::before, .radio-signal::after { content: ''; position: absolute; border: 1px solid rgba(243,169,59,.2); border-radius: 50%; inset: 16%; }
+  .radio-signal::after { inset: 34%; }
+  .radio-signal span { position: absolute; top: 50%; left: 50%; width: 50%; height: 1px; background: linear-gradient(90deg, var(--radio-amber), transparent); transform-origin: left; animation: radioSweep 6s linear infinite; }
+  .radio-eyebrow { grid-column: 1 / -1; align-self: start; position: relative; margin: 0; color: var(--radio-amber); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+  .radio-hero h1 { grid-column: 1 / -1; max-width: 1220px; position: relative; margin: auto 0 0; font: 400 clamp(4rem, 10.4vw, 10.7rem)/.82 'Instrument Serif', Georgia, serif; letter-spacing: -.065em; text-wrap: balance; }
+  .radio-intro { max-width: 650px; position: relative; margin: 0; font-size: clamp(16px, 1.8vw, 25px); line-height: 1.35; color: var(--radio-dim); }
+  .radio-down { min-height: 44px; position: relative; display: inline-flex; justify-self: end; align-items: center; gap: 34px; border-bottom: 1px solid var(--radio-amber); color: var(--radio-amber); font-size: 12px; }
+  .radio-desk { min-height: 100dvh; padding: clamp(28px, 5vw, 78px) clamp(18px, 4vw, 64px) 92px; background: #0b1821; border-top: 1px solid rgba(238,230,207,.18); }
+  .radio-desk-title { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 36px; }
+  .radio-desk-title p { margin: 0; color: var(--radio-amber); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+  .radio-desk-title h2 { margin: 0; font: 400 clamp(2.8rem, 5vw, 5.5rem)/.9 'Instrument Serif', Georgia, serif; letter-spacing: -.045em; }
+  .radio-console { min-height: 680px; display: grid; grid-template-columns: minmax(250px, 340px) 1fr; border: 1px solid rgba(238,230,207,.22); background: var(--radio-panel); box-shadow: 0 40px 90px rgba(0,0,0,.3); }
+  .radio-tuner { padding: 24px; border-right: 1px solid rgba(238,230,207,.18); }
+  .radio-frequency-label { display: block; margin-bottom: 20px; color: var(--radio-amber); font: 600 10px/1 'Space Grotesk', sans-serif; letter-spacing: .18em; }
+  .radio-tuner button { width: 100%; min-height: 84px; padding: 12px 10px; display: grid; grid-template-columns: 48px 1fr; grid-template-rows: auto auto; align-items: center; gap: 4px 12px; border: 0; border-top: 1px solid rgba(238,230,207,.12); background: transparent; color: var(--radio-dim); text-align: left; cursor: pointer; transition: color 150ms ease-out, background-color 150ms ease-out; }
+  .radio-tuner button:last-child { border-bottom: 1px solid rgba(238,230,207,.12); }
+  .radio-tuner button > span { grid-row: 1 / 3; font: 400 17px/1 'Instrument Serif', Georgia, serif; color: var(--radio-amber); font-variant-numeric: tabular-nums; }
+  .radio-tuner button strong { font-size: 15px; font-weight: 560; }
+  .radio-tuner button em { font-size: 9px; font-style: normal; text-transform: uppercase; letter-spacing: .06em; }
+  .radio-tuner button[aria-pressed='true'] { padding-inline: 18px 8px; background: rgba(243,169,59,.1); color: var(--radio-cream); }
+  .radio-receiver { min-width: 0; padding: clamp(22px, 4vw, 60px); display: grid; grid-template-rows: auto 1fr; }
+  .radio-scale { height: 48px; display: flex; align-items: center; gap: 10px; position: relative; color: var(--radio-dim); font-size: 9px; font-variant-numeric: tabular-nums; }
+  .radio-scale i { flex: 1; height: 7px; border-inline: 1px solid rgba(238,230,207,.3); }
+  .radio-scale b { position: absolute; top: 8px; left: 13%; width: 2px; height: 32px; background: var(--radio-red); box-shadow: 0 0 12px var(--radio-red); transition: left 220ms cubic-bezier(.22,1,.36,1); }
+  .radio-receiver article { min-width: 0; display: grid; grid-template-columns: minmax(260px, 1.1fr) minmax(250px, .9fr); gap: clamp(28px, 5vw, 80px); align-items: center; }
+  .radio-receiver article[hidden] { display: none; }
+  .radio-art { height: min(52vw, 500px); min-height: 320px; overflow: hidden; position: relative; display: grid; place-items: center; border-radius: 48% 48% 46% 54% / 46% 52% 48% 54%; background: #071016; }
+  .radio-art img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.72) contrast(1.05) brightness(.72); }
+  .radio-art > span { color: var(--radio-amber); font: 400 100px/1 'Instrument Serif', Georgia, serif; }
+  .radio-scan { position: absolute; inset: 0; background: linear-gradient(115deg, transparent 30%, rgba(243,169,59,.2) 50%, transparent 70%); transform: translateX(-100%); animation: radioScan 5s ease-in-out infinite; }
+  .radio-copy > span { color: var(--radio-amber); font-size: 9px; text-transform: uppercase; letter-spacing: .1em; }
+  .radio-copy h3 { margin: 12px 0 18px; font: 400 clamp(3.2rem, 6vw, 6.5rem)/.84 'Instrument Serif', Georgia, serif; letter-spacing: -.055em; }
+  .radio-copy p { max-width: 480px; margin: 0; color: var(--radio-dim); font-size: 16px; line-height: 1.5; }
+  .radio-copy blockquote { max-width: 460px; margin: 30px 0; padding-left: 18px; border-left: 1px solid var(--radio-red); color: var(--radio-cream); font: 400 19px/1.4 'Instrument Serif', Georgia, serif; }
+  .radio-copy a { min-height: 44px; display: inline-flex; align-items: center; border-bottom: 1px solid var(--radio-amber); color: var(--radio-amber); font-size: 12px; }
+  .radio-footer { min-height: 56dvh; padding: 70px clamp(18px, 6vw, 96px) 110px; display: grid; grid-template-columns: 1fr auto; align-content: end; gap: 36px; }
+  .radio-footer > div p { max-width: 850px; margin: 0 0 30px; font: 400 clamp(3.4rem, 8vw, 8rem)/.86 'Instrument Serif', Georgia, serif; letter-spacing: -.055em; }
+  .radio-footer > div a { color: var(--radio-amber); font-size: clamp(16px, 2vw, 28px); }
+  .radio-footer nav { display: flex; flex-direction: column; align-items: flex-end; gap: 12px; font-size: 11px; }
+  .radio-signoff { grid-column: 1 / -1; margin: 40px 0 0; color: var(--radio-dim); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+  @keyframes radioSweep { to { transform: rotate(360deg); } }
+  @keyframes radioScan { 45%,100% { transform: translateX(100%); } }
+  @media (max-width: 840px) {
+    .radio-top { grid-template-columns: 1fr auto; }
+    .radio-top p { display: none; }
+    .radio-hero { grid-template-columns: 1fr; }
+    .radio-hero h1 { font-size: clamp(3.7rem, 15vw, 7rem); }
+    .radio-intro { max-width: 78%; }
+    .radio-down { justify-self: start; }
+    .radio-console { grid-template-columns: 1fr; }
+    .radio-tuner { display: flex; gap: 4px; overflow-x: auto; border-right: 0; border-bottom: 1px solid rgba(238,230,207,.18); scroll-snap-type: x mandatory; }
+    .radio-frequency-label { display: none; }
+    .radio-tuner button { min-width: 150px; border: 1px solid rgba(238,230,207,.12); scroll-snap-align: start; }
+    .radio-receiver article { grid-template-columns: 1fr; }
+    .radio-art { height: 52vw; min-height: 260px; }
+  }
+  @media (max-width: 560px) {
+    .radio-hero { min-height: calc(100dvh - 62px); padding: 34px 20px 54px; }
+    .radio-hero h1 { font-size: clamp(3.35rem, 17vw, 5.2rem); }
+    .radio-signal { opacity: .72; }
+    .radio-intro { max-width: 100%; font-size: 15px; }
+    .radio-desk { padding: 34px 0 90px; }
+    .radio-desk-title { padding-inline: 20px; align-items: start; flex-direction: column; }
+    .radio-console { border-inline: 0; }
+    .radio-receiver { padding: 24px 20px 42px; }
+    .radio-scale { gap: 5px; }
+    .radio-receiver article { gap: 28px; }
+    .radio-art { min-height: 220px; border-radius: 44% 56% 48% 52% / 51% 43% 57% 49%; }
+    .radio-copy h3 { font-size: 3.5rem; }
+    .radio-footer { grid-template-columns: 1fr; padding-inline: 20px; }
+    .radio-footer nav { align-items: flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .radio-signal span, .radio-scan { animation: none; }
+    .radio-world * { transition-duration: .01ms !important; }
+  }
+</style>

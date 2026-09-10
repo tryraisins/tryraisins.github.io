@@ -1,0 +1,228 @@
+---
+import Ledger from '../../prototypes/portfolio-redesign/Ledger.astro';
+import Notes from '../../prototypes/portfolio-redesign/Notes.astro';
+import Radio from '../../prototypes/portfolio-redesign/Radio.astro';
+import System from '../../prototypes/portfolio-redesign/System.astro';
+import Play from '../../prototypes/portfolio-redesign/Play.astro';
+
+const variantNames = ['Lagos Workshop Ledger', 'Field Notes', 'Night Radio', 'Personal System', 'Pocket Playground'];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#111418" />
+    <title>TryRaisins portfolio redesign prototypes</title>
+    <meta name="description" content="Five local redesign directions for the TryRaisins portfolio." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Fraunces:opsz,wght@9..144,400;9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="proto-skip" href="#stage">Skip to prototype</a>
+    <div id="stage"></div>
+    <p class="proto-status" aria-live="polite">Showing {variantNames[0]}</p>
+
+    <nav class="proto-picker" aria-label="Prototype variants">
+      <span class="proto-picker-highlight" aria-hidden="true"></span>
+      <button class="proto-picker-item" data-active aria-current="true">Log</button>
+      <button class="proto-picker-item">Note</button>
+      <button class="proto-picker-item">FM</button>
+      <button class="proto-picker-item">Sys</button>
+      <button class="proto-picker-item">Play</button>
+    </nav>
+
+    <template id="variant-1"><Ledger /></template>
+    <template id="variant-2"><Notes /></template>
+    <template id="variant-3"><Radio /></template>
+    <template id="variant-4"><System /></template>
+    <template id="variant-5"><Play /></template>
+
+    <script is:inline define:vars={{ variantNames }}>
+      const stage = document.getElementById('stage');
+      const picker = document.querySelector('.proto-picker');
+      const highlight = picker.querySelector('.proto-picker-highlight');
+      const items = [...picker.querySelectorAll('.proto-picker-item:not(.proto-picker-replay)')];
+      const templates = items.map((_, index) => document.getElementById(`variant-${index + 1}`));
+      const status = document.querySelector('.proto-status');
+      let current = 0;
+
+      function moveHighlight() {
+        const el = items[current];
+        highlight.style.width = el.offsetWidth + 'px';
+        highlight.style.transform = `translateX(${el.offsetLeft}px)`;
+      }
+
+      function wireRadio(root) {
+        const options = [...root.querySelectorAll('[data-radio-option]')];
+        const panels = [...root.querySelectorAll('[data-radio-panel]')];
+        const needle = root.querySelector('.radio-scale b');
+        options.forEach((option, index) => {
+          option.addEventListener('click', () => {
+            options.forEach((item, itemIndex) => item.setAttribute('aria-pressed', itemIndex === index ? 'true' : 'false'));
+            panels.forEach((panel, panelIndex) => panel.toggleAttribute('hidden', panelIndex !== index));
+            if (needle) needle.style.left = `${13 + index * 14.7}%`;
+          });
+        });
+      }
+
+      function wirePlay(root) {
+        const shuffle = root.querySelector('[data-shuffle]');
+        const tiles = [...root.querySelectorAll('[data-play-tile]')];
+        if (!shuffle) return;
+        shuffle.addEventListener('click', () => {
+          tiles.forEach((tile, index) => {
+            const x = Math.round((Math.random() - .5) * 36);
+            const y = Math.round((Math.random() - .5) * 32);
+            const rotation = ((Math.random() - .5) * 5).toFixed(2);
+            tile.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}deg)`;
+            tile.style.zIndex = String((index * 3 + Math.floor(Math.random() * 7)) % tiles.length);
+          });
+          shuffle.textContent = 'Shuffle again';
+        });
+      }
+
+      function mount(i) {
+        stage.innerHTML = '';
+        requestAnimationFrame(() => {
+          stage.appendChild(templates[i].content.cloneNode(true));
+          const root = stage.firstElementChild;
+          if (root?.matches('[data-radio-root]')) wireRadio(root);
+          if (root?.matches('[data-play-root]')) wirePlay(root);
+        });
+      }
+
+      function setActive(i) {
+        if (i < 0 || i >= items.length) return;
+        current = i;
+        items.forEach((el, j) => {
+          el.toggleAttribute('data-active', j === i);
+          if (j === i) el.setAttribute('aria-current', 'true');
+          else el.removeAttribute('aria-current');
+        });
+        moveHighlight();
+        const url = new URL(location);
+        url.searchParams.set('v', i + 1);
+        url.hash = '';
+        history.replaceState(null, '', url);
+        document.documentElement.dataset.variant = String(i + 1);
+        status.textContent = `Showing ${variantNames[i]}`;
+        mount(i);
+        window.scrollTo(0, 0);
+      }
+
+      items.forEach((el, i) => el.addEventListener('click', () => setActive(i)));
+      window.addEventListener('resize', moveHighlight);
+
+      document.addEventListener('keydown', (e) => {
+        if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable) return;
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        const num = parseInt(e.key, 10);
+        if (num >= 1 && num <= items.length) setActive(num - 1);
+        else if (e.key === 'ArrowRight') setActive((current + 1) % items.length);
+        else if (e.key === 'ArrowLeft') setActive((current - 1 + items.length) % items.length);
+      });
+
+      setActive((parseInt(new URLSearchParams(location.search).get('v'), 10) || 1) - 1);
+      requestAnimationFrame(() => requestAnimationFrame(() => picker.setAttribute('data-ready', '')));
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  * { box-sizing: border-box; }
+  html { min-width: 320px; scroll-behavior: smooth; }
+  body { min-width: 320px; margin: 0; overflow-x: hidden; }
+  button, a { -webkit-tap-highlight-color: transparent; }
+  .proto-skip {
+    position: fixed;
+    z-index: 2147483647;
+    top: 8px;
+    left: 8px;
+    min-height: 44px;
+    padding: 0 14px;
+    display: inline-flex;
+    align-items: center;
+    background: #fff;
+    color: #111;
+    font: 600 12px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    transform: translateY(-150%);
+    transition: transform 150ms ease-out;
+  }
+  .proto-skip:focus { transform: translateY(0); }
+  .proto-status { position: fixed; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .proto-picker {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2147483647;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px;
+    border-radius: 999px;
+    background: rgba(10, 10, 10, 0.82);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
+    backdrop-filter: blur(12px) saturate(1.4);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+      0 8px 24px rgba(0, 0, 0, 0.24),
+      0 2px 6px rgba(0, 0, 0, 0.12);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .proto-picker-highlight {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    height: 28px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    will-change: transform;
+  }
+
+  .proto-picker[data-ready] .proto-picker-highlight {
+    transition:
+      transform 250ms cubic-bezier(0.23, 1, 0.32, 1),
+      width 250ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .proto-picker[data-ready] .proto-picker-highlight { transition: none; }
+  }
+
+  .proto-picker-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.55);
+    font: inherit;
+    cursor: pointer;
+    transition: color 150ms ease-out;
+  }
+
+  .proto-picker-item:hover { color: rgba(255, 255, 255, 0.85); }
+  .proto-picker-item:active { transform: scale(0.97); }
+  .proto-picker-item:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.4); outline-offset: 2px; }
+  .proto-picker-item[data-active] { color: #fff; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .proto-skip { transition: none; }
+  }
+</style>
