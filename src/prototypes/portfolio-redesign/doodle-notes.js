@@ -72,17 +72,6 @@ function drawReverse(context, paths, progress, width, height) {
   });
 }
 
-function drawUserReverse(context, strokes, progress, width, height) {
-  let remaining = strokes.reduce((sum, stroke) => sum + pathLength(stroke), 0) * Math.max(0, 1 - progress);
-  const visible = new Map();
-  [...strokes].reverse().forEach((stroke) => {
-    const length = pathLength(stroke);
-    visible.set(stroke, Math.min(length, Math.max(0, remaining)));
-    remaining -= length;
-  });
-  strokes.forEach((stroke) => drawPath(context, stroke, (visible.get(stroke) || 0) / pathLength(stroke), width, height));
-}
-
 function drawSecondary(context, name, time, width, height) {
   const x = (value) => value * width / 100;
   const y = (value) => value * height / 100;
@@ -117,7 +106,7 @@ function drawSecondary(context, name, time, width, height) {
 
 export function mountDoodles(root) {
   const drawings = [...root.querySelectorAll('[data-doodle]')].map((drawing, index) => ({
-    drawing, canvas: drawing.querySelector('[data-doodle-canvas]'), sketch: index % sketches.length, phase: 'drawing', started: performance.now() + index * 500, userStrokes: [], activeStroke: null,
+    drawing, canvas: drawing.querySelector('[data-doodle-canvas]'), sketch: index % sketches.length, phase: 'drawing', started: performance.now() + index * 500,
   })).filter((state) => state.canvas instanceof HTMLCanvasElement);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let frame = 0;
@@ -128,14 +117,9 @@ export function mountDoodles(root) {
     const width = canvas.width; const height = canvas.height;
     const elapsed = reduced.matches ? 8000 : now - state.started;
     const phase = elapsed % LOOP_DURATION;
-    const previousPhase = state.phase;
     if (phase < DRAW_DURATION) state.phase = 'drawing';
     else if (phase < DRAW_DURATION + HOLD_DURATION) state.phase = 'complete';
     else state.phase = 'reversing';
-    if (state.phase === 'reversing' && previousPhase === 'complete' && state.activeStroke) {
-      if (state.activeStroke.length > 1) state.userStrokes.push(state.activeStroke);
-      state.activeStroke = null;
-    }
     state.drawing.dataset.doodleState = state.phase;
     context.clearRect(0, 0, width, height);
     context.strokeStyle = 'rgba(48, 49, 43, .76)'; context.lineWidth = Math.max(1.2, width / 155); context.lineJoin = 'round'; context.lineCap = 'round'; context.globalCompositeOperation = 'multiply';
@@ -143,28 +127,13 @@ export function mountDoodles(root) {
     if (state.phase === 'drawing') drawAuto(context, paths, phase / DRAW_DURATION, width, height);
     if (state.phase === 'complete') {
       drawAuto(context, paths, 1, width, height);
-      state.userStrokes.forEach((stroke) => drawPath(context, stroke, 1, width, height));
       drawSecondary(context, sketches[state.sketch].name, (phase - DRAW_DURATION) / 1000, width, height);
     }
-    if (state.phase === 'reversing') { const reverse = (phase - DRAW_DURATION - HOLD_DURATION) / ERASE_DURATION; drawReverse(context, paths, reverse, width, height); drawUserReverse(context, state.userStrokes, reverse, width, height); }
-    if (state.activeStroke && state.phase === 'complete') drawPath(context, state.activeStroke, 1, width, height);
-    if (state.phase === 'reversing' && phase >= LOOP_DURATION - 20) { state.userStrokes = []; state.activeStroke = null; state.sketch = (state.sketch + 1 + indexOf(state)) % sketches.length; state.started = now; }
+    if (state.phase === 'reversing') { const reverse = (phase - DRAW_DURATION - HOLD_DURATION) / ERASE_DURATION; drawReverse(context, paths, reverse, width, height); }
+    if (state.phase === 'reversing' && phase >= LOOP_DURATION - 20) { state.sketch = (state.sketch + 1 + indexOf(state)) % sketches.length; state.started = now; }
   };
   const indexOf = (state) => drawings.indexOf(state);
   const loopFrame = (now) => { drawings.forEach((state) => draw(state, now)); frame = requestAnimationFrame(loopFrame); };
-  const point = (event, canvas) => { const rect = canvas.getBoundingClientRect(); return [(event.clientX - rect.left) * canvas.width / rect.width, (event.clientY - rect.top) * canvas.height / rect.height]; };
-  const cleanups = drawings.map((state) => {
-    const canvas = state.canvas;
-    const down = (event) => { if (state.phase !== 'complete') return; canvas.setPointerCapture(event.pointerId); state.activeStroke = [point(event, canvas)]; };
-    const move = (event) => { if (!state.activeStroke || state.phase !== 'complete') return; state.activeStroke.push(point(event, canvas)); };
-    const up = () => {
-      if (!state.activeStroke) return;
-      if (state.phase === 'complete' && state.activeStroke.length > 1) state.userStrokes.push(state.activeStroke);
-      state.activeStroke = null;
-    };
-    canvas.addEventListener('pointerdown', down); canvas.addEventListener('pointermove', move); canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
-    return () => { canvas.removeEventListener('pointerdown', down); canvas.removeEventListener('pointermove', move); canvas.removeEventListener('pointerup', up); canvas.removeEventListener('pointercancel', up); };
-  });
   frame = requestAnimationFrame(loopFrame);
-  return () => { cancelAnimationFrame(frame); cleanups.forEach((cleanup) => cleanup()); };
+  return () => { cancelAnimationFrame(frame); };
 }
