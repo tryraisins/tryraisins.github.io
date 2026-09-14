@@ -1,27 +1,28 @@
 # Project Handoff
 
-Last updated: 2026-09-10
+Last updated: 2026-09-14
 
 ## Current Objective
 
-Pocket Playground is the selected TryRaisins portfolio direction. The page now uses a ruled student-notebook backdrop, transparent pencil sketch canvases, and a decorative five-top Beyblade-like physics scene.
+Pocket Playground is the selected TryRaisins portfolio direction. The page now uses a ruled student-notebook backdrop, transparent pencil sketch canvases, and a responsive Beyblade-like physics scene.
 
 ## Current State
 
-- `src/prototypes/portfolio-redesign/Play.astro` renders the portfolio on one continuous notebook surface, with three transparent pencil drawings behind hero/work content, a marker-drawn yellow sticky-note contact section, and the 3D scene. The hero uses a desk-label identity, the practical proposition “Software for the parts people actually have to use.”, a concise product/interface/systems explanation, and direct work/contact actions.
-- `src/prototypes/portfolio-redesign/spinning-tops.js` contains the Three.js models, lighting, fixed-step physics, top-to-top and pointer collisions, shadows, and reduced-motion handling. Page text and other DOM elements are not physics obstacles; the canvas remains below the hero content in stacking order.
+- `src/prototypes/portfolio-redesign/Play.astro` renders the portfolio on one continuous notebook surface, with three transparent pencil drawings behind hero/work content, a marker-drawn yellow sticky-note contact section, and the 3D scene. The hero uses a desk-label identity, the proposition “Writing code for the work that matters.”, a concise Astro/React/Python/Next.js/Azure/MongoDB explanation, and direct work/contact actions.
+- `src/prototypes/portfolio-redesign/spinning-tops.js` contains the Three.js models, lighting, fixed-step physics, top-to-top, pointer, and wide-desktop hero-content collisions, shadows, and reduced-motion handling. Seven tops and DOM obstacle collisions activate only above 1200px; 1200px and below retain five background-only tops. The canvas remains below the hero content in stacking order.
 - `src/prototypes/portfolio-redesign/doodle-notes.js` contains the 20 sketch definitions and the IDLE/DRAWING/COMPLETE/REVERSING lifecycle for each drawing.
-- Five tops use original procedural geometry: beveled fins, metal weight rings, hubs, drivers, and colored enamel materials. They move for roughly 85 seconds, spawn from a randomized left/center/right region each cycle, collide with stronger variable knockback, wobble and tip over independently, cast shadows, settle, then restart.
-- Three transparent canvases cover the hero and desk. Each draws for 8 seconds, holds for exactly 11 seconds, reverses over 4 seconds, then advances to another sketch. During the hold, contextual rays/clouds/leaves/rings animate only for compatible sketches. User pencil strokes are accepted only during COMPLETE and retract in reverse chronology.
+- Seven tops use original procedural geometry: beveled fins, metal weight rings, hubs, drivers, and colored enamel materials. Seven are active above 1200px and five below that breakpoint. They move for roughly 85 seconds, spawn from a randomized left/center/right region each cycle, collide with stronger variable knockback, wobble and tip over independently, cast shadows, settle, then restart.
+- Three transparent canvases cover the hero and desk. Each draws for 5.2 seconds, holds for exactly 11 seconds, erases over 2.6 seconds, then advances to another sketch. During the hold, contextual rays/clouds/leaves/rings animate only for compatible sketches. User pencil strokes are accepted only during COMPLETE and retract in reverse chronology.
 - The removed middle statement section is not part of the page anymore. The contact area now exposes only the subject-prefilled email link, marker-underlined social links, and Lagos location text. The copy-email action and whole footer have been removed.
 
 ## Verification
 
 - `npm run build` passed on 2026-09-10. Astro emitted only the existing stale Browserslist database warning.
 - The contact and hero revision was browser-checked at desktop and 390px. The page stayed within the viewport, the revised hero actions remained accessible, the project note rendered with marker-like pencil styling, and the DOM contained zero copy-email controls and zero footer elements.
-- Desktop browser check rendered five 3D models with shadows and transparent pencil canvases on the ruled page.
+- Desktop browser check rendered the 3D models with shadows and transparent pencil canvases on the ruled page; the latest 1440px pass confirmed seven active tops.
 - Mobile layout stays bounded at 390px with no horizontal overflow; the contact sheet uses reduced spacing and a three-link social row to stay compact while retaining a 56px email action and 44px social targets. The copy-email control and footer are no longer rendered. Reduced-motion disables the continuous simulation and leaves the reveal content visible.
-- Runtime checks confirmed zero `[data-battle-obstacle]` markers, battlefield `z-index: 0`, hero title `z-index: 1`, rendered tops, and nonzero top-to-top hit counts at 1280px; the same layering and no-overflow checks passed at 390px.
+- Earlier runtime checks confirmed the battlefield `z-index: 0`, hero title `z-index: 1`, rendered tops, and nonzero top-to-top hit counts at 1280px; the current wide-desktop collision markers are intentionally limited to `>1200px`.
+- Runtime checks on 2026-09-14 confirmed seven active tops and six hero obstacle regions at 1440px, five tops at 1200px and 390px, no effective mobile obstacle collisions, updated hero copy, transparent `.play-world` background, darker paper body color, and no horizontal overflow at mobile width.
 - Drawing layers explicitly use `z-index: 0`, while hero text and work-desk content use `z-index: 1`, so drawings stay underneath overlapping page elements.
 - The supplied Sketchfab page was blocked by 403 in the research tool; Meshy’s gallery was accessible and used only for broad form cues.
 

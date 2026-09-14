@@ -28,6 +28,11 @@ export const sketches = [
   { name: 'hero insignia', paths: [arc(50, 50, 29), loop([33, 67], [51, 27], [68, 67], [57, 58], [50, 70], [43, 58]), line([41, 54], [59, 54]), arc(50, 50, 21)] },
 ];
 
+const DRAW_DURATION = 5200;
+const HOLD_DURATION = 11000;
+const ERASE_DURATION = 2600;
+const LOOP_DURATION = DRAW_DURATION + HOLD_DURATION + ERASE_DURATION;
+
 const lengthOf = (points) => points.slice(1).reduce((total, point, index) => total + Math.hypot(point[0] - points[index][0], point[1] - points[index][1]), 0);
 const pathLength = (points) => lengthOf(points);
 
@@ -122,10 +127,10 @@ export function mountDoodles(root) {
     if (!context) return;
     const width = canvas.width; const height = canvas.height;
     const elapsed = reduced.matches ? 8000 : now - state.started;
-    const phase = elapsed % 23000;
+    const phase = elapsed % LOOP_DURATION;
     const previousPhase = state.phase;
-    if (phase < 8000) state.phase = 'drawing';
-    else if (phase < 19000) state.phase = 'complete';
+    if (phase < DRAW_DURATION) state.phase = 'drawing';
+    else if (phase < DRAW_DURATION + HOLD_DURATION) state.phase = 'complete';
     else state.phase = 'reversing';
     if (state.phase === 'reversing' && previousPhase === 'complete' && state.activeStroke) {
       if (state.activeStroke.length > 1) state.userStrokes.push(state.activeStroke);
@@ -135,15 +140,15 @@ export function mountDoodles(root) {
     context.clearRect(0, 0, width, height);
     context.strokeStyle = 'rgba(48, 49, 43, .76)'; context.lineWidth = Math.max(1.2, width / 155); context.lineJoin = 'round'; context.lineCap = 'round'; context.globalCompositeOperation = 'multiply';
     const paths = sketches[state.sketch].paths;
-    if (state.phase === 'drawing') drawAuto(context, paths, phase / 8000, width, height);
+    if (state.phase === 'drawing') drawAuto(context, paths, phase / DRAW_DURATION, width, height);
     if (state.phase === 'complete') {
       drawAuto(context, paths, 1, width, height);
       state.userStrokes.forEach((stroke) => drawPath(context, stroke, 1, width, height));
-      drawSecondary(context, sketches[state.sketch].name, (phase - 8000) / 1000, width, height);
+      drawSecondary(context, sketches[state.sketch].name, (phase - DRAW_DURATION) / 1000, width, height);
     }
-    if (state.phase === 'reversing') { const reverse = (phase - 19000) / 4000; drawReverse(context, paths, reverse, width, height); drawUserReverse(context, state.userStrokes, reverse, width, height); }
+    if (state.phase === 'reversing') { const reverse = (phase - DRAW_DURATION - HOLD_DURATION) / ERASE_DURATION; drawReverse(context, paths, reverse, width, height); drawUserReverse(context, state.userStrokes, reverse, width, height); }
     if (state.activeStroke && state.phase === 'complete') drawPath(context, state.activeStroke, 1, width, height);
-    if (state.phase === 'reversing' && phase >= 22980) { state.userStrokes = []; state.activeStroke = null; state.sketch = (state.sketch + 1 + indexOf(state)) % sketches.length; state.started = now; }
+    if (state.phase === 'reversing' && phase >= LOOP_DURATION - 20) { state.userStrokes = []; state.activeStroke = null; state.sketch = (state.sketch + 1 + indexOf(state)) % sketches.length; state.started = now; }
   };
   const indexOf = (state) => drawings.indexOf(state);
   const loopFrame = (now) => { drawings.forEach((state) => draw(state, now)); frame = requestAnimationFrame(loopFrame); };
