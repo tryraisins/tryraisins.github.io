@@ -65,7 +65,7 @@ export function mountSpinningTops(host, hero) {
   const particles=[];
   const sparkGeometry=new THREE.SphereGeometry(1.3,4,3);
   const sparkMaterial=new THREE.MeshBasicMaterial({color:0xffba4a});
-  let width=1,height=1,pointer=null,frame=0,last=0,accumulator=0,hold=0,elapsed=0,disposed=false,visible=true,obstacles=[];
+  let width=1,height=1,pointer=null,frame=0,last=0,accumulator=0,hold=0,elapsed=0,disposed=false,visible=true;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const random=(a,b)=>a+Math.random()*(b-a);
   const world=(x,y)=>[x-width/2,(y-height/2)/projection];
@@ -76,14 +76,6 @@ export function mountSpinningTops(host, hero) {
       s.pivot.visible = s.active;
     });
     host.dataset.topCount = String(topCount);
-  }
-  function refreshObstacles() {
-    if (window.innerWidth <= 1200) { obstacles = []; return; }
-    const hostBox = host.getBoundingClientRect();
-    obstacles = [...hero.querySelectorAll('[data-battle-obstacle]')].map((element) => {
-      const box = element.getBoundingClientRect();
-      return { left: box.left - hostBox.left - 10, top: box.top - hostBox.top - 10, right: box.right - hostBox.left + 10, bottom: box.bottom - hostBox.top + 10 };
-    });
   }
   function reset() {
     elapsed=0; hold=0; host.dataset.hitCount='0';
@@ -111,7 +103,7 @@ export function mountSpinningTops(host, hero) {
     camera.position.set(0,Math.sin(viewAngle)*1800,Math.cos(viewAngle)*1800);camera.lookAt(0,0,0);camera.updateProjectionMatrix();
     const reach=Math.max(width,height); light.shadow.camera.left=-reach;light.shadow.camera.right=reach;light.shadow.camera.top=reach;light.shadow.camera.bottom=-reach;light.shadow.camera.far=3000;light.shadow.camera.updateProjectionMatrix();
     states.forEach(s=>{s.radius=width<620?26:43;s.model.scale.setScalar(s.radius);});
-    refreshObstacles(); reset(); pose();renderer.render(scene,camera);
+    reset(); pose();renderer.render(scene,camera);
   }
   function burst(x,y,speed) {
     if(speed<45||particles.length>36)return;
@@ -122,16 +114,6 @@ export function mountSpinningTops(host, hero) {
     s.x+=nx*penetration;s.y+=ny*penetration;
     const v=s.vx*nx+s.vy*ny;
     if(v<0){s.vx-=1.82*v*nx;s.vy-=1.82*v*ny;burst(x,y,-v);}
-  }
-  function obstacle(s, box) {
-    const closestX=Math.max(box.left,Math.min(s.x,box.right)),closestY=Math.max(box.top,Math.min(s.y,box.bottom));
-    let dx=s.x-closestX,dy=s.y-closestY,d=Math.hypot(dx,dy);
-    if(d>=s.radius)return;
-    if(d<.001){
-      const edges=[{distance:s.x-box.left,nx:-1,ny:0,x:box.left,y:s.y},{distance:box.right-s.x,nx:1,ny:0,x:box.right,y:s.y},{distance:s.y-box.top,nx:0,ny:-1,x:s.x,y:box.top},{distance:box.bottom-s.y,nx:0,ny:1,x:s.x,y:box.bottom}].sort((a,b)=>a.distance-b.distance)[0];
-      wall(s,edges.nx,edges.ny,s.radius+edges.distance,edges.x,edges.y);return;
-    }
-    wall(s,dx/d,dy/d,s.radius-d,closestX,closestY);
   }
   function step(dt) {
     elapsed+=dt;
@@ -156,7 +138,6 @@ export function mountSpinningTops(host, hero) {
       if(s.x<r)wall(s,1,0,r-s.x,r,s.y);if(s.x>width-r)wall(s,-1,0,s.x-width+r,width-r,s.y);
       if(s.y<r)wall(s,0,1,r-s.y,s.x,r);if(s.y>height-r)wall(s,0,-1,s.y-height+r,s.x,height-r);
       if(pointer){const dx=s.x-pointer.x,dy=s.y-pointer.y,d=Math.hypot(dx,dy);if(d>0&&d<r+12)wall(s,dx/d,dy/d,r+12-d,pointer.x,pointer.y);}
-      if(topCount===7) obstacles.forEach((box)=>obstacle(s,box));
     });
     states.slice(0,topCount).forEach((a,i)=>states.slice(i+1,topCount).forEach(b=>{
       const dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy),r=a.radius+b.radius;
