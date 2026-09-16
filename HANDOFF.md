@@ -1,10 +1,10 @@
 # Project Handoff
 
-Last updated: 2026-09-14
+Last updated: 2026-09-16
 
 ## Current Objective
 
-Pocket Playground is the selected TryRaisins portfolio direction. The page now uses a ruled student-notebook backdrop, transparent pencil sketch canvases, and a responsive Beyblade-like physics scene.
+Pocket Playground is the selected TryRaisins portfolio direction. The page now uses a ruled student-notebook backdrop with a shared book-margin layout boundary, transparent pencil sketch canvases, and a responsive Beyblade-like physics scene.
 
 ## Current State
 
@@ -24,6 +24,7 @@ Pocket Playground is the selected TryRaisins portfolio direction. The page now u
 - Earlier runtime checks confirmed the battlefield `z-index: 0`, hero title `z-index: 1`, rendered tops, and nonzero top-to-top hit counts at 1280px; the current wide-desktop collision markers are intentionally limited to `>1200px`.
 - Runtime checks on 2026-09-14 confirmed seven active tops at 1440px and five tops at 1200px and 390px, with no DOM obstacle collision system, updated hero copy, transparent `.play-world` background, darker paper body color, and no horizontal overflow at mobile width.
 - Drawing layers explicitly use `z-index: 0`, while hero text and work-desk content use `z-index: 1`, so drawings stay underneath overlapping page elements.
+- The notebook’s red rule and the hero, work desk, and contact content all share `--play-page-margin`. At wider viewports, the reading area is capped at `--play-content-width` so content keeps book-like line lengths; Beyblades and drawings remain full-section decorative layers and can cross the page margin.
 - The supplied Sketchfab page was blocked by 403 in the research tool; Meshy’s gallery was accessible and used only for broad form cues.
 
 ## Important Constraints
