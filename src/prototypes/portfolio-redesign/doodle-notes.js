@@ -80,16 +80,47 @@ function drawSecondary(context, name, time, width, height) {
   context.lineWidth = 1.6;
   context.setLineDash([5, 6]);
   context.beginPath();
-  if (name === 'mountains' || name === 'landscape') {
+  if (name === 'portrait') {
+    const blink = Math.max(0, Math.cos(time * 1.6)) ** 18;
+    context.moveTo(x(39), y(47)); context.lineTo(x(46), y(47 - blink * 2));
+    context.moveTo(x(54), y(47)); context.lineTo(x(61), y(47 - blink * 2));
+  } else if (name === 'cat') {
+    context.moveTo(x(67), y(63)); context.quadraticCurveTo(x(83), y(68 + Math.sin(time * 1.7) * 5), x(78), y(51 + Math.sin(time * 1.7) * 4));
+  } else if (name === 'dinosaur') {
+    context.moveTo(x(29), y(62)); context.quadraticCurveTo(x(17), y(67 + Math.sin(time * 1.8) * 3), x(13), y(57 + Math.sin(time * 1.8) * 3));
+  } else if (name === 'landscape' || name === 'mountains') {
     const cloudX = (time * 8) % 130 - 20;
     context.arc(x(cloudX), y(23), x(6), 0, Math.PI * 2);
     context.arc(x(cloudX + 7), y(21), x(8), 0, Math.PI * 2);
-    context.moveTo(x(10 + Math.sin(time * 2) * 3), y(64)); context.lineTo(x(30), y(62));
-    context.moveTo(x(18 + Math.sin(time * 1.4) * 4), y(69)); context.lineTo(x(38), y(67));
+    if (name === 'landscape') {
+      context.moveTo(x(10 + Math.sin(time * 2) * 3), y(64)); context.lineTo(x(30), y(62));
+      context.moveTo(x(18 + Math.sin(time * 1.4) * 4), y(69)); context.lineTo(x(38), y(67));
+    } else {
+      const sun = Math.sin(time * 1.1) * 2;
+      context.arc(x(52), y(34 + sun), x(5), Math.PI, Math.PI * 2);
+    }
+  } else if (name === 'rocket') {
+    const flicker = 3 + Math.sin(time * 14) * 2;
+    context.moveTo(x(46), y(76)); context.lineTo(x(50), y(76 + flicker)); context.lineTo(x(54), y(76));
+  } else if (name === 'house') {
+    context.moveTo(x(33), y(55)); context.lineTo(x(38), y(55)); context.lineTo(x(38), y(60)); context.lineTo(x(33), y(60)); context.closePath();
   } else if (name === 'tree') {
     context.moveTo(x(30), y(42 + Math.sin(time * 2) * 2)); context.lineTo(x(27), y(48));
     context.moveTo(x(71), y(50 + Math.sin(time * 1.7) * 2)); context.lineTo(x(74), y(57));
-    context.arc(x(37 + Math.sin(time) * 5), y(74 + (time % 2) * 8), x(2), 0, Math.PI * 2);
+    context.ellipse(x(37 + Math.sin(time) * 5), y(74 + (time % 2) * 8), x(2.5), y(1.5), time, 0, Math.PI * 2);
+  } else if (name === 'robot') {
+    const glow = 2 + Math.sin(time * 3) * 1.5;
+    context.arc(x(50), y(17), x(glow), 0, Math.PI * 2);
+    context.moveTo(x(39), y(47)); context.lineTo(x(44), y(47));
+  } else if (name === 'fish') {
+    const bubbleY = 54 - (time * 9) % 28;
+    context.arc(x(23), y(bubbleY), x(2), 0, Math.PI * 2);
+    context.arc(x(31), y(bubbleY - 8), x(1.5), 0, Math.PI * 2);
+    context.moveTo(x(65), y(51)); context.lineTo(x(69), y(47 + Math.sin(time * 5) * 2));
+  } else if (name === 'whale') {
+    const spout = Math.max(0, Math.sin(time * 1.7));
+    context.moveTo(x(49), y(43)); context.quadraticCurveTo(x(46), y(36 - spout * 5), x(43), y(34 - spout * 8));
+    context.moveTo(x(49), y(42)); context.quadraticCurveTo(x(53), y(35 - spout * 5), x(56), y(34 - spout * 8));
   } else if (name === 'light bulb') {
     const pulse = Math.sin(time * 3) * 3;
     context.moveTo(x(50), y(2)); context.lineTo(x(50), y(10 + pulse));
@@ -97,8 +128,41 @@ function drawSecondary(context, name, time, width, height) {
     context.moveTo(x(81), y(13)); context.lineTo(x(74 - pulse), y(20));
   } else if (name === 'planet') {
     context.arc(x(50), y(50), x(36), time % 2, Math.PI + (time % 2));
+    const satellite = time * 1.1;
+    context.arc(x(50 + Math.cos(satellite) * 36), y(50 + Math.sin(satellite) * 18), x(2.2), 0, Math.PI * 2);
   } else if (name === 'flower') {
     context.moveTo(x(50), y(59)); context.lineTo(x(50 + Math.sin(time * 2) * 4), y(82));
+  } else if (name === 'coffee') {
+    const drift = Math.sin(time * 2) * 2;
+    context.moveTo(x(39), y(33)); context.bezierCurveTo(x(34 + drift), y(28), x(44 - drift), y(25), x(39), y(20));
+    context.moveTo(x(53), y(32)); context.bezierCurveTo(x(48 - drift), y(27), x(58 + drift), y(24), x(53), y(18));
+  } else if (name === 'guitar') {
+    const vibration = Math.sin(time * 18) * 1.1;
+    context.moveTo(x(49), y(53)); context.lineTo(x(70 + vibration), y(20));
+    context.moveTo(x(52), y(51)); context.lineTo(x(72 - vibration), y(22));
+  } else if (name === 'bicycle') {
+    [31, 70].forEach((center) => {
+      const angle = time * 2.4;
+      context.moveTo(x(center), y(66));
+      context.lineTo(x(center + Math.cos(angle) * 10), y(66 + Math.sin(angle) * 10));
+    });
+  } else if (name === 'cassette') {
+    [37, 63].forEach((center, index) => {
+      const angle = time * (index ? -2 : 2);
+      context.moveTo(x(center - Math.cos(angle) * 6), y(51 - Math.sin(angle) * 6));
+      context.lineTo(x(center + Math.cos(angle) * 6), y(51 + Math.sin(angle) * 6));
+      context.moveTo(x(center + Math.sin(angle) * 6), y(51 - Math.cos(angle) * 6));
+      context.lineTo(x(center - Math.sin(angle) * 6), y(51 + Math.cos(angle) * 6));
+    });
+  } else if (name === 'snail') {
+    const sway = Math.sin(time * 1.5) * 2;
+    context.moveTo(x(79), y(49)); context.lineTo(x(77 + sway), y(43));
+    context.moveTo(x(87), y(49)); context.lineTo(x(90 - sway), y(43));
+    context.moveTo(x(59 + Math.sin(time * .5) * 3), y(67)); context.lineTo(x(62 + Math.sin(time * .5) * 3), y(67));
+  } else if (name === 'hero insignia') {
+    const glint = (time * 28) % 45;
+    context.moveTo(x(25 + glint), y(39)); context.lineTo(x(29 + glint), y(34));
+    context.moveTo(x(29 + glint), y(34)); context.lineTo(x(33 + glint), y(39));
   }
   context.stroke();
   context.restore();

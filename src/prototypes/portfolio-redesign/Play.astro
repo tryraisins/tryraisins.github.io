@@ -13,7 +13,7 @@ const {
   <main id="play-top">
     <section class="play-hero" aria-labelledby="play-title">
       <div class="play-battlefield" data-battlefield aria-hidden="true"></div>
-      <div class="play-doodle-layer play-doodle-layer-hero" aria-label="Pencil drawings">
+      <div class="play-doodle-layer play-doodle-layer-hero" aria-hidden="true">
         <figure class="play-drawing play-drawing-hero-a" data-doodle>
           <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
         </figure>
@@ -73,14 +73,28 @@ const {
           </li>
         ))}
       </ol>
-      <div class="play-doodle-layer play-doodle-layer-desk" aria-label="Pencil drawing">
+      <div class="play-doodle-layer play-doodle-layer-desk" aria-hidden="true">
         <figure class="play-drawing play-drawing-desk" data-doodle>
+          <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
+        </figure>
+        <figure class="play-drawing play-drawing-desk-b" data-doodle>
+          <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
+        </figure>
+        <figure class="play-drawing play-drawing-desk-c" data-doodle>
           <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
         </figure>
       </div>
     </section>
 
     <section id="play-contact" class="play-contact" data-play-reveal aria-labelledby="play-contact-title">
+      <div class="play-doodle-layer play-doodle-layer-contact" aria-hidden="true">
+        <figure class="play-drawing play-drawing-contact-a" data-doodle>
+          <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
+        </figure>
+        <figure class="play-drawing play-drawing-contact-b" data-doodle>
+          <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
+        </figure>
+      </div>
       <div class="play-contact-sheet">
         <span class="play-contact-tape" aria-hidden="true"></span>
         <header class="play-contact-meta">
@@ -267,8 +281,8 @@ const {
   .play-copy strong { grid-column: 1 / -1; font: 500 clamp(1.8rem,3vw,3rem)/.9 'Fraunces', Georgia, serif; letter-spacing: -.04em; }
   .play-copy p { margin: 2px 0 0; font-size: 11px; line-height: 1.45; }
   .play-copy em { align-self: end; color: var(--play-blue); font-size: 9px; font-style: normal; white-space: nowrap; }
-  .play-contact { padding: clamp(90px, 11vw, 160px) max(var(--play-page-margin), calc((100% - var(--play-content-width)) / 2)) clamp(80px, 9vw, 130px); position: relative; background: transparent; }
-  .play-contact-sheet { width: min(1120px, 100%); margin: 0 auto; padding: clamp(34px, 5vw, 68px); position: relative; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(310px, .95fr); background: #f3d665; box-shadow: 13px 15px 0 var(--play-red), 19px 22px 0 rgba(23,23,25,.14); transform: rotate(-.75deg); }
+  .play-contact { padding: clamp(170px, 17vw, 230px) max(var(--play-page-margin), calc((100% - var(--play-content-width)) / 2)) clamp(170px, 17vw, 230px); position: relative; background: transparent; }
+  .play-contact-sheet { width: min(1120px, 100%); margin: 0 auto; padding: clamp(34px, 5vw, 68px); position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(310px, .95fr); background: #f3d665; box-shadow: 13px 15px 0 var(--play-red), 19px 22px 0 rgba(23,23,25,.14); transform: rotate(-.75deg); }
   .play-contact-sheet::before { content: ''; position: absolute; inset: -4px 7px 5px -5px; border: 4px solid var(--play-ink); border-radius: 2% 4% 3% 2%; transform: rotate(.55deg); pointer-events: none; }
   .play-contact-sheet::after { content: ''; position: absolute; inset: 5px -4px -3px 5px; border: 2px solid rgba(23,23,25,.78); border-radius: 4% 2% 2% 3%; transform: rotate(-.3deg); pointer-events: none; }
   .play-contact-sheet > * { position: relative; z-index: 1; }
@@ -299,6 +313,10 @@ const {
   .play-drawing-hero-a { top: 8%; left: 4%; --drawing-rotation: -2.2deg; }
   .play-drawing-hero-b { top: 52%; right: 5%; --drawing-rotation: 2.5deg; }
   .play-drawing-desk { top: 72%; left: 4%; --drawing-rotation: -1.7deg; }
+  .play-drawing-desk-b { top: 29%; left: 43%; --drawing-rotation: 1.2deg; }
+  .play-drawing-desk-c { top: 79%; right: 5%; --drawing-rotation: -2.4deg; }
+  .play-drawing-contact-a { top: 20px; left: 8%; --drawing-rotation: -2deg; }
+  .play-drawing-contact-b { right: 9%; bottom: 20px; --drawing-rotation: 2.2deg; }
 
   @media (prefers-reduced-motion: no-preference) {
     .play-hero .play-kicker { animation: play-rise 520ms var(--play-ease-out) both; }
@@ -341,7 +359,7 @@ const {
     .play-desk ol { min-height: 0; display: grid; gap: 24px; padding: 0; }
     .play-tile { width: 100%; min-width: 0; position: static; transform: none !important; }
     .play-tile a { min-height: 0; grid-template-rows: 190px auto; }
-    .play-contact { padding: 58px calc(var(--play-page-margin) + 6px) 64px; }
+    .play-contact { padding: 150px calc(var(--play-page-margin) + 6px); }
     .play-contact-sheet { padding: 26px 20px 24px; grid-template-columns: 1fr; box-shadow: 7px 9px 0 var(--play-red), 11px 14px 0 rgba(23,23,25,.14); transform: rotate(-.35deg); }
     .play-contact-meta { margin-bottom: 26px; padding-bottom: 10px; align-items: center; border-bottom-width: 3px; }
     .play-contact-availability { display: none; }
@@ -355,6 +373,8 @@ const {
     .play-contact-aside nav { margin-top: 8px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
     .play-contact-aside a { min-width: 0; min-height: 44px; padding: 0; gap: 6px; border-bottom-width: 3px; font-size: 10px; }
     .play-contact-social-action { display: none; }
+    .play-drawing-contact-a { top: 14px; left: 8%; }
+    .play-drawing-contact-b { right: 8%; bottom: 14px; }
   }
   @media (max-width: 380px) {
     .play-contact-sheet { padding-inline: 18px; }
