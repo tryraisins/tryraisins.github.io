@@ -65,7 +65,7 @@ export function mountSpinningTops(host, hero) {
   const particles=[];
   const sparkGeometry=new THREE.SphereGeometry(1.3,4,3);
   const sparkMaterial=new THREE.MeshBasicMaterial({color:0xffba4a});
-  let width=1,height=1,pointer=null,frame=0,last=0,accumulator=0,hold=0,elapsed=0,disposed=false,visible=true;
+  let width=1,height=1,pointer=null,frame=0,last=0,accumulator=0,hold=0,elapsed=0,disposed=false;
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const random=(a,b)=>a+Math.random()*(b-a);
   const world=(x,y)=>[x-width/2,(y-height/2)/projection];
@@ -109,6 +109,23 @@ export function mountSpinningTops(host, hero) {
     if(speed<45||particles.length>36)return;
     const [wx,wz]=world(x,y);
     for(let i=0;i<6;i++) {const mesh=new THREE.Mesh(sparkGeometry,sparkMaterial);mesh.position.set(wx,22,wz);scene.add(mesh);particles.push({mesh,vx:random(-75,75),vy:random(30,100),vz:random(-75,75),life:.3});}
+  }
+  let previousScrollY=window.scrollY,previousScrollTime=performance.now();
+  function onScroll(){
+    const now=performance.now(),dt=Math.max((now-previousScrollTime)/1000,.001);
+    const scrollDelta=window.scrollY-previousScrollY;
+    previousScrollY=window.scrollY;previousScrollTime=now;
+    const strength=Math.min(1,Math.abs(scrollDelta/dt)/1800);
+    if(strength<.025)return;
+    const push=Math.sign(scrollDelta)*(55+165*strength);
+    states.slice(0,topCount).forEach(s=>{
+      if(s.phase==='resting'){
+        s.phase='spinning';s.age=0;s.life=30;s.tilt=.03;
+      }
+      s.vy+=push;
+      // Scrolling acts like a quick flick: tops gain spin and take longer to settle.
+      s.life=Math.min(110,s.life+.35+strength*.9);
+    });
   }
   function wall(s,nx,ny,penetration,x,y) {
     s.x+=nx*penetration;s.y+=ny*penetration;
@@ -177,15 +194,15 @@ export function mountSpinningTops(host, hero) {
   function tick(now){
     if(disposed)return;
     const delta=Math.min(.05,(now-last)/1000||0);last=now;
-    if(visible&&!document.hidden&&!reduced.matches){accumulator+=delta;while(accumulator>=1/120){step(1/120);accumulator-=1/120;}pose();renderer.render(scene,camera);}
+    if(!document.hidden&&!reduced.matches){accumulator+=delta;while(accumulator>=1/120){step(1/120);accumulator-=1/120;}pose();renderer.render(scene,camera);}
     frame=requestAnimationFrame(tick);
   }
   const move=e=>{if(e.pointerType==='touch')return;const box=host.getBoundingClientRect();pointer={x:e.clientX-box.left,y:e.clientY-box.top};};
   const leave=()=>{pointer=null;};
   hero.addEventListener('pointermove',move);hero.addEventListener('pointerleave',leave);
+  window.addEventListener('scroll',onScroll,{passive:true});
   const observer=new ResizeObserver(resize);observer.observe(host);
-  const intersection=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;});intersection.observe(hero);
   const motionChange=()=>{reset();pose();renderer.render(scene,camera);};reduced.addEventListener('change',motionChange);
   resize();frame=requestAnimationFrame(tick);
-  return ()=>{disposed=true;cancelAnimationFrame(frame);observer.disconnect();intersection.disconnect();hero.removeEventListener('pointermove',move);hero.removeEventListener('pointerleave',leave);reduced.removeEventListener('change',motionChange);scene.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)o.material.dispose();});environment.dispose();renderer.dispose();renderer.domElement.remove();};
+  return ()=>{disposed=true;cancelAnimationFrame(frame);observer.disconnect();window.removeEventListener('scroll',onScroll);hero.removeEventListener('pointermove',move);hero.removeEventListener('pointerleave',leave);reduced.removeEventListener('change',motionChange);scene.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)o.material.dispose();});environment.dispose();renderer.dispose();renderer.domElement.remove();};
 }

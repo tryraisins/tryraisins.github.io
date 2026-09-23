@@ -72,100 +72,124 @@ function drawReverse(context, paths, progress, width, height) {
   });
 }
 
-function drawSecondary(context, name, time, width, height) {
-  const x = (value) => value * width / 100;
-  const y = (value) => value * height / 100;
-  context.save();
-  context.globalAlpha = .42;
-  context.lineWidth = 1.6;
-  context.setLineDash([5, 6]);
-  context.beginPath();
+const translatePath = (path, dx, dy) => path.map(([x, y]) => [x + dx, y + dy]);
+const rotatePath = (path, cx, cy, angle) => path.map(([x, y]) => [
+  cx + (x - cx) * Math.cos(angle) - (y - cy) * Math.sin(angle),
+  cy + (x - cx) * Math.sin(angle) + (y - cy) * Math.cos(angle),
+]);
+const sample = (from, to, count, pointAt) => Array.from({ length: count + 1 }, (_, index) => pointAt(index / count, from, to));
+
+export function animatedPaths(name, originalPaths, time) {
+  const settle = Math.min(1, time / .45);
+  const paths = originalPaths.map((path) => path.map(([x, y]) => [x, y]));
+  const sway = Math.sin(time * 2.2) * settle;
+
   if (name === 'portrait') {
-    const blink = Math.max(0, Math.cos(time * 1.6)) ** 18;
-    context.moveTo(x(39), y(47)); context.lineTo(x(46), y(47 - blink * 2));
-    context.moveTo(x(54), y(47)); context.lineTo(x(61), y(47 - blink * 2));
+    const blink = Math.max(0, Math.cos(time * 1.5)) ** 28 * settle;
+    [2, 3].forEach((index) => {
+      const center = (paths[index][0][0] + paths[index][1][0]) / 2;
+      paths[index] = paths[index].map(([x, y]) => [center + (x - center) * (1 - blink), y + blink * 1.4]);
+    });
   } else if (name === 'cat') {
-    context.moveTo(x(67), y(63)); context.quadraticCurveTo(x(83), y(68 + Math.sin(time * 1.7) * 5), x(78), y(51 + Math.sin(time * 1.7) * 4));
+    paths[0] = rotatePath(paths[0], 50, 65, sway * .035);
+    const tailWag = Math.sin(time * 2.7) * 8 * settle;
+    paths.push(sample(0, 1, 14, (t) => [66 + t * 15, 63 + Math.sin(t * Math.PI) * (4 + tailWag) + t * 4]));
   } else if (name === 'dinosaur') {
-    context.moveTo(x(29), y(62)); context.quadraticCurveTo(x(17), y(67 + Math.sin(time * 1.8) * 3), x(13), y(57 + Math.sin(time * 1.8) * 3));
-  } else if (name === 'landscape' || name === 'mountains') {
-    const cloudX = (time * 8) % 130 - 20;
-    context.arc(x(cloudX), y(23), x(6), 0, Math.PI * 2);
-    context.arc(x(cloudX + 7), y(21), x(8), 0, Math.PI * 2);
-    if (name === 'landscape') {
-      context.moveTo(x(10 + Math.sin(time * 2) * 3), y(64)); context.lineTo(x(30), y(62));
-      context.moveTo(x(18 + Math.sin(time * 1.4) * 4), y(69)); context.lineTo(x(38), y(67));
-    } else {
-      const sun = Math.sin(time * 1.1) * 2;
-      context.arc(x(52), y(34 + sun), x(5), Math.PI, Math.PI * 2);
-    }
+    const step = Math.sin(time * 2.5) * 1.4 * settle;
+    paths[0] = translatePath(paths[0], 0, Math.abs(step));
+    paths[0] = paths[0].map(([x, y]) => [x, y + (x < 43 && y > 63 ? step : 0)]);
+    paths[2] = rotatePath(paths[2], 20, 58, sway * .12);
+  } else if (name === 'landscape') {
+    paths[3] = translatePath(paths[3], 0, Math.sin(time * 1.3) * 2 * settle);
+    const cloudX = (time * 8) % 120 - 12;
+    paths.push(sample(0, 1, 20, (t) => [cloudX + t * 13, 22 + Math.sin(t * Math.PI * 2) * 1.8]));
   } else if (name === 'rocket') {
-    const flicker = 3 + Math.sin(time * 14) * 2;
-    context.moveTo(x(46), y(76)); context.lineTo(x(50), y(76 + flicker)); context.lineTo(x(54), y(76));
+    const lift = (1 - Math.cos(time * 2.1)) * 1.5 * settle;
+    paths.forEach((path, index) => { paths[index] = translatePath(path, 0, -lift); });
+    const flame = Math.sin(time * 16) * 2.5 * settle;
+    paths[4] = paths[4].map(([x, y], index) => [x, y + (index > 0 && index < 4 ? flame : 0)]);
   } else if (name === 'house') {
-    context.moveTo(x(33), y(55)); context.lineTo(x(38), y(55)); context.lineTo(x(38), y(60)); context.lineTo(x(33), y(60)); context.closePath();
-  } else if (name === 'tree') {
-    context.moveTo(x(30), y(42 + Math.sin(time * 2) * 2)); context.lineTo(x(27), y(48));
-    context.moveTo(x(71), y(50 + Math.sin(time * 1.7) * 2)); context.lineTo(x(74), y(57));
-    context.ellipse(x(37 + Math.sin(time) * 5), y(74 + (time % 2) * 8), x(2.5), y(1.5), time, 0, Math.PI * 2);
-  } else if (name === 'robot') {
-    const glow = 2 + Math.sin(time * 3) * 1.5;
-    context.arc(x(50), y(17), x(glow), 0, Math.PI * 2);
-    context.moveTo(x(39), y(47)); context.lineTo(x(44), y(47));
-  } else if (name === 'fish') {
-    const bubbleY = 54 - (time * 9) % 28;
-    context.arc(x(23), y(bubbleY), x(2), 0, Math.PI * 2);
-    context.arc(x(31), y(bubbleY - 8), x(1.5), 0, Math.PI * 2);
-    context.moveTo(x(65), y(51)); context.lineTo(x(69), y(47 + Math.sin(time * 5) * 2));
-  } else if (name === 'whale') {
-    const spout = Math.max(0, Math.sin(time * 1.7));
-    context.moveTo(x(49), y(43)); context.quadraticCurveTo(x(46), y(36 - spout * 5), x(43), y(34 - spout * 8));
-    context.moveTo(x(49), y(42)); context.quadraticCurveTo(x(53), y(35 - spout * 5), x(56), y(34 - spout * 8));
-  } else if (name === 'light bulb') {
-    const pulse = Math.sin(time * 3) * 3;
-    context.moveTo(x(50), y(2)); context.lineTo(x(50), y(10 + pulse));
-    context.moveTo(x(19), y(13)); context.lineTo(x(26 + pulse), y(20));
-    context.moveTo(x(81), y(13)); context.lineTo(x(74 - pulse), y(20));
-  } else if (name === 'planet') {
-    context.arc(x(50), y(50), x(36), time % 2, Math.PI + (time % 2));
-    const satellite = time * 1.1;
-    context.arc(x(50 + Math.cos(satellite) * 36), y(50 + Math.sin(satellite) * 18), x(2.2), 0, Math.PI * 2);
+    const smoke = time * 2;
+    paths.push(sample(0, 1, 16, (t) => [68 + Math.sin(smoke + t * 3) * (1 + t * 2), 22 - t * 13]));
+    const windowGlow = .5 + Math.sin(time * 2.8) * .5;
+    paths.push(windowGlow > .62 ? loop([32, 54], [39, 54], [39, 61], [32, 61]) : line([35, 54], [35, 61]));
   } else if (name === 'flower') {
-    context.moveTo(x(50), y(59)); context.lineTo(x(50 + Math.sin(time * 2) * 4), y(82));
+    const bend = Math.sin(time * 1.8) * 6 * settle;
+    paths[6] = paths[6].map(([x, y]) => [x + ((y - 58) / 24) * bend, y]);
+    paths.slice(0, 6).forEach((path, index) => { paths[index] = translatePath(path, bend, 0); });
+    paths[7] = rotatePath(paths[7], 50, 72, sway * .08);
+    paths[8] = rotatePath(paths[8], 50, 67, -sway * .08);
+  } else if (name === 'robot') {
+    const blink = Math.max(0, Math.cos(time * 1.25)) ** 24 * settle;
+    [2, 3].forEach((index) => {
+      const middle = (paths[index][0][1] + paths[index][2][1]) / 2;
+      paths[index] = paths[index].map(([x, y]) => [x, middle + (y - middle) * (1 - blink)]);
+    });
+    paths[6] = rotatePath(paths[6], 27, 58, sway * .13);
+    paths[7] = rotatePath(paths[7], 73, 58, -sway * .13);
+  } else if (name === 'fish') {
+    paths[1] = rotatePath(paths[1], 65, 51, Math.sin(time * 5) * .25 * settle);
+    paths[0] = translatePath(paths[0], Math.sin(time * 2.5) * 1.2 * settle, 0);
+    const bubble = (time * 10) % 28;
+    paths.push(arc(24, 52 - bubble, 1.4, 0, Math.PI * 2, 12));
+  } else if (name === 'whale') {
+    const tailBeat = Math.sin(time * 2.1) * 2.5 * settle;
+    paths[0] = paths[0].map(([x, y]) => [x > 78 ? x + tailBeat : x, y]);
+    const blow = Math.max(0, Math.sin(time * 1.8)) * settle;
+    paths.push(sample(0, 1, 10, (t) => [51 + Math.sin(t * Math.PI * 2) * 2, 41 - t * (4 + blow * 8)]));
+  } else if (name === 'mountains') {
+    const cloudX = (time * 7) % 120 - 12;
+    paths.push(sample(0, 1, 20, (t) => [cloudX + t * 13, 22 + Math.sin(t * Math.PI * 2) * 1.8]));
+    paths.push(arc(77, 34 + Math.sin(time) * 1.5, 6, Math.PI, Math.PI * 2, 16));
   } else if (name === 'coffee') {
-    const drift = Math.sin(time * 2) * 2;
-    context.moveTo(x(39), y(33)); context.bezierCurveTo(x(34 + drift), y(28), x(44 - drift), y(25), x(39), y(20));
-    context.moveTo(x(53), y(32)); context.bezierCurveTo(x(48 - drift), y(27), x(58 + drift), y(24), x(53), y(18));
+    [0, 1].forEach((index) => {
+      const x = index ? 53 : 39;
+      const curl = time * 2 + index * Math.PI;
+      paths.push(sample(0, 1, 16, (t) => [x + Math.sin(curl + t * 4) * (1 + t * 2), 34 - t * 19]));
+    });
   } else if (name === 'guitar') {
-    const vibration = Math.sin(time * 18) * 1.1;
-    context.moveTo(x(49), y(53)); context.lineTo(x(70 + vibration), y(20));
-    context.moveTo(x(52), y(51)); context.lineTo(x(72 - vibration), y(22));
+    const vibration = Math.sin(time * 24) * 1.8 * settle;
+    paths[5] = sample(0, 1, 14, (t) => [47 + t * 24 + Math.sin(t * Math.PI * 5) * vibration, 55 - t * 36]);
+  } else if (name === 'light bulb') {
+    const pulse = (Math.sin(time * 3) + 1) * .5 * settle;
+    [[4, [50, 12]], [5, [25, 22]], [6, [75, 22]]].forEach(([index, [cx, cy]]) => {
+      paths[index] = paths[index].map(([x, y]) => [cx + (x - cx) * (1 + pulse * .24), cy + (y - cy) * (1 + pulse * .24)]);
+    });
+  } else if (name === 'planet') {
+    const satellite = time * 1.2;
+    paths.push(arc(50 + Math.cos(satellite) * 34, 50 + Math.sin(satellite) * 19, 2.2, 0, Math.PI * 2, 12));
   } else if (name === 'bicycle') {
-    [31, 70].forEach((center) => {
-      const angle = time * 2.4;
-      context.moveTo(x(center), y(66));
-      context.lineTo(x(center + Math.cos(angle) * 10), y(66 + Math.sin(angle) * 10));
+    [31, 70].forEach((center, wheel) => {
+      const angle = time * 3.3 * (wheel ? -1 : 1);
+      for (let spoke = 0; spoke < 4; spoke += 1) {
+        const a = angle + spoke * Math.PI / 2;
+        paths.push(line([center, 66], [center + Math.cos(a) * 13, 66 + Math.sin(a) * 13]));
+      }
     });
   } else if (name === 'cassette') {
-    [37, 63].forEach((center, index) => {
-      const angle = time * (index ? -2 : 2);
-      context.moveTo(x(center - Math.cos(angle) * 6), y(51 - Math.sin(angle) * 6));
-      context.lineTo(x(center + Math.cos(angle) * 6), y(51 + Math.sin(angle) * 6));
-      context.moveTo(x(center + Math.sin(angle) * 6), y(51 - Math.cos(angle) * 6));
-      context.lineTo(x(center - Math.sin(angle) * 6), y(51 + Math.cos(angle) * 6));
+    [37, 63].forEach((center, reel) => {
+      const angle = time * (reel ? -2.8 : 2.8);
+      for (let spoke = 0; spoke < 3; spoke += 1) {
+        const a = angle + spoke * Math.PI * 2 / 3;
+        paths.push(line([center, 51], [center + Math.cos(a) * 7, 51 + Math.sin(a) * 7]));
+      }
+    });
+  } else if (name === 'tree') {
+    paths[1] = rotatePath(paths[1], 50, 65, sway * .1);
+    paths[2] = rotatePath(paths[2], 50, 65, -sway * .1);
+    [3, 4, 5].forEach((index) => {
+      paths[index] = translatePath(paths[index], Math.sin(time * 2.2 + index) * 1.5 * settle, 0);
     });
   } else if (name === 'snail') {
-    const sway = Math.sin(time * 1.5) * 2;
-    context.moveTo(x(79), y(49)); context.lineTo(x(77 + sway), y(43));
-    context.moveTo(x(87), y(49)); context.lineTo(x(90 - sway), y(43));
-    context.moveTo(x(59 + Math.sin(time * .5) * 3), y(67)); context.lineTo(x(62 + Math.sin(time * .5) * 3), y(67));
+    const creep = (1 - Math.cos(time * .7)) * 1.1 * settle;
+    paths.slice(0, 4).forEach((path, index) => { paths[index] = translatePath(path, creep, 0); });
+    const nod = Math.sin(time * 1.6) * .13 * settle;
+    [4, 5, 6, 7].forEach((index) => { paths[index] = rotatePath(paths[index], 80, 60, nod); });
   } else if (name === 'hero insignia') {
-    const glint = (time * 28) % 45;
-    context.moveTo(x(25 + glint), y(39)); context.lineTo(x(29 + glint), y(34));
-    context.moveTo(x(29 + glint), y(34)); context.lineTo(x(33 + glint), y(39));
+    paths.forEach((path, index) => { paths[index] = rotatePath(path, 50, 50, sway * .08); });
   }
-  context.stroke();
-  context.restore();
+
+  return paths;
 }
 
 export function mountDoodles(root) {
@@ -187,17 +211,28 @@ export function mountDoodles(root) {
     state.drawing.dataset.doodleState = state.phase;
     context.clearRect(0, 0, width, height);
     context.strokeStyle = 'rgba(48, 49, 43, .76)'; context.lineWidth = Math.max(1.2, width / 155); context.lineJoin = 'round'; context.lineCap = 'round'; context.globalCompositeOperation = 'multiply';
-    const paths = sketches[state.sketch].paths;
+    const sketch = sketches[state.sketch];
+    const elapsedHold = (phase - DRAW_DURATION) / 1000;
+    const paths = state.phase !== 'drawing' && !reduced.matches
+      ? animatedPaths(sketch.name, sketch.paths, state.phase === 'complete' ? elapsedHold : HOLD_DURATION / 1000)
+      : sketch.paths;
     if (state.phase === 'drawing') drawAuto(context, paths, phase / DRAW_DURATION, width, height);
     if (state.phase === 'complete') {
       drawAuto(context, paths, 1, width, height);
-      drawSecondary(context, sketches[state.sketch].name, (phase - DRAW_DURATION) / 1000, width, height);
     }
     if (state.phase === 'reversing') { const reverse = (phase - DRAW_DURATION - HOLD_DURATION) / ERASE_DURATION; drawReverse(context, paths, reverse, width, height); }
     if (state.phase === 'reversing' && phase >= LOOP_DURATION - 20) { state.sketch = (state.sketch + 1 + indexOf(state)) % sketches.length; state.started = now; }
   };
   const indexOf = (state) => drawings.indexOf(state);
-  const loopFrame = (now) => { drawings.forEach((state) => draw(state, now)); frame = requestAnimationFrame(loopFrame); };
+  const loopFrame = (now) => {
+    drawings.forEach((state) => draw(state, now));
+    if (!reduced.matches) frame = requestAnimationFrame(loopFrame);
+  };
+  const motionChange = () => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(loopFrame);
+  };
+  reduced.addEventListener('change', motionChange);
   frame = requestAnimationFrame(loopFrame);
-  return () => { cancelAnimationFrame(frame); };
+  return () => { cancelAnimationFrame(frame); reduced.removeEventListener('change', motionChange); };
 }
