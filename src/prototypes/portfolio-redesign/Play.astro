@@ -21,21 +21,21 @@ const {
           <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
         </figure>
       </div>
-      <p class="play-hero-index">TryRaisins / Software engineer / Lagos</p>
-      <h1 id="play-title">Writing code for the work that matters.</h1>
+      <p class="play-hero-index">Seun Sowemimo / Software engineer / Lagos</p>
+      <h1 id="play-title">I build useful things for the web.</h1>
       <div class="play-intro">
-        <p>I work across product, interface and the intricate space behind them, using leading standard frameworks on the frontend, Python and Next.js for application work, and Azure with MongoDB/MySQL underneath as my go-to stack.</p>
+        <p>I’m a Lagos-based software engineer who likes turning messy ideas into clear, dependable products. I work across the interface and the systems behind it, using React, TypeScript, Next.js, Node.js and Python.</p>
         <nav class="play-hero-actions" aria-label="Portfolio introduction">
-          <a class="play-hero-primary" href="#play-desk">See selected work <span aria-hidden="true">↓</span></a>
-          <a class="play-hero-secondary" href="#play-contact">Start a conversation</a>
+          <a class="play-hero-primary" href="#play-desk">Explore my work <span aria-hidden="true">↓</span></a>
+          <a class="play-hero-secondary" href="#play-contact">Get in touch</a>
         </nav>
       </div>
     </section>
 
     <section id="play-desk" class="play-desk" data-play-reveal aria-labelledby="play-work-title">
       <header>
-        <p>Six things that escaped the drafts folder</p>
-        <h2 id="play-work-title">The work desk</h2>
+        <p>Small ideas, shipped and in use</p>
+        <h2 id="play-work-title">Things I’ve built</h2>
         <div class="play-desk-actions">
           <button type="button" data-shuffle aria-label="Shuffle the project desk">Shuffle desk</button>
         </div>
@@ -85,28 +85,28 @@ const {
         <span class="play-contact-tape" aria-hidden="true"></span>
         <header class="play-contact-meta">
           <p><span>07</span> Contact sheet</p>
-          <p class="play-contact-availability"><span aria-hidden="true"></span> Open to useful problems</p>
+          <p class="play-contact-availability"><span aria-hidden="true"></span> Open to thoughtful projects</p>
         </header>
         <div class="play-contact-heading">
-          <p class="play-contact-label">Start a conversation</p>
-          <h2 id="play-contact-title">Have a useful problem?</h2>
-          <p>Tell me what you’re trying to make, improve, or untangle. A little context is plenty. We can work out the rest together.</p>
+          <p class="play-contact-label">Have something in mind?</p>
+          <h2 id="play-contact-title">Let’s make it make sense.</h2>
+          <p>Share what you’re building, what’s getting in the way, or where you need a second pair of eyes. I’m happy to start with the rough version.</p>
         </div>
         <div class="play-contact-body">
-          <p class="play-contact-label">Quickest route</p>
+          <p class="play-contact-label">Write me an email</p>
           <a class="play-contact-email" href={`mailto:${email}?subject=Project%20enquiry`}>
             <span>{email}</span>
           </a>
-          <p class="play-contact-location">Based in Lagos, Nigeria · Replies personally</p>
+          <p class="play-contact-location">Lagos, Nigeria · A real person will reply</p>
         </div>
         <aside class="play-contact-aside">
-          <p class="play-contact-label">Elsewhere on the internet</p>
+          <p class="play-contact-label">More of my work and notes</p>
           <nav aria-label="Social profiles">
             {socials.map((social, index) => (
               <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.name}, opens in a new tab`}>
                 <span class="play-contact-social-number" aria-hidden="true">0{index + 1}</span>
                 <span>{social.name}</span>
-                <span class="play-contact-social-action" aria-hidden="true">View profile</span>
+                <span class="play-contact-social-action" aria-hidden="true">Say hello</span>
               </a>
             ))}
           </nav>

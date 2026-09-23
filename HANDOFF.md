@@ -1,6 +1,6 @@
 # Project Handoff
 
-Last updated: 2026-09-16
+Last updated: 2026-09-23
 
 ## Current Objective
 
@@ -8,7 +8,8 @@ Pocket Playground is the selected TryRaisins portfolio direction. The page now u
 
 ## Current State
 
-- `src/prototypes/portfolio-redesign/Play.astro` renders the portfolio on one continuous notebook surface, with three display-only transparent pencil drawings behind hero/work content, a marker-drawn yellow sticky-note contact section, and the 3D scene. The hero uses a desk-label identity, the proposition “Writing code for the work that matters.”, a concise leading-frameworks/Python/Next.js/Azure/MongoDB/MySQL stack explanation, and direct work/contact actions.
+- `src/prototypes/portfolio-redesign/Play.astro` renders the portfolio on one continuous notebook surface, with three display-only transparent pencil drawings behind hero/work content, a marker-drawn yellow sticky-note contact section, and the 3D scene. The hero introduces Seun as a Lagos-based engineer building useful web products, names React/TypeScript/Next.js/Node.js/Python, and links directly to work and contact. Copy uses a clear, first-person practitioner voice.
+- `src/pages/index.astro` provides the six live project descriptions and matching SEO description. Project copy explains each product's purpose in plain language.
 - `src/prototypes/portfolio-redesign/spinning-tops.js` contains the Three.js models, lighting, fixed-step physics, Beyblade-to-Beyblade and pointer interactions, shadows, and reduced-motion handling. Seven tops are active above 1200px and five below that breakpoint; tops only collide with other active tops, regardless of device width. The canvas remains below the hero content in stacking order.
 - `src/prototypes/portfolio-redesign/doodle-notes.js` contains the 20 sketch definitions and the IDLE/DRAWING/COMPLETE/REVERSING lifecycle for each drawing.
 - Seven tops use original procedural geometry: beveled fins, metal weight rings, hubs, drivers, and colored enamel materials. Seven are active above 1200px and five below that breakpoint. They move for roughly 85 seconds, spawn from a randomized left/center/right region each cycle, collide with stronger variable knockback, wobble and tip over independently, cast shadows, settle, then restart.
@@ -26,9 +27,11 @@ Pocket Playground is the selected TryRaisins portfolio direction. The page now u
 - Drawing layers explicitly use `z-index: 0`, while hero text and work-desk content use `z-index: 1`, so drawings stay underneath overlapping page elements.
 - The notebook’s red rule and the hero, work desk, and contact content all share `--play-page-margin`. At wider viewports, the reading area is capped at `--play-content-width` so content keeps book-like line lengths; Beyblades and drawings remain full-section decorative layers and can cross the page margin.
 - The supplied Sketchfab page was blocked by 403 in the research tool; Meshy’s gallery was accessible and used only for broad form cues.
+- Copy was refreshed on 2026-09-23 using goodylili.com as a high-level reference for concise first-person technical positioning; no source phrasing was reused.
 
 ## Important Constraints
 
 - Keep `.playwright-cli/` untouched; it is unrelated user state.
 - Preserve the production homepage import in `src/pages/index.astro` and the prototype selector route.
 - Keep `prefers-reduced-motion` behavior and avoid adding unrelated animation or content.
+- GitHub Pages deploys automatically on pushes to `main` through `.github/workflows/deploy-pages.yml`.
