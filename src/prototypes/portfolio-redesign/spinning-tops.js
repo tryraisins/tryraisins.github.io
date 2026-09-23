@@ -110,21 +110,17 @@ export function mountSpinningTops(host, hero) {
     const [wx,wz]=world(x,y);
     for(let i=0;i<6;i++) {const mesh=new THREE.Mesh(sparkGeometry,sparkMaterial);mesh.position.set(wx,22,wz);scene.add(mesh);particles.push({mesh,vx:random(-75,75),vy:random(30,100),vz:random(-75,75),life:.3});}
   }
-  let previousScrollY=window.scrollY,previousScrollTime=performance.now();
+  let previousScrollY=window.scrollY;
   function onScroll(){
-    const now=performance.now(),dt=Math.max((now-previousScrollTime)/1000,.001);
     const scrollDelta=window.scrollY-previousScrollY;
-    previousScrollY=window.scrollY;previousScrollTime=now;
-    const strength=Math.min(1,Math.abs(scrollDelta/dt)/1800);
-    if(strength<.025)return;
-    const push=Math.sign(scrollDelta)*(55+165*strength);
+    previousScrollY=window.scrollY;
+    const nudge=Math.max(-6,Math.min(6,-scrollDelta*.035));
+    if(Math.abs(nudge)<.15)return;
     states.slice(0,topCount).forEach(s=>{
-      if(s.phase==='resting'){
-        s.phase='spinning';s.age=0;s.life=30;s.tilt=.03;
-      }
-      s.vy+=push;
-      // Scrolling acts like a quick flick: tops gain spin and take longer to settle.
-      s.life=Math.min(110,s.life+.35+strength*.9);
+      if(s.phase==='resting')return;
+      // The fixed scene gets a small inertial nudge from page movement.
+      // Bound the speed so rapid wheel or trackpad events cannot launch a top.
+      s.vy=Math.max(-165,Math.min(165,s.vy+nudge));
     });
   }
   function wall(s,nx,ny,penetration,x,y) {
@@ -146,7 +142,7 @@ export function mountSpinningTops(host, hero) {
       s.tilt+=(target-s.tilt)*(1-Math.exp(-dt*(remaining===0?2.4:5)));
       if(remaining===0){s.rest+=dt;s.spin=5*Math.exp(-s.rest*2);if(s.rest>3){s.phase='resting';s.spin=0;s.vx=0;s.vy=0;}}
       s.angle+=s.spin*dt;
-      const drag=s.phase==='tumbling'?2.5:.045;
+      const drag=s.phase==='tumbling'?2.5:.12;
       // A shallow bowl accelerates the tops smoothly towards one another.
       if(s.phase==='spinning'){s.vx+=(width*.77-s.x)*.65*dt;s.vy+=(Math.min(height*.3,240)-s.y)*.65*dt;}
       s.vx*=Math.exp(-drag*dt);s.vy*=Math.exp(-drag*dt);
