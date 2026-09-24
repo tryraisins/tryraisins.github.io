@@ -33,7 +33,7 @@ export function mountSpinningTops(host, hero) {
   const metal = new THREE.MeshStandardMaterial({ color: 0xbac3cc, metalness: .88, roughness: .25 });
   const dark = new THREE.MeshStandardMaterial({ color: 0x202733, metalness: .5, roughness: .34 });
   const gold = new THREE.MeshStandardMaterial({ color: 0xd7ad56, metalness: .75, roughness: .27 });
-  const states = [0x275ace, 0xc84231, 0xd6a926, 0x2f9d70, 0x8a5cf5, 0xe87835, 0x1e8f96].map((color, index) => {
+  const states = [0x275ace, 0xc84231, 0xd6a926, 0x2f9d70, 0x8a5cf5, 0xe87835, 0x1e8f96, 0xd54b83, 0x719b35].map((color, index) => {
     const pivot = new THREE.Group(), model = new THREE.Group();
     pivot.add(model); scene.add(pivot);
     const enamel = new THREE.MeshStandardMaterial({ color, metalness: .35, roughness: .23 });
@@ -59,9 +59,9 @@ export function mountSpinningTops(host, hero) {
       const screw = add(new THREE.CylinderGeometry(.042,.042,.025,12),dark,.98);
       screw.position.x=Math.cos(i*Math.PI/3)*.48; screw.position.z=Math.sin(i*Math.PI/3)*.48;
     }
-    return {pivot,model,index,x:0,y:0,vx:0,vy:0,spin:0,angle:0,age:0,life:0,tilt:0,precession:0,phase:'spinning',rest:0,radius:40,mass:1+index*.12};
+    return {pivot,model,index,x:0,y:0,vx:0,vy:0,spin:0,angle:0,age:0,life:0,tilt:0,precession:0,phase:'spinning',rest:0,radius:40,mass:1+index*.12,roamX:0,roamY:0,roamIn:0};
   });
-  let topCount = window.innerWidth > 1200 ? 7 : 5;
+  let topCount = window.innerWidth > 1200 ? 9 : 7;
   const particles=[];
   const sparkGeometry=new THREE.SphereGeometry(1.3,4,3);
   const sparkMaterial=new THREE.MeshBasicMaterial({color:0xffba4a});
@@ -81,23 +81,23 @@ export function mountSpinningTops(host, hero) {
     elapsed=0; hold=0; host.dataset.hitCount='0';
     states.forEach((s,i)=>{
       if (!s.active) { s.phase='resting'; s.rest=0; s.vx=0; s.vy=0; return; }
-      const a=i*Math.PI*2/topCount;
-      // Give every cycle a different launch side: left, center, or right.
-      // Each top gets its own small offset so the group does not spawn as a
-      // rigid formation while remaining comfortably inside the hero bounds.
-      const side=Math.floor(Math.random()*3);
-      const center=side===0?width*.2:side===1?width*.5:width*.8;
-      s.x=center+random(-Math.min(width*.08,56),Math.min(width*.08,56));
-      s.y=Math.min(height*.3,240)+random(-42,42);
-      s.x=Math.max(s.radius+12,Math.min(width-s.radius-12,s.x));
-      s.vx=-Math.cos(a)*random(100,150); s.vy=-Math.sin(a)*random(100,150);
+      const margin=s.radius+12;
+      // Spread the roaming centers across the full hero instead of pulling
+      // every top toward the same upper-right patch.
+      const lane=(i+random(.2,.8))/topCount;
+      s.roamX=margin+lane*Math.max(0,width-margin*2);
+      s.roamY=margin+random(0,1)*Math.max(0,height-margin*2);
+      s.roamIn=random(2,6);
+      s.x=Math.max(margin,Math.min(width-margin,s.roamX+random(-Math.min(width*.07,56),Math.min(width*.07,56))));
+      s.y=Math.max(margin,Math.min(height-margin,s.roamY+random(-Math.min(height*.12,70),Math.min(height*.12,70))));
+      s.vx=random(-145,145); s.vy=random(-145,145);
       s.spin=random(64,84); s.angle=random(0,6); s.age=0;s.life=85+random(-1.5,1.5);
-      s.tilt=.03;s.precession=a;s.phase='spinning';s.rest=0;
+      s.tilt=.03;s.precession=random(0,Math.PI*2);s.phase='spinning';s.rest=0;
     });
   }
   function resize() {
     const box=host.getBoundingClientRect(); width=box.width;height=box.height;
-    setTopCount(window.innerWidth > 1200 ? 7 : 5);
+    setTopCount(window.innerWidth > 1200 ? 9 : 7);
     renderer.setSize(width,height);
     camera.left=-width/2;camera.right=width/2;camera.top=height/2;camera.bottom=-height/2;camera.near=1;camera.far=5000;
     camera.position.set(0,Math.sin(viewAngle)*1800,Math.cos(viewAngle)*1800);camera.lookAt(0,0,0);camera.updateProjectionMatrix();
@@ -143,8 +143,18 @@ export function mountSpinningTops(host, hero) {
       if(remaining===0){s.rest+=dt;s.spin=5*Math.exp(-s.rest*2);if(s.rest>3){s.phase='resting';s.spin=0;s.vx=0;s.vy=0;}}
       s.angle+=s.spin*dt;
       const drag=s.phase==='tumbling'?2.5:.12;
-      // A shallow bowl accelerates the tops smoothly towards one another.
-      if(s.phase==='spinning'){s.vx+=(width*.77-s.x)*.65*dt;s.vy+=(Math.min(height*.3,240)-s.y)*.65*dt;}
+      // Give each top a changing local destination. Their roaming centers are
+      // distributed over the full field, so the gentle steering keeps the
+      // scene lively without collecting everything in one corner.
+      if(s.phase==='spinning'){
+        s.roamIn-=dt;
+        if(s.roamIn<=0){
+          s.roamX=Math.max(s.radius+12,Math.min(width-s.radius-12,s.x+random(-width*.22,width*.22)));
+          s.roamY=Math.max(s.radius+12,Math.min(height-s.radius-12,s.y+random(-height*.22,height*.22)));
+          s.roamIn=random(3,7);
+        }
+        s.vx+=(s.roamX-s.x)*.24*dt;s.vy+=(s.roamY-s.y)*.24*dt;
+      }
       s.vx*=Math.exp(-drag*dt);s.vy*=Math.exp(-drag*dt);
       s.x+=s.vx*dt;s.y+=s.vy*dt;
       const r=s.radius+5;
