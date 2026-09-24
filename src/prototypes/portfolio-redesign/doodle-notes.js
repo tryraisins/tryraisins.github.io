@@ -31,6 +31,7 @@ export const sketches = [
 const DRAW_DURATION = 5200;
 const HOLD_DURATION = 11000;
 const ERASE_DURATION = 2600;
+const DOODLE_START_INTERVAL = 900;
 const LOOP_DURATION = DRAW_DURATION + HOLD_DURATION + ERASE_DURATION;
 
 const lengthOf = (points) => points.slice(1).reduce((total, point, index) => total + Math.hypot(point[0] - points[index][0], point[1] - points[index][1]), 0);
@@ -194,7 +195,7 @@ export function animatedPaths(name, originalPaths, time) {
 
 export function mountDoodles(root) {
   const drawings = [...root.querySelectorAll('[data-doodle]')].map((drawing, index) => ({
-    drawing, canvas: drawing.querySelector('[data-doodle-canvas]'), sketch: index % sketches.length, phase: 'drawing', started: performance.now() + index * 500,
+    drawing, canvas: drawing.querySelector('[data-doodle-canvas]'), sketch: index % sketches.length, phase: 'drawing', started: performance.now() + index * DOODLE_START_INTERVAL,
   })).filter((state) => state.canvas instanceof HTMLCanvasElement);
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   let frame = 0;
