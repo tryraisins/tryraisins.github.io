@@ -93,6 +93,13 @@ DESKTOP                         MOBILE
 
 Pocket Playground was selected and is now the production homepage in `src/pages/index.astro`. The prototype route remains available for comparison at `/prototypes/portfolio-redesign/`.
 
+### Notebook decoration
+
+- The active page uses warm ruled paper, a shared red book margin, Fraunces and Space Grotesk, and existing tomato, cobalt and butter accents. Readable content begins after the margin; decorative layers span the page and may cross the rule.
+- Drawings resemble a child's classroom pencil sketches: uneven silhouettes, soft graphite edges, changes in pressure, faint retracing and sparse hatch shading. They draw first, animate their own parts for 11 seconds, then erase. Keep them transparent, behind content and display-only.
+- Spinning toys have distinct silhouettes, materials and rim patterns. Motion follows spin loss, increasing wobble, a grounded fall and a brief rest. Collisions dissipate energy and can transfer spin. Avoid repeated acceleration that prevents settling.
+- Respect reduced motion with completed static drawings and stationary tops. Keep all links and content readable regardless of decoration; verify the margin and viewport containment at desktop and 320px/390px widths.
+
 ## Current content verification
 
 - All six project names, types, descriptions, years, cover assets, destinations, social links, and the contact email match the active `src/pages/index.astro` source.

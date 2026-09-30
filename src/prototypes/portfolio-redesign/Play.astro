@@ -306,16 +306,16 @@ const {
   .play-contact-social-number { color: var(--play-blue); font-size: 9px; }
   .play-contact-social-action { margin-left: auto; color: rgba(23,23,25,.56); font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; }
   .play-sr-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .play-doodle-layer { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .play-doodle-layer { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
   .play-doodle-layer-desk { overflow: hidden; }
-  .play-drawing { --drawing-rotation: 0deg; position: absolute; width: min(240px, 22vw); aspect-ratio: 1.37; margin: 0; transform: rotate(var(--drawing-rotation)); pointer-events: none; opacity: .78; mix-blend-mode: multiply; }
-  .play-drawing-canvas { width: 100%; height: 100%; display: block; filter: drop-shadow(.35px .5px 0 rgba(44,43,37,.2)); pointer-events: none; }
-  .play-drawing-hero-a { top: 8%; left: 4%; --drawing-rotation: -2.2deg; }
+  .play-drawing { --drawing-rotation: 0deg; position: absolute; width: min(250px, 24vw); aspect-ratio: 1.37; margin: 0; transform: rotate(var(--drawing-rotation)); pointer-events: none; opacity: .86; mix-blend-mode: multiply; }
+  .play-drawing-canvas { width: 100%; height: 100%; display: block; pointer-events: none; }
+  .play-drawing-hero-a { top: 12%; left: -38px; --drawing-rotation: -5deg; }
   .play-drawing-hero-b { top: 52%; right: 5%; --drawing-rotation: 2.5deg; }
-  .play-drawing-desk { top: 72%; left: 4%; --drawing-rotation: -1.7deg; }
+  .play-drawing-desk { top: 72%; left: -42px; --drawing-rotation: -3deg; }
   .play-drawing-desk-b { top: 29%; left: 43%; --drawing-rotation: 1.2deg; }
   .play-drawing-desk-c { top: 79%; right: 5%; --drawing-rotation: -2.4deg; }
-  .play-drawing-contact-a { top: 20px; left: 8%; --drawing-rotation: -2deg; }
+  .play-drawing-contact-a { top: 20px; left: -35px; --drawing-rotation: -4deg; }
   .play-drawing-contact-b { right: 9%; bottom: 20px; --drawing-rotation: 2.2deg; }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -349,9 +349,9 @@ const {
     .play-intro p { max-width: 430px; }
     .play-hero-actions { justify-content: flex-start; }
     .play-drawing { width: min(170px, 42vw); }
-    .play-drawing-hero-a { top: 4%; left: auto; right: 4%; }
+    .play-drawing-hero-a { top: 13%; left: -38px; right: auto; }
     .play-drawing-hero-b { top: 55%; right: auto; left: 2%; }
-    .play-drawing-desk { top: 74%; left: 2%; }
+    .play-drawing-desk { top: 74%; left: -40px; }
     .play-desk { padding: 42px var(--play-page-margin) 100px; }
     .play-desk > header { grid-template-columns: 1fr; gap: 10px; }
     .play-desk-actions { justify-items: start; }
@@ -373,7 +373,7 @@ const {
     .play-contact-aside nav { margin-top: 8px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
     .play-contact-aside a { min-width: 0; min-height: 44px; padding: 0; gap: 6px; border-bottom-width: 3px; font-size: 10px; }
     .play-contact-social-action { display: none; }
-    .play-drawing-contact-a { top: 14px; left: 8%; }
+    .play-drawing-contact-a { top: 14px; left: -34px; }
     .play-drawing-contact-b { right: 8%; bottom: 14px; }
   }
   @media (max-width: 380px) {
