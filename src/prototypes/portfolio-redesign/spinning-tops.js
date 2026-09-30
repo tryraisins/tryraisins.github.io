@@ -286,8 +286,8 @@ export function mountSpinningTops(host, hero) {
   const tiltQuaternion = new THREE.Quaternion();
   const tiltAxis = new THREE.Vector3();
   const yAxis = new THREE.Vector3(0, 1, 0);
-  let width = 1;
-  let height = 1;
+  let width = 0;
+  let height = 0;
   let pointer = null;
   let frame = 0;
   let last = 0;
@@ -308,11 +308,31 @@ export function mountSpinningTops(host, hero) {
     host.dataset.topCount = String(topCount);
   }
 
+  function launch(state) {
+    const margin = state.radius + 12;
+    const lane = (state.index + random(.18, .82)) / topCount;
+    state.x = margin + lane * Math.max(0, width - margin * 2);
+    state.y = margin + random(0, 1) * Math.max(0, height - margin * 2);
+    const speed = random(82, 172);
+    const direction = random(0, Math.PI * 2);
+    state.vx = Math.cos(direction) * speed;
+    state.vy = Math.sin(direction) * speed;
+    state.spin = random(62, 78) * (Math.random() < .22 ? -1 : 1);
+    state.spinDrag = random(.66, .84) * (1 + state.design * .0125);
+    state.angle = random(0, Math.PI * 2);
+    state.tilt = random(.018, .05);
+    state.tiltVelocity = 0;
+    state.precession = random(0, Math.PI * 2);
+    state.wobble = random(0, .014);
+    state.phase = 'spinning';
+    state.rest = 0;
+  }
+
   function reset() {
     hold = 0;
     collisionEnergy = 0;
     host.dataset.hitCount = '0';
-    states.forEach((state, index) => {
+    states.forEach((state) => {
       if (!state.active) {
         state.phase = 'resting';
         state.rest = 0;
@@ -320,28 +340,16 @@ export function mountSpinningTops(host, hero) {
         state.vy = 0;
         return;
       }
-      const margin = state.radius + 12;
-      const lane = (index + random(.18, .82)) / topCount;
-      state.x = margin + lane * Math.max(0, width - margin * 2);
-      state.y = margin + random(0, 1) * Math.max(0, height - margin * 2);
-      const launch = random(82, 172);
-      const direction = random(0, Math.PI * 2);
-      state.vx = Math.cos(direction) * launch;
-      state.vy = Math.sin(direction) * launch;
-      state.spin = random(62, 78) * (Math.random() < .22 ? -1 : 1);
-      state.spinDrag = random(.66, .84) * (1 + state.design * .0125);
-      state.angle = random(0, Math.PI * 2);
-      state.tilt = random(.018, .05);
-      state.tiltVelocity = 0;
-      state.precession = random(0, Math.PI * 2);
-      state.wobble = random(0, .014);
-      state.phase = 'spinning';
-      state.rest = 0;
+      launch(state);
     });
   }
 
   function resize() {
     const box = host.getBoundingClientRect();
+    if (!box.width || !box.height || (box.width === width && box.height === height)) return;
+    const previousWidth = width;
+    const previousHeight = height;
+    const previousCount = topCount;
     width = box.width;
     height = box.height;
     setTopCount(window.innerWidth > 1200 ? 9 : 7);
@@ -368,7 +376,27 @@ export function mountSpinningTops(host, hero) {
       state.model.scale.setScalar(state.radius);
       state.inertia = state.inertiaFactor * state.mass * state.radius * state.radius;
     });
-    reset();
+    if (!previousWidth) {
+      reset();
+    } else {
+      const widthChanged = width !== previousWidth;
+      states.forEach((state, index) => {
+        if (!state.active) return;
+        if (index >= previousCount) {
+          launch(state);
+          return;
+        }
+        const edge = state.collisionRadius + 5;
+        state.x = clamp(state.x * (widthChanged ? width / previousWidth : 1), edge, width - edge);
+        // Browser bars change height during mobile scroll. Keep each top anchored
+        // in screen space; remap both axes only when the viewport width changes.
+        state.y = clamp(state.y * (widthChanged ? height / previousHeight : 1), edge, height - edge);
+      });
+      particles.forEach(({ mesh }) => {
+        mesh.position.x += (previousWidth - width) / 2;
+        mesh.position.z += (previousHeight - height) / (2 * projection);
+      });
+    }
     pose();
     renderer.render(scene, camera);
   }
@@ -388,6 +416,7 @@ export function mountSpinningTops(host, hero) {
   function onScroll() {
     const scrollDelta = window.scrollY - previousScrollY;
     previousScrollY = window.scrollY;
+    if (reduced.matches) return;
     const nudge = Math.max(-6, Math.min(6, -scrollDelta * .035));
     if (Math.abs(nudge) < .15) return;
     states.slice(0, topCount).forEach((state) => {

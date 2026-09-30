@@ -2,7 +2,7 @@
 
 Last updated: 2026-09-30
 Branch: main
-HEAD: use `git rev-parse HEAD`; this handoff accompanies the animation release.
+HEAD: use `git rev-parse HEAD`; this handoff accompanies the mobile scroll fix.
 
 ## Current Objective and State
 
@@ -15,6 +15,7 @@ Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro
 - Fixed-step simulation uses angular friction, increasing gyroscopic instability, precession, tipping, rim rocking and rest. Launches are distributed across the viewport; continuous artificial roaming/steering has been removed. A fresh cycle begins after all tops rest for three seconds. Spin duration varies by top and collisions.
 - Top collisions use mass, rotational inertia, restitution below one and limited tangential friction to transfer spin while dissipating energy. Overlap correction also runs for separating contacts. A substantial hit may rock a resting top; scrolling leaves resting tops settled. Scroll nudges remain bounded at 6 and vertical speed at 165. Text and cards are not obstacles.
 - Ground support uses a cached hull sampled from actual model geometry, including pegs, domes and fins. Fast spinning has a subtle blur ring. Reduced motion renders stationary tops. Small 5 Hz datasets (`phases`, `spinRange`, `topState`) support browser diagnosis; `hitCount` updates on collisions.
+- Viewport resizing preserves spin, tilt, phase, rest timers, velocity and collision history. Height-only changes keep tops anchored, with boundary clamping; width/orientation changes remap positions and retain existing tops. Only newly visible tops launch when crossing to nine. Duplicate/empty resize notifications are ignored, and reduced motion ignores scroll forces.
 
 ## Relevant Files and Decisions
 
@@ -28,6 +29,8 @@ Use the existing Canvas 2D/Three.js implementation. No new dependency or image a
 ## Verification
 
 - `npm run build` passes. Existing Browserslist age and large client chunk warnings remain.
+- Mobile scroll root cause: `ResizeObserver` previously called `reset()` on every size change, including mobile browser bar height changes. Chrome iPhone 15 emulation reproduced repeated spin reseeding before the fix and stable state afterward.
+- Focused checks in ignored `output/playwright/mobile-scroll/` passed height changes, orientation, 320/390/844/1200/1440px sizing, 7/9 counts, zero overflow, bounded scroll, preserved collision history, motion resumption and reduced motion. `verify-mobile-scroll.js` observes the real dev scene and pauses its physics through the existing hidden-document branch; its settled-top fixture verifies the rest guard. `verify-release.js` exercises the unmodified built page with touch events and repeated viewport changes. Run either with a named mobile Chrome CLI session and `run-code --filename=<script>` from that directory. The first targets dev port 4321; the second uses the current tab URL, including preview port 4322 or production. Reports and screenshots remain local. Physical Safari toolbar behavior has not been tested.
 - Chrome E2E exercised all 20 sketches through actual canvas rendering and pixel changes during the alive phase, including skipped-boundary cycle advancement. All seven drawings remain completed and unchanged under reduced motion.
 - 1440px, 768px, 390px and 320px checks confirm zero horizontal overflow, correct 9/7 counts, ink before the red rule, and content after it. Work and Contact navigation succeed.
 - Final built-preview screenshots verify the corrected wood material, no texture/shadow API warnings, identical rendered pixels under reduced motion, and resumed simulation when motion is enabled. The 1200px breakpoint retains seven tops.
