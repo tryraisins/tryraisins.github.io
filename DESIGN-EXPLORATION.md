@@ -95,12 +95,21 @@ Pocket Playground was selected and is now the production homepage in `src/pages/
 
 ### Notebook decoration
 
-- The active page uses warm ruled paper, a shared red book margin, Fraunces and Space Grotesk, and existing tomato, cobalt and butter accents. Readable content begins after the margin; decorative layers span the page and may cross the rule.
+- The active page uses warm ruled paper, a shared red book margin, Bricolage Grotesque and DM Sans, and existing tomato, cobalt and butter accents. Readable content begins after the margin; decorative layers span the page and may cross the rule.
 - Drawings resemble a child's classroom pencil sketches: uneven silhouettes, soft graphite edges, changes in pressure, faint retracing and sparse hatch shading. They draw first, animate their own parts for 11 seconds, then erase. Keep them transparent, behind content and display-only.
 - Spinning toys have distinct silhouettes, materials and rim patterns. Motion follows spin loss, increasing wobble, a grounded fall and a brief rest. Collisions dissipate energy and can transfer spin. Avoid repeated acceleration that prevents settling.
 - Respect reduced motion with completed static drawings and stationary tops. Keep all links and content readable regardless of decoration; verify the margin and viewport containment at desktop and 320px/390px widths.
 
 ## Current content verification
+
+### 2026-10-05 typography selection and design review
+
+- The user selected Bricolage Grotesque for display and DM Sans for body text/controls. This is the approved font direction and is now implemented in the active homepage and Play prototype.
+- Thesis: preserve the playful working notebook while making project evidence and contact easier to read. Keep the warm paper, red margin, taped project photographs, yellow contact sheet, real copy/destinations, shuffle, sketches and existing top physics.
+- Proposed roles: display weight 600 with roughly -0.03em tracking and 1.02 line height; body regular at 15-21px with 1.5 line height; controls medium/semibold at 14px with 44-48px targets; metadata at 11-12px. Use responsive values during implementation rather than copying fixed canvas sizes.
+- Desktop and 390px phone live review confirmed compressed hero type, 11px project descriptions, 9px project actions and mobile availability hidden below 620px. Work navigation and shuffle announcement worked. Smaller-phone and reduced-motion checks were interrupted and remain unverified.
+- Editable static proposals: Pen frames `uDYdI` (desktop), `CKIAN` (phone), and `vg9oV` (review notes) in the active document recorded in `HANDOFF.md`. Exports/live evidence are in ignored `output/design-review/`. The desktop decoration is a static excerpt from production, not a replacement animation.
+- The user approved implementation, push and deployment on 2026-10-05. The approved layout is implemented with a 3/2/1 grid, real shuffle, readable copy and visible phone availability. Preserve existing side effects and animation lifecycle; do not replace production behavior with the static canvas representation. Keep the two existing unexposed cover treatments until real replacement assets are approved.
 
 - All six project names, types, descriptions, years, cover assets, destinations, social links, and the contact email match the active `src/pages/index.astro` source.
 - On 2026-09-09, QuickBillz, Terror Tracker, Talent Hunter, and StreamSlip returned HTTP 200 from their saved destinations. The npm registry rejected an automated request for `yeknal` with HTTP 403, so that result does not establish whether the public browser page is unavailable.
