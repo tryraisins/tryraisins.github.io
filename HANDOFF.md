@@ -1,6 +1,6 @@
 # Project Handoff
 
-Last updated: 2026-10-05
+Last updated: 2026-10-06
 Branch: main
 Implementation release: 7bc3ec52ea3605ecd7324cbefef6ec9c0182276d
 HEAD: use `git rev-parse HEAD` for the latest documentation revision.
@@ -20,7 +20,9 @@ Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro
 
 ## Current Task
 
-The user selected option 1: Bricolage Grotesque for headings and DM Sans for body text/controls. The desktop/390px phone proposals were approved for implementation and production deployment. The refresh is implemented, pushed and deployed at https://tryraisins.dev/. Final local and live verification passed.
+The user requested removal of staccato sentences from the deployed portfolio and a lasting rule against using that prose style. Smooth copy is updated in the active homepage contact text and shared project notes, and `AGENTS.md` now records the writing rule. Build and production deployment verification remain to be completed.
+
+Previous milestone: Bricolage Grotesque for headings and DM Sans for body text/controls were approved, implemented, pushed and deployed at https://tryraisins.dev/ with local and live verification.
 
 - Selected: Bricolage Grotesque for display and DM Sans for body/controls. The active Astro page now uses these selected families, including the Play variant in the prototype selector.
 - Editable Pen study: frame `ZSpUL`, named `TryRaisins typography study`, in the active document at `C:/Users/nubiaville/.pencil/documents/ac777916-4cc5-4906-9eaf-0ab64eb8a3ea/pencil-new.pen`. Existing unrelated canvas content was preserved. The tool operated on this active document despite a requested separate file path; no separate `portfolio-fonts.pen` was saved.
@@ -33,6 +35,7 @@ The user selected option 1: Bricolage Grotesque for headings and DM Sans for bod
 - Browser release evidence: ignored `output/playwright/design-refresh/acceptance.md`, `release-e2e.js`, `built-report.txt`, and hero/desk/contact screenshots. CLI E2E passed real font loading, all six original destinations, keyboard skip/work/contact navigation, repeated/rapid shuffle, no overlaps or overflow across 11 widths (320-1440px), >=44px controls, visible availability, static reduced-motion drawings/tops, enlarged text reachability and prototype switching. Screenshots at 1440/768/390/320px were inspected. After screenshot review, contact tape positioning was corrected and the final build plus full browser pass succeeded. Mobile E2E passed real touch scrolling, height-only resize continuity, preserved collision history and static reduced-motion rendering.
 - Release verified: implementation `7bc3ec5`; build/publish workflow `37248213907` and Pages deployment `37248248458` succeeded. Cache-busted HTTP 200, exact local/live CSS SHA-256 and JavaScript SHA-256 parity confirmed. Live Chrome loaded both selected fonts and passed 1440/390/320px fit, all six cards, visible availability, work/contact navigation, shuffle and announcement, email destination and actual top motion with zero page errors. Live screenshots were inspected. Details and repeatable scripts are in ignored `output/playwright/design-refresh/`; no dependency or image asset changes.
 - No remaining implementation work for this refresh. Physical-device Safari remains outside the Chrome emulation evidence.
+- Portfolio prose should read naturally with varied sentence lengths; avoid several short standalone sentences that split a connected thought into punchy fragments. Keep conventional interface labels and headings concise.
 
 ## Relevant Files and Decisions
 
