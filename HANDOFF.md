@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-06
 Branch: main
-Implementation release: 7bc3ec52ea3605ecd7324cbefef6ec9c0182276d
+Implementation release: 7a2ef26c9c8dd134ed06db4ecd274d3a9a426999
 HEAD: use `git rev-parse HEAD` for the latest documentation revision.
 
 ## Current Objective and State
@@ -20,7 +20,7 @@ Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro
 
 ## Current Task
 
-The user requested removal of staccato sentences from the deployed portfolio and a lasting rule against using that prose style. Smooth copy is updated in the active homepage contact text and shared project notes, and `AGENTS.md` now records the writing rule. Build and production deployment verification remain to be completed.
+The user requested removal of staccato sentences from the deployed portfolio and a lasting rule against using that prose style. Smooth copy is updated in the active homepage contact text and shared project notes, and `AGENTS.md` records the writing rule. Commit `7a2ef26` is deployed to production.
 
 Previous milestone: Bricolage Grotesque for headings and DM Sans for body text/controls were approved, implemented, pushed and deployed at https://tryraisins.dev/ with local and live verification.
 
@@ -36,6 +36,7 @@ Previous milestone: Bricolage Grotesque for headings and DM Sans for body text/c
 - Release verified: implementation `7bc3ec5`; build/publish workflow `37248213907` and Pages deployment `37248248458` succeeded. Cache-busted HTTP 200, exact local/live CSS SHA-256 and JavaScript SHA-256 parity confirmed. Live Chrome loaded both selected fonts and passed 1440/390/320px fit, all six cards, visible availability, work/contact navigation, shuffle and announcement, email destination and actual top motion with zero page errors. Live screenshots were inspected. Details and repeatable scripts are in ignored `output/playwright/design-refresh/`; no dependency or image asset changes.
 - No remaining implementation work for this refresh. Physical-device Safari remains outside the Chrome emulation evidence.
 - Portfolio prose should read naturally with varied sentence lengths; avoid several short standalone sentences that split a connected thought into punchy fragments. Keep conventional interface labels and headings concise.
+- Copy release `7a2ef26` passed `npm run build` and `git diff --check`; GitHub Actions workflows `37433515661` (Deploy GitHub Pages) and `37433582099` (pages build and deployment) succeeded. Cache-busted production requests returned HTTP 200 and confirmed updated copy on both `/` and `/prototypes/portfolio-redesign/`. The unrelated untracked `.playwright-cli/` directory remains untouched.
 
 ## Relevant Files and Decisions
 
