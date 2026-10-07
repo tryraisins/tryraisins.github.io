@@ -1,6 +1,6 @@
 # Project Handoff
 
-Last updated: 2026-10-06
+Last updated: 2026-10-07
 Branch: main
 Implementation release: 7a2ef26c9c8dd134ed06db4ecd274d3a9a426999
 HEAD: use `git rev-parse HEAD` for the latest documentation revision.
@@ -13,12 +13,28 @@ Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro
 - Seven pencil canvases contain 20 classroom-style sketches. Uneven outlines, graphite grain, pressure changes, faint retracing and hatch shading replace clean icon strokes. Sketch parts animate after drawing: blinking faces, a wagging cat tail, walking dinosaur, swaying flower, waving robot, swimming fish, turning wheels and other object-specific movement.
 - The lifecycle remains 5.2 seconds drawing, 11 seconds alive, 2.6 seconds erasing, with randomized 1-3 second initial gaps. Completed-cycle counting advances sketches even when a frame skips the erase boundary. Rendering uses device pixel ratio up to 2, runs at 30 FPS, skips offscreen drawings and pauses hidden-tab clocks. Reduced motion displays completed static originals.
 - Nine tops appear above 1200px, seven otherwise. Nine variants use wooden pear, rounded enamel, angular blade, gear and turbine silhouettes, with different pegs, rim bands, spokes and fasteners. Wood uses a procedural RGBA grain texture; metal and enamel have separate finishes.
-- Fixed-step simulation uses angular friction, increasing gyroscopic instability, precession, tipping, rim rocking and rest. Launches are distributed across the viewport; continuous artificial roaming/steering has been removed. A fresh cycle begins after all tops rest for three seconds. Spin duration varies by top and collisions.
+- Fixed-step simulation uses angular friction, increasing gyroscopic instability, precession, tipping, rim rocking and rest. Above 980px, launches start in the hero's open space between the header and headline, then roam normally. At 980px and below, launches retain their previous viewport-wide distribution. Continuous artificial roaming/steering has been removed. A fresh cycle begins after all tops rest for three seconds. Spin duration varies by top and collisions.
 - Top collisions use mass, rotational inertia, restitution below one and limited tangential friction to transfer spin while dissipating energy. Overlap correction also runs for separating contacts. A substantial hit may rock a resting top; scrolling leaves resting tops settled. Scroll nudges remain bounded at 6 and vertical speed at 165. Text and cards are not obstacles.
 - Ground support uses a cached hull sampled from actual model geometry, including pegs, domes and fins. Fast spinning has a subtle blur ring. Reduced motion renders stationary tops. Small 5 Hz datasets (`phases`, `spinRange`, `topState`) support browser diagnosis; `hitCount` updates on collisions.
 - Viewport resizing preserves spin, tilt, phase, rest timers, velocity and collision history. Height-only changes keep tops anchored, with boundary clamping; width/orientation changes remap positions and retain existing tops. Only newly visible tops launch when crossing to nine. Duplicate/empty resize notifications are ignored, and reduced motion ignores scroll forces.
 
 ## Current Task
+
+The user requested a pen.dev refinement of the spinning-top models, realistic but lightweight motion, a useful viewing perspective, and collision sparks for other tops and the mouse. The implementation is local and has not been committed or deployed.
+
+- Follow-up: desktop starts and relaunches use the header-to-headline gap as their starting ground. The band comes from actual hero layout, ignores the introductory headline transform and scrolling, and leaves room for each model's projected crown/rim. Short gaps use their center. Tops continue roaming and colliding after launch; active tops are not regrouped on resize. The existing small-screen random positions, motion and 9/7 count remain intact. `output/spinner-study/launch-band.cjs` passed actual rendered-model bounds at 1440/1366/1024px, identical previous random launch coordinates at 980/390/320px, scroll-stable relaunch bounds and spin/phase continuity on height changes, with zero page errors. Screenshots and `launch-band-report.json` are in that ignored folder. The preview on 4322 has been rebuilt; browser-control connections were unavailable, so the user must refresh its open tab.
+- `spinning-tops.js` now uses a 55-degree orthographic tabletop camera, warmer procedural wood, brushed metal roughness, swept battle blades, a three-arm turbine, flatter gear teeth, and inset hubs. Static meshes are merged by material, preserving geometry-based support and the existing 9/7 responsive count.
+- Fixed 120 Hz physics retains damping, bounded scrolling, resizing continuity and rest/relaunch. Rim-heavy models use their inertia factor for stability; fast precession is gentler. Ground support applies one combined quaternion rather than repeated axis-angle transforms. Rendering is capped at 60 FPS on faster displays. Reduced motion hides the spin blur.
+- `spinning-top-effects.js` provides a fixed 96-particle GPU buffer and one spark draw call. Brief orange/gold sparks originate at actual rim contacts, including mouse contacts throughout the portfolio. Pointer velocity is bounded, stale motion expires, touch is ignored, and blur clears the pointer. Resize and reduced-motion changes clear transient sparks.
+- Pen document: `C:/Users/nubiaville/.pencil/documents/87c05f24-7998-46a4-b6a7-20e510fb1038/pencil-new.pen`. New boards `vHtXx` (direction and live portfolio preview) and `GW37B` (39/55/72-degree comparisons and actual model renders) preserve the existing canvas. Relative PNG assets are in that document's `assets/` directory. The comparison uses larger inspection models; it is not a second production scene.
+- Seeded desktop browser comparison: 231 to 109 draw calls, 61,194 to 37,498 triangles, and 116 to 55 geometry resources. The additional procedural roughness texture is 32x32 RGBA. These are render-work counts, not an FPS claim on physical hardware.
+- Rerunnable artifacts are ignored under `output/spinner-study/`. With dev port 4321 running, run `node output/spinner-study/prepare-study.cjs` followed by `node output/spinner-study/verify.cjs`. Preparation temporarily creates `public/spinner-model-study.html` for rendered angle comparisons; remove that file after verification and before building. `capture.cjs` records render metrics; `browser-report.json`, collision/phone/rest screenshots and three angle sheets record evidence. The acceptance file lists concrete failure modes.
+- Browser checks exercised the real renderer and simulation. Deterministic contact fixtures emitted 12 visible sparks for top and mouse contacts; a mouse strike also woke a resting top into rocking. Any approaching mouse contact wakes a settled top before imparting velocity. Advancing 200 seconds of fixed-step simulation in the browser observed all five phases and two relaunches without measured energy increases between launches. Full geometry checks at three tilt angles found ground clearance >=0.31px. These accelerated checks are distinct from a 200-second real-time run.
+- Native page checks passed animation, zero overflow and 9/7 counts at 1440/768/390/320px, identical reduced-motion canvas pixels, height-only resize continuity, work navigation and motion resumption. The final render-cap revision passed the same checks. No page or WebGL warnings were observed. Physical-device Safari and deployed behavior are outside these checks.
+- Built-preview smoke checks at 1440px and touch-enabled 390px passed animation, reduced-motion pixels, touch exclusion from mouse collisions and actual touch scrolling, with zero page errors. `built-smoke.cjs` and `built-report.json` are in the same ignored output folder. CDP `Input.synthesizeScrollGesture` did not move this headless mobile page; native `Input.dispatchTouchEvent` start/move/end commands succeeded. Preview port 4322 runs the final local build; dev port 4321 supports the Pen preview.
+- `npm run build` passed; existing large-chunk and Browserslist warnings remain. Dev startup also reports unresolved React/lucide imports in the unrelated `src/test.tsx`; the active Astro portfolio renders and the production build succeeds.
+
+## Previous Copy and Typography Release
 
 The user requested removal of staccato sentences from the deployed portfolio and a lasting rule against using that prose style. Smooth copy is updated in the active homepage contact text and shared project notes, and `AGENTS.md` records the writing rule. Commit `7a2ef26` is deployed to production.
 
@@ -43,6 +59,7 @@ Previous milestone: Bricolage Grotesque for headings and DM Sans for body text/c
 - `Play.astro`: page markup, stacking, responsive sizing and drawing placements across the margin.
 - `doodle-notes.js`: sketch geometry, pencil renderer, part motion and lifecycle.
 - `spinning-tops.js`: procedural models, support hulls, lighting, physics and input.
+- `spinning-top-effects.js`: pooled collision sparks and GPU resource cleanup.
 - `DESIGN-EXPLORATION.md`: selected direction and notebook decoration rules.
 
 Use the existing Canvas 2D/Three.js implementation. No new dependency or image asset is required. Keep all decoration behind links and readable content.
@@ -65,4 +82,4 @@ Use the existing Canvas 2D/Three.js implementation. No new dependency or image a
 - Preserve unrelated `.playwright-cli/` user state. Never commit browser scripts, screenshots, generated assets or other test artifacts.
 - GitHub Pages publishes `dist` to `gh-pages` after a push to `main` through `.github/workflows/deploy-pages.yml`.
 - Verify the pushed `main` SHA, Actions conclusion, and cache-busted live animation/CSS assets. A successful local build alone does not prove the release.
-- No further animation feature work is pending. Follow the publication verification procedure above for every release.
+- The local spinner refinement is awaiting publication if requested. Follow the publication verification procedure above for every release.
