@@ -102,6 +102,14 @@ Pocket Playground was selected and is now the production homepage in `src/pages/
 
 ## Current content verification
 
+### 2026-10-08 free typography accents
+
+The user requested a mix inspired by https://shantellmartin.art/, then chose to avoid paid fonts. Its live CSS identifies Kommissar Condensed Ultra for display and Calibre for supporting text. Desktop and phone browser inspection supplied visual evidence, while the foundries confirmed these are commercial families. The portfolio adopts the contrast between condensed headings and clear supporting titles, keeping its existing notebook composition and content.
+
+Barlow Condensed 600 now serves the work/contact section headings at 48-76px with 1.05 line height and -0.015em tracking; the contact heading retains its existing smaller phone range. Public Sans 600 serves project titles at the existing responsive 28-34px range and 1.1 line height. Bricolage Grotesque 600 remains the hero face and DM Sans remains the body/control face, so these additional families have confined roles. Both additions use the SIL Open Font License, verified against the official Google Fonts source: [Barlow Condensed](https://github.com/google/fonts/blob/main/ofl/barlowcondensed/OFL.txt) and [Public Sans](https://github.com/google/fonts/blob/main/ofl/publicsans/OFL.txt). Use the shared `--play-section-font` and `--play-project-font` tokens and exact loaded weights rather than per-heading overrides.
+
+The existing 3/2/1 project grid, controls, margin, illustrations, animations and all copy/destinations remain the governing system. Browser checks cover 11 widths, enlarged text, font-failure recovery, keyboard navigation, shuffle and Play prototype parity; screenshots at desktop/tablet/phone widths remain in ignored `output/playwright/font-mix/`. This is a typography accent update, and does not reproduce the reference site's artwork, oversized navigation or layout.
+
 ### 2026-10-05 typography selection and design review
 
 - The user selected Bricolage Grotesque for display and DM Sans for body text/controls. This is the approved font direction and is now implemented in the active homepage and Play prototype.

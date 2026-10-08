@@ -1,8 +1,8 @@
 # Project Handoff
 
-Last updated: 2026-10-07
+Last updated: 2026-10-08
 Branch: main
-Implementation release: 7a2ef26c9c8dd134ed06db4ecd274d3a9a426999
+Implementation release: see the latest typography implementation commit in `git log`.
 HEAD: use `git rev-parse HEAD` for the latest documentation revision.
 
 ## Current Objective and State
@@ -19,6 +19,12 @@ Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro
 - Viewport resizing preserves spin, tilt, phase, rest timers, velocity and collision history. Height-only changes keep tops anchored, with boundary clamping; width/orientation changes remap positions and retain existing tops. Only newly visible tops launch when crossing to nine. Duplicate/empty resize notifications are ignored, and reduced motion ignores scroll forces.
 
 ## Current Task
+
+The user requested Kommissar and Calibre after seeing https://shantellmartin.art/, then explicitly chose to avoid paid fonts. Free alternatives are implemented: Barlow Condensed 600 for the work/contact section headings and Public Sans 600 for project titles. Bricolage Grotesque remains on the hero and DM Sans remains on body copy/controls, with the additions confined to these secondary roles. Both routes request the exact new weights with `display=swap`; shared role tokens in `Play.astro` define the same typography for the homepage and Play prototype. Their SIL Open Font Licenses were checked in the official Google Fonts repository.
+
+`npm run build` and `git diff --check` passed. The adapted existing browser flow at `output/playwright/font-mix/font-e2e.js` passed actual font loading, all six original project destinations, keyboard skip/work/contact navigation, real shuffle, prototype switching, static reduced motion, enlarged default text and 11 widths from 320 to 1440px with no clipping, overflow or overlap. Blocking the font stylesheet also passed readable fallback/contact reachability at 1440/390/320px. Desktop and phone screenshots were inspected. Repeat with preview on 4322: `npx --yes --package @playwright/cli playwright-cli -s=font-mix open http://127.0.0.1:4322/ --browser chrome`, then `npx --yes --package @playwright/cli playwright-cli -s=font-mix run-code --filename=output/playwright/font-mix/font-e2e.js`. The report is `built-report.txt` in that ignored folder. GitHub push and live verification are the remaining release steps.
+
+## Previous Spinner Release
 
 The user requested a pen.dev refinement of the spinning-top models, realistic but lightweight motion, a useful viewing perspective, and collision sparks for other tops and the mouse. Implementation release `0a2c0aeb3e1051f79a51a08c2c86ccb2ede3a9ce` is deployed to GitHub Pages.
 

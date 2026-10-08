@@ -215,6 +215,8 @@ const {
     --play-red: #f05c45;
     --play-blue: #315fe9;
     --play-yellow: #f0ce4e;
+    --play-section-font: 'Barlow Condensed', 'Bricolage Grotesque', sans-serif;
+    --play-project-font: 'Public Sans', 'DM Sans', sans-serif;
     --play-page-margin: max(clamp(32px, 6vw, 96px), calc((100% - 1280px) / 2));
     --play-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     min-height: 100dvh;
@@ -253,7 +255,7 @@ const {
   .play-desk-actions { display: grid; justify-items: end; }
   .play-desk-actions button { min-width: 132px; min-height: 48px; padding: 0 18px; border: 1px solid var(--play-ink); border-radius: 0; background: var(--play-yellow); color: var(--play-ink); font: 600 14px/1 'DM Sans', sans-serif; cursor: pointer; box-shadow: 3px 3px 0 var(--play-ink); transition: transform 130ms var(--play-ease-out), box-shadow 130ms var(--play-ease-out); }
   .play-desk-actions button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--play-ink); }
-  .play-desk h2 { margin: 0; font: 600 clamp(2.75rem, 5vw, 4.5rem)/1.05 'Bricolage Grotesque', sans-serif; letter-spacing: -.03em; }
+  .play-desk h2 { margin: 0; font: 600 clamp(3rem, 5.4vw, 4.75rem)/1.05 var(--play-section-font); letter-spacing: -.015em; }
   .play-desk ol { margin: 0; padding: 12px 0 0; position: relative; z-index: 1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px; list-style: none; }
   .play-tile { min-width: 0; position: relative; transform: rotate(var(--play-desk-rotation)); }
   .play-tile a { height: 100%; padding: 18px; display: grid; grid-template-rows: 225px 1fr; gap: 20px; position: relative; border: 1px solid var(--play-ink); background: var(--play-paper); box-shadow: 4px 5px 0 rgba(23,23,25,.16); transition: translate 180ms var(--play-ease-out); }
@@ -275,7 +277,7 @@ const {
   .play-unexposed small { position: absolute; z-index: 1; bottom: 12px; left: 12px; font-size: 11px; line-height: 1; letter-spacing: .08em; }
   .play-copy { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
   .play-copy > span:not(.play-project-footer) { color: rgba(23,23,25,.65); font-size: 11px; line-height: 1.4; text-transform: uppercase; letter-spacing: .06em; }
-  .play-copy strong { font: 600 clamp(1.75rem, 2.4vw, 2.125rem)/1.1 'Bricolage Grotesque', sans-serif; letter-spacing: -.025em; }
+  .play-copy strong { font: 600 clamp(1.75rem, 2.4vw, 2.125rem)/1.1 var(--play-project-font); letter-spacing: -.025em; }
   .play-copy p { margin: 0 0 8px; font-size: 15px; line-height: 1.5; }
   .play-project-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 12px; line-height: 1.5; }
   .play-project-footer em { color: var(--play-blue); font-size: 14px; font-weight: 500; font-style: normal; white-space: nowrap; }
@@ -292,7 +294,7 @@ const {
   .play-contact-availability > span { width: 9px; height: 9px; flex-shrink: 0; border: 1px solid var(--play-ink); border-radius: 50%; background: var(--play-yellow); box-shadow: 1px 1px 0 var(--play-ink); }
   .play-contact-heading { min-width: 0; }
   .play-contact-label { margin: 0; color: rgba(23,23,25,.7); font-size: 12px; line-height: 1.5; text-transform: uppercase; letter-spacing: .04em; }
-  .play-contact-heading h2 { margin: 16px 0 24px; font: 600 clamp(2.75rem, 5vw, 4.5rem)/1.05 'Bricolage Grotesque', sans-serif; letter-spacing: -.03em; text-wrap: balance; }
+  .play-contact-heading h2 { margin: 16px 0 24px; font: 600 clamp(3rem, 5.4vw, 4.75rem)/1.05 var(--play-section-font); letter-spacing: -.015em; text-wrap: balance; }
   .play-contact-heading > p:last-child { max-width: 500px; margin: 0; color: rgba(23,23,25,.8); font-size: 18px; line-height: 1.5; }
   .play-contact-body { min-width: 0; padding: 4px 0 0 32px; border-left: 2px solid var(--play-ink); }
   .play-contact-email { width: 100%; min-height: 64px; margin-top: 16px; padding: 0 0 12px; display: flex; align-items: center; border-bottom: 3px solid var(--play-red); font-size: clamp(1.375rem, 2.2vw, 2rem); font-weight: 500; line-height: 1.3; letter-spacing: -.025em; }
