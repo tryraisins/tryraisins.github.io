@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-08
 Branch: main
-Implementation release: see the latest typography implementation commit in `git log`.
+Implementation release: a9520b01a98381ce8083246ccf9086a5dd4bc5c7
 HEAD: use `git rev-parse HEAD` for the latest documentation revision.
 
 ## Current Objective and State
@@ -22,7 +22,9 @@ Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro
 
 The user requested Kommissar and Calibre after seeing https://shantellmartin.art/, then explicitly chose to avoid paid fonts. Free alternatives are implemented: Barlow Condensed 600 for the work/contact section headings and Public Sans 600 for project titles. Bricolage Grotesque remains on the hero and DM Sans remains on body copy/controls, with the additions confined to these secondary roles. Both routes request the exact new weights with `display=swap`; shared role tokens in `Play.astro` define the same typography for the homepage and Play prototype. Their SIL Open Font Licenses were checked in the official Google Fonts repository.
 
-`npm run build` and `git diff --check` passed. The adapted existing browser flow at `output/playwright/font-mix/font-e2e.js` passed actual font loading, all six original project destinations, keyboard skip/work/contact navigation, real shuffle, prototype switching, static reduced motion, enlarged default text and 11 widths from 320 to 1440px with no clipping, overflow or overlap. Blocking the font stylesheet also passed readable fallback/contact reachability at 1440/390/320px. Desktop and phone screenshots were inspected. Repeat with preview on 4322: `npx --yes --package @playwright/cli playwright-cli -s=font-mix open http://127.0.0.1:4322/ --browser chrome`, then `npx --yes --package @playwright/cli playwright-cli -s=font-mix run-code --filename=output/playwright/font-mix/font-e2e.js`. The report is `built-report.txt` in that ignored folder. GitHub push and live verification are the remaining release steps.
+`npm run build` and `git diff --check` passed. The adapted existing browser flow at `output/playwright/font-mix/font-e2e.js` passed actual font loading, all six original project destinations, keyboard skip/work/contact navigation, real shuffle, prototype switching, static reduced motion, enlarged default text and 11 widths from 320 to 1440px with no clipping, overflow or overlap. Blocking the font stylesheet also passed readable fallback/contact reachability at 1440/390/320px. Desktop and phone screenshots were inspected. Repeat with preview on 4322: `npx --yes --package @playwright/cli playwright-cli -s=font-mix open http://127.0.0.1:4322/ --browser chrome`, then `npx --yes --package @playwright/cli playwright-cli -s=font-mix run-code --filename=output/playwright/font-mix/font-e2e.js`. The report is `built-report.txt` in that ignored folder.
+
+Release `a9520b0` was pushed to `origin/main`; [build/publish run 37836992889](https://github.com/tryraisins/tryraisins.github.io/actions/runs/37836992889) and [Pages deployment 37837063929](https://github.com/tryraisins/tryraisins.github.io/actions/runs/37837063929) succeeded. Cache-busted live requests returned HTTP 200 and matched homepage inline CSS, the shared JavaScript bundle and both prototype CSS assets against the local build. Run `node output/playwright/font-mix/verify-live.cjs` to repeat; evidence is in `live-parity.json`. The same complete E2E flow passed against https://tryraisins.dev/ with both new fonts loaded and zero page errors; `live-report.txt`, `live-summary.json` and inspected live screenshots are in the same ignored folder. The keyboard check waits for the skip link to finish moving into view rather than reading its position immediately after Tab. No remaining implementation work; physical-device Safari remains outside the Chrome browser evidence.
 
 ## Previous Spinner Release
 
