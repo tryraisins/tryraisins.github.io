@@ -1,13 +1,13 @@
 # Project Handoff
 
-Last updated: 2026-10-08
+Last updated: 2026-10-09
 Branch: main
-Implementation release: a9520b01a98381ce8083246ccf9086a5dd4bc5c7
+Implementation release: use the latest link/copy cleanup commit in `git log`.
 HEAD: use `git rev-parse HEAD` for the latest documentation revision.
 
 ## Current Objective and State
 
-Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro` imports `src/prototypes/portfolio-redesign/Play.astro`. Preserve the six projects, current copy, contact sheet, notebook layout and prototype selector route.
+Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro` imports `src/prototypes/portfolio-redesign/Play.astro`. Preserve the six projects, conversational copy, contact sheet, notebook layout and prototype selector route.
 
 - Readable content starts after the shared red notebook rule. Decorative canvases span their full sections, sit behind content, and may cross the rule. Drawings remain display-only, transparent and hidden from assistive technology.
 - Seven pencil canvases contain 20 classroom-style sketches. Uneven outlines, graphite grain, pressure changes, faint retracing and hatch shading replace clean icon strokes. Sketch parts animate after drawing: blinking faces, a wagging cat tail, walking dinosaur, swaying flower, waving robot, swimming fish, turning wheels and other object-specific movement.
@@ -19,6 +19,14 @@ Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro
 - Viewport resizing preserves spin, tilt, phase, rest timers, velocity and collision history. Height-only changes keep tops anchored, with boundary clamping; width/orientation changes remap positions and retain existing tops. Only newly visible tops launch when crossing to nine. Duplicate/empty resize notifications are ignored, and reduced motion ignores scroll forces.
 
 ## Current Task
+
+Reviewed both published routes for decorative link arrows, underlines, generic slogans and fragmented copy. Removed arrow glyphs from Play/Radio links, bottom-only CTA borders across Play/Ledger/Notes/Radio, and repeated non-link decorative text underlines in Play. Clear labels, background/color affordances, complete button borders, focus outlines and click targets remain. Notebook rules and structural dividers remain. Simplified contact copy and prototype prose, and added lasting rules to `AGENTS.md`. Unused earlier components and `_legacy` are outside the published route tree. No animation code or project destinations changed.
+
+`npm run build` and `git diff --check` passed. Chrome E2E at `output/playwright/link-review/link-e2e.js` passed the existing complete font/navigation/shuffle/reduced-motion/enlarged-text/font-failure flow plus arrow/underline/border/focus checks on all five prototypes at 1440/390/320px. Homepage geometry also passed 11 widths from 320 to 1440px; desktop/phone screenshots were inspected. The final Ledger email contrast/wrapping correction is verified separately by `final-links.js`. Repeat using preview port 4322 and `npx --yes --package @playwright/cli playwright-cli -s=link-review run-code --filename=output/playwright/link-review/link-e2e.js`, then the same command with `final-links.js`. Reports/screenshots remain ignored in that folder. In-app browser discovery failed; actual Chrome CLI was used. A Chrome shader precision warning and existing large-bundle/Browserslist build warnings remain unrelated.
+
+Release verification is pending push and Pages completion. Follow the procedure below and replace this paragraph with the confirmed release evidence.
+
+## Previous Free Typography Release
 
 The user requested Kommissar and Calibre after seeing https://shantellmartin.art/, then explicitly chose to avoid paid fonts. Free alternatives are implemented: Barlow Condensed 600 for the work/contact section headings and Public Sans 600 for project titles. Bricolage Grotesque remains on the hero and DM Sans remains on body copy/controls, with the additions confined to these secondary roles. Both routes request the exact new weights with `display=swap`; shared role tokens in `Play.astro` define the same typography for the homepage and Play prototype. Their SIL Open Font Licenses were checked in the official Google Fonts repository.
 

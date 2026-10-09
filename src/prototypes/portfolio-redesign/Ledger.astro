@@ -25,8 +25,8 @@ import { email, projects, socials } from './data';
 
     <section class="ledger-route" aria-labelledby="ledger-work-title">
       <header>
-        <h2 id="ledger-work-title">Six stops. Six working systems.</h2>
-        <p>Select a destination to leave the workshop.</p>
+        <h2 id="ledger-work-title">Six projects, built and shipped.</h2>
+        <p>Open a project to see it in use.</p>
       </header>
 
       <ol>
@@ -90,7 +90,7 @@ import { email, projects, socials } from './data';
   }
 
   .ledger-top p { margin: 0; }
-  .ledger-top > a:last-child { min-height: 44px; display: inline-flex; align-items: center; border-bottom: 4px solid var(--ledger-yellow); }
+  .ledger-top > a:last-child { min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; background: var(--ledger-yellow); }
   .ledger-mark { font-family: 'Archivo Black', Impact, sans-serif; font-size: 24px; letter-spacing: -.08em; }
   .ledger-mark span { color: var(--ledger-red); }
   .ledger-place { font-variant-numeric: tabular-nums; }
@@ -169,7 +169,7 @@ import { email, projects, socials } from './data';
   .ledger-footer { padding: 40px clamp(18px, 3vw, 48px) 100px; display: grid; grid-template-columns: 1fr auto; gap: 24px; background: var(--ledger-ink); color: var(--ledger-paper); }
   .ledger-footer p { max-width: 620px; margin: 0; font-family: 'Archivo Black', Impact, sans-serif; font-size: clamp(2.4rem, 6vw, 6rem); line-height: .9; letter-spacing: -.06em; }
   .ledger-footer nav { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-size: 13px; }
-  .ledger-email { grid-column: 1 / -1; width: fit-content; min-height: 44px; display: inline-flex; align-items: center; border-bottom: 4px solid var(--ledger-yellow); font-size: clamp(1.2rem, 3vw, 2.5rem); }
+  .ledger-world .ledger-email { grid-column: 1 / -1; width: fit-content; max-width: 100%; min-height: 44px; display: inline-flex; align-items: center; padding: 0 14px; background: var(--ledger-yellow); color: var(--ledger-ink); overflow-wrap: anywhere; font-size: clamp(1.2rem, 3vw, 2.5rem); }
 
   @media (hover: hover) and (pointer: fine) {
     .ledger-route li a:hover { padding-inline: 14px; background: #fff; }
