@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-09
 Branch: main
-Implementation release: use the latest link/copy cleanup commit in `git log`.
+Implementation release: c9c821b42165f52064d7e2bdc51ad74fcf292d31
 HEAD: use `git rev-parse HEAD` for the latest documentation revision.
 
 ## Current Objective and State
@@ -24,7 +24,7 @@ Reviewed both published routes for decorative link arrows, underlines, generic s
 
 `npm run build` and `git diff --check` passed. Chrome E2E at `output/playwright/link-review/link-e2e.js` passed the existing complete font/navigation/shuffle/reduced-motion/enlarged-text/font-failure flow plus arrow/underline/border/focus checks on all five prototypes at 1440/390/320px. Homepage geometry also passed 11 widths from 320 to 1440px; desktop/phone screenshots were inspected. The final Ledger email contrast/wrapping correction and darker Play link blue are verified separately by `final-links.js`; the latter gives the email 5.59:1 contrast on its actual yellow background, including 320px phones. Repeat using preview port 4322 and `npx --yes --package @playwright/cli playwright-cli -s=link-review run-code --filename=output/playwright/link-review/link-e2e.js`, then the same command with `final-links.js`. Reports/screenshots remain ignored in that folder. In-app browser discovery failed; actual Chrome CLI was used. A Chrome shader precision warning and existing large-bundle/Browserslist build warnings remain unrelated.
 
-Initial cleanup `5ebca88` is published: [build/publish run 37990691366](https://github.com/tryraisins/tryraisins.github.io/actions/runs/37990691366) succeeded, `origin/main` matched, and both live routes returned HTTP 200 with matching homepage CSS, JavaScript and both prototype CSS assets. The darker-blue follow-up remains to be pushed and reverified. Run `node output/playwright/link-review/verify-live.cjs` for release copy and asset parity; evidence is in `live-parity.json`.
+Release `c9c821b` is pushed and published: [build/publish run 37991057532](https://github.com/tryraisins/tryraisins.github.io/actions/runs/37991057532) and [Pages deployment 37991106606](https://github.com/tryraisins/tryraisins.github.io/actions/runs/37991106606) succeeded. `origin/main` matched the implementation SHA. Cache-busted requests to both live routes returned HTTP 200 with the revised copy, no old arrow glyphs or removed slogans, and matching homepage styles, shared JavaScript and both prototype CSS assets. Repeat `node output/playwright/link-review/verify-live.cjs`; evidence is in `live-parity.json`. No remaining implementation work; full interactive proof is local Chrome plus production asset parity, not a physical-device Safari claim.
 
 ## Previous Free Typography Release
 
