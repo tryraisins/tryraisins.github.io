@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-09
 Branch: main
-Implementation release: c9c821b42165f52064d7e2bdc51ad74fcf292d31
+Implementation release: see the latest social-preview commit in `git log`.
 HEAD: use `git rev-parse HEAD` for the latest documentation revision.
 
 ## Current Objective and State
@@ -19,6 +19,12 @@ Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro
 - Viewport resizing preserves spin, tilt, phase, rest timers, velocity and collision history. Height-only changes keep tops anchored, with boundary clamping; width/orientation changes remap positions and retain existing tops. Only newly visible tops launch when crossing to nine. Duplicate/empty resize notifications are ignored, and reduced motion ignores scroll forces.
 
 ## Current Task
+
+The Open Graph/Twitter preview now matches the current Pocket Playground design. `public/og-notebook.png` is a 1200x630 PNG rendered from the built homepage with its actual Bricolage Grotesque/DM Sans fonts, notebook rules, seeded reduced-motion tops and pencil sketches. Large headline, identity, location and yellow domain label remain readable at social-card size. The new filename gives crawlers a fresh image URL; `src/pages/index.astro` and the fallback `src/layouts/Layout.astro` use it. Homepage Open Graph and Twitter alt text describes the actual image. The original `og-image.png` remains available for old shares.
+
+Production renderer source: `scripts/render-social-preview.js`, intended for Playwright CLI `run-code --filename` from the repository root. With the built homepage on preview port 4322, run `npx --yes --package @playwright/cli playwright-cli -s=social-preview open http://127.0.0.1:4322/ --browser chrome`, then the same command with `run-code --filename=scripts/render-social-preview.js`. It adapts only a temporary browser page, leaves the website unchanged, waits for actual fonts/WebGL and produces the public asset. Build after rendering. The image was visually inspected at 1200px, 600px and 300px widths. `npm run build`, `node --check scripts/render-social-preview.js` and `git diff --check` passed. A local HTTP check verified Open Graph/Twitter/secure image URL agreement, descriptive alt, PNG MIME/signature, 1200x630 dimensions and byte-for-byte equality with the public image (129,258 bytes). Repeatable verification: `node output/playwright/social-preview/verify.cjs` locally, then add `https://tryraisins.dev/` for production. Reports/thumbnails remain ignored in that folder. Publishing and live verification remain.
+
+## Previous Link and Copy Release
 
 Reviewed both published routes for decorative link arrows, underlines, generic slogans and fragmented copy. Removed arrow glyphs from Play/Radio links, bottom-only CTA borders across Play/Ledger/Notes/Radio, and repeated non-link decorative text underlines in Play. Clear labels, background/color affordances, complete button borders, focus outlines and click targets remain. Notebook rules and structural dividers remain. Simplified contact copy and prototype prose, and added lasting rules to `AGENTS.md`. Unused earlier components and `_legacy` are outside the published route tree. No animation code or project destinations changed.
 
