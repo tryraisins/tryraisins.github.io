@@ -1,6 +1,6 @@
 # Project Handoff
 
-Last updated: 2026-10-09
+Last updated: 2026-10-11
 Branch: main
 Implementation release: 242c997e03c3e54d1af03cb127713f30e9501ce1
 HEAD: use `git rev-parse HEAD` for the latest documentation revision.
@@ -18,7 +18,23 @@ Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro
 - Ground support uses a cached hull sampled from actual model geometry, including pegs, domes and fins. Fast spinning has a subtle blur ring. Reduced motion renders stationary tops. Small 5 Hz datasets (`phases`, `spinRange`, `topState`) support browser diagnosis; `hitCount` updates on collisions.
 - Viewport resizing preserves spin, tilt, phase, rest timers, velocity and collision history. Height-only changes keep tops anchored, with boundary clamping; width/orientation changes remap positions and retain existing tops. Only newly visible tops launch when crossing to nine. Duplicate/empty resize notifications are ignored, and reduced motion ignores scroll forces.
 
-## Current Task
+## Current Task: Agent Skills Library
+
+`/skills/` lists every installable skill from MD_Files (89, including the 35 marked internal) and `/skills/<slug>/` gives each one a shareable page. Pages are generated at build time from `src/data/skills-catalog.json`, a snapshot written only by MD_Files' `node tools/sync-portfolio.js --portfolio <this checkout>`. Never edit the snapshot by hand: `src/lib/skills.ts` re-hashes and validates it, and any mismatch fails the build. The snapshot pins source links, install prompts and `/skills/<slug>/files.json` hash manifests to the catalog `sourceRevision` (currently `edf3ec6`), the same revision `npx yeknal setup` serves. Presentation copy (titles, tasks, examples, attribution) lives in MD_Files `site/presentation.json`; the publication order is in that repository's README.
+
+- Library: introduction, six task notes, search, task chips (a native select at 620px and below), 12 entries with "Show more", query/task state in the URL, empty state with a task suggestion, reset, and an install-everything sheet explaining `npx yeknal@latest setup` versus `skills --all`. All 89 entries and links are in the static HTML; JavaScript only filters and reveals them.
+- Install prompts: copying from the list opens a This project / All my projects choice first; the detail page shows no prompt until a scope radio is chosen. `src/lib/skill-prompt.ts` builds prompts for both the server and the browser. The prompt clones with `-c core.autocrlf=false` because Windows Git with autocrlf rewrites line endings and breaks the published hashes; E2E reproduced that before the fix. Clipboard failures select the full prompt for manual copy and never report success.
+- Homepage: hero header and hero actions link to `/skills/`; the yeknal card opens `/skills/` in the same tab ("Browse the skills"). Projects with relative hrefs no longer get `target="_blank"`. `scripts/render-social-preview.js` now hides `.play-hero-links`.
+- SEO: unique titles and descriptions, canonical URLs, CollectionPage/ItemList/BreadcrumbList and per-skill SoftwareSourceCode JSON-LD, sitemap coverage (renamed-skill redirect pages are noindex and filtered out in `astro.config.mjs`), and `public/og-skills.png` rendered by `scripts/render-skills-preview.js` (same run-code convention as the homepage renderer, against the built `/skills/`).
+- Deletions need no cleanup here: a removed skill disappears from the snapshot and Astro stops generating its page and manifest. Renames keep a redirect via `previousNames`. Rollback is reverting the snapshot commit or re-syncing with `--ref <older MD_Files commit>`.
+
+Verification (artifacts stay in ignored `output/`):
+
+- `node output/playwright/skills-library/e2e.cjs [baseUrl]` with the build served on 4322 (`npx astro preview --port 4322 --host 127.0.0.1`): 83/83 passed in Chrome, covering crawlable links, metadata and sitemap, default/Show more/focus, URL state and reload, empty and reset paths, inline and detail scope choice, real clipboard success and forced failure, keyboard focus, 320-1440px containment and 44px targets on library and detail pages, no-JS rendering, homepage links, reduced motion, and running the prompt's own git commands against GitHub with SHA-256 comparison for a single-file and a nine-file licensed skill. Report: `output/playwright/skills-library/run-127_0_0_1/report.json`, with screenshots in the same folder.
+- MD_Files `node tools/verify-portfolio-sync.js` (locally excluded there): 26/26 in disposable clones with a bare origin and a real Astro build, covering refusals for dirty, stale, tampered, unpublished and invalid inputs, new-skill defaults, deletion, rename redirect, hand-edited snapshot build failure and rollback.
+- `npm run build` and `git diff --check` pass. The in-app browser pane rendered black on this machine, so Chrome via the project's Playwright was used. Physical-device Safari remains unverified.
+
+## Previous Social Preview Release
 
 The Open Graph/Twitter preview now matches the current Pocket Playground design. `public/og-notebook.png` is a 1200x630 PNG rendered from the built homepage with its actual Bricolage Grotesque/DM Sans fonts, notebook rules, seeded reduced-motion tops and pencil sketches. Large headline, identity, location and yellow domain label remain readable at social-card size. The new filename gives crawlers a fresh image URL; `src/pages/index.astro` and the fallback `src/layouts/Layout.astro` use it. Homepage Open Graph and Twitter alt text describes the actual image. The original `og-image.png` remains available for old shares.
 

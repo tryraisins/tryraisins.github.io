@@ -23,7 +23,7 @@ async (page) => {
         .play-world { min-height:630px; --play-page-margin:72px; }
         #play-top .play-hero { height:630px; min-height:630px; padding:44px 72px 50px; gap:0; }
         #play-top .play-hero-header { min-height:40px; }
-        #play-top .play-hero-header > a, .play-skip, #play-top .play-desk, #play-top .play-contact, .play-sr-status { display:none; }
+        #play-top .play-hero-links, .play-skip, #play-top .play-desk, #play-top .play-contact, .play-sr-status { display:none; }
         #play-top .play-hero-index { font-size:24px; font-weight:500; text-transform:none; letter-spacing:0; }
         #play-top .play-hero h1 { max-width:1020px; margin:186px 0 0; font-size:88px; line-height:1.05; letter-spacing:-.03em; text-wrap:initial; }
         #play-top .play-intro { margin-top:auto; width:100%; display:flex; justify-content:space-between; align-items:center; }

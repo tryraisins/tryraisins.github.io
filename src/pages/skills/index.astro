@@ -1,0 +1,519 @@
+---
+import SkillsLayout from '../../layouts/SkillsLayout.astro';
+import { catalog, skillsBySlug, taskLabel, fileLabel } from '../../lib/skills';
+import { SITE_URL, sourceTreeUrl } from '../../lib/skill-prompt';
+
+const { skills, tasks, startingPoints, sourceRevision, counts } = catalog;
+const pageSize = 12;
+const title = 'Agent skills for coding agents | TryRaisins';
+const description = `${counts.skills} free agent skills for Claude Code, Codex, Cursor and other coding agents, grouped by task, each with a short explanation and an install prompt you can copy.`;
+const libraryUrl = `${SITE_URL}/skills/`;
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'CollectionPage',
+      '@id': `${libraryUrl}#page`,
+      url: libraryUrl,
+      name: 'Agent skills',
+      description,
+      isPartOf: { '@id': `${SITE_URL}/#website` },
+      author: { '@id': `${SITE_URL}/#person` },
+      mainEntity: { '@id': `${libraryUrl}#skills` },
+    },
+    {
+      '@type': 'ItemList',
+      '@id': `${libraryUrl}#skills`,
+      name: 'Agent skills',
+      numberOfItems: skills.length,
+      itemListElement: skills.map((skill, index) => ({ '@type': 'ListItem', position: index + 1, url: `${libraryUrl}${skill.slug}/`, name: skill.title })),
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'TryRaisins', item: `${SITE_URL}/` },
+        { '@type': 'ListItem', position: 2, name: 'Agent skills', item: libraryUrl },
+      ],
+    },
+  ],
+};
+const searchText = (skill: (typeof skills)[number]) =>
+  [skill.title, skill.name, skill.purpose, skill.description, ...skill.tasks.map(taskLabel)].join(' ').toLowerCase();
+---
+
+<SkillsLayout title={title} description={description} path="/skills/" schema={schema} current="library">
+  <section class="sk-section sk-intro" aria-labelledby="sk-title">
+    <p class="sk-kicker">Agent skills</p>
+    <h1 id="sk-title" class="sk-h1">Skills that teach your coding agent a specific job.</h1>
+    <p class="sk-lede">These are the instruction sets I keep for agents like Claude Code, Codex and Cursor. Each one covers a particular kind of work, such as reviewing code, designing a screen or putting a site online, so pick what you’re trying to do, read what the skill is for, and copy a prompt that installs it in one project or across all of them.</p>
+    <p class="sk-facts">{counts.skills} skills, free to use, with the source on GitHub and the same files the yeknal CLI installs.</p>
+  </section>
+
+  <section class="sk-section sk-starts" aria-labelledby="sk-starts-title">
+    <h2 id="sk-starts-title" class="sk-h2">Start with a task</h2>
+    <p class="sk-sub">Six common jobs and the skill I’d reach for first.</p>
+    <ol class="sk-notes">
+      {startingPoints.map((point, index) => {
+        const skill = skillsBySlug.get(point.skill)!;
+        return (
+          <li style={`--sk-tilt: ${[-1, 0.8, -0.6, 0.7, -0.8, 1][index % 6]}deg`}>
+            <a class="sk-note" href={`/skills/${skill.slug}/`}>
+              <span class="sk-note-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <span class="sk-note-task">{point.task}</span>
+              <span class="sk-note-skill">Start with {skill.title}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ol>
+  </section>
+
+  <section id="browse" class="sk-section sk-browse" aria-labelledby="sk-browse-title" data-library data-revision={sourceRevision} data-page-size={pageSize}>
+    <h2 id="sk-browse-title" class="sk-h2">Browse every skill</h2>
+    <form class="sk-controls" role="search" action="/skills/" method="get" data-form>
+      <div class="sk-field sk-search">
+        <label for="sk-q">Search by name or what you want done</label>
+        <div class="sk-input">
+          <svg aria-hidden="true" viewBox="0 0 256 256" width="20" height="20"><path fill="currentColor" d="m229.66 218.34-50.07-50.06a88.11 88.11 0 1 0-11.31 11.31l50.06 50.07a8 8 0 0 0 11.32-11.32ZM40 112a72 72 0 1 1 72 72 72.08 72.08 0 0 1-72-72Z"/></svg>
+          <input id="sk-q" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Try “deploy”, “animation” or “review”" data-query />
+          <button type="button" class="sk-link" data-clear hidden>Clear<span class="sk-sr"> search</span></button>
+        </div>
+      </div>
+      <fieldset class="sk-field sk-chips">
+        <legend>Filter by task</legend>
+        <div class="sk-chip-row">
+          <button type="button" class="sk-chip" data-task="" aria-pressed="true">All tasks <span class="sk-count" data-count-for="">{skills.length}</span></button>
+          {tasks.map((task) => (
+            <button type="button" class="sk-chip" data-task={task.id} aria-pressed="false" title={task.description}>{task.label} <span class="sk-count" data-count-for={task.id}>{task.count}</span></button>
+          ))}
+        </div>
+      </fieldset>
+      <div class="sk-field sk-task-select">
+        <label for="sk-task">Filter by task</label>
+        <div class="sk-select">
+          <select id="sk-task" name="task" data-task-select>
+            <option value="">All tasks ({skills.length})</option>
+            {tasks.map((task) => <option value={task.id}>{task.label} ({task.count})</option>)}
+          </select>
+          <svg aria-hidden="true" viewBox="0 0 256 256" width="20" height="20"><path fill="currentColor" d="m213.66 101.66-80 80a8 8 0 0 1-11.32 0l-80-80a8 8 0 0 1 11.32-11.32L128 164.69l74.34-74.35a8 8 0 0 1 11.32 11.32Z"/></svg>
+        </div>
+      </div>
+    </form>
+
+    <div class="sk-results-bar">
+      <p data-result-count>Showing all {skills.length} skills, most useful first</p>
+      <button type="button" class="sk-link" data-reset hidden>Reset search and filters</button>
+    </div>
+
+    <ol class="sk-list" data-list>
+      {skills.map((skill) => (
+        <li class="sk-entry sk-paper" data-skill data-name={skill.name} data-slug={skill.slug} data-files={skill.fileCount} data-title={skill.title} data-tasks={skill.tasks.join(' ')} data-search={searchText(skill)}>
+          <p class="sk-meta">
+            <span>{skill.tasks.map(taskLabel).join(' · ') || 'General'}</span>
+            <span>{fileLabel(skill.fileCount)}</span>
+            {skill.compatibility && <span>Kept for compatibility</span>}
+          </p>
+          <h3 class="sk-entry-title">{skill.title}</h3>
+          <p class="sk-entry-purpose">{skill.purpose}</p>
+          <div class="sk-entry-actions">
+            <a class="sk-btn" href={`/skills/${skill.slug}/`}>View skill<span class="sk-sr">: {skill.title}</span></a>
+            <a class="sk-link" href={sourceTreeUrl(skill.name, sourceRevision)}>View source<span class="sk-sr"> of {skill.title} on GitHub</span></a>
+            <button type="button" class="sk-btn-primary sk-copy-toggle" data-copy-toggle aria-expanded="false" aria-controls={`sk-scope-${skill.slug}`} hidden>Copy install prompt<span class="sk-sr"> for {skill.title}</span></button>
+          </div>
+          <div class="sk-inline-scope" id={`sk-scope-${skill.slug}`} data-scope-panel hidden>
+            <p class="sk-inline-legend" id={`sk-scope-label-${skill.slug}`}>Install {skill.title} for</p>
+            <div class="sk-inline-choices" role="group" aria-labelledby={`sk-scope-label-${skill.slug}`}>
+              <button type="button" class="sk-btn" data-scope="project" aria-pressed="false">This project</button>
+              <button type="button" class="sk-btn" data-scope="all" aria-pressed="false">All my projects</button>
+            </div>
+            <p class="sk-inline-hint" data-scope-hint>Choosing one copies the prompt straight away, and you can read it first on the skill’s page.</p>
+            <p class="sk-status" data-copy-status hidden></p>
+            <div class="sk-inline-links" data-after-copy hidden>
+              <button type="button" class="sk-link" data-show-prompt aria-expanded="false">Show the prompt</button>
+              <a class="sk-link" href={`/skills/${skill.slug}/`}>Read more before installing</a>
+            </div>
+            <label class="sk-sr" for={`sk-prompt-${skill.slug}`}>Install prompt for {skill.title}</label>
+            <textarea class="sk-prompt" id={`sk-prompt-${skill.slug}`} readonly rows="14" data-prompt hidden></textarea>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="sk-empty sk-paper" data-empty hidden>
+      <h3 class="sk-empty-title" data-empty-title tabindex="-1">No skills match yet</h3>
+      <p data-empty-body>Try a broader word, or browse everything by task.</p>
+      <div class="sk-empty-actions">
+        <button type="button" class="sk-btn-primary" data-suggest hidden></button>
+        <button type="button" class="sk-btn" data-clear-all>Clear search</button>
+      </div>
+    </div>
+
+    <div class="sk-widen" data-widen hidden>
+      <p data-widen-text></p>
+      <button type="button" class="sk-link" data-widen-action>Search all tasks instead</button>
+    </div>
+
+    <div class="sk-more" data-more-wrap hidden>
+      <button type="button" class="sk-btn" data-more>Show more skills</button>
+      <p data-remaining></p>
+    </div>
+  </section>
+
+  <section id="install-all" class="sk-section sk-all" aria-labelledby="sk-all-title">
+    <div class="sk-sheet sk-all-sheet">
+      <span class="sk-tape" aria-hidden="true"></span>
+      <p class="sk-all-meta"><span>Install everything at once</span><span>Needs Node.js 18 or newer</span></p>
+      <h2 id="sk-all-title" class="sk-h2">Prefer to set up the whole catalog?</h2>
+      <div class="sk-all-options">
+        <div class="sk-all-option">
+          <p class="sk-badge">Recommended: load skills when needed</p>
+          <div class="sk-command"><code id="sk-cmd-setup">npx yeknal@latest setup</code><button type="button" class="sk-btn" data-copy-command="sk-cmd-setup" hidden>Copy command</button></div>
+          <p>Adds a short instruction block to the coding agents it finds on your computer, so they can search this catalog and load a skill only when a task calls for one. Nothing is copied into your skills folders, existing skills stay where they are, and <code>npx yeknal@latest setup --remove</code> takes the instructions out again.</p>
+        </div>
+        <div class="sk-all-option">
+          <p class="sk-badge">Install all {counts.skills} skills</p>
+          <div class="sk-command"><code id="sk-cmd-all">npx yeknal@latest skills --all</code><button type="button" class="sk-btn" data-copy-command="sk-cmd-all" hidden>Copy command</button></div>
+          <p>Copies every skill into each user-level skills folder it detects. It replaces earlier yeknal- copies, including any edits you made to them, and removes yeknal- skills that have left the catalog. Skills with other names are left alone.</p>
+        </div>
+      </div>
+      <p class="sk-command-status" data-command-status aria-live="polite"></p>
+    </div>
+  </section>
+</SkillsLayout>
+
+<script>
+  import { installPrompt, type InstallScope } from '../../lib/skill-prompt';
+  import { copyText } from '../../scripts/copy-text';
+
+  const root = document.querySelector<HTMLElement>('[data-library]');
+  const announce = (message: string) => {
+    const live = document.querySelector('[data-sk-status]');
+    if (live) { live.textContent = ''; window.setTimeout(() => { live.textContent = message; }, 30); }
+  };
+
+  if (root) {
+    const revision = root.dataset.revision!;
+    const pageSize = Number(root.dataset.pageSize) || 12;
+    const entries = [...root.querySelectorAll<HTMLLIElement>('[data-skill]')];
+    const query = root.querySelector<HTMLInputElement>('[data-query]')!;
+    const chips = [...root.querySelectorAll<HTMLButtonElement>('.sk-chip')];
+    const select = root.querySelector<HTMLSelectElement>('[data-task-select]')!;
+    const countText = root.querySelector<HTMLElement>('[data-result-count]')!;
+    const reset = root.querySelector<HTMLButtonElement>('[data-reset]')!;
+    const clear = root.querySelector<HTMLButtonElement>('[data-clear]')!;
+    const empty = root.querySelector<HTMLElement>('[data-empty]')!;
+    const emptyTitle = root.querySelector<HTMLElement>('[data-empty-title]')!;
+    const emptyBody = root.querySelector<HTMLElement>('[data-empty-body]')!;
+    const suggest = root.querySelector<HTMLButtonElement>('[data-suggest]')!;
+    const widen = root.querySelector<HTMLElement>('[data-widen]')!;
+    const widenText = root.querySelector<HTMLElement>('[data-widen-text]')!;
+    const moreWrap = root.querySelector<HTMLElement>('[data-more-wrap]')!;
+    const more = root.querySelector<HTMLButtonElement>('[data-more]')!;
+    const remaining = root.querySelector<HTMLElement>('[data-remaining]')!;
+    const labels = new Map(chips.map((chip) => [chip.dataset.task!, chip.firstChild?.textContent?.trim() ?? '']));
+    // Words people type that the catalog files under a task with other wording.
+    const hints: [RegExp, string][] = [
+      [/kube|docker|host|server|cloud|aws|azure|publish|release|ci\b/, 'ship'],
+      [/bug|error|crash|test|debug|qa\b/, 'review'],
+      [/auth|password|vuln|owasp|secret/, 'security'],
+      [/css|layout|ui\b|ux\b|figma|font|color|colour/, 'design'],
+      [/video|image|audio|voice|photo/, 'media'],
+      [/excel|word|docx|pptx|notion|readme|markdown/, 'docs'],
+    ];
+    let limit = pageSize;
+
+    const state = () => ({ q: query.value.trim().toLowerCase(), task: select.value });
+    const matches = (entry: HTMLElement, q: string, task: string) =>
+      (!task || entry.dataset.tasks!.split(' ').includes(task)) &&
+      (!q || q.split(/\s+/).every((word) => entry.dataset.search!.includes(word)));
+
+    const writeUrl = () => {
+      const { q, task } = state();
+      const url = new URL(window.location.href);
+      q ? url.searchParams.set('q', query.value.trim()) : url.searchParams.delete('q');
+      task ? url.searchParams.set('task', task) : url.searchParams.delete('task');
+      history.replaceState(null, '', url);
+    };
+
+    const render = (options: { focusEmpty?: boolean } = {}) => {
+      const { q, task } = state();
+      const visible = entries.filter((entry) => matches(entry, q, task));
+      const filtered = Boolean(q || task);
+      entries.forEach((entry) => { entry.hidden = true; });
+      visible.forEach((entry, index) => { entry.hidden = index >= limit; });
+      chips.forEach((chip) => chip.setAttribute('aria-pressed', String(chip.dataset.task === task)));
+      for (const chip of chips) {
+        const id = chip.dataset.task!;
+        const count = entries.filter((entry) => matches(entry, q, id)).length;
+        chip.querySelector('.sk-count')!.textContent = String(count);
+      }
+      clear.hidden = !query.value;
+      reset.hidden = !filtered;
+      const shown = Math.min(limit, visible.length);
+      const where = task ? ` in ${labels.get(task)}` : '';
+      const quoted = query.value.trim();
+      let message: string;
+      if (!visible.length) message = quoted ? `No skills match “${quoted}”${where}` : `No skills${where}`;
+      else if (q) message = `${visible.length} ${visible.length === 1 ? 'skill matches' : 'skills match'} “${quoted}”${where}`;
+      else if (task) message = `${visible.length} skills${where}`;
+      else message = `Showing ${shown} of ${visible.length} skills, most useful first`;
+      if (visible.length && shown < visible.length && (q || task)) message += `, showing ${shown}`;
+      countText.textContent = message;
+
+      empty.hidden = visible.length > 0;
+      if (!visible.length) {
+        emptyTitle.textContent = quoted ? `No skills match “${quoted}” yet` : 'No skills here yet';
+        const suggestion = hints.find(([pattern]) => pattern.test(q))?.[1];
+        const anyTask = entries.some((entry) => matches(entry, q, ''));
+        if (task && anyTask) {
+          emptyBody.textContent = `Nothing in ${labels.get(task)} matches, but other tasks do.`;
+          suggest.textContent = 'Search all tasks instead';
+          suggest.dataset.target = '';
+          suggest.hidden = false;
+        } else if (suggestion && suggestion !== task) {
+          emptyBody.textContent = `Nothing in the catalog matches that wording. The closest fit is probably ${labels.get(suggestion)}, or you can clear the search and browse all ${entries.length}.`;
+          suggest.textContent = `Show ${labels.get(suggestion)} skills`;
+          suggest.dataset.target = suggestion;
+          suggest.hidden = false;
+        } else {
+          emptyBody.textContent = `Try a broader word, or clear the search and browse all ${entries.length} skills by task.`;
+          suggest.hidden = true;
+        }
+        if (options.focusEmpty) emptyTitle.focus();
+      }
+
+      const elsewhere = q && task ? entries.filter((entry) => matches(entry, q, '') && !matches(entry, q, task)).length : 0;
+      widen.hidden = !(visible.length && elsewhere);
+      if (elsewhere) widenText.textContent = `${elsewhere} more ${elsewhere === 1 ? 'skill mentions' : 'skills mention'} “${quoted}” under other tasks.`;
+
+      const left = visible.length - shown;
+      moreWrap.hidden = left <= 0;
+      more.textContent = `Show ${Math.min(pageSize, left)} more skills`;
+      remaining.textContent = `${left} more to go`;
+      return message;
+    };
+
+    const update = (options: { focusEmpty?: boolean; announce?: boolean } = {}) => {
+      limit = pageSize;
+      const message = render(options);
+      writeUrl();
+      if (options.announce !== false) announce(message);
+    };
+
+    const setTask = (task: string) => { select.value = task; update(); };
+    chips.forEach((chip) => chip.addEventListener('click', () => setTask(chip.dataset.task!)));
+    select.addEventListener('change', () => update());
+    let timer = 0;
+    query.addEventListener('input', () => { window.clearTimeout(timer); render(); writeUrl(); timer = window.setTimeout(() => announce(countText.textContent ?? ''), 450); });
+    root.querySelector('[data-form]')!.addEventListener('submit', (event) => { event.preventDefault(); update(); });
+    clear.addEventListener('click', () => { query.value = ''; update(); query.focus(); });
+    root.querySelector('[data-clear-all]')!.addEventListener('click', () => { query.value = ''; select.value = ''; update(); query.focus(); });
+    reset.addEventListener('click', () => { query.value = ''; select.value = ''; update(); query.focus(); });
+    suggest.addEventListener('click', () => { if (suggest.dataset.target !== undefined) { if (suggest.dataset.target) query.value = ''; select.value = suggest.dataset.target; update(); } });
+    root.querySelector('[data-widen-action]')!.addEventListener('click', () => { select.value = ''; update(); });
+    more.addEventListener('click', () => {
+      const firstHidden = entries.filter((entry) => matches(entry, state().q, state().task))[limit];
+      limit += pageSize;
+      render();
+      firstHidden?.querySelector<HTMLAnchorElement>('a')?.focus();
+      announce(countText.textContent ?? '');
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    query.value = params.get('q') ?? '';
+    const initialTask = params.get('task') ?? '';
+    select.value = [...select.options].some((option) => option.value === initialTask) ? initialTask : '';
+    root.classList.add('sk-enhanced');
+    render();
+    writeUrl();
+
+    for (const entry of entries) {
+      const toggle = entry.querySelector<HTMLButtonElement>('[data-copy-toggle]')!;
+      const panel = entry.querySelector<HTMLElement>('[data-scope-panel]')!;
+      const scopes = [...panel.querySelectorAll<HTMLButtonElement>('[data-scope]')];
+      const status = panel.querySelector<HTMLElement>('[data-copy-status]')!;
+      const after = panel.querySelector<HTMLElement>('[data-after-copy]')!;
+      const show = panel.querySelector<HTMLButtonElement>('[data-show-prompt]')!;
+      const prompt = panel.querySelector<HTMLTextAreaElement>('[data-prompt]')!;
+      const hint = panel.querySelector<HTMLElement>('[data-scope-hint]')!;
+      const skill = { name: entry.dataset.name!, slug: entry.dataset.slug!, fileCount: Number(entry.dataset.files) };
+      toggle.hidden = false;
+      toggle.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') !== 'true';
+        toggle.setAttribute('aria-expanded', String(open));
+        panel.hidden = !open;
+        if (open) scopes[0].focus();
+      });
+      for (const button of scopes) {
+        button.addEventListener('click', async () => {
+          const scope = button.dataset.scope as InstallScope;
+          scopes.forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
+          prompt.value = installPrompt(skill, revision, scope);
+          const where = scope === 'project' ? 'this project' : 'all your projects';
+          const copied = await copyText(prompt.value);
+          hint.hidden = true;
+          status.hidden = false;
+          if (copied) {
+            status.dataset.tone = 'ok';
+            status.textContent = `Copied the prompt for ${where}. Paste it into your agent ${scope === 'project' ? 'in the project where you want the skill' : 'in any project'}.`;
+            prompt.hidden = true;
+            prompt.classList.remove('sk-prompt-select');
+            after.hidden = false;
+            show.setAttribute('aria-expanded', 'false');
+            show.textContent = 'Show the prompt';
+          } else {
+            status.dataset.tone = 'error';
+            status.textContent = 'Your browser didn’t allow copying, so the whole prompt is selected below. Press Ctrl+C, or Cmd+C on a Mac, to copy it.';
+            after.hidden = true;
+            prompt.hidden = false;
+            prompt.classList.add('sk-prompt-select');
+            prompt.focus();
+            prompt.select();
+          }
+          announce(status.textContent);
+        });
+      }
+      show.addEventListener('click', () => {
+        const open = prompt.hidden;
+        prompt.hidden = !open;
+        show.setAttribute('aria-expanded', String(open));
+        show.textContent = open ? 'Hide the prompt' : 'Show the prompt';
+      });
+    }
+  }
+
+  const commandStatus = document.querySelector<HTMLElement>('[data-command-status]');
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy-command]')) {
+    const code = document.getElementById(button.dataset.copyCommand!)!;
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      const ok = await copyText(code.textContent ?? '');
+      if (ok) {
+        button.textContent = 'Copied';
+        if (commandStatus) commandStatus.textContent = `Copied ${code.textContent}.`;
+      } else {
+        const range = document.createRange();
+        range.selectNodeContents(code);
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+        if (commandStatus) commandStatus.textContent = 'Copying wasn’t allowed, so the command is selected. Press Ctrl+C, or Cmd+C on a Mac, to copy it.';
+      }
+    });
+  }
+</script>
+
+<style>
+  .sk-intro { padding-top: clamp(56px, 8vw, 96px); padding-bottom: 64px; display: grid; gap: 24px; justify-items: start; }
+  .sk-intro .sk-h1 { max-width: 68rem; }
+  .sk-facts { color: rgba(23,23,25,.72); font-size: 14px; }
+
+  .sk-starts { padding-top: 16px; padding-bottom: 72px; }
+  .sk-sub { margin-top: 8px !important; color: rgba(23,23,25,.72); }
+  .sk-notes { margin: 36px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 28px; }
+  .sk-notes li { min-width: 0; transform: rotate(var(--sk-tilt)); }
+  .sk-note { height: 100%; min-height: 132px; padding: 26px 20px 18px; position: relative; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--sk-ink); background: var(--sk-sheet); box-shadow: 4px 5px 0 rgba(23,23,25,.16); transition: translate 180ms var(--sk-ease); }
+  .sk-note::before { content: ''; position: absolute; top: -8px; left: 50%; width: 56px; height: 16px; border: 1px solid rgba(23,23,25,.35); background: rgba(251,250,245,.8); transform: translateX(-50%) rotate(2deg); }
+  .sk-note-num { color: var(--sk-blue); font-size: 12px; font-weight: 600; }
+  .sk-note-task { font: 600 21px/1.2 var(--sk-title-font); letter-spacing: -.02em; }
+  .sk-note-skill { margin-top: auto; color: var(--sk-link); font-size: 14px; font-weight: 600; }
+
+  .sk-browse { padding-top: 48px; scroll-margin-top: 16px; }
+  .sk-controls { margin: 28px 0 0; display: grid; gap: 24px; }
+  .sk-field { min-width: 0; margin: 0; padding: 0; border: 0; display: grid; gap: 8px; }
+  .sk-field > label, .sk-field > legend { padding: 0; font-size: 14px; font-weight: 600; }
+  .sk-field > legend { margin-bottom: 10px; }
+  .sk-search { max-width: 640px; }
+  .sk-input, .sk-select { min-height: 52px; position: relative; display: flex; align-items: center; gap: 10px; padding: 0 6px 0 16px; border: 1px solid var(--sk-ink); background: var(--sk-paper); }
+  .sk-input:focus-within, .sk-select:focus-within { outline: 3px solid var(--sk-blue); outline-offset: 2px; }
+  .sk-input svg { flex: none; color: rgba(23,23,25,.62); }
+  .sk-input input { min-width: 0; flex: 1; min-height: 48px; border: 0; background: transparent; color: var(--sk-ink); font: 400 16px 'DM Sans', sans-serif; outline: none; }
+  .sk-input input::placeholder { color: rgba(23,23,25,.62); }
+  .sk-input input::-webkit-search-cancel-button { display: none; }
+  .sk-select { padding: 0; }
+  .sk-select select { width: 100%; min-height: 50px; padding: 0 44px 0 14px; appearance: none; border: 0; background: transparent; color: var(--sk-ink); font: 500 16px 'DM Sans', sans-serif; outline: none; }
+  .sk-select svg { position: absolute; right: 14px; pointer-events: none; }
+  .sk-task-select { display: none; }
+  .sk-chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sk-chip { min-height: 44px; padding: 0 12px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--sk-ink); background: var(--sk-paper); font-size: 14px; font-weight: 500; cursor: pointer; user-select: none; }
+  .sk-chip .sk-count { color: rgba(23,23,25,.72); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .sk-chip[aria-pressed='true'] { background: var(--sk-ink); color: var(--sk-paper); font-weight: 600; }
+  .sk-chip[aria-pressed='true'] .sk-count { color: rgba(251,250,245,.8); }
+
+  .sk-results-bar { margin-top: 28px; padding-top: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px; border-top: 2px solid var(--sk-ink); }
+  .sk-results-bar p { font-size: 15px; font-weight: 600; }
+  .sk-list { margin: 28px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
+  .sk-entry { min-width: 0; padding: 20px 22px 18px; display: grid; gap: 12px; }
+  .sk-entry .sk-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+  .sk-entry-title { font: 600 clamp(1.5rem, 2vw, 1.625rem)/1.15 var(--sk-title-font); letter-spacing: -.02em; }
+  .sk-entry-purpose { font-size: 15px; }
+  .sk-entry-actions { padding-top: 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .sk-copy-toggle { margin-left: auto; }
+  .sk-copy-toggle[aria-expanded='true'] { background: var(--sk-paper); }
+  .sk-inline-scope { padding: 16px; display: grid; gap: 12px; border: 1px solid var(--sk-ink); background: var(--sk-sheet); }
+  .sk-inline-legend { font-size: 14px; font-weight: 600; }
+  .sk-inline-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .sk-inline-choices .sk-btn { min-height: 48px; }
+  .sk-inline-hint { color: rgba(23,23,25,.82); font-size: 13px; }
+  .sk-inline-links { display: flex; flex-wrap: wrap; gap: 4px; margin-left: -8px; }
+
+  .sk-empty { margin-top: 28px; padding: clamp(24px, 3vw, 40px); display: grid; gap: 16px; justify-items: start; }
+  .sk-empty-title { font: 600 clamp(1.5rem, 2.4vw, 1.875rem)/1.2 var(--sk-title-font); letter-spacing: -.02em; outline: none; }
+  .sk-empty p { max-width: 45rem; font-size: 17px; }
+  .sk-empty-actions { padding-top: 8px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .sk-empty-actions > * { min-height: 48px; }
+  .sk-widen { margin-top: 24px; display: grid; justify-items: start; gap: 4px; }
+  .sk-widen .sk-link { margin-left: -8px; }
+  .sk-more { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+  .sk-more .sk-btn { min-height: 48px; }
+  .sk-more p { color: rgba(23,23,25,.72); font-size: 14px; }
+
+  .sk-all { padding-top: 96px; }
+  .sk-all-sheet { padding: clamp(28px, 4vw, 52px); border-width: 3px; box-shadow: 8px 10px 0 var(--sk-red), 12px 15px 0 rgba(23,23,25,.14); transform: rotate(-.35deg); }
+  .sk-tape { position: absolute; top: -8px; left: 50%; width: 118px; height: 13px; border: 2px solid var(--sk-ink); background: var(--sk-red); transform: translateX(-50%) rotate(-3deg); box-shadow: 3px 3px 0 var(--sk-ink); }
+  .sk-all-meta { padding-bottom: 16px; margin-bottom: 20px !important; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; border-bottom: 2px solid var(--sk-ink); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+  .sk-all-options { margin-top: 28px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px; }
+  .sk-all-option { min-width: 0; display: grid; gap: 14px; align-content: start; }
+  .sk-all-option > p:last-child { color: rgba(23,23,25,.88); font-size: 16px; }
+  .sk-all-option code { font-family: var(--sk-mono); font-size: .92em; }
+  .sk-badge { color: var(--sk-link); font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+  .sk-command { min-height: 56px; padding: 6px 6px 6px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; border: 1px solid var(--sk-ink); background: var(--sk-paper); }
+  .sk-command code { min-width: 0; overflow-wrap: anywhere; font: 500 15px/1.4 var(--sk-mono); }
+  .sk-command-status { min-height: 1.5em; margin-top: 16px !important; font-size: 14px; }
+
+  @media (hover: hover) and (pointer: fine) {
+    .sk-notes li:hover { z-index: 1; }
+    .sk-note:hover { translate: 0 -4px; }
+    .sk-chip:hover:not([aria-pressed='true']) { background: rgba(240,206,78,.62); }
+  }
+  @media (max-width: 1080px) {
+    .sk-list { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 980px) {
+    .sk-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .sk-all-options { grid-template-columns: 1fr; }
+    .sk-all-sheet { transform: none; }
+  }
+  @media (max-width: 620px) {
+    .sk-intro { padding-top: 48px; padding-bottom: 40px; gap: 18px; }
+    .sk-starts { padding-bottom: 40px; }
+    .sk-notes { margin-top: 20px; grid-template-columns: 1fr; gap: 0; border: 1px solid var(--sk-ink); background: var(--sk-sheet); box-shadow: 4px 5px 0 rgba(23,23,25,.16); }
+    .sk-notes li { transform: none; }
+    .sk-notes li + li { border-top: 1px solid rgba(23,23,25,.35); }
+    .sk-note { min-height: 0; padding: 14px 16px; display: grid; grid-template-columns: 22px 1fr; gap: 4px 12px; border: 0; box-shadow: none; }
+    .sk-note::before { display: none; }
+    .sk-note-num { grid-row: span 2; padding-top: 3px; }
+    .sk-note-task { font-size: 17px; line-height: 1.25; }
+    .sk-browse { padding-top: 32px; }
+    .sk-controls { gap: 20px; }
+    .sk-chips { display: none; }
+    .sk-task-select { display: grid; }
+    .sk-entry { padding: 18px; }
+    .sk-copy-toggle { width: 100%; min-height: 48px; margin-left: 0; }
+    .sk-all { padding-top: 48px; padding-right: calc(var(--sk-margin) + 6px); }
+    .sk-all-sheet { padding: 28px 20px; box-shadow: 7px 9px 0 var(--sk-red); }
+    .sk-command .sk-btn { width: 100%; }
+    .sk-empty-actions { display: grid; width: 100%; }
+    .sk-more .sk-btn { width: 100%; }
+  }
+</style>

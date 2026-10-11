@@ -1,0 +1,313 @@
+---
+import SkillsLayout from '../../layouts/SkillsLayout.astro';
+import { catalog, skillsBySlug, taskLabel, fileLabel, licenseUrl, shortRevision, type Skill } from '../../lib/skills';
+import { SITE_URL, installPrompt, sourceTreeUrl, manifestUrl } from '../../lib/skill-prompt';
+
+export function getStaticPaths() {
+  return [
+    ...catalog.skills.map((skill) => ({ params: { slug: skill.slug }, props: { skill, redirectTo: null } })),
+    ...catalog.redirects.map((redirect) => ({ params: { slug: redirect.from }, props: { skill: null, redirectTo: redirect.to } })),
+  ];
+}
+
+const { skill, redirectTo } = Astro.props as { skill: Skill | null; redirectTo: string | null };
+const target = redirectTo ? skillsBySlug.get(redirectTo)! : null;
+const { sourceRevision } = catalog;
+const libraryUrl = `${SITE_URL}/skills/`;
+
+const page = skill && (() => {
+  const url = `${libraryUrl}${skill.slug}/`;
+  const firstTask = skill.tasks[0];
+  const description = skill.purpose.length > 158 ? `${skill.purpose.slice(0, 155).replace(/\s+\S*$/, '')}…` : skill.purpose;
+  const license = licenseUrl(skill);
+  const schema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'SoftwareSourceCode',
+        '@id': `${url}#skill`,
+        name: skill.title,
+        alternateName: skill.name,
+        description: skill.purpose,
+        url,
+        codeRepository: sourceTreeUrl(skill.name, sourceRevision),
+        version: sourceRevision,
+        programmingLanguage: 'Markdown',
+        ...(skill.attribution.license ? { license: `https://spdx.org/licenses/${skill.attribution.license}.html` } : {}),
+        isPartOf: { '@id': `${libraryUrl}#page` },
+        publisher: { '@id': `${SITE_URL}/#person` },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Agent skills', item: libraryUrl },
+          ...(firstTask ? [{ '@type': 'ListItem', position: 2, name: taskLabel(firstTask), item: `${libraryUrl}?task=${firstTask}#browse` }] : []),
+          { '@type': 'ListItem', position: firstTask ? 3 : 2, name: skill.title, item: url },
+        ],
+      },
+    ],
+  };
+  return {
+    url, description, license, schema, firstTask,
+    title: `${skill.title} agent skill | TryRaisins`,
+    prompts: { project: installPrompt(skill, sourceRevision, 'project'), all: installPrompt(skill, sourceRevision, 'all') },
+    related: skill.related.map((slug) => skillsBySlug.get(slug)!),
+  };
+})();
+---
+
+{target && (
+  <SkillsLayout title={`${target.title} agent skill has moved | TryRaisins`} description={`This skill is now called ${target.title}.`} path={`/skills/${target.slug}/`} noindex>
+    <meta slot="head" http-equiv="refresh" content={`0; url=/skills/${target.slug}/`} />
+    <section class="sk-section sk-moved">
+      <h1 class="sk-h2">This skill has a new name</h1>
+      <p class="sk-lede">It’s now called {target.title}, and its page has moved.</p>
+      <a class="sk-btn-primary" href={`/skills/${target.slug}/`}>Go to {target.title}</a>
+    </section>
+  </SkillsLayout>
+)}
+
+{skill && page && (
+  <SkillsLayout title={page.title} description={page.description} path={`/skills/${skill.slug}/`} schema={page.schema}>
+    <section class="sk-section sk-detail-head">
+      <nav class="sk-crumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a class="sk-link" href="/skills/">Agent skills</a></li>
+          {page.firstTask && <li><a class="sk-link" href={`/skills/?task=${page.firstTask}#browse`}>{taskLabel(page.firstTask)}</a></li>}
+          <li aria-current="page">{skill.title}</li>
+        </ol>
+      </nav>
+      <h1 class="sk-h1">{skill.title}</h1>
+      <p class="sk-lede">{skill.purpose}</p>
+      <p class="sk-detail-meta">
+        <span class="sk-code">{skill.name}</span>
+        <span>{fileLabel(skill.fileCount)}</span>
+        {skill.attribution.license && <span>{skill.attribution.license}</span>}
+        {skill.tasks.map((task) => <span>{taskLabel(task)}</span>)}
+        {skill.compatibility && <span>Kept for compatibility</span>}
+      </p>
+    </section>
+
+    <div class="sk-section sk-detail-body">
+      <aside class="sk-install-col" aria-labelledby="sk-install-title">
+        <section class="sk-sheet sk-install" data-install data-name={skill.name}>
+          <p class="sk-install-kicker">Install this skill</p>
+          <fieldset class="sk-scope">
+            <legend id="sk-install-title" class="sk-h3">Where should it live?</legend>
+            <label class="sk-scope-option">
+              <input type="radio" name="scope" value="project" />
+              <span><strong>This project</strong><span>Only agents working in the current repository will see it. Good for trying a skill or sharing it with a team through Git.</span></span>
+            </label>
+            <label class="sk-scope-option">
+              <input type="radio" name="scope" value="all" />
+              <span><strong>All my projects</strong><span>Installs it in your user-level skills folder, so your agent can use it in every project on this computer.</span></span>
+            </label>
+          </fieldset>
+          <p class="sk-placeholder" data-placeholder>Choose one and the install prompt appears here, ready to copy or read first.</p>
+          <div class="sk-prompt-panel" data-prompt-panel hidden>
+            <label for="sk-prompt" class="sk-prompt-label">Prompt preview</label>
+            <textarea id="sk-prompt" class="sk-prompt" readonly rows="16" data-prompt></textarea>
+            <button type="button" class="sk-btn-primary sk-copy" data-copy>Copy install prompt</button>
+            <p class="sk-status" data-status hidden></p>
+          </div>
+          <noscript>
+            <details class="sk-noscript"><summary>Prompt for this project</summary><pre>{page.prompts.project}</pre></details>
+            <details class="sk-noscript"><summary>Prompt for all my projects</summary><pre>{page.prompts.all}</pre></details>
+          </noscript>
+          <template data-template="project">{page.prompts.project}</template>
+          <template data-template="all">{page.prompts.all}</template>
+          <p class="sk-revision">Pinned to catalog revision <span class="sk-code">{shortRevision}</span>, the same files the yeknal CLI serves.</p>
+        </section>
+        <p class="sk-install-all">Want every skill instead? <a class="sk-link" href="/skills/#install-all">See the two ways to install them all</a></p>
+      </aside>
+
+      <div class="sk-detail-main">
+        <section aria-labelledby="sk-when">
+          <h2 id="sk-when" class="sk-h3">When to use it</h2>
+          {skill.whenToUse.length ? (
+            <ul class="sk-bullets">{skill.whenToUse.map((item) => <li>{item}</li>)}</ul>
+          ) : (
+            <p class="sk-body">{skill.description}</p>
+          )}
+          {skill.avoid && <p class="sk-avoid">{skill.avoid}</p>}
+        </section>
+
+        {skill.example && (
+          <section aria-labelledby="sk-example">
+            <h2 id="sk-example" class="sk-h3">A practical example</h2>
+            <div class="sk-example sk-paper">
+              <p class="sk-example-label">You ask</p>
+              <p class="sk-example-ask">“{skill.example.ask}”</p>
+              <hr />
+              <p class="sk-example-label">Your agent does</p>
+              <p>{skill.example.outcome}</p>
+            </div>
+          </section>
+        )}
+
+        <section aria-labelledby="sk-files">
+          <h2 id="sk-files" class="sk-h3">What gets installed</h2>
+          <p class="sk-body">{skill.fileCount === 1 ? 'A single instruction file, SKILL.md, which the agent reads when the skill applies.' : 'The whole folder is copied, so scripts, references and any license notices stay together.'}</p>
+          {skill.fileCount <= 24 ? (
+            <ul class="sk-files">{skill.files.map((file) => <li><span class="sk-code">{file.path}</span><span>{file.size.toLocaleString('en')} bytes</span></li>)}</ul>
+          ) : (
+            <details class="sk-files-more">
+              <summary class="sk-btn">Show all {skill.fileCount} files</summary>
+              <ul class="sk-files">{skill.files.map((file) => <li><span class="sk-code">{file.path}</span><span>{file.size.toLocaleString('en')} bytes</span></li>)}</ul>
+            </details>
+          )}
+          {skill.requirements && <p class="sk-requirements"><strong>Before you start:</strong>{' '}{skill.requirements}</p>}
+          <p class="sk-manifest"><a class="sk-link" href={`/skills/${skill.slug}/files.json`}>File list with SHA-256 hashes</a></p>
+        </section>
+
+        <section aria-labelledby="sk-credit">
+          <h2 id="sk-credit" class="sk-h3">Credit and license</h2>
+          <p class="sk-body">{skill.attribution.credit}{skill.attribution.license && ` It’s shared under the ${skill.attribution.license === 'MIT' ? 'MIT License' : 'Apache License 2.0'}, and the license file is installed with it however you choose to install.`}</p>
+          <div class="sk-credit-actions">
+            <a class="sk-btn" href={sourceTreeUrl(skill.name, sourceRevision)}>View source on GitHub</a>
+            {page.license && <a class="sk-link" href={page.license}>Read the license</a>}
+            {skill.attribution.sourceUrl && <a class="sk-link" href={skill.attribution.sourceUrl}>Original author’s project</a>}
+          </div>
+        </section>
+
+        {page.related.length > 0 && (
+          <section aria-labelledby="sk-related">
+            <h2 id="sk-related" class="sk-h3">Often used with</h2>
+            <ul class="sk-related">
+              {page.related.map((other) => (
+                <li>
+                  <div><h3>{other.title}</h3><p>{other.purpose}</p></div>
+                  <a class="sk-btn" href={`/skills/${other.slug}/`}>View skill<span class="sk-sr">: {other.title}</span></a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </div>
+    </div>
+  </SkillsLayout>
+)}
+
+<script>
+  import { copyText } from '../../scripts/copy-text';
+
+  const panel = document.querySelector<HTMLElement>('[data-install]');
+  if (panel) {
+    const radios = [...panel.querySelectorAll<HTMLInputElement>('input[name="scope"]')];
+    const placeholder = panel.querySelector<HTMLElement>('[data-placeholder]')!;
+    const promptPanel = panel.querySelector<HTMLElement>('[data-prompt-panel]')!;
+    const prompt = panel.querySelector<HTMLTextAreaElement>('[data-prompt]')!;
+    const copy = panel.querySelector<HTMLButtonElement>('[data-copy]')!;
+    const status = panel.querySelector<HTMLElement>('[data-status]')!;
+    const live = document.querySelector<HTMLElement>('[data-sk-status]');
+    const template = (scope: string) => panel.querySelector<HTMLTemplateElement>(`[data-template="${scope}"]`)!.content.textContent!.trim();
+    const say = (message: string) => { if (live) { live.textContent = ''; window.setTimeout(() => { live.textContent = message; }, 30); } };
+    const choose = (scope: string) => {
+      prompt.value = template(scope);
+      prompt.classList.remove('sk-prompt-select');
+      placeholder.hidden = true;
+      promptPanel.hidden = false;
+      status.hidden = true;
+      copy.textContent = 'Copy install prompt';
+      say(scope === 'project' ? 'Prompt ready for this project.' : 'Prompt ready for all your projects.');
+    };
+    radios.forEach((radio) => radio.addEventListener('change', () => radio.checked && choose(radio.value)));
+    const preselected = radios.find((radio) => radio.checked);
+    if (preselected) choose(preselected.value);
+    copy.addEventListener('click', async () => {
+      const scope = radios.find((radio) => radio.checked)?.value;
+      if (!scope) return;
+      const ok = await copyText(prompt.value);
+      status.hidden = false;
+      if (ok) {
+        status.dataset.tone = 'ok';
+        status.textContent = scope === 'project'
+          ? 'Copied. Paste it into your agent while it’s working in the project where you want this skill.'
+          : 'Copied. Paste it into your agent in any project, and it will install the skill for all of them.';
+        copy.textContent = 'Copied';
+        prompt.classList.remove('sk-prompt-select');
+      } else {
+        status.dataset.tone = 'error';
+        status.textContent = 'Your browser didn’t allow copying, so the whole prompt is selected above. Press Ctrl+C, or Cmd+C on a Mac, to copy it.';
+        prompt.classList.add('sk-prompt-select');
+        prompt.focus();
+        prompt.select();
+      }
+      say(status.textContent);
+    });
+  }
+</script>
+
+<style>
+  .sk-moved { padding-top: 96px; display: grid; gap: 20px; justify-items: start; }
+  .sk-detail-head { padding-top: clamp(40px, 6vw, 56px); padding-bottom: 40px; display: grid; gap: 20px; justify-items: start; }
+  .sk-crumbs ol { margin: 0 0 0 -8px; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 0 4px; font-size: 14px; }
+  .sk-crumbs li { display: inline-flex; align-items: center; }
+  .sk-crumbs li + li::before { content: '/'; margin-right: 4px; color: rgba(23,23,25,.6); }
+  .sk-crumbs li[aria-current] { padding: 0 6px; color: rgba(23,23,25,.75); font-weight: 500; }
+  .sk-detail-meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: rgba(23,23,25,.75); font-size: 13px; font-weight: 500; }
+  .sk-detail-meta .sk-code { font-size: 13px; }
+
+  .sk-detail-body { padding-top: 8px; padding-bottom: 32px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 480px); grid-template-areas: 'main aside'; gap: 64px; align-items: start; }
+  .sk-detail-main { grid-area: main; min-width: 0; display: grid; gap: 48px; }
+  .sk-detail-main section { display: grid; gap: 16px; }
+  .sk-install-col { grid-area: aside; min-width: 0; position: sticky; top: 24px; }
+  .sk-body { font-size: 17px; }
+  .sk-bullets { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .sk-bullets li { padding-left: 22px; position: relative; font-size: 17px; }
+  .sk-bullets li::before { content: ''; position: absolute; left: 0; top: .6em; width: 8px; height: 8px; background: var(--sk-red); }
+  .sk-avoid { color: rgba(23,23,25,.75); font-size: 15px; }
+  .sk-example { padding: 24px 26px; display: grid; gap: 12px; }
+  .sk-example hr { width: 100%; margin: 4px 0; border: 0; border-top: 1px solid rgba(23,23,25,.2); }
+  .sk-example-label { color: var(--sk-blue); font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+  .sk-example-ask { font: 600 clamp(1.125rem, 1.6vw, 1.25rem)/1.4 var(--sk-title-font); letter-spacing: -.01em; }
+  .sk-files { margin: 0; padding: 0; list-style: none; border-top: 2px solid var(--sk-ink); }
+  .sk-files li { min-width: 0; padding: 10px 0; display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid rgba(23,23,25,.2); font-size: 14px; }
+  .sk-files .sk-code { min-width: 0; overflow-wrap: anywhere; font-size: 13.5px; }
+  .sk-files li > span:last-child { flex: none; color: rgba(23,23,25,.72); font-variant-numeric: tabular-nums; }
+  .sk-files-more summary { width: fit-content; list-style: none; }
+  .sk-files-more summary::-webkit-details-marker { display: none; }
+  .sk-files-more[open] summary { margin-bottom: 12px; }
+  .sk-requirements { color: rgba(23,23,25,.82); font-size: 15px; }
+  .sk-manifest, .sk-credit-actions { margin-left: -8px !important; }
+  .sk-credit-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .sk-credit-actions .sk-btn { margin-left: 8px; min-height: 48px; }
+  .sk-related { margin: 0; padding: 0; list-style: none; border-top: 2px solid var(--sk-ink); }
+  .sk-related li { padding: 14px 0; display: flex; align-items: center; gap: 24px; border-bottom: 1px solid rgba(23,23,25,.2); }
+  .sk-related li > div { min-width: 0; flex: 1; display: grid; gap: 4px; }
+  .sk-related h3 { font: 600 19px/1.3 var(--sk-title-font); letter-spacing: -.01em; }
+  .sk-related p { color: rgba(23,23,25,.82); font-size: 15px; }
+
+  .sk-install { padding: 28px 26px 26px; display: grid; gap: 18px; }
+  .sk-install-kicker { font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+  .sk-scope { margin: 0; padding: 0; border: 0; display: grid; gap: 10px; }
+  .sk-scope legend { margin-bottom: 8px; padding: 0; }
+  .sk-scope-option { padding: 16px; display: flex; align-items: flex-start; gap: 14px; border: 1px solid var(--sk-ink); background: var(--sk-paper); cursor: pointer; }
+  .sk-scope-option:has(input:checked) { outline: 2px solid var(--sk-ink); outline-offset: -3px; }
+  .sk-scope-option:has(input:focus-visible) { outline: 3px solid var(--sk-blue); outline-offset: 2px; }
+  .sk-scope-option input { width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: var(--sk-ink); }
+  .sk-scope-option > span { display: grid; gap: 4px; }
+  .sk-scope-option strong { font: 600 18px/1.3 var(--sk-title-font); }
+  .sk-scope-option > span > span { color: rgba(23,23,25,.82); font-size: 14px; line-height: 1.45; }
+  .sk-placeholder { padding: 18px 16px; border: 1px solid rgba(23,23,25,.45); color: rgba(23,23,25,.82); font-size: 14px; }
+  .sk-prompt-panel { display: grid; gap: 12px; }
+  .sk-prompt-label { font-size: 13px; font-weight: 600; }
+  .sk-copy { min-width: 200px; min-height: 48px; justify-self: start; }
+  .sk-revision { color: rgba(23,23,25,.75); font-size: 12px; }
+  .sk-noscript summary { min-height: 44px; display: flex; align-items: center; font-weight: 600; cursor: pointer; }
+  .sk-noscript pre { max-height: 22rem; overflow: auto; padding: 12px; border: 1px solid var(--sk-ink); background: var(--sk-paper); font: 500 12px/1.5 var(--sk-mono); white-space: pre-wrap; }
+  .sk-install-all { padding: 24px 4px 0; color: rgba(23,23,25,.75); font-size: 14px; }
+  .sk-install-all .sk-link { margin-left: -8px; }
+
+  @media (max-width: 980px) {
+    .sk-detail-body { grid-template-columns: 1fr; grid-template-areas: 'aside' 'main'; gap: 48px; }
+    .sk-install-col { position: static; max-width: 560px; padding-right: 6px; }
+  }
+  @media (max-width: 620px) {
+    .sk-install { padding: 22px 18px; }
+    .sk-copy { width: 100%; }
+    .sk-related li { flex-direction: column; align-items: stretch; gap: 12px; }
+    .sk-related .sk-btn { min-height: 48px; }
+    .sk-files li { flex-direction: column; gap: 2px; }
+  }
+</style>

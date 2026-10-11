@@ -23,13 +23,17 @@ const {
       </div>
       <header class="play-hero-header">
         <p class="play-hero-index">Seun Sowemimo / Software engineer / Lagos</p>
-        <a href="#play-contact">Get in touch</a>
+        <nav class="play-hero-links" aria-label="Site">
+          <a href="/skills/">Agent skills</a>
+          <a href="#play-contact">Get in touch</a>
+        </nav>
       </header>
       <h1 id="play-title">I build useful things for the web.</h1>
       <div class="play-intro">
         <p>I’m a software engineer who likes turning messy ideas into clear, dependable products. I work across the interface and the systems behind it, using React, TypeScript, Next.js, Node.js and Python.</p>
         <nav class="play-hero-actions" aria-label="Portfolio introduction">
           <a class="play-hero-primary" href="#play-desk">Explore my work</a>
+          <a class="play-hero-secondary" href="/skills/">Browse agent skills</a>
           <a class="play-hero-secondary" href="#play-contact">Get in touch</a>
         </nav>
       </div>
@@ -47,7 +51,7 @@ const {
       <ol data-play-grid>
         {projects.map((project, index) => (
           <li data-play-tile class={`play-tile play-tile-${index + 1}`} style={`--play-tile-index: ${index}`}>
-            <a href={project.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} in a new tab`}>
+            <a href={project.href} {...(project.href.startsWith('/') ? { 'aria-label': `${project.cta ?? 'Open'} ${project.name}` } : { target: '_blank', rel: 'noopener noreferrer', 'aria-label': `Open ${project.name} in a new tab` })}>
               <span class="play-pin" aria-hidden="true"></span>
               <span class="play-photo">
                 {project.cover ? (
@@ -70,7 +74,7 @@ const {
                 <span>{project.number} / {project.type}</span>
                 <strong>{project.name}</strong>
                 <p>{project.description}</p>
-                <span class="play-project-footer"><span>{project.year}</span><em>View project</em></span>
+                <span class="play-project-footer"><span>{project.year}</span><em>{project.cta ?? 'View project'}</em></span>
               </span>
             </a>
           </li>
@@ -237,7 +241,8 @@ const {
   .play-skip:focus { transform: translateY(0); }
   .play-hero { min-height: 100dvh; padding: 40px var(--play-page-margin) 64px; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 64px; background: transparent; }
   .play-hero-header { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
-  .play-hero-header > a { min-height: 48px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; white-space: nowrap; }
+  .play-hero-links { display: flex; align-items: center; gap: 8px; }
+  .play-hero-links a { min-height: 48px; padding: 0 10px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; white-space: nowrap; }
   .play-hero-index { width: fit-content; position: relative; margin: 0; padding: 8px 0; color: rgba(23,23,25,.76); font-size: 12px; line-height: 1.5; letter-spacing: .04em; text-transform: uppercase; }
   .play-hero h1 { max-width: 1080px; position: relative; z-index: 1; margin: auto 0 0; font: 600 clamp(4.5rem, 7.8vw, 7rem)/1.02 'Bricolage Grotesque', sans-serif; letter-spacing: -.03em; text-wrap: balance; }
   .play-intro { position: relative; z-index: 1; display: grid; justify-items: start; gap: 28px; }
@@ -333,7 +338,7 @@ const {
     .play-tile:hover > a { translate: 0 -6px; }
     .play-tile:hover .play-photo img { filter: saturate(1); transform: scale(1.025); }
     .play-hero-primary:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--play-ink); }
-    .play-hero-header > a:hover,
+    .play-hero-links a:hover,
     .play-world .play-hero-secondary:hover,
     .play-world .play-contact-email:hover { background: rgba(240,206,78,.62); }
     .play-contact-aside a:hover { z-index: 1; background: rgba(240,206,78,.62); transform: translateY(-3px) rotate(-1deg); }
@@ -354,7 +359,7 @@ const {
     .play-hero { padding: 28px var(--play-page-margin) 48px; gap: 36px; }
     .play-hero-header { align-items: start; }
     .play-hero-index { max-width: 250px; font-size: 11px; }
-    .play-hero-header > a { display: none; }
+    .play-hero-links { display: none; }
     .play-hero h1 { max-width: 100%; font-size: clamp(2.85rem,14.6vw,4rem); }
     .play-intro { gap: 24px; }
     .play-intro p { max-width: 430px; font-size: 17px; }
