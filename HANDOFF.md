@@ -2,7 +2,7 @@
 
 Last updated: 2026-10-11
 Branch: main
-Implementation release: 242c997e03c3e54d1af03cb127713f30e9501ce1
+Implementation release: 5121fea4104b62cf534699400e85555f6e84a296
 HEAD: use `git rev-parse HEAD` for the latest documentation revision.
 
 ## Current Objective and State
@@ -33,6 +33,7 @@ Verification (artifacts stay in ignored `output/`):
 - `node output/playwright/skills-library/e2e.cjs [baseUrl]` with the build served on 4322 (`npx astro preview --port 4322 --host 127.0.0.1`): 83/83 passed in Chrome, covering crawlable links, metadata and sitemap, default/Show more/focus, URL state and reload, empty and reset paths, inline and detail scope choice, real clipboard success and forced failure, keyboard focus, 320-1440px containment and 44px targets on library and detail pages, no-JS rendering, homepage links, reduced motion, and running the prompt's own git commands against GitHub with SHA-256 comparison for a single-file and a nine-file licensed skill. Report: `output/playwright/skills-library/run-127_0_0_1/report.json`, with screenshots in the same folder.
 - MD_Files `node tools/verify-portfolio-sync.js` (locally excluded there): 26/26 in disposable clones with a bare origin and a real Astro build, covering refusals for dirty, stale, tampered, unpublished and invalid inputs, new-skill defaults, deletion, rename redirect, hand-edited snapshot build failure and rollback.
 - `npm run build` and `git diff --check` pass. The in-app browser pane rendered black on this machine, so Chrome via the project's Playwright was used. Physical-device Safari remains unverified.
+- Release `5121fea` is pushed; [build/publish run 38171371762](https://github.com/tryraisins/tryraisins.github.io/actions/runs/38171371762) and Pages deployment 38171409863 succeeded. The same E2E passed 83/83 against https://tryraisins.dev (`node output/playwright/skills-library/e2e.cjs https://tryraisins.dev`; report in `run-tryraisins_dev/`), including the live install from GitHub. Cache-busted live `/skills/`, `/skills/playwright/`, `/skills/review/files.json` and `og-skills.png` matched the local build by SHA-256, and an unknown slug returns 404. This proves published pages and assets, not third-party crawler or social-card cache refresh. The snapshot was synced from MD_Files `f013d36` (validation run 38171155193).
 
 ## Previous Social Preview Release
 
