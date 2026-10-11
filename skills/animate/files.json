@@ -1,0 +1,20 @@
+{
+  "name": "yeknal-animate",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-animate",
+  "fileCount": 2,
+  "files": [
+    {
+      "path": "RECIPES.md",
+      "sha256": "21ff63d84391db8d96ecdf9170095f55a42c836ccc36fd3269c4772bab031ba2",
+      "size": 7957,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-animate/RECIPES.md"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "7681b42023f8b9d9f299be0748204dd621442c007ecdc3d15ef1d17a9614a447",
+      "size": 12642,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-animate/SKILL.md"
+    }
+  ]
+}

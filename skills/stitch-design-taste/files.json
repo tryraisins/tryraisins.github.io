@@ -1,0 +1,26 @@
+{
+  "name": "yeknal-stitch-design-taste",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-stitch-design-taste",
+  "fileCount": 3,
+  "files": [
+    {
+      "path": "DESIGN.md",
+      "sha256": "46b1e3c6527320d8f3c5cd07ed8e0d3c5cf5b48090a9cb4408cd79462c8d3354",
+      "size": 3749,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-stitch-design-taste/DESIGN.md"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
+      "size": 1065,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-stitch-design-taste/LICENSE.txt"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a8756c9ff187031f2b7c713913d7cd88d368d6fc37be567e48c11c729ad371be",
+      "size": 5530,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-stitch-design-taste/SKILL.md"
+    }
+  ]
+}

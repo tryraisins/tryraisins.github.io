@@ -1,0 +1,14 @@
+{
+  "name": "yeknal-testing-strategy",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-testing-strategy",
+  "fileCount": 1,
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "ee32df8dcd9296962e20388bcf92ec14824ebbcf2f4be8e6e76da3e6a69c3aaa",
+      "size": 2332,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-testing-strategy/SKILL.md"
+    }
+  ]
+}

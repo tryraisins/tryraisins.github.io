@@ -1,0 +1,38 @@
+{
+  "name": "yeknal-security-threat-model",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-security-threat-model",
+  "fileCount": 5,
+  "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "3319b59736312abceca614e341c0e59cae47263e3b58a22b2b5ddf1e5fc8c227",
+      "size": 254,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-security-threat-model/agents/openai.yaml"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
+      "size": 10776,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-security-threat-model/LICENSE.txt"
+    },
+    {
+      "path": "references/prompt-template.md",
+      "sha256": "81a59aa3fb3ac3a739d6a26ab38e4015965f215581ee54becef21a2b121ec29b",
+      "size": 12642,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-security-threat-model/references/prompt-template.md"
+    },
+    {
+      "path": "references/security-controls-and-assets.md",
+      "sha256": "d536cfa9acad2523dc39134bcf33b9566c29dd9a57b407cbc9901637230c6b98",
+      "size": 1680,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-security-threat-model/references/security-controls-and-assets.md"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "a277c7aa1c8d8950867b47dfdf44be21e9b2593a198e7b6286e2aca590bb6daa",
+      "size": 8110,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-security-threat-model/SKILL.md"
+    }
+  ]
+}

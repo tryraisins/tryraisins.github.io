@@ -1,0 +1,122 @@
+{
+  "name": "yeknal-notion-spec-to-implementation",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation",
+  "fileCount": 19,
+  "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "1e4ba970e5e4b0e1fbbea6f1c3795a70e38d9c670c5a652c932b2d04982ca377",
+      "size": 524,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/agents/openai.yaml"
+    },
+    {
+      "path": "assets/notion-small.svg",
+      "sha256": "00f5e4b758cc5c3e36e783dca2fabfafd05169c2f2175063e56d2e1fb6a55f81",
+      "size": 15777,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/assets/notion-small.svg"
+    },
+    {
+      "path": "assets/notion.png",
+      "sha256": "5eef1e62d96a3d09bc9d18e4140486c22799145b017033bd0924c2c49d741cd4",
+      "size": 8526,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/assets/notion.png"
+    },
+    {
+      "path": "evaluations/basic-spec-implementation.json",
+      "sha256": "0b1aa05f74e3e3503b4faaa0263cbbb1142d679140322682bc2dba6148648b50",
+      "size": 2401,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/evaluations/basic-spec-implementation.json"
+    },
+    {
+      "path": "evaluations/README.md",
+      "sha256": "5fdf4830a9b4889b55f1636675d2d26161945530298b6a34a19f4c7f7fc9cc0f",
+      "size": 4427,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/evaluations/README.md"
+    },
+    {
+      "path": "evaluations/spec-to-tasks.json",
+      "sha256": "fea35f66e20c8f1f918815ef13d77f8ee85a3a86d8902c0d0b7d1cfbdb19cf45",
+      "size": 2561,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/evaluations/spec-to-tasks.json"
+    },
+    {
+      "path": "examples/api-feature.md",
+      "sha256": "e56587959b03dc8f4da2e22e06a654cbf81bff2df61060419a29802f9e5181ac",
+      "size": 13699,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/examples/api-feature.md"
+    },
+    {
+      "path": "examples/database-migration.md",
+      "sha256": "575ef697c6c9c55add54b43714460adb3bfa8aa2bec3ecbebd7e16757be511d3",
+      "size": 2443,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/examples/database-migration.md"
+    },
+    {
+      "path": "examples/ui-component.md",
+      "sha256": "5fa8788e1f3fd53e00729065cb574cf46db3bd866d254f108b91b41a08318307",
+      "size": 1662,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/examples/ui-component.md"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "0f377d9b2a1db642e4b0531ffa126e96d9bc6c085f8d9441f220fb25f723c6f8",
+      "size": 1057,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/LICENSE.txt"
+    },
+    {
+      "path": "reference/milestone-summary-template.md",
+      "sha256": "52bebb1e531a69a85b5f9764e27b0129dbed1258e34669ae7b26d8bb6d536efe",
+      "size": 456,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/reference/milestone-summary-template.md"
+    },
+    {
+      "path": "reference/progress-tracking.md",
+      "sha256": "834797b5a2359cc5a7a798457c187cc96392daf5101b824e5f0fe822003f2ad3",
+      "size": 9076,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/reference/progress-tracking.md"
+    },
+    {
+      "path": "reference/progress-update-template.md",
+      "sha256": "649ff810bc8b14b91df74b2506a11f2837a64a9880010466b6ce6d532967bb9a",
+      "size": 420,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/reference/progress-update-template.md"
+    },
+    {
+      "path": "reference/quick-implementation-plan.md",
+      "sha256": "7e19f4aafe8b5312825624247f7cced405482718f67ece9d8f88a4bdbf323055",
+      "size": 480,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/reference/quick-implementation-plan.md"
+    },
+    {
+      "path": "reference/spec-parsing.md",
+      "sha256": "e978a605c45b13001bb68850b635d87be694e79b415d766aa6975a0c3068f5ee",
+      "size": 6942,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/reference/spec-parsing.md"
+    },
+    {
+      "path": "reference/standard-implementation-plan.md",
+      "sha256": "98405060e286d0d60140648996d757cc102abb588ae2eaaaabf0a99e93530a15",
+      "size": 3286,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/reference/standard-implementation-plan.md"
+    },
+    {
+      "path": "reference/task-creation-template.md",
+      "sha256": "010a9a3b1d95633220bb93ffcab5f2f49e897c5d4e4231940d691719bec1be34",
+      "size": 597,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/reference/task-creation-template.md"
+    },
+    {
+      "path": "reference/task-creation.md",
+      "sha256": "df1bec09816ab7beffe7a675eaab24fd62dc01617141cf8deb48f72a735b7ee5",
+      "size": 8209,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/reference/task-creation.md"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "c60d260e5096232c88a9f2593a0ead2c1a5080cae4705fd291eb3e5e6ae897b5",
+      "size": 3571,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-notion-spec-to-implementation/SKILL.md"
+    }
+  ]
+}

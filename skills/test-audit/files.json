@@ -1,0 +1,14 @@
+{
+  "name": "yeknal-test-audit",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-test-audit",
+  "fileCount": 1,
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "be2b73259766c93fa9a614cec8915fae88b7b77f2ee19705842f5708225b605b",
+      "size": 6026,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-test-audit/SKILL.md"
+    }
+  ]
+}

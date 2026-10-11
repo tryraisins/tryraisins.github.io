@@ -1,0 +1,14 @@
+{
+  "name": "yeknal-project-handoff",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-project-handoff",
+  "fileCount": 1,
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "7c6faf080096ba7cade105b42f22328866713fe4c0591f4b953194ecab41c7e3",
+      "size": 3251,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-project-handoff/SKILL.md"
+    }
+  ]
+}

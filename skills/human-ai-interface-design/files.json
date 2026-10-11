@@ -1,0 +1,26 @@
+{
+  "name": "yeknal-human-ai-interface-design",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-human-ai-interface-design",
+  "fileCount": 3,
+  "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "980908b63bfe944d07ea0934354060d91b067ea331411e7df8b8e046cf580f8e",
+      "size": 314,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-human-ai-interface-design/agents/openai.yaml"
+    },
+    {
+      "path": "references/lifecycle-and-patterns.md",
+      "sha256": "fc459f9b732de81796d8fee9f7caed9d0f4de5cc13278c0d1384b9cc8bf64173",
+      "size": 4536,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-human-ai-interface-design/references/lifecycle-and-patterns.md"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e8f61dced4576ed9c498527dc03b2ee6c5697d0eae6b7c426a5a00b680be38fc",
+      "size": 6265,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-human-ai-interface-design/SKILL.md"
+    }
+  ]
+}

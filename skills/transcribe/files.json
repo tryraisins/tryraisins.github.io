@@ -1,0 +1,50 @@
+{
+  "name": "yeknal-transcribe",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-transcribe",
+  "fileCount": 7,
+  "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "fe7a20b9c03ce027e2f3023a4fd363c2d958ceeae1b7daaef77d1f6d055d97a4",
+      "size": 414,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-transcribe/agents/openai.yaml"
+    },
+    {
+      "path": "assets/transcribe-small.svg",
+      "sha256": "7d67890abf0f145a77f5fb87752bb6337b394fd4e26f5969c57d82d40e369a14",
+      "size": 750,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-transcribe/assets/transcribe-small.svg"
+    },
+    {
+      "path": "assets/transcribe.png",
+      "sha256": "0860df58af6b9e58f4445a81baca7bfd94029a447742ae9b9e896e7c5b748688",
+      "size": 1288,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-transcribe/assets/transcribe.png"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
+      "size": 10776,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-transcribe/LICENSE.txt"
+    },
+    {
+      "path": "references/api.md",
+      "sha256": "a2bf7e59d69aa127b176255c5c01afbafda4e3029b12b4413e75074233ffb36d",
+      "size": 457,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-transcribe/references/api.md"
+    },
+    {
+      "path": "scripts/transcribe_diarize.py",
+      "sha256": "d623b1fed1491b7ca4b7b5b393089165e3581a83d90d5a57868241f1b2a5d951",
+      "size": 8684,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-transcribe/scripts/transcribe_diarize.py"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "edce576e7cfcbe4c2cd6e5ce15f8f1a803f0976727154f23ee6ec2cda53441d4",
+      "size": 2899,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-transcribe/SKILL.md"
+    }
+  ]
+}

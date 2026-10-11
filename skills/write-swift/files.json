@@ -1,0 +1,14 @@
+{
+  "name": "yeknal-write-swift",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-write-swift",
+  "fileCount": 1,
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "59fab85c5f6d90793099e2cebd8f9769276fc647590276797406ef29d9b1ea4d",
+      "size": 42028,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-write-swift/SKILL.md"
+    }
+  ]
+}

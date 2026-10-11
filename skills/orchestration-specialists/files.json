@@ -1,0 +1,14 @@
+{
+  "name": "yeknal-orchestration-specialists",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-orchestration-specialists",
+  "fileCount": 1,
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "2012207b58d5a6a9eb8b059890ea6bd0719eb0148e781fbceac54d64f8e8a049",
+      "size": 2448,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-orchestration-specialists/SKILL.md"
+    }
+  ]
+}

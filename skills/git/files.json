@@ -1,0 +1,14 @@
+{
+  "name": "yeknal-git",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-git",
+  "fileCount": 1,
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "69587743bea3b01d070914206cb45365ab315fad790cd53f7e6557931ec067a1",
+      "size": 1435,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-git/SKILL.md"
+    }
+  ]
+}

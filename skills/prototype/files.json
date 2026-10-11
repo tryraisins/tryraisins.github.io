@@ -1,0 +1,20 @@
+{
+  "name": "yeknal-prototype",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-prototype",
+  "fileCount": 2,
+  "files": [
+    {
+      "path": "PICKER.md",
+      "sha256": "31a55eec94715cc79942e91e172e539e3031dcd5e2e5ee7c1446cf2caee960a6",
+      "size": 7548,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-prototype/PICKER.md"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "ac13e8dfa0753184a19d6f7787aad76d52c4356d60d2329c4a2ac5b061c60f4a",
+      "size": 7792,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-prototype/SKILL.md"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "yeknal-cleanup",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-cleanup",
+  "fileCount": 1,
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "0d858058162729f6309f3e3edf9462129bbb3cdcc7ef9fba77295317510ceb19",
+      "size": 1423,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-cleanup/SKILL.md"
+    }
+  ]
+}

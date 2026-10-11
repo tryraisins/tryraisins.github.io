@@ -1,0 +1,92 @@
+{
+  "name": "yeknal-sora",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora",
+  "fileCount": 14,
+  "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "d9012cc092f961b0bb956e4fe2220caed1f7a7f8f654a4ef88af254ed8aef20b",
+      "size": 350,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/agents/openai.yaml"
+    },
+    {
+      "path": "assets/sora-small.svg",
+      "sha256": "fecb5ef27b4b01028892a28a621c60d948595e9b38b542d47b5b97a3147d341d",
+      "size": 1784,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/assets/sora-small.svg"
+    },
+    {
+      "path": "assets/sora.png",
+      "sha256": "c0d8a1e9c9dce967f4aea9b6195b95aa1a8cd06bfd57b8da27542654a7b4ba43",
+      "size": 11731,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/assets/sora.png"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
+      "size": 10776,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/LICENSE.txt"
+    },
+    {
+      "path": "references/cinematic-shots.md",
+      "sha256": "c7e827b1c03e01da7cc24c89f843a820b6151e250c67a51b06be75c42d186446",
+      "size": 1655,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/references/cinematic-shots.md"
+    },
+    {
+      "path": "references/cli.md",
+      "sha256": "9926249d6cbc214ebb86665b5da0edf2974dc4d82b45105701d39259b6885b31",
+      "size": 7199,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/references/cli.md"
+    },
+    {
+      "path": "references/codex-network.md",
+      "sha256": "923fce6a135ea02b7119292418490ee4bf5764104fcb69aaabd89baa8fde57c4",
+      "size": 1146,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/references/codex-network.md"
+    },
+    {
+      "path": "references/prompting.md",
+      "sha256": "ed8cf86c87015e9bce62e0c894731ad85c10606b9d298d8ef4902f3d4a4b823e",
+      "size": 6239,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/references/prompting.md"
+    },
+    {
+      "path": "references/sample-prompts.md",
+      "sha256": "b701351dd71256078ad39a037f895cf5c20ec49a68bf1da7f488672331a4d7d3",
+      "size": 5227,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/references/sample-prompts.md"
+    },
+    {
+      "path": "references/social-ads.md",
+      "sha256": "bc79e56ee044ccf676add6b5e879ec984a9c138a796b28d7df71f217beb1d7f7",
+      "size": 1464,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/references/social-ads.md"
+    },
+    {
+      "path": "references/troubleshooting.md",
+      "sha256": "38525a193d911320af42b87407986e10aa6d4466d38ba730afd2e794bfa3bdd8",
+      "size": 3753,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/references/troubleshooting.md"
+    },
+    {
+      "path": "references/video-api.md",
+      "sha256": "50a1ef1281b0272ec17615f06d6431bcd5001750fecb057562c6dd5de4ce2a90",
+      "size": 3743,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/references/video-api.md"
+    },
+    {
+      "path": "scripts/sora.py",
+      "sha256": "a5eeb0120d6b548cec244647ca76ecdc24cb38241b7d28fa25c479d0b8e4b5eb",
+      "size": 42980,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/scripts/sora.py"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "6c5d9a330e2f66ab3cc89e20b80f8575b736ecfbdc33fbcfc02a910d6d2ac21a",
+      "size": 10273,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-sora/SKILL.md"
+    }
+  ]
+}

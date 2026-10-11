@@ -1,0 +1,44 @@
+{
+  "name": "yeknal-gh-fix-ci",
+  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
+  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-gh-fix-ci",
+  "fileCount": 6,
+  "files": [
+    {
+      "path": "agents/openai.yaml",
+      "sha256": "36f73b9450504983d1647c960689596f59bf9147c14b1b43162912ed7ada9af6",
+      "size": 302,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-gh-fix-ci/agents/openai.yaml"
+    },
+    {
+      "path": "assets/github-small.svg",
+      "sha256": "ee05e92d373d4d84f4612af3c1090ef67698d421bbe30896a4ed5a00cb86a069",
+      "size": 853,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-gh-fix-ci/assets/github-small.svg"
+    },
+    {
+      "path": "assets/github.png",
+      "sha256": "d55a9baa41798d8b5108e3058df3a5bda09914ea9fd73b49929cc38a8832424f",
+      "size": 1838,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-gh-fix-ci/assets/github.png"
+    },
+    {
+      "path": "LICENSE.txt",
+      "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
+      "size": 10776,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-gh-fix-ci/LICENSE.txt"
+    },
+    {
+      "path": "scripts/inspect_pr_checks.py",
+      "sha256": "9459e5b03f86785d184a83e5cd8d621b832e918ec04158a2962d867785812c6c",
+      "size": 15222,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-gh-fix-ci/scripts/inspect_pr_checks.py"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "22b2bad9015473cea5144b8103a5bfb4d21d67cecdc0c61a2ed711ce0fcd1343",
+      "size": 3697,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-gh-fix-ci/SKILL.md"
+    }
+  ]
+}
