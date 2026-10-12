@@ -504,6 +504,7 @@ export function mountSpinningTops(host, hero, { pad = null } = {}) {
     state.z = random(70, 110);
     state.vz = 0;
     state.delay = delay;
+    state.leftRing = false;
     spinUp(state);
   }
 
@@ -531,18 +532,23 @@ export function mountSpinningTops(host, hero, { pad = null } = {}) {
   }
 
   function checkRing() {
-    // The ring hides once every top has landed and rolled fully outside it,
-    // and returns with the next round.
+    // The ring hides once every top has landed and rolled fully outside it at
+    // least once (tops chasing each other often cross back in), and returns
+    // with the next round.
     if (ringClear) return;
     const area = padArea();
-    const left = states.slice(0, topCount).every((state) => {
-      if (state.delay > 0 || state.z > 4) return false;
-      if (!area) return true;
+    const active = states.slice(0, topCount);
+    for (const state of active) {
+      if (state.leftRing || state.delay > 0 || state.z > 4) continue;
+      if (!area) {
+        state.leftRing = true;
+        continue;
+      }
       const dx = (state.x - (area.left + area.width / 2)) / (area.width / 2 + state.collisionRadius);
       const dy = (state.y - (area.top + area.height / 2)) / (area.height / 2 + state.collisionRadius);
-      return dx * dx + dy * dy > 1;
-    });
-    if (left) setRingClear(true);
+      if (dx * dx + dy * dy > 1) state.leftRing = true;
+    }
+    if (active.every((state) => state.leftRing)) setRingClear(true);
   }
 
   function sizeLayer(canvas, context) {
