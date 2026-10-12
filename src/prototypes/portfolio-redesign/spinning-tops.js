@@ -740,7 +740,8 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
 
     const impact = clamp(severity / 160, 0, 1);
     if (sameDirection) {
-      const loss = .03 + .05 * impact;
+      // Scraping costs only a sliver of spin, so busy rounds still run long.
+      const loss = .01 + .02 * impact;
       a.spin *= 1 - loss * (b.mass / (a.mass + b.mass)) * 2;
       b.spin *= 1 - loss * (a.mass / (a.mass + b.mass)) * 2;
     } else if (spinningA || spinningB) {
@@ -750,7 +751,7 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
       const slow = fast === a ? b : a;
       const transfer = (Math.abs(fast.spin) - Math.abs(slow.spin)) * share;
       fast.spin -= Math.sign(fast.spin) * transfer;
-      slow.spin = (Math.abs(slow.spin) + transfer * .85) * (Math.sign(slow.spin) || -Math.sign(fast.spin));
+      slow.spin = (Math.abs(slow.spin) + transfer * .95) * (Math.sign(slow.spin) || -Math.sign(fast.spin));
       if (slow.phase === 'resting' && Math.abs(slow.spin) > 10) {
         slow.phase = 'rimroll';
         slow.roll = 0;

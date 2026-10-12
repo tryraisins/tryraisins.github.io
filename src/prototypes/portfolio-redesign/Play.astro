@@ -8,12 +8,6 @@ const {
   socials = defaultSocials,
 } = Astro.props;
 
-const services = [
-  { title: 'Shape the product', body: 'I help turn a loose brief into a first version worth testing, deciding early what needs to be built and what can wait.' },
-  { title: 'Build the interface', body: 'Accessible, responsive front ends in React and Next.js, with the small interaction details that make software feel considered.' },
-  { title: 'Keep it running', body: 'APIs, data models, integrations and background jobs in Node.js and Python, with tests that follow how people actually use the product.' },
-];
-const stack = ['React', 'TypeScript', 'Next.js', 'Node.js', 'Python', 'Postgres', 'Astro'];
 const year = new Date().getFullYear();
 const emailDestination = obscureContactDestination(`mailto:${email}`);
 ---
@@ -37,7 +31,6 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
           <a href="#play-desk">Work</a>
           <a href="/skills/">Agent skills</a>
           <a href="#play-contact">Contact</a>
-          <span class="play-availability"><span aria-hidden="true"></span>Available for project work</span>
         </nav>
       </header>
       <div class="play-hero-body">
@@ -54,33 +47,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       </div>
       <div class="play-launch" data-launch-pad>
         <svg class="play-launch-ring" viewBox="0 0 540 330" aria-hidden="true" data-launch-ring></svg>
-        <div class="play-launch-note">
-          <p class="play-launch-title">The spin desk</p>
-          <p>Each round the tops drop into this ring and spin out across the page, knocking into each other, trading spin and leaving a faint pencil trail as they slow down. The ring comes back with the next round.</p>
-        </div>
       </div>
-    </section>
-
-    <section class="play-how" data-play-reveal aria-labelledby="play-how-title">
-      <header>
-        <div>
-          <p class="play-eyebrow">How I can help</p>
-          <h2 id="play-how-title">From rough idea to something people rely on</h2>
-        </div>
-        <div class="play-stack">
-          <p>Tools I reach for</p>
-          <ul>{stack.map((item) => <li>{item}</li>)}</ul>
-        </div>
-      </header>
-      <ol class="play-services">
-        {services.map((service, index) => (
-          <li>
-            <span aria-hidden="true">0{index + 1}</span>
-            <h3>{service.title}</h3>
-            <p>{service.body}</p>
-          </li>
-        ))}
-      </ol>
     </section>
 
     <section id="play-desk" class="play-desk" data-play-reveal aria-labelledby="play-work-title">
@@ -372,8 +339,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-hero-index { margin: 0; padding: 8px 0; color: rgba(23,23,25,.76); font-size: 12px; line-height: 1.5; letter-spacing: .05em; text-transform: uppercase; }
   .play-hero-links { display: flex; align-items: center; gap: 4px; }
   .play-hero-links a { min-height: 48px; padding: 0 12px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 500; white-space: nowrap; transition: background-color 140ms ease; }
-  .play-availability { min-height: 40px; margin-left: 10px; padding: 0 14px; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--play-ink); background: var(--play-paper); font-size: 13px; font-weight: 500; white-space: nowrap; }
-  .play-availability > span, .play-contact-availability > span { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: var(--play-green); }
+  .play-contact-availability > span { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: var(--play-green); }
   .play-hero-body { position: relative; z-index: 1; margin-top: auto; display: grid; gap: 28px; }
   .play-hero-kicker { margin: 0; color: #c63f2b; font-size: 15px; font-weight: 500; }
   .play-hero h1 { max-width: 1080px; margin: 0; font: 600 clamp(4.25rem, 7vw, 6.25rem)/.98 'Bricolage Grotesque', sans-serif; letter-spacing: -.025em; }
@@ -390,29 +356,9 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
      sketched in pencil just before they drop (launch-ring.js), rubbed out once
      every top has rolled clear, and the note fades with it. */
   .play-launch { width: min(520px, 38vw); aspect-ratio: 540 / 330; position: absolute; z-index: 1; right: var(--play-page-margin); bottom: 56px; pointer-events: none; }
-  .play-launch-note { transition: opacity 900ms var(--play-ease-out); }
-  .play-launch[data-ring-clear] .play-launch-note { opacity: 0; }
   .play-launch-ring { width: 100%; height: 100%; display: block; overflow: visible; visibility: hidden; }
-  .play-launch-note { width: 230px; position: absolute; right: 0; bottom: calc(100% + 18px); pointer-events: none; }
-  .play-launch-note p { margin: 0; color: rgba(23,23,25,.74); font-size: 13px; line-height: 1.45; }
-  .play-launch-note .play-launch-title { margin-bottom: 6px; color: #c63f2b; font-weight: 600; }
 
   /* How I can help */
-  .play-how { padding: 72px var(--play-page-margin) 96px calc(var(--play-page-margin) + 40px); position: relative; z-index: 1; }
-  .play-how > header { margin-bottom: 40px; display: flex; justify-content: space-between; align-items: end; gap: 40px; }
-  .play-how h2 { max-width: 640px; margin: 0; font: 600 clamp(2.5rem, 4.2vw, 3.5rem)/1.02 var(--play-section-font); letter-spacing: -.01em; text-wrap: balance; }
-  .play-stack { max-width: 340px; padding-bottom: 6px; }
-  .play-stack p { margin: 0 0 10px; color: rgba(23,23,25,.72); font-size: 12px; letter-spacing: .04em; }
-  .play-stack ul { margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
-  .play-stack li { padding: 6px 12px; border: 1px solid rgba(23,23,25,.25); background: var(--play-paper); font-size: 13px; font-weight: 500; }
-  .play-services { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; }
-  .play-services li { padding: 24px 32px 8px; border-top: 2px solid rgba(23,23,25,.3); }
-  .play-services li:first-child { padding-left: 0; }
-  .play-services li:last-child { padding-right: 0; }
-  .play-services li + li { border-left: 1px solid rgba(23,23,25,.3); }
-  .play-services span { color: var(--play-blue); font-size: 12px; font-weight: 600; }
-  .play-services h3 { margin: 14px 0; font: 600 26px/1.15 var(--play-project-font); letter-spacing: -.02em; }
-  .play-services p { margin: 0; color: rgba(23,23,25,.82); font-size: 16px; line-height: 1.55; }
 
   /* Work */
   .play-desk { padding: 40px var(--play-page-margin) 100px calc(var(--play-page-margin) + 40px); position: relative; }
@@ -575,20 +521,15 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-contact-aside a:hover { z-index: 1; background: rgba(240,206,78,.62); transform: translateY(-3px) rotate(-1deg); }
   }
   @media (max-width: 1180px) {
-    .play-availability { display: none; }
     /* Beside the headline there is no longer room for the ring, so it joins the flow. */
     .play-hero { min-height: auto; gap: 48px; }
     .play-hero-body { margin-top: 48px; }
-    .play-launch { width: 100%; max-width: 560px; position: relative; right: auto; bottom: auto; order: 2; margin: 110px 0 24px; align-self: center; }
-    .play-launch-note { width: auto; max-width: 420px; right: auto; left: 0; bottom: calc(100% + 14px); }
+    .play-launch { width: 100%; max-width: 560px; position: relative; right: auto; bottom: auto; order: 2; margin: 24px 0; align-self: center; }
   }
   @media (max-width: 980px) {
     .play-hero { padding-top: 28px; gap: 40px; }
     .play-hero-body { margin-top: 0; }
     .play-intro p { font-size: 19px; }
-    .play-how > header { flex-direction: column; align-items: start; }
-    .play-services { grid-template-columns: 1fr; }
-    .play-services li, .play-services li:first-child, .play-services li:last-child { padding: 18px 0 20px; border-left: 0 !important; }
     .play-desk ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .play-tile, .play-tile:nth-child(5), .play-tile:nth-child(6) { grid-column: span 1; }
     .play-tile:first-child, .play-tile:last-child { grid-column: 1 / -1; }
@@ -601,7 +542,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   }
   @media (max-width: 620px) {
     .play-world { --play-page-margin: 28px; }
-    .play-hero, .play-how, .play-desk, .play-contact, .play-footer { padding-left: 44px; padding-right: 22px; }
+    .play-hero, .play-desk, .play-contact, .play-footer { padding-left: 44px; padding-right: 22px; }
     .play-hero { padding-top: 22px; padding-bottom: 40px; gap: 28px; }
     .play-hero-header { align-items: start; }
     .play-hero-index { max-width: 220px; font-size: 11px; }
@@ -616,8 +557,6 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-hero-header { order: -2; }
     .play-launch { order: -1; margin: 28px 0 36px; }
     .play-contact-slot { min-height: 0; margin-top: 8px; }
-    .play-launch-note { display: none; }
-    .play-how { padding-top: 40px; padding-bottom: 48px; }
     .play-desk { padding-top: 32px; padding-bottom: 72px; }
     .play-desk > header { flex-direction: column; align-items: start; margin-bottom: 32px; }
     .play-desk-actions { display: none; }
