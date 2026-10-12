@@ -6,31 +6,29 @@ import { createCollisionSparks } from './spinning-top-effects.js';
 // Page coordinates are simulation coordinates; the camera projects an oblique
 // tabletop back into the same pixel space. Each top lands, sleeps, precesses
 // faster as it slows, wobbles, rolls round on its rim and comes to rest.
-export function mountSpinningTops(host, hero, { pad = null, button = null } = {}) {
+export function mountSpinningTops(host, hero, { pad = null } = {}) {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); }
   catch { return () => {}; }
+  // Reading shader status after every link forces the driver to finish
+  // compiling on the main thread; compileAsync below does that work off it.
+  renderer.debug.checkShaderErrors = false;
   const pixelRatio = Math.min(devicePixelRatio, 1.5);
-  // A graphite layer under the tops records tip paths; a second layer above
-  // draws the launch gesture.
+  // A graphite layer under the tops records tip paths.
   const trailCanvas = document.createElement('canvas');
-  const aimCanvas = document.createElement('canvas');
   const trail = trailCanvas.getContext('2d');
-  const aim = aimCanvas.getContext('2d');
-  host.replaceChildren(trailCanvas, renderer.domElement, aimCanvas);
+  host.replaceChildren(trailCanvas, renderer.domElement);
   renderer.setPixelRatio(pixelRatio);
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  // three r186 renders PCFSoftShadowMap as PCF anyway; naming PCF directly
+  // keeps precompiled programs identical to the ones the renderer uses.
+  renderer.shadowMap.type = THREE.PCFShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.04;
 
   const scene = new THREE.Scene();
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  const room = new RoomEnvironment();
-  const environment = pmrem.fromScene(room, .04);
-  scene.environment = environment.texture;
-  room.dispose();
-  pmrem.dispose();
+  // The studio reflections are baked once the shaders are ready (see prepare).
+  let environment = null;
 
   const camera = new THREE.OrthographicCamera();
   // An orthographic 55-degree tabletop view exposes the blade faces and driver
@@ -120,9 +118,10 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
   woodGrain.needsUpdate = true;
   const wood = new THREE.MeshStandardMaterial({ color: 0xffe2b8, map: woodGrain, metalness: .01, roughness: .58 });
   const woodDark = new THREE.MeshStandardMaterial({ color: 0x5f301d, metalness: .02, roughness: .62 });
-  // One top per silhouette: turned wood, lithographed tin, steel blades, a
-  // machined brass gear and a three-fin turbine.
-  const palette = [0x2346b5, 0xc8372b, 0x275ace, 0x3a4048, 0xe87835];
+  // Five silhouettes: turned wood, lithographed tin, steel blades, a machined
+  // brass gear and a three-fin turbine. Wide screens repeat the first three
+  // in new colours.
+  const palette = [0x2346b5, 0xc8372b, 0x275ace, 0x3a4048, 0xe87835, 0x2f9d70, 0xd9a21e, 0x7a3fb8];
   const random = (a, b) => a + Math.random() * (b - a);
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -142,17 +141,21 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
 
   function sampleSupportVertices(model) {
     model.updateMatrixWorld(true);
-    const vertices = [];
+    // Baked geometry repeats each corner for every triangle that uses it, so
+    // keep one copy of each before the directional search.
+    const unique = new Map();
+    const vertex = new THREE.Vector3();
     model.traverse((object) => {
       if (!object.isMesh || object.userData.ignoreSupport) return;
       const positions = object.geometry?.getAttribute('position');
       if (!positions) return;
       for (let i = 0; i < positions.count; i++) {
-        vertices.push(new THREE.Vector3()
-          .fromBufferAttribute(positions, i)
-          .applyMatrix4(object.matrixWorld));
+        vertex.fromBufferAttribute(positions, i).applyMatrix4(object.matrixWorld);
+        const key = `${vertex.x.toFixed(4)},${vertex.y.toFixed(4)},${vertex.z.toFixed(4)}`;
+        if (!unique.has(key)) unique.set(key, vertex.clone());
       }
     });
+    const vertices = [...unique.values()];
 
     // Retain directional extrema from the full transformed geometry. This is a
     // compact support hull that includes pegs, domes, blades, teeth, and studs.
@@ -190,7 +193,7 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     const model = new THREE.Group();
     pivot.add(model);
     scene.add(pivot);
-    const design = index;
+    const design = index % 5;
     const enamel = design === 1
       ? new THREE.MeshPhysicalMaterial({ color, metalness: .45, roughness: .2, clearcoat: 1, clearcoatRoughness: .08 })
       : new THREE.MeshStandardMaterial({ color, metalness: .08, roughness: .32 });
@@ -387,8 +390,10 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     };
   }
 
-  const states = palette.map(makeTop);
-  const countFor = (viewport) => viewport > 1200 ? 5 : viewport > 620 ? 4 : 3;
+  // Tops are built only when the screen size needs them, so phones skip the
+  // geometry for the five they never show.
+  const states = [];
+  const countFor = (viewport) => viewport > 1200 ? 8 : viewport > 620 ? 4 : 3;
   const radiusFor = (viewport) => viewport > 1200 ? 56 : viewport > 620 ? 46 : 34;
   let topCount = countFor(window.innerWidth);
   const sparks = createCollisionSparks(scene, renderer.getPixelRatio());
@@ -402,7 +407,9 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
   let width = 0;
   let height = 0;
   let pointer = null;
-  let drag = null;
+  let ready = false;
+  let ringClear = false;
+  let ringCheck = 0;
   let frame = 0;
   let last = 0;
   let lastRendered = 0;
@@ -416,14 +423,39 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
   const world = (x, y) => [x - width / 2, (y - height / 2) / projection];
   const grounded = (state) => state.delay <= 0 && state.z < 4;
 
+  function sizeTop(state) {
+    state.radius = radiusFor(window.innerWidth);
+    state.collisionRadius = state.radius * state.contactRadius;
+    state.model.scale.setScalar(state.radius);
+    state.inertia = state.inertiaFactor * state.mass * state.radius * state.radius;
+    state.trailX = state.trailY = null;
+    return state;
+  }
+
+  function addTop() {
+    const state = sizeTop(makeTop(palette[states.length], states.length));
+    states.push(state);
+    state.active = states.length <= topCount;
+    state.pivot.visible = state.contact.visible = false;
+    return state;
+  }
+
   function setTopCount(nextCount) {
     topCount = nextCount;
+    // Before the first round prepare() builds tops one per frame; afterwards
+    // a wider window builds any extra tops straight away.
+    if (ready) while (states.length < topCount) addTop();
     states.forEach((state, index) => {
       state.active = index < topCount;
       state.pivot.visible = state.active;
       state.contact.visible = state.active;
     });
     host.dataset.topCount = String(topCount);
+  }
+
+  // Renders are skipped until the shaders have compiled in the background.
+  function draw() {
+    if (ready) renderer.render(scene, camera);
   }
 
   function padArea() {
@@ -450,18 +482,23 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     state.phase = 'airborne';
   }
 
-  function launch(state, delay = 0) {
+  function launch(state, delay = 0, slot = random(0, 1)) {
     const margin = state.radius + 12;
     const area = padArea();
+    // Tops land spread round the ring and are flung outward, so the ring
+    // empties within a few seconds and they meet out on the page.
+    const around = slot * Math.PI * 2 + random(-.35, .35);
+    let direction = random(0, Math.PI * 2);
     if (area) {
-      state.x = clamp(random(area.left + area.width * .18, area.right - area.width * .18), margin, width - margin);
-      state.y = clamp(random(area.top + area.height * .3, area.bottom - area.height * .2), margin, height - margin);
+      const reach = random(.2, .55);
+      state.x = clamp(area.left + area.width * (.5 + Math.cos(around) * reach * .5), margin, width - margin);
+      state.y = clamp(area.top + area.height * (.5 + Math.sin(around) * reach * .5), margin, height - margin);
+      direction = around + random(-.6, .6);
     } else {
       state.x = margin + random(0, 1) * Math.max(0, width - margin * 2);
       state.y = margin + random(0, 1) * Math.max(0, height - margin * 2);
     }
-    const speed = random(40, 110);
-    const direction = random(0, Math.PI * 2);
+    const speed = random(150, 260) * state.radius / 56;
     state.vx = Math.cos(direction) * speed;
     state.vy = Math.sin(direction) * speed;
     state.z = random(70, 110);
@@ -477,7 +514,8 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     host.dataset.hitCount = '0';
     // Tops arrive one after another instead of appearing mid-spin.
     const order = states.slice(0, topCount).sort(() => Math.random() - .5);
-    order.forEach((state, index) => launch(state, .25 + index * .42));
+    order.forEach((state, index) => launch(state, .25 + index * .32, index / order.length));
+    setRingClear(false);
     states.forEach((state) => {
       if (state.active) return;
       state.phase = 'resting';
@@ -485,27 +523,26 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     });
   }
 
-  function launchFromGesture(x, y, dx, dy) {
-    // Reuse the top that has rested longest, otherwise the one closest to dying.
-    const candidates = states.slice(0, topCount);
-    const pick = candidates.reduce((best, state) => {
-      const score = state.phase === 'resting' ? 1000 + state.rest : -Math.abs(state.spin) - (state.delay > 0 ? 500 : 0);
-      return score > best.score ? { state, score } : best;
-    }, { state: candidates[0], score: -Infinity }).state;
-    const length = Math.hypot(dx, dy);
-    const margin = pick.radius + 8;
-    pick.x = clamp(x, margin, width - margin);
-    pick.y = clamp(y, margin, height - margin);
-    const speed = clamp(length * 2.6, 30, 460);
-    const direction = length > 4 ? Math.atan2(dy, dx) : random(0, Math.PI * 2);
-    pick.vx = Math.cos(direction) * speed;
-    pick.vy = Math.sin(direction) * speed;
-    pick.z = 34;
-    pick.vz = 120;
-    pick.delay = 0;
-    spinUp(pick, clamp(length / 220, .35, 1));
-    hold = 0;
-    host.dataset.launches = String(Number(host.dataset.launches || 0) + 1);
+  function setRingClear(clear) {
+    if (clear === ringClear) return;
+    ringClear = clear;
+    host.dataset.ring = clear ? 'clear' : 'occupied';
+    if (pad instanceof HTMLElement) pad.toggleAttribute('data-ring-clear', clear);
+  }
+
+  function checkRing() {
+    // The ring hides once every top has landed and rolled fully outside it,
+    // and returns with the next round.
+    if (ringClear) return;
+    const area = padArea();
+    const left = states.slice(0, topCount).every((state) => {
+      if (state.delay > 0 || state.z > 4) return false;
+      if (!area) return true;
+      const dx = (state.x - (area.left + area.width / 2)) / (area.width / 2 + state.collisionRadius);
+      const dy = (state.y - (area.top + area.height / 2)) / (area.height / 2 + state.collisionRadius);
+      return dx * dx + dy * dy > 1;
+    });
+    if (left) setRingClear(true);
   }
 
   function sizeLayer(canvas, context) {
@@ -529,7 +566,6 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     setTopCount(countFor(window.innerWidth));
     renderer.setSize(width, height);
     sizeLayer(trailCanvas, trail);
-    sizeLayer(aimCanvas, aim);
     camera.left = -width / 2;
     camera.right = width / 2;
     camera.top = height / 2;
@@ -546,14 +582,7 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     light.shadow.camera.bottom = -reach;
     light.shadow.camera.far = 3000;
     light.shadow.camera.updateProjectionMatrix();
-    const radius = radiusFor(window.innerWidth);
-    states.forEach((state) => {
-      state.radius = radius;
-      state.collisionRadius = state.radius * state.contactRadius;
-      state.model.scale.setScalar(state.radius);
-      state.inertia = state.inertiaFactor * state.mass * state.radius * state.radius;
-      state.trailX = state.trailY = null;
-    });
+    states.forEach(sizeTop);
     if (!previousWidth) {
       reset();
     } else {
@@ -573,7 +602,7 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
       sparks.clear();
     }
     pose(0);
-    renderer.render(scene, camera);
+    draw();
   }
 
   function burst(x, y, speed, elevation, source) {
@@ -614,7 +643,7 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     }
   }
 
-  function wall(state, nx, ny, penetration, x, y, restitution = .6, source = 'edge') {
+  function wall(state, nx, ny, penetration, x, y, restitution = .78, source = 'edge') {
     state.x += nx * penetration;
     state.y += ny * penetration;
     const pointerVX = source === 'mouse' ? pointer.vx : 0;
@@ -680,8 +709,11 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     const sameDirection = spinningA && spinningB && Math.sign(a.spin) === Math.sign(b.spin);
     const tangentSpeed = rvx * tx + rvy * ty + a.spin * a.collisionRadius + b.spin * b.collisionRadius;
     const slip = clamp(Math.abs(tangentSpeed) / 900, 0, 1);
-    const restitution = .6 + Math.min(.08, severity / 1800) + (sameDirection ? .16 * slip : 0);
-    const normalImpulse = -(1 + restitution) * normalSpeed / inverseMass;
+    const restitution = .82 + Math.min(.1, severity / 1500) + (sameDirection ? .2 * slip : 0);
+    // Spinning rims fling each other apart, harder the faster they turn.
+    const scale = Math.min(a.radius, b.radius) / 56;
+    const rimKick = clamp(Math.abs(a.spin) + Math.abs(b.spin), 0, 140) * (sameDirection ? 1.6 : 1.1) * scale;
+    const normalImpulse = (-(1 + restitution) * normalSpeed + rimKick) / inverseMass;
     const jx = normalImpulse * nx;
     const jy = normalImpulse * ny;
     a.vx -= jx * invA;
@@ -698,7 +730,7 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
 
     const impact = clamp(severity / 160, 0, 1);
     if (sameDirection) {
-      const loss = .1 + .15 * impact;
+      const loss = .04 + .08 * impact;
       a.spin *= 1 - loss * (b.mass / (a.mass + b.mass)) * 2;
       b.spin *= 1 - loss * (a.mass / (a.mass + b.mass)) * 2;
     } else if (spinningA || spinningB) {
@@ -716,10 +748,10 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     }
 
     for (const [state, other] of [[a, b], [b, a]]) {
-      const kick = severity * (other.mass / state.mass);
-      // A short hop and a nod that settles within about a second.
-      if (state.phase !== 'resting') state.vz = Math.max(state.vz, Math.min(150, kick * .45));
-      state.nutation = Math.min(.22, state.nutation + kick * .0009);
+      const kick = (severity + rimKick) * (other.mass / state.mass);
+      // A hop and a nod that settles within about a second.
+      if (state.phase !== 'resting') state.vz = Math.max(state.vz, Math.min(230, kick * .55));
+      state.nutation = Math.min(.26, state.nutation + kick * .0011);
       state.wobble = Math.min(.3, state.wobble + kick * .0004);
       if (state.phase === 'resting') state.rock = Math.min(.22, state.rock + kick * .0016);
       // A slow, tilted top has little gyroscopic stiffness and can be knocked over.
@@ -735,8 +767,8 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     collisionEnergy += Math.max(0, energyBefore - energyAfter);
     const contactX = a.x + nx * a.collisionRadius;
     const contactY = a.y + ny * a.collisionRadius;
-    if (a.metal && b.metal) burst(contactX, contactY, severity, Math.min(a.radius, b.radius) * .82, 'top');
-    else scuff(contactX, contactY, severity);
+    if (a.metal && b.metal) burst(contactX, contactY, severity + rimKick, Math.min(a.radius, b.radius) * .82, 'top');
+    else scuff(contactX, contactY, severity + rimKick);
     host.dataset.hitCount = String(Number(host.dataset.hitCount || 0) + 1);
   }
 
@@ -868,10 +900,35 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
       }
     }
 
+    if (!airborne && state.z <= 0 && spinMagnitude > 22) {
+      // A lively top drifts across the paper and is drawn toward the nearest
+      // other spinning top, so they meet often instead of settling apart.
+      const scale = state.radius / 56;
+      let nearest = null;
+      let nearestDistance = Infinity;
+      for (let i = 0; i < topCount; i++) {
+        const other = states[i];
+        if (other === state || other.phase === 'resting' || !grounded(other)) continue;
+        const distance = Math.hypot(other.x - state.x, other.y - state.y);
+        if (distance < nearestDistance) { nearest = other; nearestDistance = distance; }
+      }
+      if (nearest && nearestDistance > 1) {
+        const pull = 70 * scale * stability;
+        state.vx += (nearest.x - state.x) / nearestDistance * pull * dt;
+        state.vy += (nearest.y - state.y) / nearestDistance * pull * dt;
+      }
+      const speed = Math.hypot(state.vx, state.vy);
+      if (speed < 120 * scale * stability) {
+        const heading = speed > 1 ? Math.atan2(state.vy, state.vx) : random(0, Math.PI * 2);
+        state.vx += Math.cos(heading) * 90 * scale * dt;
+        state.vy += Math.sin(heading) * 90 * scale * dt;
+      }
+    }
+
     const linearDrag = airborne ? .1
-      : state.phase === 'spinning' ? .18
-        : state.phase === 'precessing' ? .3
-          : state.phase === 'wobbling' ? .6 : 2.4;
+      : state.phase === 'spinning' ? .08
+        : state.phase === 'precessing' ? .16
+          : state.phase === 'wobbling' ? .5 : 2.4;
     state.vx *= Math.exp(-linearDrag * dt);
     state.vy *= Math.exp(-linearDrag * dt);
     state.x += state.vx * dt;
@@ -961,7 +1018,12 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     }
     for (let i = 0; i < topCount; i++) allResting &&= states[i].phase === 'resting';
     sparks.update(dt);
-    if (allResting && !drag) {
+    ringCheck += dt;
+    if (ringCheck > .25) {
+      ringCheck = 0;
+      checkRing();
+    }
+    if (allResting) {
       hold += dt;
       if (hold > 3) reset();
     } else {
@@ -1034,38 +1096,11 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     }
   }
 
-  function drawAim() {
-    aim.clearRect(0, 0, width, height);
-    if (!drag) return;
-    const dx = drag.x - drag.startX;
-    const dy = drag.y - drag.startY;
-    const length = Math.hypot(dx, dy);
-    aim.strokeStyle = 'rgba(198,63,43,.85)';
-    aim.fillStyle = 'rgba(198,63,43,.85)';
-    aim.lineWidth = 1.6;
-    aim.beginPath();
-    aim.ellipse(drag.startX, drag.startY, 14, 14 * projection * .6, 0, 0, Math.PI * 2);
-    aim.stroke();
-    if (length < 6) return;
-    const angle = Math.atan2(dy, dx);
-    aim.beginPath();
-    aim.moveTo(drag.startX, drag.startY);
-    // A slight wobble so the guide reads as a pencil stroke.
-    aim.quadraticCurveTo(drag.startX + dx / 2 + Math.sin(angle) * 4, drag.startY + dy / 2 - Math.cos(angle) * 4, drag.x, drag.y);
-    aim.stroke();
-    aim.beginPath();
-    aim.moveTo(drag.x, drag.y);
-    aim.lineTo(drag.x - Math.cos(angle - .45) * 12, drag.y - Math.sin(angle - .45) * 12);
-    aim.moveTo(drag.x, drag.y);
-    aim.lineTo(drag.x - Math.cos(angle + .45) * 12, drag.y - Math.sin(angle + .45) * 12);
-    aim.stroke();
-  }
-
   function tick(now) {
     if (disposed) return;
     const delta = Math.min(.05, (now - last) / 1000 || 0);
     last = now;
-    if (!document.hidden && !reduced.matches) {
+    if (ready && !document.hidden && !reduced.matches) {
       accumulator += delta;
       while (accumulator >= 1 / 120) {
         step(1 / 120);
@@ -1089,66 +1124,28 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     return [event.clientX - box.left, event.clientY - box.top];
   };
   const move = (event) => {
-    if (drag && event.pointerId === drag.id) {
-      [drag.x, drag.y] = local(event);
-      drawAim();
-    }
     if (event.pointerType === 'touch') return;
     const [x, y] = local(event);
     const elapsed = pointer ? Math.max(.008, (event.timeStamp - pointer.time) / 1000) : 1;
     const vx = pointer ? clamp((x - pointer.x) / elapsed, -450, 450) : 0;
     const vy = pointer ? clamp((y - pointer.y) / elapsed, -450, 450) : 0;
-    // While aiming, the cursor should not shove the tops it passes over.
-    pointer = drag ? null : { x, y, vx, vy, time: event.timeStamp, age: 0 };
+    pointer = { x, y, vx, vy, time: event.timeStamp, age: 0 };
   };
   const leave = () => { pointer = null; };
-  const startDrag = (event) => {
-    if (reduced.matches || event.button > 0 || drag) return;
-    if (event.target instanceof Element && event.target.closest('button, a')) return;
-    event.preventDefault();
-    const [x, y] = local(event);
-    drag = { id: event.pointerId, startX: x, startY: y, x, y };
-    pad.setPointerCapture?.(event.pointerId);
-    drawAim();
-  };
-  const endDrag = (event) => {
-    if (!drag || event.pointerId !== drag.id) return;
-    const { startX, startY, x, y } = drag;
-    drag = null;
-    drawAim();
-    if (event.type === 'pointerup') launchFromGesture(startX, startY, x - startX, y - startY);
-  };
-  const launchFromButton = () => {
-    if (reduced.matches) return;
-    const area = padArea();
-    const x = area ? area.left + area.width / 2 : width / 2;
-    const y = area ? area.top + area.height / 2 : height / 2;
-    const angle = random(0, Math.PI * 2);
-    launchFromGesture(x, y, Math.cos(angle) * 90, Math.sin(angle) * 90);
-  };
-
   const pointerSurface = hero.closest('[data-play-root]') || window;
   pointerSurface.addEventListener('pointermove', move);
   pointerSurface.addEventListener('pointerleave', leave);
   window.addEventListener('blur', leave);
   window.addEventListener('scroll', onScroll, { passive: true });
-  if (pad instanceof HTMLElement) {
-    pad.addEventListener('pointerdown', startDrag);
-    pad.addEventListener('pointerup', endDrag);
-    pad.addEventListener('pointercancel', endDrag);
-  }
-  button?.addEventListener('click', launchFromButton);
   const observer = new ResizeObserver(resize);
   observer.observe(host);
   const motionChange = () => {
     trail.clearRect(0, 0, width, height);
-    drag = null;
-    drawAim();
     if (reduced.matches) settleStill();
     else reset();
     nextMetricsAt = 0;
     pose();
-    renderer.render(scene, camera);
+    draw();
   };
   // Reduced motion: a still arrangement of upright tops, no trails.
   function settleStill() {
@@ -1163,6 +1160,7 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
       state.nutation = 0;
       state.rock = 0;
     });
+    setRingClear(false);
   }
   reduced.addEventListener('change', motionChange);
   // Browser tests can fast-forward the fixed-step simulation with ?spin-debug.
@@ -1174,18 +1172,102 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
         drawTrails();
         nextMetricsAt = 0;
         pose();
-        renderer.render(scene, camera);
+        draw();
       },
+      tops: () => states.slice(0, topCount).map(({ x, y, phase, delay }) => ({ x, y, phase, delay })),
+      size: () => ({ width, height }),
     };
   }
   resize();
-  if (reduced.matches) {
-    settleStill();
+  // Every shader is compiled in the background (KHR_parallel_shader_compile)
+  // before it is first used, so the page never waits on the GPU driver.
+  // Reflections on tops this small do not need the default 256px bake.
+  const envSize = 64;
+  async function prepare() {
+    const nextFrame = () => new Promise((resolve) => requestAnimationFrame(resolve));
+    const room = new RoomEnvironment();
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    // The environment bake renders the room into a float target without tone
+    // mapping, then blurs it with PMREM's own shaders. Compiling all of them
+    // against a matching target yields the programs the bake will look up.
+    const bakeTarget = new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType });
+    const warm = new THREE.Scene();
+    warm.add(new THREE.Mesh(new THREE.BoxGeometry(), new THREE.MeshBasicMaterial({ side: THREE.BackSide, depthWrite: false, depthTest: false })));
+    // Top materials are keyed on the baked map's height, so a stand-in of the
+    // same size lets them compile alongside the bake instead of after it.
+    const bakeSize = { width: 3 * Math.max(envSize, 112), height: 4 * envSize };
+    try {
+      // Private PMREMGenerator internals (three r186); if they change, the
+      // bake still works and only loses these warm-ups.
+      pmrem._setSize(envSize);
+      const target = pmrem._allocateTargets();
+      bakeSize.width = target.width;
+      bakeSize.height = target.height;
+      target.dispose();
+      // Programs are keyed on which attributes exist, so give the probes a position.
+      const probe = new THREE.BufferGeometry().setAttribute('position', new THREE.Float32BufferAttribute([0, 0, 0], 3));
+      for (const material of [pmrem._blurMaterial, pmrem._ggxMaterial]) {
+        if (material) warm.add(new THREE.Mesh(probe, material));
+      }
+    } catch {}
+    renderer.setRenderTarget(bakeTarget);
+    const bakeCamera = new THREE.PerspectiveCamera();
+    const compiling = [room, warm].map((target) => renderer.compileAsync(target, bakeCamera).catch(() => {}));
+
+    // Shadow casting draws each top into a depth target with a depth material.
+    // A probe lit like the page and compiled against a target warms it.
+    const shadowScene = new THREE.Scene();
+    const shadowLight = new THREE.DirectionalLight();
+    shadowLight.castShadow = true;
+    const depthProbe = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshDepthMaterial());
+    shadowScene.add(new THREE.HemisphereLight(), shadowLight, depthProbe);
+    compiling.push(renderer.compileAsync(shadowScene, camera).catch(() => {}));
+    renderer.setRenderTarget(null);
+
+    // Building a top takes a few milliseconds, so spread them across frames
+    // while the GPU process compiles.
+    while (states.length < topCount) {
+      addTop();
+      await nextFrame();
+      if (disposed) break;
+    }
+    const standIn = new THREE.Texture(bakeSize);
+    standIn.mapping = THREE.CubeUVReflectionMapping;
+    scene.environment = standIn;
+    // All tops are shown for the pass so every material is compiled.
+    const shown = states.map((state) => state.pivot.visible);
+    for (const state of states) state.pivot.visible = state.contact.visible = true;
+    if (!disposed) compiling.push(renderer.compileAsync(scene, camera).catch(() => {}));
+    states.forEach((state, index) => { state.pivot.visible = state.contact.visible = shown[index]; });
+    scene.environment = null;
+
+    await Promise.all(compiling);
+    bakeTarget.dispose();
+    warm.children[0].geometry.dispose();
+    warm.children[0].material.dispose();
+    depthProbe.geometry.dispose();
+    depthProbe.material.dispose();
+    if (!disposed) {
+      environment = pmrem.fromScene(room, .04, .1, 100, { size: envSize });
+      scene.environment = environment.texture;
+    }
+    room.dispose();
+    pmrem.dispose();
+  }
+
+  prepare().then(() => {
+    if (disposed) return;
+    ready = true;
+    host.dataset.ready = '';
+    setTopCount(countFor(window.innerWidth));
+    if (reduced.matches) settleStill();
+    else reset();
     nextMetricsAt = 0;
     pose();
-    renderer.render(scene, camera);
-  }
-  frame = requestAnimationFrame(tick);
+    draw();
+    last = performance.now();
+    frame = requestAnimationFrame(tick);
+  });
 
   return () => {
     disposed = true;
@@ -1195,12 +1277,7 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     pointerSurface.removeEventListener('pointermove', move);
     pointerSurface.removeEventListener('pointerleave', leave);
     window.removeEventListener('blur', leave);
-    if (pad instanceof HTMLElement) {
-      pad.removeEventListener('pointerdown', startDrag);
-      pad.removeEventListener('pointerup', endDrag);
-      pad.removeEventListener('pointercancel', endDrag);
-    }
-    button?.removeEventListener('click', launchFromButton);
+    if (pad instanceof HTMLElement) pad.removeAttribute('data-ring-clear');
     reduced.removeEventListener('change', motionChange);
     sparks.dispose();
     scene.traverse((object) => {
@@ -1211,7 +1288,7 @@ export function mountSpinningTops(host, hero, { pad = null, button = null } = {}
     finish.dispose();
     streakTexture.dispose();
     contactTexture.dispose();
-    environment.dispose();
+    environment?.dispose();
     renderer.dispose();
     host.replaceChildren();
   };
