@@ -4,17 +4,25 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { createCollisionSparks } from './spinning-top-effects.js';
 
 // Page coordinates are simulation coordinates; the camera projects an oblique
-// tabletop back into the same pixel space.
-export function mountSpinningTops(host, hero) {
+// tabletop back into the same pixel space. Each top lands, sleeps, precesses
+// faster as it slows, wobbles, rolls round on its rim and comes to rest.
+export function mountSpinningTops(host, hero, { pad = null, button = null } = {}) {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); }
   catch { return () => {}; }
-  host.replaceChildren(renderer.domElement);
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
+  const pixelRatio = Math.min(devicePixelRatio, 1.5);
+  // A graphite layer under the tops records tip paths; a second layer above
+  // draws the launch gesture.
+  const trailCanvas = document.createElement('canvas');
+  const aimCanvas = document.createElement('canvas');
+  const trail = trailCanvas.getContext('2d');
+  const aim = aimCanvas.getContext('2d');
+  host.replaceChildren(trailCanvas, renderer.domElement, aimCanvas);
+  renderer.setPixelRatio(pixelRatio);
   renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFShadowMap;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.02;
+  renderer.toneMappingExposure = 1.04;
 
   const scene = new THREE.Scene();
   const pmrem = new THREE.PMREMGenerator(renderer);
@@ -29,21 +37,50 @@ export function mountSpinningTops(host, hero) {
   // without perspective scaling changing pointer and collision alignment.
   const viewAngle = Math.PI * 55 / 180;
   const projection = Math.sin(viewAngle);
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x8d8175, 1.1));
-  const light = new THREE.DirectionalLight(0xfff6e8, 2.1);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x8d8175, 1));
+  const light = new THREE.DirectionalLight(0xfff6e8, 2.2);
   light.position.set(-250, 650, 200);
   light.castShadow = true;
   light.shadow.mapSize.set(1024, 1024);
   light.shadow.bias = -.0001;
   light.shadow.normalBias = .3;
+  light.shadow.radius = 4;
   scene.add(light, light.target);
   const ground = new THREE.Mesh(
     new THREE.PlaneGeometry(6000, 6000),
-    new THREE.ShadowMaterial({ opacity: .2 }),
+    new THREE.ShadowMaterial({ opacity: .22 }),
   );
   ground.rotation.x = -Math.PI / 2;
   ground.receiveShadow = true;
   scene.add(ground);
+
+  const canvasTexture = (size, draw) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = canvas.height = size;
+    draw(canvas.getContext('2d'), size);
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+  };
+  // Concentric streaks: what a camera sees of blades and studs at speed.
+  const streakTexture = canvasTexture(256, (context, size) => {
+    const centre = size / 2;
+    for (let radius = 4; radius < centre; radius += 1.5) {
+      context.strokeStyle = `rgba(255,255,255,${.35 + Math.random() * .65})`;
+      context.lineWidth = 1.6;
+      context.beginPath();
+      context.arc(centre, centre, radius, 0, Math.PI * 2);
+      context.stroke();
+    }
+  });
+  const contactTexture = canvasTexture(64, (context, size) => {
+    const gradient = context.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    gradient.addColorStop(0, 'rgba(0,0,0,1)');
+    gradient.addColorStop(.35, 'rgba(0,0,0,.55)');
+    gradient.addColorStop(1, 'rgba(0,0,0,0)');
+    context.fillStyle = gradient;
+    context.fillRect(0, 0, size, size);
+  });
 
   const finishPixels = new Uint8Array(32 * 32 * 4);
   for (let y = 0; y < 32; y++) {
@@ -58,30 +95,34 @@ export function mountSpinningTops(host, hero) {
   finish.wrapS = finish.wrapT = THREE.RepeatWrapping;
   finish.repeat.set(3, 2);
   finish.needsUpdate = true;
-  const metal = new THREE.MeshStandardMaterial({ color: 0x8a929b, metalness: .86, roughness: .56, roughnessMap: finish });
-  const dark = new THREE.MeshStandardMaterial({ color: 0x252b32, metalness: .25, roughness: .47 });
-  const gold = new THREE.MeshStandardMaterial({ color: 0xb38b40, metalness: .8, roughness: .4, roughnessMap: finish });
-  const cream = new THREE.MeshStandardMaterial({ color: 0xf2dfb4, metalness: .08, roughness: .55 });
-  const woodPixels = new Uint8Array(64 * 32 * 4);
-  for (let y = 0; y < 32; y++) {
-    for (let x = 0; x < 64; x++) {
-      const grain = Math.sin(y * .82 + Math.sin(x * .12) * 1.6) * 12 + Math.sin(y * 2.8 + x * .09) * 4;
-      const offset = (y * 64 + x) * 4;
-      woodPixels[offset] = 185 + grain;
-      woodPixels[offset + 1] = 124 + grain * .7;
-      woodPixels[offset + 2] = 68 + grain * .4;
+  const steel = new THREE.MeshStandardMaterial({ color: 0x9aa2ab, metalness: 1, roughness: .34, roughnessMap: finish });
+  const gunmetal = new THREE.MeshStandardMaterial({ color: 0x2a2f36, metalness: .7, roughness: .42 });
+  const brass = new THREE.MeshStandardMaterial({ color: 0xc39a4a, metalness: 1, roughness: .3, roughnessMap: finish });
+  const cream = new THREE.MeshStandardMaterial({ color: 0xf2dfb4, metalness: .05, roughness: .5 });
+  const woodPixels = new Uint8Array(128 * 64 * 4);
+  for (let y = 0; y < 64; y++) {
+    for (let x = 0; x < 128; x++) {
+      // Growth rings disturbed by slow noise, plus fine fibre.
+      const ring = Math.sin((y + Math.sin(x * .07) * 5 + Math.sin(x * .023 + 1.3) * 9) * .55);
+      const grain = ring * 14 + Math.sin(y * 3.1 + x * .2) * 3 + (Math.random() - .5) * 6;
+      const offset = (y * 128 + x) * 4;
+      woodPixels[offset] = 190 + grain;
+      woodPixels[offset + 1] = 128 + grain * .72;
+      woodPixels[offset + 2] = 70 + grain * .42;
       woodPixels[offset + 3] = 255;
     }
   }
-  const woodGrain = new THREE.DataTexture(woodPixels, 64, 32, THREE.RGBAFormat);
+  const woodGrain = new THREE.DataTexture(woodPixels, 128, 64, THREE.RGBAFormat);
   woodGrain.wrapS = THREE.RepeatWrapping;
   woodGrain.wrapT = THREE.RepeatWrapping;
-  woodGrain.repeat.set(2.5, 1.5);
+  woodGrain.repeat.set(2, 1.4);
   woodGrain.colorSpace = THREE.SRGBColorSpace;
   woodGrain.needsUpdate = true;
-  const wood = new THREE.MeshStandardMaterial({ color: 0xffe4bc, map: woodGrain, metalness: .01, roughness: .62 });
-  const woodDark = new THREE.MeshStandardMaterial({ color: 0x5f301d, metalness: .02, roughness: .7 });
-  const palette = [0x275ace, 0xc84231, 0xd6a926, 0x2f9d70, 0x8a5cf5, 0xe87835, 0x1e8f96, 0xd54b83, 0x719b35];
+  const wood = new THREE.MeshStandardMaterial({ color: 0xffe2b8, map: woodGrain, metalness: .01, roughness: .58 });
+  const woodDark = new THREE.MeshStandardMaterial({ color: 0x5f301d, metalness: .02, roughness: .62 });
+  // One top per silhouette: turned wood, lithographed tin, steel blades, a
+  // machined brass gear and a three-fin turbine.
+  const palette = [0x2346b5, 0xc8372b, 0x275ace, 0x3a4048, 0xe87835];
   const random = (a, b) => a + Math.random() * (b - a);
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -129,9 +170,9 @@ export function mountSpinningTops(host, hero) {
         let support = vertices[0];
         let minimum = Infinity;
         for (const vertex of vertices) {
-          const projection = vertex.dot(direction);
-          if (projection < minimum) {
-            minimum = projection;
+          const value = vertex.dot(direction);
+          if (value < minimum) {
+            minimum = value;
             support = vertex;
           }
         }
@@ -149,26 +190,22 @@ export function mountSpinningTops(host, hero) {
     const model = new THREE.Group();
     pivot.add(model);
     scene.add(pivot);
-    const enamel = new THREE.MeshStandardMaterial({ color, metalness: .08, roughness: .34 });
+    const design = index;
+    const enamel = design === 1
+      ? new THREE.MeshPhysicalMaterial({ color, metalness: .45, roughness: .2, clearcoat: 1, clearcoatRoughness: .08 })
+      : new THREE.MeshStandardMaterial({ color, metalness: .08, roughness: .32 });
     const accent = new THREE.MeshStandardMaterial({
       color: new THREE.Color(color).offsetHSL(index % 2 ? .035 : -.035, -.08, -.09),
       metalness: .06,
-      roughness: .42,
+      roughness: .4,
     });
-    const blurMaterial = new THREE.MeshBasicMaterial({
-      color,
-      transparent: true,
-      opacity: 0,
-      depthWrite: false,
-      blending: THREE.NormalBlending,
-      side: THREE.DoubleSide,
-    });
-    const add = (geometry, material, y = 0, parent = model) => {
+    // Asymmetric parts (blades, teeth, fins, fasteners) are what strobe at
+    // speed, so they are baked separately and fade into a blur disc.
+    const add = (geometry, material, y = 0, detail = false) => {
       const mesh = new THREE.Mesh(geometry, material);
       mesh.position.y = y;
-      mesh.castShadow = material !== blurMaterial;
-      mesh.receiveShadow = material !== blurMaterial;
-      parent.add(mesh);
+      mesh.userData.detail = detail;
+      model.add(mesh);
       return mesh;
     };
     const torus = (radius, tube, material, y) => {
@@ -180,7 +217,7 @@ export function mountSpinningTops(host, hero) {
       const fastener = new THREE.CylinderGeometry(studRadius, studRadius, .025, 6);
       for (let i = 0; i < count; i++) {
         const angle = i * Math.PI * 2 / count;
-        const stud = add(fastener, material, y);
+        const stud = add(fastener, material, y, true);
         stud.position.x = Math.cos(angle) * radius;
         stud.position.z = Math.sin(angle) * radius;
       }
@@ -189,32 +226,34 @@ export function mountSpinningTops(host, hero) {
     let contactRadius = .88;
     let inertiaFactor = .52;
     let mass = 1;
-    const design = index % 5;
 
     if (design === 0) {
       // Traditional wooden top: pear profile, painted waist stripes, tall peg.
       const profile = [[.025, 0], [.05, .06], [.12, .22], [.3, .43], [.58, .62], [.76, .76], [.82, .86], [.8, .95], [.7, 1.03], [.48, 1.1], [.16, 1.13]];
-      add(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 36), wood);
+      add(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 40), wood);
       torus(.69, .045, cream, .74);
       torus(.57, .04, enamel, .9);
+      torus(.79, .022, woodDark, .84);
       add(new THREE.CylinderGeometry(.085, .13, .36, 20), woodDark, 1.28);
       add(new THREE.SphereGeometry(.12, 16, 8), enamel, 1.46);
       contactRadius = .82; inertiaFactor = .43; mass = .82;
     } else if (design === 1) {
-      // Rounded enamel toy: soft dome, double pinstripe, broad lower skirt.
+      // Lithographed tin: soft dome, printed bands, plunger knob.
       const profile = [[.055, 0], [.14, .12], [.27, .34], [.63, .55], [.88, .7], [.91, .83], [.7, 1.01], [.36, 1.14], [.2, 1.16]];
-      add(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 36), enamel);
-      torus(.84, .055, cream, .79);
-      torus(.7, .035, accent, .96);
-      add(new THREE.CylinderGeometry(.16, .22, .3, 24), gold, 1.28);
-      add(new THREE.SphereGeometry(.2, 16, 8), cream, 1.46);
+      add(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 48), enamel);
+      torus(.86, .05, cream, .79);
+      torus(.74, .03, brass, .93);
+      torus(.52, .025, cream, 1.07);
+      studRing(10, .64, 1.02, cream, .03);
+      add(new THREE.CylinderGeometry(.13, .19, .34, 24), brass, 1.3);
+      add(new THREE.SphereGeometry(.18, 16, 8), enamel, 1.5);
       contactRadius = .93; inertiaFactor = .56; mass = 1.05;
     } else if (design === 2) {
-      // Angular battle top: six offset blades around a dense weight disc.
+      // Battle top: six swept steel blades around a dense weight disc.
       const profile = [[.055, 0], [.13, .08], [.17, .25], [.3, .39], [.57, .54], [.71, .63]];
-      add(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 40), dark);
-      add(new THREE.CylinderGeometry(.83, .76, .13, 32), metal, .64);
-      add(new THREE.CylinderGeometry(.63, .75, .13, 32), accent, .77);
+      add(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 40), gunmetal);
+      add(new THREE.CylinderGeometry(.83, .76, .13, 40), steel, .64);
+      add(new THREE.CylinderGeometry(.63, .75, .13, 40), enamel, .77);
       for (let i = 0; i < 6; i++) {
         const shape = new THREE.Shape();
         shape.moveTo(.35, -.1);
@@ -225,32 +264,31 @@ export function mountSpinningTops(host, hero) {
         shape.closePath();
         const blade = add(new THREE.ExtrudeGeometry(shape, {
           depth: .12, bevelEnabled: true, bevelSegments: 1, curveSegments: 4, steps: 1, bevelSize: .025, bevelThickness: .02,
-        }), i % 2 ? enamel : metal, .8);
+        }), i % 2 ? enamel : steel, .8, true);
         blade.rotation.set(-Math.PI / 2, 0, i * Math.PI / 3);
       }
-      add(new THREE.CylinderGeometry(.29, .35, .16, 6), gold, .98);
-      add(new THREE.CylinderGeometry(.18, .18, .018, 6), accent, 1.07);
-      torus(.38, .025, dark, .94);
-      studRing(6, .5, .99, dark);
+      add(new THREE.CylinderGeometry(.29, .35, .16, 32), brass, .98);
+      torus(.38, .025, gunmetal, .94);
+      studRing(6, .5, .99, gunmetal);
       contactRadius = 1.04; inertiaFactor = .68; mass = 1.35;
     } else if (design === 3) {
-      // Machined gear top: twelve scallops, exposed fasteners, recessed core.
+      // Machined brass gear: twelve scallops, exposed fasteners, recessed core.
       const profile = [[.05, 0], [.12, .08], [.17, .27], [.32, .44], [.58, .57], [.7, .65]];
-      add(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 40), dark);
-      const gear = add(new THREE.ExtrudeGeometry(radialShape(12, .78, 1.0, Math.PI / 24), {
+      add(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 40), gunmetal);
+      const gear = add(new THREE.ExtrudeGeometry(radialShape(12, .8, 1.0, Math.PI / 24), {
         depth: .13, bevelEnabled: true, bevelSegments: 1, steps: 1, bevelSize: .02, bevelThickness: .015,
-      }), metal, .69);
+      }), brass, .69, true);
       gear.rotation.x = -Math.PI / 2;
-      add(new THREE.CylinderGeometry(.65, .7, .15, 32), enamel, .84);
-      torus(.48, .065, gold, .97);
-      add(new THREE.CylinderGeometry(.28, .33, .15, 12), dark, 1.01);
-      studRing(8, .58, 1.02, accent, .04);
+      add(new THREE.CylinderGeometry(.66, .7, .15, 40), enamel, .84);
+      torus(.48, .065, brass, .97);
+      add(new THREE.CylinderGeometry(.24, .3, .18, 32), steel, 1.02);
+      studRing(8, .58, 1.02, steel, .04);
       contactRadius = 1.03; inertiaFactor = .72; mass = 1.48;
     } else {
-      // Three-lobed turbine: asymmetric-looking fins and concentric center rings.
+      // Three-lobed turbine: swept fins and concentric centre rings.
       const profile = [[.05, 0], [.12, .09], [.16, .26], [.3, .43], [.55, .57], [.66, .65]];
-      add(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 40), dark);
-      add(new THREE.CylinderGeometry(.77, .7, .1, 32), metal, .67);
+      add(new THREE.LatheGeometry(profile.map(([r, y]) => new THREE.Vector2(r, y)), 40), gunmetal);
+      add(new THREE.CylinderGeometry(.77, .7, .1, 40), steel, .67);
       for (let i = 0; i < 3; i++) {
         const fin = new THREE.Shape();
         fin.moveTo(.22, -.18);
@@ -260,39 +298,19 @@ export function mountSpinningTops(host, hero) {
         fin.closePath();
         const rotor = add(new THREE.ExtrudeGeometry(fin, {
           depth: .14, bevelEnabled: true, bevelSegments: 1, curveSegments: 5, steps: 1, bevelSize: .03, bevelThickness: .02,
-        }), enamel, .78);
+        }), enamel, .78, true);
         rotor.rotation.set(-Math.PI / 2, 0, i * Math.PI * 2 / 3);
       }
-      add(new THREE.CylinderGeometry(.43, .57, .14, 32), accent, .92);
-      torus(.48, .055, metal, .98);
-      torus(.3, .045, gold, 1.03);
-      add(new THREE.CylinderGeometry(.17, .24, .18, 6), dark, 1.04);
+      add(new THREE.CylinderGeometry(.43, .57, .14, 40), accent, .92);
+      torus(.48, .055, steel, .98);
+      torus(.3, .045, brass, 1.03);
+      add(new THREE.CylinderGeometry(.17, .24, .18, 24), gunmetal, 1.04);
       studRing(3, .47, 1.04, cream, .055);
       contactRadius = 1.03; inertiaFactor = .64; mass = 1.22;
     }
 
-    // Repeated silhouette families get different physical trim, collars, and
-    // fastener layouts so the nine-top desktop field is not palette-swapping.
-    if (index >= 5 && design === 0) {
-      torus(.72, .035, woodDark, .7);
-      torus(.63, .035, cream, .82);
-      add(new THREE.CylinderGeometry(.16, .2, .12, 24), gold, 1.08);
-    } else if (index >= 5 && design === 1) {
-      torus(.82, .045, dark, .84);
-      studRing(5, .56, 1.06, gold, .05);
-      add(new THREE.CylinderGeometry(.11, .17, .2, 24), accent, 1.58);
-    } else if (index >= 5 && design === 2) {
-      torus(.89, .045, gold, .88);
-      torus(.43, .035, accent, 1.04);
-      add(new THREE.CylinderGeometry(.13, .2, .22, 6), enamel, 1.13);
-    } else if (index >= 5 && design === 3) {
-      torus(.73, .05, enamel, .77);
-      add(new THREE.CylinderGeometry(.2, .31, .22, 12), gold, 1.13);
-      studRing(4, .37, 1.15, cream, .055);
-    }
-
-    // Bake static parts into one surface per material. Meshes still retain
-    // independent material normals/UVs, but no longer cost a draw per fastener.
+    // Bake static parts into one surface per material. Detail parts get their
+    // own material copies so they can fade without touching the solid body.
     model.updateMatrixWorld(true);
     const batches = new Map();
     const originals = new Set();
@@ -300,33 +318,79 @@ export function mountSpinningTops(host, hero) {
       const baked = mesh.geometry.index ? mesh.geometry.toNonIndexed() : mesh.geometry.clone();
       baked.applyMatrix4(mesh.matrix);
       baked.clearGroups();
-      if (!batches.has(mesh.material)) batches.set(mesh.material, []);
-      batches.get(mesh.material).push(baked);
+      const key = `${mesh.material.uuid}:${mesh.userData.detail ? 'detail' : 'solid'}`;
+      if (!batches.has(key)) batches.set(key, { material: mesh.material, detail: mesh.userData.detail, parts: [] });
+      batches.get(key).parts.push(baked);
       originals.add(mesh.geometry);
       model.remove(mesh);
     }
-    for (const [material, parts] of batches) {
-      add(mergeGeometries(parts), material);
+    const details = [];
+    const blurs = [];
+    for (const { material, detail, parts } of batches.values()) {
+      const merged = mergeGeometries(parts);
       for (const part of parts) part.dispose();
+      const surface = detail ? material.clone() : material;
+      if (detail) {
+        surface.transparent = true;
+        details.push(surface);
+      }
+      const mesh = new THREE.Mesh(merged, surface);
+      mesh.castShadow = true;
+      mesh.receiveShadow = true;
+      model.add(mesh);
+      if (!detail) continue;
+      // A streaked ring covering the swept band of these parts.
+      const positions = merged.getAttribute('position');
+      let inner = Infinity;
+      let outer = 0;
+      let top = -Infinity;
+      for (let i = 0; i < positions.count; i++) {
+        const radius = Math.hypot(positions.getX(i), positions.getZ(i));
+        inner = Math.min(inner, radius);
+        outer = Math.max(outer, radius);
+        top = Math.max(top, positions.getY(i));
+      }
+      const blurMaterial = new THREE.MeshBasicMaterial({
+        color: new THREE.Color(material.color).lerp(new THREE.Color(0xffffff), material.metalness > .5 ? .25 : .05),
+        map: streakTexture,
+        transparent: true,
+        opacity: 0,
+        depthWrite: false,
+        side: THREE.DoubleSide,
+      });
+      const ring = new THREE.Mesh(new THREE.RingGeometry(Math.max(.02, inner * .92), outer, 56, 1), blurMaterial);
+      ring.rotation.x = -Math.PI / 2;
+      ring.position.y = top + .004;
+      ring.renderOrder = 2;
+      ring.userData.ignoreSupport = true;
+      model.add(ring);
+      blurs.push(blurMaterial);
     }
     for (const geometry of originals) geometry.dispose();
     const support = sampleSupportVertices(model);
-    const motionBlur = add(new THREE.RingGeometry(contactRadius * .86, contactRadius * 1.02, 40), blurMaterial, .86);
-    motionBlur.rotation.x = -Math.PI / 2;
-    motionBlur.renderOrder = 2;
-    motionBlur.userData.ignoreSupport = true;
+
+    const contactMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, map: contactTexture, transparent: true, opacity: .4, depthWrite: false });
+    const contact = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), contactMaterial);
+    contact.rotation.x = -Math.PI / 2;
+    contact.renderOrder = 1;
+    scene.add(contact);
 
     return {
-      pivot, model, motionBlur, blurMaterial, support, index, design,
-      x: 0, y: 0, vx: 0, vy: 0, spin: 0, angle: 0,
+      pivot, model, support, details, blurs, contact, contactMaterial, index, design,
+      metal: design >= 2,
+      x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, spin: 0, angle: 0,
       tilt: 0, tiltVelocity: 0, precession: 0, wobble: 0,
-      phase: 'spinning', rest: 0, radius: 40, contactRadius, collisionRadius: 40,
-      mass, inertiaFactor, inertia: 1, spinDrag: .4, active: true,
+      nutation: 0, nutationPhase: 0, rock: 0, rockPhase: 0, roll: 0,
+      phase: 'resting', rest: 0, delay: 0, radius: 40, contactRadius, collisionRadius: 40,
+      mass, inertiaFactor, inertia: 1, friction: 1, airDrag: .012, lying: 1.36,
+      trailX: null, trailY: null, active: true,
     };
   }
 
   const states = palette.map(makeTop);
-  let topCount = window.innerWidth > 1200 ? 9 : 7;
+  const countFor = (viewport) => viewport > 1200 ? 5 : viewport > 620 ? 4 : 3;
+  const radiusFor = (viewport) => viewport > 1200 ? 56 : viewport > 620 ? 46 : 34;
+  let topCount = countFor(window.innerWidth);
   const sparks = createCollisionSparks(scene, renderer.getPixelRatio());
   const scratchPoint = new THREE.Vector3();
   const tiltQuaternion = new THREE.Quaternion();
@@ -334,91 +398,124 @@ export function mountSpinningTops(host, hero) {
   const spinQuaternion = new THREE.Quaternion();
   const tiltAxis = new THREE.Vector3();
   const yAxis = new THREE.Vector3(0, 1, 0);
+  const gravity = 2200;
   let width = 0;
   let height = 0;
   let pointer = null;
+  let drag = null;
   let frame = 0;
   let last = 0;
   let lastRendered = 0;
   let accumulator = 0;
+  let fadeClock = 0;
   let hold = 0;
   let disposed = false;
   let collisionEnergy = 0;
   let nextMetricsAt = 0;
-  let launchArea = null;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const world = (x, y) => [x - width / 2, (y - height / 2) / projection];
+  const grounded = (state) => state.delay <= 0 && state.z < 4;
 
   function setTopCount(nextCount) {
     topCount = nextCount;
     states.forEach((state, index) => {
       state.active = index < topCount;
       state.pivot.visible = state.active;
+      state.contact.visible = state.active;
     });
     host.dataset.topCount = String(topCount);
   }
 
-  function readLaunchArea() {
-    if (window.innerWidth <= 980) return null;
-    const header = hero.querySelector('.play-hero-header');
-    const headline = hero.querySelector('h1');
-    if (!header || !headline) return null;
-    // The field is fixed to the viewport. Use the hero's unscrolled layout so
-    // restarts keep the same launch band even when the visitor scrolls away.
-    // offsetTop also ignores the headline's introductory translate animation.
-    const origin = hero.getBoundingClientRect().top + window.scrollY;
-    return {
-      top: origin + header.offsetTop + header.offsetHeight + 16,
-      bottom: origin + headline.offsetTop - 16,
-    };
+  function padArea() {
+    if (!(pad instanceof HTMLElement)) return null;
+    const box = pad.getBoundingClientRect();
+    if (box.width < 40 || box.bottom < 0 || box.top > height) return null;
+    return box;
   }
 
-  function launch(state) {
+  function spinUp(state, strength = random(.85, 1)) {
+    // Each top gets its own spin and friction so they do not all die together.
+    state.spin = (52 + 26 * strength) * (Math.random() < .2 ? -1 : 1);
+    state.friction = random(.95, 1.4) * (1 + state.design * .04);
+    state.airDrag = random(.009, .014);
+    state.tilt = random(.06, .11);
+    state.tiltVelocity = 0;
+    state.precession = random(0, Math.PI * 2);
+    state.wobble = .02;
+    state.nutation = .04;
+    state.rock = 0;
+    state.roll = 0;
+    state.rest = 0;
+    state.trailX = state.trailY = null;
+    state.phase = 'airborne';
+  }
+
+  function launch(state, delay = 0) {
     const margin = state.radius + 12;
-    const lane = (state.index + random(.18, .82)) / topCount;
-    state.x = margin + lane * Math.max(0, width - margin * 2);
-    const distribution = random(0, 1);
-    if (launchArea) {
-      // Allow for the projected crown above the tip and the rim below it.
-      const top = Math.max(margin, launchArea.top + state.radius * 1.8);
-      const bottom = Math.min(height - margin, launchArea.bottom - state.radius);
-      state.y = bottom >= top
-        ? top + distribution * (bottom - top)
-        : clamp((launchArea.top + launchArea.bottom) / 2 + state.radius * .4, margin, height - margin);
+    const area = padArea();
+    if (area) {
+      state.x = clamp(random(area.left + area.width * .18, area.right - area.width * .18), margin, width - margin);
+      state.y = clamp(random(area.top + area.height * .3, area.bottom - area.height * .2), margin, height - margin);
     } else {
-      state.y = margin + distribution * Math.max(0, height - margin * 2);
+      state.x = margin + random(0, 1) * Math.max(0, width - margin * 2);
+      state.y = margin + random(0, 1) * Math.max(0, height - margin * 2);
     }
-    const speed = random(82, 172);
+    const speed = random(40, 110);
     const direction = random(0, Math.PI * 2);
     state.vx = Math.cos(direction) * speed;
     state.vy = Math.sin(direction) * speed;
-    state.spin = random(62, 78) * (Math.random() < .22 ? -1 : 1);
-    state.spinDrag = random(.66, .84) * (1 + state.design * .0125);
-    state.angle = random(0, Math.PI * 2);
-    state.tilt = random(.018, .05);
-    state.tiltVelocity = 0;
-    state.precession = random(0, Math.PI * 2);
-    state.wobble = random(0, .014);
-    state.phase = 'spinning';
-    state.rest = 0;
+    state.z = random(70, 110);
+    state.vz = 0;
+    state.delay = delay;
+    spinUp(state);
   }
 
   function reset() {
-    launchArea = readLaunchArea();
     hold = 0;
     collisionEnergy = 0;
     sparks.clear();
     host.dataset.hitCount = '0';
+    // Tops arrive one after another instead of appearing mid-spin.
+    const order = states.slice(0, topCount).sort(() => Math.random() - .5);
+    order.forEach((state, index) => launch(state, .25 + index * .42));
     states.forEach((state) => {
-      if (!state.active) {
-        state.phase = 'resting';
-        state.rest = 0;
-        state.vx = 0;
-        state.vy = 0;
-        return;
-      }
-      launch(state);
+      if (state.active) return;
+      state.phase = 'resting';
+      state.vx = state.vy = 0;
     });
+  }
+
+  function launchFromGesture(x, y, dx, dy) {
+    // Reuse the top that has rested longest, otherwise the one closest to dying.
+    const candidates = states.slice(0, topCount);
+    const pick = candidates.reduce((best, state) => {
+      const score = state.phase === 'resting' ? 1000 + state.rest : -Math.abs(state.spin) - (state.delay > 0 ? 500 : 0);
+      return score > best.score ? { state, score } : best;
+    }, { state: candidates[0], score: -Infinity }).state;
+    const length = Math.hypot(dx, dy);
+    const margin = pick.radius + 8;
+    pick.x = clamp(x, margin, width - margin);
+    pick.y = clamp(y, margin, height - margin);
+    const speed = clamp(length * 2.6, 30, 460);
+    const direction = length > 4 ? Math.atan2(dy, dx) : random(0, Math.PI * 2);
+    pick.vx = Math.cos(direction) * speed;
+    pick.vy = Math.sin(direction) * speed;
+    pick.z = 34;
+    pick.vz = 120;
+    pick.delay = 0;
+    spinUp(pick, clamp(length / 220, .35, 1));
+    hold = 0;
+    host.dataset.launches = String(Number(host.dataset.launches || 0) + 1);
+  }
+
+  function sizeLayer(canvas, context) {
+    canvas.width = Math.round(width * pixelRatio);
+    canvas.height = Math.round(height * pixelRatio);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    context.lineCap = 'round';
+    context.lineJoin = 'round';
   }
 
   function resize() {
@@ -429,8 +526,10 @@ export function mountSpinningTops(host, hero) {
     const previousCount = topCount;
     width = box.width;
     height = box.height;
-    setTopCount(window.innerWidth > 1200 ? 9 : 7);
+    setTopCount(countFor(window.innerWidth));
     renderer.setSize(width, height);
+    sizeLayer(trailCanvas, trail);
+    sizeLayer(aimCanvas, aim);
     camera.left = -width / 2;
     camera.right = width / 2;
     camera.top = height / 2;
@@ -447,13 +546,14 @@ export function mountSpinningTops(host, hero) {
     light.shadow.camera.bottom = -reach;
     light.shadow.camera.far = 3000;
     light.shadow.camera.updateProjectionMatrix();
+    const radius = radiusFor(window.innerWidth);
     states.forEach((state) => {
-      state.radius = width < 620 ? 26 : 43;
+      state.radius = radius;
       state.collisionRadius = state.radius * state.contactRadius;
       state.model.scale.setScalar(state.radius);
       state.inertia = state.inertiaFactor * state.mass * state.radius * state.radius;
+      state.trailX = state.trailY = null;
     });
-    launchArea = readLaunchArea();
     if (!previousWidth) {
       reset();
     } else {
@@ -461,7 +561,7 @@ export function mountSpinningTops(host, hero) {
       states.forEach((state, index) => {
         if (!state.active) return;
         if (index >= previousCount) {
-          launch(state);
+          launch(state, .2);
           return;
         }
         const edge = state.collisionRadius + 5;
@@ -472,7 +572,7 @@ export function mountSpinningTops(host, hero) {
       });
       sparks.clear();
     }
-    pose();
+    pose(0);
     renderer.render(scene, camera);
   }
 
@@ -484,6 +584,22 @@ export function mountSpinningTops(host, hero) {
     }
   }
 
+  function scuff(x, y, strength) {
+    // Wood and tin leave a small graphite mark instead of sparks.
+    if (reduced.matches || strength < 20) return;
+    trail.strokeStyle = 'rgba(23,23,25,.32)';
+    trail.lineWidth = 1;
+    for (let i = 0; i < 4; i++) {
+      const angle = random(0, Math.PI * 2);
+      const length = random(3, 7);
+      trail.beginPath();
+      trail.moveTo(x + random(-3, 3), y + random(-3, 3));
+      trail.lineTo(x + Math.cos(angle) * length, y + Math.sin(angle) * length);
+      trail.stroke();
+    }
+    host.dataset.scuffs = String(Number(host.dataset.scuffs || 0) + 1);
+  }
+
   let previousScrollY = window.scrollY;
   function onScroll() {
     const scrollDelta = window.scrollY - previousScrollY;
@@ -493,12 +609,12 @@ export function mountSpinningTops(host, hero) {
     if (Math.abs(nudge) < .15) return;
     for (let i = 0; i < topCount; i++) {
       const state = states[i];
-      if (state.phase === 'resting') continue;
+      if (state.phase === 'resting' || !grounded(state)) continue;
       state.vy = Math.max(-165, Math.min(165, state.vy + nudge));
     }
   }
 
-  function wall(state, nx, ny, penetration, x, y, restitution = .64, source = 'edge') {
+  function wall(state, nx, ny, penetration, x, y, restitution = .6, source = 'edge') {
     state.x += nx * penetration;
     state.y += ny * penetration;
     const pointerVX = source === 'mouse' ? pointer.vx : 0;
@@ -514,20 +630,20 @@ export function mountSpinningTops(host, hero) {
     const tangentSpeed = (state.vx - pointerVX) * tx + (state.vy - pointerVY) * ty + state.spin * state.collisionRadius;
     const tangentInverseMass = inverseMass
       + state.collisionRadius * state.collisionRadius / Math.max(state.inertia, 1);
-    const tangentImpulse = clamp(
-      -tangentSpeed / tangentInverseMass,
-      -normalImpulse * .28,
-      normalImpulse * .28,
-    );
+    const tangentImpulse = clamp(-tangentSpeed / tangentInverseMass, -normalImpulse * .28, normalImpulse * .28);
     state.vx += tangentImpulse * tx * inverseMass;
     state.vy += tangentImpulse * ty * inverseMass;
     state.spin += tangentImpulse * state.collisionRadius / Math.max(state.inertia, 1);
-    state.wobble = Math.min(.28, state.wobble + Math.abs(normalSpeed) * .0007);
-    burst(x, y, -normalSpeed, state.radius * .82, source);
-    if (source === 'mouse') host.dataset.mouseHitCount = String(Number(host.dataset.mouseHitCount || 0) + 1);
+    state.nutation = Math.min(.18, state.nutation + Math.abs(normalSpeed) * .0006);
+    if (source === 'mouse') {
+      if (state.metal) burst(x, y, -normalSpeed, state.radius * .82, source);
+      else scuff(x, y, -normalSpeed);
+      host.dataset.mouseHitCount = String(Number(host.dataset.mouseHitCount || 0) + 1);
+    }
   }
 
   function collide(a, b) {
+    if (!grounded(a) || !grounded(b)) return;
     const dx = b.x - a.x;
     const dy = b.y - a.y;
     const distance = Math.hypot(dx, dy);
@@ -541,19 +657,10 @@ export function mountSpinningTops(host, hero) {
     const rvy = b.vy - a.vy;
     const normalSpeed = rvx * nx + rvy * ny;
     const severity = Math.abs(normalSpeed);
-    if (normalSpeed < 0) {
-      for (const state of [a, b]) {
-        if (state.phase === 'resting' && severity > 42) {
-          state.phase = 'rocking';
-          state.rest = 0;
-          state.tiltVelocity = -Math.min(.22, severity * .0015);
-        }
-      }
-    }
-    const invA = a.phase === 'resting' ? 0 : 1 / a.mass;
-    const invB = b.phase === 'resting' ? 0 : 1 / b.mass;
+    // Resting tops are heavy and sticky but can still be shoved and rocked.
+    const invA = (a.phase === 'resting' ? .25 : 1) / a.mass;
+    const invB = (b.phase === 'resting' ? .25 : 1) / b.mass;
     const inverseMass = invA + invB;
-    if (!inverseMass) return;
 
     const overlap = combinedRadius - distance;
     a.x -= nx * overlap * invA / inverseMass;
@@ -566,7 +673,14 @@ export function mountSpinningTops(host, hero) {
       + .5 * b.mass * (b.vx * b.vx + b.vy * b.vy)
       + .5 * a.inertia * a.spin * a.spin
       + .5 * b.inertia * b.spin * b.spin;
-    const restitution = .68 + Math.min(.08, severity / 1800);
+    // Same spin direction: the rims meet moving in opposite directions, so
+    // they scrape and bounce apart hard. Opposite spins mesh like gears.
+    const spinningA = Math.abs(a.spin) > 2;
+    const spinningB = Math.abs(b.spin) > 2;
+    const sameDirection = spinningA && spinningB && Math.sign(a.spin) === Math.sign(b.spin);
+    const tangentSpeed = rvx * tx + rvy * ty + a.spin * a.collisionRadius + b.spin * b.collisionRadius;
+    const slip = clamp(Math.abs(tangentSpeed) / 900, 0, 1);
+    const restitution = .6 + Math.min(.08, severity / 1800) + (sameDirection ? .16 * slip : 0);
     const normalImpulse = -(1 + restitution) * normalSpeed / inverseMass;
     const jx = normalImpulse * nx;
     const jy = normalImpulse * ny;
@@ -575,33 +689,85 @@ export function mountSpinningTops(host, hero) {
     b.vx += jx * invB;
     b.vy += jy * invB;
 
-    const tangentSpeed = rvx * tx + rvy * ty
-      + a.spin * a.collisionRadius + b.spin * b.collisionRadius;
-    const angularInvA = invA ? a.collisionRadius * a.collisionRadius / Math.max(a.inertia, 1) : 0;
-    const angularInvB = invB ? b.collisionRadius * b.collisionRadius / Math.max(b.inertia, 1) : 0;
-    const angularInverseMass = inverseMass + angularInvA + angularInvB;
-    const idealTangentImpulse = -tangentSpeed / angularInverseMass;
-    const tangentImpulse = clamp(idealTangentImpulse, -normalImpulse * .24, normalImpulse * .24);
+    // Glancing friction converts some spin into sideways recoil.
+    const tangentImpulse = clamp(-tangentSpeed / (inverseMass * 4), -normalImpulse * .22, normalImpulse * .22);
     a.vx -= tangentImpulse * tx * invA;
     a.vy -= tangentImpulse * ty * invA;
     b.vx += tangentImpulse * tx * invB;
     b.vy += tangentImpulse * ty * invB;
-    if (invA) a.spin += tangentImpulse * a.collisionRadius / Math.max(a.inertia, 1);
-    if (invB) b.spin += tangentImpulse * b.collisionRadius / Math.max(b.inertia, 1);
 
-    a.wobble = Math.min(.32, a.wobble + severity * .00075 / a.mass);
-    b.wobble = Math.min(.32, b.wobble + severity * .00075 / b.mass);
+    const impact = clamp(severity / 160, 0, 1);
+    if (sameDirection) {
+      const loss = .1 + .15 * impact;
+      a.spin *= 1 - loss * (b.mass / (a.mass + b.mass)) * 2;
+      b.spin *= 1 - loss * (a.mass / (a.mass + b.mass)) * 2;
+    } else if (spinningA || spinningB) {
+      // The faster top hands spin to the slower one, which can wake it briefly.
+      const share = .2 * Math.max(.25, impact);
+      const fast = Math.abs(a.spin) >= Math.abs(b.spin) ? a : b;
+      const slow = fast === a ? b : a;
+      const transfer = (Math.abs(fast.spin) - Math.abs(slow.spin)) * share;
+      fast.spin -= Math.sign(fast.spin) * transfer;
+      slow.spin = (Math.abs(slow.spin) + transfer * .85) * (Math.sign(slow.spin) || -Math.sign(fast.spin));
+      if (slow.phase === 'resting' && Math.abs(slow.spin) > 10) {
+        slow.phase = 'rimroll';
+        slow.roll = 0;
+      }
+    }
+
+    for (const [state, other] of [[a, b], [b, a]]) {
+      const kick = severity * (other.mass / state.mass);
+      // A short hop and a nod that settles within about a second.
+      if (state.phase !== 'resting') state.vz = Math.max(state.vz, Math.min(150, kick * .45));
+      state.nutation = Math.min(.22, state.nutation + kick * .0009);
+      state.wobble = Math.min(.3, state.wobble + kick * .0004);
+      if (state.phase === 'resting') state.rock = Math.min(.22, state.rock + kick * .0016);
+      // A slow, tilted top has little gyroscopic stiffness and can be knocked over.
+      if ((state.phase === 'wobbling' || state.phase === 'precessing') && Math.abs(state.spin) < 24 && kick > 60) {
+        state.tiltVelocity += kick * .006;
+      }
+    }
+
     const energyAfter = .5 * a.mass * (a.vx * a.vx + a.vy * a.vy)
       + .5 * b.mass * (b.vx * b.vx + b.vy * b.vy)
       + .5 * a.inertia * a.spin * a.spin
       + .5 * b.inertia * b.spin * b.spin;
     collisionEnergy += Math.max(0, energyBefore - energyAfter);
-    burst(a.x + nx * a.collisionRadius, a.y + ny * a.collisionRadius, severity, Math.min(a.radius, b.radius) * .82, 'top');
+    const contactX = a.x + nx * a.collisionRadius;
+    const contactY = a.y + ny * a.collisionRadius;
+    if (a.metal && b.metal) burst(contactX, contactY, severity, Math.min(a.radius, b.radius) * .82, 'top');
+    else scuff(contactX, contactY, severity);
     host.dataset.hitCount = String(Number(host.dataset.hitCount || 0) + 1);
   }
 
   function stepTop(state, dt) {
-    if (pointer) {
+    if (!state.active) return;
+    if (state.delay > 0) {
+      state.delay -= dt;
+      return;
+    }
+
+    // Vertical motion: launch drops and collision hops.
+    if (state.z > 0 || state.vz > 0) {
+      state.vz -= gravity * dt;
+      state.z += state.vz * dt;
+      if (state.z <= 0) {
+        state.z = 0;
+        if (state.vz < -140) {
+          // The tip strikes the paper and hops, losing some speed to the skid.
+          state.vz = -state.vz * .3;
+          state.tiltVelocity += random(.2, .5);
+          state.nutation = Math.min(.2, state.nutation + .05);
+          state.vx *= .82;
+          state.vy *= .82;
+        } else {
+          state.vz = 0;
+          if (state.phase === 'airborne') state.phase = 'spinning';
+        }
+      }
+    }
+
+    if (pointer && grounded(state)) {
       // Pointer coordinates refer to the visible rim, not its hidden ground tip.
       const dx = state.x - pointer.x;
       const dy = state.y - (pointer.y + state.radius * .82 * Math.cos(viewAngle));
@@ -610,91 +776,180 @@ export function mountSpinningTops(host, hero) {
         const nx = dx / distance;
         const ny = dy / distance;
         const approach = (state.vx - pointer.vx) * nx + (state.vy - pointer.vy) * ny;
-        if (state.phase === 'resting' && approach < 0) {
-          state.phase = 'rocking';
-          state.rest = 0;
-          state.tiltVelocity = -.16;
-        }
+        if (state.phase === 'resting' && approach < 0) state.rock = Math.min(.2, state.rock + .08);
         wall(state, nx, ny, state.collisionRadius + 12 - distance,
           state.x - nx * state.collisionRadius, state.y - ny * state.collisionRadius, .55, 'mouse');
       }
     }
-    if (state.phase === 'resting') return;
+
+    if (state.phase === 'resting') {
+      state.rest += dt;
+      state.rockPhase += 9 * dt;
+      state.rock *= Math.exp(-2.4 * dt);
+      state.vx *= Math.exp(-5 * dt);
+      state.vy *= Math.exp(-5 * dt);
+      state.x += state.vx * dt;
+      state.y += state.vy * dt;
+      edges(state);
+      return;
+    }
 
     const spinMagnitude = Math.abs(state.spin);
-    const momentumFactor = Math.sqrt(state.inertiaFactor / .52);
-    const gyroscopicStability = clamp((spinMagnitude * momentumFactor - 7) / 27, 0, 1);
-    const instability = 1 - gyroscopicStability;
-    const wobbleFriction = state.wobble * 2.2 + instability * instability * 1.7;
-    const angularLoss = (state.spinDrag + wobbleFriction) * dt;
+    // Stability falls from 1 above the critical speed to 0 when the top can
+    // no longer hold itself up.
+    const stability = clamp((spinMagnitude - 8) / 22, 0, 1);
+    const airborne = state.phase === 'airborne';
+
+    if (state.phase !== 'rimroll' && !airborne) {
+      if (state.tilt > .95 || spinMagnitude < 6) {
+        state.phase = 'rimroll';
+        state.roll = 0;
+      } else if (spinMagnitude > 30 && state.tilt < .14) state.phase = 'spinning';
+      else if (spinMagnitude > 18) state.phase = 'precessing';
+      else state.phase = 'wobbling';
+    }
+
+    // Tip friction is steady, air drag grows with speed, and the wobble itself
+    // scrubs energy once the top leans.
+    const scrub = state.phase === 'wobbling' || state.phase === 'rimroll' ? 2.4 : .4;
+    const angularLoss = (state.friction + state.airDrag * spinMagnitude + scrub * state.tilt + state.wobble * 2) * dt
+      * (state.phase === 'rimroll' ? 3 : 1);
     if (spinMagnitude <= angularLoss) state.spin = 0;
     else state.spin -= Math.sign(state.spin) * angularLoss;
-    state.angle = (state.angle + state.spin * dt) % (Math.PI * 2);
-
-    if (spinMagnitude > 28 && state.tilt < .13) state.phase = 'spinning';
-    else if (spinMagnitude > 5 && state.tilt < .82) state.phase = 'wobbling';
-    else if (state.tilt < 1.28) state.phase = 'tipping';
-    else state.phase = 'rocking';
+    state.angle = (state.angle + displayRate(state.spin) * dt) % (Math.PI * 2);
 
     let targetTilt;
-    let tiltSpring;
-    let tiltDamping;
-    if (state.phase === 'spinning') {
-      targetTilt = .018 + state.wobble * .25 + Math.sin(state.precession * 2) * .004;
+    let tiltSpring = 14;
+    let tiltDamping = 5;
+    if (airborne) {
+      targetTilt = .06;
+    } else if (state.phase === 'spinning') {
+      targetTilt = .015 + state.wobble * .25;
       tiltSpring = 22;
       tiltDamping = 8;
+    } else if (state.phase === 'precessing') {
+      targetTilt = .035 + Math.pow(1 - stability, 1.5) * .4 + state.wobble;
     } else if (state.phase === 'wobbling') {
-      targetTilt = .08 + Math.pow(instability, 1.8) * .76 + state.wobble;
-      tiltSpring = 13;
-      tiltDamping = 5.5;
+      targetTilt = .14 + Math.pow(1 - stability, 1.3) * .78 + state.wobble;
+      tiltSpring = 11;
+      tiltDamping = 4.2;
     } else {
-      targetTilt = 1.49;
-      tiltSpring = state.phase === 'tipping' ? 7 : 18;
-      tiltDamping = state.phase === 'tipping' ? 3.6 : 4.8;
+      targetTilt = state.lying;
+      tiltSpring = 6;
+      tiltDamping = 2.6;
     }
     state.tiltVelocity += (targetTilt - state.tilt) * tiltSpring * dt;
     state.tiltVelocity *= Math.exp(-tiltDamping * dt);
-    state.tilt = clamp(state.tilt + state.tiltVelocity * dt, .012, 1.53);
+    state.tilt = clamp(state.tilt + state.tiltVelocity * dt, .01, state.lying + .04);
 
-    const precessionRate = state.phase === 'spinning'
-      ? .65 + 17 / Math.max(spinMagnitude * momentumFactor, 8)
-      : state.phase === 'wobbling'
-        ? 2.8 + instability * 7.5
-        : Math.max(.35, 5.5 - state.rest * 1.35);
-    state.precession += Math.sign(state.spin || 1) * precessionRate * dt;
-    state.wobble *= Math.exp(-(state.phase === 'spinning' ? .22 : .55) * dt);
+    // Gyroscopic precession speeds up as spin falls: Ω ≈ m·g·l / (I·ω).
+    let precessionRate = clamp(105 / Math.max(spinMagnitude, 4), .4, 14);
+    if (state.phase === 'rimroll') {
+      // Like a settling coin, the rim rolls round faster as it flattens.
+      state.roll += dt;
+      precessionRate = Math.min(26, 4 + 2.4 / Math.max(.06, state.lying - state.tilt));
+    }
+    const direction = Math.sign(state.spin) || 1;
+    state.precession += direction * precessionRate * dt;
+    state.nutationPhase += (7 + spinMagnitude * .45) * dt;
+    const nutationTarget = state.phase === 'wobbling' ? .05 * (1 - stability) : .004;
+    state.nutation += (nutationTarget - state.nutation) * Math.min(1, 1.6 * dt);
+    state.wobble *= Math.exp(-(state.phase === 'spinning' ? .25 : .55) * dt);
 
-    const linearDrag = state.phase === 'spinning' ? .075
-      : state.phase === 'wobbling' ? .2
-        : state.phase === 'tipping' ? .75 : 2.6;
+    if (!airborne && state.z <= 0) {
+      // A leaning tip slides sideways, so the top walks in loops as it precesses.
+      const walk = 230 * state.tilt * Math.min(spinMagnitude, 30) / 30;
+      state.vx += -Math.sin(state.precession) * walk * direction * dt;
+      state.vy += Math.cos(state.precession) * walk * direction * dt;
+      if (state.phase === 'rimroll') {
+        const rollRadius = state.radius * .12 * (state.lying - state.tilt + .08);
+        state.vx += -Math.sin(state.precession) * rollRadius * precessionRate * dt * 4;
+        state.vy += Math.cos(state.precession) * rollRadius * precessionRate * dt * 4;
+      }
+    }
+
+    const linearDrag = airborne ? .1
+      : state.phase === 'spinning' ? .18
+        : state.phase === 'precessing' ? .3
+          : state.phase === 'wobbling' ? .6 : 2.4;
     state.vx *= Math.exp(-linearDrag * dt);
     state.vy *= Math.exp(-linearDrag * dt);
     state.x += state.vx * dt;
     state.y += state.vy * dt;
+    edges(state);
 
+    if (state.phase === 'rimroll' && state.tilt > state.lying - .05 && state.roll > 1.6) {
+      state.phase = 'resting';
+      state.spin = 0;
+      state.tilt = state.lying;
+      state.tiltVelocity = 0;
+      state.rock = .1;
+      state.rockPhase = 0;
+      state.rest = 0;
+    }
+  }
+
+  function edges(state) {
     const radius = state.collisionRadius + 5;
     if (state.x < radius) wall(state, 1, 0, radius - state.x, radius, state.y);
     if (state.x > width - radius) wall(state, -1, 0, state.x - width + radius, width - radius, state.y);
     if (state.y < radius) wall(state, 0, 1, radius - state.y, state.x, radius);
     if (state.y > height - radius) wall(state, 0, -1, state.y - height + radius, state.x, height - radius);
-
-    if (state.phase === 'rocking') {
-      state.rest += dt;
-      const speed = Math.hypot(state.vx, state.vy);
-      if (state.rest > 2.6 && speed < 3 && Math.abs(state.spin) < 1.1 && Math.abs(state.tiltVelocity) < .025) {
-        state.phase = 'resting';
-        state.spin = 0;
-        state.vx = 0;
-        state.vy = 0;
-        state.tilt = 1.49;
-        state.tiltVelocity = 0;
-      }
-    } else {
-      state.rest = 0;
-    }
   }
 
+  // At 60 fps a fast top would jump hundreds of degrees per frame and strobe.
+  // The visible body turns at a capped rate while detail fades into blur.
+  function displayRate(spin) {
+    const magnitude = Math.abs(spin);
+    return Math.sign(spin) * (magnitude < 12 ? magnitude : 12 + (magnitude - 12) * .08);
+  }
+
+  function drawTrails() {
+    // One batched path per rendered frame; stroking per physics step costs
+    // far more than the physics itself.
+    trail.strokeStyle = 'rgba(23,23,25,.2)';
+    trail.lineWidth = 1.05;
+    trail.beginPath();
+    let segments = 0;
+    for (let i = 0; i < topCount; i++) {
+      const state = states[i];
+      const drawing = state.delay <= 0 && state.z < 2 && state.phase !== 'resting' && state.phase !== 'airborne';
+      if (!drawing) {
+        state.trailX = state.trailY = null;
+        continue;
+      }
+      if (state.trailX === null) {
+        state.trailX = state.x;
+        state.trailY = state.y;
+        continue;
+      }
+      if (Math.hypot(state.x - state.trailX, state.y - state.trailY) < 1.2) continue;
+      trail.moveTo(state.trailX, state.trailY);
+      trail.lineTo(state.x, state.y);
+      segments++;
+      state.trailX = state.x;
+      state.trailY = state.y;
+    }
+    if (segments) trail.stroke();
+  }
+
+  function fadeTrails(dt) {
+    // Fade in coarse steps: tiny per-frame alphas round away on 8-bit canvases
+    // and would leave permanent ghosts. About eight seconds to disappear.
+    fadeClock += dt;
+    if (fadeClock < .6) return;
+    fadeClock = 0;
+    trail.save();
+    trail.setTransform(1, 0, 0, 1, 0, 0);
+    trail.globalCompositeOperation = 'destination-out';
+    trail.fillStyle = 'rgba(0,0,0,.2)';
+    trail.fillRect(0, 0, trailCanvas.width, trailCanvas.height);
+    trail.restore();
+  }
+
+  let simTime = 0;
   function step(dt) {
+    simTime += dt;
     if (pointer) {
       pointer.age += dt;
       if (pointer.age > .08) pointer.vx = pointer.vy = 0;
@@ -706,19 +961,28 @@ export function mountSpinningTops(host, hero) {
     }
     for (let i = 0; i < topCount; i++) allResting &&= states[i].phase === 'resting';
     sparks.update(dt);
-    if (allResting) {
+    if (allResting && !drag) {
       hold += dt;
       if (hold > 3) reset();
+    } else {
+      hold = 0;
     }
   }
 
   function pose() {
     let totalEnergy = 0;
     for (const state of states) {
-      if (!state.active) continue;
+      const visible = state.active && state.delay <= 0;
+      state.pivot.visible = visible;
+      state.contact.visible = visible;
+      if (!visible) continue;
       const [x, z] = world(state.x, state.y);
+      const resting = state.phase === 'resting';
+      const tilt = resting
+        ? state.tilt - Math.abs(Math.sin(state.rockPhase)) * state.rock
+        : state.tilt + Math.sin(state.nutationPhase) * state.nutation;
       tiltAxis.set(Math.cos(state.precession), 0, Math.sin(state.precession));
-      tiltQuaternion.setFromAxisAngle(tiltAxis, state.tilt);
+      tiltQuaternion.setFromAxisAngle(tiltAxis, clamp(tilt, .005, 1.5));
       state.pivot.quaternion.copy(tiltQuaternion);
       state.model.rotation.y = state.angle;
       supportQuaternion.copy(tiltQuaternion).multiply(spinQuaternion.setFromAxisAngle(yAxis, state.angle));
@@ -730,12 +994,18 @@ export function mountSpinningTops(host, hero) {
           .applyQuaternion(supportQuaternion);
         minimumY = Math.min(minimumY, scratchPoint.y);
       }
-      state.pivot.position.set(x, -minimumY + .4, z);
+      state.pivot.position.set(x, -minimumY + .4 + state.z, z);
 
-      const blurStrength = reduced.matches ? 0 : clamp((Math.abs(state.spin) - 24) / 46, 0, 1);
-      state.blurMaterial.opacity = blurStrength * .065;
-      state.motionBlur.scale.setScalar(1 + blurStrength * .08);
-      state.motionBlur.visible = blurStrength > .02 && state.phase !== 'resting';
+      // Contact point: tight under the tip, broad when the top lies down.
+      const lean = clamp(tilt / state.lying, 0, 1);
+      const spread = state.radius * (.28 + lean * 1.1);
+      state.contact.position.set(x - Math.cos(state.precession) * lean * state.radius * .5, .2, z - Math.sin(state.precession) * lean * state.radius * .5);
+      state.contact.scale.set(spread, spread * (.7 + lean * .3), 1);
+      state.contactMaterial.opacity = (.42 - lean * .12) * clamp(1 - state.z / 90, 0, 1);
+
+      const blur = reduced.matches ? 0 : clamp((Math.abs(state.spin) - 10) / 26, 0, 1);
+      for (const material of state.details) material.opacity = 1 - blur * .72;
+      for (const material of state.blurs) material.opacity = blur * .55;
       totalEnergy += .5 * state.mass * (state.vx * state.vx + state.vy * state.vy)
         + .5 * state.inertia * state.spin * state.spin;
     }
@@ -760,7 +1030,35 @@ export function mountSpinningTops(host, hero) {
       host.dataset.renderCalls = String(renderer.info.render.calls);
       host.dataset.renderTriangles = String(renderer.info.render.triangles);
       host.dataset.cameraElevation = '55';
+      host.dataset.simTime = simTime.toFixed(1);
     }
+  }
+
+  function drawAim() {
+    aim.clearRect(0, 0, width, height);
+    if (!drag) return;
+    const dx = drag.x - drag.startX;
+    const dy = drag.y - drag.startY;
+    const length = Math.hypot(dx, dy);
+    aim.strokeStyle = 'rgba(198,63,43,.85)';
+    aim.fillStyle = 'rgba(198,63,43,.85)';
+    aim.lineWidth = 1.6;
+    aim.beginPath();
+    aim.ellipse(drag.startX, drag.startY, 14, 14 * projection * .6, 0, 0, Math.PI * 2);
+    aim.stroke();
+    if (length < 6) return;
+    const angle = Math.atan2(dy, dx);
+    aim.beginPath();
+    aim.moveTo(drag.startX, drag.startY);
+    // A slight wobble so the guide reads as a pencil stroke.
+    aim.quadraticCurveTo(drag.startX + dx / 2 + Math.sin(angle) * 4, drag.startY + dy / 2 - Math.cos(angle) * 4, drag.x, drag.y);
+    aim.stroke();
+    aim.beginPath();
+    aim.moveTo(drag.x, drag.y);
+    aim.lineTo(drag.x - Math.cos(angle - .45) * 12, drag.y - Math.sin(angle - .45) * 12);
+    aim.moveTo(drag.x, drag.y);
+    aim.lineTo(drag.x - Math.cos(angle + .45) * 12, drag.y - Math.sin(angle + .45) * 12);
+    aim.stroke();
   }
 
   function tick(now) {
@@ -776,6 +1074,8 @@ export function mountSpinningTops(host, hero) {
       const elapsed = now - lastRendered;
       if (elapsed >= 1000 / 60 - .5) {
         lastRendered = now - (elapsed % (1000 / 60));
+        fadeTrails(elapsed / 1000);
+        drawTrails();
         pose();
         sparks.upload();
         renderer.render(scene, camera);
@@ -784,31 +1084,107 @@ export function mountSpinningTops(host, hero) {
     frame = requestAnimationFrame(tick);
   }
 
-  const move = (event) => {
-    if (event.pointerType === 'touch') return;
+  const local = (event) => {
     const box = host.getBoundingClientRect();
-    const x = event.clientX - box.left;
-    const y = event.clientY - box.top;
+    return [event.clientX - box.left, event.clientY - box.top];
+  };
+  const move = (event) => {
+    if (drag && event.pointerId === drag.id) {
+      [drag.x, drag.y] = local(event);
+      drawAim();
+    }
+    if (event.pointerType === 'touch') return;
+    const [x, y] = local(event);
     const elapsed = pointer ? Math.max(.008, (event.timeStamp - pointer.time) / 1000) : 1;
     const vx = pointer ? clamp((x - pointer.x) / elapsed, -450, 450) : 0;
     const vy = pointer ? clamp((y - pointer.y) / elapsed, -450, 450) : 0;
-    pointer = { x, y, vx, vy, time: event.timeStamp, age: 0 };
+    // While aiming, the cursor should not shove the tops it passes over.
+    pointer = drag ? null : { x, y, vx, vy, time: event.timeStamp, age: 0 };
   };
   const leave = () => { pointer = null; };
+  const startDrag = (event) => {
+    if (reduced.matches || event.button > 0 || drag) return;
+    if (event.target instanceof Element && event.target.closest('button, a')) return;
+    event.preventDefault();
+    const [x, y] = local(event);
+    drag = { id: event.pointerId, startX: x, startY: y, x, y };
+    pad.setPointerCapture?.(event.pointerId);
+    drawAim();
+  };
+  const endDrag = (event) => {
+    if (!drag || event.pointerId !== drag.id) return;
+    const { startX, startY, x, y } = drag;
+    drag = null;
+    drawAim();
+    if (event.type === 'pointerup') launchFromGesture(startX, startY, x - startX, y - startY);
+  };
+  const launchFromButton = () => {
+    if (reduced.matches) return;
+    const area = padArea();
+    const x = area ? area.left + area.width / 2 : width / 2;
+    const y = area ? area.top + area.height / 2 : height / 2;
+    const angle = random(0, Math.PI * 2);
+    launchFromGesture(x, y, Math.cos(angle) * 90, Math.sin(angle) * 90);
+  };
+
   const pointerSurface = hero.closest('[data-play-root]') || window;
   pointerSurface.addEventListener('pointermove', move);
   pointerSurface.addEventListener('pointerleave', leave);
   window.addEventListener('blur', leave);
   window.addEventListener('scroll', onScroll, { passive: true });
+  if (pad instanceof HTMLElement) {
+    pad.addEventListener('pointerdown', startDrag);
+    pad.addEventListener('pointerup', endDrag);
+    pad.addEventListener('pointercancel', endDrag);
+  }
+  button?.addEventListener('click', launchFromButton);
   const observer = new ResizeObserver(resize);
   observer.observe(host);
   const motionChange = () => {
-    reset();
+    trail.clearRect(0, 0, width, height);
+    drag = null;
+    drawAim();
+    if (reduced.matches) settleStill();
+    else reset();
+    nextMetricsAt = 0;
     pose();
     renderer.render(scene, camera);
   };
+  // Reduced motion: a still arrangement of upright tops, no trails.
+  function settleStill() {
+    states.forEach((state, index) => {
+      if (!state.active) return;
+      launch(state, 0);
+      state.z = 0;
+      state.vz = 0;
+      state.phase = index % 3 === 2 ? 'resting' : 'spinning';
+      state.tilt = state.phase === 'resting' ? state.lying : .03;
+      state.spin = 0;
+      state.nutation = 0;
+      state.rock = 0;
+    });
+  }
   reduced.addEventListener('change', motionChange);
+  // Browser tests can fast-forward the fixed-step simulation with ?spin-debug.
+  if (new URLSearchParams(location.search).has('spin-debug')) {
+    window.__spinTops = {
+      advance(seconds) {
+        for (let elapsed = 0; elapsed < seconds; elapsed += 1 / 120) step(1 / 120);
+        fadeTrails(seconds);
+        drawTrails();
+        nextMetricsAt = 0;
+        pose();
+        renderer.render(scene, camera);
+      },
+    };
+  }
   resize();
+  if (reduced.matches) {
+    settleStill();
+    nextMetricsAt = 0;
+    pose();
+    renderer.render(scene, camera);
+  }
   frame = requestAnimationFrame(tick);
 
   return () => {
@@ -819,6 +1195,12 @@ export function mountSpinningTops(host, hero) {
     pointerSurface.removeEventListener('pointermove', move);
     pointerSurface.removeEventListener('pointerleave', leave);
     window.removeEventListener('blur', leave);
+    if (pad instanceof HTMLElement) {
+      pad.removeEventListener('pointerdown', startDrag);
+      pad.removeEventListener('pointerup', endDrag);
+      pad.removeEventListener('pointercancel', endDrag);
+    }
+    button?.removeEventListener('click', launchFromButton);
     reduced.removeEventListener('change', motionChange);
     sparks.dispose();
     scene.traverse((object) => {
@@ -827,8 +1209,10 @@ export function mountSpinningTops(host, hero) {
     });
     woodGrain.dispose();
     finish.dispose();
+    streakTexture.dispose();
+    contactTexture.dispose();
     environment.dispose();
     renderer.dispose();
-    renderer.domElement.remove();
+    host.replaceChildren();
   };
 }

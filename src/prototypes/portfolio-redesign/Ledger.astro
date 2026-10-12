@@ -1,5 +1,5 @@
 ---
-import { email, projects, socials } from './data';
+import { projects, socials } from './data';
 ---
 
 <div class="ledger-world">
@@ -7,7 +7,7 @@ import { email, projects, socials } from './data';
     <a class="ledger-mark" href="#ledger-top" aria-label="TryRaisins home">TR<span>.</span></a>
     <p>Independent software engineer</p>
     <p class="ledger-place">Lagos, NG <span aria-hidden="true">/</span> 06°31′N</p>
-    <a href={`mailto:${email}`}>Start a conversation</a>
+    <a href="/#play-contact">Start a conversation</a>
   </header>
 
   <main id="ledger-top">
@@ -54,7 +54,7 @@ import { email, projects, socials } from './data';
       <nav aria-label="Social profiles">
         {socials.map((social) => <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.name}, opens in a new tab`}>{social.name}</a>)}
       </nav>
-      <a class="ledger-email" href={`mailto:${email}`}>{email}</a>
+      <a class="ledger-email" href="/#play-contact">Get in touch on the contact sheet</a>
     </footer>
   </main>
 </div>

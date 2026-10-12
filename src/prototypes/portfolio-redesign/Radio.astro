@@ -1,12 +1,12 @@
 ---
-import { email, projects, socials } from './data';
+import { projects, socials } from './data';
 ---
 
 <div class="radio-world" data-radio-root>
   <header class="radio-top">
     <a href="#radio-top" class="radio-station">TR<span>106.3</span></a>
     <p>Independent transmissions from Lagos</p>
-    <a href={`mailto:${email}`}>Call the studio</a>
+    <a href="/#play-contact">Call the studio</a>
   </header>
 
   <main id="radio-top">
@@ -64,7 +64,7 @@ import { email, projects, socials } from './data';
     <footer class="radio-footer">
       <div>
         <p>One good signal deserves a reply.</p>
-        <a href={`mailto:${email}`}>{email}</a>
+        <a href="/#play-contact">Open the contact sheet</a>
       </div>
       <nav aria-label="Social profiles">
         {socials.map((social) => <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`${social.name}, opens in a new tab`}>{social.name}</a>)}

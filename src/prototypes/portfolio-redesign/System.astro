@@ -1,5 +1,5 @@
 ---
-import { email, projects, socials } from './data';
+import { projects, socials } from './data';
 ---
 
 <div class="system-world">
@@ -7,7 +7,7 @@ import { email, projects, socials } from './data';
     <a href="#system-top">tryraisins://home</a>
     <p><span aria-hidden="true"></span> operator available</p>
     <p>Lagos local / WAT</p>
-    <a href={`mailto:${email}`}>new_message</a>
+    <a href="/#play-contact">new_message</a>
   </header>
 
   <main id="system-top" class="system-main">
@@ -67,7 +67,7 @@ import { email, projects, socials } from './data';
     </section>
 
     <footer class="system-footer">
-      <div><span>READY FOR INPUT</span><a href={`mailto:${email}`}>{email}</a></div>
+      <div><span>READY FOR INPUT</span><a href="/#play-contact">open_contact_sheet</a></div>
       <nav aria-label="Social profiles">{socials.map((social) => <a href={social.href} target="_blank" rel="noopener noreferrer">[{social.name}]</a>)}</nav>
     </footer>
   </main>

@@ -1,12 +1,12 @@
 ---
-import { email, projects, socials } from './data';
+import { projects, socials } from './data';
 ---
 
 <div class="notes-world">
   <header class="notes-top">
     <a href="#notes-top" class="notes-wordmark">TryRaisins’ field notes</a>
     <p>Software, systems, and the reasons behind them</p>
-    <a href={`mailto:${email}`}>Write to me</a>
+    <a href="/#play-contact">Write to me</a>
   </header>
 
   <main id="notes-top" class="notes-book">
@@ -55,7 +55,7 @@ import { email, projects, socials } from './data';
 
       <footer class="notes-footer">
         <p>Have a project in mind? Write to me.</p>
-        <a href={`mailto:${email}`}>{email}</a>
+        <a href="/#play-contact">Open the contact sheet</a>
         <nav aria-label="Social profiles">
           {socials.map((social) => <a href={social.href} target="_blank" rel="noopener noreferrer">{social.name}</a>)}
         </nav>

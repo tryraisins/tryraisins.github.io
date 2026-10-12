@@ -7,12 +7,12 @@ import talentHunterCover from '../assets/images/talent-hunter-cover.png';
 import streamSlipCover from '../assets/images/streamslip-cover.png';
 
 const projects = [
-  { number: '01', name: 'QuickBillz', type: 'Invoicing product', description: 'A straightforward way to create and share invoices, without a monthly subscription.', year: '2026', href: 'https://quickbillz.tryraisins.dev/', cover: quickBillzCover, coverAlt: 'QuickBillz invoice workspace' },
-  { number: '02', name: 'Terror Tracker', type: 'Live incident map', description: 'A map for exploring verified security incidents and emerging patterns across Nigeria.', year: '2026', href: 'https://terrortracker.tryraisins.dev/', cover: terrorTrackerCover, coverAlt: 'Nigeria security incident tracker dashboard' },
+  { number: '01', name: 'Terror Tracker', type: 'Live incident map', description: 'A map for exploring verified security incidents and emerging patterns across Nigeria.', year: '2026', href: 'https://terrortracker.tryraisins.dev/', cover: terrorTrackerCover, coverAlt: 'Nigeria security incident tracker dashboard' },
+  { number: '02', name: 'QuickBillz', type: 'Invoicing product', description: 'A straightforward way to create and share invoices, without a monthly subscription.', year: '2026', href: 'https://quickbillz.tryraisins.dev/', cover: quickBillzCover, coverAlt: 'QuickBillz invoice workspace' },
   { number: '03', name: 'Talent Hunter', type: 'Resume matching', description: 'Compares resumes with a job brief to help teams build a clearer shortlist.', year: '2026', href: 'https://talenthunter.tryraisins.dev/', cover: talentHunterCover, coverAlt: 'Talent Hunter resume screening interface' },
-  { number: '04', name: 'yeknal', type: 'Developer tooling', description: 'A command-line tool and a library of agent skills that teach coding agents how I review, design, test and ship work.', year: '2026', href: '/skills/', cta: 'Browse the skills', cover: null, coverAlt: '' },
-  { number: '05', name: 'StreamSlip', type: 'Music utility', description: 'Turns YouTube Music listening history into a tidy recap you can share.', year: '2025', href: 'https://streamslip.vercel.app/', cover: streamSlipCover, coverAlt: 'StreamSlip music receipt interface' },
-  { number: '06', name: 'BetPicks', type: 'Sports picks product', description: 'A single place to look through fixtures, odds, and match predictions.', year: '2026', href: 'https://betpicks.tryraisins.dev/', cover: null, coverAlt: '' },
+  { number: '04', name: 'StreamSlip', type: 'Music utility', description: 'Turns YouTube Music listening history into a tidy recap you can share.', year: '2025', href: 'https://streamslip.vercel.app/', cover: streamSlipCover, coverAlt: 'StreamSlip music receipt interface' },
+  { number: '05', name: 'yeknal', type: 'Developer tooling', description: 'A command-line tool and a library of agent skills that teach coding agents how I review, design, test and ship work.', year: '2026', href: '/skills/', cta: 'Browse the skills', cover: null, coverAlt: '', placeholder: 'terminal' },
+  { number: '06', name: 'BetPicks', type: 'Sports picks product', description: 'A single place to look through fixtures, odds, and match predictions.', year: '2026', href: 'https://betpicks.tryraisins.dev/', cover: null, coverAlt: '', placeholder: 'slip', suspended: true },
 ];
 
 const socials = [
@@ -37,7 +37,6 @@ const seoSchema = {
       image: socialImage,
       jobTitle: 'Fullstack Developer',
       description: pageDescription,
-      email: 'mailto:tryraisins@gmail.com',
       homeLocation: { '@type': 'Place', name: 'Lagos, Nigeria' },
       sameAs: socials.map((social) => social.href),
       knowsAbout: ['React', 'TypeScript', 'JavaScript', 'Node.js', 'Python', 'Web development', 'Frontend development', 'Backend development'],
@@ -70,7 +69,7 @@ const seoSchema = {
       '@type': 'ItemList',
       '@id': `${siteUrl}#projects`,
       name: 'TryRaisins projects',
-      itemListElement: projects.map((project, index) => ({
+      itemListElement: projects.filter((project) => !project.suspended).map((project, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         item: {
@@ -118,7 +117,7 @@ const seoSchema = {
     <script id="structured-data" type="application/ld+json" set:html={JSON.stringify(seoSchema)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Bricolage+Grotesque:wght@600&family=DM+Sans:wght@400;500;600&family=Public+Sans:wght@600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Bricolage+Grotesque:wght@600&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Permanent+Marker&family=Public+Sans:wght@600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <Play projects={projects} socials={socials} email="tryraisins@gmail.com" />
