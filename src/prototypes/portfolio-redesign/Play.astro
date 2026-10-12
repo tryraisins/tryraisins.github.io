@@ -369,9 +369,10 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-desk ol { margin: 0; padding: 12px 0 0; position: relative; z-index: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 44px 28px; list-style: none; }
   .play-tile { min-width: 0; grid-column: span 2; position: relative; transform: rotate(var(--play-desk-rotation)); }
   .play-tile:first-child { grid-column: 1 / -1; }
-  .play-tile:nth-child(5), .play-tile:nth-child(6) { grid-column: span 3; }
+  /* With six tiles the last two share a row as halves; with seven, two rows of thirds follow the lead tile. */
+  .play-tile:nth-child(5):nth-last-child(2), .play-tile:nth-child(6):last-child { grid-column: span 3; }
   .play-card { height: 100%; padding: 18px; display: grid; grid-template-rows: 230px 1fr; gap: 20px; position: relative; border: 1px solid var(--play-ink); background: var(--play-paper); box-shadow: 4px 5px 0 rgba(23,23,25,.16); transition: translate 180ms var(--play-ease-out); }
-  .play-tile:nth-child(5) .play-card, .play-tile:nth-child(6) .play-card { grid-template-rows: 260px 1fr; }
+  .play-tile:nth-child(5):nth-last-child(2) .play-card, .play-tile:nth-child(6):last-child .play-card { grid-template-rows: 260px 1fr; }
   .play-tile:first-child .play-card { grid-template-rows: 400px; grid-template-columns: minmax(0, 700fr) minmax(0, 446fr); gap: 36px; }
   .play-tile:first-child .play-copy { padding: 20px 12px 8px 0; }
   .play-tile:first-child .play-copy strong { font-size: clamp(2.25rem, 3.2vw, 2.75rem); }
@@ -382,6 +383,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-tile-4 { --play-desk-rotation: .6deg; }
   .play-tile-5 { --play-desk-rotation: -.5deg; }
   .play-tile-6 { --play-desk-rotation: .5deg; }
+  .play-tile-7 { --play-desk-rotation: -.7deg; }
   .play-pin { position: absolute; z-index: 3; top: -9px; left: 50%; width: 44px; height: 16px; background: rgba(240,206,78,.8); border: 1px solid rgba(23,23,25,.35); transform: translateX(-50%) rotate(-2deg); }
   .play-pin-right { display: none; }
   .play-tile:first-child .play-pin { left: 56px; transform: rotate(-3deg); }
@@ -531,11 +533,12 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-hero-body { margin-top: 0; }
     .play-intro p { font-size: 19px; }
     .play-desk ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .play-tile, .play-tile:nth-child(5), .play-tile:nth-child(6) { grid-column: span 1; }
-    .play-tile:first-child, .play-tile:last-child { grid-column: 1 / -1; }
-    .play-card, .play-tile:nth-child(5) .play-card, .play-tile:nth-child(6) .play-card { grid-template-rows: 220px 1fr; }
-    .play-tile:first-child .play-card, .play-tile:last-child .play-card { grid-template-rows: 300px; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px; }
-    .play-tile:first-child .play-copy, .play-tile:last-child .play-copy { padding: 8px 4px 4px 0; }
+    .play-tile, .play-tile:nth-child(5):nth-last-child(2), .play-tile:nth-child(6):last-child { grid-column: span 1; }
+    /* An even tile count leaves the last tile alone in the two-column grid, so it spans the row. */
+    .play-tile:first-child, .play-tile:last-child:nth-child(even) { grid-column: 1 / -1; }
+    .play-card, .play-tile:nth-child(5):nth-last-child(2) .play-card, .play-tile:nth-child(6):last-child .play-card { grid-template-rows: 220px 1fr; }
+    .play-tile:first-child .play-card, .play-tile:last-child:nth-child(even) .play-card { grid-template-rows: 300px; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px; }
+    .play-tile:first-child .play-copy, .play-tile:last-child:nth-child(even) .play-copy { padding: 8px 4px 4px 0; }
     .play-contact-sheet { grid-template-columns: 1fr; }
     .play-contact-body { margin-top: 32px; padding: 24px 0 0; border-top: 2px solid var(--play-ink); border-left: 0; }
     .play-contact-social-action { display: none; }

@@ -45,9 +45,17 @@ const searchText = (skill: (typeof skills)[number]) =>
   <section class="sk-section sk-intro" aria-labelledby="sk-title">
     <p class="sk-kicker">Agent skills</p>
     <h1 id="sk-title" class="sk-h1">Skills that teach your coding agent a specific job.</h1>
-    <p class="sk-lede">These are the instruction sets I keep for agents like Claude Code, Codex and Cursor. Each one covers a particular kind of work, such as reviewing code, designing a screen or putting a site online, so pick what you’re trying to do, read what the skill is for, and copy a prompt that installs it in one project or across all of them.</p>
-    <p class="sk-facts">{counts.skills} skills, free to use, with the source on GitHub and the same files the yeknal CLI installs.</p>
-    <p class="sk-facts sk-downloads" data-downloads hidden></p>
+    <div class="sk-intro-copy">
+      <p class="sk-lede">These are the instruction sets I keep for agents like Claude Code, Codex and Cursor. Each one covers a particular kind of work, such as reviewing code, designing a screen or putting a site online, so pick what you’re trying to do, read what the skill is for, and copy a prompt that installs it in one project or across all of them.</p>
+      <p class="sk-facts">{counts.skills} skills, free to use, with the source on GitHub and the same files the yeknal CLI installs.</p>
+    </div>
+    <aside class="sk-tally sk-sheet" aria-labelledby="sk-tally-label" data-downloads>
+      <span class="sk-tally-tape" aria-hidden="true"></span>
+      <p class="sk-tally-label" id="sk-tally-label">Installs so far</p>
+      <p class="sk-tally-num" data-downloads-total>0</p>
+      <svg class="sk-tally-marks" viewBox="0 0 132 34" aria-hidden="true"><path d="M6 4v26M18 3v27M30 5v25M42 4v26M2 26 48 7M66 4v26M78 3v27M90 5v25M102 4v26M62 27 108 8M122 5v25" /></svg>
+      <p class="sk-tally-note">Every install counted together, whether the prompt was copied here, the yeknal package came from npm, or the skill was added through skills.sh.</p>
+    </aside>
   </section>
 
   <section class="sk-section sk-starts" aria-labelledby="sk-starts-title">
@@ -187,12 +195,25 @@ const searchText = (skill: (typeof skills)[number]) =>
   import { copyText } from '../../scripts/copy-text';
   import { loadDownloadTotal, recordInstall } from '../../scripts/skill-downloads';
 
-  const downloads = document.querySelector<HTMLElement>('[data-downloads]');
-  if (downloads) {
+  const tally = document.querySelector<HTMLElement>('[data-downloads]');
+  const tallyNum = tally?.querySelector<HTMLElement>('[data-downloads-total]');
+  if (tally && tallyNum) {
+    const format = new Intl.NumberFormat('en');
     loadDownloadTotal().then((total) => {
-      if (total === null) return;
-      downloads.textContent = `Installed ${new Intl.NumberFormat('en').format(total)} times so far, counting prompts copied here, the yeknal package on npm and installs through skills.sh.`;
-      downloads.hidden = false;
+      // The card keeps its space while loading, and only collapses if there is nothing to show.
+      if (total === null) { tally.hidden = true; return; }
+      tallyNum.setAttribute('aria-label', format.format(total));
+      tally.dataset.ready = '';
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { tallyNum.textContent = format.format(total); return; }
+      const start = performance.now();
+      const duration = 1100;
+      const step = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 4);
+        tallyNum.textContent = format.format(Math.round(total * eased));
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
     });
   }
 
@@ -416,10 +437,26 @@ const searchText = (skill: (typeof skills)[number]) =>
 </script>
 
 <style>
-  .sk-intro { padding-top: clamp(56px, 8vw, 96px); padding-bottom: 64px; display: grid; gap: 24px; justify-items: start; }
+  .sk-intro { padding-top: clamp(56px, 8vw, 96px); padding-bottom: 64px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(240px, 290px); gap: 24px clamp(32px, 5vw, 80px); justify-items: start; align-items: start; }
+  .sk-intro .sk-kicker, .sk-intro .sk-h1 { grid-column: 1 / -1; }
   .sk-intro .sk-h1 { max-width: 68rem; }
+  .sk-intro-copy { display: grid; gap: 24px; justify-items: start; }
   .sk-facts { color: rgba(23,23,25,.72); font-size: 14px; }
-  .sk-downloads { margin-top: -14px !important; }
+
+  /* Keeps its space while the count loads so nothing below jumps when it appears. */
+  .sk-tally { grid-column: 2; grid-row: 3; justify-self: stretch; padding: 26px 22px 20px; display: grid; gap: 6px; visibility: hidden; opacity: 0; transform: rotate(1.4deg) translateY(10px); transition: opacity 320ms var(--sk-ease), transform 420ms var(--sk-ease); }
+  .sk-tally[hidden] { display: none; }
+  .sk-tally[data-ready] { visibility: visible; opacity: 1; transform: rotate(1.4deg); }
+  .sk-tally-tape { position: absolute; top: -9px; left: 50%; width: 76px; height: 18px; border: 1px solid rgba(23,23,25,.35); background: rgba(251,250,245,.82); transform: translateX(-50%) rotate(-3deg); }
+  .sk-tally-label { font-size: 12px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
+  .sk-tally-num { font: 600 clamp(3.75rem, 6.4vw, 5.25rem)/.92 var(--sk-section-font); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+  .sk-tally-marks { width: 132px; height: 34px; margin: 2px 0 6px; overflow: visible; }
+  .sk-tally-marks path { fill: none; stroke: var(--sk-red); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 520; stroke-dashoffset: 520; }
+  .sk-tally[data-ready] .sk-tally-marks path { stroke-dashoffset: 0; transition: stroke-dashoffset 1100ms 120ms var(--sk-ease); }
+  .sk-tally-note { color: rgba(23,23,25,.82); font-size: 14px; line-height: 1.45; }
+  @media (prefers-reduced-motion: reduce) {
+    .sk-tally, .sk-tally[data-ready] .sk-tally-marks path { transition: none; }
+  }
 
   .sk-starts { padding-top: 16px; padding-bottom: 72px; }
   .sk-sub { margin-top: 8px !important; color: rgba(23,23,25,.72); }
@@ -501,6 +538,10 @@ const searchText = (skill: (typeof skills)[number]) =>
   }
   @media (max-width: 1080px) {
     .sk-list { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 860px) {
+    .sk-intro { grid-template-columns: minmax(0, 1fr); }
+    .sk-tally { grid-column: 1; grid-row: auto; justify-self: start; width: min(calc(100% - 12px), 360px); margin-top: 12px; }
   }
   @media (max-width: 980px) {
     .sk-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
