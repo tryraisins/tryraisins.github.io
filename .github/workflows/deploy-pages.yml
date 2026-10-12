@@ -33,7 +33,6 @@ jobs:
       - name: Build site
         run: npm run build
         env:
-          PUBLIC_LEADERBOARD_API_URL: ${{ secrets.PUBLIC_LEADERBOARD_API_URL }}
           PUBLIC_SKILL_STATS_API_URL: ${{ secrets.PUBLIC_SKILL_STATS_API_URL }}
 
       - name: Publish to gh-pages
