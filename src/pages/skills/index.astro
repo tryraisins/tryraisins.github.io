@@ -47,6 +47,7 @@ const searchText = (skill: (typeof skills)[number]) =>
     <h1 id="sk-title" class="sk-h1">Skills that teach your coding agent a specific job.</h1>
     <p class="sk-lede">These are the instruction sets I keep for agents like Claude Code, Codex and Cursor. Each one covers a particular kind of work, such as reviewing code, designing a screen or putting a site online, so pick what you’re trying to do, read what the skill is for, and copy a prompt that installs it in one project or across all of them.</p>
     <p class="sk-facts">{counts.skills} skills, free to use, with the source on GitHub and the same files the yeknal CLI installs.</p>
+    <p class="sk-facts sk-downloads" data-downloads hidden></p>
   </section>
 
   <section class="sk-section sk-starts" aria-labelledby="sk-starts-title">
@@ -184,6 +185,16 @@ const searchText = (skill: (typeof skills)[number]) =>
 <script>
   import { installPrompt, type InstallScope } from '../../lib/skill-prompt';
   import { copyText } from '../../scripts/copy-text';
+  import { loadDownloadTotal, recordInstall } from '../../scripts/skill-downloads';
+
+  const downloads = document.querySelector<HTMLElement>('[data-downloads]');
+  if (downloads) {
+    loadDownloadTotal().then((total) => {
+      if (total === null) return;
+      downloads.textContent = `Installed ${new Intl.NumberFormat('en').format(total)} times so far, counting prompts copied here, the yeknal package on npm and installs through skills.sh.`;
+      downloads.hidden = false;
+    });
+  }
 
   const root = document.querySelector<HTMLElement>('[data-library]');
   const announce = (message: string) => {
@@ -349,6 +360,7 @@ const searchText = (skill: (typeof skills)[number]) =>
           const scope = button.dataset.scope as InstallScope;
           scopes.forEach((other) => other.setAttribute('aria-pressed', String(other === button)));
           prompt.value = installPrompt(skill, revision, scope);
+          recordInstall(skill.name, scope);
           const where = scope === 'project' ? 'this project' : 'all your projects';
           const copied = await copyText(prompt.value);
           hint.hidden = true;
@@ -407,6 +419,7 @@ const searchText = (skill: (typeof skills)[number]) =>
   .sk-intro { padding-top: clamp(56px, 8vw, 96px); padding-bottom: 64px; display: grid; gap: 24px; justify-items: start; }
   .sk-intro .sk-h1 { max-width: 68rem; }
   .sk-facts { color: rgba(23,23,25,.72); font-size: 14px; }
+  .sk-downloads { margin-top: -14px !important; }
 
   .sk-starts { padding-top: 16px; padding-bottom: 72px; }
   .sk-sub { margin-top: 8px !important; color: rgba(23,23,25,.72); }

@@ -190,6 +190,7 @@ const page = skill && (() => {
 
 <script>
   import { copyText } from '../../scripts/copy-text';
+  import { recordInstall } from '../../scripts/skill-downloads';
 
   const panel = document.querySelector<HTMLElement>('[data-install]');
   if (panel) {
@@ -217,6 +218,7 @@ const page = skill && (() => {
     copy.addEventListener('click', async () => {
       const scope = radios.find((radio) => radio.checked)?.value;
       if (!scope) return;
+      recordInstall(panel.dataset.name!, scope);
       const ok = await copyText(prompt.value);
       status.hidden = false;
       if (ok) {

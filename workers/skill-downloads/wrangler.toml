@@ -1,0 +1,8 @@
+name = "skill-downloads"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "skill-downloads"
+database_id = "117562a7-2101-4dd1-a1cd-b3e449065b05"
