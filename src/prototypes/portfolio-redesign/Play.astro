@@ -53,11 +53,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
         </div>
       </div>
       <div class="play-launch" data-launch-pad>
-        <svg class="play-launch-ring" viewBox="0 0 540 330" preserveAspectRatio="none" aria-hidden="true">
-          <ellipse cx="270" cy="165" rx="268" ry="163" />
-          <ellipse cx="271" cy="166" rx="264" ry="160" transform="rotate(.6 270 165)" />
-          <ellipse class="play-launch-mark" cx="270" cy="165" rx="3" ry="2" />
-        </svg>
+        <svg class="play-launch-ring" viewBox="0 0 540 330" aria-hidden="true" data-launch-ring></svg>
         <div class="play-launch-note">
           <p class="play-launch-title">The spin desk</p>
           <p>Each round the tops drop into this ring and spin out across the page, knocking into each other, trading spin and leaving a faint pencil trail as they slow down. The ring comes back with the next round.</p>
@@ -247,6 +243,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
 </div>
 
 <script>
+  import { createLaunchRing } from "./launch-ring.js";
   import { mountDoodles } from "./doodle-notes.js";
   import { initContactReveal } from "../../scripts/contact-reveal";
   const root = document.querySelector('[data-play-root]');
@@ -323,7 +320,10 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       document.addEventListener('astro:before-swap', () => { cancelled = true; dispose(); }, { once: true });
       const mountTops = () => import('./spinning-tops.js').then(({ mountSpinningTops }) => {
         if (cancelled) return;
-        dispose = mountSpinningTops(battlefield, hero, { pad: root.querySelector('[data-launch-pad]') });
+        dispose = mountSpinningTops(battlefield, hero, {
+          pad: root.querySelector('[data-launch-pad]'),
+          ring: createLaunchRing(root.querySelector('[data-launch-ring]')),
+        });
       });
       if ('requestIdleCallback' in window) requestIdleCallback(mountTops, { timeout: 600 });
       else setTimeout(mountTops, 200);
@@ -386,15 +386,13 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-hero-primary:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--play-ink); }
   .play-world .play-hero-secondary { padding: 0 12px; color: var(--play-link-blue); transition: background-color 140ms ease; }
 
-  /* The ring beside the headline is where each round of tops lands. It fades
-     out once every top has rolled clear and returns with the next round. */
+  /* The ring beside the headline is where each round of tops lands. It is
+     sketched in pencil just before they drop (launch-ring.js), rubbed out once
+     every top has rolled clear, and the note fades with it. */
   .play-launch { width: min(520px, 38vw); aspect-ratio: 540 / 330; position: absolute; z-index: 1; right: var(--play-page-margin); bottom: 56px; pointer-events: none; }
-  .play-launch > * { transition: opacity 900ms var(--play-ease-out); }
-  .play-launch[data-ring-clear] > * { opacity: 0; }
-  .play-launch-ring { width: 100%; height: 100%; display: block; overflow: visible; }
-  .play-launch-ring ellipse { fill: none; stroke: rgba(23,23,25,.36); stroke-width: 1.4; vector-effect: non-scaling-stroke; }
-  .play-launch-ring ellipse + ellipse { stroke: rgba(23,23,25,.18); stroke-width: 1; }
-  .play-launch-ring .play-launch-mark { fill: rgba(23,23,25,.4); stroke: none; }
+  .play-launch-note { transition: opacity 900ms var(--play-ease-out); }
+  .play-launch[data-ring-clear] .play-launch-note { opacity: 0; }
+  .play-launch-ring { width: 100%; height: 100%; display: block; overflow: visible; visibility: hidden; }
   .play-launch-note { width: 230px; position: absolute; right: 0; bottom: calc(100% + 18px); pointer-events: none; }
   .play-launch-note p { margin: 0; color: rgba(23,23,25,.74); font-size: 13px; line-height: 1.45; }
   .play-launch-note .play-launch-title { margin-bottom: 6px; color: #c63f2b; font-weight: 600; }

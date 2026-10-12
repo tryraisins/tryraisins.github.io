@@ -6,7 +6,7 @@ import { createCollisionSparks } from './spinning-top-effects.js';
 // Page coordinates are simulation coordinates; the camera projects an oblique
 // tabletop back into the same pixel space. Each top lands, sleeps, precesses
 // faster as it slows, wobbles, rolls round on its rim and comes to rest.
-export function mountSpinningTops(host, hero, { pad = null } = {}) {
+export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) {
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); }
   catch { return () => {}; }
@@ -513,10 +513,13 @@ export function mountSpinningTops(host, hero, { pad = null } = {}) {
     collisionEnergy = 0;
     sparks.clear();
     host.dataset.hitCount = '0';
-    // Tops arrive one after another instead of appearing mid-spin.
-    const order = states.slice(0, topCount).sort(() => Math.random() - .5);
-    order.forEach((state, index) => launch(state, .25 + index * .32, index / order.length));
     setRingClear(false);
+    // The ring is sketched first; the tops start dropping in as it closes and
+    // arrive one after another instead of appearing mid-spin.
+    const sketching = ready && ring ? ring.draw() : 0;
+    const lead = Math.max(.25, sketching - .2);
+    const order = states.slice(0, topCount).sort(() => Math.random() - .5);
+    order.forEach((state, index) => launch(state, lead + index * .32, index / order.length));
     states.forEach((state) => {
       if (state.active) return;
       state.phase = 'resting';
@@ -529,6 +532,7 @@ export function mountSpinningTops(host, hero, { pad = null } = {}) {
     ringClear = clear;
     host.dataset.ring = clear ? 'clear' : 'occupied';
     if (pad instanceof HTMLElement) pad.toggleAttribute('data-ring-clear', clear);
+    if (clear) ring?.erase();
   }
 
   function checkRing() {
@@ -736,7 +740,7 @@ export function mountSpinningTops(host, hero, { pad = null } = {}) {
 
     const impact = clamp(severity / 160, 0, 1);
     if (sameDirection) {
-      const loss = .04 + .08 * impact;
+      const loss = .03 + .05 * impact;
       a.spin *= 1 - loss * (b.mass / (a.mass + b.mass)) * 2;
       b.spin *= 1 - loss * (a.mass / (a.mass + b.mass)) * 2;
     } else if (spinningA || spinningB) {
@@ -756,13 +760,13 @@ export function mountSpinningTops(host, hero, { pad = null } = {}) {
     for (const [state, other] of [[a, b], [b, a]]) {
       const kick = (severity + rimKick) * (other.mass / state.mass);
       // A hop and a nod that settles within about a second.
-      if (state.phase !== 'resting') state.vz = Math.max(state.vz, Math.min(230, kick * .55));
+      if (state.phase !== 'resting') state.vz = Math.max(state.vz, Math.min(170, kick * .45));
       state.nutation = Math.min(.26, state.nutation + kick * .0011);
-      state.wobble = Math.min(.3, state.wobble + kick * .0004);
+      state.wobble = Math.min(.18, state.wobble + kick * .00022);
       if (state.phase === 'resting') state.rock = Math.min(.22, state.rock + kick * .0016);
-      // A slow, tilted top has little gyroscopic stiffness and can be knocked over.
-      if ((state.phase === 'wobbling' || state.phase === 'precessing') && Math.abs(state.spin) < 24 && kick > 60) {
-        state.tiltVelocity += kick * .006;
+      // Only a hard hit on a top that is nearly spent tips it over.
+      if (state.phase === 'wobbling' && Math.abs(state.spin) < 14 && kick > 150) {
+        state.tiltVelocity += kick * .003;
       }
     }
 
@@ -794,7 +798,9 @@ export function mountSpinningTops(host, hero, { pad = null } = {}) {
         if (state.vz < -140) {
           // The tip strikes the paper and hops, losing some speed to the skid.
           state.vz = -state.vz * .3;
-          state.tiltVelocity += random(.2, .5);
+          // A dropped top lands hard; a hop from a collision lands on a
+          // spinning tip whose gyroscopic stiffness shrugs most of it off.
+          state.tiltVelocity += state.phase === 'airborne' ? random(.2, .5) : random(.03, .1);
           state.nutation = Math.min(.2, state.nutation + .05);
           state.vx *= .82;
           state.vy *= .82;
@@ -1167,6 +1173,7 @@ export function mountSpinningTops(host, hero, { pad = null } = {}) {
       state.rock = 0;
     });
     setRingClear(false);
+    if (ready) ring?.draw();
   }
   reduced.addEventListener('change', motionChange);
   // Browser tests can fast-forward the fixed-step simulation with ?spin-debug.
@@ -1285,6 +1292,7 @@ export function mountSpinningTops(host, hero, { pad = null } = {}) {
     window.removeEventListener('blur', leave);
     if (pad instanceof HTMLElement) pad.removeAttribute('data-ring-clear');
     reduced.removeEventListener('change', motionChange);
+    ring?.dispose();
     sparks.dispose();
     scene.traverse((object) => {
       if (object.geometry) object.geometry.dispose();
