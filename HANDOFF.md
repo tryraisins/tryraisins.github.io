@@ -19,7 +19,9 @@ Pocket Playground is the production TryRaisins portfolio. `src/pages/index.astro
 - Drag to launch: pointer drag inside `[data-launch-pad]` (the hero ring) draws a red-pencil aim guide on a third canvas; release launches the longest-resting or weakest top from the drag start with speed/spin from drag length. `[data-launch-button]` launches by click/keyboard. Reduced motion shows a still arrangement, no trails, and hides the button.
 - `?spin-debug` exposes `window.__spinTops.advance(seconds)` for fast-forward tests. Datasets: `phases`, `spinRange`, `topState`, `hitCount`, `launches`, `scuffs`, `simTime`.
 
-## Current Task: Homepage Redesign and Realistic Tops (uncommitted)
+## Current Task: Homepage Redesign and Realistic Tops
+
+Release `97f4b9b` is pushed to `main`; [build/publish run 38187650049](https://github.com/tryraisins/tryraisins.github.io/actions/runs/38187650049) and Pages deployment 38187679518 succeeded. `node output/playwright/spin-redesign/e2e.cjs https://tryraisins.dev/` passed 41/41 against production (report in `run-tryraisins_dev/`, log in `live-run.txt`), and cache-busted fetches of `/` and `/prototypes/portfolio-redesign/` contained no plain email address. Physical-device Safari remains unverified.
 
 Designed in pen.dev first (document `C:/Users/nubiaville/.pencil/documents/bc9ae75d-e9a6-483c-9025-31871738b26f/untitled.pen`, boards "Home / Redesign / Desktop 1440", "Home / Redesign / Mobile 390", "Spinning tops / Motion study", below the skills boards at y≈11,400). User feedback applied: Option B roaming tops, drag to launch, Terror Tracker featured with tape on both corners, BetPicks crossed out with a marker X and a "Suspended" banner over a blank match-slip cover (the live BetPicks site did not respond), no football-pitch thumbnail.
 
