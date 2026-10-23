@@ -1,20 +1,20 @@
 {
   "name": "yeknal-content-seo",
-  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
-  "source": "https://github.com/tryraisins/MD_Files/tree/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-content-seo",
+  "sourceRevision": "f00caadb729f8f787bfa1a1e72a2ef0a1df8342e",
+  "source": "https://github.com/tryraisins/MD_Files/tree/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-content-seo",
   "fileCount": 2,
   "files": [
     {
       "path": "references/indexnow.md",
       "sha256": "37a95981c161c0419ae367f2ace255dd41450d1b7fdc9bcc9fffc39e396a2e37",
       "size": 3978,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-content-seo/references/indexnow.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-content-seo/references/indexnow.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "50fe5267eea50a20a0b9584f57ca4a128b16349a952b64418f8567247cfac591",
       "size": 9226,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/edf3ec64781c24428e87cb869225a4bab077619c/skills/yeknal-content-seo/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-content-seo/SKILL.md"
     }
   ]
 }
