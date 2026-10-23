@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "repository": "tryraisins/MD_Files",
-  "sourceRevision": "f00caadb729f8f787bfa1a1e72a2ef0a1df8342e",
-  "catalogCommit": "0af92d8478bf21e1dd47468aacce03bcc88f6ab8",
-  "cliVersion": "2.5.0",
+  "sourceRevision": "565e10b96cdab30bc8c3089ffa7f1c201b9c3854",
+  "catalogCommit": "c2cf16a5b75c3ea5aedbb332a91ebd476a88b516",
+  "cliVersion": "2.5.1",
   "counts": {
-    "skills": 90,
+    "skills": 91,
     "internal": 35
   },
   "tasks": [
@@ -31,19 +31,19 @@
       "id": "review",
       "label": "Review and test",
       "description": "Find defects, check flows in a browser and debug failures.",
-      "count": 19
+      "count": 21
     },
     {
       "id": "security",
       "label": "Security",
       "description": "Secure implementation, review and threat modeling.",
-      "count": 4
+      "count": 5
     },
     {
       "id": "ship",
       "label": "Ship and deploy",
       "description": "Git, pull requests, releases and hosting.",
-      "count": 10
+      "count": 11
     },
     {
       "id": "docs",
@@ -125,14 +125,14 @@
         "review",
         "testing-strategy"
       ],
-      "version": "bfdd78e7f6f734286afb1071fa88bde85f305650760cbeff67d71ddd9635bdf2",
+      "version": "b4166324001e18f73ed9e8dac65667b2bc7b8e8955b5225c2f4b9e71bf1a4f17",
       "fileCount": 1,
-      "totalBytes": 4607,
+      "totalBytes": 4720,
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "98bb9b09eea3a84dcb8b4d324ef98d933ab5beff2abb84204383b037c3e065ee",
-          "size": 4607
+          "sha256": "dd53ac0f5994313776dc6c0d62966eb261319a3c6bc216dbc314ab0eeb912541",
+          "size": 4720
         }
       ]
     },
@@ -309,9 +309,9 @@
         "testing-strategy",
         "troubleshoot"
       ],
-      "version": "8d64b3217b7967b25ac40928f50502e497dce1481d1ea4ebe2bc14ec85cca2db",
+      "version": "b644e6163cba4c276a50856dc088628f3c3d7a83e13c9160976db59b82be583f",
       "fileCount": 9,
-      "totalBytes": 23891,
+      "totalBytes": 24077,
       "files": [
         {
           "path": "agents/openai.yaml",
@@ -355,8 +355,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "1e403e1b98fca2078b6800cb2ab86822c96979110eb8bd92e572fba16da95446",
-          "size": 4973
+          "sha256": "b3c12fab8afa624166fd9329d8f02f75361849a31c90edaaca35975a104f32be",
+          "size": 5159
         }
       ]
     },
@@ -364,8 +364,8 @@
       "name": "yeknal-testing-strategy",
       "slug": "testing-strategy",
       "title": "Testing strategy",
-      "purpose": "Plans tests around real end-to-end flows and writes down how things could fail before any isolated test gets added.",
-      "description": "Use before testing implementation work to prefer end-to-end coverage and plan failure cases before isolated test implementations.",
+      "purpose": "Keeps verification end to end: proves behavior through the real entry point, bans new unit tests, and asks before any isolated check.",
+      "description": "Use before writing or running tests to enforce end-to-end-only verification. Do not write unit tests; prove behavior through the real entry point, keep a repeatable artifact, and report what stayed unverified.",
       "tasks": [
         "review"
       ],
@@ -375,13 +375,13 @@
       "whenToUse": [
         "You are about to add tests for a feature.",
         "You want coverage of real user flows and error paths.",
-        "Unit tests keep being written after the code instead of before it."
+        "An agent is about to write unit tests instead of an end-to-end flow."
       ],
       "avoid": null,
       "requirements": null,
       "example": {
         "ask": "Plan how we should test the new password-reset flow.",
-        "outcome": "It lists the ways the flow could fail, then proposes end-to-end checks that cover them and produce a rerunnable record."
+        "outcome": "It maps the flow's real end-to-end path and failure states, then proposes the browser or CLI run that proves them and leaves a rerunnable record."
       },
       "attribution": {
         "credit": "Written for this catalog.",
@@ -392,14 +392,14 @@
         "test-audit",
         "playwright"
       ],
-      "version": "803ef414ef872efa0e49f4c8b88de66425e4bcf8068909b89170add3cb7b2214",
+      "version": "f52fe17912e989a9cf82bf4e3f2c99abda5b458148e4c0994f09c8068ae9631d",
       "fileCount": 1,
-      "totalBytes": 2332,
+      "totalBytes": 3470,
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "ee32df8dcd9296962e20388bcf92ec14824ebbcf2f4be8e6e76da3e6a69c3aaa",
-          "size": 2332
+          "sha256": "8c672787d32e07e97681f6f3d62b9f117028cbe707a4df39c4acf245ee98f461",
+          "size": 3470
         }
       ]
     },
@@ -966,9 +966,9 @@
         "engineering-specialists",
         "winui-app"
       ],
-      "version": "be978f12e7df2341cd09e3c60416320bd8dcb6799aa4223c3b09e2bfb18d691f",
+      "version": "8fc6139eace45ed49b570f040ccb4cd452244b1392eedba6c0bc7cb5407a7958",
       "fileCount": 17,
-      "totalBytes": 53173,
+      "totalBytes": 53391,
       "files": [
         {
           "path": "agents/openai.yaml",
@@ -1027,8 +1027,8 @@
         },
         {
           "path": "references/testing-performance-and-operations.md",
-          "sha256": "14fecd1e3f5c7a54de2e7ffdd51a91a52101da5765f1ccdfd1f6c6437dd6c8ec",
-          "size": 2698
+          "sha256": "193203a1d03a6e9f163fdffd8fa0f28ac02cc27a94854e29870c6caaa2eaea00",
+          "size": 2916
         },
         {
           "path": "references/ui-blazor.md",
@@ -3013,25 +3013,29 @@
       "name": "yeknal-content-seo",
       "slug": "content-seo",
       "title": "Content and SEO",
-      "purpose": "Guides useful, accessible web content and technical SEO together, from page copy and metadata to structured data, sitemaps, canonical URLs and AI-search visibility.",
-      "description": "Unified content marketing and technical SEO guidance for useful, accessible web content. Use when planning, writing, auditing, or improving pages, metadata, information architecture, structured data, crawlability, sitemaps, canonicalization, AI-search visibility, or change-driven IndexNow submission.",
+      "purpose": "Guides useful content and search visibility together, from keyword patterns and page briefs to metadata, structured data, sitemaps, local search, earned links and AI citations.",
+      "description": "Evidence-led search visibility guidance for content, technical SEO, local search, earned links, and AI answers. Use when choosing target queries, deciding whether to update or create a page, writing or publishing pages, auditing metadata, structure, structured data, crawlability, sitemaps, or canonicalization, triaging traffic changes, improving local or AI-search visibility, or submitting changed URLs with IndexNow.",
       "tasks": [
         "docs",
-        "design"
+        "design",
+        "review"
       ],
       "featuredRank": -1,
       "compatibility": false,
       "internal": true,
       "whenToUse": [
+        "You are choosing which queries to target and which pages should exist.",
         "You are planning or rewriting pages and want them to be found.",
-        "Metadata, canonical tags or structured data need an audit.",
+        "Metadata, canonical tags, crawlability or structured data need an audit.",
+        "A local business is invisible in the map pack, or links and coverage need a plan.",
+        "Traffic moved and you need to separate a ranking loss from a click-through loss.",
         "You want a site to be readable by search engines and AI search alike."
       ],
       "avoid": null,
       "requirements": null,
       "example": {
-        "ask": "Audit the product pages for SEO and fix the metadata and structured data.",
-        "outcome": "It checks titles, descriptions, canonicals and schema against the visible content and corrects what’s missing or wrong."
+        "ask": "Choose the queries worth targeting and tell me whether to update an existing page or create a new one.",
+        "outcome": "It reads the live results, checks existing query and page data, and returns a decision, a brief and the evidence behind it."
       },
       "attribution": {
         "credit": "Written for this catalog.",
@@ -3042,19 +3046,54 @@
         "markdown-management",
         "frontend-developer"
       ],
-      "version": "3dafef01dfe91b51852ff404a7caef64a376349cceb8edb9d694bf84ce0332f3",
-      "fileCount": 2,
-      "totalBytes": 13204,
+      "version": "9e3022df5c6321363375dbb826f999ada88c7e96ca07488f6fc5fb78ebb5e3e1",
+      "fileCount": 9,
+      "totalBytes": 64859,
       "files": [
+        {
+          "path": "references/authority-and-links.md",
+          "sha256": "cd1ff8bb41bbd63e6f6ed1c07b3a2c65635790c5d9fd453c64c340dab73df41f",
+          "size": 9290
+        },
+        {
+          "path": "references/content-maintenance.md",
+          "sha256": "d51c3c183abc2a818ed453adadc4ea5e88ae355edefee9e1669fc681937d01d2",
+          "size": 5544
+        },
         {
           "path": "references/indexnow.md",
           "sha256": "37a95981c161c0419ae367f2ace255dd41450d1b7fdc9bcc9fffc39e396a2e37",
           "size": 3978
         },
         {
+          "path": "references/keyword-intent-and-patterns.md",
+          "sha256": "dd90d628d05e6c59db6fb7acc5b9306a6fb28b2095832080f7f21cd616fd83bc",
+          "size": 7527
+        },
+        {
+          "path": "references/local-search.md",
+          "sha256": "1a02b2e1325e8aeb347df3c282091213c665f923affd55254cbb8c377bde5696",
+          "size": 6221
+        },
+        {
+          "path": "references/page-decisions-and-briefs.md",
+          "sha256": "a16ae7c5b08e98f097aa0a6970bd4f723e53eeaaf0490606a9b3ea221a7c70f9",
+          "size": 8088
+        },
+        {
+          "path": "references/publishing-and-change-control.md",
+          "sha256": "24e379d7eaad512cca11ad2494b2a8a026cf505113d63e775aff557d4b0d533c",
+          "size": 4799
+        },
+        {
+          "path": "references/technical-audit.md",
+          "sha256": "f82e4a734401bc733984962a08f3a815eaf453b4832f6b619102b2300cc1c00e",
+          "size": 6656
+        },
+        {
           "path": "SKILL.md",
-          "sha256": "50fe5267eea50a20a0b9584f57ca4a128b16349a952b64418f8567247cfac591",
-          "size": 9226
+          "sha256": "1c2b5afd6d6dc10905dc70428591abc3acdf55b4d483bfe898554afc7f578f64",
+          "size": 12756
         }
       ]
     },
@@ -4244,6 +4283,78 @@
       ]
     },
     {
+      "name": "yeknal-launch-readiness",
+      "slug": "launch-readiness",
+      "title": "Launch readiness",
+      "purpose": "Audits a product before it becomes publicly reachable, covering the legal obligations that attach to the data, payments, email and user content it handles, plus the engineering gates no other workflow owns, then returns one register and a go or no-go.",
+      "description": "Audit a product for launch readiness before it becomes publicly reachable, covering the legal obligations that attach to the data, payments, email and user content it handles, plus the engineering gates no other workflow owns, then produce one register and a go or no-go. Use when someone asks whether an app is ready to launch or to ship to real users, or before public availability.",
+      "tasks": [
+        "review",
+        "ship",
+        "security"
+      ],
+      "featuredRank": -1,
+      "compatibility": false,
+      "internal": false,
+      "whenToUse": [
+        "You are about to let strangers reach the product for the first time.",
+        "You need to know which privacy, payment, email and content duties apply to you, in Nigeria or elsewhere.",
+        "You want the unglamorous checks done: database rules, a tested restore, a real performance budget, deliverability, spend caps, a rollback plan."
+      ],
+      "avoid": "It is not legal advice and it is not a code review. It never states a statutory maximum as a likely outcome, and it marks anything it cannot verify as unassessed rather than guessing.",
+      "requirements": null,
+      "example": {
+        "ask": "We launch on Monday. What are we missing?",
+        "outcome": "It builds a data map from the code, checks it against the applicable obligations and the seven launch gates, then returns a verdict with blockers first, the filings that need lead time, and every check it could not perform."
+      },
+      "attribution": {
+        "credit": "Written for this catalog.",
+        "license": null,
+        "sourceUrl": null
+      },
+      "related": [
+        "application-security",
+        "finalize",
+        "sentry",
+        "testing-strategy"
+      ],
+      "version": "f45155ff651356f1667cbf597f03bce9d9306a41c0dceacd3fd8885c194a4f05",
+      "fileCount": 6,
+      "totalBytes": 49460,
+      "files": [
+        {
+          "path": "references/evidence-and-fixes.md",
+          "sha256": "5a43626c0dc6c1b1270731710e809bd79108770c23b5854e0fed25136e43b265",
+          "size": 6526
+        },
+        {
+          "path": "references/jurisdictions.md",
+          "sha256": "60de2728b14bc00c8886a3058a9596769d057be35fdf77052aeff57eb298ca62",
+          "size": 15007
+        },
+        {
+          "path": "references/launch-gates.md",
+          "sha256": "29d0d25c99ead50448e03d27d1b290dd022e85cf02f7d9f85bb43c85672cdd50",
+          "size": 7153
+        },
+        {
+          "path": "references/obligations.md",
+          "sha256": "d4a99d9eeccea611d6a4cb390edb8c4dba25815d4023ec641751f2cbc684f94e",
+          "size": 9546
+        },
+        {
+          "path": "references/report-template.md",
+          "sha256": "63eec6cbc513354f3b935664c525a347c5da5c3b1a67c179fd7e565ae0062d89",
+          "size": 3143
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "98e79b1b9d4e709180397f28de804d388c08d15b7e103dd6b89cc50589dca11b",
+          "size": 8085
+        }
+      ]
+    },
+    {
       "name": "yeknal-linear",
       "slug": "linear",
       "title": "Linear",
@@ -5148,9 +5259,9 @@
         "implement",
         "linear"
       ],
-      "version": "bfead02471d21ce36819356a32fa32e9e745d77c47819d3f18ee1ef08bdee727",
+      "version": "d6a7372975a24f823079bf2d58062e2b7853eb8357af1a9d872096c1094f16f8",
       "fileCount": 19,
-      "totalBytes": 86114,
+      "totalBytes": 86217,
       "files": [
         {
           "path": "agents/openai.yaml",
@@ -5239,8 +5350,8 @@
         },
         {
           "path": "reference/task-creation.md",
-          "sha256": "df1bec09816ab7beffe7a675eaab24fd62dc01617141cf8deb48f72a735b7ee5",
-          "size": 8209
+          "sha256": "0eaf8bbf51aa24165bf99bd3578cbd65936f73ff11f612e5f5166a008113fcaa",
+          "size": 8312
         },
         {
           "path": "SKILL.md",
@@ -7464,5 +7575,5 @@
       ]
     }
   ],
-  "snapshotHash": "83665114a316512440031fb9bcf9acbdb1a21595bceb1bfa47077cb9948b1287"
+  "snapshotHash": "06b7c2270e2d996daa32bf0176ac7bbe20cc31a7d98e13b1e95b702d36bb6404"
 }

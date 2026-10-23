@@ -1,6 +1,6 @@
 # Project Handoff
 
-Last updated: 2026-10-11
+Last updated: 2026-10-23
 Branch: main
 Implementation release: 5121fea4104b62cf534699400e85555f6e84a296
 HEAD: use `git rev-parse HEAD` for the latest documentation revision.
@@ -33,7 +33,7 @@ Designed in pen.dev first (document `C:/Users/nubiaville/.pencil/documents/bc9ae
 
 ## Previous Task: Agent Skills Library
 
-`/skills/` lists every installable skill from MD_Files (89, including the 35 marked internal) and `/skills/<slug>/` gives each one a shareable page. Pages are generated at build time from `src/data/skills-catalog.json`, a snapshot written only by MD_Files' `node tools/sync-portfolio.js --portfolio <this checkout>`. Never edit the snapshot by hand: `src/lib/skills.ts` re-hashes and validates it, and any mismatch fails the build. The snapshot pins source links, install prompts and `/skills/<slug>/files.json` hash manifests to the catalog `sourceRevision` (currently `edf3ec6`), the same revision `npx yeknal setup` serves. Presentation copy (titles, tasks, examples, attribution) lives in MD_Files `site/presentation.json`; the publication order is in that repository's README.
+`/skills/` lists every installable skill from MD_Files (91, including the 35 marked internal) and `/skills/<slug>/` gives each one a shareable page. Pages are generated at build time from `src/data/skills-catalog.json`, a snapshot written only by MD_Files' `node tools/sync-portfolio.js --portfolio <this checkout>`. Never edit the snapshot by hand: `src/lib/skills.ts` re-hashes and validates it, and any mismatch fails the build. The snapshot pins source links, install prompts and `/skills/<slug>/files.json` hash manifests to the catalog `sourceRevision` (currently `565e10b`), the same revision `npx yeknal setup` serves. Presentation copy (titles, tasks, examples, attribution) lives in MD_Files `site/presentation.json`; the publication order is in that repository's README.
 
 - Library: introduction, six task notes, search, task chips (a native select at 620px and below), 12 entries with "Show more", query/task state in the URL, empty state with a task suggestion, reset, and an install-everything sheet explaining `npx yeknal@latest setup` versus `skills --all`. All 89 entries and links are in the static HTML; JavaScript only filters and reveals them.
 - Install prompts: copying from the list opens a This project / All my projects choice first; the detail page shows no prompt until a scope radio is chosen. `src/lib/skill-prompt.ts` builds prompts for both the server and the browser. The prompt clones with `-c core.autocrlf=false` because Windows Git with autocrlf rewrites line endings and breaks the published hashes; E2E reproduced that before the fix. Clipboard failures select the full prompt for manual copy and never report success.
