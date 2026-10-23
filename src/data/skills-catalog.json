@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "repository": "tryraisins/MD_Files",
-  "sourceRevision": "edf3ec64781c24428e87cb869225a4bab077619c",
-  "catalogCommit": "f013d360ec0041756710fe02ea4811042a14ba3b",
-  "cliVersion": "2.4.1",
+  "sourceRevision": "f00caadb729f8f787bfa1a1e72a2ef0a1df8342e",
+  "catalogCommit": "0af92d8478bf21e1dd47468aacce03bcc88f6ab8",
+  "cliVersion": "2.5.0",
   "counts": {
-    "skills": 89,
+    "skills": 90,
     "internal": 35
   },
   "tasks": [
@@ -19,7 +19,7 @@
       "id": "design",
       "label": "Design interfaces",
       "description": "Visual direction, layout, components and interface quality.",
-      "count": 28
+      "count": 29
     },
     {
       "id": "motion",
@@ -31,7 +31,7 @@
       "id": "review",
       "label": "Review and test",
       "description": "Find defects, check flows in a browser and debug failures.",
-      "count": 18
+      "count": 19
     },
     {
       "id": "security",
@@ -6251,6 +6251,50 @@
       ]
     },
     {
+      "name": "yeknal-slopscan",
+      "slug": "slopscan",
+      "title": "Slop scan",
+      "purpose": "Scans a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, and writes a report that explains each finding and how to fix it.",
+      "description": "Scan a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, then act on the report. Use when a project should be checked for the familiar signs of a shipped template, when copy or interface patterns need reviewing before a launch, or when someone asks whether a codebase reads as generic.",
+      "tasks": [
+        "design",
+        "review"
+      ],
+      "featuredRank": -1,
+      "compatibility": false,
+      "internal": false,
+      "whenToUse": [
+        "You want to know whether a codebase carries the familiar signs of a shipped template.",
+        "Copy or interface patterns need checking before a launch.",
+        "You want findings with locations and fixes rather than a general opinion."
+      ],
+      "avoid": "It reads source files only. It cannot see the rendered page, so checks that need a browser are reported as unassessed.",
+      "requirements": null,
+      "example": {
+        "ask": "Scan this project for AI slop before we launch.",
+        "outcome": "It reports each indicator with its file and line, a plain explanation and a fix, lists what it could not assess, and writes both a readable log and a JSON report."
+      },
+      "attribution": {
+        "credit": "Written for this catalog.",
+        "license": null,
+        "sourceUrl": null
+      },
+      "related": [
+        "ui-quality-baseline",
+        "review"
+      ],
+      "version": "f9fefbde49b0762bc4d9fd40cbb4324a4e6f216532150c09ecd3a40ca72648b7",
+      "fileCount": 1,
+      "totalBytes": 5964,
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "eaa80f9f839ffb9645182e959a5a08c66968f0a0f2fcdf331fd04024dd886ee2",
+          "size": 5964
+        }
+      ]
+    },
+    {
       "name": "yeknal-ask-sonner",
       "slug": "ask-sonner",
       "title": "Sonner toasts",
@@ -7420,5 +7464,5 @@
       ]
     }
   ],
-  "snapshotHash": "c80c6b6d4116227ffacc467cb9afc9c204629b5740719ec24de8c0f35eacbe6a"
+  "snapshotHash": "83665114a316512440031fb9bcf9acbdb1a21595bceb1bfa47077cb9948b1287"
 }
