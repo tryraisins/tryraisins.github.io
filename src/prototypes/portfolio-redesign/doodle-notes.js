@@ -70,7 +70,7 @@ const LOOP_DURATION = DRAW_DURATION + HOLD_DURATION + ERASE_DURATION;
 const lengthOf = (points) => points.slice(1).reduce((total, point, index) => total + Math.hypot(point[0] - points[index][0], point[1] - points[index][1]), 0);
 const pathLength = (points) => lengthOf(points);
 
-function drawPath(context, points, progress, width, height, seed) {
+function drawPath(context, points, progress, width, height, seed, lean = false) {
   if (progress <= 0) return;
   let remaining = pathLength(points) * Math.min(progress, 1);
   const scale = Math.min(width, height) / 100;
@@ -95,44 +95,60 @@ function drawPath(context, points, progress, width, height, seed) {
     remaining -= segment;
   }
   // A soft rubbed edge, pressure changes and a faint second attempt at the line.
+  // Pressure is bucketed into three widths and each bucket is stroked once per
+  // pass. Stroking every six-sample chunk separately cost around two thousand
+  // canvas calls per drawing per frame, which is what made old laptops wheeze.
   for (const [pass, opacity, thickness] of [[1, .12, 1.45], [0, .68, .68], [2, .17, .38]]) {
+    if (lean && pass === 2) continue;
     context.strokeStyle = `rgba(57, 54, 46, ${opacity})`;
+    const buckets = [[], [], []];
     for (let start = 0; start < visible.length - 1; start += 6) {
-      context.beginPath();
       const pressure = .82 + Math.sin(seed + start * .17) * .18;
-      context.lineWidth = Math.max(.45, scale * thickness * pressure);
+      const bucket = Math.min(2, Math.max(0, Math.round((pressure - .64) / .12)));
       const end = Math.min(visible.length - 1, start + 6);
+      const chunk = [];
       for (let i = start; i <= end; i += 1) {
         const [x, y] = visible[i];
-        if (i === start) context.moveTo(x + pass * .25, y - pass * .19);
-        else context.lineTo(x + pass * .25, y - pass * .19);
+        chunk.push(x + pass * .25, y - pass * .19);
+      }
+      buckets[bucket].push(chunk);
+    }
+    buckets.forEach((chunks, bucket) => {
+      if (!chunks.length) return;
+      const pressure = .76 + bucket * .12;
+      context.lineWidth = Math.max(.45, scale * thickness * pressure);
+      context.beginPath();
+      for (const chunk of chunks) {
+        context.moveTo(chunk[0], chunk[1]);
+        for (let i = 2; i < chunk.length; i += 2) context.lineTo(chunk[i], chunk[i + 1]);
       }
       context.stroke();
-    }
+    });
   }
   context.fillStyle = 'rgba(57, 54, 46, .2)';
-  for (let i = 3; i < visible.length; i += 7) {
+  const stride = lean ? 14 : 7;
+  for (let i = 3; i < visible.length; i += stride) {
     const [x, y] = visible[i], grain = Math.sin(i * 13.7 + seed);
     context.fillRect(x + grain * scale, y + Math.cos(i * 4.3 + seed) * scale, .34 * scale, .28 * scale);
   }
 }
 
-function drawAuto(context, paths, progress, width, height) {
+function drawAuto(context, paths, progress, width, height, lean) {
   const total = paths.reduce((sum, path) => sum + pathLength(path), 0);
   let remaining = total * Math.min(1, Math.max(0, progress));
   paths.forEach((path, index) => {
     const length = pathLength(path);
-    drawPath(context, path, Math.min(1, remaining / length), width, height, index * 17.31);
+    drawPath(context, path, Math.min(1, remaining / length), width, height, index * 17.31, lean);
     remaining -= length;
   });
 }
 
-function drawReverse(context, paths, progress, width, height) {
+function drawReverse(context, paths, progress, width, height, lean) {
   let remaining = paths.reduce((sum, path) => sum + pathLength(path), 0) * Math.max(0, 1 - progress);
   paths.forEach((path, index) => {
     const length = pathLength(path);
     const visible = Math.min(length, Math.max(0, remaining));
-    drawPath(context, path, visible / length, width, height, index * 17.31);
+    drawPath(context, path, visible / length, width, height, index * 17.31, lean);
     remaining -= length;
   });
 }
@@ -274,9 +290,16 @@ export function mountDoodles(root) {
   const doodles = [...root.querySelectorAll('[data-doodle]')]
     .map((drawing) => ({ drawing, canvas: drawing.querySelector('[data-doodle-canvas]') }))
     .filter((state) => state.canvas instanceof HTMLCanvasElement);
+  // Four-thread machines (a 2013 MacBook, cheap phones) get fewer frames, one
+  // less pencil pass, coarser grain and no blend mode.
+  const cores = navigator.hardwareConcurrency || 4;
+  const memory = navigator.deviceMemory;
+  const lean = cores <= 4 || (typeof memory === 'number' && memory <= 4);
+  const frameInterval = lean ? 1000 / 18 : 1000 / 30;
   let nextStart = performance.now();
   const drawings = doodles.map(({ drawing, canvas }, index) => {
     if (index > 0) nextStart += DOODLE_START_INTERVAL_MIN + Math.random() * (DOODLE_START_INTERVAL_MAX - DOODLE_START_INTERVAL_MIN);
+    if (lean) drawing.classList.add('is-lean');
     return { drawing, canvas, context: canvas.getContext('2d'), index, sketch: index % sketches.length,
       phase: 'waiting', started: nextStart, visible: true, width: 240, height: 175, ratio: 1 };
   });
@@ -305,18 +328,28 @@ export function mountDoodles(root) {
     const paths = state.phase !== 'drawing' && !reduced.matches
       ? animatedPaths(sketch.name, sketch.paths, state.phase === 'complete' ? elapsedHold : HOLD_DURATION / 1000)
       : sketch.paths;
-    if (state.phase === 'drawing') drawAuto(context, paths, phase / DRAW_DURATION, width, height);
+    if (state.phase === 'drawing') drawAuto(context, paths, phase / DRAW_DURATION, width, height, lean);
     if (state.phase === 'complete') {
-      drawAuto(context, paths, 1, width, height);
+      drawAuto(context, paths, 1, width, height, lean);
     }
-    if (state.phase === 'reversing') { const reverse = (phase - DRAW_DURATION - HOLD_DURATION) / ERASE_DURATION; drawReverse(context, paths, reverse, width, height); }
+    if (state.phase === 'reversing') { const reverse = (phase - DRAW_DURATION - HOLD_DURATION) / ERASE_DURATION; drawReverse(context, paths, reverse, width, height, lean); }
+  };
+  const startLoop = () => {
+    if (!frame && !reduced.matches && !document.hidden) frame = requestAnimationFrame(loopFrame);
   };
   const loopFrame = (now) => {
-    if (reduced.matches || now - lastDraw >= 1000 / 30) {
-      drawings.forEach((state) => { if (state.visible || reduced.matches) draw(state, now); });
+    frame = 0;
+    if (reduced.matches) {
+      drawings.forEach((state) => draw(state, now));
+      return;
+    }
+    if (now - lastDraw >= frameInterval) {
+      drawings.forEach((state) => { if (state.visible) draw(state, now); });
       lastDraw = now;
     }
-    if (!reduced.matches && !document.hidden) frame = requestAnimationFrame(loopFrame);
+    // No visible drawings means no reason to wake up again. The intersection
+    // observer restarts the loop when one scrolls back into view.
+    if (drawings.some((state) => state.visible)) startLoop();
   };
   const motionChange = () => {
     cancelAnimationFrame(frame);
@@ -334,15 +367,23 @@ export function mountDoodles(root) {
     entries.forEach((entry) => { const state = drawings.find((item) => item.canvas === entry.target); if (state) resize(state); });
   });
   const visibilityObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => { const state = drawings.find((item) => item.drawing === entry.target); if (state) { state.visible = entry.isIntersecting; if (state.visible) draw(state, performance.now()); } });
+    entries.forEach((entry) => {
+      const state = drawings.find((item) => item.drawing === entry.target);
+      if (!state) return;
+      state.visible = entry.isIntersecting;
+      if (state.visible) {
+        draw(state, performance.now());
+        startLoop();
+      }
+    });
   }, { rootMargin: '120px' });
   drawings.forEach((state) => { resize(state); resizeObserver.observe(state.canvas); visibilityObserver.observe(state.drawing); });
   const visibilityChange = () => {
-    if (document.hidden) { hiddenAt = performance.now(); cancelAnimationFrame(frame); }
+    if (document.hidden) { hiddenAt = performance.now(); cancelAnimationFrame(frame); frame = 0; }
     else { if (hiddenAt) drawings.forEach((state) => { state.started += performance.now() - hiddenAt; }); hiddenAt = 0; motionChange(); }
   };
   document.addEventListener('visibilitychange', visibilityChange);
   reduced.addEventListener('change', motionChange);
-  frame = requestAnimationFrame(loopFrame);
+  startLoop();
   return () => { cancelAnimationFrame(frame); reduced.removeEventListener('change', motionChange); document.removeEventListener('visibilitychange', visibilityChange); resizeObserver.disconnect(); visibilityObserver.disconnect(); };
 }

@@ -13,13 +13,19 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
   // Reading shader status after every link forces the driver to finish
   // compiling on the main thread; compileAsync below does that work off it.
   renderer.debug.checkShaderErrors = false;
-  const pixelRatio = Math.min(devicePixelRatio, 1.5);
-  // A graphite layer under the tops records tip paths.
+  // A graphite layer under the tops records tip paths. It is a soft smudge, so
+  // it never needs a retina-sized buffer.
   const trailCanvas = document.createElement('canvas');
   const trail = trailCanvas.getContext('2d');
   host.replaceChildren(trailCanvas, renderer.domElement);
+  // Devices are guessed into a quality tier up front and a frame-time watchdog
+  // can drop one more tier while the page runs. Old integrated GPUs (a 2013
+  // MacBook among them) are the reason this exists.
+  let tier = detectTier();
+  let pixelRatio = ratioFor(tier);
+  const trailRatio = Math.min(pixelRatio, 1);
   renderer.setPixelRatio(pixelRatio);
-  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.enabled = tier < 2;
   // three r186 renders PCFSoftShadowMap as PCF anyway; naming PCF directly
   // keeps precompiled programs identical to the ones the renderer uses.
   renderer.shadowMap.type = THREE.PCFShadowMap;
@@ -38,8 +44,8 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
   scene.add(new THREE.HemisphereLight(0xffffff, 0x8d8175, 1));
   const light = new THREE.DirectionalLight(0xfff6e8, 2.2);
   light.position.set(-250, 650, 200);
-  light.castShadow = true;
-  light.shadow.mapSize.set(1024, 1024);
+  light.castShadow = tier < 2;
+  light.shadow.mapSize.set(tier === 0 ? 1024 : 512, tier === 0 ? 1024 : 512);
   light.shadow.bias = -.0001;
   light.shadow.normalBias = .3;
   light.shadow.radius = 4;
@@ -194,9 +200,14 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
     pivot.add(model);
     scene.add(pivot);
     const design = index % 5;
-    const enamel = design === 1
-      ? new THREE.MeshPhysicalMaterial({ color, metalness: .45, roughness: .2, clearcoat: 1, clearcoatRoughness: .08 })
-      : new THREE.MeshStandardMaterial({ color, metalness: .08, roughness: .32 });
+    // One standard material covers every silhouette. The tin top used to carry
+    // a clearcoat, which costs a second specular lobe per pixel and is invisible
+    // on a 56px toy, so it now reads as lacquer through roughness alone.
+    const enamel = new THREE.MeshStandardMaterial({
+      color,
+      metalness: design === 1 ? .45 : .08,
+      roughness: design === 1 ? .16 : .32,
+    });
     const accent = new THREE.MeshStandardMaterial({
       color: new THREE.Color(color).offsetHSL(index % 2 ? .035 : -.035, -.08, -.09),
       metalness: .06,
@@ -391,12 +402,47 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
   }
 
   // Tops are built only when the screen size needs them, so phones skip the
-  // geometry for the five they never show.
+  // geometry for the ones they never show. The desktop count was cut from eight
+  // to five: five silhouettes is the whole set anyway, and each one is a shadow
+  // caster on older GPUs.
   const states = [];
-  const countFor = (viewport) => viewport > 1200 ? 8 : viewport > 620 ? 4 : 3;
+  const countFor = (viewport) => viewport > 1200 ? 5 : viewport > 620 ? 4 : 3;
   const radiusFor = (viewport) => viewport > 1200 ? 56 : viewport > 620 ? 46 : 34;
   let topCount = countFor(window.innerWidth);
   const sparks = createCollisionSparks(scene, renderer.getPixelRatio());
+
+  // 0: current desktop GPU. 1: phones and older laptops. 2: four threads or
+  // less, which is where a 2013 MacBook and cheap Android phones land.
+  function detectTier() {
+    const cores = navigator.hardwareConcurrency || 4;
+    const memory = navigator.deviceMemory;
+    if (cores <= 4 || (typeof memory === 'number' && memory <= 4)) return 2;
+    if (matchMedia('(pointer: coarse)').matches || cores < 8) return 1;
+    return 0;
+  }
+
+  function ratioFor(value) {
+    const cap = value === 0 ? 1.5 : value === 1 ? 1.25 : 1;
+    return Math.min(devicePixelRatio || 1, cap);
+  }
+
+  // Called once at startup and again whenever the watchdog steps down. The
+  // drawing buffer has to be resized for a new pixel ratio to take effect.
+  function applyQuality() {
+    pixelRatio = ratioFor(tier);
+    renderer.setPixelRatio(pixelRatio);
+    const shadows = tier < 2;
+    renderer.shadowMap.enabled = shadows;
+    light.castShadow = shadows;
+    if (light.shadow.map) { light.shadow.map.dispose(); light.shadow.map = null; }
+    light.shadow.mapSize.set(tier === 0 ? 1024 : 512, tier === 0 ? 1024 : 512);
+    sparks.setPixelRatio(pixelRatio);
+    if (width && height) {
+      renderer.setSize(width, height);
+      sizeLayer(trailCanvas, trail, trailRatio);
+    }
+    host.dataset.quality = String(tier);
+  }
   const scratchPoint = new THREE.Vector3();
   const tiltQuaternion = new THREE.Quaternion();
   const supportQuaternion = new THREE.Quaternion();
@@ -420,6 +466,8 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
   let collisionEnergy = 0;
   let nextMetricsAt = 0;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  // Tops are a hero toy: once the hero leaves the viewport the simulation stops.
+  let heroVisible = true;
   const world = (x, y) => [x - width / 2, (y - height / 2) / projection];
   const grounded = (state) => state.delay <= 0 && state.z < 4;
 
@@ -555,12 +603,12 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
     if (active.every((state) => state.leftRing)) setRingClear(true);
   }
 
-  function sizeLayer(canvas, context) {
-    canvas.width = Math.round(width * pixelRatio);
-    canvas.height = Math.round(height * pixelRatio);
+  function sizeLayer(canvas, context, ratio = 1) {
+    canvas.width = Math.round(width * ratio);
+    canvas.height = Math.round(height * ratio);
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
-    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
     context.lineCap = 'round';
     context.lineJoin = 'round';
   }
@@ -575,7 +623,7 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
     height = box.height;
     setTopCount(countFor(window.innerWidth));
     renderer.setSize(width, height);
-    sizeLayer(trailCanvas, trail);
+    sizeLayer(trailCanvas, trail, trailRatio);
     camera.left = -width / 2;
     camera.right = width / 2;
     camera.top = height / 2;
@@ -643,7 +691,7 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
   function onScroll() {
     const scrollDelta = window.scrollY - previousScrollY;
     previousScrollY = window.scrollY;
-    if (reduced.matches) return;
+    if (reduced.matches || !heroVisible) return;
     const nudge = Math.max(-6, Math.min(6, -scrollDelta * .035));
     if (Math.abs(nudge) < .15) return;
     for (let i = 0; i < topCount; i++) {
@@ -1109,25 +1157,56 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
     }
   }
 
+  // Frames are only requested while the tops can actually be seen. Scrolling
+  // past the hero costs nothing at all: no physics, no WebGL, no compositing of
+  // a full-viewport transparent canvas over the page.
+  function start() {
+    if (disposed || frame || !ready || reduced.matches || document.hidden || !heroVisible) return;
+    last = performance.now();
+    lastRendered = last - 1000 / 60;
+    frame = requestAnimationFrame(tick);
+  }
+
+  // The quality tier is a guess. If the device still cannot deliver frames,
+  // step down instead of stuttering: fewer pixels, then no shadows, then half
+  // the refresh rate. Two steps maximum keeps the tops looking like tops.
+  const frameSamples = [];
+  let lastStepDown = 0;
+  function watchFrame(delta) {
+    const now = performance.now();
+    if (now - lastStepDown < 4000) return;
+    frameSamples.push(delta);
+    if (frameSamples.length < 90) return;
+    const slow = frameSamples.filter((sample) => sample > .028).length;
+    frameSamples.length = 0;
+    if (slow < 45 || tier > 1) return;
+    tier += 1;
+    lastStepDown = now;
+    accumulator = 0;
+    applyQuality();
+  }
+
   function tick(now) {
+    frame = 0;
     if (disposed) return;
+    if (!ready || document.hidden || reduced.matches || !heroVisible) return;
     const delta = Math.min(.05, (now - last) / 1000 || 0);
     last = now;
-    if (ready && !document.hidden && !reduced.matches) {
-      accumulator += delta;
-      while (accumulator >= 1 / 120) {
-        step(1 / 120);
-        accumulator -= 1 / 120;
-      }
-      const elapsed = now - lastRendered;
-      if (elapsed >= 1000 / 60 - .5) {
-        lastRendered = now - (elapsed % (1000 / 60));
-        fadeTrails(elapsed / 1000);
-        drawTrails();
-        pose();
-        sparks.upload();
-        renderer.render(scene, camera);
-      }
+    watchFrame(delta);
+    accumulator += delta;
+    while (accumulator >= 1 / 120) {
+      step(1 / 120);
+      accumulator -= 1 / 120;
+    }
+    const budget = tier === 2 ? 1000 / 30 : 1000 / 60;
+    const elapsed = now - lastRendered;
+    if (elapsed >= budget - .5) {
+      lastRendered = now - (elapsed % budget);
+      fadeTrails(elapsed / 1000);
+      drawTrails();
+      pose();
+      sparks.upload();
+      renderer.render(scene, camera);
     }
     frame = requestAnimationFrame(tick);
   }
@@ -1152,6 +1231,27 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
   window.addEventListener('scroll', onScroll, { passive: true });
   const observer = new ResizeObserver(resize);
   observer.observe(host);
+  // A second observer decides whether the tops should run at all. `data-idle`
+  // also fades the layer out, so a paused scene is never left on screen.
+  let heroObserver = null;
+  if ('IntersectionObserver' in window) {
+    heroObserver = new IntersectionObserver((entries) => {
+      const visible = entries[0]?.isIntersecting ?? true;
+      if (visible === heroVisible) return;
+      heroVisible = visible;
+      if (visible) {
+        host.removeAttribute('data-idle');
+        start();
+      } else {
+        host.setAttribute('data-idle', '');
+        cancelAnimationFrame(frame);
+        frame = 0;
+      }
+    }, { threshold: .12 });
+    heroObserver.observe(hero);
+  }
+  const onDocumentVisibility = () => { if (!document.hidden) start(); };
+  document.addEventListener('visibilitychange', onDocumentVisibility);
   const motionChange = () => {
     trail.clearRect(0, 0, width, height);
     if (reduced.matches) settleStill();
@@ -1159,6 +1259,7 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
     nextMetricsAt = 0;
     pose();
     draw();
+    if (!reduced.matches) start();
   };
   // Reduced motion: a still arrangement of upright tops, no trails.
   function settleStill() {
@@ -1229,13 +1330,14 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
     const compiling = [room, warm].map((target) => renderer.compileAsync(target, bakeCamera).catch(() => {}));
 
     // Shadow casting draws each top into a depth target with a depth material.
-    // A probe lit like the page and compiled against a target warms it.
+    // A probe lit like the page and compiled against a target warms it. Tier 2
+    // never casts shadows, so it skips the probe entirely.
     const shadowScene = new THREE.Scene();
     const shadowLight = new THREE.DirectionalLight();
     shadowLight.castShadow = true;
     const depthProbe = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshDepthMaterial());
     shadowScene.add(new THREE.HemisphereLight(), shadowLight, depthProbe);
-    compiling.push(renderer.compileAsync(shadowScene, camera).catch(() => {}));
+    if (tier < 2) compiling.push(renderer.compileAsync(shadowScene, camera).catch(() => {}));
     renderer.setRenderTarget(null);
 
     // Building a top takes a few milliseconds, so spread them across frames
@@ -1274,19 +1376,21 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
     ready = true;
     host.dataset.ready = '';
     setTopCount(countFor(window.innerWidth));
+    applyQuality();
     if (reduced.matches) settleStill();
     else reset();
     nextMetricsAt = 0;
     pose();
     draw();
-    last = performance.now();
-    frame = requestAnimationFrame(tick);
+    start();
   });
 
   return () => {
     disposed = true;
     cancelAnimationFrame(frame);
     observer.disconnect();
+    heroObserver?.disconnect();
+    document.removeEventListener('visibilitychange', onDocumentVisibility);
     window.removeEventListener('scroll', onScroll);
     pointerSurface.removeEventListener('pointermove', move);
     pointerSurface.removeEventListener('pointerleave', leave);

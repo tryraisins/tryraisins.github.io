@@ -13,9 +13,10 @@ async (page) => {
         return seed / 4294967296;
       };
     });
-    // Install the card layout before the scene mounts, preserving real geometry
-    // and launch positions without changing the production webpage.
-    await card.route(source, async route => {
+    // Install the card layout before the page paints. The card is typographic:
+    // the spinning-top layer and launch ring are hidden because the settled
+    // arrangement collides with the headline at this size.
+    await card.route((url) => url.href === source, async route => {
       const response = await route.fetch();
       const html = await response.text();
       await route.fulfill({ response, body: html.replace('</head>', `<style>
@@ -23,9 +24,10 @@ async (page) => {
         .play-world { min-height:630px; --play-page-margin:72px; }
         #play-top .play-hero { height:630px; min-height:630px; padding:44px 72px 50px; gap:0; }
         #play-top .play-hero-header { min-height:40px; }
-        #play-top .play-hero-links, .play-skip, #play-top .play-desk, #play-top .play-contact, .play-sr-status { display:none; }
+        #play-top .play-hero-links, .play-skip, #play-top .play-desk, #play-top .play-contact, .play-sr-status, #play-top .play-page-number, #play-top .play-launch, .play-battlefield { display:none; }
         #play-top .play-hero-index { font-size:24px; font-weight:500; text-transform:none; letter-spacing:0; }
-        #play-top .play-hero h1 { max-width:1020px; margin:186px 0 0; font-size:88px; line-height:1.05; letter-spacing:-.03em; text-wrap:initial; }
+        #play-top .play-hero-kicker { margin:0 0 6px; font-size:30px; }
+        #play-top .play-hero h1 { max-width:1020px; margin:120px 0 0; font-size:88px; line-height:1.05; letter-spacing:-.03em; text-wrap:initial; }
         #play-top .play-intro { margin-top:auto; width:100%; display:flex; justify-content:space-between; align-items:center; }
         #play-top .play-intro > p { max-width:none; font-size:24px; color:var(--play-ink); }
         #play-top .play-hero-actions { display:none; }
@@ -35,6 +37,9 @@ async (page) => {
       </style></head>`) });
     });
     await card.goto(source);
+    // A background tab is not composited, so the page would screenshot before
+    // it has painted.
+    await card.bringToFront();
     await card.evaluate(() => document.fonts.ready);
     await card.waitForFunction(() => document.querySelector('[data-battlefield]')?.dataset.topState);
     await card.evaluate(() => {

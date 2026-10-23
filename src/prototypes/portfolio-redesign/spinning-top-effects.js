@@ -96,6 +96,11 @@ export function createCollisionSparks(scene, pixelRatio) {
     },
     get active() { return active; },
     get bursts() { return bursts; },
+    setPixelRatio(value) {
+      // gl_PointSize is in device pixels, so it has to track the renderer's
+      // ratio when the quality tier changes.
+      material.uniforms.pixelRatio.value = value;
+    },
     dispose() {
       scene.remove(points);
       geometry.dispose();

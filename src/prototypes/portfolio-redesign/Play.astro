@@ -47,19 +47,56 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       </div>
       <div class="play-launch" data-launch-pad>
         <svg class="play-launch-ring" viewBox="0 0 540 330" aria-hidden="true" data-launch-ring></svg>
+        <p class="play-launch-note" aria-hidden="true">a new round starts once they all fall</p>
       </div>
+      <p class="play-page-number" aria-hidden="true">p. 01</p>
     </section>
 
     <section id="play-desk" class="play-desk" data-play-reveal aria-labelledby="play-work-title">
-      <header>
+      <svg class="play-divider" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M3 11 C 48 7, 92 14, 140 10 S 236 7, 284 11 S 362 14, 397 9" />
+        <path class="play-divider-faint" d="M12 14 C 60 12, 112 17, 170 13 S 270 10, 322 15 S 378 14, 390 12" />
+      </svg>
+      <div class="play-reel" data-reel style={`--reel-count: ${projects.length}`}>
+      <div class="play-reel-stage" data-reel-stage>
+      <span class="play-reel-tape" aria-hidden="true"></span>
+      <span class="play-reel-tape play-reel-tape-right" aria-hidden="true"></span>
+      <div class="play-doodle-layer play-doodle-layer-desk" aria-hidden="true">
+        <figure class="play-drawing play-drawing-desk" data-doodle>
+          <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
+        </figure>
+        <figure class="play-drawing play-drawing-desk-b" data-doodle>
+          <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
+        </figure>
+        <figure class="play-drawing play-drawing-desk-c" data-doodle>
+          <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
+        </figure>
+      </div>
+      <header class="play-desk-header">
         <div>
           <p class="play-eyebrow">Web products and developer tools</p>
           <h2 id="play-work-title">Things I’ve built</h2>
+          <p class="play-margin-note play-rail-hint" aria-hidden="true">swipe sideways to see them all</p>
         </div>
         <div class="play-desk-actions">
-          <button type="button" data-shuffle aria-label="Shuffle the project desk">Shuffle desk</button>
+          <button type="button" class="play-reel-toggle" data-reel-toggle hidden>Spread them out</button>
         </div>
       </header>
+
+      <div class="play-reel-side">
+        <div class="play-reel-index" data-reel-index role="group" aria-label="Jump to a project">
+          {projects.map((project) => (
+            <button type="button">
+              <span class="play-reel-number">{project.number}<svg class="play-reel-circle" viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true"><path d="M14 31 C 4 26, 3 12, 16 7 S 46 2, 54 13 S 50 34, 31 35 S 9 30, 12 18" /></svg></span>
+              {' '}<span class="play-reel-name">{project.name}</span>
+            </button>
+          ))}
+        </div>
+        <p class="play-margin-note play-reel-hint" aria-hidden="true">
+          <span class="play-reel-hint-start">keep scrolling to turn the page</span>
+          <span class="play-reel-hint-end">that’s the last print, contact is next</span>
+        </p>
+      </div>
 
       <ol data-play-grid>
         {projects.map((project, index) => {
@@ -81,9 +118,10 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
                       src={project.cover}
                       alt={project.coverAlt}
                       widths={[480, 720, 960, 1280]}
-                      sizes="(max-width: 620px) calc(100vw - 94px), (max-width: 980px) 80vw, 760px"
+                      sizes="(max-width: 900px) min(76vw, 500px), 760px"
                       formats={['avif', 'webp']}
-                      loading="lazy"
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      fetchpriority={index === 0 ? 'high' : undefined}
                     />
                   ) : project.placeholder === 'terminal' ? (
                     <span class="play-terminal" role="img" aria-label={`A terminal running npx yeknal@latest setup for ${project.name}`}>
@@ -130,20 +168,16 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
           );
         })}
       </ol>
-      <div class="play-doodle-layer play-doodle-layer-desk" aria-hidden="true">
-        <figure class="play-drawing play-drawing-desk" data-doodle>
-          <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
-        </figure>
-        <figure class="play-drawing play-drawing-desk-b" data-doodle>
-          <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
-        </figure>
-        <figure class="play-drawing play-drawing-desk-c" data-doodle>
-          <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
-        </figure>
+      <p class="play-page-number" aria-hidden="true">p. 02</p>
+      </div>
       </div>
     </section>
 
     <section id="play-contact" class="play-contact" data-play-reveal aria-labelledby="play-contact-title">
+      <svg class="play-divider" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M4 9 C 56 13, 104 6, 158 10 S 250 14, 300 9 S 370 7, 396 12" />
+        <path class="play-divider-faint" d="M9 12 C 62 15, 118 9, 176 12 S 262 16, 318 11 S 372 10, 388 14" />
+      </svg>
       <div class="play-doodle-layer play-doodle-layer-contact" aria-hidden="true">
         <figure class="play-drawing play-drawing-contact-a" data-doodle>
           <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
@@ -196,10 +230,16 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
             ))}
           </nav>
         </aside>
+        <p class="play-signature" aria-hidden="true">Seun</p>
       </div>
+      <p class="play-page-number" aria-hidden="true">p. 03</p>
     </section>
   </main>
   <footer class="play-footer">
+    <svg class="play-divider" viewBox="0 0 400 20" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M2 10 C 44 8, 90 13, 150 11 S 244 7, 296 10 S 366 13, 398 10" />
+      <path class="play-divider-faint" d="M14 13 C 70 11, 128 15, 186 12 S 274 10, 330 13 S 380 12, 392 11" />
+    </svg>
     <p>© {year} Seun Sowemimo. Designed and built in Lagos with Astro and Three.js.</p>
     <nav aria-label="Footer">
       <a href="/skills/">Agent skills</a>
@@ -213,12 +253,11 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   import { createLaunchRing } from "./launch-ring.js";
   import { mountDoodles } from "./doodle-notes.js";
   import { initContactReveal } from "../../scripts/contact-reveal";
+  import { mountReel } from "./reel.js";
   const root = document.querySelector('[data-play-root]');
 
   if (root instanceof HTMLElement) {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const shuffle = root.querySelector('[data-shuffle]');
-    const tiles = [...root.querySelectorAll('[data-play-tile]')];
     const status = root.querySelector('[data-play-status]');
     const revealTargets = [...root.querySelectorAll('[data-play-reveal]')];
     const battlefield = root.querySelector('[data-battlefield]');
@@ -230,13 +269,15 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       const reveal = (target) => target.setAttribute('data-visible', '');
 
       if ('IntersectionObserver' in window) {
+        // The pinned desk is several screens tall, so reveal on entry rather
+        // than on a share of the section's height.
         const observer = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
             reveal(entry.target);
             observer.unobserve(entry.target);
           });
-        }, { threshold: .12, rootMargin: '0px 0px -8% 0px' });
+        }, { threshold: 0, rootMargin: '0px 0px -14% 0px' });
         revealTargets.forEach((target) => observer.observe(target));
       } else {
         revealTargets.forEach(reveal);
@@ -245,36 +286,8 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       revealTargets.forEach((target) => target.setAttribute('data-visible', ''));
     }
 
-    shuffle?.addEventListener('click', () => {
-      if (window.matchMedia('(max-width: 620px)').matches) return;
-      const grid = root.querySelector('[data-play-grid]');
-      if (!(grid instanceof HTMLElement)) return;
-      const current = [...grid.querySelectorAll('[data-play-tile]')];
-      tiles.forEach((tile) => tile.getAnimations().forEach((animation) => animation.cancel()));
-      const shuffled = [...current];
-      for (let index = shuffled.length - 1; index > 0; index--) {
-        const other = Math.floor(Math.random() * (index + 1));
-        [shuffled[index], shuffled[other]] = [shuffled[other], shuffled[index]];
-      }
-      // Every press produces a visible change, including a random identity permutation.
-      if (shuffled.every((tile, index) => tile === current[index])) shuffled.push(shuffled.shift());
-      const first = new Map(shuffled.map((tile) => [tile, tile.getBoundingClientRect()]));
-      grid.append(...shuffled);
-      if (!reduceMotion.matches) {
-        shuffled.forEach((tile) => {
-          const before = first.get(tile);
-          const after = tile.getBoundingClientRect();
-          if (!before) return;
-          const rotation = getComputedStyle(tile).getPropertyValue('--play-desk-rotation');
-          tile.animate([
-            { transform: `translate(${before.left - after.left}px, ${before.top - after.top}px) scale(${before.width / after.width}, ${before.height / after.height}) rotate(${rotation})`, transformOrigin: 'top left' },
-            { transform: `translate(0, 0) scale(1, 1) rotate(${rotation})`, transformOrigin: 'top left' },
-          ], { duration: 420, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
-        });
-      }
-      shuffle.textContent = 'Shuffle again';
-      if (status) status.textContent = 'The project desk has been rearranged into a new order.';
-    });
+    const disposeReel = mountReel(root, (message) => { if (status) status.textContent = message; });
+    document.addEventListener('astro:before-swap', disposeReel, { once: true });
 
     const disposeContact = initContactReveal(root, (message) => { if (status) status.textContent = message; });
     document.addEventListener('astro:before-swap', disposeContact, { once: true });
@@ -301,25 +314,29 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
 <style>
   .play-world {
     --play-paper: #fbfaf5;
+    --play-sheet: #e7ddc9;
     --play-ink: #171719;
+    --play-graphite: rgba(23,23,25,.6);
     --play-red: #f05c45;
     --play-marker: #d7263d;
     --play-blue: #315fe9;
     --play-link-blue: #2346b5;
     --play-yellow: #f0ce4e;
     --play-green: #2f9d70;
-    --play-section-font: 'Barlow Condensed', 'Bricolage Grotesque', sans-serif;
-    --play-project-font: 'Public Sans', 'DM Sans', sans-serif;
+    --play-hand: 'Caveat', 'Segoe Print', cursive;
+    --play-project-font: 'Bricolage Grotesque', 'DM Sans', sans-serif;
     --play-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --play-page-margin: max(clamp(32px, 6vw, 96px), calc((100% - 1280px) / 2));
     --play-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    /* Paper: a static graphite grain tile, the blue rules and the red margin. */
+    --play-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .09 0 0 0 0 .08 0 0 0 0 .07 0 0 0 1.6 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.05'/%3E%3C/svg%3E");
+    --play-rules: repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(85,126,166,.12) 35px, rgba(85,126,166,.12) 36px);
+    --play-margin-rule: linear-gradient(90deg, transparent 0 calc(var(--play-page-margin) - 2px), rgba(210,84,72,.22) calc(var(--play-page-margin) - 2px), rgba(210,84,72,.22) var(--play-page-margin), transparent var(--play-page-margin));
     min-height: 100dvh;
     position: relative;
-    background-color: #e7ddc9;
-    background-image:
-      repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(85,126,166,.12) 35px, rgba(85,126,166,.12) 36px),
-      linear-gradient(90deg, transparent 0 calc(var(--play-page-margin) - 2px), rgba(210,84,72,.22) calc(var(--play-page-margin) - 2px), rgba(210,84,72,.22) var(--play-page-margin), transparent var(--play-page-margin));
-    background-size: 100% 36px, 100% 100%;
+    background-color: var(--play-sheet);
+    background-image: var(--play-grain), var(--play-rules), var(--play-margin-rule);
+    background-size: 160px 160px, 100% 36px, 100% 100%;
     color: var(--play-ink);
     font-family: 'DM Sans', sans-serif;
   }
@@ -330,8 +347,17 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-skip { position: fixed; z-index: 20; top: 8px; left: 8px; min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; background: var(--play-ink); color: var(--play-paper) !important; font-size: 14px; transform: translateY(-150%); transition: transform 160ms var(--play-ease-out); }
   .play-skip:focus { transform: translateY(0); }
   .play-battlefield { position: fixed; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
+  .play-battlefield[data-idle] { opacity: 0; transition: opacity 320ms ease; }
   .play-battlefield :global(canvas) { position: absolute; inset: 0; }
-  .play-eyebrow { margin: 0 0 12px; color: rgba(23,23,25,.76); font-size: 13px; line-height: 1.5; }
+  .play-eyebrow { margin: 0 0 4px; color: rgba(23,23,25,.74); font: 600 24px/1.05 var(--play-hand); }
+
+  /* Pencil furniture: margin notes, page numbers, section dividers, signature. */
+  .play-margin-note { margin: 0; color: var(--play-graphite); font: 500 22px/1.05 var(--play-hand); rotate: -1.5deg; transform-origin: left center; }
+  .play-page-number { position: absolute; z-index: 1; right: var(--play-page-margin); bottom: 26px; margin: 0; color: rgba(23,23,25,.55); font: 500 22px/1 var(--play-hand); rotate: -2deg; pointer-events: none; }
+  .play-divider { width: min(380px, calc(100% - var(--play-page-margin) * 2 - 40px)); height: 20px; position: absolute; z-index: 1; top: 8px; left: calc(var(--play-page-margin) + 40px); overflow: visible; pointer-events: none; }
+  .play-divider path { fill: none; stroke: rgba(23,23,25,.5); stroke-width: 1.6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  .play-divider .play-divider-faint { stroke: rgba(23,23,25,.26); stroke-width: 1; }
+  .play-signature { grid-column: 1 / -1; justify-self: end; margin: 24px 12px -12px 0; color: rgba(23,23,25,.84); font: 700 clamp(2.75rem, 4.6vw, 3.75rem)/.95 var(--play-hand); rotate: -6deg; }
 
   /* Hero */
   .play-hero { min-height: max(100dvh, 760px); padding: 32px var(--play-page-margin) 72px calc(var(--play-page-margin) + 40px); position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 56px; }
@@ -341,7 +367,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-hero-links a { min-height: 48px; padding: 0 12px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 500; white-space: nowrap; transition: background-color 140ms ease; }
   .play-contact-availability > span { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: var(--play-green); }
   .play-hero-body { position: relative; z-index: 1; margin-top: auto; display: grid; gap: 28px; }
-  .play-hero-kicker { margin: 0; color: #c63f2b; font-size: 15px; font-weight: 500; }
+  .play-hero-kicker { margin: 0 0 -6px; color: #c63f2b; font: 600 30px/1 var(--play-hand); rotate: -1.5deg; transform-origin: left center; }
   .play-hero h1 { max-width: 1080px; margin: 0; font: 600 clamp(4.25rem, 7vw, 6.25rem)/.98 'Bricolage Grotesque', sans-serif; letter-spacing: -.025em; }
   .play-hero h1 > span { display: block; }
   .play-intro { display: grid; justify-items: start; gap: 30px; }
@@ -354,19 +380,24 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
 
   /* The ring beside the headline is where each round of tops lands. It is
      sketched in pencil just before they drop (launch-ring.js), rubbed out once
-     every top has rolled clear, and the note fades with it. */
+     every top has rolled clear, and the note fades with it. The caption only
+     appears once the tops are actually running. */
   .play-launch { width: min(520px, 38vw); aspect-ratio: 540 / 330; position: absolute; z-index: 1; right: var(--play-page-margin); bottom: 56px; pointer-events: none; }
   .play-launch-ring { width: 100%; height: 100%; display: block; overflow: visible; visibility: hidden; }
+  .play-launch-note { position: absolute; top: -22px; right: 4%; margin: 0; color: var(--play-graphite); font: 500 22px/1 var(--play-hand); white-space: nowrap; rotate: 2.5deg; opacity: 0; transition: opacity 600ms ease; }
+  .play-world:has([data-battlefield][data-ready]) .play-launch-note { opacity: 1; }
 
-  /* How I can help */
-
-  /* Work */
-  .play-desk { padding: 40px var(--play-page-margin) 100px calc(var(--play-page-margin) + 40px); position: relative; }
-  .play-desk > header { position: relative; z-index: 1; margin-bottom: 44px; display: flex; justify-content: space-between; align-items: end; gap: 24px; }
-  .play-desk h2 { margin: 0; font: 600 clamp(3rem, 5.4vw, 4.75rem)/1 var(--play-section-font); letter-spacing: -.015em; }
-  .play-desk-actions button { min-width: 132px; min-height: 48px; padding: 0 18px; border: 1px solid var(--play-ink); border-radius: 0; background: var(--play-yellow); color: var(--play-ink); font: 600 14px/1 'DM Sans', sans-serif; cursor: pointer; box-shadow: 3px 3px 0 var(--play-ink); transition: transform 130ms var(--play-ease-out), box-shadow 130ms var(--play-ease-out); }
-  .play-desk-actions button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--play-ink); }
-  .play-desk ol { margin: 0; padding: 12px 0 0; position: relative; z-index: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 44px 28px; list-style: none; }
+  /* Work. Static by default: a grid above 900px and a swipe rail below it.
+     reel.js adds data-reel-mode="pinned" on wide, tall screens (rules further down). */
+  .play-desk { padding: 48px var(--play-page-margin) 100px calc(var(--play-page-margin) + 40px); position: relative; }
+  .play-desk-header { position: relative; z-index: 1; margin-bottom: 44px; display: flex; justify-content: space-between; align-items: end; gap: 24px; }
+  .play-desk h2 { margin: 0; font: 600 clamp(3.75rem, 6.8vw, 6rem)/1 var(--play-hand); letter-spacing: 0; }
+  .play-rail-hint { display: none; }
+  .play-reel-toggle { min-width: 132px; min-height: 48px; padding: 0 18px; border: 1px solid var(--play-ink); border-radius: 0; background: var(--play-yellow); color: var(--play-ink); font: 600 14px/1 'DM Sans', sans-serif; white-space: nowrap; cursor: pointer; box-shadow: 3px 3px 0 var(--play-ink); transition: transform 130ms var(--play-ease-out), box-shadow 130ms var(--play-ease-out); }
+  .play-reel-toggle[hidden] { display: none; }
+  .play-reel-toggle:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--play-ink); }
+  .play-reel-side, .play-reel-tape { display: none; }
+  .play-desk [data-play-grid] { margin: 0; padding: 12px 0 0; position: relative; z-index: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 44px 28px; list-style: none; }
   .play-tile { min-width: 0; grid-column: span 2; position: relative; transform: rotate(var(--play-desk-rotation)); }
   .play-tile:first-child { grid-column: 1 / -1; }
   /* With six tiles the last two share a row as halves; with seven, two rows of thirds follow the lead tile. */
@@ -430,28 +461,29 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
 
   .play-copy { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
   .play-copy > span:not(.play-project-footer) { color: rgba(23,23,25,.68); font-size: 11px; line-height: 1.4; text-transform: uppercase; letter-spacing: .06em; }
-  .play-copy strong { font: 600 clamp(1.75rem, 2.4vw, 2rem)/1.1 var(--play-project-font); letter-spacing: -.025em; }
+  .play-copy strong { font: 600 clamp(1.75rem, 2.4vw, 2rem)/1.1 var(--play-project-font); letter-spacing: -.02em; }
   .play-copy p { margin: 0 0 8px; font-size: 15px; line-height: 1.5; }
-  .play-project-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 12px; line-height: 1.5; }
-  .play-project-footer em { color: var(--play-link-blue); font-size: 14px; font-weight: 600; font-style: normal; white-space: nowrap; }
+  .play-project-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: rgba(23,23,25,.66); font: 500 21px/1.1 var(--play-hand); }
+  .play-project-footer em { color: var(--play-link-blue); font: 600 23px/1.1 var(--play-hand); font-style: normal; white-space: nowrap; }
 
   /* Contact */
   .play-contact { padding: 96px var(--play-page-margin) 120px calc(var(--play-page-margin) + 40px); position: relative; }
+  .play-contact > .play-divider { top: 28px; }
   .play-contact-sheet { width: min(1120px, 100%); margin: 0 auto; padding: clamp(32px, 4vw, 56px); position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 0 48px; background: #f3d665; box-shadow: 8px 10px 0 var(--play-red), 12px 15px 0 rgba(23,23,25,.14); transform: rotate(-.35deg); }
   .play-contact-sheet::before { content: ''; position: absolute; inset: -4px 7px 5px -5px; border: 3px solid var(--play-ink); border-radius: 2% 4% 3% 2%; transform: rotate(.55deg); pointer-events: none; }
   .play-contact-sheet::after { content: ''; position: absolute; inset: 5px -4px -3px 5px; border: 1px solid rgba(23,23,25,.78); border-radius: 4% 2% 2% 3%; transform: rotate(-.3deg); pointer-events: none; }
   .play-contact-sheet > * { position: relative; z-index: 1; }
   .play-contact-sheet > .play-contact-tape { width: 118px; height: 13px; position: absolute; top: -8px; left: 50%; border: 2px solid var(--play-ink); background: var(--play-red); transform: translateX(-50%) rotate(-3deg); box-shadow: 3px 3px 0 var(--play-ink); }
-  .play-contact-meta { grid-column: 1 / -1; margin-bottom: 40px; padding-bottom: 16px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 2px solid var(--play-ink); font-size: 12px; line-height: 1.5; text-transform: uppercase; letter-spacing: .05em; }
+  .play-contact-meta { grid-column: 1 / -1; margin-bottom: 40px; padding-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 2px solid var(--play-ink); font: 600 24px/1.1 var(--play-hand); }
   .play-contact-meta p { margin: 0; }
-  .play-contact-availability { display: inline-flex; align-items: center; gap: 8px; }
+  .play-contact-availability { display: inline-flex; align-items: center; gap: 10px; }
   .play-contact-availability > span { border: 1px solid var(--play-ink); }
   .play-contact-heading { min-width: 0; }
-  .play-contact-label { margin: 0; color: rgba(23,23,25,.72); font-size: 12px; line-height: 1.5; text-transform: uppercase; letter-spacing: .05em; }
-  .play-contact-heading h2 { margin: 16px 0 24px; font: 600 clamp(3rem, 5.4vw, 4.5rem)/1.02 var(--play-section-font); letter-spacing: -.015em; text-wrap: balance; }
+  .play-contact-label { margin: 0; color: rgba(23,23,25,.78); font: 600 23px/1.1 var(--play-hand); }
+  .play-contact-heading h2 { margin: 14px 0 24px; font: 600 clamp(3.75rem, 6.8vw, 5.75rem)/.98 var(--play-hand); letter-spacing: 0; text-wrap: balance; }
   .play-contact-heading > p:last-child { max-width: 480px; margin: 0; color: rgba(23,23,25,.82); font-size: 18px; line-height: 1.5; }
   .play-contact-body { min-width: 0; padding: 4px 0 0 32px; display: flex; flex-direction: column; align-items: flex-start; border-left: 2px solid var(--play-ink); }
-  .play-contact-toggle { max-width: 100%; margin-top: 10px; padding: 6px 2px; display: inline-flex; align-items: center; gap: 14px; overflow: hidden; border: 0; background: none; color: var(--play-ink); font: 600 clamp(2.25rem, 3.6vw, 3.25rem)/1 var(--play-section-font); letter-spacing: -.01em; white-space: nowrap; cursor: pointer; }
+  .play-contact-toggle { max-width: 100%; margin-top: 10px; padding: 6px 2px; display: inline-flex; align-items: center; gap: 14px; overflow: hidden; border: 0; background: none; color: var(--play-ink); font: 600 clamp(2rem, 3.2vw, 2.875rem)/1 'DM Sans', sans-serif; letter-spacing: -.025em; white-space: nowrap; cursor: pointer; }
   .play-contact-toggle-text { position: relative; display: block; height: 1em; overflow: hidden; }
   .play-contact-toggle-text > span { display: block; line-height: 1; transition: transform 400ms cubic-bezier(.77, 0, .175, 1); }
   .play-contact-toggle-copy { position: absolute; top: 0; left: 0; color: var(--play-link-blue); transform: translateY(calc(100% + 8px)); }
@@ -482,7 +514,8 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-contact-social-number { color: var(--play-blue); font-size: 11px; }
   .play-contact-social-action { margin-left: auto; color: rgba(23,23,25,.72); font-size: 12px; font-weight: 500; white-space: nowrap; }
 
-  .play-footer { padding: 28px var(--play-page-margin) 40px calc(var(--play-page-margin) + 40px); position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px 32px; flex-wrap: wrap; border-top: 1px solid rgba(23,23,25,.2); }
+  .play-footer { padding: 36px var(--play-page-margin) 40px calc(var(--play-page-margin) + 40px); position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px 32px; flex-wrap: wrap; }
+  .play-footer > .play-divider { top: 0; }
   .play-footer p { margin: 0; color: rgba(23,23,25,.72); font-size: 13px; line-height: 1.5; }
   .play-footer nav { display: flex; gap: 8px; }
   .play-footer a { min-height: 44px; padding: 0 10px; display: inline-flex; align-items: center; color: var(--play-link-blue) !important; font-size: 13px; font-weight: 600; transition: background-color 140ms ease; }
@@ -490,6 +523,9 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-sr-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .play-doodle-layer { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
   .play-drawing { --drawing-rotation: 0deg; position: absolute; width: min(250px, 24vw); aspect-ratio: 1.37; margin: 0; transform: rotate(var(--drawing-rotation)); pointer-events: none; opacity: .86; mix-blend-mode: multiply; }
+  /* Four-thread machines skip the blend pass, which costs a backdrop composite
+     on every scroll frame on an old integrated GPU. */
+  .play-drawing.is-lean { mix-blend-mode: normal; opacity: .93; }
   .play-drawing-canvas { width: 100%; height: 100%; display: block; pointer-events: none; }
   .play-drawing-hero-a { top: 14%; left: -38px; --drawing-rotation: -5deg; }
   .play-drawing-hero-b { top: 13%; right: 34%; --drawing-rotation: 2.5deg; }
@@ -511,9 +547,10 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-tile:hover { z-index: 5; }
     .play-tile:hover > a { translate: 0 -6px; }
     .play-tile:hover .play-photo img { filter: saturate(1); transform: scale(1.02); }
-    .play-hero-primary:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--play-ink); }
+    .play-hero-primary:hover, .play-reel-toggle:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--play-ink); }
     .play-hero-links a:hover,
     .play-world .play-hero-secondary:hover,
+    .play-reel-index button:hover,
     .play-footer a:hover { background: rgba(240,206,78,.62); }
     .play-contact-toggle:hover .play-contact-toggle-main { transform: translateY(calc(-100% - 8px)); }
     .play-contact-toggle:hover .play-contact-toggle-copy { transform: translateY(0); }
@@ -527,30 +564,57 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-hero { min-height: auto; gap: 48px; }
     .play-hero-body { margin-top: 48px; }
     .play-launch { width: 100%; max-width: 560px; position: relative; right: auto; bottom: auto; order: 2; margin: 24px 0; align-self: center; }
+    .play-launch-note { top: -20px; right: auto; left: 2%; rotate: -2.5deg; }
   }
   @media (max-width: 980px) {
     .play-hero { padding-top: 28px; gap: 40px; }
     .play-hero-body { margin-top: 0; }
     .play-intro p { font-size: 19px; }
-    .play-desk ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .play-contact-sheet { grid-template-columns: 1fr; }
+    .play-contact-body { margin-top: 32px; padding: 24px 0 0; border-top: 2px solid var(--play-ink); border-left: 0; }
+    .play-contact-social-action { display: none; }
+  }
+  @media (min-width: 901px) and (max-width: 980px) {
+    .play-desk [data-play-grid] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .play-tile, .play-tile:nth-child(5):nth-last-child(2), .play-tile:nth-child(6):last-child { grid-column: span 1; }
     /* An even tile count leaves the last tile alone in the two-column grid, so it spans the row. */
     .play-tile:first-child, .play-tile:last-child:nth-child(even) { grid-column: 1 / -1; }
     .play-card, .play-tile:nth-child(5):nth-last-child(2) .play-card, .play-tile:nth-child(6):last-child .play-card { grid-template-rows: 220px 1fr; }
     .play-tile:first-child .play-card, .play-tile:last-child:nth-child(even) .play-card { grid-template-rows: 300px; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px; }
     .play-tile:first-child .play-copy, .play-tile:last-child:nth-child(even) .play-copy { padding: 8px 4px 4px 0; }
-    .play-contact-sheet { grid-template-columns: 1fr; }
-    .play-contact-body { margin-top: 32px; padding: 24px 0 0; border-top: 2px solid var(--play-ink); border-left: 0; }
-    .play-contact-social-action { display: none; }
+  }
+  /* Tablets and phones: a native swipe rail with snap points and no script. */
+  @media (max-width: 900px) {
+    .play-desk { padding-bottom: 80px; }
+    .play-desk-header { margin-bottom: 20px; }
+    .play-desk-actions { display: none; }
+    .play-rail-hint { display: block; margin-top: 16px; }
+    .play-desk [data-play-grid] { margin-right: calc(-1 * var(--play-page-margin)); padding: 18px var(--play-page-margin) 28px 0; display: flex; gap: 18px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 0 var(--play-page-margin); scrollbar-width: none; }
+    .play-desk [data-play-grid]::-webkit-scrollbar { display: none; }
+    .play-tile, .play-tile:first-child, .play-tile:last-child { flex: 0 0 min(84%, 520px); scroll-snap-align: center; transform: none; }
+    .play-tile:first-child { scroll-snap-align: start; }
+    .play-card, .play-tile:first-child .play-card, .play-tile:last-child .play-card, .play-tile:nth-child(5) .play-card, .play-tile:nth-child(6) .play-card { padding: 16px; grid-template-rows: 220px auto; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+    .play-tile:first-child .play-copy, .play-tile:last-child .play-copy { padding: 0; }
+    .play-tile:first-child .play-copy strong { font-size: clamp(1.75rem, 2.4vw, 2rem); }
+    .play-tile:first-child .play-copy p { font-size: 15px; }
+    .play-tile:first-child .play-pin { left: 50%; transform: translateX(-50%) rotate(-2deg); }
+    .play-tile:first-child .play-pin-right { display: none; }
+    /* Rail cards share the tallest height, so centre the caption in the space
+       instead of leaving one card with a gap under its description. */
+    .play-copy { justify-content: center; }
+    .play-project-footer { margin-top: 4px; }
   }
   @media (max-width: 620px) {
     .play-world { --play-page-margin: 28px; }
     .play-hero, .play-desk, .play-contact, .play-footer { padding-left: 44px; padding-right: 22px; }
-    .play-hero { padding-top: 22px; padding-bottom: 40px; gap: 28px; }
+    .play-divider { left: 44px; width: min(300px, calc(100% - 66px)); }
+    .play-page-number { right: 22px; bottom: 12px; font-size: 20px; }
+    .play-hero { padding-top: 22px; padding-bottom: 44px; gap: 28px; }
     .play-hero-header { align-items: start; }
     .play-hero-index { max-width: 220px; font-size: 11px; }
     .play-hero-links { display: none; }
     .play-hero-body { gap: 22px; }
+    .play-hero-kicker { font-size: 27px; }
     .play-hero h1 { font-size: clamp(2.75rem, 13vw, 3.4rem); line-height: 1; }
     .play-hero h1 > span { display: inline; }
     .play-intro { gap: 24px; }
@@ -559,27 +623,25 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-hero-actions { gap: 8px; }
     .play-hero-header { order: -2; }
     .play-launch { order: -1; margin: 28px 0 36px; }
+    .play-launch-note { top: -26px; font-size: 20px; }
     .play-contact-slot { min-height: 0; margin-top: 8px; }
-    .play-desk { padding-top: 32px; padding-bottom: 72px; }
-    .play-desk > header { flex-direction: column; align-items: start; margin-bottom: 32px; }
-    .play-desk-actions { display: none; }
-    .play-desk ol { grid-template-columns: 1fr; gap: 32px; padding: 0; }
-    .play-tile, .play-tile:first-child, .play-tile:last-child { grid-column: auto; transform: none; }
-    .play-card, .play-tile:first-child .play-card, .play-tile:last-child .play-card, .play-tile:nth-child(5) .play-card, .play-tile:nth-child(6) .play-card { padding: 14px; grid-template-rows: 180px auto; grid-template-columns: 1fr; gap: 14px; }
-    .play-tile:first-child .play-copy, .play-tile:last-child .play-copy { padding: 0; }
-    .play-tile:first-child .play-copy strong { font-size: 28px; }
-    .play-tile:first-child .play-copy p { font-size: 15px; }
-    .play-copy strong { font-size: 28px; }
+    .play-desk { padding-top: 40px; padding-bottom: 72px; }
+    .play-desk h2 { font-size: clamp(3rem, 15vw, 3.75rem); }
+    .play-desk [data-play-grid] { margin-right: -22px; padding-right: 22px; scroll-padding-inline: 0 22px; }
+    .play-card, .play-tile:first-child .play-card, .play-tile:last-child .play-card, .play-tile:nth-child(5) .play-card, .play-tile:nth-child(6) .play-card { padding: 14px; grid-template-rows: 180px auto; gap: 14px; }
+    .play-tile:first-child .play-copy strong, .play-copy strong { font-size: 28px; }
     .play-terminal { padding: 16px; font-size: 12px; gap: 7px; }
     .play-suspended { font-size: 1.75rem; }
     .play-contact { padding-top: 72px; padding-bottom: 88px; padding-left: 36px; }
+    .play-contact > .play-divider { top: 24px; left: 36px; }
     .play-contact-sheet { padding: 28px 22px; box-shadow: 7px 9px 0 var(--play-red), 11px 14px 0 rgba(23,23,25,.14); transform: none; }
-    .play-contact-meta { margin-bottom: 28px; flex-direction: column; align-items: start; gap: 12px; }
-    .play-contact-heading h2 { margin: 12px 0 20px; font-size: clamp(2.125rem,11vw,2.75rem); }
+    .play-contact-meta { margin-bottom: 28px; flex-direction: column; align-items: start; gap: 8px; }
+    .play-contact-heading h2 { margin: 12px 0 20px; font-size: clamp(2.75rem, 14vw, 3.5rem); }
     .play-contact-heading > p:last-child { font-size: 16px; }
     .play-contact-reveal { flex-direction: column; }
     .play-contact-aside nav { grid-template-columns: 1fr; gap: 4px; }
     .play-contact-social-action { display: inline; }
+    .play-signature { margin: 16px 4px -8px 0; }
     .play-drawing { width: min(170px, 42vw); }
     .play-drawing-hero-b { top: auto; bottom: 2%; right: -30px; }
     .play-drawing-desk { top: 74%; left: -40px; }
@@ -591,8 +653,97 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-contact-sheet { padding-inline: 18px; }
     .play-contact-channel-icon { width: 48px; height: 48px; }
   }
+
+  /* Pinned print sequence. The track is as tall as the stage plus one step per
+     print, and the stage is a fresh sheet of paper stuck to the viewport. Each
+     print reads --frame (written by reel.js) and derives its pose from it:
+     incoming prints rise from the bottom edge tilted, outgoing ones lift and
+     turn away. Only transform and opacity change while scrolling. */
+  .play-desk[data-reel-mode='pinned'] { padding: 48px 0 0; }
+  .play-desk[data-reel-mode='pinned'] .play-reel { height: calc(100vh + (var(--reel-count) - 1) * var(--reel-step, 62vh)); height: calc(100svh + (var(--reel-count) - 1) * var(--reel-step, 62svh)); }
+  .play-desk[data-reel-mode='pinned'] .play-reel-stage {
+    height: 100vh;
+    height: 100svh;
+    padding: clamp(30px, 5.5svh, 56px) var(--play-page-margin) clamp(44px, 7svh, 64px) calc(var(--play-page-margin) + 40px);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    overflow: hidden;
+    overflow: clip;
+    display: grid;
+    grid-template-columns: minmax(176px, 232px) minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: clamp(12px, 2.4svh, 28px) clamp(28px, 4vw, 64px);
+    background-color: var(--play-sheet);
+    background-image: var(--play-grain), var(--play-rules), var(--play-margin-rule);
+    background-size: 160px 160px, 100% 36px, 100% 100%;
+    box-shadow: 0 -1px 0 rgba(23,23,25,.16), 0 -18px 30px -22px rgba(23,23,25,.55), 0 1px 0 rgba(23,23,25,.12);
+  }
+  .play-desk[data-reel-mode='pinned'] .play-reel-tape { width: 104px; height: 24px; position: absolute; z-index: 2; top: 12px; left: calc(var(--play-page-margin) + 64px); display: block; border: 1px solid rgba(23,23,25,.25); background: rgba(240,206,78,.72); rotate: -4deg; box-shadow: 2px 3px 0 rgba(23,23,25,.08); }
+  .play-desk[data-reel-mode='pinned'] .play-reel-tape-right { left: auto; right: calc(var(--play-page-margin) + 24px); rotate: 3deg; }
+  .play-desk[data-reel-mode='pinned'] .play-desk-header { grid-column: 1 / -1; z-index: 2; margin: 0; }
+  .play-desk[data-reel-mode='pinned'] h2 { font-size: min(clamp(3.75rem, 6.8vw, 6rem), 11svh); }
+  .play-desk[data-reel-mode='pinned'] .play-reel-side { min-height: 0; position: relative; z-index: 1; display: grid; align-content: center; gap: 28px; }
+  .play-reel-index { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+  .play-reel-index button { max-width: 100%; min-height: 44px; padding: 0 12px 0 10px; position: relative; display: inline-flex; align-items: center; gap: 12px; border: 0; background: none; color: rgba(23,23,25,.58); font: 600 24px/1 var(--play-hand); text-align: left; cursor: pointer; transition: background-color 140ms ease, color 140ms ease; }
+  .play-reel-number { min-width: 1.3em; position: relative; }
+  .play-reel-circle { width: calc(100% + 26px); height: calc(100% + 22px); position: absolute; top: -11px; left: -13px; overflow: visible; opacity: 0; pointer-events: none; }
+  .play-reel-circle path { fill: none; stroke: var(--play-red); stroke-width: 1.8; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  .play-reel-name { width: 1px; height: 1px; position: absolute; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .play-reel-index button[aria-current='true'] { color: var(--play-ink); }
+  .play-reel-index button[aria-current='true'] .play-reel-circle { opacity: 1; }
+  .play-reel-index button[aria-current='true'] .play-reel-name { width: auto; height: auto; min-width: 0; position: static; overflow: hidden; clip: auto; text-overflow: ellipsis; }
+  .play-reel-hint { display: grid; }
+  .play-reel-hint > span { grid-area: 1 / 1; }
+  .play-reel-hint-start { opacity: calc(1 - var(--reel-tail, 0)); }
+  .play-reel-hint-end { opacity: var(--reel-tail, 0); }
+  .play-desk[data-reel-mode='pinned'] [data-play-grid] { min-height: 0; margin: 0; padding: 0; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; gap: 0; }
+  .play-desk[data-reel-mode='pinned'] .play-tile {
+    --in: max(var(--frame, 1.2), 0);
+    --out: min(var(--frame, 1.2), 0);
+    width: min(100%, 68rem);
+    height: min(100%, 34rem);
+    grid-area: 1 / 1;
+    /* The style query below needs a style container, and the tile is the
+       closest ancestor that owns --frame. */
+    container-type: style;
+    transform:
+      translate3d(calc(var(--in) * 3% + var(--out) * 4%), calc(var(--in) * 92% + var(--out) * 11%), 0)
+      rotate(calc(var(--play-desk-rotation) + var(--in) * 6deg - var(--out) * 3deg))
+      scale(calc(1 + var(--out) * .07));
+    opacity: clamp(0, calc(1 - var(--frame, 1.2) * var(--frame, 1.2)), 1);
+  }
+  .play-desk[data-reel-mode='pinned'] .play-tile:not([data-reel-current]) { pointer-events: none; }
+  .play-desk[data-reel-mode='pinned'] .play-tile:hover { z-index: auto; }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-card { height: 100%; padding: clamp(16px, 2.4svh, 22px); grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(24px, 3vw, 40px); box-shadow: 6px 8px 0 rgba(23,23,25,.16); }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy { min-height: 0; padding: 14px 8px 4px 0; justify-content: center; gap: 14px; }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-project-footer { margin-top: 6px; }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy strong { font-size: clamp(2rem, 3vw, 2.75rem); }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy p { font-size: 17px; }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-pin { left: 56px; transform: rotate(-3deg); }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-pin-right { display: block; left: auto; right: 56px; transform: rotate(3deg); }
+  .play-desk[data-reel-mode='pinned'] .play-page-number { z-index: 0; bottom: 14px; }
+  /* Prints beyond the active one's neighbours are parked at exactly ±1.2 and
+     skipped by the rasteriser. Browsers without style queries still hide them
+     through opacity. */
+  @container style(--frame: 1.2) or style(--frame: -1.2) {
+    .play-desk[data-reel-mode='pinned'] .play-card { visibility: hidden; }
+  }
+  @media (max-width: 1180px) {
+    .play-desk[data-reel-mode='pinned'] .play-reel-stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); }
+    .play-desk[data-reel-mode='pinned'] .play-reel-side { display: block; }
+    .play-reel-index { flex-direction: row; flex-wrap: wrap; align-items: center; }
+    .play-reel-index button { padding-inline: 10px; }
+    .play-reel-hint { display: none; }
+    .play-desk[data-reel-mode='pinned'] .play-tile .play-card { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+    .play-desk[data-reel-mode='pinned'] .play-tile .play-copy strong { font-size: clamp(1.75rem, 3vw, 2.25rem); }
+    .play-desk[data-reel-mode='pinned'] .play-tile .play-copy p { font-size: 16px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .play-world * { transition-duration: .01ms !important; }
+    .play-battlefield[data-idle] { transition: none; }
+    .play-launch-note { display: none; }
     .play-contact-toggle-copy { display: none; }
     .play-contact-toggle-main, .play-contact-arrow-motion, .play-contact-channel, .play-contact-channel-icon { transform: none !important; }
   }
