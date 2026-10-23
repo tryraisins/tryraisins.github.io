@@ -1,122 +1,122 @@
 {
   "name": "yeknal-notion-meeting-intelligence",
-  "sourceRevision": "f00caadb729f8f787bfa1a1e72a2ef0a1df8342e",
-  "source": "https://github.com/tryraisins/MD_Files/tree/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence",
+  "sourceRevision": "565e10b96cdab30bc8c3089ffa7f1c201b9c3854",
+  "source": "https://github.com/tryraisins/MD_Files/tree/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence",
   "fileCount": 19,
   "files": [
     {
       "path": "agents/openai.yaml",
       "sha256": "5c7b40b8e174653303dadaa3152dd44d3c0e426c4857f937dc0d11e4ae982453",
       "size": 512,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/agents/openai.yaml"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/agents/openai.yaml"
     },
     {
       "path": "assets/notion-small.svg",
       "sha256": "00f5e4b758cc5c3e36e783dca2fabfafd05169c2f2175063e56d2e1fb6a55f81",
       "size": 15777,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/assets/notion-small.svg"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/assets/notion-small.svg"
     },
     {
       "path": "assets/notion.png",
       "sha256": "5eef1e62d96a3d09bc9d18e4140486c22799145b017033bd0924c2c49d741cd4",
       "size": 8526,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/assets/notion.png"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/assets/notion.png"
     },
     {
       "path": "evaluations/decision-meeting-prep.json",
       "sha256": "3ba23fc1fc3edfa26e51afff0d92f88f41e93e0f8a20852a19d90cd9354f299a",
       "size": 3441,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/evaluations/decision-meeting-prep.json"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/evaluations/decision-meeting-prep.json"
     },
     {
       "path": "evaluations/README.md",
       "sha256": "0991780b6c2a29a2ef84b8a37f5e3ea0dc898d31118b8968bbfe26680ac73f24",
       "size": 3971,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/evaluations/README.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/evaluations/README.md"
     },
     {
       "path": "evaluations/status-meeting-prep.json",
       "sha256": "3f7b065f14e68dc1f0d1ffc3720fb0cd32fcf9cdf23365d935338425b2ce4021",
       "size": 3312,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/evaluations/status-meeting-prep.json"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/evaluations/status-meeting-prep.json"
     },
     {
       "path": "examples/customer-meeting.md",
       "sha256": "5371f1d9df68454df163ffc28e69ad8f2434ad47c19ebe19099d1aeaea0cc3f5",
       "size": 3133,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/examples/customer-meeting.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/examples/customer-meeting.md"
     },
     {
       "path": "examples/executive-review.md",
       "sha256": "e39b93e00564cc7631fcc95ba948f9d6fb94e5a7f23eb6100de6b421bddaa4fc",
       "size": 2150,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/examples/executive-review.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/examples/executive-review.md"
     },
     {
       "path": "examples/project-decision.md",
       "sha256": "511decfaed53dcf8462874a4f6cafe1656dca635fa4bcaf9196a354a3f1a86b5",
       "size": 12840,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/examples/project-decision.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/examples/project-decision.md"
     },
     {
       "path": "examples/sprint-planning.md",
       "sha256": "e6ad6b8b3ec26b8181ad61c2cb9f91897d023749dd6e57a2c86559c0130f2776",
       "size": 2100,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/examples/sprint-planning.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/examples/sprint-planning.md"
     },
     {
       "path": "LICENSE.txt",
       "sha256": "0f377d9b2a1db642e4b0531ffa126e96d9bc6c085f8d9441f220fb25f723c6f8",
       "size": 1057,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/LICENSE.txt"
     },
     {
       "path": "reference/brainstorming-template.md",
       "sha256": "4f118f04c8e5eef18f55faf12ecbdb7f8243cd189a4773c98c0d61b822706b14",
       "size": 1480,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/reference/brainstorming-template.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/reference/brainstorming-template.md"
     },
     {
       "path": "reference/decision-meeting-template.md",
       "sha256": "f0b46b0f71a2886bd72af7f9b219ece1d68742b5fba6e2a7fe78f9c65f140d98",
       "size": 1825,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/reference/decision-meeting-template.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/reference/decision-meeting-template.md"
     },
     {
       "path": "reference/one-on-one-template.md",
       "sha256": "1c7f328738b5d6139b22e977608b5ef47f3fa45d95211991168efc632a73c7ae",
       "size": 932,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/reference/one-on-one-template.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/reference/one-on-one-template.md"
     },
     {
       "path": "reference/retrospective-template.md",
       "sha256": "b1e18f96323ce83405f25fa24833b3d3e97fbab86e20c99e6ccfb9a826bd354c",
       "size": 940,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/reference/retrospective-template.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/reference/retrospective-template.md"
     },
     {
       "path": "reference/sprint-planning-template.md",
       "sha256": "1eed8455dc48c330eaecd0f79cbd18150973d47b93329826c7ae611a10dece66",
       "size": 1301,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/reference/sprint-planning-template.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/reference/sprint-planning-template.md"
     },
     {
       "path": "reference/status-update-template.md",
       "sha256": "c5f53adde43d8a9333555ce0e4634b85f4f6a44faa560f3a250c6104eebe4f17",
       "size": 1356,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/reference/status-update-template.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/reference/status-update-template.md"
     },
     {
       "path": "reference/template-selection-guide.md",
       "sha256": "a29b16db340c153a3a32579b7031809b398ed319210fbea2d29ec424c68d147e",
       "size": 1948,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/reference/template-selection-guide.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/reference/template-selection-guide.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "b02192038de4635164b0751beaa52bcffde9582a478cbce399af40b0949e1327",
       "size": 3480,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f00caadb729f8f787bfa1a1e72a2ef0a1df8342e/skills/yeknal-notion-meeting-intelligence/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-notion-meeting-intelligence/SKILL.md"
     }
   ]
 }
