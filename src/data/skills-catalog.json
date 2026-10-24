@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
   "repository": "tryraisins/MD_Files",
-  "sourceRevision": "e25b3e4424766d1ee620053e73ea899388dcba84",
-  "catalogCommit": "d71569570f42cbd72e1b90e90cf5c5ce3275fb76",
-  "cliVersion": "2.5.1",
+  "sourceRevision": "0d3357839c1197d254bec134443a60a7bacacb06",
+  "catalogCommit": "3a04d680fb7dcbec63644d65e1242f7e3162ef48",
+  "cliVersion": "2.6.0",
   "counts": {
-    "skills": 93,
-    "internal": 35
+    "skills": 96,
+    "internal": 34
   },
   "tasks": [
     {
       "id": "build",
       "label": "Plan and build",
       "description": "Shape an idea, then turn it into working code.",
-      "count": 22
+      "count": 24
     },
     {
       "id": "design",
@@ -31,13 +31,13 @@
       "id": "review",
       "label": "Review and test",
       "description": "Find defects, check flows in a browser and debug failures.",
-      "count": 23
+      "count": 25
     },
     {
       "id": "security",
       "label": "Security",
       "description": "Secure implementation, review and threat modeling.",
-      "count": 5
+      "count": 6
     },
     {
       "id": "ship",
@@ -61,7 +61,7 @@
       "id": "agents",
       "label": "Working with agents",
       "description": "How agents load skills, split work and format answers.",
-      "count": 7
+      "count": 8
     }
   ],
   "startingPoints": [
@@ -90,7 +90,12 @@
       "skill": "vercel-deploy"
     }
   ],
-  "redirects": [],
+  "redirects": [
+    {
+      "from": "test-audit",
+      "to": "legacy-sweep"
+    }
+  ],
   "skills": [
     {
       "name": "yeknal-implement",
@@ -265,14 +270,14 @@
         "playwright",
         "gh-fix-ci"
       ],
-      "version": "e0c3c34f619952e590143d64edc31cb42c89c76ec6b1cce7c843a20eb7ea1a49",
+      "version": "0f5a63ff41735e781373465d57514dc3b8912bcd02560560e6c61e19486b021b",
       "fileCount": 1,
-      "totalBytes": 3201,
+      "totalBytes": 3435,
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "1010682985e97f4ea264e2d8ffadbcd4288874d892d70e8c142436307cc6e5c2",
-          "size": 3201
+          "sha256": "6bbab4566fd2555bccd3cbd41ed145bcc3e84b511861e440bd1189e43d3218f4",
+          "size": 3435
         }
       ]
     },
@@ -389,17 +394,17 @@
         "sourceUrl": null
       },
       "related": [
-        "test-audit",
+        "legacy-sweep",
         "playwright"
       ],
-      "version": "f52fe17912e989a9cf82bf4e3f2c99abda5b458148e4c0994f09c8068ae9631d",
+      "version": "687f8285efd26dca47b9f62b66a1067d6685af8d37e20cf1f2ac8cf24c2c33be",
       "fileCount": 1,
-      "totalBytes": 3470,
+      "totalBytes": 3472,
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "8c672787d32e07e97681f6f3d62b9f117028cbe707a4df39c4acf245ee98f461",
-          "size": 3470
+          "sha256": "8de5491331f24b2af55275e551b2f641326aa4e91633f440ee2e7bc809642d29",
+          "size": 3472
         }
       ]
     },
@@ -575,9 +580,9 @@
         "security-best-practices",
         "security-threat-model"
       ],
-      "version": "d44b764bb750ebe095054caa59fc2f38d1fab09f3a063e4eb1f626c1178b1bca",
+      "version": "e047828950d26c0a64b9d23f7534277e509aaa12b1101faeb1fc43fa0234e61a",
       "fileCount": 2,
-      "totalBytes": 28522,
+      "totalBytes": 28838,
       "files": [
         {
           "path": "Security-Master.md",
@@ -586,8 +591,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "5582eda6c8243399d51d778de1174a6a5e19d5333dcd87ccbbdc05d4ee040773",
-          "size": 11086
+          "sha256": "bedd377cd38226ecd0396832161e4650c83819735375f7bc7d501022bb897578",
+          "size": 11402
         }
       ]
     },
@@ -800,6 +805,55 @@
       ]
     },
     {
+      "name": "yeknal-agent-cost-control",
+      "slug": "agent-cost-control",
+      "title": "Agent cost control",
+      "purpose": "Measures what agent work actually costs, finds the sessions and settings that own the spend, and changes one lever at a time without quietly losing review quality along the way.",
+      "description": "Cut agent inference spend without quietly losing quality. Use when an LLM bill, token spend, or per-task cost is too high, when sessions feel slow or expensive, when choosing models or effort levels for a task, or when someone asks whether prompt caching, model routing, or a cheaper tier is worth it.",
+      "tasks": [
+        "agents"
+      ],
+      "featuredRank": -1,
+      "compatibility": false,
+      "internal": false,
+      "whenToUse": [
+        "The inference bill rose, or one task cost far more than expected.",
+        "You are choosing models or effort levels and want evidence rather than a hunch.",
+        "Someone asks whether prompt caching, model routing, or a cheaper tier will actually help."
+      ],
+      "avoid": "It does not decide who does the work and it does not review code. It will not present a saving without an outcome check that nothing important was dropped.",
+      "requirements": null,
+      "example": {
+        "ask": "Why did last month cost more than the month before, with the same workload?",
+        "outcome": "It reads the harness usage log, shows that one long session carried most of the spend, checks whether caching is already warm, and recommends splitting the work at a boundary instead of switching models."
+      },
+      "attribution": {
+        "credit": "Written for this catalog.",
+        "license": null,
+        "sourceUrl": null
+      },
+      "related": [
+        "orchestration-specialists",
+        "review",
+        "testing-strategy"
+      ],
+      "version": "087dfde78139eee352a32be95eb0595e436b4be33eaf73daf1a52ecb72efaa2a",
+      "fileCount": 2,
+      "totalBytes": 11203,
+      "files": [
+        {
+          "path": "references/measurement.md",
+          "sha256": "718dabaa6778d25cae7afaf07cf5c7a0335d263afd83f10b30e4129bdda29571",
+          "size": 4627
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "d1e79857d60bf5022d26ece9430ca01bc39926aa4552c7fbb13bd76c71566439",
+          "size": 6576
+        }
+      ]
+    },
+    {
       "name": "yeknal-animate-expo",
       "slug": "animate-expo",
       "title": "Animation in Expo",
@@ -887,6 +941,88 @@
           "path": "SKILL.md",
           "sha256": "237e5fa342792e821c6a85b7be340086422f4d43171ddf65a354beecae9affa0",
           "size": 13135
+        }
+      ]
+    },
+    {
+      "name": "yeknal-performance",
+      "slug": "performance",
+      "title": "App performance",
+      "purpose": "Measures startup, screen navigation, content loading and scrolling on a throttled production build, finds the real bottleneck, then proves each fix with before and after benchmarks rather than intuition.",
+      "description": "Optimize an application's real performance by measuring baseline startup, screen navigation, content loading, and scrolling, locating the actual bottleneck, changing one thing at a time, and proving every fix with before and after benchmarks. Use when an app feels slow to start, screens or content take too long to appear, scrolling stutters, or someone asks to make the app faster.",
+      "tasks": [
+        "build",
+        "review"
+      ],
+      "featuredRank": -1,
+      "compatibility": false,
+      "internal": false,
+      "whenToUse": [
+        "The app feels slow to start or slow to open a screen.",
+        "Content takes too long to appear, especially older or deeper pages.",
+        "Scrolling stutters or degrades during a long session.",
+        "Every optimization needs a measured before and after."
+      ],
+      "avoid": "It is not failure diagnosis or a motion audit. Use Troubleshoot for a broken feature and Improve animations for motion craft.",
+      "requirements": null,
+      "example": {
+        "ask": "Make this app faster, benchmark every fix, and tell me what actually worked.",
+        "outcome": "It records a cold production baseline on a throttled device, traces the largest cost, changes one thing at a time, re-measures, and keeps only the wins that clear the noise floor."
+      },
+      "attribution": {
+        "credit": "Written for this catalog.",
+        "license": null,
+        "sourceUrl": null
+      },
+      "related": [
+        "troubleshoot",
+        "improve-animations",
+        "launch-readiness",
+        "playwright"
+      ],
+      "version": "00b691b178a42e09f3ba75f8da0d07508bbff805892c093c0a47113276a154f2",
+      "fileCount": 8,
+      "totalBytes": 55742,
+      "files": [
+        {
+          "path": "references/fix-catalog.md",
+          "sha256": "ab7d6b837b64bb1850efaa0bf63d3843c050750277f66e64256053c489a004b8",
+          "size": 6762
+        },
+        {
+          "path": "references/measuring.md",
+          "sha256": "147876a258dcb60e1321e4cc03edc91fe19e2e25611ec23d7eb966d35eb59eab",
+          "size": 5991
+        },
+        {
+          "path": "references/report-template.md",
+          "sha256": "e41cd83c4a92e3187254b29fd896c2bb60239406164b950061f66f54b1172f5e",
+          "size": 2776
+        },
+        {
+          "path": "references/screens-and-content.md",
+          "sha256": "766c533f83c170d6793942c59d9843a751a2301b1e4cf89a282e711c5b07d19c",
+          "size": 5492
+        },
+        {
+          "path": "references/scrolling.md",
+          "sha256": "0d540e8039dcf19ca90928a22e539ff31d296326bfd50d2a4cc8c0940a34ab84",
+          "size": 4354
+        },
+        {
+          "path": "references/startup.md",
+          "sha256": "198d84fc353127eab353bfae6f8e92a2aa14b52f3f79facea3fca218b0bef115",
+          "size": 4797
+        },
+        {
+          "path": "scripts/bench-web.mjs",
+          "sha256": "262791d491a9c07a7544db34f9fee2094efd114e0bce85aa3952015ae00e7234",
+          "size": 16825
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "3900059a2d3247e62803d9e5f21f067ffe68f188620eebf3dc2bcf7f2a59a9de",
+          "size": 8745
         }
       ]
     },
@@ -4318,9 +4454,9 @@
         "sentry",
         "testing-strategy"
       ],
-      "version": "f45155ff651356f1667cbf597f03bce9d9306a41c0dceacd3fd8885c194a4f05",
+      "version": "ced9db7bf1b978e7d3f18814cc31b0cc54cec2d966ad696b932a5f54bf27a1a5",
       "fileCount": 6,
-      "totalBytes": 49460,
+      "totalBytes": 49632,
       "files": [
         {
           "path": "references/evidence-and-fixes.md",
@@ -4334,8 +4470,8 @@
         },
         {
           "path": "references/launch-gates.md",
-          "sha256": "29d0d25c99ead50448e03d27d1b290dd022e85cf02f7d9f85bb43c85672cdd50",
-          "size": 7153
+          "sha256": "77e8ee9f454bd288612b51d0714c5ba6fb7060710f4ea761f756cac0d181c7b1",
+          "size": 7325
         },
         {
           "path": "references/obligations.md",
@@ -4351,6 +4487,67 @@
           "path": "SKILL.md",
           "sha256": "98e79b1b9d4e709180397f28de804d388c08d15b7e103dd6b89cc50589dca11b",
           "size": 8085
+        }
+      ]
+    },
+    {
+      "name": "yeknal-legacy-sweep",
+      "slug": "legacy-sweep",
+      "title": "Legacy sweep",
+      "purpose": "Audits a whole repository or subsystem for unused legacy code and bloated or worthless tests, proves each candidate is obsolete before deleting it, fixes real defects instead of removing the failing test, and keeps the coverage that still protects behaviour.",
+      "description": "Audit a whole repository or subsystem for unused legacy code and bloated or worthless tests, prove each candidate is obsolete before deleting it, repair real defects instead of removing the test that caught them, and keep the coverage that still protects behaviour. Use when asked for a deep cleanup, a dead-code sweep, a test-suite prune, or a legacy audit, and whenever deletion is on the table.",
+      "tasks": [
+        "review",
+        "build"
+      ],
+      "featuredRank": -1,
+      "compatibility": false,
+      "internal": false,
+      "whenToUse": [
+        "A codebase has accumulated dead paths, unused exports and stale tests.",
+        "A test suite is slow or noisy and you want to prune it without losing the checks that matter.",
+        "A cleanup should fix the failures it uncovers instead of deleting them.",
+        "You want a cleanup that reports what it could not prove."
+      ],
+      "avoid": "It is not a lint pass and not a licence to delete code. Every removal needs a filled evidence row, a failing test is treated as a defect before it is treated as bloat, and it never authors unit tests.",
+      "requirements": null,
+      "example": {
+        "ask": "Sweep the repo: remove the dead code and the bloated tests, but fix real bugs instead of hiding them.",
+        "outcome": "It records a baseline, splits production ownership into read-only and write lanes, removes only candidates with completed proof, fixes the failures that are real defects, and reports what it removed, the contracts it preserved and every blocked candidate."
+      },
+      "attribution": {
+        "credit": "The test evidence gate was written independently, inspired by the test-audit concepts in the openclaw project; no source text was copied. Production-code, failure-triage and campaign material is original.",
+        "license": null,
+        "sourceUrl": "https://github.com/openclaw/openclaw"
+      },
+      "related": [
+        "cleanup",
+        "dead-code-hunter",
+        "testing-strategy"
+      ],
+      "version": "f46516b2e539e3e969d077b74c9ffd5a1d3b2a47117cc57adf94df4533f46709",
+      "fileCount": 4,
+      "totalBytes": 23065,
+      "files": [
+        {
+          "path": "references/campaign-execution.md",
+          "sha256": "b103ef1ea6737dd3b782cd104c2efe8b7ee1b0bb01aa2b8cac4adabe88e8ed7f",
+          "size": 5231
+        },
+        {
+          "path": "references/evidence-standard.md",
+          "sha256": "ea0acc05f8fafddbed1733f09b8493054f823d8eaac7c7f82bc6f3e7ef98c435",
+          "size": 6698
+        },
+        {
+          "path": "references/report-template.md",
+          "sha256": "6ad6d95addaf9c0020209b19a7a42edb76d2a0e1538adf13be8f1cdb26600bbb",
+          "size": 2631
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "63df80703b49e216820538247e2343a13d9f0f1bd0d70ca26aa262a3fbd998de",
+          "size": 8505
         }
       ]
     },
@@ -5971,11 +6168,147 @@
       ]
     },
     {
+      "name": "yeknal-security-audit",
+      "slug": "security-audit",
+      "title": "Security audit",
+      "purpose": "Runs a multi-phase security audit of a repository, directory or diff with a coverage ledger, adversarial verification and schema-validated findings.",
+      "description": "Run a multi-phase security audit of a repository, directory, or diff with a coverage ledger, adversarial verification, and schema-validated findings. Use only for explicit audit, vulnerability-hunt, or penetration-test requests that ask for findings or report artifacts, not for general security questions.",
+      "tasks": [
+        "security",
+        "review"
+      ],
+      "featuredRank": -1,
+      "compatibility": false,
+      "internal": false,
+      "whenToUse": [
+        "You want a full security audit or pen test of a codebase rather than a quick review.",
+        "You need findings you can hand to someone else, with evidence and a reproduction for each.",
+        "A previous audit needs its coverage gaps closed or its findings rechecked against changed code."
+      ],
+      "avoid": "It only runs a full audit when you ask for one. Security questions and focused reviews belong to the narrower security skills.",
+      "requirements": "Needs Node.js for the two zero-dependency validators. Target code is not executed without an OS-enforced sandbox.",
+      "example": {
+        "ask": "Audit this repository for security vulnerabilities and give me the findings.",
+        "outcome": "It plans coverage, hunts in isolated units, has every candidate independently disproved or confirmed, and writes findings.json plus a report derived from it."
+      },
+      "attribution": {
+        "credit": "Adapted from Cloudflare's security-audit skill.",
+        "license": "MIT",
+        "sourceUrl": "https://github.com/cloudflare/security-audit-skill"
+      },
+      "related": [
+        "application-security",
+        "security-threat-model",
+        "security-best-practices",
+        "security-ownership-map"
+      ],
+      "version": "b82a4319f285410b2f2e108b55a8927893f785f24312aa60914ba667023c014f",
+      "fileCount": 19,
+      "totalBytes": 259667,
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "e598e694aa506650c7192d5ea3be0e50aca0d356ea00551c53429f0b01eb6391",
+          "size": 1078
+        },
+        {
+          "path": "references/AI-AND-LLM.md",
+          "sha256": "7335a95c43554eadefcf03ece639291bb0e038c398a179299e3887ffe06bd2ef",
+          "size": 10617
+        },
+        {
+          "path": "references/ATTACK-CLASSES.md",
+          "sha256": "3ee4f00c6e8c9dcf6dd02dd5ac2a4ceb322e2085f3e9fbe79cf0c6330bc7ef83",
+          "size": 15695
+        },
+        {
+          "path": "references/CLIENT-SIDE.md",
+          "sha256": "613f6b98f86083e045525c5b60154ffdab122bac35f1e05eb17488e6e453370c",
+          "size": 8594
+        },
+        {
+          "path": "references/CLOUD-AND-DEPLOYMENT.md",
+          "sha256": "3c80f3088be22345e07b057c056d6ed99fe2b0304f794398964f7ccd5a496ca3",
+          "size": 8291
+        },
+        {
+          "path": "references/DATA-ISOLATION-AND-LIFECYCLE.md",
+          "sha256": "307dcb3e24d292715c4a041190e7bb135646a37eb6187619ae01d000a634a4ad",
+          "size": 7798
+        },
+        {
+          "path": "references/DESKTOP-MOBILE-AND-LOCAL-IPC.md",
+          "sha256": "58eae8ee0ca6a46611c501ec5a3ab47fdff88dd7db0d8d74789bbf8bb19d8cb2",
+          "size": 8739
+        },
+        {
+          "path": "references/HUNTING.md",
+          "sha256": "71c121decea1322c47c718f6e110f1a892980bb4266bd7ac55ef043a213ade09",
+          "size": 22446
+        },
+        {
+          "path": "references/MEMORY-SAFETY-AND-BINARY.md",
+          "sha256": "7c8b0dccfb35315cca2455509674d49632b2fe37e1f3aac16c1a496a7e9924a7",
+          "size": 10513
+        },
+        {
+          "path": "references/PROTOCOLS-RPC-AND-MESSAGING.md",
+          "sha256": "8b73816fa5b3697c9c40977f0c836b40f01d6e81929ff2720fe83ce089e9a619",
+          "size": 7483
+        },
+        {
+          "path": "references/RECONNAISSANCE.md",
+          "sha256": "02ca887aca84de8ae137f1891bd2f0a54f28d3fa6da92a27f54734382b3381a2",
+          "size": 15902
+        },
+        {
+          "path": "references/RESOURCE-EXHAUSTION-AND-AVAILABILITY.md",
+          "sha256": "4326fab5c92a0b4c420a70196254040105cd794026562130b59bf1a6db3e4baa",
+          "size": 7476
+        },
+        {
+          "path": "references/SUPPLY-CHAIN-AND-RELEASE.md",
+          "sha256": "f372e919940e335468ba1ae09f99026c3986a345f7fe26f8068f132e199f52a5",
+          "size": 7258
+        },
+        {
+          "path": "references/VALIDATION-AND-REPORTING.md",
+          "sha256": "b892470cb89bb31f33403e050d4bdfbe2cdaef940ade1496fa65e32b2e129449",
+          "size": 17843
+        },
+        {
+          "path": "references/WEB-PROTOCOL-AND-AUTH.md",
+          "sha256": "4f3066dffa23c5635859187be9b96c32f2aff29a688186b91ff0c63e47d62b5c",
+          "size": 12300
+        },
+        {
+          "path": "scripts/report-schema.json",
+          "sha256": "6575c9de4a62255699ea052ebf9a49ebfb373a32891bcd89af6f55cc84b35519",
+          "size": 14494
+        },
+        {
+          "path": "scripts/validate-coverage-ledger.cjs",
+          "sha256": "0b07ef87f408ae34e82a7750b137224318b76c7f09b8e15323221b09cc801fb0",
+          "size": 34011
+        },
+        {
+          "path": "scripts/validate-findings.cjs",
+          "sha256": "68148ce4b9709d45875af0a17c8dcd91403d610b390c8cb52332731fddb22ae7",
+          "size": 29379
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "777541c529d6098df5f365d6571136e6799af8108b1f25fd745657381b63bd86",
+          "size": 19750
+        }
+      ]
+    },
+    {
       "name": "yeknal-security-best-practices",
       "slug": "security-best-practices",
       "title": "Security best practices",
       "purpose": "Reviews Python, JavaScript, TypeScript or Go code for security issues and writes secure-by-default code when you ask for it.",
-      "description": "Review Python, JavaScript/TypeScript, or Go code for security best practices. Use only for explicit security review or secure-by-default coding requests.",
+      "description": "Apply secure-by-default guidance for Python, JavaScript/TypeScript, or Go with per-framework references. Use for writing secure code, targeted security questions, or a focused review of a supported stack, not a full codebase audit.",
       "tasks": [
         "security",
         "review"
@@ -6003,9 +6336,9 @@
         "application-security",
         "security-threat-model"
       ],
-      "version": "dfe3786a387ed800ea5fd18078633284d047ea09bb6f60ac62b446eaf1aa83a3",
+      "version": "f1257184a24a623ecac63c2478fd0cc88ae4cd58d2759c0c3eb4cc0312fc0bb6",
       "fileCount": 14,
-      "totalBytes": 413885,
+      "totalBytes": 414415,
       "files": [
         {
           "path": "agents/openai.yaml",
@@ -6074,8 +6407,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "30551f5f85d974de744ad71beab0720125d6a58f7b86da2130ed6848bd130918",
-          "size": 6832
+          "sha256": "f71c19bbc9425ebb97f608b7c10056003510fea403727527d209070fc3c7b898",
+          "size": 7362
         }
       ]
     },
@@ -6110,9 +6443,9 @@
       "related": [
         "security-threat-model"
       ],
-      "version": "4c9d6a15cceb3fcd43a081dbf9a74e53ffaac4accb7be307930b91c09e6c2bcc",
+      "version": "d843a1dd7746d192b07e4ae607c6512f7b1807fd88a95a8ad53d32d1dc79ef36",
       "fileCount": 8,
-      "totalBytes": 98809,
+      "totalBytes": 99008,
       "files": [
         {
           "path": "agents/openai.yaml",
@@ -6151,8 +6484,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "90f4f2658769390f23934afe5800c0b005335eaf7b230c34ecc5a272266e39af",
-          "size": 9019
+          "sha256": "ff2a8450014ef2645ce53831fb7809027036b61c4d1b7f0c930a35292a93a5ca",
+          "size": 9218
         }
       ]
     },
@@ -6646,49 +6979,6 @@
       ]
     },
     {
-      "name": "yeknal-test-audit",
-      "slug": "test-audit",
-      "title": "Test audit",
-      "purpose": "Reviews a test suite for checks that prove real behaviour, and flags redundant or implementation-coupled tests worth removing.",
-      "description": "Audit test suites for meaningful behavioral coverage, redundant or implementation-coupled assertions, and test-only production seams. Use when reviewing, consolidating, pruning, or making decisions about existing tests; also apply its value gate before adding or changing tests.",
-      "tasks": [
-        "review"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "A test suite is slow or noisy and you want to prune it.",
-        "You suspect tests that only check implementation details.",
-        "You are deciding whether a new test is worth adding."
-      ],
-      "avoid": null,
-      "requirements": null,
-      "example": {
-        "ask": "Audit the checkout tests and tell me which ones actually matter.",
-        "outcome": "It classifies each test by the behaviour it protects and recommends what to keep, merge or delete."
-      },
-      "attribution": {
-        "credit": "Written independently, inspired by the test-audit concepts in the openclaw project; no source text was copied.",
-        "license": null,
-        "sourceUrl": "https://github.com/openclaw/openclaw"
-      },
-      "related": [
-        "testing-strategy",
-        "review"
-      ],
-      "version": "6277bade739d911975ec5172a28c2fa58134eda94646c0040dc0295e45ba3a77",
-      "fileCount": 1,
-      "totalBytes": 6026,
-      "files": [
-        {
-          "path": "SKILL.md",
-          "sha256": "be2b73259766c93fa9a614cec8915fae88b7b77f2ee19705842f5708225b605b",
-          "size": 6026
-        }
-      ]
-    },
-    {
       "name": "yeknal-speech",
       "slug": "speech",
       "title": "Text to speech",
@@ -6811,7 +7101,7 @@
       "slug": "security-threat-model",
       "title": "Threat model",
       "purpose": "Builds a threat model grounded in the actual repository, covering assets, trust boundaries, abuse paths and mitigations.",
-      "description": "Create a repository-grounded threat model covering assets, trust boundaries, abuse paths, and mitigations. Use only for explicit threat-modeling requests.",
+      "description": "Create a repository-grounded threat model covering assets, trust boundaries, abuse paths, and mitigations. Use only for explicit threat-modeling requests, not for vulnerability hunts or pen tests.",
       "tasks": [
         "security"
       ],
@@ -6838,9 +7128,9 @@
         "application-security",
         "security-best-practices"
       ],
-      "version": "a8edccc2ce1dcc15bbd0cd125c884e4a3231095dbf1bdfde87110ffe6c9cd9c4",
+      "version": "f344341cf9606a90b7a4f6a403cb2ea3437881899cae81a39fe0473a053b4fda",
       "fileCount": 5,
-      "totalBytes": 33462,
+      "totalBytes": 33705,
       "files": [
         {
           "path": "agents/openai.yaml",
@@ -6864,8 +7154,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "a277c7aa1c8d8950867b47dfdf44be21e9b2593a198e7b6286e2aca590bb6daa",
-          "size": 8110
+          "sha256": "8646af84803ca4d7ee87776c5ae33082c44ec394ecc91afd602a1f439f8c1756",
+          "size": 8353
         }
       ]
     },
@@ -6989,8 +7279,8 @@
       "name": "yeknal-ui-quality-baseline",
       "slug": "ui-quality-baseline",
       "title": "UI quality baseline",
-      "purpose": "Applies a shared set of visual, responsive, accessibility, state and motion checks whenever an agent creates or changes visible UI.",
-      "description": "Apply shared visual, responsive, accessibility, state, and motion checks whenever creating, changing, or reviewing visible UI or mockups.",
+      "purpose": "Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI.",
+      "description": "Apply shared visual, responsive, accessibility, state, motion, and copy checks whenever creating, changing, or reviewing visible UI or mockups.",
       "tasks": [
         "design",
         "review"
@@ -7018,9 +7308,9 @@
         "frontend-design",
         "break-ui"
       ],
-      "version": "d5af1788b5cdcb38fe65548c7b3c49d9946d1347e818d163391bd87a437bf082",
+      "version": "b51103345ca8d596ca768336e79612417498e7e62a3d283815b4346731894194",
       "fileCount": 2,
-      "totalBytes": 41935,
+      "totalBytes": 43313,
       "files": [
         {
           "path": "references/accessibility-design.md",
@@ -7029,8 +7319,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "eb62e8f429e361e7dd639dc26cf8b9eb887b869713a69cd5166aa6e28c7877b5",
-          "size": 33523
+          "sha256": "70cb10526fdf3393f9abb7b5acf071e63ae3bae248628d0062124b8bd8915bd6",
+          "size": 34901
         }
       ]
     },
@@ -7689,5 +7979,5 @@
       ]
     }
   ],
-  "snapshotHash": "a803e8adf44906131496a8a231137aaa341c77b2e94d232eee0d4577a1cd4154"
+  "snapshotHash": "c8cef9eda593985d65511c32c9d8948ffd3f39409cc7f99cf4d07ed803ac5498"
 }
