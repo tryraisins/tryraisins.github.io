@@ -36,3 +36,6 @@ yarn-error.log*
 
 # Cloudflare Wrangler local state
 .wrangler/
+
+# Playwright CLI local artifacts
+.playwright-cli/
