@@ -1,38 +1,38 @@
 {
   "name": "yeknal-design-reference-research",
-  "sourceRevision": "565e10b96cdab30bc8c3089ffa7f1c201b9c3854",
-  "source": "https://github.com/tryraisins/MD_Files/tree/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-design-reference-research",
+  "sourceRevision": "e25b3e4424766d1ee620053e73ea899388dcba84",
+  "source": "https://github.com/tryraisins/MD_Files/tree/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-design-reference-research",
   "fileCount": 5,
   "files": [
     {
       "path": "agents/openai.yaml",
       "sha256": "029067613a8dc73bf3ec65c28a14df43a031dba25ad9edc52ce36f66cd2b77b7",
       "size": 283,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-design-reference-research/agents/openai.yaml"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-design-reference-research/agents/openai.yaml"
     },
     {
       "path": "references/pattern-atlas.md",
       "sha256": "c4b5ab88259601e476ee0623336017817bca6ae9327bcde13870ef78b1cd9461",
       "size": 5093,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-design-reference-research/references/pattern-atlas.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-design-reference-research/references/pattern-atlas.md"
     },
     {
       "path": "references/responsive-matrix.md",
       "sha256": "1bf95d27be3258bebc50ea5a88ff85f20ac74d2f62f516dca3b7d31376a10272",
       "size": 3728,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-design-reference-research/references/responsive-matrix.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-design-reference-research/references/responsive-matrix.md"
     },
     {
       "path": "references/source-atlas.md",
       "sha256": "d4eb56886e0558f4be94bfde8784faf94a6b605c1be3f58610a3daa729caf683",
       "size": 8732,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-design-reference-research/references/source-atlas.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-design-reference-research/references/source-atlas.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "971dd38a74b5ba179c53211fe28d7630d1b506852654a02fc6fe4fe5a6bcc258",
       "size": 6205,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-design-reference-research/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-design-reference-research/SKILL.md"
     }
   ]
 }

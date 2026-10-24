@@ -1,56 +1,56 @@
 {
   "name": "yeknal-security-ownership-map",
-  "sourceRevision": "565e10b96cdab30bc8c3089ffa7f1c201b9c3854",
-  "source": "https://github.com/tryraisins/MD_Files/tree/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-security-ownership-map",
+  "sourceRevision": "e25b3e4424766d1ee620053e73ea899388dcba84",
+  "source": "https://github.com/tryraisins/MD_Files/tree/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-security-ownership-map",
   "fileCount": 8,
   "files": [
     {
       "path": "agents/openai.yaml",
       "sha256": "40877a3cdb1753aa187fc85a83bc138a866a1edb74165e009c885cfb6a16e433",
       "size": 253,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-security-ownership-map/agents/openai.yaml"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-security-ownership-map/agents/openai.yaml"
     },
     {
       "path": "LICENSE.txt",
       "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
       "size": 10776,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-security-ownership-map/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-security-ownership-map/LICENSE.txt"
     },
     {
       "path": "references/neo4j-import.md",
       "sha256": "176d0ef2ed3588530ed65ccda7cb30ae322e4cbec5c374dba5d1685e2bb9dd02",
       "size": 2428,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-security-ownership-map/references/neo4j-import.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-security-ownership-map/references/neo4j-import.md"
     },
     {
       "path": "scripts/build_ownership_map.py",
       "sha256": "c0454c47c7eb001b6e247cd7e473df1b28a3a148a2dca6b2fe88a74a7602cc9b",
       "size": 34330,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-security-ownership-map/scripts/build_ownership_map.py"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-security-ownership-map/scripts/build_ownership_map.py"
     },
     {
       "path": "scripts/community_maintainers.py",
       "sha256": "95adec5458cc85b41d0ae7965b0a17e4e8eaa6aaab274459324580d9a91cc3cc",
       "size": 18122,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-security-ownership-map/scripts/community_maintainers.py"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-security-ownership-map/scripts/community_maintainers.py"
     },
     {
       "path": "scripts/query_ownership.py",
       "sha256": "0f8d1a1ac3ef807a9b66939a8cdfd02564f4cda018489a3664d37f8c3a7b1b93",
       "size": 17991,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-security-ownership-map/scripts/query_ownership.py"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-security-ownership-map/scripts/query_ownership.py"
     },
     {
       "path": "scripts/run_ownership_map.py",
       "sha256": "362b547d6133659eb5c4fe889b8b930bea790f31e412f3198671baae09eec692",
       "size": 5890,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-security-ownership-map/scripts/run_ownership_map.py"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-security-ownership-map/scripts/run_ownership_map.py"
     },
     {
       "path": "SKILL.md",
       "sha256": "90f4f2658769390f23934afe5800c0b005335eaf7b230c34ecc5a272266e39af",
       "size": 9019,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-security-ownership-map/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-security-ownership-map/SKILL.md"
     }
   ]
 }

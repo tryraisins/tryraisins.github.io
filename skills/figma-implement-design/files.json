@@ -1,56 +1,56 @@
 {
   "name": "yeknal-figma-implement-design",
-  "sourceRevision": "565e10b96cdab30bc8c3089ffa7f1c201b9c3854",
-  "source": "https://github.com/tryraisins/MD_Files/tree/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-figma-implement-design",
+  "sourceRevision": "e25b3e4424766d1ee620053e73ea899388dcba84",
+  "source": "https://github.com/tryraisins/MD_Files/tree/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-figma-implement-design",
   "fileCount": 8,
   "files": [
     {
       "path": "agents/openai.yaml",
       "sha256": "05f0f52f8523d2206a5365d912d339ee9c9abb7fa0c9b42b149296cbac4fefe2",
       "size": 486,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-figma-implement-design/agents/openai.yaml"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-figma-implement-design/agents/openai.yaml"
     },
     {
       "path": "assets/figma-small.svg",
       "sha256": "6a38267efbd872bbc215d0227a395eb0b0093bc6441c44a39a43f3210549e5e9",
       "size": 818,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-figma-implement-design/assets/figma-small.svg"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-figma-implement-design/assets/figma-small.svg"
     },
     {
       "path": "assets/figma.png",
       "sha256": "4d16e1b19ae7bdac7d601d0b3bf3c0ea4a018a8cb0e38d19e5b00971968ecada",
       "size": 1612,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-figma-implement-design/assets/figma.png"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-figma-implement-design/assets/figma.png"
     },
     {
       "path": "assets/icon.svg",
       "sha256": "8936c5dcd619c41f5a27f7c08e8c50b22e428069c36217e4aa872099d6cc2cf7",
       "size": 964,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-figma-implement-design/assets/icon.svg"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-figma-implement-design/assets/icon.svg"
     },
     {
       "path": "LICENSE.txt",
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "size": 11358,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-figma-implement-design/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-figma-implement-design/LICENSE.txt"
     },
     {
       "path": "references/figma-mcp-config.md",
       "sha256": "3b8bbd016e7cecfe01d096791582da8c9669c18675ec3f201d0d4088051711a9",
       "size": 2471,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-figma-implement-design/references/figma-mcp-config.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-figma-implement-design/references/figma-mcp-config.md"
     },
     {
       "path": "references/figma-tools-and-prompts.md",
       "sha256": "428add063f235ffe27fb4b8d092558794f25f7ad69893d5a88621d8174e9c8d6",
       "size": 2796,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-figma-implement-design/references/figma-tools-and-prompts.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-figma-implement-design/references/figma-tools-and-prompts.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "f11a3be7215e191d34d88d8701a22427c69d54fe0a4c2e11184ca9902f22e097",
       "size": 12882,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-figma-implement-design/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-figma-implement-design/SKILL.md"
     }
   ]
 }

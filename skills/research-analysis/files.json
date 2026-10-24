@@ -1,26 +1,26 @@
 {
   "name": "yeknal-research-analysis",
-  "sourceRevision": "565e10b96cdab30bc8c3089ffa7f1c201b9c3854",
-  "source": "https://github.com/tryraisins/MD_Files/tree/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-research-analysis",
+  "sourceRevision": "e25b3e4424766d1ee620053e73ea899388dcba84",
+  "source": "https://github.com/tryraisins/MD_Files/tree/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-research-analysis",
   "fileCount": 3,
   "files": [
     {
       "path": "LICENSE.deep-research.txt",
       "sha256": "3ece8aa641a0f06357c6b1408557d8e9f66b6b9b919394c481aae40f0008077b",
       "size": 1069,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-research-analysis/LICENSE.deep-research.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-research-analysis/LICENSE.deep-research.txt"
     },
     {
       "path": "references/deep-research.md",
       "sha256": "d01611a83f0860564308b617936afc3205c891b4587c4f8a6faded39f4f63082",
       "size": 6869,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-research-analysis/references/deep-research.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-research-analysis/references/deep-research.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "867070f8f702f0fa6be950341f41490dc9d0d7a7888d25c48eec99cf36bd900f",
       "size": 2892,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/565e10b96cdab30bc8c3089ffa7f1c201b9c3854/skills/yeknal-research-analysis/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-research-analysis/SKILL.md"
     }
   ]
 }
