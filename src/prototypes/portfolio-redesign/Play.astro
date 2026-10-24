@@ -670,6 +670,9 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     z-index: 1;
     overflow: hidden;
     overflow: clip;
+    /* The sheet paints its own paper and never changes size, so isolating it
+       lets the browser skip repainting the page behind it while prints move. */
+    contain: layout paint;
     display: grid;
     grid-template-columns: minmax(176px, 232px) minmax(0, 1fr);
     grid-template-rows: auto minmax(0, 1fr);
@@ -704,6 +707,8 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     width: min(100%, 68rem);
     height: min(100%, 34rem);
     grid-area: 1 / 1;
+    display: grid;
+    place-items: center;
     /* The style query below needs a style container, and the tile is the
        closest ancestor that owns --frame. */
     container-type: style;
@@ -715,7 +720,10 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   }
   .play-desk[data-reel-mode='pinned'] .play-tile:not([data-reel-current]) { pointer-events: none; }
   .play-desk[data-reel-mode='pinned'] .play-tile:hover { z-index: auto; }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-card { height: 100%; padding: clamp(16px, 2.4svh, 22px); grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(24px, 3vw, 40px); box-shadow: 6px 8px 0 rgba(23,23,25,.16); }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-card { height: auto; width: 100%; align-items: center; padding: clamp(16px, 2.4svh, 22px); grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(24px, 3vw, 40px); box-shadow: 6px 8px 0 rgba(23,23,25,.16); }
+  /* Screenshots are 16:10. A portrait frame crops words off the edge of every
+     cover, so the print is a landscape photo instead. */
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-photo { aspect-ratio: 16 / 10; height: auto; }
   .play-desk[data-reel-mode='pinned'] .play-tile .play-copy { min-height: 0; padding: 14px 8px 4px 0; justify-content: center; gap: 14px; }
   .play-desk[data-reel-mode='pinned'] .play-tile .play-project-footer { margin-top: 6px; }
   .play-desk[data-reel-mode='pinned'] .play-tile .play-copy strong { font-size: clamp(2rem, 3vw, 2.75rem); }

@@ -7,7 +7,7 @@
 
 const STEP = .62; // scroll distance per print, as a share of the stage height
 const FAR = 1.2; // prints past their neighbours park here and are not painted
-const HOLD = .18; // share of each step a print rests in the middle
+const HOLD = .1; // share of each step a print rests in the middle
 const WIDE = '(min-width: 901px) and (min-height: 621px) and (min-width: 56.3125em) and (min-height: 38.8125em)';
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));

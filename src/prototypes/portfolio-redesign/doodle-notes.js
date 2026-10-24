@@ -70,26 +70,34 @@ const LOOP_DURATION = DRAW_DURATION + HOLD_DURATION + ERASE_DURATION;
 const lengthOf = (points) => points.slice(1).reduce((total, point, index) => total + Math.hypot(point[0] - points[index][0], point[1] - points[index][1]), 0);
 const pathLength = (points) => lengthOf(points);
 
-function drawPath(context, points, progress, width, height, seed, lean = false) {
+function drawPath(context, points, progress, width, height, seed, lean = false, totalLength = 0) {
   if (progress <= 0) return;
-  let remaining = pathLength(points) * Math.min(progress, 1);
   const scale = Math.min(width, height) / 100;
   const offsetX = (width - scale * 100) / 2;
-  const rough = (x, y, distance, pass) => [
-    offsetX + (x + Math.sin(distance * 2.1 + seed) * .24 + Math.sin(distance * .47 + seed) * .32) * scale + pass * .4,
-    (y + Math.cos(distance * 1.7 + seed) * .22 + Math.sin(distance * .61 + seed * 2) * .28) * scale - pass * .3,
-  ];
-  const visible = [rough(...points[0], 0, 0)];
+  const roughX = (x, distance) => offsetX + (x + Math.sin(distance * 2.1 + seed) * .24 + Math.sin(distance * .47 + seed) * .32) * scale;
+  const roughY = (y, distance) => (y + Math.cos(distance * 1.7 + seed) * .22 + Math.sin(distance * .61 + seed * 2) * .28) * scale;
+  // Flat coordinate arrays instead of a point object per sample. A busy sketch
+  // produced thousands of short-lived arrays per frame, and the garbage was a
+  // large part of the cost on older laptops.
+  const xs = [roughX(points[0][0], 0)];
+  const ys = [roughY(points[0][1], 0)];
+  let remaining = (totalLength || pathLength(points)) * Math.min(progress, 1);
   let travelled = 0;
+  const spacing = lean ? 2.4 : 1.7;
   for (let index = 1; index < points.length && remaining > 0; index += 1) {
     const previous = points[index - 1];
     const point = points[index];
-    const segment = Math.hypot(point[0] - previous[0], point[1] - previous[1]);
+    const dx = point[0] - previous[0];
+    const dy = point[1] - previous[1];
+    const segment = Math.hypot(dx, dy);
     if (segment < .0001) continue;
-    const amount = Math.min(1, remaining / segment), count = Math.max(1, Math.ceil(segment * amount / .9));
+    const amount = Math.min(1, remaining / segment);
+    const count = Math.max(1, Math.ceil(segment * amount / spacing));
     for (let sample = 1; sample <= count; sample += 1) {
       const t = amount * sample / count;
-      visible.push(rough(previous[0] + (point[0] - previous[0]) * t, previous[1] + (point[1] - previous[1]) * t, travelled + segment * t, 0));
+      const distance = travelled + segment * t;
+      xs.push(roughX(previous[0] + dx * t, distance));
+      ys.push(roughY(previous[1] + dy * t, distance));
     }
     travelled += segment;
     remaining -= segment;
@@ -98,57 +106,57 @@ function drawPath(context, points, progress, width, height, seed, lean = false) 
   // Pressure is bucketed into three widths and each bucket is stroked once per
   // pass. Stroking every six-sample chunk separately cost around two thousand
   // canvas calls per drawing per frame, which is what made old laptops wheeze.
+  const count = xs.length;
   for (const [pass, opacity, thickness] of [[1, .12, 1.45], [0, .68, .68], [2, .17, .38]]) {
     if (lean && pass === 2) continue;
     context.strokeStyle = `rgba(57, 54, 46, ${opacity})`;
     const buckets = [[], [], []];
-    for (let start = 0; start < visible.length - 1; start += 6) {
+    for (let start = 0; start < count - 1; start += 6) {
       const pressure = .82 + Math.sin(seed + start * .17) * .18;
       const bucket = Math.min(2, Math.max(0, Math.round((pressure - .64) / .12)));
-      const end = Math.min(visible.length - 1, start + 6);
-      const chunk = [];
-      for (let i = start; i <= end; i += 1) {
-        const [x, y] = visible[i];
-        chunk.push(x + pass * .25, y - pass * .19);
-      }
-      buckets[bucket].push(chunk);
+      buckets[bucket].push(start);
     }
-    buckets.forEach((chunks, bucket) => {
-      if (!chunks.length) return;
-      const pressure = .76 + bucket * .12;
-      context.lineWidth = Math.max(.45, scale * thickness * pressure);
+    for (let bucket = 0; bucket < 3; bucket += 1) {
+      const starts = buckets[bucket];
+      if (!starts.length) continue;
+      context.lineWidth = Math.max(.45, scale * thickness * (.76 + bucket * .12));
       context.beginPath();
-      for (const chunk of chunks) {
-        context.moveTo(chunk[0], chunk[1]);
-        for (let i = 2; i < chunk.length; i += 2) context.lineTo(chunk[i], chunk[i + 1]);
+      for (const start of starts) {
+        const end = Math.min(count - 1, start + 6);
+        context.moveTo(xs[start] + pass * .25, ys[start] - pass * .19);
+        for (let i = start + 1; i <= end; i += 1) context.lineTo(xs[i] + pass * .25, ys[i] - pass * .19);
       }
       context.stroke();
-    });
+    }
   }
   context.fillStyle = 'rgba(57, 54, 46, .2)';
-  const stride = lean ? 14 : 7;
-  for (let i = 3; i < visible.length; i += stride) {
-    const [x, y] = visible[i], grain = Math.sin(i * 13.7 + seed);
-    context.fillRect(x + grain * scale, y + Math.cos(i * 4.3 + seed) * scale, .34 * scale, .28 * scale);
+  const stride = lean ? 16 : 9;
+  for (let i = 3; i < count; i += stride) {
+    const grain = Math.sin(i * 13.7 + seed);
+    context.fillRect(xs[i] + grain * scale, ys[i] + Math.cos(i * 4.3 + seed) * scale, .34 * scale, .28 * scale);
   }
 }
 
 function drawAuto(context, paths, progress, width, height, lean) {
-  const total = paths.reduce((sum, path) => sum + pathLength(path), 0);
+  // Measure each path once and pass the length down; recomputing it inside
+  // drawPath doubled the work for every frame.
+  const lengths = paths.map(pathLength);
+  const total = lengths.reduce((sum, length) => sum + length, 0);
   let remaining = total * Math.min(1, Math.max(0, progress));
   paths.forEach((path, index) => {
-    const length = pathLength(path);
-    drawPath(context, path, Math.min(1, remaining / length), width, height, index * 17.31, lean);
+    const length = lengths[index];
+    drawPath(context, path, Math.min(1, remaining / length), width, height, index * 17.31, lean, length);
     remaining -= length;
   });
 }
 
 function drawReverse(context, paths, progress, width, height, lean) {
-  let remaining = paths.reduce((sum, path) => sum + pathLength(path), 0) * Math.max(0, 1 - progress);
+  const lengths = paths.map(pathLength);
+  let remaining = lengths.reduce((sum, length) => sum + length, 0) * Math.max(0, 1 - progress);
   paths.forEach((path, index) => {
-    const length = pathLength(path);
+    const length = lengths[index];
     const visible = Math.min(length, Math.max(0, remaining));
-    drawPath(context, path, visible / length, width, height, index * 17.31, lean);
+    drawPath(context, path, visible / length, width, height, index * 17.31, lean, length);
     remaining -= length;
   });
 }
@@ -295,16 +303,16 @@ export function mountDoodles(root) {
   const cores = navigator.hardwareConcurrency || 4;
   const memory = navigator.deviceMemory;
   const lean = cores <= 4 || (typeof memory === 'number' && memory <= 4);
-  const frameInterval = lean ? 1000 / 18 : 1000 / 30;
   let nextStart = performance.now();
   const drawings = doodles.map(({ drawing, canvas }, index) => {
     if (index > 0) nextStart += DOODLE_START_INTERVAL_MIN + Math.random() * (DOODLE_START_INTERVAL_MAX - DOODLE_START_INTERVAL_MIN);
     if (lean) drawing.classList.add('is-lean');
     return { drawing, canvas, context: canvas.getContext('2d'), index, sketch: index % sketches.length,
-      phase: 'waiting', started: nextStart, visible: true, width: 240, height: 175, ratio: 1 };
+      phase: 'waiting', started: nextStart, visible: true, width: 240, height: 175, ratio: 1,
+      nextAt: 0, interval: 1000 / 30 };
   });
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let frame = 0, lastDraw = 0, hiddenAt = 0;
+  let frame = 0, hiddenAt = 0;
   const draw = (state, now) => {
     const { canvas, context, width, height, ratio } = state;
     if (!context) return;
@@ -337,15 +345,28 @@ export function mountDoodles(root) {
   const startLoop = () => {
     if (!frame && !reduced.matches && !document.hidden) frame = requestAnimationFrame(loopFrame);
   };
+  let cursor = 0;
   const loopFrame = (now) => {
     frame = 0;
     if (reduced.matches) {
       drawings.forEach((state) => draw(state, now));
       return;
     }
-    if (now - lastDraw >= frameInterval) {
-      drawings.forEach((state) => { if (state.visible) draw(state, now); });
-      lastDraw = now;
+    // One sketch per frame, round-robin. Two visible sketches therefore never
+    // pay their cost in the same frame, which is what kept the page below 60fps.
+    for (let attempt = 0; attempt < drawings.length; attempt += 1) {
+      const index = (cursor + attempt) % drawings.length;
+      const state = drawings[index];
+      if (!state.visible || now < state.nextAt) continue;
+      cursor = (index + 1) % drawings.length;
+      const started = performance.now();
+      draw(state, now);
+      const cost = performance.now() - started;
+      // A sketch that costs more than a few milliseconds gives up its own frame
+      // rate instead of the whole page's.
+      state.interval = cost > 9 ? 66 : cost > 5 ? 50 : 1000 / 30;
+      state.nextAt = now + state.interval;
+      break;
     }
     // No visible drawings means no reason to wake up again. The intersection
     // observer restarts the loop when one scrolls back into view.
@@ -372,6 +393,7 @@ export function mountDoodles(root) {
       if (!state) return;
       state.visible = entry.isIntersecting;
       if (state.visible) {
+        state.nextAt = 0;
         draw(state, performance.now());
         startLoop();
       }

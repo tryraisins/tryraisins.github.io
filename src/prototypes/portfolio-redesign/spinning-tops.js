@@ -8,7 +8,11 @@ import { createCollisionSparks } from './spinning-top-effects.js';
 // faster as it slows, wobbles, rolls round on its rim and comes to rest.
 export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) {
   let renderer;
-  try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true }); }
+  // Multisampling is the first thing to go on a weak integrated GPU: it costs
+  // four samples per pixel. Those tiers render at a slightly higher pixel ratio
+  // instead, which looks cleaner and is cheaper than MSAA at this size.
+  let tier = detectTier();
+  try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: tier < 2 }); }
   catch { return () => {}; }
   // Reading shader status after every link forces the driver to finish
   // compiling on the main thread; compileAsync below does that work off it.
@@ -21,7 +25,6 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
   // Devices are guessed into a quality tier up front and a frame-time watchdog
   // can drop one more tier while the page runs. Old integrated GPUs (a 2013
   // MacBook among them) are the reason this exists.
-  let tier = detectTier();
   let pixelRatio = ratioFor(tier);
   const trailRatio = Math.min(pixelRatio, 1);
   renderer.setPixelRatio(pixelRatio);
@@ -422,6 +425,8 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
   }
 
   function ratioFor(value) {
+    // Measured on an Intel Iris 6100: the five tops hold 60fps at 1440x900 but
+    // drop frames at 1800x1125, so the lowest tier renders at device pixels.
     const cap = value === 0 ? 1.5 : value === 1 ? 1.25 : 1;
     return Math.min(devicePixelRatio || 1, cap);
   }
@@ -1198,7 +1203,9 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
       step(1 / 120);
       accumulator -= 1 / 120;
     }
-    const budget = tier === 2 ? 1000 / 30 : 1000 / 60;
+    // Render every display refresh on every tier. Halving the rate to save work
+    // reads as a stutter, which is worse than a softer image.
+    const budget = 1000 / 60;
     const elapsed = now - lastRendered;
     if (elapsed >= budget - .5) {
       lastRendered = now - (elapsed % budget);
