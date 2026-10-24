@@ -1,44 +1,44 @@
 {
   "name": "yeknal-launch-readiness",
-  "sourceRevision": "e25b3e4424766d1ee620053e73ea899388dcba84",
-  "source": "https://github.com/tryraisins/MD_Files/tree/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-launch-readiness",
+  "sourceRevision": "0d3357839c1197d254bec134443a60a7bacacb06",
+  "source": "https://github.com/tryraisins/MD_Files/tree/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-launch-readiness",
   "fileCount": 6,
   "files": [
     {
       "path": "references/evidence-and-fixes.md",
       "sha256": "5a43626c0dc6c1b1270731710e809bd79108770c23b5854e0fed25136e43b265",
       "size": 6526,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-launch-readiness/references/evidence-and-fixes.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-launch-readiness/references/evidence-and-fixes.md"
     },
     {
       "path": "references/jurisdictions.md",
       "sha256": "60de2728b14bc00c8886a3058a9596769d057be35fdf77052aeff57eb298ca62",
       "size": 15007,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-launch-readiness/references/jurisdictions.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-launch-readiness/references/jurisdictions.md"
     },
     {
       "path": "references/launch-gates.md",
-      "sha256": "29d0d25c99ead50448e03d27d1b290dd022e85cf02f7d9f85bb43c85672cdd50",
-      "size": 7153,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-launch-readiness/references/launch-gates.md"
+      "sha256": "77e8ee9f454bd288612b51d0714c5ba6fb7060710f4ea761f756cac0d181c7b1",
+      "size": 7325,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-launch-readiness/references/launch-gates.md"
     },
     {
       "path": "references/obligations.md",
       "sha256": "d4a99d9eeccea611d6a4cb390edb8c4dba25815d4023ec641751f2cbc684f94e",
       "size": 9546,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-launch-readiness/references/obligations.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-launch-readiness/references/obligations.md"
     },
     {
       "path": "references/report-template.md",
       "sha256": "63eec6cbc513354f3b935664c525a347c5da5c3b1a67c179fd7e565ae0062d89",
       "size": 3143,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-launch-readiness/references/report-template.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-launch-readiness/references/report-template.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "98e79b1b9d4e709180397f28de804d388c08d15b7e103dd6b89cc50589dca11b",
       "size": 8085,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-launch-readiness/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-launch-readiness/SKILL.md"
     }
   ]
 }

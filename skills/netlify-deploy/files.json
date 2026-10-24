@@ -1,56 +1,56 @@
 {
   "name": "yeknal-netlify-deploy",
-  "sourceRevision": "e25b3e4424766d1ee620053e73ea899388dcba84",
-  "source": "https://github.com/tryraisins/MD_Files/tree/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-netlify-deploy",
+  "sourceRevision": "0d3357839c1197d254bec134443a60a7bacacb06",
+  "source": "https://github.com/tryraisins/MD_Files/tree/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-netlify-deploy",
   "fileCount": 8,
   "files": [
     {
       "path": "agents/openai.yaml",
       "sha256": "7d3acb1ee5376c98f3366401cd413200a4aab82af48bbe97382565dcdd04870f",
       "size": 318,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-netlify-deploy/agents/openai.yaml"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-netlify-deploy/agents/openai.yaml"
     },
     {
       "path": "assets/netlify-small.svg",
       "sha256": "a2d9b9b5087c840247eb8e8360120ce9a20780c5470519b7703f49e920f780cd",
       "size": 1291,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-netlify-deploy/assets/netlify-small.svg"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-netlify-deploy/assets/netlify-small.svg"
     },
     {
       "path": "assets/netlify.png",
       "sha256": "ffbeef6d0af29a9c52f84297630f57c2c8ae86c1771458b24ad19795c4811160",
       "size": 933,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-netlify-deploy/assets/netlify.png"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-netlify-deploy/assets/netlify.png"
     },
     {
       "path": "LICENSE.txt",
       "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
       "size": 10776,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-netlify-deploy/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-netlify-deploy/LICENSE.txt"
     },
     {
       "path": "references/cli-commands.md",
       "sha256": "a24b08401b8c796e4a58933a71441b3341b61afc840d690d9127b27ab00cfe05",
       "size": 2652,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-netlify-deploy/references/cli-commands.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-netlify-deploy/references/cli-commands.md"
     },
     {
       "path": "references/deployment-patterns.md",
       "sha256": "fdb8c3b96fe03099826e4207b4933df3ff97571415f5e283567979bdc86cdc85",
       "size": 6702,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-netlify-deploy/references/deployment-patterns.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-netlify-deploy/references/deployment-patterns.md"
     },
     {
       "path": "references/netlify-toml.md",
       "sha256": "436ea3c2e0ce04abb34895db993d91b8660423977d9c52a89f2dfa014cad0b9c",
       "size": 3972,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-netlify-deploy/references/netlify-toml.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-netlify-deploy/references/netlify-toml.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "4420beacd4e3750a79c01d63613064b2d191b6601db6666857a8e4f9eeb73306",
       "size": 7132,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-netlify-deploy/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-netlify-deploy/SKILL.md"
     }
   ]
 }

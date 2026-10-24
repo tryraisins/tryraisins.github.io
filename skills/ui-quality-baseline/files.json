@@ -1,20 +1,20 @@
 {
   "name": "yeknal-ui-quality-baseline",
-  "sourceRevision": "e25b3e4424766d1ee620053e73ea899388dcba84",
-  "source": "https://github.com/tryraisins/MD_Files/tree/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-ui-quality-baseline",
+  "sourceRevision": "0d3357839c1197d254bec134443a60a7bacacb06",
+  "source": "https://github.com/tryraisins/MD_Files/tree/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-ui-quality-baseline",
   "fileCount": 2,
   "files": [
     {
       "path": "references/accessibility-design.md",
       "sha256": "271c7f9b5e3e771fa52bde4f4ea62c1cc2f239c7aa6468ae53d3295b2530cdde",
       "size": 8412,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-ui-quality-baseline/references/accessibility-design.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-ui-quality-baseline/references/accessibility-design.md"
     },
     {
       "path": "SKILL.md",
-      "sha256": "eb62e8f429e361e7dd639dc26cf8b9eb887b869713a69cd5166aa6e28c7877b5",
-      "size": 33523,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e25b3e4424766d1ee620053e73ea899388dcba84/skills/yeknal-ui-quality-baseline/SKILL.md"
+      "sha256": "70cb10526fdf3393f9abb7b5acf071e63ae3bae248628d0062124b8bd8915bd6",
+      "size": 34901,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-ui-quality-baseline/SKILL.md"
     }
   ]
 }
