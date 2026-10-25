@@ -1,122 +1,122 @@
 {
   "name": "yeknal-security-audit",
-  "sourceRevision": "26fb492a56b33bd55ce5324d09a17d638ec35b30",
-  "source": "https://github.com/tryraisins/MD_Files/tree/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit",
+  "sourceRevision": "a9246104d861a12f472ab19764db7296186b2931",
+  "source": "https://github.com/tryraisins/MD_Files/tree/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit",
   "fileCount": 19,
   "files": [
     {
       "path": "LICENSE.txt",
       "sha256": "e598e694aa506650c7192d5ea3be0e50aca0d356ea00551c53429f0b01eb6391",
       "size": 1078,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/LICENSE.txt"
     },
     {
       "path": "references/AI-AND-LLM.md",
       "sha256": "7335a95c43554eadefcf03ece639291bb0e038c398a179299e3887ffe06bd2ef",
       "size": 10617,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/AI-AND-LLM.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/AI-AND-LLM.md"
     },
     {
       "path": "references/ATTACK-CLASSES.md",
       "sha256": "3ee4f00c6e8c9dcf6dd02dd5ac2a4ceb322e2085f3e9fbe79cf0c6330bc7ef83",
       "size": 15695,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/ATTACK-CLASSES.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/ATTACK-CLASSES.md"
     },
     {
       "path": "references/CLIENT-SIDE.md",
       "sha256": "613f6b98f86083e045525c5b60154ffdab122bac35f1e05eb17488e6e453370c",
       "size": 8594,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/CLIENT-SIDE.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/CLIENT-SIDE.md"
     },
     {
       "path": "references/CLOUD-AND-DEPLOYMENT.md",
       "sha256": "3c80f3088be22345e07b057c056d6ed99fe2b0304f794398964f7ccd5a496ca3",
       "size": 8291,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/CLOUD-AND-DEPLOYMENT.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/CLOUD-AND-DEPLOYMENT.md"
     },
     {
       "path": "references/DATA-ISOLATION-AND-LIFECYCLE.md",
       "sha256": "307dcb3e24d292715c4a041190e7bb135646a37eb6187619ae01d000a634a4ad",
       "size": 7798,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/DATA-ISOLATION-AND-LIFECYCLE.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/DATA-ISOLATION-AND-LIFECYCLE.md"
     },
     {
       "path": "references/DESKTOP-MOBILE-AND-LOCAL-IPC.md",
       "sha256": "58eae8ee0ca6a46611c501ec5a3ab47fdff88dd7db0d8d74789bbf8bb19d8cb2",
       "size": 8739,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/DESKTOP-MOBILE-AND-LOCAL-IPC.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/DESKTOP-MOBILE-AND-LOCAL-IPC.md"
     },
     {
       "path": "references/HUNTING.md",
       "sha256": "71c121decea1322c47c718f6e110f1a892980bb4266bd7ac55ef043a213ade09",
       "size": 22446,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/HUNTING.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/HUNTING.md"
     },
     {
       "path": "references/MEMORY-SAFETY-AND-BINARY.md",
       "sha256": "7c8b0dccfb35315cca2455509674d49632b2fe37e1f3aac16c1a496a7e9924a7",
       "size": 10513,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/MEMORY-SAFETY-AND-BINARY.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/MEMORY-SAFETY-AND-BINARY.md"
     },
     {
       "path": "references/PROTOCOLS-RPC-AND-MESSAGING.md",
       "sha256": "8b73816fa5b3697c9c40977f0c836b40f01d6e81929ff2720fe83ce089e9a619",
       "size": 7483,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/PROTOCOLS-RPC-AND-MESSAGING.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/PROTOCOLS-RPC-AND-MESSAGING.md"
     },
     {
       "path": "references/RECONNAISSANCE.md",
       "sha256": "02ca887aca84de8ae137f1891bd2f0a54f28d3fa6da92a27f54734382b3381a2",
       "size": 15902,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/RECONNAISSANCE.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/RECONNAISSANCE.md"
     },
     {
       "path": "references/RESOURCE-EXHAUSTION-AND-AVAILABILITY.md",
       "sha256": "4326fab5c92a0b4c420a70196254040105cd794026562130b59bf1a6db3e4baa",
       "size": 7476,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/RESOURCE-EXHAUSTION-AND-AVAILABILITY.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/RESOURCE-EXHAUSTION-AND-AVAILABILITY.md"
     },
     {
       "path": "references/SUPPLY-CHAIN-AND-RELEASE.md",
       "sha256": "f372e919940e335468ba1ae09f99026c3986a345f7fe26f8068f132e199f52a5",
       "size": 7258,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/SUPPLY-CHAIN-AND-RELEASE.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/SUPPLY-CHAIN-AND-RELEASE.md"
     },
     {
       "path": "references/VALIDATION-AND-REPORTING.md",
       "sha256": "7bfb4e0264ba5f9e2c710f5d8d7cf9d9ff66c772c8e4dd56dccee7dfd18a0d72",
       "size": 18175,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/VALIDATION-AND-REPORTING.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/VALIDATION-AND-REPORTING.md"
     },
     {
       "path": "references/WEB-PROTOCOL-AND-AUTH.md",
       "sha256": "4f3066dffa23c5635859187be9b96c32f2aff29a688186b91ff0c63e47d62b5c",
       "size": 12300,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/references/WEB-PROTOCOL-AND-AUTH.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/references/WEB-PROTOCOL-AND-AUTH.md"
     },
     {
       "path": "scripts/report-schema.json",
       "sha256": "6575c9de4a62255699ea052ebf9a49ebfb373a32891bcd89af6f55cc84b35519",
       "size": 14494,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/scripts/report-schema.json"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/scripts/report-schema.json"
     },
     {
       "path": "scripts/validate-coverage-ledger.cjs",
       "sha256": "0b07ef87f408ae34e82a7750b137224318b76c7f09b8e15323221b09cc801fb0",
       "size": 34011,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/scripts/validate-coverage-ledger.cjs"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/scripts/validate-coverage-ledger.cjs"
     },
     {
       "path": "scripts/validate-findings.cjs",
       "sha256": "68148ce4b9709d45875af0a17c8dcd91403d610b390c8cb52332731fddb22ae7",
       "size": 29379,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/scripts/validate-findings.cjs"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/scripts/validate-findings.cjs"
     },
     {
       "path": "SKILL.md",
       "sha256": "bcaf1320444791ef90e3d9d1401b9b1a9a4a61c875ea65934b7bded48b4be9b8",
       "size": 19111,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/26fb492a56b33bd55ce5324d09a17d638ec35b30/skills/yeknal-security-audit/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-security-audit/SKILL.md"
     }
   ]
 }
