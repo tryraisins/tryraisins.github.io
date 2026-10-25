@@ -112,7 +112,7 @@
 
   .boot-caption { margin: 14px 0 0; display: inline-flex; align-items: center; gap: 10px; color: rgba(23,23,25,.55); font: 400 13px/1 'DM Sans', sans-serif; letter-spacing: .06em; text-transform: uppercase; }
   .boot-top { width: 22px; height: 28px; flex: none; display: block; transform-origin: 50% 100%; animation: boot-wobble 900ms ease-in-out infinite alternate; }
-  .boot-top svg { width: 100%; height: 100%; display: block; overflow: visible; fill: var(--boot-yellow); stroke: var(--boot-ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation: boot-spin 640ms linear infinite; }
+  .boot-top svg { width: 100%; height: 100%; display: block; overflow: visible; fill: var(--boot-yellow); stroke: var(--boot-ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation: boot-spin 1100ms ease-in-out infinite alternate; }
   .boot-top .boot-top-dot { fill: var(--boot-ink); stroke: none; }
 
   @media (max-width: 620px) {
@@ -136,7 +136,7 @@
     to { transform: rotate(9deg); }
   }
   @keyframes boot-spin {
-    from { transform: perspective(160px) rotateY(0deg); }
-    to { transform: perspective(160px) rotateY(360deg); }
+    from { transform: perspective(160px) rotateY(-22deg); }
+    to { transform: perspective(160px) rotateY(22deg); }
   }
 </style>
