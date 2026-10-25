@@ -36,11 +36,25 @@ async function boot(): Promise<void> {
   const shownAt = Number(root.dataset.bootT0) || 0;
   const visibleFor = () => performance.now() - shownAt;
 
+  // Only the faces visible on the first screen gate the sheet. The mono and
+  // marker faces live in the desk and prints below the fold, so waiting on them
+  // held the sheet for up to a second longer than the page needed.
+  const firstScreenFaces = () => {
+    const faces = ['600 1em "Bricolage Grotesque"', '400 1em "DM Sans"'];
+    if (document.querySelector('.play-hero')) faces.push('600 1em "Caveat"');
+    return faces;
+  };
+
+  const fontsReady = () =>
+    document.fonts
+      ? Promise.all(firstScreenFaces().map((face) => document.fonts.load(face)))
+      : Promise.resolve();
+
   // Fonts are the only asset the sheet waits on: they decide whether the page
   // beneath swaps its type the moment it is uncovered. Covers have their own
   // decode fade and must never hold the sheet.
   const ready = Promise.all([
-    settleWithin(document.fonts ? document.fonts.ready : Promise.resolve(), timing.fontsCap),
+    settleWithin(fontsReady(), timing.fontsCap),
     domReady(),
   ]);
   await Promise.race([ready, wait(Math.max(0, timing.max - visibleFor()))]);
