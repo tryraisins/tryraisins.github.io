@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
   "repository": "tryraisins/MD_Files",
-  "sourceRevision": "3ce23daa863a841e9c895c54a0d4eaf662c580a9",
-  "catalogCommit": "945ada1e42a510940d08eab5f3b370a865b8a779",
+  "sourceRevision": "8aa2a366d7ef340a2ee558db39deea342a7e94bc",
+  "catalogCommit": "c661f3c39c170249e76b4a095f95d8e72a2491a5",
   "cliVersion": "2.6.0",
   "counts": {
-    "skills": 81,
-    "internal": 26
+    "skills": 77,
+    "internal": 24
   },
   "tasks": [
     {
       "id": "build",
       "label": "Plan and build",
       "description": "Shape an idea, then turn it into working code.",
-      "count": 21
+      "count": 19
     },
     {
       "id": "design",
       "label": "Design interfaces",
       "description": "Visual direction, layout, components and interface quality.",
-      "count": 26
+      "count": 24
     },
     {
       "id": "motion",
@@ -49,7 +49,7 @@
       "id": "docs",
       "label": "Docs and files",
       "description": "Markdown, handoffs, office files, notebooks and Notion.",
-      "count": 16
+      "count": 14
     },
     {
       "id": "media",
@@ -1672,60 +1672,6 @@
       ]
     },
     {
-      "name": "yeknal-stitch-design-taste",
-      "slug": "stitch-design-taste",
-      "title": "Design spec for AI design tools",
-      "purpose": "Writes or updates a versioned DESIGN.md that gives AI design tools like Google Stitch clear guidance on tokens, components, content, states and motion.",
-      "description": "Create or update a versioned DESIGN.md that guides Google Stitch-style screen generation from real product evidence. Use when an AI design tool needs a specification, not a replacement for the real design system.",
-      "tasks": [
-        "design",
-        "docs"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": false,
-      "whenToUse": [
-        "You generate screens with an AI design tool and want them on-brand.",
-        "The design system should be written down in one place.",
-        "Generated screens keep drifting from the real product."
-      ],
-      "avoid": null,
-      "requirements": null,
-      "example": {
-        "ask": "Write a DESIGN.md so Stitch generates screens that match our app.",
-        "outcome": "It extracts tokens, components and rules from the product and writes a spec the tool can follow."
-      },
-      "attribution": {
-        "credit": "Adapted from Leonxlnx’s taste-skill collection.",
-        "license": "MIT",
-        "sourceUrl": "https://github.com/leonxlnx/taste-skill"
-      },
-      "related": [
-        "frontend-design",
-        "ui-quality-baseline"
-      ],
-      "version": "6ef53091291df51dcb4fcccda0bdc4ae47d9fc991e031a093bfd1db2c18b9c3f",
-      "fileCount": 3,
-      "totalBytes": 10245,
-      "files": [
-        {
-          "path": "DESIGN.md",
-          "sha256": "46b1e3c6527320d8f3c5cd07ed8e0d3c5cf5b48090a9cb4408cd79462c8d3354",
-          "size": 3749
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
-          "size": 1065
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "9023d0fd4f02ee025d66f187f2990bdab54dff8230e82f22db19e5d9fc37f367",
-          "size": 5431
-        }
-      ]
-    },
-    {
       "name": "yeknal-design-taste-frontend",
       "slug": "design-taste-frontend",
       "title": "Design taste for the web",
@@ -2774,68 +2720,6 @@
       ]
     },
     {
-      "name": "yeknal-linear",
-      "slug": "linear",
-      "title": "Linear",
-      "purpose": "Reads, creates and updates issues, projects and team workflows in Linear.",
-      "description": "Manage issues, projects, and team workflows in Linear. Use when the user wants to read, create, or update tickets, cycles, projects, or documents in a Linear workspace.",
-      "tasks": [
-        "docs"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You want tickets created from a plan or a bug report.",
-        "Issue status needs updating as work progresses.",
-        "You want a summary of what’s in a project."
-      ],
-      "avoid": null,
-      "requirements": "Needs the Linear MCP server connected.",
-      "example": {
-        "ask": "Create Linear issues for each task in this plan and add them to the current cycle.",
-        "outcome": "It creates one issue per task with a clear description and adds them to the cycle."
-      },
-      "attribution": {
-        "credit": "Adapted from Linear’s published skill.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "notion-spec-to-implementation"
-      ],
-      "version": "9bed8df700159ed6198a58484758dc83e5954fdc4c4d3f10ca7589dec51e3789",
-      "fileCount": 5,
-      "totalBytes": 22917,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "9e6f164960e3dd0bc56456538abdf196d9e4fd8b4273be06fe1ef0110fbab9cb",
-          "size": 460
-        },
-        {
-          "path": "assets/linear-small.svg",
-          "sha256": "6af9dbc5e58a51e80fcbcee47e5f9bd196a997cc5985c2147a89c908831d327f",
-          "size": 1065
-        },
-        {
-          "path": "assets/linear.png",
-          "sha256": "be13bf3f97e4437e67cda80979759998fb4f4dcace3cdd6a220ba6a75e1c2a82",
-          "size": 6969
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
-          "size": 11357
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "122d135949722719e6cd09610fafe581f9fd4879c57445d82a048bf180696f9c",
-          "size": 3066
-        }
-      ]
-    },
-    {
       "name": "yeknal-markdown-management",
       "slug": "markdown-management",
       "title": "Markdown management",
@@ -3112,48 +2996,6 @@
       ]
     },
     {
-      "name": "yeknal-nextjs-developer",
-      "slug": "nextjs-developer",
-      "title": "Next.js developer",
-      "purpose": "Builds and maintains Next.js apps using the version, router, rendering model and deployment target the project already has.",
-      "description": "Build and maintain full-stack Next.js applications using the repository's installed version, router, rendering model, and deployment target. Use when work involves Next.js routes, components, data access, caching, or server boundaries.",
-      "tasks": [
-        "build"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You are working on Next.js routes, components or data access.",
-        "Caching or server and client boundaries are confusing.",
-        "You want changes that match the installed version, not the latest blog post."
-      ],
-      "avoid": null,
-      "requirements": null,
-      "example": {
-        "ask": "Add a cached product listing route that revalidates every ten minutes.",
-        "outcome": "It checks the installed version and router, then adds the route with the right caching for that setup."
-      },
-      "attribution": {
-        "credit": "Written for this catalog.",
-        "license": null,
-        "sourceUrl": null
-      },
-      "related": [
-        "frontend-developer"
-      ],
-      "version": "7e9b839ad43b6a09dc05b1f45ea98b37a3c5ba04441fc9d2e97a6d94b088e984",
-      "fileCount": 1,
-      "totalBytes": 2642,
-      "files": [
-        {
-          "path": "SKILL.md",
-          "sha256": "68d8c9d55fbd22c9fbb8511ac501b8743cdec5638dc168f12516e0c9cbce41b1",
-          "size": 2642
-        }
-      ]
-    },
-    {
       "name": "yeknal-notion",
       "slug": "notion",
       "title": "Notion",
@@ -3321,8 +3163,7 @@
         "sourceUrl": null
       },
       "related": [
-        "implement",
-        "linear"
+        "implement"
       ],
       "version": "817722796f63aba101de758bab4665a8eaacb52cf911030585c30f24974dfb44",
       "fileCount": 19,
@@ -3632,7 +3473,6 @@
         "sourceUrl": null
       },
       "related": [
-        "ask-sonner",
         "frontend-developer"
       ],
       "version": "9375fe6130a1beda779d4a2aeffc1b8344ad531aafd01e38cd49ba1eeeb38237",
@@ -4456,55 +4296,6 @@
           "path": "SKILL.md",
           "sha256": "16c7750954473a22ee1640c08b1f25c8d44a8ebadf1fc3e897ec4907bd142165",
           "size": 4986
-        }
-      ]
-    },
-    {
-      "name": "yeknal-ask-sonner",
-      "slug": "ask-sonner",
-      "title": "Sonner toasts",
-      "purpose": "A practical guide to Sonner, the React toast library, from wiring up the Toaster to promise toasts, styling, theming and the usual reasons toasts misbehave.",
-      "description": "Work with Sonner toasts: mount the Toaster, pick the right toast() call, style it, and fix toasts that don't appear, appear twice, lose their styles, sit behind a modal, or ignore dark mode. Use when installing Sonner or a toast misbehaves.",
-      "tasks": [
-        "design",
-        "build"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": false,
-      "whenToUse": [
-        "You are adding toast notifications to a React app with Sonner.",
-        "Toasts don’t appear, appear twice or sit behind a modal.",
-        "Toasts ignore your Tailwind classes or don’t follow dark mode."
-      ],
-      "avoid": null,
-      "requirements": null,
-      "example": {
-        "ask": "Show a loading toast while the file uploads, then switch it to success or error.",
-        "outcome": "It sets up a promise toast that updates in place and checks the Toaster is mounted once with the right theme."
-      },
-      "attribution": {
-        "credit": "Rewritten for this catalog from an earlier merged UI skill. No upstream author is recorded for it.",
-        "license": null,
-        "sourceUrl": null
-      },
-      "related": [
-        "pick-ui-library",
-        "frontend-developer"
-      ],
-      "version": "c69207a2c3d6d9ea996e76f64c51a491b7fd56ffc36b7a11f2a9046a11f4381b",
-      "fileCount": 2,
-      "totalBytes": 11569,
-      "files": [
-        {
-          "path": "API.md",
-          "sha256": "4bb06f482c5757529e3d7a672a30fbeed42d24919a63e2571384a9ce1549aa7f",
-          "size": 4545
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "9dea76af2563b6814fb85b79f9d152f7c61c1f0137eb93f1eb2ac7e5637d5cec",
-          "size": 7024
         }
       ]
     },
@@ -5470,5 +5261,5 @@
       ]
     }
   ],
-  "snapshotHash": "3b81be36bca0e1c20a2ece0785f68bc87725f284c024b49a80ae3fd5915b53cb"
+  "snapshotHash": "afd8eae63135d16a6ae4f953a609b61fa7ef45cbd7cc6d811be2be0f8a100eb9"
 }
