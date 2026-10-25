@@ -1,26 +1,26 @@
 {
   "name": "yeknal-improve-animations",
-  "sourceRevision": "118956021dcf48fa608c2c013be9a6e9933f87ea",
-  "source": "https://github.com/tryraisins/MD_Files/tree/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-improve-animations",
+  "sourceRevision": "086398a26e489bad4ba68cbd83dfd82aadb0bf49",
+  "source": "https://github.com/tryraisins/MD_Files/tree/086398a26e489bad4ba68cbd83dfd82aadb0bf49/skills/yeknal-improve-animations",
   "fileCount": 3,
   "files": [
     {
       "path": "AUDIT.md",
       "sha256": "2969706417ee6134441eb9bc794b9a9b40e2ff7769db1c40eb3b2fee27475ce0",
       "size": 7399,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-improve-animations/AUDIT.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/086398a26e489bad4ba68cbd83dfd82aadb0bf49/skills/yeknal-improve-animations/AUDIT.md"
     },
     {
       "path": "PLAN-TEMPLATE.md",
       "sha256": "0a08ac8e23fd2082d7ffb86aeed7b789de77328c3cf874b16f1a755f2ef0a6ad",
       "size": 3100,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-improve-animations/PLAN-TEMPLATE.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/086398a26e489bad4ba68cbd83dfd82aadb0bf49/skills/yeknal-improve-animations/PLAN-TEMPLATE.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "585bea2552c40b511129a16788773ca577241ca96c0b21b7f1d9f362c69d77e9",
       "size": 8005,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-improve-animations/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/086398a26e489bad4ba68cbd83dfd82aadb0bf49/skills/yeknal-improve-animations/SKILL.md"
     }
   ]
 }

@@ -1,26 +1,26 @@
 {
   "name": "yeknal-frontend-design",
-  "sourceRevision": "118956021dcf48fa608c2c013be9a6e9933f87ea",
-  "source": "https://github.com/tryraisins/MD_Files/tree/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-frontend-design",
+  "sourceRevision": "086398a26e489bad4ba68cbd83dfd82aadb0bf49",
+  "source": "https://github.com/tryraisins/MD_Files/tree/086398a26e489bad4ba68cbd83dfd82aadb0bf49/skills/yeknal-frontend-design",
   "fileCount": 3,
   "files": [
     {
       "path": "agents/openai.yaml",
       "sha256": "e12288464311eeedcec370bf7625081b3bfb429ffe4c5d34acc9cf4bfd89db79",
       "size": 326,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-frontend-design/agents/openai.yaml"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/086398a26e489bad4ba68cbd83dfd82aadb0bf49/skills/yeknal-frontend-design/agents/openai.yaml"
     },
     {
       "path": "LICENSE.txt",
       "sha256": "b87a529a13d5294f97bb847936a82f39e4f8adae2425a3a5fb5f1a7b75d43e6a",
       "size": 10775,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-frontend-design/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/086398a26e489bad4ba68cbd83dfd82aadb0bf49/skills/yeknal-frontend-design/LICENSE.txt"
     },
     {
       "path": "SKILL.md",
       "sha256": "9bd0940e6d68d99ed1069ba5655fb07cc594cf4a350da72ed63b784676f8a638",
       "size": 7280,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-frontend-design/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/086398a26e489bad4ba68cbd83dfd82aadb0bf49/skills/yeknal-frontend-design/SKILL.md"
     }
   ]
 }
