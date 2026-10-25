@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "repository": "tryraisins/MD_Files",
-  "sourceRevision": "086398a26e489bad4ba68cbd83dfd82aadb0bf49",
-  "catalogCommit": "7a98fb2469e6313c5037bb7a2be7234ef9b92666",
+  "sourceRevision": "26fb492a56b33bd55ce5324d09a17d638ec35b30",
+  "catalogCommit": "e4782a87c47b1e3ddf40364dc74f01a58ec93730",
   "cliVersion": "2.6.4",
   "counts": {
-    "skills": 54,
+    "skills": 55,
     "internal": 5
   },
   "tasks": [
@@ -13,13 +13,13 @@
       "id": "build",
       "label": "Plan and build",
       "description": "Shape an idea, then turn it into working code.",
-      "count": 11
+      "count": 12
     },
     {
       "id": "design",
       "label": "Design interfaces",
       "description": "Visual direction, layout, components and interface quality.",
-      "count": 19
+      "count": 20
     },
     {
       "id": "motion",
@@ -487,9 +487,9 @@
         "review-animations",
         "find-animation-opportunities"
       ],
-      "version": "1b0ca403a5cbff052ec0fd80efadb322ddc4f5a0b3765d111ea8da9ac9c1e8ff",
-      "fileCount": 3,
-      "totalBytes": 38305,
+      "version": "4740fcfaf5b61747d87547dfad2652d34247e5ba586ef5b850b662b43de09540",
+      "fileCount": 6,
+      "totalBytes": 52831,
       "files": [
         {
           "path": "RECIPES.md",
@@ -502,9 +502,24 @@
           "size": 17786
         },
         {
+          "path": "references/frame-budget.md",
+          "sha256": "2b25cac9c28ddff71d7d799e1ef260beee8d7b73e3683f186ce1a672a0cb208c",
+          "size": 4330
+        },
+        {
+          "path": "references/motion-principles.md",
+          "sha256": "8a75ded444fe231111e5646321c400195816f202ad26bb9005fed2659be312a6",
+          "size": 3850
+        },
+        {
+          "path": "references/rendered-video.md",
+          "sha256": "f3add4ab9e36330820517787fb6f42e85634dc5e3668a572652095b17667f879",
+          "size": 3092
+        },
+        {
           "path": "SKILL.md",
-          "sha256": "f9692fc15388cf637d640afae211504026715d58e06f43940d2f22891c7da9fb",
-          "size": 12562
+          "sha256": "e5ecb88201277f97105f37d4c78329192b74cfd2f5178eb7789f888da0b1d107",
+          "size": 15816
         }
       ]
     },
@@ -1458,6 +1473,52 @@
       ]
     },
     {
+      "name": "yeknal-design-system",
+      "slug": "design-system",
+      "title": "Design system",
+      "purpose": "Builds, audits, documents or migrates a product's design system: token layers, mapping hardcoded values onto tokens, component specs, drift detection and an ordered adoption plan.",
+      "description": "Build, audit, document, or migrate a product's design system: token layers, mapping hardcoded values onto tokens, component specs, drift detection, and adoption plans. Use when the request names a design system, tokens, component documentation, or inconsistency across an app.",
+      "tasks": [
+        "design",
+        "build"
+      ],
+      "featuredRank": -1,
+      "compatibility": false,
+      "internal": false,
+      "whenToUse": [
+        "The app has a look but no rules, or the rules live in three places.",
+        "You need to know which hardcoded colors, spacing and radii should become tokens.",
+        "A component needs a written spec covering anatomy, tokens and states.",
+        "The app has drifted off its system and you want an order of work.",
+        "You are starting a design system from nothing on a shipped product."
+      ],
+      "avoid": null,
+      "requirements": null,
+      "example": {
+        "ask": "Our buttons and cards use slightly different grays and radii. Map them onto tokens and tell me where to start.",
+        "outcome": "It inventories the near-duplicate values, clusters them, proposes role-based tokens with confidence per cluster, and returns an ordered plan with a ratchet so the drift does not return."
+      },
+      "attribution": {
+        "credit": "Written for this catalog.",
+        "license": null,
+        "sourceUrl": null
+      },
+      "related": [
+        "ui-quality-baseline",
+        "frontend-developer"
+      ],
+      "version": "6d10f26eee8d1aa723f12ac5ee3d5a02a26fa1d49ea364b2efba9637004187b2",
+      "fileCount": 1,
+      "totalBytes": 8039,
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "b7c12c73b6f36a9620489d9658145447640cdc49dceecf0147a5031925575ada",
+          "size": 8039
+        }
+      ]
+    },
+    {
       "name": "yeknal-design-taste-frontend",
       "slug": "design-taste-frontend",
       "title": "Design taste for the web",
@@ -1489,9 +1550,9 @@
         "frontend-design",
         "high-end-visual-design"
       ],
-      "version": "2b4bd53d2317b1a5c3e11ac927b683bf5e78372cd91fed44ddd1cdb20f6ae302",
+      "version": "1aaea11e27262a0a79795f97306d7733f66930f40a76967c1df01bf041956439",
       "fileCount": 4,
-      "totalBytes": 22212,
+      "totalBytes": 22413,
       "files": [
         {
           "path": "LICENSE.txt",
@@ -1500,8 +1561,8 @@
         },
         {
           "path": "references/dials-and-arsenal.md",
-          "sha256": "a68ce5beff5f94ff7642583cf5028bc9262058c333e5e0f750f997e7118de221",
-          "size": 7051
+          "sha256": "528dfaba52d98475b1e19a831c8fc543fee854b55214c1a78fdaa53374d9eaa0",
+          "size": 7252
         },
         {
           "path": "references/patterns-redesign-and-sources.md",
@@ -1794,14 +1855,14 @@
         "implement",
         "ui-quality-baseline"
       ],
-      "version": "d8bdc91d3a26b94ba16f91177297e9849f1d94fdc5aa2e4c6362ed1fa5066d8e",
+      "version": "3e13f12d88d998fea505d03fcbee518d2aae584b0779e444404004a5b9ecfff4",
       "fileCount": 1,
-      "totalBytes": 2937,
+      "totalBytes": 4005,
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "d26e3fd68eda3908ed0b9456ad5ecdeb1ce616fac543273284d836a07077df53",
-          "size": 2937
+          "sha256": "fb11e5a51092d9a7f8a35e68691e23674c4eeb6bfcd10c0734ecabd3df3bf427",
+          "size": 4005
         }
       ]
     },
@@ -2392,14 +2453,14 @@
       "related": [
         "frontend-developer"
       ],
-      "version": "9375fe6130a1beda779d4a2aeffc1b8344ad531aafd01e38cd49ba1eeeb38237",
+      "version": "7a06cd249cce62b4f531ecb72365dea3821d35e69ce9985ca9ab9b53455b5ede",
       "fileCount": 1,
-      "totalBytes": 9172,
+      "totalBytes": 11985,
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "6413863b88931c922bc28560035244170e07da8b8ed5ef86d2c06f07225c633f",
-          "size": 9172
+          "sha256": "b406e728bed42528975003356f0c2cdfb5c0ebc7378ac7572be5cc7e89e7dd25",
+          "size": 11985
         }
       ]
     },
@@ -2434,9 +2495,9 @@
       "related": [
         "frontend-design"
       ],
-      "version": "3c96e4d0a55cac2a5dd396377091f6416bfec2db5f0dbccaaaea672c9c62b4b0",
+      "version": "55d89d1c2dfffda94dcb9afede62a8f5974d947615f1dffe8d38c9781966a57b",
       "fileCount": 2,
-      "totalBytes": 15413,
+      "totalBytes": 16522,
       "files": [
         {
           "path": "PICKER.md",
@@ -2445,8 +2506,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "b716d78783f31643a5dac169dc40a55cbf36affa63339eec1ab6f72b0eb91302",
-          "size": 7865
+          "sha256": "9a59622b3c4ae9491779b673a78db55c8a8b6552b9e5484793768ebdd148fd5e",
+          "size": 8974
         }
       ]
     },
@@ -2536,14 +2597,14 @@
         "improve-animations",
         "animate"
       ],
-      "version": "b5226ae629c397b71e84e041da81a8464410e35f7970bf67c3baa94fe21fcffb",
+      "version": "bd40f36380e4f96d5297e784c7c8b7defb09831cefeca63c89426c7deac2753f",
       "fileCount": 2,
-      "totalBytes": 17611,
+      "totalBytes": 19016,
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "35d518e3a181be767062b3fdfc9c5a6fc8d8ec7ad46088d96516d18b8d2f5632",
-          "size": 7792
+          "sha256": "96867124949ac10424bf1a96e6c5f6f081aa50eb6251eb7085dc2b7938d244ac",
+          "size": 9197
         },
         {
           "path": "STANDARDS.md",
@@ -3080,14 +3141,14 @@
         "frontend-design",
         "human-ai-interface-design"
       ],
-      "version": "8317eebafa2ebb0ceca0b42078c729d877df17db7664fe23805f206bfea51df6",
+      "version": "ae7fc9f8fab437b1199f3d967ff2726b49976ba272a4129adc9475f95aae06f1",
       "fileCount": 1,
-      "totalBytes": 5300,
+      "totalBytes": 7454,
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "b303e31bd19b3f7ec7c50110f3824aff035e188477ac68f657892c96c835a5db",
-          "size": 5300
+          "sha256": "d98b76b49e13996235ca02cbdec5bd2f9e4032ba7f53c9ab0cc1d36c9943697d",
+          "size": 7454
         }
       ]
     },
@@ -3124,14 +3185,44 @@
         "frontend-design",
         "break-ui"
       ],
-      "version": "caa7dc6f4bba6c37065a0682b869796fa7850f9e6bfa5b6d6d3da3a04a7674bc",
-      "fileCount": 5,
-      "totalBytes": 44363,
+      "version": "11dfdaffbdc69de4f9b678eedbb3ea98a23cec9d5cf943e3a8b70beba825bde5",
+      "fileCount": 12,
+      "totalBytes": 87991,
       "files": [
         {
           "path": "references/accessibility-design.md",
           "sha256": "271c7f9b5e3e771fa52bde4f4ea62c1cc2f239c7aa6468ae53d3295b2530cdde",
           "size": 8412
+        },
+        {
+          "path": "references/account-and-money.md",
+          "sha256": "77c939e834c3f715c9af11d2a05e32f7fc7a00f68422f34c9f2b3ed218161f73",
+          "size": 5706
+        },
+        {
+          "path": "references/color-systems.md",
+          "sha256": "f446b916666413956efd05d5ec7ed1ca5790aedb07aec536382734956660ad1f",
+          "size": 5718
+        },
+        {
+          "path": "references/component-patterns.md",
+          "sha256": "abec10ba6d5d0092c79cbe2535ae08d9bb188fb10676899849c7cffda19a598c",
+          "size": 9963
+        },
+        {
+          "path": "references/data-display.md",
+          "sha256": "61557decd293fbe6015aa859a1ed44c7ca4e78d075f3a9b1aee096c09d97e216",
+          "size": 6180
+        },
+        {
+          "path": "references/effects-and-blends.md",
+          "sha256": "4a51be2cc89b907d9e3d4c284b8a49d6662eebab655625165084268d8b02dba4",
+          "size": 4035
+        },
+        {
+          "path": "references/icons.md",
+          "sha256": "dfbab0bb3ee3202338a0ad3b60d53874b634d20903acf0b438ac2af86d59d17d",
+          "size": 4443
         },
         {
           "path": "references/loading-and-timing.md",
@@ -3149,9 +3240,14 @@
           "size": 5088
         },
         {
+          "path": "references/typography.md",
+          "sha256": "020e99e58efa4c6b62cfb15dd7e2641ac022a686534d56e25836e93a8a960429",
+          "size": 5448
+        },
+        {
           "path": "SKILL.md",
-          "sha256": "f6568d2344a1f5f202b2fb55520dd589e3e3fabd7e04ee9b5fb3ae7a4475802f",
-          "size": 25383
+          "sha256": "7b259a8e8faff7d49213a2c82c30c64e72ae203d3778d48418a30f4cf7d175f6",
+          "size": 27518
         }
       ]
     },
@@ -3225,5 +3321,5 @@
       ]
     }
   ],
-  "snapshotHash": "ac6a9b84722c571a495155f23f6f8b8f49a83aa76972a84932c84f6132bb4df2"
+  "snapshotHash": "da53210ca31a762435ee19370485466a7475b82c3f6520dc99d89591565c7177"
 }
