@@ -1,20 +1,20 @@
 {
   "name": "yeknal-oil-motion",
-  "sourceRevision": "0d3357839c1197d254bec134443a60a7bacacb06",
-  "source": "https://github.com/tryraisins/MD_Files/tree/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-oil-motion",
+  "sourceRevision": "3ce23daa863a841e9c895c54a0d4eaf662c580a9",
+  "source": "https://github.com/tryraisins/MD_Files/tree/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-oil-motion",
   "fileCount": 2,
   "files": [
     {
       "path": "LICENSE.txt",
       "sha256": "58812edfd7eacc4396b64739c1591de41a6f4bf0cb9c5a82d1ef7b804a045d2c",
       "size": 1069,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-oil-motion/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-oil-motion/LICENSE.txt"
     },
     {
       "path": "SKILL.md",
-      "sha256": "b23bb09a4377fedd6d53b5adcf94ea4a561cef155fb9e0dddb6f551985caf200",
-      "size": 8547,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-oil-motion/SKILL.md"
+      "sha256": "5ae33532187dd601c5b4f875a90da867a7f73d2b293059541ce4cbb2950cf0f1",
+      "size": 8422,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-oil-motion/SKILL.md"
     }
   ]
 }

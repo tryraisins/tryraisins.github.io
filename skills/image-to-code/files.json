@@ -1,26 +1,26 @@
 {
   "name": "yeknal-image-to-code",
-  "sourceRevision": "0d3357839c1197d254bec134443a60a7bacacb06",
-  "source": "https://github.com/tryraisins/MD_Files/tree/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-image-to-code",
+  "sourceRevision": "3ce23daa863a841e9c895c54a0d4eaf662c580a9",
+  "source": "https://github.com/tryraisins/MD_Files/tree/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-image-to-code",
   "fileCount": 3,
   "files": [
     {
       "path": "LICENSE.txt",
       "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
       "size": 1065,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-image-to-code/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-image-to-code/LICENSE.txt"
     },
     {
       "path": "references/implementation-and-extraction.md",
       "sha256": "b8443446b973349f72fe23810ee5d26edf3ff1c8eae9342af9f87bf97e7c8274",
       "size": 24774,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-image-to-code/references/implementation-and-extraction.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-image-to-code/references/implementation-and-extraction.md"
     },
     {
       "path": "SKILL.md",
-      "sha256": "a794d15e0fada5b7239ec6de8dd3f50b3fd70d21fc2aa45beb08e468993ead4e",
-      "size": 15390,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-image-to-code/SKILL.md"
+      "sha256": "464c081ac3571a9ea68dc4b8463374305436b8c979264943b0ac61e7b60fdd28",
+      "size": 5807,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-image-to-code/SKILL.md"
     }
   ]
 }

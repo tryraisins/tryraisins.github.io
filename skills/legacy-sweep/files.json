@@ -1,32 +1,32 @@
 {
   "name": "yeknal-legacy-sweep",
-  "sourceRevision": "0d3357839c1197d254bec134443a60a7bacacb06",
-  "source": "https://github.com/tryraisins/MD_Files/tree/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-legacy-sweep",
+  "sourceRevision": "3ce23daa863a841e9c895c54a0d4eaf662c580a9",
+  "source": "https://github.com/tryraisins/MD_Files/tree/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-legacy-sweep",
   "fileCount": 4,
   "files": [
     {
       "path": "references/campaign-execution.md",
       "sha256": "b103ef1ea6737dd3b782cd104c2efe8b7ee1b0bb01aa2b8cac4adabe88e8ed7f",
       "size": 5231,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-legacy-sweep/references/campaign-execution.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-legacy-sweep/references/campaign-execution.md"
     },
     {
       "path": "references/evidence-standard.md",
       "sha256": "ea0acc05f8fafddbed1733f09b8493054f823d8eaac7c7f82bc6f3e7ef98c435",
       "size": 6698,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-legacy-sweep/references/evidence-standard.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-legacy-sweep/references/evidence-standard.md"
     },
     {
       "path": "references/report-template.md",
       "sha256": "6ad6d95addaf9c0020209b19a7a42edb76d2a0e1538adf13be8f1cdb26600bbb",
       "size": 2631,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-legacy-sweep/references/report-template.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-legacy-sweep/references/report-template.md"
     },
     {
       "path": "SKILL.md",
-      "sha256": "63df80703b49e216820538247e2343a13d9f0f1bd0d70ca26aa262a3fbd998de",
-      "size": 8505,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-legacy-sweep/SKILL.md"
+      "sha256": "79530835c631d5e0c0ea1e35bb5140ffe00041332a055e25464c70f560e9853e",
+      "size": 11354,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-legacy-sweep/SKILL.md"
     }
   ]
 }

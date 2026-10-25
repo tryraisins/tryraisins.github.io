@@ -1,110 +1,110 @@
 {
   "name": "yeknal-aspnet-core",
-  "sourceRevision": "0d3357839c1197d254bec134443a60a7bacacb06",
-  "source": "https://github.com/tryraisins/MD_Files/tree/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core",
+  "sourceRevision": "3ce23daa863a841e9c895c54a0d4eaf662c580a9",
+  "source": "https://github.com/tryraisins/MD_Files/tree/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core",
   "fileCount": 17,
   "files": [
     {
       "path": "agents/openai.yaml",
       "sha256": "06a421ca2f92fc86d83dc7c02e31ad5c85da8193eebbe17aa883ef274e26011a",
       "size": 222,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/agents/openai.yaml"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/agents/openai.yaml"
     },
     {
       "path": "assets/dotnet-logo.png",
       "sha256": "7f561a8f84ca88130803ecc8664914a4c619530836c705a4b9169704b4195d7c",
       "size": 2270,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/assets/dotnet-logo.png"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/assets/dotnet-logo.png"
     },
     {
       "path": "LICENSE.txt",
       "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
       "size": 11357,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/LICENSE.txt"
     },
     {
       "path": "references/_sections.md",
       "sha256": "eefa51074986d078dd108857ff1e376bf6b75935ee125ebdafef47ba53a57f19",
       "size": 2412,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/_sections.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/_sections.md"
     },
     {
       "path": "references/apis-minimal-and-controllers.md",
       "sha256": "156283486289a1765d0cad6f7c296bad2f8aa45ad24d730c8ed0b845713cfee1",
       "size": 3040,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/apis-minimal-and-controllers.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/apis-minimal-and-controllers.md"
     },
     {
       "path": "references/data-state-and-services.md",
       "sha256": "9b0f2253c77a9ade7ebd39103de8fdfe1ae0cd73f71a86936bb1f5ccde064ef4",
       "size": 2422,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/data-state-and-services.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/data-state-and-services.md"
     },
     {
       "path": "references/program-and-pipeline.md",
       "sha256": "375d4e4580ce43f72f5d3d01e7c26a292eec2f43dc63c03f0200a4e24dbcd543",
       "size": 4182,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/program-and-pipeline.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/program-and-pipeline.md"
     },
     {
       "path": "references/realtime-grpc-and-background-work.md",
       "sha256": "ba6cfd463620b608c33ed65bcc4d6b25c4ec921cc77bd2fb9379cb486a11a824",
       "size": 1896,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/realtime-grpc-and-background-work.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/realtime-grpc-and-background-work.md"
     },
     {
       "path": "references/security-and-identity.md",
       "sha256": "a661dc33dc64e44f9a389d08c20f4e89f1ed62970197a3d2df35036b07884f35",
       "size": 2941,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/security-and-identity.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/security-and-identity.md"
     },
     {
       "path": "references/source-map.md",
       "sha256": "21e11fee79253f9c0050a3fb207b91e0c44360572662b2c900a855d0a332fa93",
       "size": 2040,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/source-map.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/source-map.md"
     },
     {
       "path": "references/stack-selection.md",
       "sha256": "9de61ba6c4c1fbb9b4b68d2fb6a9f3ed475feb87d912999c8a1c81911f38c8a3",
       "size": 3700,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/stack-selection.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/stack-selection.md"
     },
     {
       "path": "references/testing-performance-and-operations.md",
       "sha256": "193203a1d03a6e9f163fdffd8fa0f28ac02cc27a94854e29870c6caaa2eaea00",
       "size": 2916,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/testing-performance-and-operations.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/testing-performance-and-operations.md"
     },
     {
       "path": "references/ui-blazor.md",
       "sha256": "37267429839b21d084b35749550e85fa96077e06e96fef4917d558b8602afdcc",
       "size": 2478,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/ui-blazor.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/ui-blazor.md"
     },
     {
       "path": "references/ui-mvc.md",
       "sha256": "25657bf06f9f485967cc07d9cd93b5631d4a49871cd63bd7b2ae982fb776e659",
       "size": 1954,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/ui-mvc.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/ui-mvc.md"
     },
     {
       "path": "references/ui-razor-pages.md",
       "sha256": "3f3e2dc6e47ce6202649f28fd3143087c067048e60cb997030f8f0bc17a09f1a",
       "size": 1937,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/ui-razor-pages.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/ui-razor-pages.md"
     },
     {
       "path": "references/versioning-and-upgrades.md",
       "sha256": "3a51900fb9046ea9c0aec738410389854ab2474950253ab0719909aaf709a840",
       "size": 2085,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/references/versioning-and-upgrades.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/references/versioning-and-upgrades.md"
     },
     {
       "path": "SKILL.md",
-      "sha256": "69a473469f196ddc9414b3fbf2f5e1ba208deaf9fb3702da6fcbe88cf449f45e",
-      "size": 5539,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/0d3357839c1197d254bec134443a60a7bacacb06/skills/yeknal-aspnet-core/SKILL.md"
+      "sha256": "6b8a0753ce2323589e8ddecc2fc097465e49d101842be71bc16b9ddf10aa5e9b",
+      "size": 3266,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3ce23daa863a841e9c895c54a0d4eaf662c580a9/skills/yeknal-aspnet-core/SKILL.md"
     }
   ]
 }
