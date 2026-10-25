@@ -1,25 +1,25 @@
 {
   "schemaVersion": 1,
   "repository": "tryraisins/MD_Files",
-  "sourceRevision": "8aa2a366d7ef340a2ee558db39deea342a7e94bc",
-  "catalogCommit": "c661f3c39c170249e76b4a095f95d8e72a2491a5",
+  "sourceRevision": "118956021dcf48fa608c2c013be9a6e9933f87ea",
+  "catalogCommit": "59bc2d7069625995425d203a6ca97e8e9ae6823b",
   "cliVersion": "2.6.0",
   "counts": {
-    "skills": 77,
-    "internal": 24
+    "skills": 53,
+    "internal": 5
   },
   "tasks": [
     {
       "id": "build",
       "label": "Plan and build",
       "description": "Shape an idea, then turn it into working code.",
-      "count": 19
+      "count": 10
     },
     {
       "id": "design",
       "label": "Design interfaces",
       "description": "Visual direction, layout, components and interface quality.",
-      "count": 24
+      "count": 19
     },
     {
       "id": "motion",
@@ -31,7 +31,7 @@
       "id": "review",
       "label": "Review and test",
       "description": "Find defects, check flows in a browser and debug failures.",
-      "count": 22
+      "count": 20
     },
     {
       "id": "security",
@@ -49,19 +49,19 @@
       "id": "docs",
       "label": "Docs and files",
       "description": "Markdown, handoffs, office files, notebooks and Notion.",
-      "count": 14
+      "count": 6
     },
     {
       "id": "media",
       "label": "Images and media",
       "description": "Generated images, video, speech and transcription.",
-      "count": 7
+      "count": 1
     },
     {
       "id": "agents",
       "label": "Working with agents",
       "description": "How agents load skills, split work and format answers.",
-      "count": 7
+      "count": 3
     }
   ],
   "startingPoints": [
@@ -313,9 +313,9 @@
         "testing-strategy",
         "troubleshoot"
       ],
-      "version": "a9bca35a64e1e726bff21751f398b5c4a51a6f6c275402129088cd4b6c44e299",
+      "version": "fb6c24d60a788498ed67630194f28a19f5bb9ffa060dcb9f9ec9c5144e5cec4f",
       "fileCount": 9,
-      "totalBytes": 23128,
+      "totalBytes": 22978,
       "files": [
         {
           "path": "agents/openai.yaml",
@@ -359,8 +359,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "cdda41c0edd8879b77743e35e230e9d3455e60d29b78f40e5bf86c79e998b48f",
-          "size": 4210
+          "sha256": "bca752e01d107e5eaec752178386f3f333ff1ba4237462668722276d57e79404",
+          "size": 4060
         }
       ]
     },
@@ -713,58 +713,6 @@
       ]
     },
     {
-      "name": "yeknal-i-have-adhd",
-      "slug": "i-have-adhd",
-      "title": "ADHD-friendly answers",
-      "purpose": "Shapes answers into short, action-first steps with visible progress, which can make long tasks easier to follow.",
-      "description": "Shape responses into persistent, action-first ADHD-friendly output with short steps and visible state. Use only when the user explicitly invokes this skill or asks to enable ADHD mode.",
-      "tasks": [
-        "agents"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You prefer answers that lead with the next action.",
-        "Long explanations make it hard to keep track.",
-        "You want progress shown clearly as work moves along."
-      ],
-      "avoid": "It only runs when you turn it on by asking for it.",
-      "requirements": null,
-      "example": {
-        "ask": "ADHD mode on. Help me set up the project locally.",
-        "outcome": "It answers with one clear step at a time, keeps the current state visible and skips long preambles."
-      },
-      "attribution": {
-        "credit": "Adapted from Ayoub Ghriss’s i-have-adhd skill.",
-        "license": "MIT",
-        "sourceUrl": "https://github.com/ayghri/i-have-adhd"
-      },
-      "related": [
-        "full-output-enforcement"
-      ],
-      "version": "0b82ef43f2f3f56b010ac22ea39d23ddd4d25f3f445a631a7b1d19b6293f3e7b",
-      "fileCount": 3,
-      "totalBytes": 3948,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "2c51291283dcefdca43ca6b0c08172f225c7c26a9783ec444d6bdfa51ca96f8f",
-          "size": 238
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "8acbb618089b738404f76ac60fca1aaa995d9a87995eddf95f0b777acd7f7d2c",
-          "size": 1069
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "db82ceaee018775cfe82b13c9f5ae779d09beca2ee7dfaca4bbc8d35585ba2b4",
-          "size": 2641
-        }
-      ]
-    },
-    {
       "name": "yeknal-agent-cost-control",
       "slug": "agent-cost-control",
       "title": "Agent cost control",
@@ -1002,128 +950,6 @@
       ]
     },
     {
-      "name": "yeknal-aspnet-core",
-      "slug": "aspnet-core",
-      "title": "ASP.NET Core",
-      "purpose": "Builds, reviews and upgrades ASP.NET Core applications using current official guidance, from Blazor and Razor Pages to Minimal APIs, SignalR and authentication.",
-      "description": "Build, review, refactor, or migrate ASP.NET Core web apps: Blazor, Razor Pages, MVC, Minimal APIs, controllers, SignalR, gRPC, middleware, DI, configuration, auth, and deployment. Use when working on a .NET web app.",
-      "tasks": [
-        "build"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You are working on a Blazor, Razor Pages, MVC or Web API project.",
-        "Middleware, dependency injection or configuration needs to follow current guidance.",
-        "You are planning an ASP.NET Core upgrade."
-      ],
-      "avoid": null,
-      "requirements": null,
-      "example": {
-        "ask": "Add a Minimal API endpoint for orders with validation and proper authorization.",
-        "outcome": "It follows the project’s existing conventions, adds the endpoint with validation and policy-based authorization, and notes how to test it."
-      },
-      "attribution": {
-        "credit": "Adapted from Microsoft’s ASP.NET Core skill.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "winui-app"
-      ],
-      "version": "a10b76599e90e597ab2bb5ad474bcde6a40a61893ab018151bdd817a4d88105c",
-      "fileCount": 17,
-      "totalBytes": 51118,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "06a421ca2f92fc86d83dc7c02e31ad5c85da8193eebbe17aa883ef274e26011a",
-          "size": 222
-        },
-        {
-          "path": "assets/dotnet-logo.png",
-          "sha256": "7f561a8f84ca88130803ecc8664914a4c619530836c705a4b9169704b4195d7c",
-          "size": 2270
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
-          "size": 11357
-        },
-        {
-          "path": "references/_sections.md",
-          "sha256": "eefa51074986d078dd108857ff1e376bf6b75935ee125ebdafef47ba53a57f19",
-          "size": 2412
-        },
-        {
-          "path": "references/apis-minimal-and-controllers.md",
-          "sha256": "156283486289a1765d0cad6f7c296bad2f8aa45ad24d730c8ed0b845713cfee1",
-          "size": 3040
-        },
-        {
-          "path": "references/data-state-and-services.md",
-          "sha256": "9b0f2253c77a9ade7ebd39103de8fdfe1ae0cd73f71a86936bb1f5ccde064ef4",
-          "size": 2422
-        },
-        {
-          "path": "references/program-and-pipeline.md",
-          "sha256": "375d4e4580ce43f72f5d3d01e7c26a292eec2f43dc63c03f0200a4e24dbcd543",
-          "size": 4182
-        },
-        {
-          "path": "references/realtime-grpc-and-background-work.md",
-          "sha256": "ba6cfd463620b608c33ed65bcc4d6b25c4ec921cc77bd2fb9379cb486a11a824",
-          "size": 1896
-        },
-        {
-          "path": "references/security-and-identity.md",
-          "sha256": "a661dc33dc64e44f9a389d08c20f4e89f1ed62970197a3d2df35036b07884f35",
-          "size": 2941
-        },
-        {
-          "path": "references/source-map.md",
-          "sha256": "21e11fee79253f9c0050a3fb207b91e0c44360572662b2c900a855d0a332fa93",
-          "size": 2040
-        },
-        {
-          "path": "references/stack-selection.md",
-          "sha256": "9de61ba6c4c1fbb9b4b68d2fb6a9f3ed475feb87d912999c8a1c81911f38c8a3",
-          "size": 3700
-        },
-        {
-          "path": "references/testing-performance-and-operations.md",
-          "sha256": "193203a1d03a6e9f163fdffd8fa0f28ac02cc27a94854e29870c6caaa2eaea00",
-          "size": 2916
-        },
-        {
-          "path": "references/ui-blazor.md",
-          "sha256": "37267429839b21d084b35749550e85fa96077e06e96fef4917d558b8602afdcc",
-          "size": 2478
-        },
-        {
-          "path": "references/ui-mvc.md",
-          "sha256": "25657bf06f9f485967cc07d9cd93b5631d4a49871cd63bd7b2ae982fb776e659",
-          "size": 1954
-        },
-        {
-          "path": "references/ui-razor-pages.md",
-          "sha256": "3f3e2dc6e47ce6202649f28fd3143087c067048e60cb997030f8f0bc17a09f1a",
-          "size": 1937
-        },
-        {
-          "path": "references/versioning-and-upgrades.md",
-          "sha256": "3a51900fb9046ea9c0aec738410389854ab2474950253ab0719909aaf709a840",
-          "size": 2085
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "6b8a0753ce2323589e8ddecc2fc097465e49d101842be71bc16b9ddf10aa5e9b",
-          "size": 3266
-        }
-      ]
-    },
-    {
       "name": "yeknal-brandkit",
       "slug": "brandkit",
       "title": "Brand kit images",
@@ -1153,12 +979,11 @@
         "sourceUrl": "https://github.com/leonxlnx/taste-skill"
       },
       "related": [
-        "imagegen",
         "frontend-design"
       ],
-      "version": "a2f80d1ad4746e7e0500713f1c4a5d4dd89065b1d22e73556e59b81b596aab74",
+      "version": "45598b35b0c4d7bfee8d3ae149f16223b4aa0b1b13e66fef28af94ff81d06367",
       "fileCount": 3,
-      "totalBytes": 17166,
+      "totalBytes": 17165,
       "files": [
         {
           "path": "LICENSE.txt",
@@ -1172,8 +997,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "85adc36d117624f6382ef25194b2047fc31c7f6d3a3a60c88c8cb1b9bebf4341",
-          "size": 4662
+          "sha256": "1afc26cff3ac007bca5c11bdcfa0527f34374099e6a45667935a9a6fc85512aa",
+          "size": 4661
         }
       ]
     },
@@ -1272,100 +1097,6 @@
           "path": "SKILL.md",
           "sha256": "dbed2afdbea30b08a69882e5f4f7bf6e403d348a1e1b2c460b6d0e703679f7d8",
           "size": 1066
-        }
-      ]
-    },
-    {
-      "name": "yeknal-chatgpt-apps",
-      "slug": "chatgpt-apps",
-      "title": "ChatGPT apps",
-      "purpose": "Builds and troubleshoots ChatGPT Apps SDK projects that pair an MCP server with a widget UI, starting from the current official documentation.",
-      "description": "Build, scaffold, or refactor ChatGPT Apps SDK apps that pair an MCP server with widget UI: tool design, UI resources, the MCP Apps bridge, and CSP or domain metadata. Use when building a ChatGPT App; read the docs first.",
-      "tasks": [
-        "build",
-        "agents"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You are scaffolding a new ChatGPT app.",
-        "You need to register UI resources or wire the MCP Apps bridge.",
-        "Metadata, CSP or domain settings are getting in the way."
-      ],
-      "avoid": null,
-      "requirements": "Written with Codex in mind and works best alongside the OpenAI docs skill.",
-      "example": {
-        "ask": "Scaffold a ChatGPT app that searches our recipes and shows results in a widget.",
-        "outcome": "It checks the current docs, sets up the MCP server and tools, and registers the widget with the right metadata."
-      },
-      "attribution": {
-        "credit": "Adapted from OpenAI’s published skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "openai-docs",
-        "orchestration-specialists"
-      ],
-      "version": "78a36251ed69ef6d0e7dee1cf2e53722a761763ff3d6d06fc8eabb63f867e8e7",
-      "fileCount": 11,
-      "totalBytes": 74750,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "ebd723c60efd5242c628da61c0f1a91edd3dc106860573ba8f2f96dcdd224fcb",
-          "size": 842
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "a7f55b2cb68997f729e6199720d4d3cae47633aba0254a84b2d36ab284be9d45",
-          "size": 10774
-        },
-        {
-          "path": "references/app-archetypes.md",
-          "sha256": "ae3bb232c201541303264653518eca8bc59832bc73e511835d66ebd0a3c04f87",
-          "size": 3514
-        },
-        {
-          "path": "references/apps-sdk-docs-workflow.md",
-          "sha256": "41f0ec23b35c6a66de59de80c13b9be59002a371c8a36d23f96f20e19c656b49",
-          "size": 8143
-        },
-        {
-          "path": "references/interactive-state-sync-patterns.md",
-          "sha256": "5ca632712be3d75f63a405292184a7867cfc0fa3803b53b2063a94318a8c1278",
-          "size": 4281
-        },
-        {
-          "path": "references/repo-contract-and-validation.md",
-          "sha256": "28fb7093b67e29d05322e3fd38cb7ad182e92913aa45051d97dbddca8a627cd6",
-          "size": 2962
-        },
-        {
-          "path": "references/search-fetch-standard.md",
-          "sha256": "32c706205035007d1b616bf3eeb6c6c9ce69f6c56493bf0ea942a20abe8b39e6",
-          "size": 2021
-        },
-        {
-          "path": "references/upstream-example-workflow.md",
-          "sha256": "241f2fc58ff6c3b276325bef70254d8e1a18ec9e7633bd3bd03ef45ff478f727",
-          "size": 3443
-        },
-        {
-          "path": "references/window-openai-patterns.md",
-          "sha256": "78b7d92e0e73620b2524eef053b2cfe855c645440865da53a7759ef4479134c6",
-          "size": 3872
-        },
-        {
-          "path": "scripts/scaffold_node_ext_apps.mjs",
-          "sha256": "fb12086ca7e37ab7d1fb02418b11623f207b8726aabfcbfb3d5634539479807a",
-          "size": 16371
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "034069378e6fc696e6d9212773d8aad732e7551576ee9843a5206c703f2e865c",
-          "size": 18527
         }
       ]
     },
@@ -1773,85 +1504,6 @@
       ]
     },
     {
-      "name": "yeknal-figma-implement-design",
-      "slug": "figma-implement-design",
-      "title": "Figma to code",
-      "purpose": "Turns Figma frames into production code that matches the design closely, using the Figma MCP server for design context, screenshots and assets.",
-      "description": "Turn Figma nodes into production code with the project's own components and tokens: design context, screenshot, assets, and project-convention translation. Use when given a Figma URL or node ID to implement.",
-      "tasks": [
-        "design",
-        "build"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": false,
-      "whenToUse": [
-        "You have a Figma URL or node ID to implement.",
-        "A component must match its Figma spec exactly.",
-        "You want design tokens translated into the project’s own conventions."
-      ],
-      "avoid": null,
-      "requirements": "Needs a working Figma MCP server connection.",
-      "example": {
-        "ask": "Implement this Figma frame as a React component using our design tokens.",
-        "outcome": "It reads the frame through the Figma MCP server, maps values to existing tokens and builds the component to match."
-      },
-      "attribution": {
-        "credit": "Adapted from Figma’s published skill.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "image-to-code",
-        "frontend-developer"
-      ],
-      "version": "9059bb11fbc77cc13a7abe88f3b28d510d92cf909d8e952e2d57307315f1e71b",
-      "fileCount": 8,
-      "totalBytes": 29717,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "05f0f52f8523d2206a5365d912d339ee9c9abb7fa0c9b42b149296cbac4fefe2",
-          "size": 486
-        },
-        {
-          "path": "assets/figma-small.svg",
-          "sha256": "6a38267efbd872bbc215d0227a395eb0b0093bc6441c44a39a43f3210549e5e9",
-          "size": 818
-        },
-        {
-          "path": "assets/figma.png",
-          "sha256": "4d16e1b19ae7bdac7d601d0b3bf3c0ea4a018a8cb0e38d19e5b00971968ecada",
-          "size": 1612
-        },
-        {
-          "path": "assets/icon.svg",
-          "sha256": "8936c5dcd619c41f5a27f7c08e8c50b22e428069c36217e4aa872099d6cc2cf7",
-          "size": 964
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
-          "size": 11358
-        },
-        {
-          "path": "references/figma-mcp-config.md",
-          "sha256": "3b8bbd016e7cecfe01d096791582da8c9669c18675ec3f201d0d4088051711a9",
-          "size": 2471
-        },
-        {
-          "path": "references/figma-tools-and-prompts.md",
-          "sha256": "428add063f235ffe27fb4b8d092558794f25f7ad69893d5a88621d8174e9c8d6",
-          "size": 2796
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "d4bfd63faa907073aa73baba77592e3126759d8d89288729dae1cf1b0ac31353",
-          "size": 9212
-        }
-      ]
-    },
-    {
       "name": "yeknal-finalize",
       "slug": "finalize",
       "title": "Finalize",
@@ -2099,53 +1751,6 @@
       ]
     },
     {
-      "name": "yeknal-full-output-enforcement",
-      "slug": "full-output-enforcement",
-      "title": "Full output",
-      "purpose": "Makes the agent return complete code or documents without placeholder gaps, splitting long output only at real boundaries.",
-      "description": "Enforce complete code or document output, ban placeholder omissions, and split safely at real boundaries when necessary. Use when the user explicitly requires exhaustive, unabridged output.",
-      "tasks": [
-        "agents"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You need every line of a file, not a summary with ellipses.",
-        "Earlier answers left out sections with placeholders.",
-        "Output is long enough that it has to be split carefully."
-      ],
-      "avoid": "It only runs when you explicitly ask for exhaustive output.",
-      "requirements": null,
-      "example": {
-        "ask": "Give me the full migration file, every line, no placeholders.",
-        "outcome": "It writes the complete file and, if it has to split it, breaks at clear boundaries and says where to continue."
-      },
-      "attribution": {
-        "credit": "Adapted from Leonxlnx’s taste-skill collection.",
-        "license": "MIT",
-        "sourceUrl": "https://github.com/leonxlnx/taste-skill"
-      },
-      "related": [
-        "i-have-adhd"
-      ],
-      "version": "751167d9f7dda1b7e3910070c9929a6f7cbf84701b6e5c8e53d24aefd07581a3",
-      "fileCount": 2,
-      "totalBytes": 3506,
-      "files": [
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
-          "size": 1065
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "4c9b50098314f95181be10f700da7574bd7237f8fe8dad132569d4bdc342529f",
-          "size": 2441
-        }
-      ]
-    },
-    {
       "name": "yeknal-high-end-visual-design",
       "slug": "high-end-visual-design",
       "title": "High-end visual design",
@@ -2243,148 +1848,6 @@
           "path": "SKILL.md",
           "sha256": "d75ea8a7d82cf2d25b3215ccbf72815c20888cca6d53ed1f58cba7a5d67358f7",
           "size": 6417
-        }
-      ]
-    },
-    {
-      "name": "yeknal-imagegen",
-      "slug": "imagegen",
-      "title": "Image generation",
-      "purpose": "Generates and edits images through the OpenAI Image API, including masks, background removal, transparent backgrounds and batches of variants.",
-      "description": "Generate, edit, or batch-produce images with the OpenAI Image API through the bundled `scripts/image_gen.py` CLI. Use when the user asks to generate an image, inpaint or mask an edit, replace a background, or make variants.",
-      "tasks": [
-        "media"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You need product shots, covers or concept art.",
-        "An image needs inpainting or its background replaced.",
-        "You want several variants generated in one go."
-      ],
-      "avoid": null,
-      "requirements": "Uses Python and needs an OPENAI_API_KEY for live calls.",
-      "example": {
-        "ask": "Make three cover images for the blog post with a transparent background.",
-        "outcome": "It writes the prompts, runs the bundled script and saves the variants for you to choose from."
-      },
-      "attribution": {
-        "credit": "Adapted from OpenAI’s published skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "brandkit",
-        "sora"
-      ],
-      "version": "8a2c7400780af2c6468b2491d2787621ad525e40230f84c14ac18215154c3bfb",
-      "fileCount": 10,
-      "totalBytes": 81525,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "051b82cce281829f36caaeacb676af013d45c5429fd824ec0eac5dcee07352fa",
-          "size": 291
-        },
-        {
-          "path": "assets/imagegen-small.svg",
-          "sha256": "cff5f34f57ff60b3ee92eaedd17b15e96dd4b9e776df3e78936c9e00d42be294",
-          "size": 2889
-        },
-        {
-          "path": "assets/imagegen.png",
-          "sha256": "95952f644064eb9e890f98d8db07216347186526e4c41ad66d3420629eb86e20",
-          "size": 1711
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
-          "size": 10776
-        },
-        {
-          "path": "references/cli.md",
-          "sha256": "c548d8897fb3df3c0a0d39b42cdd7a08247706696cbedda9f1b36cb7bbf60ab7",
-          "size": 5288
-        },
-        {
-          "path": "references/image-api.md",
-          "sha256": "a31b576864fb7ab43e3191e039a24a19cdd85d2804e44c38a822f2ed1f4f78c3",
-          "size": 1629
-        },
-        {
-          "path": "references/prompting.md",
-          "sha256": "80383de47c15b2e0b014b95099cc95663497cb2ab8b0eac88d867fa2b5b208db",
-          "size": 5903
-        },
-        {
-          "path": "references/sample-prompts.md",
-          "sha256": "be54f1ced28a7ac1d68670eb2d560d1491d7e0efe38972d9ba3309110f7d45e4",
-          "size": 14901
-        },
-        {
-          "path": "scripts/image_gen.py",
-          "sha256": "f30607f1f5ee10d6d62f5fb2e28a128791e280ca7f369f9c98b1809bd2a4962a",
-          "size": 29949
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "d2a6751f0f89e2700fb7ed02bef7a4c476196be6fbe280cfcb6cc0da81266859",
-          "size": 8188
-        }
-      ]
-    },
-    {
-      "name": "yeknal-image-to-code",
-      "slug": "image-to-code",
-      "title": "Image to code",
-      "purpose": "Studies an approved screenshot or concept image, works out its visual and responsive system, and builds the frontend to match it faithfully.",
-      "description": "Turn an approved screenshot or generated concept into a faithful frontend. Use when the user supplies a reference image or asks for image-first design-to-code; not for making the concept images, which is `yeknal-imagegen-frontend-web`.",
-      "tasks": [
-        "design",
-        "build"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": false,
-      "whenToUse": [
-        "You have a screenshot or mockup to turn into code.",
-        "An approved concept must be implemented without drifting.",
-        "You want the responsive behaviour worked out from a static image."
-      ],
-      "avoid": "It won’t replace an approved reference with a newly generated design.",
-      "requirements": null,
-      "example": {
-        "ask": "Build this landing page screenshot as a responsive Astro page.",
-        "outcome": "It extracts spacing, type and colour from the image, then builds the page and checks it at phone and desktop widths."
-      },
-      "attribution": {
-        "credit": "Adapted from Leonxlnx’s taste-skill collection.",
-        "license": "MIT",
-        "sourceUrl": "https://github.com/leonxlnx/taste-skill"
-      },
-      "related": [
-        "figma-implement-design",
-        "imagegen-frontend-web"
-      ],
-      "version": "de2720ccfa35c13121cee527e8a7509e527c13dda1cec90f955d4cd6c142bcab",
-      "fileCount": 3,
-      "totalBytes": 31646,
-      "files": [
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
-          "size": 1065
-        },
-        {
-          "path": "references/implementation-and-extraction.md",
-          "sha256": "b8443446b973349f72fe23810ee5d26edf3ff1c8eae9342af9f87bf97e7c8274",
-          "size": 24774
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "464c081ac3571a9ea68dc4b8463374305436b8c979264943b0ac61e7b60fdd28",
-          "size": 5807
         }
       ]
     },
@@ -2487,104 +1950,6 @@
           "path": "SKILL.md",
           "sha256": "2d73863525ea0b32983fecabaa536383766586d6749d893803f9c3283774355a",
           "size": 8257
-        }
-      ]
-    },
-    {
-      "name": "yeknal-jupyter-notebook",
-      "slug": "jupyter-notebook",
-      "title": "Jupyter notebooks",
-      "purpose": "Creates and edits Jupyter notebooks for experiments, explorations and tutorials, starting from bundled templates.",
-      "description": "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.",
-      "tasks": [
-        "docs"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You want a clean notebook for an experiment or analysis.",
-        "A tutorial should be runnable cell by cell.",
-        "An existing notebook needs restructuring."
-      ],
-      "avoid": null,
-      "requirements": "Uses Python with JupyterLab.",
-      "example": {
-        "ask": "Set up a notebook to explore last month’s sales CSV.",
-        "outcome": "It creates a notebook from the template with loading, cleaning and a few starter charts."
-      },
-      "attribution": {
-        "credit": "Adapted from OpenAI’s published skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "spreadsheet",
-        "research-analysis"
-      ],
-      "version": "b294c7b81df100a8ffb928abca227de4f57dbcb919635ea701c463084fdbb8f6",
-      "fileCount": 12,
-      "totalBytes": 30632,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "3a2d6a8f9ed10e18f6caa66aeb26a02305bc61f36fc4b333c904e02f9988fb9c",
-          "size": 325
-        },
-        {
-          "path": "assets/experiment-template.ipynb",
-          "sha256": "25f85914103cd84244e20ef378f59097479c72481cd18d3a931354d107c3f300",
-          "size": 2570
-        },
-        {
-          "path": "assets/jupyter-small.svg",
-          "sha256": "a36bd27bef3775f111309241754b386db81e7d356f07672190e2fcb24478a250",
-          "size": 1043
-        },
-        {
-          "path": "assets/jupyter.png",
-          "sha256": "852fd5468885bb176d266d547e61684792332e44a88cfbc8cd07323937040ccb",
-          "size": 2713
-        },
-        {
-          "path": "assets/tutorial-template.ipynb",
-          "sha256": "704a809c09c7c9e6e5c437860df95524412b50c58571a14204610d73e0744765",
-          "size": 2490
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
-          "size": 10776
-        },
-        {
-          "path": "references/experiment-patterns.md",
-          "sha256": "1ff9c04281c01e8e2209bde9f1fd910b8e4b620dd1f1f040e2101f1d88513a91",
-          "size": 699
-        },
-        {
-          "path": "references/notebook-structure.md",
-          "sha256": "a85051a2e88fd3424bbed2636e952ec5f858e7efa4e076c28d62a8cc2cc9dc06",
-          "size": 751
-        },
-        {
-          "path": "references/quality-checklist.md",
-          "sha256": "ed01afe6ff47714d85935d11053b64c414772f02250fdc604e3fca65e5139136",
-          "size": 572
-        },
-        {
-          "path": "references/tutorial-patterns.md",
-          "sha256": "8c194bb640de2fb7747e3db87006ecec5219252d301f53670975dbb5310ff659",
-          "size": 685
-        },
-        {
-          "path": "scripts/new_notebook.py",
-          "sha256": "a004e2ea3115edb24313928be0be6d1dc07e571d7ca6c1b24375f0569c616d2f",
-          "size": 4086
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "56e2b756d0b57216875b47b8c0ed56d481cdf322709b2e994b1951025a602ad7",
-          "size": 3922
         }
       ]
     },
@@ -2751,9 +2116,9 @@
         "project-handoff",
         "content-seo"
       ],
-      "version": "2bd49fc0caa3335188b8c2ddfe6d3e1b86bcaa82665ce9ea573506b9bb8daae4",
+      "version": "71bf62d52296233a56104146e67434293a071c6d2828b8ca32ad42f3dd7c4c1b",
       "fileCount": 7,
-      "totalBytes": 28559,
+      "totalBytes": 28532,
       "files": [
         {
           "path": "references/installed-skill-conflict-resolution.md",
@@ -2787,8 +2152,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "b7d315f2da9a278411cdc6fc2d73cf3d37ffdaaeb955a908b478b161f384ef42",
-          "size": 8025
+          "sha256": "01d8e839e4a446f971ecbd09a336e73bfbbecdff6dcc80ca8ccce65d5ea7ac62",
+          "size": 7998
         }
       ]
     },
@@ -2841,60 +2206,6 @@
       ]
     },
     {
-      "name": "yeknal-imagegen-frontend-mobile",
-      "slug": "imagegen-frontend-mobile",
-      "title": "Mobile app concept images",
-      "purpose": "Generates polished concept images of mobile app screens and flows inside a phone frame, with consistent hierarchy across screens. It creates images, not code.",
-      "description": "Generate premium mobile app screen and flow concept images for iOS, Android, and cross-platform products. Use when the user wants app screen or flow concepts rather than code; not for websites, landing pages, or frontend implementation.",
-      "tasks": [
-        "media",
-        "design"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": false,
-      "whenToUse": [
-        "You want to see a mobile app idea before building it.",
-        "Several screens need to look like one consistent product.",
-        "You need concepts for iOS, Android or both."
-      ],
-      "avoid": null,
-      "requirements": "Needs an image-generation tool available to your agent.",
-      "example": {
-        "ask": "Show me the onboarding and home screens for a plant-care app.",
-        "outcome": "It plans the flow, then generates consistent screen concepts framed in a phone mockup."
-      },
-      "attribution": {
-        "credit": "Adapted from Leonxlnx’s taste-skill collection.",
-        "license": "MIT",
-        "sourceUrl": "https://github.com/leonxlnx/taste-skill"
-      },
-      "related": [
-        "mobile-app-design",
-        "imagegen-frontend-web"
-      ],
-      "version": "6bed5cb2a3f9c6bc53c1e72ae123a2bce76d39c938f512b7736c14c7335188e6",
-      "fileCount": 3,
-      "totalBytes": 42602,
-      "files": [
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
-          "size": 1065
-        },
-        {
-          "path": "references/mobile-art-direction-system.md",
-          "sha256": "4fd8ce8fc612aaa95bfb16eaf79a8d4ee474a81f3c5d832e2aa5f784f3a0c7d9",
-          "size": 29878
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "27d73123be32889883fce01fa83aed074c0468ea7dd63270f273340ef44b1d41",
-          "size": 11659
-        }
-      ]
-    },
-    {
       "name": "yeknal-mobile-app-design",
       "slug": "mobile-app-design",
       "title": "Mobile app design",
@@ -2927,9 +2238,9 @@
         "animate-expo",
         "ui-quality-baseline"
       ],
-      "version": "c1548be88e98dbbc17f850e96e263ec5f02ea161144a6eb909f2aa660f41ec9d",
+      "version": "57833339babd8b4b9a50742b314e4074d00710da671a85c084d715d6f42dd151",
       "fileCount": 4,
-      "totalBytes": 13620,
+      "totalBytes": 13461,
       "files": [
         {
           "path": "agents/openai.yaml",
@@ -2948,399 +2259,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "fe48bd44073f7451f61a219f53893aa7b000df72660e0973d8ea5480dd183648",
-          "size": 8175
-        }
-      ]
-    },
-    {
-      "name": "yeknal-write-swift",
-      "slug": "write-swift",
-      "title": "Modern Swift",
-      "purpose": "Writes and reviews modern Swift, including value types, Swift 6 data-race safety, concurrency, generics, API design, performance and Swift Testing.",
-      "description": "Write modern Swift with value types, Swift 6 data-race safety and approachable concurrency, protocols and generics, API design, performance, ARC, Swift Testing, macros, and migration. Use when writing, reviewing, or migrating Swift code.",
-      "tasks": [
-        "build"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You are writing or migrating Swift code.",
-        "A concurrency error, hang or data race needs fixing.",
-        "You want Swift that uses current language features well."
-      ],
-      "avoid": null,
-      "requirements": null,
-      "example": {
-        "ask": "Fix the data-race warnings after enabling Swift 6 mode.",
-        "outcome": "It explains each warning, applies the right isolation or actor changes and keeps behaviour the same."
-      },
-      "attribution": {
-        "credit": "Written for this catalog.",
-        "license": null,
-        "sourceUrl": null
-      },
-      "related": [
-        "mobile-app-design"
-      ],
-      "version": "1f3b1c9acd34233eb4526629b0942532686013e7b65f39cca895eceaa918bdcb",
-      "fileCount": 1,
-      "totalBytes": 37658,
-      "files": [
-        {
-          "path": "SKILL.md",
-          "sha256": "16b9ce6c2678d267d6de6b12d9c1d52a7a693264cb7c55a415aed13f2db86ee2",
-          "size": 37658
-        }
-      ]
-    },
-    {
-      "name": "yeknal-notion",
-      "slug": "notion",
-      "title": "Notion",
-      "purpose": "One Notion entry point with four modes: capture a decision, prepare a meeting, research a cited brief, and update an existing page.",
-      "description": "Capture, prepare, research, or update Notion pages. Turn conversations into wiki entries and decisions, build meeting agendas from templates, write cited research briefs, and refresh existing pages. Use when the request names Notion.",
-      "tasks": [
-        "docs"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": false,
-      "whenToUse": [
-        "A conversation or decision should become a structured Notion page.",
-        "Meeting material has to be prepared from existing Notion context.",
-        "Research across several Notion sources has to become a cited brief."
-      ],
-      "avoid": "It is not a general note-taking skill and not a research tool for sources outside Notion. The request must name Notion.",
-      "requirements": null,
-      "example": {
-        "ask": "Save these decisions into Notion as a page for the team.",
-        "outcome": "It selects the capture mode, searches for an existing page before creating one, writes the page with the team template, and returns the link."
-      },
-      "attribution": {
-        "credit": "Meeting and research templates were consolidated from the three previously separate Notion skills; no upstream source text is claimed.",
-        "license": null,
-        "sourceUrl": "https://developers.notion.com/"
-      },
-      "related": [
-        "markdown-management",
-        "research-analysis"
-      ],
-      "version": "8ec05c822cc20f0330b3ac0fc02dc7c6fcad06a6be47611fb5857a9e431c2aa5",
-      "fileCount": 20,
-      "totalBytes": 92134,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "cf7d8ab10ab306063a37a2c28dc3882e006a36737efac89a87827de3aef7a193",
-          "size": 477
-        },
-        {
-          "path": "assets/notion-small.svg",
-          "sha256": "00f5e4b758cc5c3e36e783dca2fabfafd05169c2f2175063e56d2e1fb6a55f81",
-          "size": 15777
-        },
-        {
-          "path": "assets/notion.png",
-          "sha256": "5eef1e62d96a3d09bc9d18e4140486c22799145b017033bd0924c2c49d741cd4",
-          "size": 8526
-        },
-        {
-          "path": "evaluations/conversation-to-wiki.json",
-          "sha256": "9c188003bfdf6d287ef44df1610f199b0cf9e60f692adfa8bff7ac132e694815",
-          "size": 2024
-        },
-        {
-          "path": "evaluations/decision-record.json",
-          "sha256": "ddde91aabbdf85c592535691e99fddabb4f26e002a5f1a376f39afbe031cae30",
-          "size": 2209
-        },
-        {
-          "path": "evaluations/README.md",
-          "sha256": "08b944fb24a0f19b2b3c76f9b76e0b64eef31fc2c3f53c62c37e8b0abac1f0d3",
-          "size": 3465
-        },
-        {
-          "path": "examples/conversation-to-faq.md",
-          "sha256": "2c78414d86d3d854ba51ff6c88ea5f1315268742816e2d3b13ee6848f1158a73",
-          "size": 16242
-        },
-        {
-          "path": "examples/decision-capture.md",
-          "sha256": "c6fc42d095d842ac55ab1a95322bab7d0146669089e0b0d470f791ad8477b586",
-          "size": 3568
-        },
-        {
-          "path": "examples/how-to-guide.md",
-          "sha256": "5c13ac240bf07a0575b1295a6c5d7f95d0112702652d92870a9858e3c74033e7",
-          "size": 2838
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "0f377d9b2a1db642e4b0531ffa126e96d9bc6c085f8d9441f220fb25f723c6f8",
-          "size": 1057
-        },
-        {
-          "path": "references/database-best-practices.md",
-          "sha256": "72190afe54894b8ef2566d6f6d60fdcfe39822f5a1db02e75c2186c6952ad83c",
-          "size": 2876
-        },
-        {
-          "path": "references/decision-log-database.md",
-          "sha256": "77d23a69b94cecaad520cb84f18b214994fa2c7873b88928f8d13da8b301c773",
-          "size": 2033
-        },
-        {
-          "path": "references/documentation-database.md",
-          "sha256": "727f6bb7a341e871ba8afe155f9b261fe6f5ecf7f5ca7a43db3ad646fee7244d",
-          "size": 2745
-        },
-        {
-          "path": "references/faq-database.md",
-          "sha256": "2fedbd91f02df20541fa14372661d82d19e04cb96d261a184a74aff5b90089be",
-          "size": 2037
-        },
-        {
-          "path": "references/how-to-guide-database.md",
-          "sha256": "a6002d032b0563e0234a4c225226ea6a207b120e69b0c839315c8402813b30e5",
-          "size": 1237
-        },
-        {
-          "path": "references/learning-database.md",
-          "sha256": "8ceaa72bc7ab944ce1084df6233001c05b65d06ee5913a23caf760f248236e83",
-          "size": 1322
-        },
-        {
-          "path": "references/meetings.md",
-          "sha256": "ebee4bd28dc789ae63bf136dc2768f61ab232277f26d287f706dde21a486ac32",
-          "size": 9998
-        },
-        {
-          "path": "references/research-brief.md",
-          "sha256": "8f17a92561b23ab9e06bc45312be8cc65d9ededd809038d85fb51ca2511cd18e",
-          "size": 6552
-        },
-        {
-          "path": "references/team-wiki-database.md",
-          "sha256": "b08cfd417d2d61cda223c1d44c199b0a588e35c177f75328681c1b820b6450f8",
-          "size": 927
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "04f84ebe2bbd9009108bc016c20277f58bd6ca5c7e4139f093d63509ee82e65c",
-          "size": 6224
-        }
-      ]
-    },
-    {
-      "name": "yeknal-notion-spec-to-implementation",
-      "slug": "notion-spec-to-implementation",
-      "title": "Notion spec to plan",
-      "purpose": "Turns a spec or PRD in Notion into an implementation plan with tasks and progress tracking.",
-      "description": "Turn Notion specs into implementation plans, tasks, and progress tracking; use when implementing PRDs/feature specs and creating Notion plans + tasks from them.",
-      "tasks": [
-        "docs",
-        "build"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "A feature spec lives in Notion and needs breaking down.",
-        "You want tasks created and tracked against the spec.",
-        "Progress should be visible to the rest of the team."
-      ],
-      "avoid": null,
-      "requirements": "Needs the Notion MCP server connected.",
-      "example": {
-        "ask": "Turn the notifications PRD into an implementation plan with tasks.",
-        "outcome": "It reads the spec, writes a plan and creates linked tasks in Notion for tracking."
-      },
-      "attribution": {
-        "credit": "Adapted from Notion’s published skills.",
-        "license": "MIT",
-        "sourceUrl": null
-      },
-      "related": [
-        "implement"
-      ],
-      "version": "817722796f63aba101de758bab4665a8eaacb52cf911030585c30f24974dfb44",
-      "fileCount": 19,
-      "totalBytes": 85310,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "1e4ba970e5e4b0e1fbbea6f1c3795a70e38d9c670c5a652c932b2d04982ca377",
-          "size": 524
-        },
-        {
-          "path": "assets/notion-small.svg",
-          "sha256": "00f5e4b758cc5c3e36e783dca2fabfafd05169c2f2175063e56d2e1fb6a55f81",
-          "size": 15777
-        },
-        {
-          "path": "assets/notion.png",
-          "sha256": "5eef1e62d96a3d09bc9d18e4140486c22799145b017033bd0924c2c49d741cd4",
-          "size": 8526
-        },
-        {
-          "path": "evaluations/basic-spec-implementation.json",
-          "sha256": "0b1aa05f74e3e3503b4faaa0263cbbb1142d679140322682bc2dba6148648b50",
-          "size": 2401
-        },
-        {
-          "path": "evaluations/README.md",
-          "sha256": "5fdf4830a9b4889b55f1636675d2d26161945530298b6a34a19f4c7f7fc9cc0f",
-          "size": 4427
-        },
-        {
-          "path": "evaluations/spec-to-tasks.json",
-          "sha256": "fea35f66e20c8f1f918815ef13d77f8ee85a3a86d8902c0d0b7d1cfbdb19cf45",
-          "size": 2561
-        },
-        {
-          "path": "examples/api-feature.md",
-          "sha256": "e56587959b03dc8f4da2e22e06a654cbf81bff2df61060419a29802f9e5181ac",
-          "size": 13699
-        },
-        {
-          "path": "examples/database-migration.md",
-          "sha256": "575ef697c6c9c55add54b43714460adb3bfa8aa2bec3ecbebd7e16757be511d3",
-          "size": 2443
-        },
-        {
-          "path": "examples/ui-component.md",
-          "sha256": "5fa8788e1f3fd53e00729065cb574cf46db3bd866d254f108b91b41a08318307",
-          "size": 1662
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "0f377d9b2a1db642e4b0531ffa126e96d9bc6c085f8d9441f220fb25f723c6f8",
-          "size": 1057
-        },
-        {
-          "path": "reference/milestone-summary-template.md",
-          "sha256": "52bebb1e531a69a85b5f9764e27b0129dbed1258e34669ae7b26d8bb6d536efe",
-          "size": 456
-        },
-        {
-          "path": "reference/progress-tracking.md",
-          "sha256": "834797b5a2359cc5a7a798457c187cc96392daf5101b824e5f0fe822003f2ad3",
-          "size": 9076
-        },
-        {
-          "path": "reference/progress-update-template.md",
-          "sha256": "649ff810bc8b14b91df74b2506a11f2837a64a9880010466b6ce6d532967bb9a",
-          "size": 420
-        },
-        {
-          "path": "reference/quick-implementation-plan.md",
-          "sha256": "7e19f4aafe8b5312825624247f7cced405482718f67ece9d8f88a4bdbf323055",
-          "size": 480
-        },
-        {
-          "path": "reference/spec-parsing.md",
-          "sha256": "e978a605c45b13001bb68850b635d87be694e79b415d766aa6975a0c3068f5ee",
-          "size": 6942
-        },
-        {
-          "path": "reference/standard-implementation-plan.md",
-          "sha256": "98405060e286d0d60140648996d757cc102abb588ae2eaaaabf0a99e93530a15",
-          "size": 3286
-        },
-        {
-          "path": "reference/task-creation-template.md",
-          "sha256": "010a9a3b1d95633220bb93ffcab5f2f49e897c5d4e4231940d691719bec1be34",
-          "size": 597
-        },
-        {
-          "path": "reference/task-creation.md",
-          "sha256": "0eaf8bbf51aa24165bf99bd3578cbd65936f73ff11f612e5f5166a008113fcaa",
-          "size": 8312
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "a145d6656e1c29b8cd4cf9d7d86b25d9eeed3f8c7ff0cf9aca32fcab73349c78",
-          "size": 2664
-        }
-      ]
-    },
-    {
-      "name": "yeknal-openai-docs",
-      "slug": "openai-docs",
-      "title": "OpenAI docs",
-      "purpose": "Answers OpenAI product and API questions from the official documentation, including current model choices, migrations and prompt reviews, with citations.",
-      "description": "Answer OpenAI product, API, and model questions from official OpenAI documentation with citations. Use for docs lookups, current model choice or migration, and GPT-5.4 upgrade planning.",
-      "tasks": [
-        "agents",
-        "build"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You need current guidance on an OpenAI API or model.",
-        "You are migrating to a newer model.",
-        "An answer needs citing to the official docs."
-      ],
-      "avoid": null,
-      "requirements": null,
-      "example": {
-        "ask": "Which OpenAI model should we use for structured extraction now, and what changes?",
-        "outcome": "It checks the current documentation, recommends a model and lists the changes with citations."
-      },
-      "attribution": {
-        "credit": "Adapted from OpenAI’s published skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "chatgpt-apps"
-      ],
-      "version": "0c8c4a9b9b5af80c03652f17768d8e90863a53701bcd99a28c4c19fca64830f1",
-      "fileCount": 8,
-      "totalBytes": 44755,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "2dd271a42c1ce5697c5b2f2047c57b7834b217599391bcbf9f794d8859c2049d",
-          "size": 567
-        },
-        {
-          "path": "assets/openai-small.svg",
-          "sha256": "45be1f0757eb18889eefb1e7db79668ef46a275dc4e0e78e8df5ebd7f6cdeadc",
-          "size": 1091
-        },
-        {
-          "path": "assets/openai.png",
-          "sha256": "156cc84d7332bfe95b310350bd470b690d22aa33d65340cc6c2e06022946194c",
-          "size": 1429
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
-          "size": 10776
-        },
-        {
-          "path": "references/gpt-5p4-prompting-guide.md",
-          "sha256": "cc1e117d0f39385da964ba38a690e5fd06b861e58a0fe073c7d656a8d40e78ac",
-          "size": 18036
-        },
-        {
-          "path": "references/latest-model.md",
-          "sha256": "ca7a6859b13ccb076cfb067f6c77116d6eeaf4c484b0a3d619ad3e887d2a743c",
-          "size": 1592
-        },
-        {
-          "path": "references/upgrading-to-gpt-5p4.md",
-          "sha256": "f57960bc1c21b5265dca3366eb746f8c99e2a913b0c08661c720cfb4a7351803",
-          "size": 8611
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "ec8b71253d4d1c3c159730b5901fe2b9bfc74242b1bd4b6a326621426fb33760",
-          "size": 2653
+          "sha256": "82abf9db53904213550eb5d6c28d8d97d09a06c155e62d0f561ed267ceb014e5",
+          "size": 8016
         }
       ]
     },
@@ -3382,64 +2302,6 @@
           "path": "SKILL.md",
           "sha256": "50ce1724dc40c4f82fc3d391b31e7fec9f7959931560083bf12f4226c327ed19",
           "size": 1483
-        }
-      ]
-    },
-    {
-      "name": "yeknal-pdf",
-      "slug": "pdf",
-      "title": "PDF files",
-      "purpose": "Reads, creates and reviews PDFs where layout matters, rendering pages to check them and using Python tools for generation and extraction.",
-      "description": "Read, create, or review PDF files where layout and rendering matter. Use Python tools (reportlab, pdfplumber, pypdf) for generation and extraction, and rendered page images for visual checks.",
-      "tasks": [
-        "docs"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You need a PDF generated with a reliable layout.",
-        "Text or tables have to be extracted from a PDF.",
-        "You want rendered pages checked before sending."
-      ],
-      "avoid": null,
-      "requirements": "Uses Python with reportlab, pdfplumber and pypdf, plus Poppler for rendering.",
-      "example": {
-        "ask": "Pull the tables out of these invoices and make a summary PDF.",
-        "outcome": "It extracts the tables, builds a summary PDF and renders the pages to check the layout."
-      },
-      "attribution": {
-        "credit": "Adapted from Anthropic’s document skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "doc",
-        "spreadsheet"
-      ],
-      "version": "97e06f992f37fcbde97556053fcf874656cfd60c44c38431177a41a67a3fa24a",
-      "fileCount": 4,
-      "totalBytes": 14677,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "f8b223e25343559f57e1839ccd849fd1494a9729da33da04bb5074b7f80f4887",
-          "size": 219
-        },
-        {
-          "path": "assets/pdf.png",
-          "sha256": "17da356d195d4e3fa24f9becbee6b8d9e60e13005762b5ab0809c520c76da6ee",
-          "size": 1312
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
-          "size": 10776
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "99b57e9f722fabfab9307dbbca1ca2b7480f620fefad55c31de47e932bec92eb",
-          "size": 2370
         }
       ]
     },
@@ -3563,12 +2425,11 @@
         "sourceUrl": null
       },
       "related": [
-        "design-reference-research",
-        "notion"
+        "design-reference-research"
       ],
-      "version": "6f1ff1e843ee249cc4440ed1d9596599dd0801db849ee832f17c4e2b4fe55538",
+      "version": "b4de539a2272b8ac003da95b82a7ed67ff5d1a0f0ea77980e1b27bf3199475eb",
       "fileCount": 3,
-      "totalBytes": 11052,
+      "totalBytes": 10957,
       "files": [
         {
           "path": "LICENSE.deep-research.txt",
@@ -3582,8 +2443,8 @@
         },
         {
           "path": "SKILL.md",
-          "sha256": "a4ff28256ad78de358a35033972ecd25f2888181c9894c4b5c2551b73771a684",
-          "size": 3114
+          "sha256": "408f88ff24df0fba8164460903906f8c0b580e2fd987efa93b531f6522c92be2",
+          "size": 3019
         }
       ]
     },
@@ -3633,98 +2494,6 @@
           "path": "STANDARDS.md",
           "sha256": "1430148d950627a83a2ed530c3b55381bbc6c97382b73b42d67b545260f759e8",
           "size": 9819
-        }
-      ]
-    },
-    {
-      "name": "yeknal-screenshot",
-      "slug": "screenshot",
-      "title": "Screenshots",
-      "purpose": "Captures desktop or system screenshots of the whole screen, one window or a region, for when the browser or tool can’t capture what you need.",
-      "description": "Capture a desktop or system screenshot (full screen, specific app or window, or a pixel region) when the user asks for one or no tool-specific capture exists.",
-      "tasks": [
-        "review"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You explicitly want a screenshot of the desktop or an app window.",
-        "Tool-specific capture isn’t available.",
-        "You need a precise region of the screen."
-      ],
-      "avoid": null,
-      "requirements": "Uses Python and operating-system capture tools.",
-      "example": {
-        "ask": "Take a screenshot of the simulator window.",
-        "outcome": "It finds the window, captures it and saves the image where you can open it."
-      },
-      "attribution": {
-        "credit": "Adapted from OpenAI’s published skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "playwright"
-      ],
-      "version": "80cf2fd04c11d7e0300314ca107a166f5241a3a65a000aee02966407c4962af3",
-      "fileCount": 11,
-      "totalBytes": 47964,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "f29638eb930e27d44846474620b0d817b4b77fb5d09caf27db269463ae45cfa8",
-          "size": 273
-        },
-        {
-          "path": "assets/screenshot-small.svg",
-          "sha256": "b0ff24097dfcd889504fab312a0e20d1d79dde0745268647a8cc2471b4baf794",
-          "size": 1019
-        },
-        {
-          "path": "assets/screenshot.png",
-          "sha256": "4ff96a476f2a2ac4ca7b626f9d4b78a7aa8cce0219e0688c5f15355513b61b5b",
-          "size": 860
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
-          "size": 10776
-        },
-        {
-          "path": "scripts/ensure_macos_permissions.sh",
-          "sha256": "9aa750f1e9592519d6c18b966fd65c1d4108c25bd3471ce625dfafd784856d7f",
-          "size": 1702
-        },
-        {
-          "path": "scripts/macos_display_info.swift",
-          "sha256": "0969cfef9c9890c82cae5ad75a6cd40fd56d33b28f27347642ef5e837f18b042",
-          "size": 482
-        },
-        {
-          "path": "scripts/macos_permissions.swift",
-          "sha256": "cf110651350e50d600268f0a1a892ac8d662505474b4455cdfde2ac5b5f4aca6",
-          "size": 929
-        },
-        {
-          "path": "scripts/macos_window_info.swift",
-          "sha256": "c7faff7913d6072284b7ef1e5d26c524ab861ad32afc0c066f24ba95ae3f3597",
-          "size": 3595
-        },
-        {
-          "path": "scripts/take_screenshot.ps1",
-          "sha256": "a31a2242e41fd1c5471651afbcced660f98fbc884f11e531218348f700a3f826",
-          "size": 4947
-        },
-        {
-          "path": "scripts/take_screenshot.py",
-          "sha256": "56eeabe2dac5d23915b9a0fb57a07431fad2d310c5444f60f71f09299899232b",
-          "size": 19659
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "1da3ce7d93a690910cb15cefcfe695c1d5eb25b326fbc2fe16d18424ee5df9f8",
-          "size": 3722
         }
       ]
     },
@@ -4118,144 +2887,6 @@
       ]
     },
     {
-      "name": "yeknal-slides",
-      "slug": "slides",
-      "title": "Slide decks",
-      "purpose": "Creates and edits PowerPoint decks with PptxGenJS, including charts and diagrams, and checks rendered slides for overflow and font problems.",
-      "description": "Create and edit PowerPoint decks (`.pptx`) with PptxGenJS plus bundled layout, render, and validation helpers. Use to build a deck, recreate slides from screenshots or PDFs, or diagnose overflow, overlap, and font substitution.",
-      "tasks": [
-        "docs"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You need a new .pptx deck built.",
-        "Slides should be recreated from screenshots or a PDF.",
-        "Text overflows or fonts change when the deck opens elsewhere."
-      ],
-      "avoid": null,
-      "requirements": "Uses Node.js, Python and LibreOffice for rendering checks.",
-      "example": {
-        "ask": "Make a ten-slide deck from this project update, with one chart.",
-        "outcome": "It builds an editable deck with the chart, renders every slide and fixes overflow before handing it over."
-      },
-      "attribution": {
-        "credit": "Adapted from Anthropic’s document skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "doc",
-        "pdf"
-      ],
-      "version": "90154708c83f1931417a02d349637eb2c6cf02744dbe0864e8402e33a1910f78",
-      "fileCount": 20,
-      "totalBytes": 167238,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "c99c7732abdfb661435dd3c61067070a1a7b33bbd582a32fd3a0bf10ec3c2dde",
-          "size": 283
-        },
-        {
-          "path": "assets/pptxgenjs_helpers/code.js",
-          "sha256": "c80e641cbb1d16d1ca15bd9b1a5a595597825cd435cb4024cc95617a82109f0f",
-          "size": 2288
-        },
-        {
-          "path": "assets/pptxgenjs_helpers/image.js",
-          "sha256": "b9034d39cc330b2e4d963b36c521a99b9fee56b6f79b81d342906d7e061e70d6",
-          "size": 9262
-        },
-        {
-          "path": "assets/pptxgenjs_helpers/index.js",
-          "sha256": "4416b22333646a1a0e0c4d63e34ca92c853323b410a9489250ffbcf4ccab7184",
-          "size": 697
-        },
-        {
-          "path": "assets/pptxgenjs_helpers/latex.js",
-          "sha256": "abc4a111bf3fe0248a67d307a57e532c9a72591f71922ec198a1b6b14db47700",
-          "size": 1815
-        },
-        {
-          "path": "assets/pptxgenjs_helpers/layout_builders.js",
-          "sha256": "e66d671e7edac49ded358d26f7929718019be72e031a090d957a31b4945ebbc3",
-          "size": 10823
-        },
-        {
-          "path": "assets/pptxgenjs_helpers/layout.js",
-          "sha256": "774076d2671697c56c9df7d968c7f46be337dd7d63508d75e0f6976237a5db96",
-          "size": 23013
-        },
-        {
-          "path": "assets/pptxgenjs_helpers/svg.js",
-          "sha256": "911725defa53b54123d61f457707a163f8e41ffc06e9148c13f12ba8a0834ba7",
-          "size": 941
-        },
-        {
-          "path": "assets/pptxgenjs_helpers/text.js",
-          "sha256": "ba5f0e38929bd9a826397ca597618a23b89561a2c2f097d3289f5364611c7ccf",
-          "size": 27274
-        },
-        {
-          "path": "assets/pptxgenjs_helpers/util.js",
-          "sha256": "49554b6376f5bad986283fb78a4ecc55b33f17826348689bb7d0f13eb4e24dc2",
-          "size": 373
-        },
-        {
-          "path": "assets/slides-small.svg",
-          "sha256": "1e9354b508ece05e8902520826c6b6f48aa289335fa7759baf1c444b6be1cdab",
-          "size": 2489
-        },
-        {
-          "path": "assets/slides.png",
-          "sha256": "879c4ff68c3930ea609b4d9f018a91756a785fb263c30994b05ac53c6f1ca6a8",
-          "size": 1868
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "c16f8dcf1a368b83be78d826ea23de4079fe1b4469a0ab9ee20563f37ff3d44b",
-          "size": 11351
-        },
-        {
-          "path": "references/pptxgenjs-helpers.md",
-          "sha256": "7aabd51f5cd85614d90c24ced9c5d9a152d87ff103eb143ce1fb551581c335ea",
-          "size": 3037
-        },
-        {
-          "path": "scripts/create_montage.py",
-          "sha256": "dd9688825147be710608b1511b2adfd774062027633980799bdf8a675b4a875f",
-          "size": 10323
-        },
-        {
-          "path": "scripts/detect_font.py",
-          "sha256": "07537d7181f79fb65e84810604ddd814165d1ac90481b208bb8b206048aa637d",
-          "size": 34800
-        },
-        {
-          "path": "scripts/ensure_raster_image.py",
-          "sha256": "3708b8ade8c7d6c46bb0915fbdfdbbd9880725db06aeb822ccebecc434ebe835",
-          "size": 6364
-        },
-        {
-          "path": "scripts/render_slides.py",
-          "sha256": "a5fd2d975233e69f55c87c84a54b6ce5990a52e78293db5412bdc44cd528b4ea",
-          "size": 9484
-        },
-        {
-          "path": "scripts/slides_test.py",
-          "sha256": "916882b8a88b7fe39e76c9009cbef3afa6a29a9e626d160b198c04f7f6a6a69b",
-          "size": 6400
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "4488bc406b6bf0e888575586b04176c69a81b7ee32e2d1eeff16ff2d57afaa6c",
-          "size": 4353
-        }
-      ]
-    },
-    {
       "name": "yeknal-slopscan",
       "slug": "slopscan",
       "title": "Slop scan",
@@ -4296,315 +2927,6 @@
           "path": "SKILL.md",
           "sha256": "16c7750954473a22ee1640c08b1f25c8d44a8ebadf1fc3e897ec4907bd142165",
           "size": 4986
-        }
-      ]
-    },
-    {
-      "name": "yeknal-sora",
-      "slug": "sora",
-      "title": "Sora video",
-      "purpose": "Generates, edits, extends and downloads Sora videos, and runs batches of video jobs through a bundled command-line tool.",
-      "description": "Generate, edit, extend, poll, download, or delete Sora videos, build non-human character references, and run local video queues with the bundled CLI. Use for AI video requests; requires `OPENAI_API_KEY` and Sora API access.",
-      "tasks": [
-        "media"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You want a short AI-generated video.",
-        "An existing Sora clip needs editing or extending.",
-        "You are planning a batch of related videos."
-      ],
-      "avoid": null,
-      "requirements": "Needs an OPENAI_API_KEY with Sora API access.",
-      "example": {
-        "ask": "Generate a five-second loop of coffee being poured for the landing page.",
-        "outcome": "It writes the prompt, submits the job, waits for it and downloads the video and thumbnail."
-      },
-      "attribution": {
-        "credit": "Adapted from OpenAI’s published skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "imagegen",
-        "speech"
-      ],
-      "version": "15877004e7ca115d9f9829f97fc94daf9a1bad91de483d59c4f6be03bb28d2ba",
-      "fileCount": 14,
-      "totalBytes": 105924,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "d9012cc092f961b0bb956e4fe2220caed1f7a7f8f654a4ef88af254ed8aef20b",
-          "size": 350
-        },
-        {
-          "path": "assets/sora-small.svg",
-          "sha256": "fecb5ef27b4b01028892a28a621c60d948595e9b38b542d47b5b97a3147d341d",
-          "size": 1784
-        },
-        {
-          "path": "assets/sora.png",
-          "sha256": "c0d8a1e9c9dce967f4aea9b6195b95aa1a8cd06bfd57b8da27542654a7b4ba43",
-          "size": 11731
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
-          "size": 10776
-        },
-        {
-          "path": "references/cinematic-shots.md",
-          "sha256": "c7e827b1c03e01da7cc24c89f843a820b6151e250c67a51b06be75c42d186446",
-          "size": 1655
-        },
-        {
-          "path": "references/cli.md",
-          "sha256": "9926249d6cbc214ebb86665b5da0edf2974dc4d82b45105701d39259b6885b31",
-          "size": 7199
-        },
-        {
-          "path": "references/codex-network.md",
-          "sha256": "923fce6a135ea02b7119292418490ee4bf5764104fcb69aaabd89baa8fde57c4",
-          "size": 1146
-        },
-        {
-          "path": "references/prompting.md",
-          "sha256": "ed8cf86c87015e9bce62e0c894731ad85c10606b9d298d8ef4902f3d4a4b823e",
-          "size": 6239
-        },
-        {
-          "path": "references/sample-prompts.md",
-          "sha256": "b701351dd71256078ad39a037f895cf5c20ec49a68bf1da7f488672331a4d7d3",
-          "size": 5227
-        },
-        {
-          "path": "references/social-ads.md",
-          "sha256": "bc79e56ee044ccf676add6b5e879ec984a9c138a796b28d7df71f217beb1d7f7",
-          "size": 1464
-        },
-        {
-          "path": "references/troubleshooting.md",
-          "sha256": "38525a193d911320af42b87407986e10aa6d4466d38ba730afd2e794bfa3bdd8",
-          "size": 3753
-        },
-        {
-          "path": "references/video-api.md",
-          "sha256": "50a1ef1281b0272ec17615f06d6431bcd5001750fecb057562c6dd5de4ce2a90",
-          "size": 3743
-        },
-        {
-          "path": "scripts/sora.py",
-          "sha256": "a5eeb0120d6b548cec244647ca76ecdc24cb38241b7d28fa25c479d0b8e4b5eb",
-          "size": 42980
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "a1a9d30bdcb1e4f9402660e2ee83aca974c6a8e83b6bd9a32a76121d76f991af",
-          "size": 7877
-        }
-      ]
-    },
-    {
-      "name": "yeknal-spreadsheet",
-      "slug": "spreadsheet",
-      "title": "Spreadsheets",
-      "purpose": "Creates, edits, analyses and formats spreadsheets in .xlsx, .csv and .tsv, keeping formulas working and checking the result visually.",
-      "description": "Use when tasks involve creating, editing, analyzing, or formatting spreadsheets (`.xlsx`, `.csv`, `.tsv`) with formula-aware workflows, cached recalculation, and visual review.",
-      "tasks": [
-        "docs"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You need a spreadsheet built with working formulas.",
-        "Messy data needs cleaning or reformatting.",
-        "You want charts or summaries from tabular data."
-      ],
-      "avoid": null,
-      "requirements": "Uses Python with openpyxl, plus LibreOffice for recalculation and rendering.",
-      "example": {
-        "ask": "Turn this CSV export into a formatted budget sheet with monthly totals.",
-        "outcome": "It builds the workbook with formulas and formatting, recalculates it and checks the rendered sheet."
-      },
-      "attribution": {
-        "credit": "Adapted from Anthropic’s document skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "jupyter-notebook",
-        "pdf"
-      ],
-      "version": "18f668a10f8256f1b91aa2a3b4cb4180bb165c1f05d0b6f25aaca7d6bc395a5c",
-      "fileCount": 9,
-      "totalBytes": 29320,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "47a60ed62c8f9c58583af95c51fc82f713c58f13e0848a060c78c7ebc00db90d",
-          "size": 334
-        },
-        {
-          "path": "assets/spreadsheet-small.svg",
-          "sha256": "403c95e0cea6f994221d3b6281ea4eb2ab15a0dd2c1156f2d412b4744df62f6b",
-          "size": 1477
-        },
-        {
-          "path": "assets/spreadsheet.png",
-          "sha256": "a5771930cd28ff46e6ed53aa8a08a25902ed71178d1cac642c178f659638d7aa",
-          "size": 3077
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
-          "size": 10776
-        },
-        {
-          "path": "references/examples/openpyxl/create_basic_spreadsheet.py",
-          "sha256": "7c291b6230c9809145c8f7f216fd2b7d099b16b89d3fae0ab4d5a3d990c05418",
-          "size": 1456
-        },
-        {
-          "path": "references/examples/openpyxl/create_spreadsheet_with_styling.py",
-          "sha256": "fbfd41b9eca17f0f274f4ce7bd8ead6bc9292d764fe3bc325a1fca57dbe954ea",
-          "size": 3180
-        },
-        {
-          "path": "references/examples/openpyxl/read_existing_spreadsheet.py",
-          "sha256": "cf2f24d90174d92bd9044e95035ab4cf2e34a5faa355a2fa1898e49088e9ad02",
-          "size": 1622
-        },
-        {
-          "path": "references/examples/openpyxl/styling_spreadsheet.py",
-          "sha256": "5427ca11beb2b408a5dede6af1fa868fa131ad2a435d40bb88e52c4a8de7bc67",
-          "size": 1998
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "5b32c6b72edcb04cf4d805a2b3788a0d22bac56db33955725320343aeb057d01",
-          "size": 5400
-        }
-      ]
-    },
-    {
-      "name": "yeknal-speech",
-      "slug": "speech",
-      "title": "Text to speech",
-      "purpose": "Turns text into narration or voiceover with the OpenAI Audio API’s built-in voices, including batches for longer scripts.",
-      "description": "Generate text-to-speech narration, voiceover, IVR prompts, or accessibility reads with the OpenAI Audio API and built-in voices. Use for spoken-audio requests; requires `OPENAI_API_KEY`. Custom voice creation is out of scope.",
-      "tasks": [
-        "media"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You need narration for a video or demo.",
-        "You want an audio version of written content.",
-        "Several clips should share the same voice."
-      ],
-      "avoid": "Creating custom voices is out of scope.",
-      "requirements": "Uses Python and needs an OPENAI_API_KEY for live calls.",
-      "example": {
-        "ask": "Record a calm voiceover for this 60-second product script.",
-        "outcome": "It picks a suitable voice, generates the audio and saves it ready to drop into your edit."
-      },
-      "attribution": {
-        "credit": "Adapted from OpenAI’s published skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "transcribe",
-        "sora"
-      ],
-      "version": "97ccbeb71985e4591edeb9cabeb094d3bbf4f35931c20bd5359137f9220670f1",
-      "fileCount": 16,
-      "totalBytes": 47304,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "1a152d9e7e66b86100db33b8e6ff3327955bf107bb9e77044a1ad6dfb10d6e18",
-          "size": 299
-        },
-        {
-          "path": "assets/speech-small.svg",
-          "sha256": "b879fe9fc476f183e1c9bfd0e2883b8b2c28c708ca3d90f409bed051fe6a173e",
-          "size": 742
-        },
-        {
-          "path": "assets/speech.png",
-          "sha256": "b5abb383bba63a309f73a4da1060b50b6c92b1b5f974f44b8f609b3da10112f9",
-          "size": 1234
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
-          "size": 10776
-        },
-        {
-          "path": "references/accessibility.md",
-          "sha256": "34cd91bc6a3ef65c8da8997e312d163babcdfc3241f9e359418b3f5a76f15b76",
-          "size": 696
-        },
-        {
-          "path": "references/audio-api.md",
-          "sha256": "dba58cfc0d5e125cf1ac13875193950233aa948639b268ed7799ca17bca66bfe",
-          "size": 902
-        },
-        {
-          "path": "references/cli.md",
-          "sha256": "77e6a0c01036ac0092cf37c3d5c88dc6800b223524c5b9c8920d10fc4f68e0cc",
-          "size": 3275
-        },
-        {
-          "path": "references/codex-network.md",
-          "sha256": "c956a51d3e67246cfb43982aa8c82065350fcce4ef7b94bd89e599c575c94d9c",
-          "size": 1148
-        },
-        {
-          "path": "references/ivr.md",
-          "sha256": "2aaf225b7cea9277fe5413eb0360a845de035c00ea0d6f30348b5ce7138803fc",
-          "size": 708
-        },
-        {
-          "path": "references/narration.md",
-          "sha256": "3e68829fe4a5a47c3d37cbe9a1ed95ff3cedf1b303ff02a10501e56ad5e7c74a",
-          "size": 671
-        },
-        {
-          "path": "references/prompting.md",
-          "sha256": "2adcb001813be04e56918eb0d34d9a45f9326aa0fb240526ae74a926522b6554",
-          "size": 1553
-        },
-        {
-          "path": "references/sample-prompts.md",
-          "sha256": "c14e1b1c526f2fe555ab2dc86c0e8aead33d38238d2bfcfbf9de0c18d28bde03",
-          "size": 991
-        },
-        {
-          "path": "references/voice-directions.md",
-          "sha256": "5da0a4c59bdadb47d1795f51a9708b515fbf2901f0ca808cc5c66d83a336986d",
-          "size": 2155
-        },
-        {
-          "path": "references/voiceover.md",
-          "sha256": "a4bb96c31c8be6a62d35a103f9d7fc700b8004df2efd10595d00b63f0c096486",
-          "size": 790
-        },
-        {
-          "path": "scripts/text_to_speech.py",
-          "sha256": "0000014efdf1194512c017ffa0d0574ae65881f6a1340b7ed822053b6e3d3c44",
-          "size": 15592
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "05534590acb6558284df36a20220f7194213ac0d5863768c73c6ebb5092093f1",
-          "size": 5772
         }
       ]
     },
@@ -4668,79 +2990,6 @@
           "path": "SKILL.md",
           "sha256": "9c4c8f493750445d6e503f9fce94f5ffb0aeaa52f9b4cf4a6e2e78769062675b",
           "size": 5384
-        }
-      ]
-    },
-    {
-      "name": "yeknal-transcribe",
-      "slug": "transcribe",
-      "title": "Transcribe audio",
-      "purpose": "Transcribes audio and video recordings to text, with optional speaker labels and hints for speakers you already know.",
-      "description": "Transcribe audio files to text with optional diarization and known-speaker hints. Use when a user asks to transcribe speech from audio/video, extract text from recordings, or label speakers in interviews or meetings.",
-      "tasks": [
-        "media",
-        "docs"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You have an interview or meeting recording to turn into text.",
-        "Speakers need labelling in the transcript.",
-        "You want text extracted from a video’s audio."
-      ],
-      "avoid": null,
-      "requirements": "Uses Python and needs an OPENAI_API_KEY.",
-      "example": {
-        "ask": "Transcribe this interview and label the two speakers.",
-        "outcome": "It transcribes the recording, separates the speakers and saves a clean transcript."
-      },
-      "attribution": {
-        "credit": "Adapted from OpenAI’s published skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "speech"
-      ],
-      "version": "8eb04d8d41c8c1925d573972661bfe1591d34fc2a3e4b2f50a924228b23c4f18",
-      "fileCount": 7,
-      "totalBytes": 24798,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "fe7a20b9c03ce027e2f3023a4fd363c2d958ceeae1b7daaef77d1f6d055d97a4",
-          "size": 414
-        },
-        {
-          "path": "assets/transcribe-small.svg",
-          "sha256": "7d67890abf0f145a77f5fb87752bb6337b394fd4e26f5969c57d82d40e369a14",
-          "size": 750
-        },
-        {
-          "path": "assets/transcribe.png",
-          "sha256": "0860df58af6b9e58f4445a81baca7bfd94029a447742ae9b9e896e7c5b748688",
-          "size": 1288
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
-          "size": 10776
-        },
-        {
-          "path": "references/api.md",
-          "sha256": "a2bf7e59d69aa127b176255c5c01afbafda4e3029b12b4413e75074233ffb36d",
-          "size": 457
-        },
-        {
-          "path": "scripts/transcribe_diarize.py",
-          "sha256": "d623b1fed1491b7ca4b7b5b393089165e3581a83d90d5a57868241f1b2a5d951",
-          "size": 8684
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "7907f32de6b820af336c60710eeeebe0009cc7c7a9498501d24e0ed9853ffdce",
-          "size": 2429
         }
       ]
     },
@@ -4919,347 +3168,7 @@
           "size": 7917
         }
       ]
-    },
-    {
-      "name": "yeknal-develop-web-game",
-      "slug": "develop-web-game",
-      "title": "Web game development",
-      "purpose": "Gives your agent a reliable loop for building browser games: make a small change, play it through a Playwright script, then check screenshots and console errors.",
-      "description": "Build or iterate on a web game (HTML/JS) with a reliable dev and test loop: small changes, a Playwright action script, screenshot and text-state inspection, and console errors. Use when the deliverable is a browser game.",
-      "tasks": [
-        "build",
-        "review"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You are building or iterating on an HTML and JavaScript game.",
-        "Changes keep breaking gameplay and you want each one checked.",
-        "You need deterministic frame stepping for automated play."
-      ],
-      "avoid": null,
-      "requirements": "Written with Codex in mind and needs Playwright available.",
-      "example": {
-        "ask": "Add a double jump to the platformer and make sure nothing else broke.",
-        "outcome": "It implements the change, plays through the level with scripted input, inspects screenshots and fixes any console errors."
-      },
-      "attribution": {
-        "credit": "Adapted from OpenAI’s published skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "playwright",
-        "implement"
-      ],
-      "version": "c8b27ebdb88a9d144b503c5e039692b1934267ae0127f0de90e9f034316f4f2b",
-      "fileCount": 7,
-      "totalBytes": 34347,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "0962a160095830d7c6d7c6983ed023ebce93855f51c3e9a58cbba0c3d9ce07dd",
-          "size": 299
-        },
-        {
-          "path": "assets/game-small.svg",
-          "sha256": "c384984085a0d12baadc39ee05c4b3ecf22c8f04fe0a5d8227b00675742c249e",
-          "size": 2706
-        },
-        {
-          "path": "assets/game.png",
-          "sha256": "08382df5010120e47f06e6c32e7e990bb8f3bc473c07f7191b7c11484272635d",
-          "size": 2234
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
-          "size": 10776
-        },
-        {
-          "path": "references/action_payloads.json",
-          "sha256": "7c6915472781be9cc704bb12952577bd66ae4c073d294459d564a8d45f98671c",
-          "size": 141
-        },
-        {
-          "path": "scripts/web_game_playwright_client.js",
-          "sha256": "e95c3bcbdc0d15eb08fd3a6021283ec32f715b51f1e5847d3db20df526be5996",
-          "size": 9963
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "66c50d1f596cdfdb2f6a493eb976e7af8d3831fe372d39c4e683ec2f97f27a9b",
-          "size": 8228
-        }
-      ]
-    },
-    {
-      "name": "yeknal-imagegen-frontend-web",
-      "slug": "imagegen-frontend-web",
-      "title": "Website concept images",
-      "purpose": "Generates website concept images for landing pages and sections that developers can actually read and build from.",
-      "description": "Generate implementation-readable website concept images for landing pages, marketing sites, product pages, and single sections. Use when the user wants visual concepts, not code; not for turning an image into code (`yeknal-image-to-code`).",
-      "tasks": [
-        "media",
-        "design"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": false,
-      "whenToUse": [
-        "You want visual concepts for a site rather than code.",
-        "A page needs its section order worked out from real content.",
-        "Developers need section-sized images with readable detail."
-      ],
-      "avoid": null,
-      "requirements": "Needs an image-generation tool available to your agent.",
-      "example": {
-        "ask": "Give me concept images for a landing page for our invoicing tool.",
-        "outcome": "It works out the page sections from your content and generates readable images for each one."
-      },
-      "attribution": {
-        "credit": "Adapted from Leonxlnx’s taste-skill collection.",
-        "license": "MIT",
-        "sourceUrl": "https://github.com/leonxlnx/taste-skill"
-      },
-      "related": [
-        "image-to-code",
-        "imagegen-frontend-mobile"
-      ],
-      "version": "a99ca5ecf25c3d78077d485247b7661fc19f74a6eb1c58839b76ce54e8316793",
-      "fileCount": 3,
-      "totalBytes": 36200,
-      "files": [
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
-          "size": 1065
-        },
-        {
-          "path": "references/web-art-direction-system.md",
-          "sha256": "16a85d5837f9918950d7c7dd6dcc0ba28bd5e83f8215facbe91cb64be6539348",
-          "size": 23102
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "b6467784e2b12482ad9faba47ab6cf3270828ec9816ac97124cf0d5c285d57fb",
-          "size": 12033
-        }
-      ]
-    },
-    {
-      "name": "yeknal-winui-app",
-      "slug": "winui-app",
-      "title": "WinUI apps",
-      "purpose": "Creates and develops WinUI 3 desktop apps in C# with the Windows App SDK, following Microsoft’s guidance and WinUI Gallery patterns.",
-      "description": "Bootstrap, develop, and review WinUI 3 desktop apps with C# and the Windows App SDK, using Microsoft guidance, WinUI Gallery patterns, and CommunityToolkit. Use for setup, new apps, XAML, controls, navigation, theming, and deployment.",
-      "tasks": [
-        "build",
-        "design"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You are starting a new Windows desktop app.",
-        "A machine needs setting up for WinUI development.",
-        "XAML controls, navigation or theming need work."
-      ],
-      "avoid": null,
-      "requirements": "Needs Windows with the .NET SDK and Windows App SDK.",
-      "example": {
-        "ask": "Create a WinUI 3 app with a navigation view and light and dark themes.",
-        "outcome": "It checks the environment, scaffolds the app and sets up navigation and theming the recommended way."
-      },
-      "attribution": {
-        "credit": "Adapted from Microsoft’s WinUI skill.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "aspnet-core"
-      ],
-      "version": "14f4f2cefc64aa1331684f4eca91ca7e2ff31665c5152d907b1a2c6b11607182",
-      "fileCount": 21,
-      "totalBytes": 85642,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "78ce2654ae038782bc270a6a6474f3cbf7df10889d646882dd140ab6c42346f4",
-          "size": 202
-        },
-        {
-          "path": "assets/winui.png",
-          "sha256": "c5ad3df6585bcbf596060e451c4b8141c3492d664a04a2041d9bd8b60445c87f",
-          "size": 8770
-        },
-        {
-          "path": "config.yaml",
-          "sha256": "fd335882f053f82290342f2f49fae4b1bf3deb2317cf2c23298e119d5c5f17da",
-          "size": 2515
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
-          "size": 11357
-        },
-        {
-          "path": "references/_sections.md",
-          "sha256": "54f055a86da3ef06e50a857ca9ab4cc256f5938a247774377d6d037045a2feda",
-          "size": 4279
-        },
-        {
-          "path": "references/accessibility-input-and-localization.md",
-          "sha256": "62d03a806ce883ac4ef58947a1f0b173011dbfbfcfb0cb992cca95b8c25696a3",
-          "size": 2026
-        },
-        {
-          "path": "references/build-run-and-launch-verification.md",
-          "sha256": "a6e15a7fbc7969a5e716653bc7848a974ed9471b1fef914ff70778c3c80c2c24",
-          "size": 4332
-        },
-        {
-          "path": "references/community-toolkit-controls-and-helpers.md",
-          "sha256": "abb4dd07d96094bf37b928d3769b52d23b411e45e76221ee0008ef6565dfc449",
-          "size": 1954
-        },
-        {
-          "path": "references/controls-layout-and-adaptive-ui.md",
-          "sha256": "90d2087e73aa617cea8c853f5d8b2440b5e5eb6f3c9e55fedd84e7bf4be7ee15",
-          "size": 6012
-        },
-        {
-          "path": "references/foundation-environment-audit-and-remediation.md",
-          "sha256": "8bd585792a576a40c882918916135789dc84eb6e319fbb5ee4ebd2fbedc38928",
-          "size": 3730
-        },
-        {
-          "path": "references/foundation-setup-and-project-selection.md",
-          "sha256": "4440a2a6babd2c293d6f0efc7fb3a6975b2978e711295924ecf145e139124a72",
-          "size": 4412
-        },
-        {
-          "path": "references/foundation-template-first-recovery.md",
-          "sha256": "6718919c530b0bb0c4abc8aea7f56564412db58e60d8e3bfd282dabc86d5d94b",
-          "size": 3381
-        },
-        {
-          "path": "references/foundation-winui-app-structure.md",
-          "sha256": "5d2a8e8ca4a7e7058722566622bddca98ae18c136c0c3f76dd0a5edfb78cd51c",
-          "size": 2479
-        },
-        {
-          "path": "references/motion-animations-and-polish.md",
-          "sha256": "d22b9b919bdc9dd5674da28b5980988a41e1cc5ee37182c0a470268b9d126134",
-          "size": 1577
-        },
-        {
-          "path": "references/performance-diagnostics-and-responsiveness.md",
-          "sha256": "01d47d229c1903b875e6dc0b55d0935963afed2bd99b65638a06bfdfe931359e",
-          "size": 1759
-        },
-        {
-          "path": "references/sample-source-map.md",
-          "sha256": "fd03ee0e1abd41bd3cf2fa7f5131686498597d56122f219742854ac4d33f0ce2",
-          "size": 2201
-        },
-        {
-          "path": "references/shell-navigation-and-windowing.md",
-          "sha256": "3fda8c2dc98c710c08f901d83475391d53bb6e92fa2ace140693f5783380bf71",
-          "size": 3551
-        },
-        {
-          "path": "references/styling-theming-materials-and-icons.md",
-          "sha256": "14c9b4aff55d63a8afc3501643a8fc0e75056f0cdd55331f356d50ad6ad45014",
-          "size": 3948
-        },
-        {
-          "path": "references/testing-debugging-and-review-checklists.md",
-          "sha256": "1e3e2890e14f3216cf6485839592293d5b02652da19453a460cfa2368e89fb10",
-          "size": 4288
-        },
-        {
-          "path": "references/windows-app-sdk-lifecycle-notifications-and-deployment.md",
-          "sha256": "099ee45361e1d0ef5c017b08bda43699e578dad615e27438591798a95e353009",
-          "size": 2731
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "f0eb6a13e577ea6c7e5e8f122a21386bb3555e8493c5c6b76d05d3e33ab76904",
-          "size": 10138
-        }
-      ]
-    },
-    {
-      "name": "yeknal-doc",
-      "slug": "doc",
-      "title": "Word documents",
-      "purpose": "Reads, creates and edits .docx files where formatting matters, and renders pages to check the layout visually.",
-      "description": "Read, create, or edit `.docx` documents where formatting and layout fidelity matter; prefer `python-docx` plus the bundled `scripts/render_docx.py` for visual checks.",
-      "tasks": [
-        "docs"
-      ],
-      "featuredRank": -1,
-      "compatibility": false,
-      "internal": true,
-      "whenToUse": [
-        "You need a Word document generated or edited.",
-        "Layout fidelity matters, such as headings, tables and page breaks.",
-        "You want to check how a document actually renders."
-      ],
-      "avoid": null,
-      "requirements": "Uses Python with python-docx, and Poppler or LibreOffice for rendering checks.",
-      "example": {
-        "ask": "Turn these meeting notes into a formatted Word report with a table of actions.",
-        "outcome": "It builds the document with proper styles and a table, renders it and fixes any layout problems."
-      },
-      "attribution": {
-        "credit": "Adapted from Anthropic’s document skills.",
-        "license": "Apache-2.0",
-        "sourceUrl": null
-      },
-      "related": [
-        "pdf",
-        "slides",
-        "spreadsheet"
-      ],
-      "version": "44d2d4712409d2e17a9294520bb32f5a4f4c45c9be092ec6ddbe2e55ff31c542",
-      "fileCount": 6,
-      "totalBytes": 26467,
-      "files": [
-        {
-          "path": "agents/openai.yaml",
-          "sha256": "b77d452b23dfa0bef7788728317254f07bddcd5f2be1d6678d5c3cf754b833ae",
-          "size": 271
-        },
-        {
-          "path": "assets/doc-small.svg",
-          "sha256": "bd5415fbbfe72c66c1527411d61625731fdd2f75b25d1542510b6ddef699ebe0",
-          "size": 1678
-        },
-        {
-          "path": "assets/doc.png",
-          "sha256": "7eadf1088e5062f681dba6596173a1df13bbfbcddd8a8a9bb78fd2071947dcf8",
-          "size": 1211
-        },
-        {
-          "path": "LICENSE.txt",
-          "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
-          "size": 10776
-        },
-        {
-          "path": "scripts/render_docx.py",
-          "sha256": "52b3c3158913ebcad2ada7b8193970b70453239e255054aa2d60c1683af08751",
-          "size": 9700
-        },
-        {
-          "path": "SKILL.md",
-          "sha256": "894938637312073b308df10f3773dfc510f084874fe95f4380fd1f9ec0e1cf16",
-          "size": 2831
-        }
-      ]
     }
   ],
-  "snapshotHash": "afd8eae63135d16a6ae4f953a609b61fa7ef45cbd7cc6d811be2be0f8a100eb9"
+  "snapshotHash": "73a934a2b9b59afd694da9569efd4e362e39633a7c3b928a869d8ef3f5870663"
 }
