@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "repository": "tryraisins/MD_Files",
   "sourceRevision": "118956021dcf48fa608c2c013be9a6e9933f87ea",
-  "catalogCommit": "59bc2d7069625995425d203a6ca97e8e9ae6823b",
+  "catalogCommit": "899797c5b6c3b080714bed81930d9059731440bf",
   "cliVersion": "2.6.0",
   "counts": {
     "skills": 53,
@@ -47,20 +47,20 @@
     },
     {
       "id": "docs",
-      "label": "Docs and files",
-      "description": "Markdown, handoffs, office files, notebooks and Notion.",
+      "label": "Docs and handoffs",
+      "description": "Markdown, documentation, handoffs and research notes.",
       "count": 6
     },
     {
       "id": "media",
-      "label": "Images and media",
-      "description": "Generated images, video, speech and transcription.",
+      "label": "Brand and identity",
+      "description": "Brand boards, logo systems and visual identity.",
       "count": 1
     },
     {
       "id": "agents",
       "label": "Working with agents",
-      "description": "How agents load skills, split work and format answers.",
+      "description": "How agents split work, delegate and control cost.",
       "count": 3
     }
   ],
@@ -3170,5 +3170,5 @@
       ]
     }
   ],
-  "snapshotHash": "73a934a2b9b59afd694da9569efd4e362e39633a7c3b928a869d8ef3f5870663"
+  "snapshotHash": "05e205bab99eaa3fe37f9b33d12b59c4beda81c7f29e59b29165ed40c2298f61"
 }
