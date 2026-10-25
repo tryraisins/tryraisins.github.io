@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "repository": "tryraisins/MD_Files",
   "sourceRevision": "118956021dcf48fa608c2c013be9a6e9933f87ea",
-  "catalogCommit": "b25375a26c9ed0ec4afc71ea3a7f800822cd4b7d",
-  "cliVersion": "2.6.1",
+  "catalogCommit": "9eea2122cdddc1b6fbd8105cc4817aed211e4da8",
+  "cliVersion": "2.6.2",
   "counts": {
     "skills": 53,
     "internal": 5
@@ -3170,5 +3170,5 @@
       ]
     }
   ],
-  "snapshotHash": "ce27672d472317e937346806685b9e28fd90efb8bf28bb39602093bbb1a7db27"
+  "snapshotHash": "343de778f8f61ef82265df8168ac558fd7dfe7a9edb3eaf056ee61754a9ef30b"
 }
