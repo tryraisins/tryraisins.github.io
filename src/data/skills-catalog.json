@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "repository": "tryraisins/MD_Files",
-  "sourceRevision": "118956021dcf48fa608c2c013be9a6e9933f87ea",
-  "catalogCommit": "bcbf387d318a42a72f9608f3329cd52b399b87df",
-  "cliVersion": "2.6.3",
+  "sourceRevision": "086398a26e489bad4ba68cbd83dfd82aadb0bf49",
+  "catalogCommit": "7a98fb2469e6313c5037bb7a2be7234ef9b92666",
+  "cliVersion": "2.6.4",
   "counts": {
-    "skills": 53,
+    "skills": 54,
     "internal": 5
   },
   "tasks": [
@@ -13,7 +13,7 @@
       "id": "build",
       "label": "Plan and build",
       "description": "Shape an idea, then turn it into working code.",
-      "count": 10
+      "count": 11
     },
     {
       "id": "design",
@@ -61,7 +61,7 @@
       "id": "agents",
       "label": "Working with agents",
       "description": "How agents split work, delegate and control cost.",
-      "count": 3
+      "count": 4
     }
   ],
   "startingPoints": [
@@ -1097,6 +1097,61 @@
           "path": "SKILL.md",
           "sha256": "dbed2afdbea30b08a69882e5f4f7bf6e403d348a1e1b2c460b6d0e703679f7d8",
           "size": 1066
+        }
+      ]
+    },
+    {
+      "name": "yeknal-code-graph",
+      "slug": "code-graph",
+      "title": "Code graph",
+      "purpose": "Builds a local, model-free index of a repository and answers with a small ranked slice, so an unfamiliar codebase can be entered in one call instead of many searches.",
+      "description": "Use when a task starts in an unfamiliar or large repository and you need the right files in one call instead of many searches. Builds a zero-dependency local index of content terms plus imports, routes and tests, then answers with a small ranked slice inside a token budget. It is retrieval, not GraphRAG, and it never replaces grep for exhaustive matches.",
+      "tasks": [
+        "agents",
+        "build"
+      ],
+      "featuredRank": -1,
+      "compatibility": false,
+      "internal": false,
+      "whenToUse": [
+        "You are starting work in a large repository and do not know where a behavior lives.",
+        "The question is conceptual and searching for it would need several vocabulary guesses.",
+        "You need call sites, importers, or the tests that touch a route."
+      ],
+      "avoid": "It is not exhaustive and it is not GraphRAG. For every mention of a known identifier, use grep; for a small repository, grep is already one call.",
+      "requirements": null,
+      "example": {
+        "ask": "In this 300-file app, where does an uploaded CV get turned into text before review?",
+        "outcome": "It builds a local index, returns the parser function and its call sites with line numbers in one call, states that recall is partial, and reads the surrounding code before changing anything."
+      },
+      "attribution": {
+        "credit": "Written for this catalog.",
+        "license": null,
+        "sourceUrl": null
+      },
+      "related": [
+        "agent-cost-control",
+        "troubleshoot",
+        "orchestration-specialists"
+      ],
+      "version": "4a9d20c8511c4883d81883f750e9dcb2ea521064ae81d6b789f61dac5cad1f6b",
+      "fileCount": 3,
+      "totalBytes": 30022,
+      "files": [
+        {
+          "path": "references/measurements.md",
+          "sha256": "91efff02338c012b9fef85e2ef4647979e2dacc75ab1249339d6151d7443dc2f",
+          "size": 2847
+        },
+        {
+          "path": "scripts/codegraph.py",
+          "sha256": "a9515e335843ec375e668a58d3f65efbd3442d18e103a7e944bc1e9a82ccf61b",
+          "size": 22237
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "ecd4bbbc6d4464112e3000c3b45be6c5d5ad8d659d74f47ac75a93e419eeeae3",
+          "size": 4938
         }
       ]
     },
@@ -3170,5 +3225,5 @@
       ]
     }
   ],
-  "snapshotHash": "f8449c0dd615d5faa390a9d51a91540779c0985ef0b7dc79efd5bac6890301b2"
+  "snapshotHash": "ac6a9b84722c571a495155f23f6f8b8f49a83aa76972a84932c84f6132bb4df2"
 }
