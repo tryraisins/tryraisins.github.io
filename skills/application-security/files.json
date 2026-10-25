@@ -1,20 +1,20 @@
 {
   "name": "yeknal-application-security",
-  "sourceRevision": "8aa2a366d7ef340a2ee558db39deea342a7e94bc",
-  "source": "https://github.com/tryraisins/MD_Files/tree/8aa2a366d7ef340a2ee558db39deea342a7e94bc/skills/yeknal-application-security",
+  "sourceRevision": "118956021dcf48fa608c2c013be9a6e9933f87ea",
+  "source": "https://github.com/tryraisins/MD_Files/tree/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-application-security",
   "fileCount": 2,
   "files": [
     {
       "path": "Security-Master.md",
       "sha256": "8a158f7de38fb60df9c9433f9ca9956f395f9818003c4dcbcb4ab1638c44242d",
       "size": 17436,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/8aa2a366d7ef340a2ee558db39deea342a7e94bc/skills/yeknal-application-security/Security-Master.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-application-security/Security-Master.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "9614aa0e04a8d85e14d1009f1f84dc5e7f2e23902f22efa80d7598c0da37f4c8",
       "size": 10689,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/8aa2a366d7ef340a2ee558db39deea342a7e94bc/skills/yeknal-application-security/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-application-security/SKILL.md"
     }
   ]
 }

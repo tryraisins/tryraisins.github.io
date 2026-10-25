@@ -1,20 +1,20 @@
 {
   "name": "yeknal-review-animations",
-  "sourceRevision": "8aa2a366d7ef340a2ee558db39deea342a7e94bc",
-  "source": "https://github.com/tryraisins/MD_Files/tree/8aa2a366d7ef340a2ee558db39deea342a7e94bc/skills/yeknal-review-animations",
+  "sourceRevision": "118956021dcf48fa608c2c013be9a6e9933f87ea",
+  "source": "https://github.com/tryraisins/MD_Files/tree/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-review-animations",
   "fileCount": 2,
   "files": [
     {
       "path": "SKILL.md",
       "sha256": "35d518e3a181be767062b3fdfc9c5a6fc8d8ec7ad46088d96516d18b8d2f5632",
       "size": 7792,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/8aa2a366d7ef340a2ee558db39deea342a7e94bc/skills/yeknal-review-animations/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-review-animations/SKILL.md"
     },
     {
       "path": "STANDARDS.md",
       "sha256": "1430148d950627a83a2ed530c3b55381bbc6c97382b73b42d67b545260f759e8",
       "size": 9819,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/8aa2a366d7ef340a2ee558db39deea342a7e94bc/skills/yeknal-review-animations/STANDARDS.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/118956021dcf48fa608c2c013be9a6e9933f87ea/skills/yeknal-review-animations/STANDARDS.md"
     }
   ]
 }
