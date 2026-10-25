@@ -13,6 +13,19 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
 ---
 
 <div class="play-world" data-play-root>
+  <script is:inline>
+    // The hero paints normally under the sheet on a first visit, so the headline
+    // can be the LCP candidate instead of waiting for the entrance. Only the
+    // repeat path needs a hidden start, and it keeps a failsafe in case the page
+    // script never runs.
+    (function (world) {
+      world.setAttribute('data-hero-script', '');
+      if (document.documentElement.getAttribute('data-boot') !== 'pending') {
+        world.setAttribute('data-hero-enter', '');
+        setTimeout(function () { world.setAttribute('data-enter', ''); }, 4000);
+      }
+    })(document.currentScript.parentElement);
+  </script>
   <a class="play-skip" href="#play-desk">Skip to work</a>
   <div class="play-battlefield" data-battlefield aria-hidden="true"></div>
   <main id="play-top">
@@ -254,6 +267,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   import { mountDoodles } from "./doodle-notes.js";
   import { initContactReveal } from "../../scripts/contact-reveal";
   import { mountReel } from "./reel.js";
+  import { whenBootRevealed, whenBootDone } from "../../scripts/boot-overlay";
   const root = document.querySelector('[data-play-root]');
 
   if (root instanceof HTMLElement) {
@@ -262,8 +276,33 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     const revealTargets = [...root.querySelectorAll('[data-play-reveal]')];
     const battlefield = root.querySelector('[data-battlefield]');
     const hero = root.querySelector('.play-hero');
-    const disposeDoodles = mountDoodles(root);
-    document.addEventListener('astro:before-swap', disposeDoodles, { once: true });
+
+    // Entrance. Covers start hidden only once this script has run, so without
+    // JavaScript everything stays visible. The hero's hidden start is set by the
+    // inline script above on the repeat path; on a first visit it stays painted
+    // under the sheet and is hidden in the same task that starts the rise.
+    root.setAttribute('data-img-fade', '');
+    root.querySelectorAll('.play-photo img').forEach((img) => {
+      const show = () => img.setAttribute('data-loaded', '');
+      if (img.complete) show();
+      else {
+        img.addEventListener('load', show, { once: true });
+        img.addEventListener('error', show, { once: true });
+      }
+    });
+
+    // The hero rises as the sheet lifts. Doodles wait until the sheet is gone,
+    // so the first frame of the entrance is never blocked by the sketch pass.
+    let disposeDoodles = () => {};
+    document.addEventListener('astro:before-swap', () => disposeDoodles(), { once: true });
+    whenBootRevealed(() => {
+      // Both in one task: the animation starts from its own hidden first frame,
+      // so there is no flash between hiding and rising.
+      root.setAttribute('data-hero-enter', '');
+      root.setAttribute('data-enter', '');
+    });
+    whenBootDone(() => { disposeDoodles = mountDoodles(root); });
+
     if (!reduceMotion.matches) {
       root.dataset.motion = 'ready';
       const reveal = (target) => target.setAttribute('data-visible', '');
@@ -305,8 +344,12 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
           ring: createLaunchRing(root.querySelector('[data-launch-ring]')),
         });
       });
-      if ('requestIdleCallback' in window) requestIdleCallback(mountTops, { timeout: 600 });
-      else setTimeout(mountTops, 200);
+      // After the sheet has gone, so the three.js parse and compile cannot take
+      // the first frame of the entrance while the sheet is still moving.
+      whenBootDone(() => requestAnimationFrame(() => {
+        if ('requestIdleCallback' in window) requestIdleCallback(mountTops, { timeout: 600 });
+        else setTimeout(mountTops, 200);
+      }));
     }
   }
 </script>
@@ -422,6 +465,10 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-photo { min-width: 0; position: relative; overflow: hidden; display: grid; place-items: center; border: 1px solid rgba(23,23,25,.22); background: #ece8dc; }
   .play-photo picture, .play-photo img { width: 100%; height: 100%; display: block; }
   .play-photo img { object-fit: cover; object-position: top center; filter: saturate(.82); transition: filter 180ms ease, transform 180ms var(--play-ease-out); }
+  /* Covers fade in as they decode instead of popping into empty paper. The
+     guard attribute is added by the page script, so no-JS images stay visible. */
+  .play-world[data-img-fade] .play-photo img { opacity: 0; }
+  .play-world[data-img-fade] .play-photo img[data-loaded] { opacity: 1; transition: opacity 300ms ease, filter 180ms ease, transform 180ms var(--play-ease-out); }
   .play-unexposed { width: 100%; height: 100%; position: relative; isolation: isolate; display: grid; place-items: center; overflow: hidden; color: rgba(251,250,245,.88); background: linear-gradient(142deg, #111 0 23%, #343331 45%, #171719 72%); }
   .play-unexposed-glow { width: 36%; aspect-ratio: 1; border: 1px solid rgba(251,250,245,.7); border-radius: 50%; background: rgba(240,206,78,.16); filter: blur(10px); }
   .play-unexposed small { position: absolute; z-index: 1; bottom: 12px; left: 12px; font-size: 11px; line-height: 1; letter-spacing: .08em; }
@@ -536,7 +583,18 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-drawing-contact-b { right: 9%; bottom: 20px; --drawing-rotation: 2.2deg; }
 
   @media (prefers-reduced-motion: no-preference) {
-    .play-hero .play-hero-body { animation: play-rise 700ms var(--play-ease-out) both 90ms; }
+    /* Without the entrance below (script not run) the body still rises as one block. */
+    .play-world:not([data-hero-script]) .play-hero .play-hero-body { animation: play-rise 700ms var(--play-ease-out) both 90ms; }
+    /* Hero entrance: six lines rise in sequence once the notebook is open. The
+       hidden state only exists under [data-hero-enter], so no-JS stays visible. */
+    .play-hero-header { --enter-i: 0; }
+    .play-hero-kicker { --enter-i: 1; }
+    .play-hero h1 > span:first-child { --enter-i: 2; }
+    .play-hero h1 > span:last-child { --enter-i: 3; }
+    .play-intro p { --enter-i: 4; }
+    .play-hero-actions { --enter-i: 5; }
+    .play-world[data-hero-enter] :is(.play-hero-header, .play-hero-kicker, .play-hero h1 > span, .play-intro p, .play-hero-actions) { opacity: 0; }
+    .play-world[data-hero-enter][data-enter] :is(.play-hero-header, .play-hero-kicker, .play-hero h1 > span, .play-intro p, .play-hero-actions) { animation: play-enter 520ms var(--play-ease-out) both; animation-delay: calc(var(--enter-i) * 60ms); }
     .play-hero .play-launch { animation: play-fade 900ms var(--play-ease-out) both 260ms; }
     .play-world[data-motion='ready'] [data-play-reveal]:not([data-visible]) { opacity: 0; transform: translateY(20px); }
     .play-world[data-motion='ready'] [data-play-reveal] { transition: opacity 520ms var(--play-ease-out), transform 520ms var(--play-ease-out); }
@@ -758,6 +816,10 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
 
   @keyframes play-rise {
     from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes play-enter {
+    from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
   @keyframes play-fade {

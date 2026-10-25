@@ -1,6 +1,7 @@
 ---
 import '../styles/fonts.css';
 import Play from '../prototypes/portfolio-redesign/Play.astro';
+import BootOverlay from '../components/BootOverlay.astro';
 
 import quickBillzCover from '../assets/images/quickbillz-cover.png';
 import terrorTrackerCover from '../assets/images/terror-tracker-cover.png';
@@ -122,6 +123,7 @@ const seoSchema = {
     <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
+    <BootOverlay />
     <Play projects={projects} socials={socials} email="tryraisins@gmail.com" />
   </body>
 </html>

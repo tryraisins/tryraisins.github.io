@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import BootOverlay from '../components/BootOverlay.astro';
 
 interface Props {
   title?: string;
@@ -126,6 +127,7 @@ const collectionSchema = {
   </head>
 
   <body class="min-h-screen font-sans antialiased" style="background: #17130f; color: #f0e2c9;">
+    <BootOverlay />
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg" style="background: #c2593a; color: #f5ead5;">
       Skip to main content
     </a>

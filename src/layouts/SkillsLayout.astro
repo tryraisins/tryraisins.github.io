@@ -3,6 +3,7 @@
 // src/prototypes/portfolio-redesign/Play.astro so the library reads as part of
 // the same notebook.
 import { SITE_URL } from '../lib/skill-prompt';
+import BootOverlay from '../components/BootOverlay.astro';
 
 interface Props {
   title: string;
@@ -54,6 +55,7 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     <slot name="head" />
   </head>
   <body>
+    <BootOverlay />
     <div class="sk-world">
       <a class="sk-skip" href="#sk-main">Skip to content</a>
       <header class="sk-topbar">
