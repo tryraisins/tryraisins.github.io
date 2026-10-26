@@ -1,3 +1,5 @@
+import { clearMotion, createBody, endTurn, fxFor, measure, removeTrails, resetBody, inMotion, startTurn, step, travelling } from './doodle-world.js';
+
 const line = (...points) => points;
 const loop = (...points) => [...points, points[0]];
 const arc = (x, y, radius, start = 0, end = Math.PI * 2, steps = 30) => Array.from({ length: steps + 1 }, (_, index) => {
@@ -20,7 +22,7 @@ const hatch = (x, y, count, length = 6) => Array.from({ length: count }, (_, ind
 export const sketches = [
   { name: 'portrait', paths: [loop([28, 40], [29, 57], [36, 69], [51, 73], [66, 64], [73, 48], [69, 34], [53, 27], [37, 29], [28, 40]), line([27, 44], [23, 31], [31, 23], [36, 27], [40, 17], [47, 24], [52, 16], [60, 24], [66, 23], [76, 32], [73, 43]), arc(40, 46, 2), arc(58, 45, 2.4), curve([40, 58], [47, 65], [56, 63], [61, 55]), line([25, 91], [32, 81], [42, 77], [41, 69], [58, 69], [59, 77], [71, 81], [76, 91]), line([49, 47], [46, 54], [51, 54]), curve([30, 44], [21, 39], [19, 57], [31, 55]), curve([70, 41], [81, 36], [82, 54], [71, 53]), line([42, 77], [50, 85], [59, 77]), ...hatch(35, 29, 12, 7), line([35, 85], [36, 91]), line([67, 84], [66, 91])] },
   { name: 'cat', paths: [loop([30, 39], [33, 18], [47, 31], [58, 28], [72, 17], [72, 42], [67, 62], [51, 69], [34, 61]), arc(41, 46, 2), arc(60, 45, 2.3), loop([48, 51], [54, 51], [51, 55]), curve([51, 55], [49, 61], [41, 61], [40, 57]), curve([51, 55], [53, 61], [59, 60], [62, 56]), line([35, 51], [15, 45]), line([35, 55], [13, 57]), line([66, 50], [85, 43]), line([66, 55], [86, 57]), curve([64, 76], [85, 87], [89, 57], [78, 62]), curve([37, 63], [26, 94], [77, 95], [64, 63]), line([43, 75], [41, 87], [46, 87]), line([56, 74], [58, 87], [53, 87]), line([34, 29], [40, 35]), line([67, 29], [61, 34]), ...hatch(37, 35, 3), ...hatch(55, 32, 3)] },
-  { name: 'dinosaur', paths: [loop([18, 59], [30, 44], [47, 42], [58, 31], [68, 41], [82, 43], [72, 51], [77, 62], [62, 67], [58, 80], [51, 80], [49, 67], [39, 66], [35, 78], [28, 78], [29, 62]), line([61, 45], [64, 45]), line([20, 59], [10, 51]), line([45, 42], [41, 30]), line([52, 40], [49, 28])] },
+  { name: 'rhino', paths: [loop([16, 56], [22, 42], [38, 35], [56, 36], [66, 40], [76, 45], [86, 52], [84, 58], [74, 61], [64, 62], [62, 76], [56, 76], [54, 64], [38, 64], [36, 76], [30, 76], [28, 62], [18, 62]), arc(70, 49, 1.7), line([17, 53], [10, 57], [12, 61]), line([80, 49], [86, 33], [86, 51]), line([72, 45], [74, 38], [77, 46]), line([62, 40], [59, 31], [66, 37]), line([79, 58], [84, 57])] },
   { name: 'landscape', paths: [line([8, 71], [26, 48], [39, 65], [57, 34], [82, 71]), line([8, 71], [92, 71]), line([18, 71], [31, 57], [41, 71]), arc(75, 30, 9), line([12, 82], [36, 77], [57, 82], [88, 76])] },
   { name: 'rocket', paths: [loop([48, 19], [61, 36], [59, 61], [50, 75], [41, 61], [39, 36]), arc(50, 42, 7), line([41, 57], [28, 65], [41, 67]), line([59, 57], [72, 65], [59, 67]), line([46, 75], [42, 88], [50, 82], [57, 88], [54, 75])] },
   { name: 'house', paths: [loop([25, 48], [50, 25], [75, 48], [75, 76], [25, 76]), loop([44, 76], [44, 58], [57, 58], [57, 76]), loop([31, 53], [40, 53], [40, 62], [31, 62]), line([65, 33], [65, 22], [72, 22], [72, 39])] },
@@ -42,7 +44,7 @@ export const sketches = [
 
 // Small, imperfect details make these classroom sketches, rather than icons.
 const details = {
-  dinosaur: [line([66, 48], [70, 49]), line([31, 77], [32, 73]), line([54, 79], [55, 74]), ...hatch(37, 52, 6, 8)],
+  rhino: [curve([50, 38], [46, 46], [47, 54], [51, 62]), line([31, 75], [32, 71]), line([57, 75], [58, 71]), ...hatch(28, 46, 6, 8)],
   landscape: [curve([13, 26], [16, 18], [24, 19], [27, 25]), curve([26, 25], [29, 14], [39, 19], [39, 26]), line([12, 27], [40, 27]), ...hatch(29, 60, 5, 8)],
   rocket: [line([44, 58], [56, 58]), line([43, 61], [57, 61]), line([24, 19], [26, 15], [28, 19], [32, 21], [28, 23], [26, 27], [24, 23], [20, 21], [24, 19]), ...hatch(45, 29, 3, 6)],
   house: [line([22, 47], [49, 22], [78, 47]), line([34, 54], [34, 61]), line([31, 58], [40, 58]), arc(55, 67, 1.1), line([10, 79], [27, 77], [48, 80], [86, 78]), ...hatch(27, 68, 5, 7)],
@@ -65,7 +67,9 @@ const HOLD_DURATION = 11000;
 const ERASE_DURATION = 2600;
 const DOODLE_START_INTERVAL_MIN = 1000;
 const DOODLE_START_INTERVAL_MAX = 3000;
-const LOOP_DURATION = DRAW_DURATION + HOLD_DURATION + ERASE_DURATION;
+// The pause before a new sketch, once the last one has left its section.
+const GAP_DURATION = 900;
+const OVERRUN_DURATION = 5000;
 
 const lengthOf = (points) => points.slice(1).reduce((total, point, index) => total + Math.hypot(point[0] - points[index][0], point[1] - points[index][1]), 0);
 const pathLength = (points) => lengthOf(points);
@@ -167,39 +171,70 @@ const rotatePath = (path, cx, cy, angle) => path.map(([x, y]) => [
   cy + (x - cx) * Math.sin(angle) + (y - cy) * Math.cos(angle),
 ]);
 const sample = (from, to, count, pointAt) => Array.from({ length: count + 1 }, (_, index) => pointAt(index / count, from, to));
+const ease = (t) => 1 - (1 - Math.min(1, Math.max(0, t))) ** 3;
+const star = (x, y, size) => line([x, y - size], [x + size * .3, y - size * .3], [x + size, y], [x + size * .3, y + size * .3],
+  [x, y + size], [x - size * .3, y + size * .3], [x - size, y], [x - size * .3, y - size * .3], [x, y - size]);
+const puff = (x, y, radius, seed) => sample(0, 1, 48, (t) => {
+  const angle = t * Math.PI * 2, r = radius * (1 + Math.sin(angle * 7 + seed) * .18);
+  return [x + Math.cos(angle) * r, y + Math.sin(angle) * r];
+});
+const NO_FX = { kind: '', t: 0, running: false, look: [0, 0], wince: false };
 
-export function animatedPaths(name, originalPaths, time) {
+// time is seconds since the drawing was finished. fx carries what the doodle
+// world has done to it: knocked out, tipped, flung, and so on.
+export function animatedPaths(name, originalPaths, time, fx = NO_FX) {
   const settle = Math.min(1, time / .7);
   const paths = originalPaths.map((path) => path.map(([x, y]) => [x, y]));
   const sway = Math.sin(time * 2.2) * settle;
+  const { kind, t: fxTime, running } = fx;
 
   if (name === 'portrait') {
-    const blink = Math.max(0, Math.cos(time * 1.5 + 1.8)) ** 38 * settle;
+    const blink = fx.wince ? 1 : Math.max(0, Math.cos(time * 1.5 + 1.8)) ** 38 * settle;
     [2, 3].forEach((index) => {
       const center = index === 2 ? 46 : 45;
-      paths[index] = paths[index].map(([x, y]) => [x, center + (y - center) * (1 - blink * .92)]);
+      paths[index] = translatePath(paths[index].map(([x, y]) => [x, center + (y - center) * (1 - blink * .92)]), fx.look[0] * 2.2, fx.look[1] * 1.4);
     });
-    paths[4] = paths[4].map(([x, y]) => [x, y + Math.sin((x - 40) / 21 * Math.PI) * sway * 1.4]);
+    paths[4] = paths[4].map(([x, y]) => [x, (fx.wince ? 59 + (y - 59) * .15 : y) + Math.sin((x - 40) / 21 * Math.PI) * sway * 1.4]);
     paths.forEach((path, index) => { if (index !== 5 && index < 21) paths[index] = rotatePath(path, 50, 71, sway * .045); });
   } else if (name === 'cat') {
     const blink = Math.max(0, Math.cos(time * 1.3 + 1.5)) ** 30 * settle;
     [1, 2].forEach((index) => { paths[index] = paths[index].map(([x, y]) => [x, (index === 1 ? 46 : 45) + (y - (index === 1 ? 46 : 45)) * (1 - blink * .95)]); });
     paths.forEach((path, index) => { if (index < 10 || index >= 14) paths[index] = rotatePath(path, 51, 64, sway * .065); });
-    paths[10] = rotatePath(paths[10], 64, 76, Math.sin(time * 3.4) * .34 * settle);
+    paths[10] = rotatePath(paths[10], 64, 76, Math.sin(time * (running ? 8 : 3.4)) * .34 * settle);
     paths[11] = paths[11].map(([x, y]) => [51 + (x - 51) * (1 + sway * .018), y]);
-  } else if (name === 'dinosaur') {
-    const step = Math.sin(time * 5) * 4 * settle;
-    paths.forEach((path, index) => { paths[index] = translatePath(path, Math.sin(time * 1.2) * 4 * settle, -Math.abs(step) * .3); });
-    paths[0] = paths[0].map(([x, y]) => [x + (y > 70 ? (x < 44 ? step : -step) : 0), y]);
-    paths[2] = rotatePath(paths[2], 20, 58, sway * .12);
+  } else if (name === 'rhino') {
+    const knocked = kind === 'ko';
+    const step = knocked ? 0 : Math.sin(time * (running ? 15 : 5)) * (running ? 5 : 4) * settle;
+    const drift = running || knocked ? 0 : Math.sin(time * 1.2) * 4 * settle;
+    paths.forEach((path, index) => { paths[index] = translatePath(path, drift, -Math.abs(step) * .3); });
+    paths[0] = paths[0].map(([x, y]) => [x + (y > 70 ? (x < 46 ? step : -step) : 0), y]);
+    paths[2] = rotatePath(paths[2], 17, 54, knocked ? .5 : sway * (running ? .35 : .12));
+    if (knocked) {
+      paths[1] = line([68, 47], [72, 51]);
+      paths.push(line([72, 47], [68, 51]));
+      for (let k = 0; k < 3; k += 1) {
+        const angle = fxTime * 3.2 + k * Math.PI * 2 / 3;
+        paths.push(star(69 + Math.cos(angle) * 13, 31 + Math.sin(angle) * 4, 2.6));
+      }
+    }
   } else if (name === 'landscape') {
     paths[3] = translatePath(paths[3], 0, Math.sin(time * 1.3) * 2 * settle);
     const cloudX = (time * 8) % 120 - 12;
     paths.push(sample(0, 1, 20, (t) => [cloudX + t * 13, 22 + Math.sin(t * Math.PI * 2) * 1.8]));
   } else if (name === 'rocket') {
-    const lift = (1 - Math.cos(time * 1.7)) * 4 * settle;
-    paths.forEach((path, index) => { if (index !== 7) paths[index] = translatePath(rotatePath(path, 50, 54, Math.sin(time * 1.7) * .075 * settle), Math.sin(time * 1.1) * 3 * settle, -lift); });
-    const flame = Math.sin(time * 16) * 4 * settle;
+    if (kind === 'boom') {
+      if (fxTime > .9) return [];
+      const grow = ease(fxTime / .45);
+      return [puff(50, 50, 6 + grow * 20, 1.3), puff(50, 50, 3 + grow * 12, 4.1), ...hatch(43, 45, 6, 8),
+        ...Array.from({ length: 7 }, (_, k) => {
+          const angle = k / 7 * Math.PI * 2 + .3, r = 10 + grow * 24;
+          return line([50 + Math.cos(angle) * r, 50 + Math.sin(angle) * r], [50 + Math.cos(angle) * (r + 6), 50 + Math.sin(angle) * (r + 6)]);
+        })];
+    }
+    const still = running ? 0 : 1;
+    const lift = still * (1 - Math.cos(time * 1.7)) * 4 * settle;
+    paths.forEach((path, index) => { if (index !== 7) paths[index] = translatePath(rotatePath(path, 50, 54, Math.sin(time * 1.7) * .075 * settle * (running ? .3 : 1)), Math.sin(time * 1.1) * 3 * settle * still, -lift); });
+    const flame = Math.sin(time * (running ? 30 : 16)) * 4 * settle + (running ? 9 : 0);
     paths[4] = paths[4].map(([x, y], index) => [x, y + (index > 0 && index < 4 ? flame : 0)]);
   } else if (name === 'house') {
     const smoke = time * 2;
@@ -212,24 +247,43 @@ export function animatedPaths(name, originalPaths, time) {
       if (index === paths.length - 1) return;
       paths[index] = path.map(([x, y]) => [x + Math.max(0, (90 - y) / 46) ** 2 * bend, y]);
     });
+    if (kind === 'petals') {
+      [1, 2, 3, 4, 5].forEach((index) => {
+        const [mx, my] = paths[index][Math.floor(paths[index].length / 2)];
+        const dx = mx - 50, dy = my - 44, distance = Math.hypot(dx, dy) || 1;
+        paths[index] = translatePath(rotatePath(paths[index], mx, my, fxTime * (index % 2 ? 1.4 : -1.2)),
+          dx / distance * fxTime * 14, dy / distance * fxTime * 10 + fxTime * fxTime * 9);
+      });
+    }
   } else if (name === 'robot') {
     const blink = Math.max(0, Math.cos(time * 1.25 + 2)) ** 24 * settle;
     [2, 3].forEach((index) => {
       const middle = (paths[index][0][1] + paths[index][2][1]) / 2;
       paths[index] = paths[index].map(([x, y]) => [x, middle + (y - middle) * (1 - blink)]);
     });
-    paths[6] = rotatePath(paths[6], 27, 58, sway * .3);
-    paths[7] = rotatePath(paths[7], 73, 58, -sway * .5);
-    paths[12] = rotatePath(paths[12], 27, 58, sway * .3);
-    paths[13] = rotatePath(paths[13], 73, 58, -sway * .5);
-    paths.forEach((path, index) => { paths[index] = translatePath(path, 0, Math.sin(time * 3) * 1.1 * settle); });
+    const carrying = kind === 'carrying';
+    const left = carrying ? Math.PI / 2 : sway * .3, right = carrying ? -Math.PI / 2 : -sway * .5;
+    paths[6] = rotatePath(paths[6], 27, 58, left);
+    paths[7] = rotatePath(paths[7], 73, 58, right);
+    paths[12] = rotatePath(paths[12], 27, 58, left);
+    paths[13] = rotatePath(paths[13], 73, 58, right);
+    if (kind === 'sparks') {
+      const flicker = Math.floor(fxTime * 14);
+      for (let k = 0; k < 4; k += 1) {
+        const angle = k * 1.6 + flicker * .7, x = 50 + Math.cos(angle) * 6, y = 15 + Math.sin(angle) * 5;
+        paths.push(line([x, y], [x + Math.cos(angle) * 4 + 1.5, y + Math.sin(angle) * 4 - 1.5], [x + Math.cos(angle) * 7, y + Math.sin(angle) * 7]));
+      }
+    }
+    paths.forEach((path, index) => { paths[index] = translatePath(path, 0, Math.sin(time * (running ? 6 : 3)) * 1.1 * settle); });
   } else if (name === 'fish') {
-    paths[1] = rotatePath(paths[1], 65, 51, Math.sin(time * 5) * .3 * settle);
-    paths.forEach((path, index) => { paths[index] = translatePath(path, Math.sin(time * 1.3) * 5 * settle, Math.sin(time * 2.5) * 1.4 * settle); });
+    paths[1] = rotatePath(paths[1], 65, 51, Math.sin(time * (running ? 12 : 5)) * .3 * settle);
+    const roam = running ? 0 : 1;
+    paths.forEach((path, index) => { paths[index] = translatePath(path, Math.sin(time * 1.3) * 5 * settle * roam, Math.sin(time * 2.5) * 1.4 * settle * roam); });
     const bubble = (time * 10) % 28;
     paths.push(arc(24, 52 - bubble, 1.4, 0, Math.PI * 2, 12));
   } else if (name === 'whale') {
-    const tailBeat = Math.sin(time * 2.1) * 2.5 * settle;
+    const slap = kind === 'slap' && fxTime < .7;
+    const tailBeat = slap ? Math.sin(fxTime * 18) * 9 : Math.sin(time * 2.1) * 2.5 * settle;
     paths[0] = paths[0].map(([x, y]) => [x > 78 ? x + tailBeat : x, y]);
     const blow = Math.max(0, Math.sin(time * 1.8)) * settle;
     paths.push(sample(0, 1, 10, (t) => [51 + Math.sin(t * Math.PI * 2) * 2, 41 - t * (4 + blow * 8)]));
@@ -238,19 +292,49 @@ export function animatedPaths(name, originalPaths, time) {
     paths.push(sample(0, 1, 20, (t) => [cloudX + t * 13, 22 + Math.sin(t * Math.PI * 2) * 1.8]));
     paths.push(arc(77, 34 + Math.sin(time) * 1.5, 6, Math.PI, Math.PI * 2, 16));
   } else if (name === 'coffee') {
-    [0, 1].forEach((index) => {
-      const x = index ? 53 : 39;
-      const curl = time * 2 + index * Math.PI;
-      const steam = sample(0, 1, 16, (t) => [x + Math.sin(curl + t * 4) * (1 + t * 2), 34 - t * 19]);
-      paths[3 + index] = paths[3 + index].map(([px, py], point) => {
-        const other = steam[Math.min(steam.length - 1, Math.round(point / (paths[3 + index].length - 1) * (steam.length - 1)))];
-        return [px + (other[0] - px) * settle, py + (other[1] - py) * settle];
+    if (kind === 'spill') {
+      // Tipped over to the left around the cup's bottom corner, then the puddle spreads.
+      const tip = ease(fxTime / .5);
+      paths.forEach((path, index) => { if (index !== 2) paths[index] = rotatePath(path, 27, 69, -Math.PI / 2 * tip); });
+      paths[3] = []; paths[4] = [];
+      const spread = ease((fxTime - .35) / 1.6);
+      if (spread > 0) paths.push(sample(0, 1, 28, (t) => {
+        const angle = t * Math.PI * 2;
+        return [4 - spread * 4 + Math.cos(angle) * (4 + spread * 12) + Math.sin(angle * 5) * .8, 70 + Math.sin(angle) * (1 + spread * 1.6)];
+      }));
+    } else {
+      [0, 1].forEach((index) => {
+        const x = index ? 53 : 39;
+        const curl = time * 2 + index * Math.PI;
+        const steam = sample(0, 1, 16, (t) => [x + Math.sin(curl + t * 4) * (1 + t * 2), 34 - t * 19]);
+        paths[3 + index] = paths[3 + index].map(([px, py], point) => {
+          const other = steam[Math.min(steam.length - 1, Math.round(point / (paths[3 + index].length - 1) * (steam.length - 1)))];
+          return [px + (other[0] - px) * settle, py + (other[1] - py) * settle];
+        });
       });
-    });
+    }
   } else if (name === 'guitar') {
-    const vibration = Math.sin(time * 24) * 1.8 * settle;
+    const twang = kind === 'twang' ? 6 * Math.max(0, 1 - fxTime) : 0;
+    const vibration = Math.sin(time * 24) * (1.8 * settle + twang);
     paths[5] = sample(0, 1, 14, (t) => [47 + t * 24 + Math.sin(t * Math.PI * 5) * vibration, 55 - t * 36]);
+    if (kind === 'twang') {
+      for (let k = 0; k < 2; k += 1) {
+        const x = 78 + k * 10 + Math.sin(fxTime * 4 + k) * 3, y = 30 - fxTime * 10 - k * 6;
+        paths.push(arc(x, y, 2.2, 0, Math.PI * 2, 10), line([x + 2.2, y], [x + 2.2, y - 8], [x + 5, y - 6]));
+      }
+    }
   } else if (name === 'light bulb') {
+    if (kind === 'shatter') {
+      const burst = ease(fxTime / .6), fall = Math.min(fxTime, 1.4);
+      const glass = paths[0], size = Math.ceil(glass.length / 5);
+      const shards = Array.from({ length: 5 }, (_, k) => {
+        const piece = glass.slice(k * size, k * size + size + 1);
+        const [mx, my] = piece[Math.floor(piece.length / 2)];
+        const dx = mx - 50, dy = my - 43, distance = Math.hypot(dx, dy) || 1;
+        return translatePath(rotatePath(piece, mx, my, (k - 2) * burst * .9), dx / distance * burst * 12, dy / distance * burst * 8 + fall * fall * 14);
+      });
+      return [...shards, paths[1], paths[2], paths[3], paths[7]].filter((path) => path && path.length > 1);
+    }
     const pulse = (Math.sin(time * 3) + 1) * .5 * settle;
     [[4, [50, 12]], [5, [25, 22]], [6, [75, 22]]].forEach(([index, [cx, cy]]) => {
       paths[index] = paths[index].map(([x, y]) => [cx + (x - cx) * (1 + pulse * .24), cy + (y - cy) * (1 + pulse * .24)]);
@@ -259,23 +343,31 @@ export function animatedPaths(name, originalPaths, time) {
     const satellite = time * 1.2;
     paths.push(arc(50 + Math.cos(satellite) * 34, 50 + Math.sin(satellite) * 19, 2.2, 0, Math.PI * 2, 12));
   } else if (name === 'bicycle') {
+    const speed = running ? 10 : kind === 'tipped' ? 1 : 3.3;
     [31, 70].forEach((center, wheel) => {
-      const angle = time * 3.3 * (wheel ? -1 : 1);
+      const angle = time * speed * (wheel ? -1 : 1);
       for (let spoke = 0; spoke < 4; spoke += 1) {
         const a = angle + spoke * Math.PI / 2;
         paths.push(line([center, 66], [center + Math.cos(a) * 13, 66 + Math.sin(a) * 13]));
       }
     });
-    const pedal = time * 3.3;
+    const pedal = time * speed;
     paths[11] = line([54, 64], [54 + Math.cos(pedal) * 7, 64 + Math.sin(pedal) * 7], [58 + Math.cos(pedal) * 7, 64 + Math.sin(pedal) * 7]);
   } else if (name === 'cassette') {
     [37, 63].forEach((center, reel) => {
-      const angle = time * (reel ? -2.8 : 2.8);
+      const angle = time * (reel ? -2.8 : 2.8) * (kind === 'tape' ? 3 : 1);
       for (let spoke = 0; spoke < 3; spoke += 1) {
         const a = angle + spoke * Math.PI * 2 / 3;
         paths.push(line([center, 51], [center + Math.cos(a) * 7, 51 + Math.sin(a) * 7]));
       }
     });
+    if (kind === 'tape') {
+      const length = Math.min(1, fxTime / 1.2);
+      paths.push(sample(0, 1, 30, (t) => {
+        const u = t * length;
+        return [37 - u * 50 + Math.sin(u * 14 + fxTime * 6) * 3, 60 + u * 40 + Math.cos(u * 11) * 2];
+      }));
+    }
   } else if (name === 'tree') {
     paths[1] = rotatePath(paths[1], 50, 65, sway * .1);
     paths[2] = rotatePath(paths[2], 50, 65, -sway * .1);
@@ -283,15 +375,17 @@ export function animatedPaths(name, originalPaths, time) {
       paths[index] = translatePath(paths[index], Math.sin(time * 2.2 + index) * 1.5 * settle, 0);
     });
   } else if (name === 'snail') {
-    const creep = (1 - Math.cos(time * .7)) * 2.8 * settle;
+    const creep = running ? 0 : (1 - Math.cos(time * .7)) * 2.8 * settle;
     const nod = Math.sin(time * 1.6) * .13 * settle;
     [4, 5, 6, 7].forEach((index) => { paths[index] = rotatePath(paths[index], 80, 60, nod); });
     paths.forEach((path, index) => { paths[index] = translatePath(path, creep, 0); });
+    // In its shell: the foot, stalks, eyes and smile are pulled in.
+    if (kind === 'shell') [2, 3, 4, 5, 6, 7, 8].forEach((index) => { paths[index] = []; });
   } else if (name === 'hero insignia') {
     paths.forEach((path, index) => { paths[index] = rotatePath(path, 50, 50, sway * .08); });
   }
 
-  return paths;
+  return paths.filter((path) => path.length > 1);
 }
 
 export function mountDoodles(root) {
@@ -303,57 +397,112 @@ export function mountDoodles(root) {
   const cores = navigator.hardwareConcurrency || 4;
   const memory = navigator.deviceMemory;
   const lean = cores <= 4 || (typeof memory === 'number' && memory <= 4);
-  let nextStart = performance.now();
+  // ?doodles=rhino,house pins the sketch in each slot, in page order, for testing.
+  const pins = new URLSearchParams(location.search).get('doodles')?.split(',') ?? [];
+  const pick = (index, cycle) => {
+    const pinned = sketches.findIndex((sketch) => sketch.name === (pins[index] || '').trim());
+    return pinned >= 0 ? pinned : (index + cycle * (1 + index)) % sketches.length;
+  };
+  // A clock that stops while the tab is hidden, so turns resume where they were.
+  let paused = 0, hiddenAt = 0;
+  const clock = () => performance.now() - paused;
+  let nextStart = clock();
   const drawings = doodles.map(({ drawing, canvas }, index) => {
     if (index > 0) nextStart += DOODLE_START_INTERVAL_MIN + Math.random() * (DOODLE_START_INTERVAL_MAX - DOODLE_START_INTERVAL_MIN);
     if (lean) drawing.classList.add('is-lean');
-    return { drawing, canvas, context: canvas.getContext('2d'), index, sketch: index % sketches.length,
-      phase: 'waiting', started: nextStart, visible: true, width: 240, height: 175, ratio: 1,
-      nextAt: 0, interval: 1000 / 30 };
+    const sketch = pick(index, 0);
+    return { drawing, canvas, context: canvas.getContext('2d'), index, sketch, name: sketches[sketch].name, cycle: 0,
+      layer: drawing.closest('.play-doodle-layer'), phase: 'waiting', at: nextStart, visible: true,
+      width: 240, height: 175, ratio: 1, nextAt: 0, interval: 1000 / 30, body: createBody() };
   });
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  let frame = 0, hiddenAt = 0;
+  let frame = 0, lastFrame = 0;
+
+  const stateName = (phase) => ({ active: 'complete', erasing: 'reversing', gap: 'gone' }[phase] || phase);
+  // The attribute changes with the phase, so offscreen drawings report it too.
+  const enter = (state, phase, at) => {
+    state.phase = phase; state.at = at; state.nextAt = 0;
+    state.drawing.dataset.doodleState = stateName(phase);
+  };
+  const nextSketch = (state, at) => {
+    state.cycle += 1;
+    state.sketch = pick(state.index, state.cycle);
+    state.name = sketches[state.sketch].name;
+    resetBody(state, drawings);
+    enter(state, 'drawing', at);
+  };
+  // Each turn: drawn, then free to move for the hold, then rubbed out where it
+  // stands. A drawing that leaves its section skips the rubbing out.
+  const advance = (state, now) => {
+    for (let guard = 0; guard < 8; guard += 1) {
+      const { phase, at, body } = state;
+      if (phase === 'waiting') {
+        if (now < at) return;
+        enter(state, 'drawing', at);
+      } else if (phase === 'drawing') {
+        if (now - at < DRAW_DURATION) return;
+        enter(state, 'active', at + DRAW_DURATION);
+        startTurn(state, drawings, state.at);
+      } else if (phase === 'active') {
+        if (body.gone) enter(state, 'gap', now);
+        else if (now - at >= HOLD_DURATION && !(travelling(state) && now - at < HOLD_DURATION + OVERRUN_DURATION)) { enter(state, 'erasing', now - at > HOLD_DURATION + 200 ? now : at + HOLD_DURATION); endTurn(state); }
+        else return;
+      } else if (phase === 'erasing') {
+        if (body.gone) enter(state, 'gap', now);
+        else if (now - at >= ERASE_DURATION) nextSketch(state, at + ERASE_DURATION);
+        else return;
+      } else if (phase === 'gap') {
+        if (now - at < GAP_DURATION) return;
+        nextSketch(state, at + GAP_DURATION);
+      }
+    }
+  };
   const draw = (state, now) => {
     const { canvas, context, width, height, ratio } = state;
     if (!context) return;
-    const elapsed = reduced.matches ? DRAW_DURATION : now - state.started;
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
     context.clearRect(0, 0, width, height);
-    if (elapsed < 0) { state.drawing.dataset.doodleState = 'waiting'; return; }
-    // Count complete cycles even if a slow frame skips the end of an erase.
-    const cycle = Math.floor(elapsed / LOOP_DURATION);
-    state.sketch = (state.index + cycle * (1 + state.index)) % sketches.length;
-    const phase = elapsed - cycle * LOOP_DURATION;
-    if (phase < DRAW_DURATION) state.phase = 'drawing';
-    else if (phase < DRAW_DURATION + HOLD_DURATION) state.phase = 'complete';
-    else state.phase = 'reversing';
-    state.drawing.dataset.doodleState = state.phase;
-    state.drawing.dataset.doodleSketch = sketches[state.sketch].name;
-    state.drawing.dataset.doodleCycle = String(cycle);
     context.lineJoin = 'round'; context.lineCap = 'round'; context.globalCompositeOperation = 'source-over';
-    const sketch = sketches[state.sketch];
-    const elapsedHold = (phase - DRAW_DURATION) / 1000;
-    const paths = state.phase !== 'drawing' && !reduced.matches
-      ? animatedPaths(sketch.name, sketch.paths, state.phase === 'complete' ? elapsedHold : HOLD_DURATION / 1000)
-      : sketch.paths;
-    if (state.phase === 'drawing') drawAuto(context, paths, phase / DRAW_DURATION, width, height, lean);
-    if (state.phase === 'complete') {
-      drawAuto(context, paths, 1, width, height, lean);
+    const data = state.drawing.dataset;
+    if (reduced.matches) {
+      const sketch = sketches[pick(state.index, 0)];
+      data.doodleState = 'complete';
+      data.doodleSketch = sketch.name;
+      drawAuto(context, sketch.paths, 1, width, height, lean);
+      return;
     }
-    if (state.phase === 'reversing') { const reverse = (phase - DRAW_DURATION - HOLD_DURATION) / ERASE_DURATION; drawReverse(context, paths, reverse, width, height, lean); }
+    data.doodleState = stateName(state.phase);
+    data.doodleSketch = state.name;
+    data.doodleCycle = String(state.cycle);
+    if (state.phase === 'waiting' || state.phase === 'gap') return;
+    const sketch = sketches[state.sketch];
+    if (state.phase === 'drawing') { drawAuto(context, sketch.paths, (now - state.at) / DRAW_DURATION, width, height, lean); return; }
+    const time = state.phase === 'active' ? (now - state.at) / 1000 : HOLD_DURATION / 1000;
+    const paths = animatedPaths(sketch.name, sketch.paths, time, fxFor(state, now));
+    if (state.phase === 'active') drawAuto(context, paths, 1, width, height, lean);
+    else drawReverse(context, paths, (now - state.at) / ERASE_DURATION, width, height, lean);
   };
   const startLoop = () => {
     if (!frame && !reduced.matches && !document.hidden) frame = requestAnimationFrame(loopFrame);
   };
   let cursor = 0;
-  const loopFrame = (now) => {
+  const loopFrame = () => {
     frame = 0;
+    const now = clock();
     if (reduced.matches) {
+      clearMotion(drawings);
       drawings.forEach((state) => draw(state, now));
       return;
     }
+    // A long gap (scrolled away) must not throw drawings across the page, but a
+    // slow machine at 5-15fps still has to move them at full speed.
+    const dt = lastFrame ? Math.min(.2, (now - lastFrame) / 1000) : 0;
+    lastFrame = now;
+    drawings.forEach((state) => advance(state, now));
+    step(drawings, dt, now);
     // One sketch per frame, round-robin. Two visible sketches therefore never
     // pay their cost in the same frame, which is what kept the page below 60fps.
+    // Travel itself is a transform, so it stays smooth between redraws.
     for (let attempt = 0; attempt < drawings.length; attempt += 1) {
       const index = (cursor + attempt) % drawings.length;
       const state = drawings[index];
@@ -368,24 +517,31 @@ export function mountDoodles(root) {
       state.nextAt = now + state.interval;
       break;
     }
-    // No visible drawings means no reason to wake up again. The intersection
-    // observer restarts the loop when one scrolls back into view.
-    if (drawings.some((state) => state.visible)) startLoop();
+    // No visible drawings and nothing still in flight means no reason to wake
+    // up again. The intersection observer restarts the loop when one scrolls
+    // back into view.
+    if (drawings.some((state) => state.visible || inMotion(state))) startLoop();
+    else lastFrame = 0;
   };
   const motionChange = () => {
     cancelAnimationFrame(frame);
+    lastFrame = 0;
     frame = requestAnimationFrame(loopFrame);
   };
   const resize = (state) => {
     const box = state.canvas.getBoundingClientRect();
-    state.width = box.width || 240; state.height = box.height || 175;
+    // The figure may be rotated or flipped mid-flight; its layout size is what the canvas fills.
+    state.width = state.canvas.offsetWidth || box.width || 240; state.height = state.canvas.offsetHeight || box.height || 175;
     state.ratio = Math.min(window.devicePixelRatio || 1, 2);
     state.canvas.width = Math.round(state.width * state.ratio);
     state.canvas.height = Math.round(state.height * state.ratio);
-    draw(state, performance.now());
+    measure(state);
+    draw(state, clock());
   };
   const resizeObserver = new ResizeObserver((entries) => {
-    entries.forEach((entry) => { const state = drawings.find((item) => item.canvas === entry.target); if (state) resize(state); });
+    entries.forEach((entry) => {
+      drawings.forEach((state) => { if (state.canvas === entry.target || state.layer === entry.target) resize(state); });
+    });
   });
   const visibilityObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -394,18 +550,27 @@ export function mountDoodles(root) {
       state.visible = entry.isIntersecting;
       if (state.visible) {
         state.nextAt = 0;
-        draw(state, performance.now());
+        draw(state, clock());
         startLoop();
       }
     });
   }, { rootMargin: '120px' });
+  const layers = new Set(drawings.map((state) => state.layer).filter(Boolean));
   drawings.forEach((state) => { resize(state); resizeObserver.observe(state.canvas); visibilityObserver.observe(state.drawing); });
+  layers.forEach((layer) => resizeObserver.observe(layer));
   const visibilityChange = () => {
     if (document.hidden) { hiddenAt = performance.now(); cancelAnimationFrame(frame); frame = 0; }
-    else { if (hiddenAt) drawings.forEach((state) => { state.started += performance.now() - hiddenAt; }); hiddenAt = 0; motionChange(); }
+    else { if (hiddenAt) paused += performance.now() - hiddenAt; hiddenAt = 0; motionChange(); }
   };
   document.addEventListener('visibilitychange', visibilityChange);
   reduced.addEventListener('change', motionChange);
   startLoop();
-  return () => { cancelAnimationFrame(frame); reduced.removeEventListener('change', motionChange); document.removeEventListener('visibilitychange', visibilityChange); resizeObserver.disconnect(); visibilityObserver.disconnect(); };
+  return () => {
+    cancelAnimationFrame(frame);
+    reduced.removeEventListener('change', motionChange);
+    document.removeEventListener('visibilitychange', visibilityChange);
+    resizeObserver.disconnect();
+    visibilityObserver.disconnect();
+    removeTrails(drawings);
+  };
 }
