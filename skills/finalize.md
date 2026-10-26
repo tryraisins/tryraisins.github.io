@@ -3,7 +3,7 @@
 > Runs the final documentation and quality checks, summarises the diff and handles any Git publishing you asked for.
 
 Canonical: https://tryraisins.dev/skills/finalize/
-Source revision: fc6b3b7
+Source revision: 95a39b5
 
 Run final documentation and quality gates, summarize the diff, and perform requested Git publication. Use when preparing completed work for delivery.
 
@@ -25,13 +25,13 @@ Outcome: It runs the repository’s checks, updates documentation that the chang
 Install the Agent Skill "yeknal-finalize" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-finalize
+https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-finalize
 File list with SHA-256 hashes: https://tryraisins.dev/skills/finalize/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-finalize/
-   git -C yeknal-skill-src checkout fc6b3b7cc3c6dc9d9e72b3921ea211044675b692
+   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
 2. Copy skills/yeknal-finalize into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-finalize or ~/.claude/skills/yeknal-finalize, so it is available in every project.
 3. If a yeknal-finalize folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -48,4 +48,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/finalize/files.json
 
 ## Source
 
-- [yeknal-finalize on GitHub](https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-finalize)
+- [yeknal-finalize on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-finalize)

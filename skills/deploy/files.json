@@ -1,68 +1,68 @@
 {
   "name": "yeknal-deploy",
-  "sourceRevision": "fc6b3b7cc3c6dc9d9e72b3921ea211044675b692",
-  "source": "https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-deploy",
+  "sourceRevision": "95a39b5f5552e26ca8493af435f08a8fd34456ce",
+  "source": "https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy",
   "fileCount": 10,
   "files": [
     {
       "path": "references/cloudflare.md",
       "sha256": "8eca3dc932949c285efd380475a234649507b65ed710b539b37414880ba0e0b3",
       "size": 3047,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-deploy/references/cloudflare.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy/references/cloudflare.md"
     },
     {
       "path": "references/licenses/cloudflare.txt",
       "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
       "size": 10776,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-deploy/references/licenses/cloudflare.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy/references/licenses/cloudflare.txt"
     },
     {
       "path": "references/licenses/netlify.txt",
       "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
       "size": 10776,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-deploy/references/licenses/netlify.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy/references/licenses/netlify.txt"
     },
     {
       "path": "references/licenses/render.txt",
       "sha256": "4dd13869245e356246a5b770723247bbb80a8f07a181d1d3d873a1734297cdb9",
       "size": 10776,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-deploy/references/licenses/render.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy/references/licenses/render.txt"
     },
     {
       "path": "references/licenses/vercel.txt",
       "sha256": "e0fad1e120e56b02bb8e65745ff5be6d3234368f2df9d0dd183183879e595fc1",
       "size": 1063,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-deploy/references/licenses/vercel.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy/references/licenses/vercel.txt"
     },
     {
       "path": "references/netlify.md",
       "sha256": "89f779d797ace8eea6dfdbb64ec0532aeafdcaa7114b0b8e51413f746aebbba8",
       "size": 2355,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-deploy/references/netlify.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy/references/netlify.md"
     },
     {
       "path": "references/render.md",
       "sha256": "2a1cac06cc511016164ea6f1af90e9fc3448213d0fe2efb6acd84928ad7af657",
       "size": 3149,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-deploy/references/render.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy/references/render.md"
     },
     {
       "path": "references/vercel.md",
       "sha256": "5991a4caf28bb38a57e396f024802b89cc7aaffdc4084d09539899dbde93caec",
       "size": 2246,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-deploy/references/vercel.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy/references/vercel.md"
     },
     {
       "path": "scripts/deploy.sh",
       "sha256": "c84b29c5aaa0c17e7acc8de45955b328d3e792955c56ba5bc8c92a2ca65d1244",
       "size": 9035,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-deploy/scripts/deploy.sh"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy/scripts/deploy.sh"
     },
     {
       "path": "SKILL.md",
       "sha256": "c90f1fc8ccff182e5313704badf3b85f3b6e248f885535f2cb49bf4bc08e37f7",
       "size": 3508,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-deploy/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy/SKILL.md"
     }
   ]
 }

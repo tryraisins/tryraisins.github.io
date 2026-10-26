@@ -3,7 +3,7 @@
 > Maps who owns sensitive code from Git history and highlights bus-factor risk and code nobody looks after.
 
 Canonical: https://tryraisins.dev/skills/security-ownership-map/
-Source revision: fc6b3b7
+Source revision: 95a39b5
 
 Map sensitive-code ownership and bus-factor risk from Git history with Python 3 and networkx. Use only for explicit security ownership, orphaned-code, or CODEOWNERS risk analysis.
 
@@ -29,13 +29,13 @@ Outcome: It analyses commit history for sensitive paths and reports owners, gaps
 Install the Agent Skill "yeknal-security-ownership-map" for all my projects.
 
 Source, pinned to a published revision (8 files):
-https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-security-ownership-map
+https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-ownership-map
 File list with SHA-256 hashes: https://tryraisins.dev/skills/security-ownership-map/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-security-ownership-map/
-   git -C yeknal-skill-src checkout fc6b3b7cc3c6dc9d9e72b3921ea211044675b692
+   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
 2. Copy skills/yeknal-security-ownership-map into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-security-ownership-map or ~/.claude/skills/yeknal-security-ownership-map, so it is available in every project.
 3. If a yeknal-security-ownership-map folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 8 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -58,4 +58,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-ownership-
 
 ## Source
 
-- [yeknal-security-ownership-map on GitHub](https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-security-ownership-map)
+- [yeknal-security-ownership-map on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-ownership-map)

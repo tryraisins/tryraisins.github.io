@@ -3,7 +3,7 @@
 > Looks through a codebase or interface for places that should animate and rejects those that shouldn’t, proposing motion with exact values but changing nothing.
 
 Canonical: https://tryraisins.dev/skills/find-animation-opportunities/
-Source revision: fc6b3b7
+Source revision: 95a39b5
 
 Search a UI for moments that should animate and reject the rest, with exact values for each surviving suggestion. Read-only; it proposes motion, it does not implement it. For fixes use `yeknal-improve-animations`.
 
@@ -29,13 +29,13 @@ Outcome: It lists a few specific opportunities with durations and easing, and ex
 Install the Agent Skill "yeknal-find-animation-opportunities" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-find-animation-opportunities
+https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-find-animation-opportunities
 File list with SHA-256 hashes: https://tryraisins.dev/skills/find-animation-opportunities/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-find-animation-opportunities/
-   git -C yeknal-skill-src checkout fc6b3b7cc3c6dc9d9e72b3921ea211044675b692
+   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
 2. Copy skills/yeknal-find-animation-opportunities into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-find-animation-opportunities or ~/.claude/skills/yeknal-find-animation-opportunities, so it is available in every project.
 3. If a yeknal-find-animation-opportunities folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -52,4 +52,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/find-animation-oppo
 
 ## Source
 
-- [yeknal-find-animation-opportunities on GitHub](https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-find-animation-opportunities)
+- [yeknal-find-animation-opportunities on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-find-animation-opportunities)

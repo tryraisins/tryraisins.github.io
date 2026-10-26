@@ -3,7 +3,7 @@
 > TryRaisins is a software engineer whose work is used by FTSE 100 companies on four continents, building web products, developer tools and open-source projects, mostly with Next.js, Node.js and Python.
 
 Canonical: https://tryraisins.dev/
-Source revision: fc6b3b7
+Source revision: 95a39b5
 
 ## Projects
 

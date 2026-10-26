@@ -3,7 +3,7 @@
 > Researches comparable products and collects references into an evidence ledger and brief, so design decisions come from what works rather than what’s fashionable.
 
 Canonical: https://tryraisins.dev/skills/design-reference-research/
-Source revision: fc6b3b7
+Source revision: 95a39b5
 
 Research interface references into an evidence ledger and implementation brief. Use before design or redesign when references or benchmark evidence should drive direction.
 
@@ -25,13 +25,13 @@ Outcome: It studies each flow, records what it saw and what it couldn’t verify
 Install the Agent Skill "yeknal-design-reference-research" for all my projects.
 
 Source, pinned to a published revision (5 files):
-https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-design-reference-research
+https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-design-reference-research
 File list with SHA-256 hashes: https://tryraisins.dev/skills/design-reference-research/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-design-reference-research/
-   git -C yeknal-skill-src checkout fc6b3b7cc3c6dc9d9e72b3921ea211044675b692
+   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
 2. Copy skills/yeknal-design-reference-research into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-design-reference-research or ~/.claude/skills/yeknal-design-reference-research, so it is available in every project.
 3. If a yeknal-design-reference-research folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 5 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -52,4 +52,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/design-reference-re
 
 ## Source
 
-- [yeknal-design-reference-research on GitHub](https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-design-reference-research)
+- [yeknal-design-reference-research on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-design-reference-research)

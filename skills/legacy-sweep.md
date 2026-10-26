@@ -3,7 +3,7 @@
 > Audits a whole repository or subsystem for unused legacy code and bloated or worthless tests, proves each candidate is obsolete before deleting it, fixes real defects instead of removing the failing test, and keeps the coverage that still protects behaviour.
 
 Canonical: https://tryraisins.dev/skills/legacy-sweep/
-Source revision: fc6b3b7
+Source revision: 95a39b5
 
 Prove legacy code and tests are obsolete before deleting them, repair real defects instead of removing the test that caught them, and keep the coverage that protects behaviour. Use for a dead-code sweep, "remove unused imports", or a test-suite prune.
 
@@ -30,13 +30,13 @@ Outcome: It records a baseline, splits production ownership into read-only and w
 Install the Agent Skill "yeknal-legacy-sweep" for all my projects.
 
 Source, pinned to a published revision (4 files):
-https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-legacy-sweep
+https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-legacy-sweep
 File list with SHA-256 hashes: https://tryraisins.dev/skills/legacy-sweep/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-legacy-sweep/
-   git -C yeknal-skill-src checkout fc6b3b7cc3c6dc9d9e72b3921ea211044675b692
+   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
 2. Copy skills/yeknal-legacy-sweep into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-legacy-sweep or ~/.claude/skills/yeknal-legacy-sweep, so it is available in every project.
 3. If a yeknal-legacy-sweep folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 4 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -55,4 +55,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/legacy-sweep/files.
 
 ## Source
 
-- [yeknal-legacy-sweep on GitHub](https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-legacy-sweep)
+- [yeknal-legacy-sweep on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-legacy-sweep)

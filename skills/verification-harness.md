@@ -3,7 +3,7 @@
 > Generates a project-local skill that launches the real app, drives a feature the way a user would, and captures proof, with a feature map for the next agent to follow.
 
 Canonical: https://tryraisins.dev/skills/verification-harness/
-Source revision: fc6b3b7
+Source revision: 95a39b5
 
 Generate a project-local verification harness that starts a real app, drives a feature like a user, and captures proof. Use only when explicitly asked to build one for a repository with no scripted way to prove behavior.
 
@@ -29,13 +29,13 @@ Outcome: It inspects how the app starts and can be driven, writes a verify skill
 Install the Agent Skill "yeknal-verification-harness" for all my projects.
 
 Source, pinned to a published revision (6 files):
-https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-verification-harness
+https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-verification-harness
 File list with SHA-256 hashes: https://tryraisins.dev/skills/verification-harness/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-verification-harness/
-   git -C yeknal-skill-src checkout fc6b3b7cc3c6dc9d9e72b3921ea211044675b692
+   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
 2. Copy skills/yeknal-verification-harness into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-verification-harness or ~/.claude/skills/yeknal-verification-harness, so it is available in every project.
 3. If a yeknal-verification-harness folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 6 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -57,4 +57,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/verification-harnes
 
 ## Source
 
-- [yeknal-verification-harness on GitHub](https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-verification-harness)
+- [yeknal-verification-harness on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-verification-harness)

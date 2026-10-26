@@ -3,7 +3,7 @@
 > Guides useful content and search visibility together, from keyword patterns and page briefs to metadata, structured data, sitemaps, local search, earned links and AI citations.
 
 Canonical: https://tryraisins.dev/skills/content-seo/
-Source revision: fc6b3b7
+Source revision: 95a39b5
 
 Evidence-led search visibility: target queries, update-or-create decisions, metadata, structured data, crawlability, sitemaps, canonicalization, local search, earned links, AI answers (AEO/GEO), and measured citations. Use for SEO, AEO or GEO strategy.
 
@@ -28,13 +28,13 @@ Outcome: It reads the live results, checks existing query and page data, and ret
 Install the Agent Skill "yeknal-content-seo" for all my projects.
 
 Source, pinned to a published revision (9 files):
-https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-content-seo
+https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-content-seo
 File list with SHA-256 hashes: https://tryraisins.dev/skills/content-seo/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-content-seo/
-   git -C yeknal-skill-src checkout fc6b3b7cc3c6dc9d9e72b3921ea211044675b692
+   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
 2. Copy skills/yeknal-content-seo into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-content-seo or ~/.claude/skills/yeknal-content-seo, so it is available in every project.
 3. If a yeknal-content-seo folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 9 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -59,4 +59,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/content-seo/files.j
 
 ## Source
 
-- [yeknal-content-seo on GitHub](https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-content-seo)
+- [yeknal-content-seo on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-content-seo)
