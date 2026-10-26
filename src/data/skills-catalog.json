@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "repository": "tryraisins/MD_Files",
-  "sourceRevision": "4d5f23650cf23128b33e548478e9960e8cdc694e",
-  "catalogCommit": "9aa351c545b9c754ade346844037ad8d097d2168",
-  "cliVersion": "2.6.4",
+  "sourceRevision": "9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f",
+  "catalogCommit": "9ecd4633ed60e365b227526c4c193bffa328860a",
+  "cliVersion": "2.7.0",
   "counts": {
-    "skills": 55,
+    "skills": 56,
     "internal": 5
   },
   "tasks": [
@@ -13,7 +13,7 @@
       "id": "build",
       "label": "Plan and build",
       "description": "Shape an idea, then turn it into working code.",
-      "count": 12
+      "count": 13
     },
     {
       "id": "design",
@@ -49,7 +49,7 @@
       "id": "docs",
       "label": "Docs and handoffs",
       "description": "Markdown, documentation, handoffs and research notes.",
-      "count": 6
+      "count": 7
     },
     {
       "id": "media",
@@ -2512,6 +2512,61 @@
       ]
     },
     {
+      "name": "yeknal-ambition",
+      "slug": "ambition",
+      "title": "Raise the bar on a brief",
+      "purpose": "Raises a task or prompt to expert standard before work starts, by finding the real bottleneck and naming the raw material, the method and the outside check that decides whether the result is right.",
+      "description": "Raise a task or brief to expert standard before work starts by naming the real bottleneck, the rawest material, the method and the outside check. Use for \"be ambitious\", \"raise the bar\", or \"what would an expert do here\".",
+      "tasks": [
+        "build",
+        "docs"
+      ],
+      "featuredRank": -1,
+      "compatibility": false,
+      "internal": false,
+      "whenToUse": [
+        "You want a deeper version of a task rather than a bigger one.",
+        "A brief is thin and you want to know what an expert in the field would ask for.",
+        "A request names an artifact when the real goal is the outcome behind it."
+      ],
+      "avoid": "It does not expand scope, add features, or replace execution. Most briefs need no pass at all, and a pass never changes acceptance criteria, access, ownership or cost without approval.",
+      "requirements": null,
+      "example": {
+        "ask": "Be more ambitious about this slow checkout page.",
+        "outcome": "It names the bottleneck, asks for production traces and a measurement on an agreed device, and writes a replacement brief with an explicit pass and fail condition."
+      },
+      "attribution": {
+        "credit": "Depth pass adapted from Dan McAteer's be-ambitious skill; altitude, range and the contract boundary synthesized from Felix Rieseberg's essay.",
+        "license": "MIT",
+        "sourceUrl": "https://github.com/DannyMac180/skills/tree/main/be-ambitious"
+      },
+      "related": [
+        "implement",
+        "research-analysis",
+        "orchestration-specialists"
+      ],
+      "version": "b1591d279b02b8bcf94a4406e2b1ca4958923b758576f8f994fb8e75571aedf2",
+      "fileCount": 3,
+      "totalBytes": 11409,
+      "files": [
+        {
+          "path": "LICENSE.txt",
+          "sha256": "c79e62f9c47beae76d91660b608e8c21ff9db118d80493d03bbc052b8e198cdb",
+          "size": 1306
+        },
+        {
+          "path": "references/worked-examples.md",
+          "sha256": "5a5059afd80d5590d839a7148759200775f3704fa95c67d4678a4e597f064f42",
+          "size": 4450
+        },
+        {
+          "path": "SKILL.md",
+          "sha256": "b903281e1b46567eefad0a244a431d17c32db88a754c8ee8ce31e90026e85ad8",
+          "size": 5653
+        }
+      ]
+    },
+    {
       "name": "yeknal-research-analysis",
       "slug": "research-analysis",
       "title": "Research and analysis",
@@ -3321,5 +3376,5 @@
       ]
     }
   ],
-  "snapshotHash": "be5dd269e750b4f76676db49086dc2bf33389234b6595dbbedab487d147b7719"
+  "snapshotHash": "76c6f35942f2b3a7a10d0ca35b54fb3bf0ceffb54bb4ce76f785970408ff146b"
 }
