@@ -9,26 +9,23 @@ import talentHunterCover from '../assets/images/talent-hunter-cover.png';
 import streamSlipCover from '../assets/images/streamslip-cover.png';
 import slopLensCover from '../assets/images/sloplens-cover.png';
 
-const projects = [
-  { number: '01', name: 'Terror Tracker', type: 'Live incident map', description: 'A map for exploring verified security incidents and emerging patterns across Nigeria.', year: '2026', href: 'https://terrortracker.tryraisins.dev/', cover: terrorTrackerCover, coverAlt: 'Nigeria security incident tracker dashboard' },
-  { number: '02', name: 'SlopLens', type: 'Design audit tool', description: 'Scores any web page out of 100 for how template-made it looks, and lists the tells that gave it away.', year: '2026', href: 'https://sloplens.tryraisins.dev/', cover: slopLensCover, coverAlt: 'SlopLens slop score checker' },
-  { number: '03', name: 'QuickBillz', type: 'Invoicing product', description: 'A straightforward way to create and share invoices, without a monthly subscription.', year: '2026', href: 'https://quickbillz.tryraisins.dev/', cover: quickBillzCover, coverAlt: 'QuickBillz invoice workspace' },
-  { number: '04', name: 'Talent Hunter', type: 'Resume matching', description: 'Compares resumes with a job brief to help teams build a clearer shortlist.', year: '2026', href: 'https://talenthunter.tryraisins.dev/', cover: talentHunterCover, coverAlt: 'Talent Hunter resume screening interface' },
-  { number: '05', name: 'StreamSlip', type: 'Music utility', description: 'Turns YouTube Music listening history into a tidy recap you can share.', year: '2025', href: 'https://streamslip.vercel.app/', cover: streamSlipCover, coverAlt: 'StreamSlip music receipt interface' },
-  { number: '06', name: 'yeknal', type: 'Developer tooling', description: 'A command-line tool and a library of agent skills that teach coding agents how I review, design, test and ship work.', year: '2026', href: '/skills/', cta: 'Browse the skills', cover: null, coverAlt: '', placeholder: 'terminal' },
-  { number: '07', name: 'BetPicks', type: 'Sports picks product', description: 'A single place to look through fixtures, odds, and match predictions.', year: '2026', href: 'https://betpicks.tryraisins.dev/', cover: null, coverAlt: '', placeholder: 'slip', suspended: true },
-];
+import type { ImageMetadata } from 'astro';
+import { projects as projectFacts, socials, siteUrl, pageTitle, pageDescription, socialImageAlt, email } from '../data/profile';
 
-const socials = [
-  { name: 'GitHub', href: 'https://github.com/tryraisins' },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/seun-sowemimo-8518b7249/' },
-  { name: 'Medium', href: 'https://medium.com/@TryRaisins' },
-];
+// Covers stay beside the image imports; every wording fact about a project lives
+// in src/data/profile.ts so the markdown alternate states the same thing.
+const covers: Record<string, { cover: ImageMetadata | null; coverAlt: string; placeholder?: string }> = {
+  'Terror Tracker': { cover: terrorTrackerCover, coverAlt: 'Nigeria security incident tracker dashboard' },
+  SlopLens: { cover: slopLensCover, coverAlt: 'SlopLens slop score checker' },
+  QuickBillz: { cover: quickBillzCover, coverAlt: 'QuickBillz invoice workspace' },
+  'Talent Hunter': { cover: talentHunterCover, coverAlt: 'Talent Hunter resume screening interface' },
+  StreamSlip: { cover: streamSlipCover, coverAlt: 'StreamSlip music receipt interface' },
+  yeknal: { cover: null, coverAlt: '', placeholder: 'terminal' },
+  BetPicks: { cover: null, coverAlt: '', placeholder: 'slip' },
+};
 
-const siteUrl = 'https://tryraisins.dev/';
-const pageTitle = 'TryRaisins | Software Engineer and Open-Source Maintainer';
-const pageDescription = 'TryRaisins is a software engineer whose work is used by FTSE 100 companies on four continents, building web products, developer tools and open-source projects, mostly with Next.js, Node.js and Python.';
-const socialImageAlt = 'TryRaisins: I build useful things for the web. Ruled notebook paper with a handwritten hello and pencil sketches of a face and a cat.';
+const projects = projectFacts.map((project) => ({ ...project, ...covers[project.name] }));
+
 // The LinkedIn URL spells out a personal name, so it stays a visible link on the
 // page but is left out of the structured data.
 const profileUrls = socials.filter((social) => social.name !== 'LinkedIn').map((social) => social.href);
@@ -103,6 +100,8 @@ const seoSchema = {
     <meta name="description" content={pageDescription} />
     <meta name="author" content="TryRaisins" />
     <link rel="canonical" href={siteUrl} />
+    <link rel="alternate" type="text/markdown" href={`${siteUrl}index.md`} />
+    <meta name="ai-summary" content={`${pageDescription} The page lists seven selected projects, six of them live, and links to a free library of agent skills for coding agents.`} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -129,7 +128,7 @@ const seoSchema = {
   </head>
   <body>
     <BootOverlay />
-    <Play projects={projects} socials={socials} email="tryraisins@gmail.com" />
+    <Play projects={projects} socials={socials} email={email} />
   </body>
 </html>
 

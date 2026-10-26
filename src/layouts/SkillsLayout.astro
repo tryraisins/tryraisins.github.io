@@ -13,10 +13,15 @@ interface Props {
   schema?: object;
   noindex?: boolean;
   current?: 'library' | 'skill';
+  aiSummary?: string;
 }
 
-const { title, description, path, schema, noindex = false, current = 'skill' } = Astro.props;
+const { title, description, path, schema, noindex = false, current = 'skill', aiSummary } = Astro.props;
 const canonical = new URL(path, SITE_URL).href;
+// `/skills/` resolves to `/skills.md` and `/skills/<slug>/` to `/skills/<slug>.md`,
+// which is the route src/pages/skills/[slug].md.ts and skills.md.ts publish.
+const markdownHref = new URL(`${path.replace(/\/$/, '')}.md`, SITE_URL).href;
+const summary = aiSummary ?? description;
 const socialImage = `${SITE_URL}/og-skills.png`;
 const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding agent a specific job, on ruled notebook paper with two yellow task notes.';
 ---
@@ -31,6 +36,8 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="alternate" type="text/markdown" href={markdownHref} />}
+    <meta name="ai-summary" content={summary} />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
