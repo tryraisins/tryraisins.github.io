@@ -50,8 +50,8 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
         <p class="play-hero-kicker">Hello, I’m Seun.</p>
         <h1 id="play-title"><span>I build <s class="play-strike" aria-hidden="true">cool</s> useful things</span> <span>for the web.</span></h1>
         <div class="play-intro">
-          <p>I’m a software engineer who likes turning messy ideas into clear, dependable products. I work across the interface and the systems behind it, mostly using React, TypeScript, Next.js, Node.js and Python.</p>
-          <p class="play-intro-proof">My work is used by <mark>multiple FTSE 100 companies across four continents</mark>, and I maintain and contribute to open-source projects.</p>
+          <p>I’m a software engineer who likes turning messy ideas into clear, dependable products. I work across the interface and the systems behind it, mostly using Next.js, Node.js and Python.</p>
+          <p class="play-intro-proof">My work is used by multiple FTSE 100 companies across four continents, and I maintain and contribute to open-source projects.</p>
           <nav class="play-hero-actions" aria-label="Portfolio introduction">
             <a class="play-hero-primary" href="#play-desk">Explore my work</a>
             <a class="play-hero-secondary" href="/skills/">Browse agent skills</a>
@@ -262,6 +262,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   import { initContactReveal } from "../../scripts/contact-reveal";
   import { mountReel } from "./reel.js";
   import { mountRail } from "./rail.js";
+  import { mountRules } from "./rules.js";
   import { whenBootRevealed, whenBootDone } from "../../scripts/boot-overlay";
   const root = document.querySelector('[data-play-root]');
 
@@ -324,6 +325,8 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     document.addEventListener('astro:before-swap', disposeReel, { once: true });
     const disposeRail = mountRail(root, (message) => { if (status) status.textContent = message; });
     document.addEventListener('astro:before-swap', disposeRail, { once: true });
+    const disposeRules = mountRules(root);
+    document.addEventListener('astro:before-swap', disposeRules, { once: true });
 
     const disposeContact = initContactReveal(root, (message) => { if (status) status.textContent = message; });
     document.addEventListener('astro:before-swap', disposeContact, { once: true });
@@ -374,6 +377,9 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     --play-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     /* Paper: a static graphite grain tile, the blue rules and the red margin. */
     --play-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .09 0 0 0 0 .08 0 0 0 0 .07 0 0 0 1.6 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.05'/%3E%3C/svg%3E");
+    /* One ruled line. Written lines use this height (or a multiple) so a note
+       that wraps stays on the rules; rules.js lines up each first baseline. */
+    --play-rule: 36px;
     --play-rules: repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(52,110,204,.5) 35px, rgba(52,110,204,.5) 36px);
     --play-margin-rule: linear-gradient(90deg, transparent 0 calc(var(--play-page-margin) - 6px), rgba(214,62,56,.55) calc(var(--play-page-margin) - 6px), rgba(214,62,56,.55) calc(var(--play-page-margin) - 4.5px), transparent calc(var(--play-page-margin) - 4.5px) calc(var(--play-page-margin) - 1.5px), rgba(214,62,56,.55) calc(var(--play-page-margin) - 1.5px), rgba(214,62,56,.55) var(--play-page-margin), transparent var(--play-page-margin));
     min-height: 100dvh;
@@ -393,7 +399,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-battlefield { position: fixed; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
   .play-battlefield[data-idle] { opacity: 0; transition: opacity 320ms ease; }
   .play-battlefield :global(canvas) { position: absolute; inset: 0; }
-  .play-eyebrow { margin: 0 0 4px; color: var(--play-red-pen); font: 600 26px/1.05 var(--play-hand); }
+  .play-eyebrow { margin: 0 0 4px; color: var(--play-red-pen); font: 600 26px/var(--play-rule) var(--play-hand); }
 
   /* Pencil furniture: margin notes, page numbers, section dividers, signature. */
   .play-margin-note { margin: 0; color: var(--play-graphite); font: 500 22px/1.05 var(--play-hand); rotate: -1.5deg; transform-origin: left center; }
@@ -406,22 +412,21 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   /* Hero */
   .play-hero { min-height: max(100dvh, 760px); padding: 32px var(--play-page-margin) 72px calc(var(--play-page-margin) + 40px); position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 56px; }
   .play-hero-header { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
-  .play-hero-index { margin: 0; padding: 8px 0; color: var(--play-graphite); font: 500 22px/1.3 var(--play-hand); }
+  .play-hero-index { margin: 0; padding: 8px 0; color: var(--play-graphite); font: 500 22px/var(--play-rule) var(--play-hand); }
   .play-hero-index strong { color: var(--play-ink); font-weight: 700; }
   .play-hero-links { display: flex; align-items: center; gap: 4px; }
   .play-hero-links a { min-height: 48px; padding: 0 12px; display: inline-flex; align-items: center; font-size: 23px; font-weight: 600; white-space: nowrap; transition: background-color 140ms ease; }
   .play-contact-availability > span { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: var(--play-green); }
   .play-hero-body { position: relative; z-index: 1; margin-top: auto; display: grid; gap: 28px; }
-  .play-hero-kicker { margin: 0 0 -6px; color: var(--play-red-pen); font: 600 34px/1 var(--play-hand); rotate: -1.5deg; transform-origin: left center; }
-  .play-hero h1 { max-width: 1080px; margin: 0; font: 700 clamp(4.75rem, 8.4vw, 7.75rem)/.92 var(--play-hand); letter-spacing: 0; }
+  .play-hero-kicker { margin: 0 0 -6px; color: var(--play-red-pen); font: 600 34px/var(--play-rule) var(--play-hand); }
+  .play-hero h1 { max-width: 1080px; margin: 0; font: 700 clamp(4.75rem, 8.4vw, 7.75rem)/.92 var(--play-hand); line-height: round(nearest, .92em, var(--play-rule)); letter-spacing: 0; }
   .play-hero h1 > span { display: block; }
   /* A first draft crossed out in red pen. It is hidden from assistive tech, so the heading reads as written. */
   .play-strike { margin-right: .16em; color: var(--play-graphite); font-weight: 500; text-decoration: line-through; text-decoration-color: var(--play-red-pen); text-decoration-thickness: .09em; }
   .play-intro { display: grid; justify-items: start; gap: 30px; }
-  .play-intro p { max-width: 560px; margin: 0; color: var(--play-biro); font: 500 27px/1.33 var(--play-hand); }
-  /* The second note sits right under the first, with its key phrase highlighted. */
-  .play-intro .play-intro-proof { margin-top: -18px; }
-  .play-intro mark { padding: 0 .12em; color: var(--play-ink); background: var(--play-highlight); border-radius: 3px 8px 4px 7px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .play-intro p { max-width: 560px; margin: 0; color: var(--play-biro); font: 500 27px/var(--play-rule) var(--play-hand); }
+  /* The second note starts after one empty rule. */
+  .play-intro .play-intro-proof { margin-top: 6px; }
   .play-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
   .play-hero-actions a { min-height: 50px; display: inline-flex; align-items: center; font-size: 24px; font-weight: 700; }
   .play-hero-primary { padding: 0 20px; border: 1px solid var(--play-ink); background: var(--play-yellow); box-shadow: 3px 3px 0 var(--play-ink); transition: transform 130ms var(--play-ease-out), box-shadow 130ms var(--play-ease-out); }
@@ -443,8 +448,10 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
      a screenshot taped into the book, with its notes written on the page. */
   .play-desk { padding: 48px var(--play-page-margin) 100px calc(var(--play-page-margin) + 40px); position: relative; }
   .play-desk-header { position: relative; z-index: 1; margin-bottom: 44px; display: flex; justify-content: space-between; align-items: end; gap: 24px; }
-  .play-desk h2 { margin: 0; font: 700 clamp(4rem, 7.4vw, 6.5rem)/.95 var(--play-hand); letter-spacing: 0; }
+  .play-desk h2 { margin: 0; font: 700 clamp(4rem, 7.4vw, 6.5rem)/.95 var(--play-hand); line-height: round(nearest, 1em, var(--play-rule)); letter-spacing: 0; }
   .play-rail-hint { display: none; }
+  /* Written on the rules, so it sits level, unlike the pencil notes in the margin. */
+  .play-world .play-rail-hint { rotate: none; line-height: var(--play-rule); }
   .play-reel-toggle { min-width: 132px; min-height: 48px; padding: 0 18px; border: 1px solid var(--play-ink); border-radius: 0; background: var(--play-yellow); color: var(--play-ink); font: 700 22px/1 var(--play-hand); white-space: nowrap; cursor: pointer; box-shadow: 3px 3px 0 var(--play-ink); transition: transform 130ms var(--play-ease-out), box-shadow 130ms var(--play-ease-out); }
   .play-reel-toggle[hidden] { display: none; }
   .play-reel-toggle:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--play-ink); }
@@ -512,10 +519,10 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
 
   /* The notes: number and type in red pen, the name in black, the note in biro. */
   .play-copy { min-width: 0; padding: 0 6px; display: flex; flex-direction: column; gap: 6px; }
-  .play-copy-meta { display: flex; align-items: center; gap: 10px; color: var(--play-red-pen); font: 600 22px/1.2 var(--play-hand); }
+  .play-copy-meta { display: flex; align-items: center; gap: 10px; color: var(--play-red-pen); font: 600 22px/var(--play-rule) var(--play-hand); }
   .play-copy-number { min-width: 2.1em; padding: 1px 6px 2px; display: inline-grid; place-items: center; border: 1.5px solid currentColor; border-radius: 52% 46% 55% 44% / 50% 56% 44% 50%; rotate: -4deg; }
-  .play-copy strong { color: var(--play-ink); font: 700 clamp(2.5rem, 3.3vw, 3rem)/1 var(--play-hand); }
-  .play-copy p { margin: 2px 0 8px; color: var(--play-biro); font: 500 24px/1.32 var(--play-hand); }
+  .play-copy strong { color: var(--play-ink); font: 700 clamp(2.5rem, 3.3vw, 3rem)/1 var(--play-hand); line-height: round(up, .9em, var(--play-rule)); }
+  .play-copy p { margin: 2px 0 8px; color: var(--play-biro); font: 500 24px/var(--play-rule) var(--play-hand); }
   .play-tile:first-child .play-copy strong { font-size: clamp(3rem, 4.6vw, 4.25rem); }
   .play-tile:first-child .play-copy p { font-size: 28px; }
   .play-project-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--play-graphite); font: 500 22px/1.1 var(--play-hand); }
@@ -575,7 +582,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
 
   .play-footer { padding: 36px var(--play-page-margin) 40px calc(var(--play-page-margin) + 40px); position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px 32px; flex-wrap: wrap; }
   .play-footer > .play-divider { top: 0; }
-  .play-footer p { margin: 0; color: var(--play-graphite); font-size: 21px; line-height: 1.3; }
+  .play-footer p { margin: 0; color: var(--play-graphite); font-size: 21px; line-height: var(--play-rule); }
   .play-footer nav { display: flex; gap: 8px; }
   .play-footer a { min-height: 44px; padding: 0 10px; display: inline-flex; align-items: center; color: var(--play-ink) !important; font-size: 22px; font-weight: 700; transition: background-color 140ms ease; }
 
@@ -663,7 +670,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-desk { padding-bottom: 80px; }
     .play-desk-header { margin-bottom: 12px; }
     .play-desk-actions { display: none; }
-    .play-rail-hint { display: block; margin-top: 12px; }
+    .play-rail-hint { display: block; margin-top: 26px; }
     .play-desk [data-play-grid] { margin-right: calc(-1 * var(--play-page-margin)); padding: 30px var(--play-page-margin) 24px 4px; display: flex; gap: 22px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 4px var(--play-page-margin); scrollbar-width: none; }
     .play-desk [data-play-grid]::-webkit-scrollbar { display: none; }
     .play-tile, .play-tile:first-child, .play-tile:last-child { flex: 0 0 min(80%, 440px); scroll-snap-align: center; scroll-snap-stop: always; }
@@ -694,7 +701,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-hero-links { display: none; }
     .play-hero-body { gap: 22px; }
     .play-hero-kicker { font-size: 30px; }
-    .play-hero h1 { font-size: clamp(3.5rem, 17vw, 4.5rem); line-height: .92; }
+    .play-hero h1 { font-size: clamp(3.5rem, 17vw, 4.5rem); line-height: .92; line-height: round(nearest, .95em, var(--play-rule)); }
     .play-intro { gap: 24px; }
     .play-intro p { font-size: 24px; }
     .play-hero-primary { width: 100%; justify-content: center; }
