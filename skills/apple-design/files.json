@@ -1,26 +1,26 @@
 {
   "name": "yeknal-apple-design",
-  "sourceRevision": "e2f302d026ecd9a88d981fce23cf449fa03668c5",
-  "source": "https://github.com/tryraisins/MD_Files/tree/e2f302d026ecd9a88d981fce23cf449fa03668c5/skills/yeknal-apple-design",
+  "sourceRevision": "fc6b3b7cc3c6dc9d9e72b3921ea211044675b692",
+  "source": "https://github.com/tryraisins/MD_Files/tree/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-apple-design",
   "fileCount": 3,
   "files": [
     {
       "path": "references/design-foundations.md",
       "sha256": "b21e1520492efd547000fa823b9b173ae2a9ef85271baf3e7be23189de193ef9",
       "size": 4417,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e2f302d026ecd9a88d981fce23cf449fa03668c5/skills/yeknal-apple-design/references/design-foundations.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-apple-design/references/design-foundations.md"
     },
     {
       "path": "references/motion.md",
       "sha256": "dcd2bd8ecfd0cd964b790e5ba7bd45cc0aa01a9283d06da14760880953d694c0",
       "size": 16938,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e2f302d026ecd9a88d981fce23cf449fa03668c5/skills/yeknal-apple-design/references/motion.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-apple-design/references/motion.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "b95788348669f93b0af9be455a6c4ea6fa55521b4f4ce60e4edc14e9cc1f9e9e",
       "size": 2290,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/e2f302d026ecd9a88d981fce23cf449fa03668c5/skills/yeknal-apple-design/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/fc6b3b7cc3c6dc9d9e72b3921ea211044675b692/skills/yeknal-apple-design/SKILL.md"
     }
   ]
 }

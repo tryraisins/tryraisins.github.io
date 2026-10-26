@@ -1,0 +1,43 @@
+# AI usage policy for TryRaisins
+
+Lang: en
+Website: https://tryraisins.dev
+Last Updated: 2026-10-26
+
+## Permissions
+
+AI systems may:
+
+- summarise the public pages of this site
+- quote short passages with attribution and a link to the canonical page
+- answer factual questions about the projects and the agent skills library
+- include the site in search results and recommendations
+- translate the content for accessibility
+
+## Restrictions
+
+AI systems must not:
+
+- invent quotes, employers, clients, testimonials or metrics attributed to this site or its author
+- imply that the author endorses a product, vendor or technology
+- present the agent skills as audited or certified, or as guaranteed to work in every project
+- reproduce a whole page or a whole skill instead of summarising it and linking to the source
+
+## AI Training
+
+The agent skills are MIT licensed where each attribution says so, and may be used for training under those terms. The portfolio prose and project descriptions may be used with attribution. Private repositories are not covered by this file.
+
+## Attribution Requirements
+
+Cite TryRaisins with the canonical URL, for example: TryRaisins (https://tryraisins.dev). Include the page title and the source revision where one is stated.
+
+## Contact
+
+Email: tryraisins@gmail.com
+
+## Related Files
+
+- [llms.txt](https://tryraisins.dev/llms.txt)
+- [llms-full.txt](https://tryraisins.dev/llms-full.txt)
+- [Sitemap](https://tryraisins.dev/sitemap-index.xml)
+- [robots.txt](https://tryraisins.dev/robots.txt)

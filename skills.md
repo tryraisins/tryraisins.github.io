@@ -1,0 +1,130 @@
+# Agent skills
+
+> 57 free agent skills for Claude Code, Codex, Cursor and other coding agents, grouped by the task each one serves.
+
+Canonical: https://tryraisins.dev/skills/
+Source revision: fc6b3b7
+
+## How to install
+
+Each skill page carries an install prompt pinned to a published revision, with a file list and SHA-256 hashes so an agent can verify what it fetched.
+
+## Plan and build
+
+- [Implement](https://tryraisins.dev/skills/implement.md): Takes a scoped feature or fix from plan to working code while keeping the rest of the repository behaving as it did.
+- [App performance](https://tryraisins.dev/skills/performance.md): Measures startup, screen navigation, content loading and scrolling on a throttled production build, finds the real bottleneck, then proves each fix with before and after benchmarks rather than intuition.
+- [Code graph](https://tryraisins.dev/skills/code-graph.md): Builds a local, model-free index of a repository and answers with a small ranked slice, so an unfamiliar codebase can be entered in one call instead of many searches.
+- [Design system](https://tryraisins.dev/skills/design-system.md): Builds, audits, documents or migrates a product's design system: token layers, mapping hardcoded values onto tokens, component specs, drift detection and an ordered adoption plan.
+- [Domain modeling](https://tryraisins.dev/skills/domain-modeling.md): Clarifies a project’s domain terms and boundaries and records the decisions in a glossary or architecture decision record.
+- [Frontend developer](https://tryraisins.dev/skills/frontend-developer.md): Implements or repairs accessible web interfaces in React, Vue or Angular, covering components, state, styling and browser behaviour.
+- [Legacy sweep](https://tryraisins.dev/skills/legacy-sweep.md): Audits a whole repository or subsystem for unused legacy code and bloated or worthless tests, proves each candidate is obsolete before deleting it, fixes real defects instead of removing the failing test, and keeps the coverage that still protects behaviour.
+- [Mobile app design](https://tryraisins.dev/skills/mobile-app-design.md): Designs and builds mobile screens and flows that feel native, especially in Expo or React Native, covering navigation, controls, states, accessibility and performance.
+- [Orchestration specialists](https://tryraisins.dev/skills/orchestration-specialists.md): Organises work across several agents and tools, covering task distribution, context management, evidence synthesis, prompt engineering and MCP design.
+- [Pick a UI library](https://tryraisins.dev/skills/pick-ui-library.md): Recommends the right library or inspectable source registry for a frontend need from a curated list, from accessible primitives to charts, toasts and drag and drop.
+- [Raise the bar on a brief](https://tryraisins.dev/skills/ambition.md): Raises a task or prompt to expert standard before work starts, by finding the real bottleneck and naming the raw material, the method and the outside check that decides whether the result is right.
+- [Research and analysis](https://tryraisins.dev/skills/research-analysis.md): Researches and compares sources, checks them against each other and writes evidence-backed reports for market, competitive, trend or data questions.
+- [Verification harness](https://tryraisins.dev/skills/verification-harness.md): Generates a project-local skill that launches the real app, drives a feature the way a user would, and captures proof, with a feature map for the next agent to follow.
+
+## Design interfaces
+
+- [Frontend design](https://tryraisins.dev/skills/frontend-design.md): Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette and interface copy.
+- [Redesign an existing product](https://tryraisins.dev/skills/redesign-existing-projects.md): Refreshes the look or flow of a working site or app without breaking its behaviour or the data behind it.
+- [Apple-style interface design](https://tryraisins.dev/skills/apple-design.md): Brings Apple’s approach to fluid, physical motion and interface design to the web, from springs and interruptible gestures to materials, depth and typography.
+- [Brand kit images](https://tryraisins.dev/skills/brandkit.md): Generates polished brand-guideline boards, logo systems and identity presentations as images, with deliberate composition and sparse typography.
+- [Break UI](https://tryraisins.dev/skills/break-ui.md): Stress-tests a screen with realistic worst-case data, such as long names, missing fields, huge counts and non-Latin text, and reports every break with its fix.
+- [Content and SEO](https://tryraisins.dev/skills/content-seo.md): Guides useful content and search visibility together, from keyword patterns and page briefs to metadata, structured data, sitemaps, local search, earned links and AI citations.
+- [Design reference research](https://tryraisins.dev/skills/design-reference-research.md): Researches comparable products and collects references into an evidence ledger and brief, so design decisions come from what works rather than what’s fashionable.
+- [Design system](https://tryraisins.dev/skills/design-system.md): Builds, audits, documents or migrates a product's design system: token layers, mapping hardcoded values onto tokens, component specs, drift detection and an ordered adoption plan.
+- [Design taste for the web](https://tryraisins.dev/skills/design-taste-frontend.md): Designs and builds expressive landing pages, portfolios and marketing sites from real product evidence instead of reusable AI layouts.
+- [Frontend developer](https://tryraisins.dev/skills/frontend-developer.md): Implements or repairs accessible web interfaces in React, Vue or Angular, covering components, state, styling and browser behaviour.
+- [High-end visual design](https://tryraisins.dev/skills/high-end-visual-design.md): Creates art-directed, showcase-level web interfaces with a product-specific visual idea, expressive type, deliberate composition and considered motion.
+- [Human-AI interface design](https://tryraisins.dev/skills/human-ai-interface-design.md): Designs AI features people can trust, covering suggestions, generation, copilots and agents, along with sources, uncertainty, approvals and recovery.
+- [Industrial brutalist UI](https://tryraisins.dev/skills/industrial-brutalist-ui.md): Designs raw, mechanical interfaces that mix Swiss print typography with terminal aesthetics: rigid grids, extreme type contrast and utilitarian colour.
+- [Minimalist UI](https://tryraisins.dev/skills/minimalist-ui.md): Designs clean editorial interfaces with warm monochrome palettes, strong typographic contrast, flat grids and restrained depth.
+- [Mobile app design](https://tryraisins.dev/skills/mobile-app-design.md): Designs and builds mobile screens and flows that feel native, especially in Expo or React Native, covering navigation, controls, states, accessibility and performance.
+- [Pick a UI library](https://tryraisins.dev/skills/pick-ui-library.md): Recommends the right library or inspectable source registry for a frontend need from a curated list, from accessible primitives to charts, toasts and drag and drop.
+- [Prototype variants](https://tryraisins.dev/skills/prototype.md): Builds several genuinely different versions of a UI piece behind a visual picker, so you can flip between them live and keep the one that feels right.
+- [Slop scan](https://tryraisins.dev/skills/slopscan.md): Scans a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, and writes a report that explains each finding and how to fix it.
+- [UI and UX design](https://tryraisins.dev/skills/ui-ux-designer.md): Designs user-centred interface systems that balance intuitive flows with a distinctive visual direction, from information architecture to interaction patterns.
+- [UI quality baseline](https://tryraisins.dev/skills/ui-quality-baseline.md): Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI.
+
+## Motion
+
+- [Web animation](https://tryraisins.dev/skills/animate.md): Adds purposeful, accessible motion to components, pages, scrolling, gestures, SVG and canvas, with sensible timing and a reduced-motion fallback.
+- [Animation in Expo](https://tryraisins.dev/skills/animate-expo.md): Builds animation for React Native and Expo apps with Reanimated, Gesture Handler, Expo Router and haptics, making the decisions that decide whether motion feels right on a device.
+- [Apple-style interface design](https://tryraisins.dev/skills/apple-design.md): Brings Apple’s approach to fluid, physical motion and interface design to the web, from springs and interruptible gestures to materials, depth and typography.
+- [Find animation opportunities](https://tryraisins.dev/skills/find-animation-opportunities.md): Looks through a codebase or interface for places that should animate and rejects those that shouldn’t, proposing motion with exact values but changing nothing.
+- [Frame-based motion](https://tryraisins.dev/skills/oil-motion.md): Designs and builds scrubbable web animation made from generated or captured frames and driven by scroll, pointer, touch or data, for moments ordinary CSS can’t express.
+- [Improve animations](https://tryraisins.dev/skills/improve-animations.md): Surveys an app’s existing motion like a senior motion designer would, then writes a prioritised audit with self-contained plans that other agents can carry out.
+- [Review animations](https://tryraisins.dev/skills/review-animations.md): Checks existing motion against a high craft bar, from easing and duration to interruption and reduced-motion behaviour, and explains each fix.
+
+## Review and test
+
+- [Code review](https://tryraisins.dev/skills/review.md): Reads code or a whole system for real defects, regressions and maintainability risks, then sorts what it finds by severity and effort.
+- [Troubleshoot](https://tryraisins.dev/skills/troubleshoot.md): Works back from a reproducible error, failing build or slowdown to its cause before it suggests a fix.
+- [Browser automation](https://tryraisins.dev/skills/playwright.md): Lets your agent open a real browser from the terminal to click through a flow, fill forms, take screenshots and read what’s on the page, so it can show you a change working.
+- [Testing strategy](https://tryraisins.dev/skills/testing-strategy.md): Keeps verification end to end: proves behavior through the real entry point, bans new unit tests, and asks before any isolated check.
+- [Address PR comments](https://tryraisins.dev/skills/gh-address-comments.md): Works through the review and issue comments on the open GitHub pull request for your current branch, using the GitHub CLI.
+- [App performance](https://tryraisins.dev/skills/performance.md): Measures startup, screen navigation, content loading and scrolling on a throttled production build, finds the real bottleneck, then proves each fix with before and after benchmarks rather than intuition.
+- [Break UI](https://tryraisins.dev/skills/break-ui.md): Stress-tests a screen with realistic worst-case data, such as long names, missing fields, huge counts and non-Latin text, and reports every break with its fix.
+- [Content and SEO](https://tryraisins.dev/skills/content-seo.md): Guides useful content and search visibility together, from keyword patterns and page briefs to metadata, structured data, sitemaps, local search, earned links and AI citations.
+- [Find animation opportunities](https://tryraisins.dev/skills/find-animation-opportunities.md): Looks through a codebase or interface for places that should animate and rejects those that shouldn’t, proposing motion with exact values but changing nothing.
+- [Fix failing CI](https://tryraisins.dev/skills/gh-fix-ci.md): Inspects failing GitHub Actions checks on a pull request, summarises the logs, drafts a fix plan and only makes changes once you approve.
+- [Improve animations](https://tryraisins.dev/skills/improve-animations.md): Surveys an app’s existing motion like a senior motion designer would, then writes a prioritised audit with self-contained plans that other agents can carry out.
+- [Launch readiness](https://tryraisins.dev/skills/launch-readiness.md): Audits a product before it becomes publicly reachable, covering the legal obligations that attach to the data, payments, email and user content it handles, plus the engineering gates no other workflow owns, then returns one register and a go or no-go.
+- [Legacy sweep](https://tryraisins.dev/skills/legacy-sweep.md): Audits a whole repository or subsystem for unused legacy code and bloated or worthless tests, proves each candidate is obsolete before deleting it, fixes real defects instead of removing the failing test, and keeps the coverage that still protects behaviour.
+- [Review animations](https://tryraisins.dev/skills/review-animations.md): Checks existing motion against a high craft bar, from easing and duration to interruption and reduced-motion behaviour, and explains each fix.
+- [Security audit](https://tryraisins.dev/skills/security-audit.md): Runs a multi-phase security audit of a repository, directory or diff with a coverage ledger, adversarial verification and schema-validated findings.
+- [Security best practices](https://tryraisins.dev/skills/security-best-practices.md): Reviews Python, JavaScript, TypeScript or Go code for security issues and writes secure-by-default code when you ask for it.
+- [Sentry errors](https://tryraisins.dev/skills/sentry.md): Inspects Sentry issues and events, summarises recent production errors and pulls basic health data, using read-only queries.
+- [Slop scan](https://tryraisins.dev/skills/slopscan.md): Scans a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, and writes a report that explains each finding and how to fix it.
+- [UI quality baseline](https://tryraisins.dev/skills/ui-quality-baseline.md): Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI.
+- [Verification harness](https://tryraisins.dev/skills/verification-harness.md): Generates a project-local skill that launches the real app, drives a feature the way a user would, and captures proof, with a feature map for the next agent to follow.
+
+## Security
+
+- [Application security](https://tryraisins.dev/skills/application-security.md): Designs or hardens security across web apps, APIs, cloud setup, CI/CD pipelines and AI features, covering the OWASP-style risks a product is likely to face.
+- [Launch readiness](https://tryraisins.dev/skills/launch-readiness.md): Audits a product before it becomes publicly reachable, covering the legal obligations that attach to the data, payments, email and user content it handles, plus the engineering gates no other workflow owns, then returns one register and a go or no-go.
+- [Security audit](https://tryraisins.dev/skills/security-audit.md): Runs a multi-phase security audit of a repository, directory or diff with a coverage ledger, adversarial verification and schema-validated findings.
+- [Security best practices](https://tryraisins.dev/skills/security-best-practices.md): Reviews Python, JavaScript, TypeScript or Go code for security issues and writes secure-by-default code when you ask for it.
+- [Security ownership map](https://tryraisins.dev/skills/security-ownership-map.md): Maps who owns sensitive code from Git history and highlights bus-factor risk and code nobody looks after.
+- [Threat model](https://tryraisins.dev/skills/security-threat-model.md): Builds a threat model grounded in the actual repository, covering assets, trust boundaries, abuse paths and mitigations.
+
+## Ship and deploy
+
+- [Git](https://tryraisins.dev/skills/git.md): Handles status, diffs, branches, commits, merges and pushes while leaving unrelated work in your checkout alone.
+- [Address PR comments](https://tryraisins.dev/skills/gh-address-comments.md): Works through the review and issue comments on the open GitHub pull request for your current branch, using the GitHub CLI.
+- [Agent-readable site](https://tryraisins.dev/skills/agent-readable-site.md): Gives every public page a markdown version and gives agents the files that explain the site: llms.txt, llms-full.txt, ai.txt, head signals and a crawler policy, plus a checker that separates host-blocked requirements from real failures.
+- [Changelog entries](https://tryraisins.dev/skills/add-changelog.md): Adds or updates a Keep a Changelog entry based on the changes and history that can actually be verified, so release notes describe what shipped.
+- [Commit, push and open a PR](https://tryraisins.dev/skills/yeet.md): Stages, commits, pushes and opens a GitHub pull request in one flow using the GitHub CLI.
+- [Deploy](https://tryraisins.dev/skills/deploy.md): Detects the hosting provider from repository configuration and follows that provider's deploy procedure, so an unnamed "deploy this" request has one entry point instead of four competing ones.
+- [Finalize](https://tryraisins.dev/skills/finalize.md): Runs the final documentation and quality checks, summarises the diff and handles any Git publishing you asked for.
+- [Fix failing CI](https://tryraisins.dev/skills/gh-fix-ci.md): Inspects failing GitHub Actions checks on a pull request, summarises the logs, drafts a fix plan and only makes changes once you approve.
+- [Launch readiness](https://tryraisins.dev/skills/launch-readiness.md): Audits a product before it becomes publicly reachable, covering the legal obligations that attach to the data, payments, email and user content it handles, plus the engineering gates no other workflow owns, then returns one register and a go or no-go.
+
+## Docs and handoffs
+
+- [Project handoff](https://tryraisins.dev/skills/project-handoff.md): Keeps a short HANDOFF.md at the root of the repository so the next session, or the next person, can pick up exactly where the work stopped.
+- [Agent-readable site](https://tryraisins.dev/skills/agent-readable-site.md): Gives every public page a markdown version and gives agents the files that explain the site: llms.txt, llms-full.txt, ai.txt, head signals and a crawler policy, plus a checker that separates host-blocked requirements from real failures.
+- [Changelog entries](https://tryraisins.dev/skills/add-changelog.md): Adds or updates a Keep a Changelog entry based on the changes and history that can actually be verified, so release notes describe what shipped.
+- [Content and SEO](https://tryraisins.dev/skills/content-seo.md): Guides useful content and search visibility together, from keyword patterns and page briefs to metadata, structured data, sitemaps, local search, earned links and AI citations.
+- [Domain modeling](https://tryraisins.dev/skills/domain-modeling.md): Clarifies a project’s domain terms and boundaries and records the decisions in a glossary or architecture decision record.
+- [Markdown management](https://tryraisins.dev/skills/markdown-management.md): Creates, merges, updates and audits Markdown without losing meaning, links or repository conventions, including README files and Agent Skills.
+- [Raise the bar on a brief](https://tryraisins.dev/skills/ambition.md): Raises a task or prompt to expert standard before work starts, by finding the real bottleneck and naming the raw material, the method and the outside check that decides whether the result is right.
+- [Research and analysis](https://tryraisins.dev/skills/research-analysis.md): Researches and compares sources, checks them against each other and writes evidence-backed reports for market, competitive, trend or data questions.
+
+## Brand and identity
+
+- [Brand kit images](https://tryraisins.dev/skills/brandkit.md): Generates polished brand-guideline boards, logo systems and identity presentations as images, with deliberate composition and sparse typography.
+
+## Working with agents
+
+- [Project handoff](https://tryraisins.dev/skills/project-handoff.md): Keeps a short HANDOFF.md at the root of the repository so the next session, or the next person, can pick up exactly where the work stopped.
+- [Agent cost control](https://tryraisins.dev/skills/agent-cost-control.md): Measures what agent work actually costs, finds the sessions and settings that own the spend, and changes one lever at a time without quietly losing review quality along the way.
+- [Code graph](https://tryraisins.dev/skills/code-graph.md): Builds a local, model-free index of a repository and answers with a small ranked slice, so an unfamiliar codebase can be entered in one call instead of many searches.
+- [Orchestration specialists](https://tryraisins.dev/skills/orchestration-specialists.md): Organises work across several agents and tools, covering task distribution, context management, evidence synthesis, prompt engineering and MCP design.
+
+## Related
+
+- [Portfolio](https://tryraisins.dev/)
+- [Full content](https://tryraisins.dev/llms-full.txt)

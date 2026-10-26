@@ -1,4 +1,50 @@
+# Answer-engine crawlers retrieve pages to answer a question. A vendor cannot
+# retrieve what it is not allowed to fetch, so blocking these removes the site
+# from that vendor's answers.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# User-initiated fetchers act on a request from a person who pasted or asked
+# about a URL. Their robots.txt compliance varies by vendor.
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Training crawlers are the owner's decision, not a requirement. This site's
+# prose and MIT-licensed skills are open to training with attribution; blocking
+# any of these would not remove the site from answer engines.
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
 User-agent: *
 Allow: /
 
+# Keep this file in sync with /llms.txt and /ai.txt.
+# See /llms.txt for the curated index and /ai.txt for usage permissions.
 Sitemap: https://tryraisins.dev/sitemap-index.xml
