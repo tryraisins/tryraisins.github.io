@@ -1,62 +1,62 @@
 {
   "name": "yeknal-content-seo",
-  "sourceRevision": "9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f",
-  "source": "https://github.com/tryraisins/MD_Files/tree/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-content-seo",
+  "sourceRevision": "ac51b4848862031263d9a8416a0caa5b19d6e127",
+  "source": "https://github.com/tryraisins/MD_Files/tree/ac51b4848862031263d9a8416a0caa5b19d6e127/skills/yeknal-content-seo",
   "fileCount": 9,
   "files": [
     {
       "path": "references/authority-and-links.md",
       "sha256": "cd1ff8bb41bbd63e6f6ed1c07b3a2c65635790c5d9fd453c64c340dab73df41f",
       "size": 9290,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-content-seo/references/authority-and-links.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/ac51b4848862031263d9a8416a0caa5b19d6e127/skills/yeknal-content-seo/references/authority-and-links.md"
     },
     {
       "path": "references/content-maintenance.md",
       "sha256": "d51c3c183abc2a818ed453adadc4ea5e88ae355edefee9e1669fc681937d01d2",
       "size": 5544,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-content-seo/references/content-maintenance.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/ac51b4848862031263d9a8416a0caa5b19d6e127/skills/yeknal-content-seo/references/content-maintenance.md"
     },
     {
       "path": "references/indexnow.md",
       "sha256": "37a95981c161c0419ae367f2ace255dd41450d1b7fdc9bcc9fffc39e396a2e37",
       "size": 3978,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-content-seo/references/indexnow.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/ac51b4848862031263d9a8416a0caa5b19d6e127/skills/yeknal-content-seo/references/indexnow.md"
     },
     {
       "path": "references/keyword-intent-and-patterns.md",
       "sha256": "dd90d628d05e6c59db6fb7acc5b9306a6fb28b2095832080f7f21cd616fd83bc",
       "size": 7527,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-content-seo/references/keyword-intent-and-patterns.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/ac51b4848862031263d9a8416a0caa5b19d6e127/skills/yeknal-content-seo/references/keyword-intent-and-patterns.md"
     },
     {
       "path": "references/local-search.md",
       "sha256": "1a02b2e1325e8aeb347df3c282091213c665f923affd55254cbb8c377bde5696",
       "size": 6221,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-content-seo/references/local-search.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/ac51b4848862031263d9a8416a0caa5b19d6e127/skills/yeknal-content-seo/references/local-search.md"
     },
     {
       "path": "references/page-decisions-and-briefs.md",
       "sha256": "a16ae7c5b08e98f097aa0a6970bd4f723e53eeaaf0490606a9b3ea221a7c70f9",
       "size": 8088,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-content-seo/references/page-decisions-and-briefs.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/ac51b4848862031263d9a8416a0caa5b19d6e127/skills/yeknal-content-seo/references/page-decisions-and-briefs.md"
     },
     {
       "path": "references/publishing-and-change-control.md",
       "sha256": "24e379d7eaad512cca11ad2494b2a8a026cf505113d63e775aff557d4b0d533c",
       "size": 4799,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-content-seo/references/publishing-and-change-control.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/ac51b4848862031263d9a8416a0caa5b19d6e127/skills/yeknal-content-seo/references/publishing-and-change-control.md"
     },
     {
       "path": "references/technical-audit.md",
       "sha256": "f82e4a734401bc733984962a08f3a815eaf453b4832f6b619102b2300cc1c00e",
       "size": 6656,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-content-seo/references/technical-audit.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/ac51b4848862031263d9a8416a0caa5b19d6e127/skills/yeknal-content-seo/references/technical-audit.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "9975c634d6be93cb3bd75bcff48b6cdf5e90a9b0a483224592c6707defd9692d",
       "size": 11641,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-content-seo/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/ac51b4848862031263d9a8416a0caa5b19d6e127/skills/yeknal-content-seo/SKILL.md"
     }
   ]
 }
