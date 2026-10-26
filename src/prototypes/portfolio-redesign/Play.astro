@@ -262,7 +262,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   import { initContactReveal } from "../../scripts/contact-reveal";
   import { mountReel } from "./reel.js";
   import { mountRail } from "./rail.js";
-  import { mountRules } from "./rules.js";
+  import { mountRules } from "../../scripts/notebook-rules";
   import { whenBootRevealed, whenBootDone } from "../../scripts/boot-overlay";
   const root = document.querySelector('[data-play-root]');
 
@@ -325,7 +325,15 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     document.addEventListener('astro:before-swap', disposeReel, { once: true });
     const disposeRail = mountRail(root, (message) => { if (status) status.textContent = message; });
     document.addEventListener('astro:before-swap', disposeRail, { once: true });
-    const disposeRules = mountRules(root);
+    // Handwriting written on the page itself (not the yellow contact note) sits on the rules.
+    const desk = root.querySelector('#play-desk');
+    const stage = root.querySelector('[data-reel-stage]');
+    const disposeRules = mountRules(root, {
+      selector: '.play-hero-index, .play-hero-links a, .play-hero-kicker, .play-hero h1 > span, .play-intro p, .play-eyebrow, .play-desk h2, .play-rail-hint, .play-copy-meta, .play-copy strong, .play-copy p, .play-project-footer, .play-footer p, .play-footer a',
+      // While the desk is pinned, its stage is a separate sheet with its own rules.
+      paperFor: (block) => (desk?.getAttribute('data-reel-mode') === 'pinned' && stage instanceof HTMLElement && stage.contains(block) ? stage : root),
+      watch: desk ? [{ target: desk, attributes: ['data-reel-mode'] }] : [],
+    });
     document.addEventListener('astro:before-swap', disposeRules, { once: true });
 
     const disposeContact = initContactReveal(root, (message) => { if (status) status.textContent = message; });

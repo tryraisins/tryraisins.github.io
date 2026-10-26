@@ -4,9 +4,11 @@ const allowedOrigins = new Set([
   'https://tryraisins.dev',
   'https://www.tryraisins.dev',
   'https://tryraisins.github.io',
-  'http://localhost:4321',
-  'http://127.0.0.1:4321',
 ]);
+// Any local dev or preview server (astro dev, astro preview, test runs) can read
+// the total. Nothing here is private, and posted installs are validated anyway.
+const localOrigin = /^http:\/\/(localhost|127\.0\.0\.1)(:\d{1,5})?$/;
+const isAllowed = (origin) => !!origin && (allowedOrigins.has(origin) || localOrigin.test(origin));
 const NPM_PACKAGE = 'yeknal';
 const NPM_FIRST_PUBLISHED = '2026-03-05';
 const SKILLS_SH_SOURCE = 'tryraisins/md_files';
@@ -77,7 +79,7 @@ export default {
       'Access-Control-Allow-Headers': 'Content-Type',
       'Cache-Control': 'no-store',
     });
-    if (allowedOrigins.has(origin)) headers.set('Access-Control-Allow-Origin', origin);
+    if (isAllowed(origin)) headers.set('Access-Control-Allow-Origin', origin);
     const respond = (status, payload) => new Response(JSON.stringify(payload), { status, headers });
 
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers });

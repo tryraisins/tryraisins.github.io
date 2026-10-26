@@ -82,6 +82,17 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
       </footer>
       <p class="sk-sr" data-sk-status aria-live="polite"></p>
     </div>
+    <script>
+      import { mountRules } from '../scripts/notebook-rules';
+
+      // Text written straight on the ruled paper sits on the rules. The white
+      // cards and yellow sheets have no rules, so their text is left alone.
+      const world = document.querySelector('.sk-world');
+      if (world instanceof HTMLElement) {
+        const written = ['.sk-home', '.sk-topbar nav a', '.sk-crumbs ol', '.sk-kicker', '.sk-h1', '.sk-h2', '.sk-h3', '.sk-lede', '.sk-facts', '.sk-sub', '.sk-results-bar p', '.sk-detail-meta', '.sk-body', '.sk-bullets li', '.sk-avoid', '.sk-requirements', '.sk-install-all', '.sk-footer p'];
+        mountRules(world, { selector: written.map((s) => `${s}:not(.sk-sheet *):not(.sk-paper *)`).join(', '), paperFor: () => world });
+      }
+    </script>
   </body>
 </html>
 
@@ -101,6 +112,9 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     /* Headings, titles and labels are handwritten, as on the homepage; long
        instructions and prompts stay in print so they are easy to read and copy. */
     --sk-hand: 'Caveat', 'Segoe Print', cursive;
+    /* One ruled line. Text written on the paper uses this height (or a multiple)
+       and notebook-rules.ts lines up each first baseline with the rules. */
+    --sk-rule: 36px;
     --sk-red-pen: #c4352b;
     --sk-section-font: var(--sk-hand);
     --sk-title-font: var(--sk-hand);
@@ -140,11 +154,11 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
   .sk-topbar nav a.sk-nav-current { border-color: var(--sk-ink); background: var(--sk-yellow); font-weight: 700; }
 
   .sk-section { padding: 0 var(--sk-margin) 0 var(--sk-inset); }
-  .sk-kicker { color: var(--sk-red-pen); font: 600 28px/1.1 var(--sk-hand); }
-  .sk-h1 { font: 700 clamp(3.5rem, 7.4vw, 6.75rem)/.92 var(--sk-hand); text-wrap: balance; }
-  .sk-h2 { font: 700 clamp(2.75rem, 4.6vw, 4rem)/1 var(--sk-section-font); }
-  .sk-h3 { font: 700 clamp(2.4rem, 3.4vw, 3rem)/1 var(--sk-section-font); }
-  .sk-lede { max-width: 46rem; color: rgba(23,23,25,.82); font-size: clamp(1.0625rem, 1.6vw, 1.3125rem); line-height: 1.5; }
+  .sk-kicker { color: var(--sk-red-pen); font: 600 28px/var(--sk-rule) var(--sk-hand); }
+  .sk-h1 { font: 700 clamp(3.5rem, 7.4vw, 6.75rem)/.92 var(--sk-hand); line-height: round(nearest, .92em, var(--sk-rule)); text-wrap: balance; }
+  .sk-h2 { font: 700 clamp(2.75rem, 4.6vw, 4rem)/1 var(--sk-section-font); line-height: round(nearest, 1em, var(--sk-rule)); }
+  .sk-h3 { font: 700 clamp(2.4rem, 3.4vw, 3rem)/1 var(--sk-section-font); line-height: round(nearest, 1em, var(--sk-rule)); }
+  .sk-lede { max-width: 46rem; color: rgba(23,23,25,.82); font-size: clamp(1.0625rem, 1.6vw, 1.3125rem); line-height: var(--sk-rule); }
 
   .sk-btn, .sk-btn-primary { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--sk-ink); border-radius: 0; background: var(--sk-paper); color: var(--sk-ink); font: 600 14px/1.2 'DM Sans', sans-serif; text-align: center; cursor: pointer; user-select: none; }
   .sk-btn-primary { background: var(--sk-yellow); box-shadow: 3px 3px 0 var(--sk-ink); transition: transform 130ms var(--sk-ease), box-shadow 130ms var(--sk-ease); }
@@ -167,7 +181,7 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
   .sk-status[data-tone='error']::before { border-radius: 0; background: #943614; transform: rotate(45deg); }
 
   .sk-footer { margin-top: 64px; padding: 40px var(--sk-margin) 56px var(--sk-inset); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; }
-  .sk-footer p { max-width: 38rem; color: rgba(23,23,25,.72); font-size: 13px; }
+  .sk-footer p { max-width: 38rem; color: rgba(23,23,25,.72); font-size: 13px; line-height: var(--sk-rule); }
   .sk-footer nav { display: flex; flex-wrap: wrap; gap: 4px; margin-left: -8px; }
 
   @media (hover: hover) and (pointer: fine) {
