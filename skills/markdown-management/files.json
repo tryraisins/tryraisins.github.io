@@ -1,50 +1,50 @@
 {
   "name": "yeknal-markdown-management",
-  "sourceRevision": "a9246104d861a12f472ab19764db7296186b2931",
-  "source": "https://github.com/tryraisins/MD_Files/tree/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-markdown-management",
+  "sourceRevision": "4d5f23650cf23128b33e548478e9960e8cdc694e",
+  "source": "https://github.com/tryraisins/MD_Files/tree/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-markdown-management",
   "fileCount": 7,
   "files": [
     {
       "path": "references/installed-skill-conflict-resolution.md",
       "sha256": "a3be3a3217483e06e20f0d2a7374da5d3dbe5f41963524e8124a296f10a0781c",
       "size": 1610,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-markdown-management/references/installed-skill-conflict-resolution.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-markdown-management/references/installed-skill-conflict-resolution.md"
     },
     {
       "path": "references/markdown-review-checklist.md",
       "sha256": "68cfd69506539867564e7cb462d3fa6ff4de34eafbd096f98759d667d107204f",
       "size": 2005,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-markdown-management/references/markdown-review-checklist.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-markdown-management/references/markdown-review-checklist.md"
     },
     {
       "path": "scripts/audit-installed-skill-conflicts.ps1",
       "sha256": "a2c9c42498d33d432d613bf15791a0b3d4143ac64ec80df957abb9d77f9a3460",
       "size": 4147,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-markdown-management/scripts/audit-installed-skill-conflicts.ps1"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-markdown-management/scripts/audit-installed-skill-conflicts.ps1"
     },
     {
       "path": "scripts/audit-markdown-links.ps1",
       "sha256": "3fd1dc1eff5359cf5e110bf31ee8b0f9fd6ba2261bca912874f3a95ef463d1e0",
       "size": 2781,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-markdown-management/scripts/audit-markdown-links.ps1"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-markdown-management/scripts/audit-markdown-links.ps1"
     },
     {
       "path": "scripts/audit-skills.ps1",
       "sha256": "84cdb8150a5e8958f0f6eb3691c052da22c4f926ac7c0aa97c49ba10d27b5117",
       "size": 7247,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-markdown-management/scripts/audit-skills.ps1"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-markdown-management/scripts/audit-skills.ps1"
     },
     {
       "path": "scripts/validate-routing-evals.ps1",
       "sha256": "aa8df9dd4c74cc3d06b0a0c7b2ad40ff517cb69b8d79d28bf9a371e58fe2e71d",
       "size": 2744,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-markdown-management/scripts/validate-routing-evals.ps1"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-markdown-management/scripts/validate-routing-evals.ps1"
     },
     {
       "path": "SKILL.md",
       "sha256": "01d8e839e4a446f971ecbd09a336e73bfbbecdff6dcc80ca8ccce65d5ea7ac62",
       "size": 7998,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-markdown-management/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-markdown-management/SKILL.md"
     }
   ]
 }

@@ -1,20 +1,20 @@
 {
   "name": "yeknal-industrial-brutalist-ui",
-  "sourceRevision": "a9246104d861a12f472ab19764db7296186b2931",
-  "source": "https://github.com/tryraisins/MD_Files/tree/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-industrial-brutalist-ui",
+  "sourceRevision": "4d5f23650cf23128b33e548478e9960e8cdc694e",
+  "source": "https://github.com/tryraisins/MD_Files/tree/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-industrial-brutalist-ui",
   "fileCount": 2,
   "files": [
     {
       "path": "LICENSE.txt",
       "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
       "size": 1065,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-industrial-brutalist-ui/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-industrial-brutalist-ui/LICENSE.txt"
     },
     {
       "path": "SKILL.md",
       "sha256": "2d73863525ea0b32983fecabaa536383766586d6749d893803f9c3283774355a",
       "size": 8257,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/a9246104d861a12f472ab19764db7296186b2931/skills/yeknal-industrial-brutalist-ui/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-industrial-brutalist-ui/SKILL.md"
     }
   ]
 }
