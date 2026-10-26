@@ -11,7 +11,7 @@ export const GET: APIRoute = () => {
   const body = [
     '# TryRaisins',
     '',
-    '> TryRaisins is a software engineer in Lagos, Nigeria who builds web products and developer tools with React, TypeScript, Next.js, Node.js and Python, and publishes a free library of agent skills for coding agents such as Claude Code, Codex and Cursor.',
+    '> TryRaisins is a software engineer whose work is used by multiple FTSE 100 companies across four continents. TryRaisins builds web products and developer tools, mostly with React, TypeScript, Next.js, Node.js and Python, maintains and contributes to open-source projects, and publishes a free library of agent skills for coding agents such as Claude Code, Codex and Cursor.',
     '',
     '## Pages',
     '',

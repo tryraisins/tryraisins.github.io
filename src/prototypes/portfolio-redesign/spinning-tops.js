@@ -412,6 +412,9 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
   const countFor = (viewport) => viewport > 1200 ? 5 : viewport > 620 ? 4 : 3;
   const radiusFor = (viewport) => viewport > 1200 ? 56 : viewport > 620 ? 46 : 34;
   let topCount = countFor(window.innerWidth);
+  // prepare() builds tops one per frame, and a resize can raise topCount before
+  // the new ones exist, so loops only visit tops that have been built.
+  const liveCount = () => Math.min(topCount, states.length);
   const sparks = createCollisionSparks(scene, renderer.getPixelRatio());
 
   // 0: current desktop GPU. 1: phones and older laptops. 2: four threads or
@@ -699,7 +702,7 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
     if (reduced.matches || !heroVisible) return;
     const nudge = Math.max(-6, Math.min(6, -scrollDelta * .035));
     if (Math.abs(nudge) < .15) return;
-    for (let i = 0; i < topCount; i++) {
+    for (let i = 0; i < liveCount(); i++) {
       const state = states[i];
       if (state.phase === 'resting' || !grounded(state)) continue;
       state.vy = Math.max(-165, Math.min(165, state.vy + nudge));
@@ -972,7 +975,7 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
       const scale = state.radius / 56;
       let nearest = null;
       let nearestDistance = Infinity;
-      for (let i = 0; i < topCount; i++) {
+      for (let i = 0; i < liveCount(); i++) {
         const other = states[i];
         if (other === state || other.phase === 'resting' || !grounded(other)) continue;
         const distance = Math.hypot(other.x - state.x, other.y - state.y);
@@ -1034,7 +1037,7 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
     trail.lineWidth = 1.05;
     trail.beginPath();
     let segments = 0;
-    for (let i = 0; i < topCount; i++) {
+    for (let i = 0; i < liveCount(); i++) {
       const state = states[i];
       const drawing = state.delay <= 0 && state.z < 2 && state.phase !== 'resting' && state.phase !== 'airborne';
       if (!drawing) {
@@ -1078,11 +1081,11 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
       if (pointer.age > .08) pointer.vx = pointer.vy = 0;
     }
     let allResting = true;
-    for (let i = 0; i < topCount; i++) {
+    for (let i = 0; i < liveCount(); i++) {
       stepTop(states[i], dt);
       for (let j = 0; j < i; j++) collide(states[j], states[i]);
     }
-    for (let i = 0; i < topCount; i++) allResting &&= states[i].phase === 'resting';
+    for (let i = 0; i < liveCount(); i++) allResting &&= states[i].phase === 'resting';
     sparks.update(dt);
     ringCheck += dt;
     if (ringCheck > .25) {

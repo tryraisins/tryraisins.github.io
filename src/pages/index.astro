@@ -26,8 +26,8 @@ const socials = [
 ];
 
 const siteUrl = 'https://tryraisins.dev/';
-const pageTitle = 'TryRaisins | Software Engineer in Lagos, Nigeria';
-const pageDescription = 'TryRaisins is a Lagos-based software engineer building web products and developer tools, from the Terror Tracker incident map and SlopLens to QuickBillz invoicing, with React, TypeScript, Next.js, Node.js and Python.';
+const pageTitle = 'TryRaisins | Software Engineer and Open-Source Maintainer';
+const pageDescription = 'TryRaisins is a software engineer whose work is used by FTSE 100 companies on four continents, building web products, developer tools and open-source projects with React, TypeScript, Next.js, Node.js and Python.';
 const socialImageAlt = 'TryRaisins: I build useful things for the web. Ruled notebook paper with a handwritten hello and pencil sketches of a face and a cat.';
 // The LinkedIn URL spells out a personal name, so it stays a visible link on the
 // page but is left out of the structured data.
@@ -44,7 +44,6 @@ const seoSchema = {
       image: socialImage,
       jobTitle: 'Software engineer',
       description: pageDescription,
-      homeLocation: { '@type': 'Place', name: 'Lagos, Nigeria' },
       sameAs: profileUrls,
       knowsAbout: ['React', 'TypeScript', 'Next.js', 'Node.js', 'Python', 'Web development', 'Developer tooling', 'AI coding agents'],
     },
@@ -99,7 +98,7 @@ const seoSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="theme-color" content="#fbfaf5" />
+    <meta name="theme-color" content="#f8f7f1" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
     <meta name="author" content="TryRaisins" />
@@ -113,7 +112,6 @@ const seoSchema = {
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:site_name" content="TryRaisins" />
-    <meta property="og:locale" content="en_NG" />
     <meta property="og:image" content={socialImage} />
     <meta property="og:image:secure_url" content={socialImage} />
     <meta property="og:image:type" content="image/png" />
@@ -127,8 +125,6 @@ const seoSchema = {
     <meta name="twitter:image:alt" content={socialImageAlt} />
     <meta name="twitter:creator" content="@tryraisins" />
     <script id="structured-data" type="application/ld+json" set:html={JSON.stringify(seoSchema)} />
-    <link rel="preload" href="/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/caveat-latin.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
@@ -138,8 +134,8 @@ const seoSchema = {
 </html>
 
 <style is:global>
-  html { min-width: 320px; background: #e7ddc9; scroll-behavior: smooth; }
-  body { min-width: 320px; min-height: 100dvh; margin: 0; overflow-x: hidden; background: #e7ddc9; }
+  html { min-width: 320px; background: #f8f7f1; scroll-behavior: smooth; }
+  body { min-width: 320px; min-height: 100dvh; margin: 0; overflow-x: hidden; background: #f8f7f1; }
   ::selection { background: #315fe9; color: #fff; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>

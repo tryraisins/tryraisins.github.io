@@ -40,8 +40,10 @@ async function boot(): Promise<void> {
   // marker faces live in the desk and prints below the fold, so waiting on them
   // held the sheet for up to a second longer than the page needed.
   const firstScreenFaces = () => {
-    const faces = ['600 1em "Bricolage Grotesque"', '400 1em "DM Sans"'];
-    if (document.querySelector('.play-hero')) faces.push('600 1em "Caveat"');
+    // Both pages are handwritten in Caveat (one variable file covers every
+    // weight); only the skills pages also open on printed DM Sans.
+    const faces = ['700 1em "Caveat"'];
+    if (!document.querySelector('.play-hero')) faces.push('400 1em "DM Sans"');
     return faces;
   };
 

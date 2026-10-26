@@ -448,8 +448,8 @@ const searchText = (skill: (typeof skills)[number]) =>
   .sk-tally[hidden] { display: none; }
   .sk-tally[data-ready] { visibility: visible; opacity: 1; transform: rotate(1.4deg); }
   .sk-tally-tape { position: absolute; top: -9px; left: 50%; width: 76px; height: 18px; border: 1px solid rgba(23,23,25,.35); background: rgba(251,250,245,.82); transform: translateX(-50%) rotate(-3deg); }
-  .sk-tally-label { font-size: 12px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
-  .sk-tally-num { font: 600 clamp(3.75rem, 6.4vw, 5.25rem)/.92 var(--sk-section-font); letter-spacing: -.01em; font-variant-numeric: tabular-nums; }
+  .sk-tally-label { font: 700 22px/1.1 var(--sk-hand); }
+  .sk-tally-num { font: 700 clamp(4.25rem, 7vw, 6rem)/.9 var(--sk-section-font); }
   .sk-tally-marks { width: 132px; height: 34px; margin: 2px 0 6px; overflow: visible; }
   .sk-tally-marks path { fill: none; stroke: var(--sk-red); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 520; stroke-dashoffset: 520; }
   .sk-tally[data-ready] .sk-tally-marks path { stroke-dashoffset: 0; transition: stroke-dashoffset 1100ms 120ms var(--sk-ease); }
@@ -465,7 +465,7 @@ const searchText = (skill: (typeof skills)[number]) =>
   .sk-note { height: 100%; min-height: 132px; padding: 26px 20px 18px; position: relative; display: flex; flex-direction: column; gap: 10px; border: 1px solid var(--sk-ink); background: var(--sk-sheet); box-shadow: 4px 5px 0 rgba(23,23,25,.16); transition: translate 180ms var(--sk-ease); }
   .sk-note::before { content: ''; position: absolute; top: -8px; left: 50%; width: 56px; height: 16px; border: 1px solid rgba(23,23,25,.35); background: rgba(251,250,245,.8); transform: translateX(-50%) rotate(2deg); }
   .sk-note-num { color: var(--sk-blue); font-size: 12px; font-weight: 600; }
-  .sk-note-task { font: 600 21px/1.2 var(--sk-title-font); letter-spacing: -.02em; }
+  .sk-note-task { font: 700 28px/1.1 var(--sk-title-font); }
   .sk-note-skill { margin-top: auto; color: var(--sk-link); font-size: 14px; font-weight: 600; }
 
   .sk-browse { padding-top: 48px; scroll-margin-top: 16px; }
@@ -495,7 +495,7 @@ const searchText = (skill: (typeof skills)[number]) =>
   .sk-list { margin: 28px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; align-items: start; }
   .sk-entry { min-width: 0; padding: 20px 22px 18px; display: grid; gap: 12px; }
   .sk-entry .sk-meta { display: flex; flex-wrap: wrap; gap: 4px 14px; }
-  .sk-entry-title { font: 600 clamp(1.5rem, 2vw, 1.625rem)/1.15 var(--sk-title-font); letter-spacing: -.02em; }
+  .sk-entry-title { font: 700 clamp(1.875rem, 2.6vw, 2.125rem)/1.05 var(--sk-title-font); }
   .sk-entry-purpose { font-size: 15px; }
   .sk-entry-actions { padding-top: 6px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
   .sk-copy-toggle { margin-left: auto; }
@@ -508,7 +508,7 @@ const searchText = (skill: (typeof skills)[number]) =>
   .sk-inline-links { display: flex; flex-wrap: wrap; gap: 4px; margin-left: -8px; }
 
   .sk-empty { margin-top: 28px; padding: clamp(24px, 3vw, 40px); display: grid; gap: 16px; justify-items: start; }
-  .sk-empty-title { font: 600 clamp(1.5rem, 2.4vw, 1.875rem)/1.2 var(--sk-title-font); letter-spacing: -.02em; outline: none; }
+  .sk-empty-title { font: 700 clamp(1.875rem, 3vw, 2.375rem)/1.1 var(--sk-title-font); outline: none; }
   .sk-empty p { max-width: 45rem; font-size: 17px; }
   .sk-empty-actions { padding-top: 8px; display: flex; flex-wrap: wrap; gap: 12px; }
   .sk-empty-actions > * { min-height: 48px; }
@@ -526,7 +526,7 @@ const searchText = (skill: (typeof skills)[number]) =>
   .sk-all-option { min-width: 0; display: grid; gap: 14px; align-content: start; }
   .sk-all-option > p:last-child { color: rgba(23,23,25,.88); font-size: 16px; }
   .sk-all-option code { font-family: var(--sk-mono); font-size: .92em; }
-  .sk-badge { color: var(--sk-link); font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+  .sk-badge { color: var(--sk-red-pen); font: 700 19px/1.1 var(--sk-hand); }
   .sk-command { min-height: 56px; padding: 6px 6px 6px 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; border: 1px solid var(--sk-ink); background: var(--sk-paper); }
   .sk-command code { min-width: 0; overflow-wrap: anywhere; font: 500 15px/1.4 var(--sk-mono); }
   .sk-command-status { min-height: 1.5em; margin-top: 16px !important; font-size: 14px; }

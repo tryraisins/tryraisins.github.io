@@ -39,7 +39,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
         </figure>
       </div>
       <header class="play-hero-header">
-        <p class="play-hero-index"><strong>TryRaisins</strong> / Software engineer / Lagos</p>
+        <p class="play-hero-index"><strong>TryRaisins</strong> / Software engineer</p>
         <nav class="play-hero-links" aria-label="Site">
           <a href="#play-desk">Work</a>
           <a href="/skills/">Agent skills</a>
@@ -48,9 +48,10 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       </header>
       <div class="play-hero-body">
         <p class="play-hero-kicker">Hello, I’m Seun.</p>
-        <h1 id="play-title"><span>I build useful things</span> <span>for the web.</span></h1>
+        <h1 id="play-title"><span>I build <s class="play-strike" aria-hidden="true">cool</s> useful things</span> <span>for the web.</span></h1>
         <div class="play-intro">
-          <p>I’m a software engineer who likes turning messy ideas into clear, dependable products. I work across the interface and the systems behind it, using React, TypeScript, Next.js, Node.js and Python.</p>
+          <p>I’m a software engineer who likes turning messy ideas into clear, dependable products. I work across the interface and the systems behind it, mostly using React, TypeScript, Next.js, Node.js and Python.</p>
+          <p class="play-intro-proof">My work is used by <mark>multiple FTSE 100 companies across four continents</mark>, and I maintain and contribute to open-source projects.</p>
           <nav class="play-hero-actions" aria-label="Portfolio introduction">
             <a class="play-hero-primary" href="#play-desk">Explore my work</a>
             <a class="play-hero-secondary" href="/skills/">Browse agent skills</a>
@@ -111,7 +112,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
         </p>
       </div>
 
-      <ol data-play-grid>
+      <ol data-play-grid aria-label="Projects">
         {projects.map((project, index) => {
           const internal = project.href.startsWith('/');
           const Card = project.suspended ? 'div' : 'a';
@@ -123,6 +124,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
           return (
             <li data-play-tile class={`play-tile play-tile-${index + 1}${project.suspended ? ' play-tile-suspended' : ''}`} style={`--play-tile-index: ${index}`}>
               <Card class="play-card" {...linkProps}>
+                <span class="play-print">
                 <span class="play-pin" aria-hidden="true"></span>
                 <span class="play-pin play-pin-right" aria-hidden="true"></span>
                 <span class="play-photo">
@@ -170,8 +172,9 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
                   )}
                   {project.suspended && <span class="play-suspended">Suspended</span>}
                 </span>
+                </span>
                 <span class="play-copy">
-                  <span>{project.number} / {project.type}</span>
+                  <span class="play-copy-meta"><span class="play-copy-number">{project.number}</span> {project.type}</span>
                   <strong>{project.name}</strong>
                   <p>{project.description}</p>
                   <span class="play-project-footer"><span>{project.year}</span><em>{project.suspended ? 'Not live right now' : project.cta ?? 'View project'}</em></span>
@@ -181,6 +184,11 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
           );
         })}
       </ol>
+      <div class="play-rail-controls" data-rail-controls hidden>
+        <button type="button" class="play-rail-button" data-rail-prev aria-label="Previous project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5" /></svg></button>
+        <p class="play-rail-count" data-rail-count aria-hidden="true">1 of {projects.length}</p>
+        <button type="button" class="play-rail-button" data-rail-next aria-label="Next project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5" /></svg></button>
+      </div>
       <p class="play-page-number" aria-hidden="true">p. 02</p>
       </div>
       </div>
@@ -201,22 +209,16 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       </div>
       <div class="play-contact-sheet">
         <span class="play-contact-tape" aria-hidden="true"></span>
-        <header class="play-contact-meta">
-          <p>Contact sheet</p>
-          <p class="play-contact-availability"><span aria-hidden="true"></span> Available for project work</p>
-        </header>
         <div class="play-contact-heading">
-          <p class="play-contact-label">Have something in mind?</p>
           <h2 id="play-contact-title">Tell me what you’re working on.</h2>
-          <p>Share what you’re building, what’s getting in the way, or where you need a second pair of eyes, and we can start with the rough version.</p>
+          <p>Send the rough version: what you’re building, what’s in the way, or where a second pair of eyes would help.</p>
+          <p class="play-contact-availability"><span aria-hidden="true"></span> Available for project work.</p>
         </div>
         <div class="play-contact-body">
-          <p class="play-contact-label">Write me an email</p>
-          <button type="button" class="play-contact-toggle" data-contact-toggle aria-expanded="false" aria-controls="play-contact-options" aria-label="Get in touch: show my email address">
+          <button type="button" class="play-contact-toggle" data-contact-toggle aria-expanded="false" aria-controls="play-contact-options" aria-label="Show my email address">
             <span class="play-contact-arrow" aria-hidden="true"><span class="play-contact-arrow-motion"><svg viewBox="0 0 96 89" fill="currentColor"><path d="M95.38 44.19 52.3 88.38 43.7 80 72.77 50.19H0v-12h72.77L43.7 8.38 52.3 0Z" /></svg></span></span>
-            <span class="play-contact-toggle-text" aria-hidden="true"><span class="play-contact-toggle-main">Get in touch</span><span class="play-contact-toggle-copy">Get in touch</span></span>
+            <span class="play-contact-toggle-text" aria-hidden="true"><span class="play-contact-toggle-main">Show my email</span><span class="play-contact-toggle-copy">Show my email</span></span>
           </button>
-          <div class="play-contact-slot">
           <div class="play-contact-reveal" id="play-contact-options" data-contact-options data-open="false" aria-hidden="true" inert hidden>
             <a class="play-contact-channel" href="#play-contact" data-contact-destination={emailDestination} style="--channel-order: 0">
               <span class="play-contact-channel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg></span>
@@ -227,23 +229,15 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
               <span class="play-contact-channel-label" data-copy-label>Copy address</span>
             </button>
           </div>
-          </div>
           <noscript><p class="play-contact-location">Turn on JavaScript to see my email address, or reach me through the profiles below.</p></noscript>
-          <p class="play-contact-location">Based in Lagos, Nigeria (WAT, UTC+1).</p>
-        </div>
-        <aside class="play-contact-aside">
-          <p class="play-contact-label">More of my work and notes</p>
-          <nav aria-label="Social profiles">
-            {socials.map((social, index) => (
-              <a href={social.href} target="_blank" rel="me noopener noreferrer" aria-label={`${social.name}, opens in a new tab`}>
-                <span class="play-contact-social-number" aria-hidden="true">0{index + 1}</span>
-                <span>{social.name}</span>
-                <span class="play-contact-social-action" aria-hidden="true">View profile</span>
-              </a>
+          <p class="play-contact-label">Or find me on</p>
+          <nav class="play-contact-profiles" aria-label="Social profiles">
+            {socials.map((social) => (
+              <a href={social.href} target="_blank" rel="me noopener noreferrer" aria-label={`${social.name}, opens in a new tab`}>{social.name}</a>
             ))}
           </nav>
-        </aside>
-        <p class="play-signature" aria-hidden="true">tryraisins</p>
+          <p class="play-signature" aria-hidden="true">tryraisins</p>
+        </div>
       </div>
       <p class="play-page-number" aria-hidden="true">p. 03</p>
     </section>
@@ -253,7 +247,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       <path d="M2 10 C 44 8, 90 13, 150 11 S 244 7, 296 10 S 366 13, 398 10" />
       <path class="play-divider-faint" d="M14 13 C 70 11, 128 15, 186 12 S 274 10, 330 13 S 380 12, 392 11" />
     </svg>
-    <p>© {year} TryRaisins. Designed and built in Lagos with Astro and Three.js.</p>
+    <p>© {year} TryRaisins. Designed and built with Astro and Three.js.</p>
     <nav aria-label="Footer">
       <a href="/skills/">Agent skills</a>
       <a href="#play-top">Back to top</a>
@@ -267,6 +261,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   import { mountDoodles } from "./doodle-notes.js";
   import { initContactReveal } from "../../scripts/contact-reveal";
   import { mountReel } from "./reel.js";
+  import { mountRail } from "./rail.js";
   import { whenBootRevealed, whenBootDone } from "../../scripts/boot-overlay";
   const root = document.querySelector('[data-play-root]');
 
@@ -327,6 +322,8 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
 
     const disposeReel = mountReel(root, (message) => { if (status) status.textContent = message; });
     document.addEventListener('astro:before-swap', disposeReel, { once: true });
+    const disposeRail = mountRail(root, (message) => { if (status) status.textContent = message; });
+    document.addEventListener('astro:before-swap', disposeRail, { once: true });
 
     const disposeContact = initContactReveal(root, (message) => { if (status) status.textContent = message; });
     document.addEventListener('astro:before-swap', disposeContact, { once: true });
@@ -356,10 +353,15 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
 
 <style>
   .play-world {
-    --play-paper: #fbfaf5;
-    --play-sheet: #e7ddc9;
-    --play-ink: #171719;
-    --play-graphite: rgba(23,23,25,.6);
+    /* A school exercise book: off-white paper, blue rules, a double red margin.
+       Headings are in black pen, notes in blue biro, marks in red pen. */
+    --play-paper: #ffffff;
+    --play-sheet: #f8f7f1;
+    --play-ink: #17181d;
+    --play-biro: #233f8f;
+    --play-red-pen: #c4352b;
+    --play-highlight: rgba(255,224,66,.72);
+    --play-graphite: rgba(23,24,29,.62);
     --play-red: #f05c45;
     --play-marker: #d7263d;
     --play-blue: #315fe9;
@@ -367,32 +369,31 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     --play-yellow: #f0ce4e;
     --play-green: #2f9d70;
     --play-hand: 'Caveat', 'Segoe Print', cursive;
-    --play-project-font: 'Bricolage Grotesque', 'DM Sans', sans-serif;
     --play-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --play-page-margin: max(clamp(32px, 6vw, 96px), calc((100% - 1280px) / 2));
     --play-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     /* Paper: a static graphite grain tile, the blue rules and the red margin. */
     --play-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .09 0 0 0 0 .08 0 0 0 0 .07 0 0 0 1.6 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.05'/%3E%3C/svg%3E");
-    --play-rules: repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(85,126,166,.12) 35px, rgba(85,126,166,.12) 36px);
-    --play-margin-rule: linear-gradient(90deg, transparent 0 calc(var(--play-page-margin) - 2px), rgba(210,84,72,.22) calc(var(--play-page-margin) - 2px), rgba(210,84,72,.22) var(--play-page-margin), transparent var(--play-page-margin));
+    --play-rules: repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(52,110,204,.5) 35px, rgba(52,110,204,.5) 36px);
+    --play-margin-rule: linear-gradient(90deg, transparent 0 calc(var(--play-page-margin) - 6px), rgba(214,62,56,.55) calc(var(--play-page-margin) - 6px), rgba(214,62,56,.55) calc(var(--play-page-margin) - 4.5px), transparent calc(var(--play-page-margin) - 4.5px) calc(var(--play-page-margin) - 1.5px), rgba(214,62,56,.55) calc(var(--play-page-margin) - 1.5px), rgba(214,62,56,.55) var(--play-page-margin), transparent var(--play-page-margin));
     min-height: 100dvh;
     position: relative;
     background-color: var(--play-sheet);
     background-image: var(--play-grain), var(--play-rules), var(--play-margin-rule);
     background-size: 160px 160px, 100% 36px, 100% 100%;
     color: var(--play-ink);
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--play-hand);
   }
   .play-world * { box-sizing: border-box; }
   .play-world a { color: inherit; text-decoration: none; }
   .play-world a:focus-visible,
   .play-world button:focus-visible { outline: 3px solid var(--play-blue); outline-offset: 4px; }
-  .play-skip { position: fixed; z-index: 20; top: 8px; left: 8px; min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; background: var(--play-ink); color: var(--play-paper) !important; font-size: 14px; transform: translateY(-150%); transition: transform 160ms var(--play-ease-out); }
+  .play-skip { position: fixed; z-index: 20; top: 8px; left: 8px; min-height: 44px; padding: 0 14px; display: inline-flex; align-items: center; background: var(--play-ink); color: var(--play-paper) !important; font-size: 20px; font-weight: 700; transform: translateY(-150%); transition: transform 160ms var(--play-ease-out); }
   .play-skip:focus { transform: translateY(0); }
   .play-battlefield { position: fixed; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
   .play-battlefield[data-idle] { opacity: 0; transition: opacity 320ms ease; }
   .play-battlefield :global(canvas) { position: absolute; inset: 0; }
-  .play-eyebrow { margin: 0 0 4px; color: rgba(23,23,25,.74); font: 600 24px/1.05 var(--play-hand); }
+  .play-eyebrow { margin: 0 0 4px; color: var(--play-red-pen); font: 600 26px/1.05 var(--play-hand); }
 
   /* Pencil furniture: margin notes, page numbers, section dividers, signature. */
   .play-margin-note { margin: 0; color: var(--play-graphite); font: 500 22px/1.05 var(--play-hand); rotate: -1.5deg; transform-origin: left center; }
@@ -400,27 +401,32 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-divider { width: min(380px, calc(100% - var(--play-page-margin) * 2 - 40px)); height: 20px; position: absolute; z-index: 1; top: 8px; left: calc(var(--play-page-margin) + 40px); overflow: visible; pointer-events: none; }
   .play-divider path { fill: none; stroke: rgba(23,23,25,.5); stroke-width: 1.6; stroke-linecap: round; vector-effect: non-scaling-stroke; }
   .play-divider .play-divider-faint { stroke: rgba(23,23,25,.26); stroke-width: 1; }
-  .play-signature { grid-column: 1 / -1; justify-self: end; margin: 24px 12px -12px 0; color: rgba(23,23,25,.84); font: 700 clamp(2.75rem, 4.6vw, 3.75rem)/.95 var(--play-hand); rotate: -6deg; }
+  .play-signature { margin: auto 0 -8px; align-self: flex-end; color: rgba(23,23,25,.84); font: 700 clamp(2.25rem, 3.4vw, 3rem)/.95 var(--play-hand); rotate: -6deg; }
 
   /* Hero */
   .play-hero { min-height: max(100dvh, 760px); padding: 32px var(--play-page-margin) 72px calc(var(--play-page-margin) + 40px); position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 56px; }
   .play-hero-header { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
-  .play-hero-index { margin: 0; padding: 8px 0; color: rgba(23,23,25,.76); font-size: 14px; line-height: 1.5; }
-  .play-hero-index strong { color: var(--play-ink); font-weight: 600; }
+  .play-hero-index { margin: 0; padding: 8px 0; color: var(--play-graphite); font: 500 22px/1.3 var(--play-hand); }
+  .play-hero-index strong { color: var(--play-ink); font-weight: 700; }
   .play-hero-links { display: flex; align-items: center; gap: 4px; }
-  .play-hero-links a { min-height: 48px; padding: 0 12px; display: inline-flex; align-items: center; font-size: 14px; font-weight: 500; white-space: nowrap; transition: background-color 140ms ease; }
+  .play-hero-links a { min-height: 48px; padding: 0 12px; display: inline-flex; align-items: center; font-size: 23px; font-weight: 600; white-space: nowrap; transition: background-color 140ms ease; }
   .play-contact-availability > span { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: var(--play-green); }
   .play-hero-body { position: relative; z-index: 1; margin-top: auto; display: grid; gap: 28px; }
-  .play-hero-kicker { margin: 0 0 -6px; color: #c63f2b; font: 600 30px/1 var(--play-hand); rotate: -1.5deg; transform-origin: left center; }
-  .play-hero h1 { max-width: 1080px; margin: 0; font: 600 clamp(4.25rem, 7vw, 6.25rem)/.98 'Bricolage Grotesque', sans-serif; letter-spacing: -.025em; }
+  .play-hero-kicker { margin: 0 0 -6px; color: var(--play-red-pen); font: 600 34px/1 var(--play-hand); rotate: -1.5deg; transform-origin: left center; }
+  .play-hero h1 { max-width: 1080px; margin: 0; font: 700 clamp(4.75rem, 8.4vw, 7.75rem)/.92 var(--play-hand); letter-spacing: 0; }
   .play-hero h1 > span { display: block; }
+  /* A first draft crossed out in red pen. It is hidden from assistive tech, so the heading reads as written. */
+  .play-strike { margin-right: .16em; color: var(--play-graphite); font-weight: 500; text-decoration: line-through; text-decoration-color: var(--play-red-pen); text-decoration-thickness: .09em; }
   .play-intro { display: grid; justify-items: start; gap: 30px; }
-  .play-intro p { max-width: 520px; margin: 0; color: rgba(23,23,25,.82); font-size: 20px; line-height: 1.5; }
+  .play-intro p { max-width: 560px; margin: 0; color: var(--play-biro); font: 500 27px/1.33 var(--play-hand); }
+  /* The second note sits right under the first, with its key phrase highlighted. */
+  .play-intro .play-intro-proof { margin-top: -18px; }
+  .play-intro mark { padding: 0 .12em; color: var(--play-ink); background: var(--play-highlight); border-radius: 3px 8px 4px 7px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
   .play-hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
-  .play-hero-actions a { min-height: 50px; display: inline-flex; align-items: center; font-size: 15px; font-weight: 600; }
+  .play-hero-actions a { min-height: 50px; display: inline-flex; align-items: center; font-size: 24px; font-weight: 700; }
   .play-hero-primary { padding: 0 20px; border: 1px solid var(--play-ink); background: var(--play-yellow); box-shadow: 3px 3px 0 var(--play-ink); transition: transform 130ms var(--play-ease-out), box-shadow 130ms var(--play-ease-out); }
   .play-hero-primary:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 var(--play-ink); }
-  .play-world .play-hero-secondary { padding: 0 12px; color: var(--play-link-blue); transition: background-color 140ms ease; }
+  .play-world .play-hero-secondary { min-height: 44px; padding: 2px 10px 4px; color: var(--play-ink); background: var(--play-highlight); border-radius: 3px 8px 4px 7px; transition: background-color 140ms ease; }
 
   /* The ring beside the headline is where each round of tops lands. It is
      sketched in pencil just before they drop (launch-ring.js), rubbed out once
@@ -431,41 +437,39 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-launch-note { position: absolute; top: -22px; right: 4%; margin: 0; color: var(--play-graphite); font: 500 22px/1 var(--play-hand); white-space: nowrap; rotate: 2.5deg; opacity: 0; transition: opacity 600ms ease; }
   .play-world:has([data-battlefield][data-ready]) .play-launch-note { opacity: 1; }
 
-  /* Work. Static by default: a grid above 900px and a swipe rail below it.
-     reel.js adds data-reel-mode="pinned" on wide, tall screens (rules further down). */
+  /* Work. Static by default: a grid above 900px and a swipe carousel below it.
+     reel.js adds data-reel-mode="pinned" on wide, tall screens (rules further
+     down) and rail.js adds the carousel controls on narrow ones. Each project is
+     a screenshot taped into the book, with its notes written on the page. */
   .play-desk { padding: 48px var(--play-page-margin) 100px calc(var(--play-page-margin) + 40px); position: relative; }
   .play-desk-header { position: relative; z-index: 1; margin-bottom: 44px; display: flex; justify-content: space-between; align-items: end; gap: 24px; }
-  .play-desk h2 { margin: 0; font: 600 clamp(3.75rem, 6.8vw, 6rem)/1 var(--play-hand); letter-spacing: 0; }
+  .play-desk h2 { margin: 0; font: 700 clamp(4rem, 7.4vw, 6.5rem)/.95 var(--play-hand); letter-spacing: 0; }
   .play-rail-hint { display: none; }
-  .play-reel-toggle { min-width: 132px; min-height: 48px; padding: 0 18px; border: 1px solid var(--play-ink); border-radius: 0; background: var(--play-yellow); color: var(--play-ink); font: 600 14px/1 'DM Sans', sans-serif; white-space: nowrap; cursor: pointer; box-shadow: 3px 3px 0 var(--play-ink); transition: transform 130ms var(--play-ease-out), box-shadow 130ms var(--play-ease-out); }
+  .play-reel-toggle { min-width: 132px; min-height: 48px; padding: 0 18px; border: 1px solid var(--play-ink); border-radius: 0; background: var(--play-yellow); color: var(--play-ink); font: 700 22px/1 var(--play-hand); white-space: nowrap; cursor: pointer; box-shadow: 3px 3px 0 var(--play-ink); transition: transform 130ms var(--play-ease-out), box-shadow 130ms var(--play-ease-out); }
   .play-reel-toggle[hidden] { display: none; }
   .play-reel-toggle:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--play-ink); }
-  .play-reel-side, .play-reel-tape { display: none; }
-  .play-desk [data-play-grid] { margin: 0; padding: 12px 0 0; position: relative; z-index: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 44px 28px; list-style: none; }
-  .play-tile { min-width: 0; grid-column: span 2; position: relative; transform: rotate(var(--play-desk-rotation)); }
+  .play-reel-side, .play-reel-tape, .play-rail-controls { display: none; }
+  .play-desk [data-play-grid] { margin: 0; padding: 16px 0 0; position: relative; z-index: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 72px 44px; list-style: none; }
+  .play-tile { min-width: 0; grid-column: span 2; position: relative; }
   .play-tile:first-child { grid-column: 1 / -1; }
   /* With six tiles the last two share a row as halves; with seven, two rows of thirds follow the lead tile. */
   .play-tile:nth-child(5):nth-last-child(2), .play-tile:nth-child(6):last-child { grid-column: span 3; }
-  .play-card { height: 100%; padding: 18px; display: grid; grid-template-rows: 230px 1fr; gap: 20px; position: relative; border: 1px solid var(--play-ink); background: var(--play-paper); box-shadow: 4px 5px 0 rgba(23,23,25,.16); transition: translate 180ms var(--play-ease-out); }
-  .play-tile:nth-child(5):nth-last-child(2) .play-card, .play-tile:nth-child(6):last-child .play-card { grid-template-rows: 260px 1fr; }
-  .play-tile:first-child .play-card { grid-template-rows: 400px; grid-template-columns: minmax(0, 700fr) minmax(0, 446fr); gap: 36px; }
-  .play-tile:first-child .play-copy { padding: 20px 12px 8px 0; }
-  .play-tile:first-child .play-copy strong { font-size: clamp(2.25rem, 3.2vw, 2.75rem); }
-  .play-tile:first-child .play-copy p { font-size: 18px; }
-  .play-tile-1 { --play-desk-rotation: -.4deg; }
-  .play-tile-2 { --play-desk-rotation: .7deg; }
-  .play-tile-3 { --play-desk-rotation: -.6deg; }
-  .play-tile-4 { --play-desk-rotation: .6deg; }
-  .play-tile-5 { --play-desk-rotation: -.5deg; }
-  .play-tile-6 { --play-desk-rotation: .5deg; }
-  .play-tile-7 { --play-desk-rotation: -.7deg; }
-  .play-pin { position: absolute; z-index: 3; top: -9px; left: 50%; width: 44px; height: 16px; background: rgba(240,206,78,.8); border: 1px solid rgba(23,23,25,.35); transform: translateX(-50%) rotate(-2deg); }
-  .play-pin-right { display: none; }
-  .play-tile:first-child .play-pin { left: 56px; transform: rotate(-3deg); }
-  .play-tile:first-child .play-pin-right { display: block; left: auto; right: 56px; transform: rotate(3deg); }
-  .play-photo { min-width: 0; position: relative; overflow: hidden; display: grid; place-items: center; border: 1px solid rgba(23,23,25,.22); background: #ece8dc; }
+  .play-card { height: 100%; display: grid; grid-template-rows: auto 1fr; align-content: start; gap: 24px; position: relative; }
+  .play-tile:first-child .play-card { grid-template-rows: auto; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: center; gap: 56px; }
+  .play-tile-1 { --play-tilt: -1.4deg; }
+  .play-tile-2 { --play-tilt: 1.6deg; }
+  .play-tile-3 { --play-tilt: -1.1deg; }
+  .play-tile-4 { --play-tilt: 1.2deg; }
+  .play-tile-5 { --play-tilt: -1.5deg; }
+  .play-tile-6 { --play-tilt: 1deg; }
+  .play-tile-7 { --play-tilt: -1.3deg; }
+  /* The print: a white-bordered screenshot held down with two strips of tape. */
+  .play-print { min-width: 0; padding: 10px 10px 12px; position: relative; display: block; background: var(--play-paper); box-shadow: 0 1px 1px rgba(23,24,29,.12), 6px 12px 22px -10px rgba(23,24,29,.42); transform: rotate(var(--play-tilt, 0deg)); transition: transform 220ms var(--play-ease-out), box-shadow 220ms var(--play-ease-out); }
+  .play-pin { position: absolute; z-index: 3; top: -12px; left: 14%; width: 74px; height: 24px; background: rgba(255,236,150,.62); border: 1px solid rgba(23,23,25,.12); box-shadow: 0 1px 2px rgba(23,24,29,.08); transform: rotate(-5deg); }
+  .play-pin-right { left: auto; right: 14%; transform: rotate(4deg); }
+  .play-photo { aspect-ratio: 16 / 10; min-width: 0; position: relative; overflow: hidden; display: grid; place-items: center; background: #ece9e0; outline: 1px solid rgba(23,24,29,.12); outline-offset: -1px; }
   .play-photo picture, .play-photo img { width: 100%; height: 100%; display: block; }
-  .play-photo img { object-fit: cover; object-position: top center; filter: saturate(.82); transition: filter 180ms ease, transform 180ms var(--play-ease-out); }
+  .play-photo img { object-fit: cover; object-position: top center; filter: saturate(.9) contrast(1.02); transition: filter 180ms ease, transform 180ms var(--play-ease-out); }
   /* Covers fade in as they decode instead of popping into empty paper. The
      guard attribute is added by the page script, so no-JS images stay visible. */
   .play-world[data-img-fade] .play-photo img { opacity: 0; }
@@ -505,35 +509,46 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-suspended::before, .play-suspended::after { content: ''; position: absolute; top: -8px; width: 46px; height: 16px; background: rgba(240,206,78,.85); border: 1px solid rgba(23,23,25,.35); }
   .play-suspended::before { left: -20px; transform: rotate(-30deg); }
   .play-suspended::after { right: -20px; transform: rotate(30deg); }
-  .play-tile-suspended .play-copy em { color: rgba(23,23,25,.65); }
 
-  .play-copy { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
-  .play-copy > span:not(.play-project-footer) { color: rgba(23,23,25,.68); font-size: 11px; line-height: 1.4; text-transform: uppercase; letter-spacing: .06em; }
-  .play-copy strong { font: 600 clamp(1.75rem, 2.4vw, 2rem)/1.1 var(--play-project-font); letter-spacing: -.02em; }
-  .play-copy p { margin: 0 0 8px; font-size: 15px; line-height: 1.5; }
-  .play-project-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: rgba(23,23,25,.66); font: 500 21px/1.1 var(--play-hand); }
-  .play-project-footer em { color: var(--play-link-blue); font: 600 23px/1.1 var(--play-hand); font-style: normal; white-space: nowrap; }
+  /* The notes: number and type in red pen, the name in black, the note in biro. */
+  .play-copy { min-width: 0; padding: 0 6px; display: flex; flex-direction: column; gap: 6px; }
+  .play-copy-meta { display: flex; align-items: center; gap: 10px; color: var(--play-red-pen); font: 600 22px/1.2 var(--play-hand); }
+  .play-copy-number { min-width: 2.1em; padding: 1px 6px 2px; display: inline-grid; place-items: center; border: 1.5px solid currentColor; border-radius: 52% 46% 55% 44% / 50% 56% 44% 50%; rotate: -4deg; }
+  .play-copy strong { color: var(--play-ink); font: 700 clamp(2.5rem, 3.3vw, 3rem)/1 var(--play-hand); }
+  .play-copy p { margin: 2px 0 8px; color: var(--play-biro); font: 500 24px/1.32 var(--play-hand); }
+  .play-tile:first-child .play-copy strong { font-size: clamp(3rem, 4.6vw, 4.25rem); }
+  .play-tile:first-child .play-copy p { font-size: 28px; }
+  .play-project-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--play-graphite); font: 500 22px/1.1 var(--play-hand); }
+  /* Links are marked with highlighter rather than underlined. */
+  .play-project-footer em { padding: 4px 10px 6px; color: var(--play-ink); font: 700 24px/1 var(--play-hand); font-style: normal; white-space: nowrap; background: var(--play-highlight); border-radius: 3px 8px 4px 7px; rotate: -1.5deg; }
+  .play-tile-suspended .play-copy em { color: var(--play-graphite); background: rgba(23,24,29,.07); }
+
+  /* Carousel controls under the rail: two pen-drawn buttons and the position. */
+  .play-rail-button { width: 52px; height: 52px; padding: 0; display: grid; place-items: center; border: 1.5px solid var(--play-ink); border-radius: 48% 52% 46% 54% / 54% 46% 52% 48%; background: var(--play-paper); color: var(--play-ink); cursor: pointer; touch-action: manipulation; user-select: none; transition: transform 130ms var(--play-ease-out), opacity 160ms ease, background-color 140ms ease; }
+  .play-rail-button svg { width: 22px; height: 22px; display: block; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .play-rail-button:active { transform: scale(.94); }
+  .play-rail-button:disabled { opacity: .3; cursor: default; }
+  .play-rail-count { min-width: 5.5ch; margin: 0; color: var(--play-ink); font: 700 26px/1 var(--play-hand); text-align: center; }
 
   /* Contact */
   .play-contact { padding: 96px var(--play-page-margin) 120px calc(var(--play-page-margin) + 40px); position: relative; }
   .play-contact > .play-divider { top: 28px; }
-  .play-contact-sheet { width: min(1120px, 100%); margin: 0 auto; padding: clamp(32px, 4vw, 56px); position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 0 48px; background: #f3d665; box-shadow: 8px 10px 0 var(--play-red), 12px 15px 0 rgba(23,23,25,.14); transform: rotate(-.35deg); }
+  .play-contact-sheet { width: min(980px, 100%); margin: 0 auto; padding: clamp(32px, 4vw, 52px) clamp(28px, 4.4vw, 60px); position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px 52px; background: #f3d665; box-shadow: 8px 10px 0 var(--play-red), 12px 15px 0 rgba(23,23,25,.14); transform: rotate(-.35deg); }
   .play-contact-sheet::before { content: ''; position: absolute; inset: -4px 7px 5px -5px; border: 3px solid var(--play-ink); border-radius: 2% 4% 3% 2%; transform: rotate(.55deg); pointer-events: none; }
   .play-contact-sheet::after { content: ''; position: absolute; inset: 5px -4px -3px 5px; border: 1px solid rgba(23,23,25,.78); border-radius: 4% 2% 2% 3%; transform: rotate(-.3deg); pointer-events: none; }
   .play-contact-sheet > * { position: relative; z-index: 1; }
   .play-contact-sheet > .play-contact-tape { width: 118px; height: 13px; position: absolute; top: -8px; left: 50%; border: 2px solid var(--play-ink); background: var(--play-red); transform: translateX(-50%) rotate(-3deg); box-shadow: 3px 3px 0 var(--play-ink); }
-  .play-contact-meta { grid-column: 1 / -1; margin-bottom: 40px; padding-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 2px solid var(--play-ink); font: 600 24px/1.1 var(--play-hand); }
-  .play-contact-meta p { margin: 0; }
-  .play-contact-availability { display: inline-flex; align-items: center; gap: 10px; }
+  .play-contact-availability { margin: 20px 0 0; display: flex; align-items: center; gap: 10px; color: var(--play-ink); font: 600 22px/1.25 var(--play-hand); }
   .play-contact-availability > span { border: 1px solid var(--play-ink); }
   .play-contact-heading { min-width: 0; }
-  .play-contact-label { margin: 0; color: rgba(23,23,25,.78); font: 600 23px/1.1 var(--play-hand); }
-  .play-contact-heading h2 { margin: 14px 0 24px; font: 600 clamp(3.75rem, 6.8vw, 5.75rem)/.98 var(--play-hand); letter-spacing: 0; text-wrap: balance; }
-  .play-contact-heading > p:last-child { max-width: 480px; margin: 0; color: rgba(23,23,25,.82); font-size: 18px; line-height: 1.5; }
-  .play-contact-body { min-width: 0; padding: 4px 0 0 32px; display: flex; flex-direction: column; align-items: flex-start; border-left: 2px solid var(--play-ink); }
-  .play-contact-toggle { max-width: 100%; margin-top: 10px; padding: 6px 2px; display: inline-flex; align-items: center; gap: 14px; overflow: hidden; border: 0; background: none; color: var(--play-ink); font: 600 clamp(2rem, 3.2vw, 2.875rem)/1 'DM Sans', sans-serif; letter-spacing: -.025em; white-space: nowrap; cursor: pointer; }
-  .play-contact-toggle-text { position: relative; display: block; height: 1em; overflow: hidden; }
-  .play-contact-toggle-text > span { display: block; line-height: 1; transition: transform 400ms cubic-bezier(.77, 0, .175, 1); }
+  .play-contact-label { margin: 8px 0 0; color: rgba(23,23,25,.72); font: 600 22px/1.1 var(--play-hand); }
+  .play-contact-heading h2 { margin: 0 0 16px; font: 700 clamp(3.25rem, 5.6vw, 4.75rem)/.95 var(--play-hand); letter-spacing: 0; text-wrap: balance; }
+  .play-contact-heading > h2 + p { max-width: 460px; margin: 0; color: var(--play-biro); font: 500 25px/1.32 var(--play-hand); }
+  .play-contact-body { min-width: 0; padding: 4px 0 0 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; border-left: 2px solid var(--play-ink); }
+  .play-contact-toggle { max-width: 100%; margin-top: 0; padding: 6px 2px; display: inline-flex; align-items: center; gap: 14px; overflow: hidden; border: 0; background: none; color: var(--play-ink); font: 700 clamp(2.25rem, 3.1vw, 2.875rem)/1 var(--play-hand); letter-spacing: 0; white-space: nowrap; cursor: pointer; }
+  /* The end padding keeps the handwritten final letter clear of the clip. */
+  .play-contact-toggle-text { position: relative; display: block; height: 1.2em; padding-right: .14em; overflow: hidden; }
+  .play-contact-toggle-text > span { display: block; line-height: 1.2; transition: transform 400ms cubic-bezier(.77, 0, .175, 1); }
   .play-contact-toggle-copy { position: absolute; top: 0; left: 0; color: var(--play-link-blue); transform: translateY(calc(100% + 8px)); }
   .play-contact-arrow { width: .62em; height: .62em; flex: none; position: relative; overflow: hidden; }
   .play-contact-arrow svg { width: 100%; height: 100%; display: block; }
@@ -542,31 +557,27 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-contact-toggle:focus-visible .play-contact-toggle-main { transform: translateY(calc(-100% - 8px)); }
   .play-contact-toggle:focus-visible .play-contact-toggle-copy { transform: translateY(0); }
   .play-contact-toggle:active { opacity: .75; }
-  .play-contact-slot { width: 100%; min-height: 128px; margin-top: 18px; }
   .play-contact-reveal { display: flex; flex-wrap: wrap; gap: 14px 28px; }
   .play-contact-reveal[hidden] { display: none; }
-  .play-contact-channel { min-width: 0; max-width: 100%; min-height: 48px; padding: 0; display: flex; align-items: center; gap: 14px; border: 0; background: none; color: var(--play-ink); font: 600 15px/1.3 'DM Sans', sans-serif; text-align: left; cursor: pointer; opacity: 0; transform: translateY(24px); }
+  .play-contact-channel { min-width: 0; max-width: 100%; min-height: 48px; padding: 0; display: flex; align-items: center; gap: 14px; border: 0; background: none; color: var(--play-ink); font: 600 22px/1.2 var(--play-hand); text-align: left; cursor: pointer; opacity: 0; transform: translateY(24px); }
   .play-contact-reveal[data-open='true'] .play-contact-channel { opacity: 1; transform: translateY(0); }
   .play-contact-reveal[data-animate='true'] .play-contact-channel { transition: opacity 280ms var(--play-ease-out), transform 280ms var(--play-ease-out); transition-delay: calc((1 - var(--channel-order)) * 60ms); }
   .play-contact-reveal[data-open='true'][data-animate='true'] .play-contact-channel { transition-delay: calc(var(--channel-order) * 60ms); }
   .play-contact-channel-icon { width: 56px; height: 56px; flex: none; display: grid; place-items: center; border: 1.5px solid var(--play-ink); border-radius: 50%; background: var(--play-paper); transition: background-color 180ms ease, color 180ms ease, transform 240ms var(--play-ease-out); }
   .play-contact-channel-icon svg { width: 24px; height: 24px; }
   .play-contact-channel-label { min-width: 0; overflow-wrap: anywhere; }
-  .play-world a.play-contact-channel .play-contact-channel-label { color: var(--play-link-blue); font-size: clamp(1.0625rem, 1.5vw, 1.25rem); font-weight: 500; }
+  .play-world a.play-contact-channel .play-contact-channel-label { padding: 0 8px 2px; color: var(--play-ink); font-size: clamp(1.5rem, 2vw, 1.75rem); font-weight: 700; background: var(--play-highlight); }
   .play-contact-channel:focus-visible .play-contact-channel-icon, .play-contact-channel:active .play-contact-channel-icon { color: var(--play-paper); background: var(--play-ink); }
   .play-contact-channel:active .play-contact-channel-icon { transform: scale(.96); }
-  .play-contact-location { margin: 12px 0 0; color: rgba(23,23,25,.72); font-size: 13px; line-height: 1.5; }
-  .play-contact-aside { grid-column: 1 / -1; margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--play-ink); }
-  .play-contact-aside nav { margin-top: 12px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
-  .play-contact-aside a { min-width: 0; min-height: 48px; padding: 4px 0; display: inline-flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 600; transition: background-color 140ms ease, transform 140ms var(--play-ease-out); }
-  .play-contact-social-number { color: var(--play-blue); font-size: 11px; }
-  .play-contact-social-action { margin-left: auto; color: rgba(23,23,25,.72); font-size: 12px; font-weight: 500; white-space: nowrap; }
+  .play-contact-location { margin: 12px 0 0; color: var(--play-graphite); font-size: 21px; line-height: 1.3; }
+  .play-contact-profiles { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .play-contact-profiles a { min-height: 44px; padding: 2px 14px 4px; display: inline-flex; align-items: center; color: var(--play-ink); font: 700 24px/1 var(--play-hand); background: rgba(255,255,255,.55); border: 1.5px solid var(--play-ink); border-radius: 46% 54% 50% 50% / 58% 48% 52% 42%; transition: background-color 140ms ease, transform 140ms var(--play-ease-out); }
 
   .play-footer { padding: 36px var(--play-page-margin) 40px calc(var(--play-page-margin) + 40px); position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px 32px; flex-wrap: wrap; }
   .play-footer > .play-divider { top: 0; }
-  .play-footer p { margin: 0; color: rgba(23,23,25,.72); font-size: 13px; line-height: 1.5; }
+  .play-footer p { margin: 0; color: var(--play-graphite); font-size: 21px; line-height: 1.3; }
   .play-footer nav { display: flex; gap: 8px; }
-  .play-footer a { min-height: 44px; padding: 0 10px; display: inline-flex; align-items: center; color: var(--play-link-blue) !important; font-size: 13px; font-weight: 600; transition: background-color 140ms ease; }
+  .play-footer a { min-height: 44px; padding: 0 10px; display: inline-flex; align-items: center; color: var(--play-ink) !important; font-size: 22px; font-weight: 700; transition: background-color 140ms ease; }
 
   .play-sr-status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .play-doodle-layer { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
@@ -575,7 +586,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
      on every scroll frame on an old integrated GPU. */
   .play-drawing.is-lean { mix-blend-mode: normal; opacity: .93; }
   .play-drawing-canvas { width: 100%; height: 100%; display: block; pointer-events: none; }
-  .play-drawing-hero-a { top: 14%; left: -38px; --drawing-rotation: -5deg; }
+  .play-drawing-hero-a { top: 7%; left: -60px; --drawing-rotation: -5deg; }
   .play-drawing-hero-b { top: 13%; right: 34%; --drawing-rotation: 2.5deg; }
   .play-drawing-desk { top: 72%; left: -42px; --drawing-rotation: -3deg; }
   .play-drawing-desk-b { top: 31%; left: 43%; --drawing-rotation: 1.2deg; }
@@ -593,18 +604,25 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-hero h1 > span:first-child { --enter-i: 2; }
     .play-hero h1 > span:last-child { --enter-i: 3; }
     .play-intro p { --enter-i: 4; }
+    .play-intro .play-intro-proof { --enter-i: 5; }
     .play-hero-actions { --enter-i: 5; }
-    .play-world[data-hero-enter] :is(.play-hero-header, .play-hero-kicker, .play-hero h1 > span, .play-intro p, .play-hero-actions) { opacity: 0; }
-    .play-world[data-hero-enter][data-enter] :is(.play-hero-header, .play-hero-kicker, .play-hero h1 > span, .play-intro p, .play-hero-actions) { animation: play-enter 520ms var(--play-ease-out) both; animation-delay: calc(var(--enter-i) * 60ms); }
+    /* The header and buttons rise; the handwriting is written in from the left. */
+    .play-world[data-hero-enter] :is(.play-hero-header, .play-hero-actions) { opacity: 0; }
+    .play-world[data-hero-enter] :is(.play-hero-kicker, .play-hero h1 > span, .play-intro p) { clip-path: inset(-30% 100% -30% -10%); }
+    .play-world[data-hero-enter][data-enter] :is(.play-hero-header, .play-hero-actions) { animation: play-enter 520ms var(--play-ease-out) both; animation-delay: calc(var(--enter-i) * 70ms); }
+    .play-world[data-hero-enter][data-enter] :is(.play-hero-kicker, .play-hero h1 > span, .play-intro p) { animation: play-write 560ms cubic-bezier(.45, 0, .2, 1) both; animation-delay: calc(var(--enter-i) * 140ms); }
     .play-hero .play-launch { animation: play-fade 900ms var(--play-ease-out) both 260ms; }
     .play-world[data-motion='ready'] [data-play-reveal]:not([data-visible]) { opacity: 0; transform: translateY(20px); }
     .play-world[data-motion='ready'] [data-play-reveal] { transition: opacity 520ms var(--play-ease-out), transform 520ms var(--play-ease-out); }
-    .play-desk[data-visible] .play-card { animation: play-tile-in 640ms var(--play-ease-out) both; animation-delay: calc(var(--play-tile-index, 0) * 70ms); }
+    /* Grid and rail: each print is dropped onto the page, then its notes are written in. */
+    .play-desk[data-visible]:not([data-reel-mode='pinned']) .play-print { animation: play-drop 620ms var(--play-ease-out) backwards; animation-delay: calc(var(--play-tile-index, 0) * 80ms); }
+    .play-desk[data-visible]:not([data-reel-mode='pinned']) .play-copy { animation: play-write 720ms cubic-bezier(.45, 0, .2, 1) backwards; animation-delay: calc(var(--play-tile-index, 0) * 80ms + 220ms); }
     .play-contact[data-visible] .play-contact-sheet > :not(.play-contact-tape) { animation: play-rise 640ms var(--play-ease-out) both; }
   }
   @media (hover:hover) and (pointer:fine) {
     .play-tile:hover { z-index: 5; }
-    .play-tile:hover > a { translate: 0 -6px; }
+    .play-tile:hover .play-print { transform: rotate(0deg) translateY(-5px); box-shadow: 0 1px 1px rgba(23,24,29,.12), 10px 20px 28px -12px rgba(23,24,29,.45); }
+    .play-rail-button:hover:not(:disabled) { background: var(--play-highlight); }
     .play-tile:hover .play-photo img { filter: saturate(1); transform: scale(1.02); }
     .play-hero-primary:hover, .play-reel-toggle:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--play-ink); }
     .play-hero-links a:hover,
@@ -616,7 +634,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-contact-toggle:hover .play-contact-arrow-motion { transform: translateX(6px); }
     .play-contact-toggle[aria-expanded='true']:hover .play-contact-arrow-motion { transform: rotate(90deg) translateX(4px); }
     .play-contact-channel:hover .play-contact-channel-icon { color: var(--play-paper); background: var(--play-ink); transform: translateY(-4px); }
-    .play-contact-aside a:hover { z-index: 1; background: rgba(240,206,78,.62); transform: translateY(-3px) rotate(-1deg); }
+    .play-contact-profiles a:hover { background: var(--play-paper); transform: translateY(-2px) rotate(-1.5deg); }
   }
   @media (max-width: 1180px) {
     /* Beside the headline there is no longer room for the ring, so it joins the flow. */
@@ -628,40 +646,42 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   @media (max-width: 980px) {
     .play-hero { padding-top: 28px; gap: 40px; }
     .play-hero-body { margin-top: 0; }
-    .play-intro p { font-size: 19px; }
+    .play-intro p { font-size: 25px; }
     .play-contact-sheet { grid-template-columns: 1fr; }
-    .play-contact-body { margin-top: 32px; padding: 24px 0 0; border-top: 2px solid var(--play-ink); border-left: 0; }
-    .play-contact-social-action { display: none; }
+    .play-contact-body { margin-top: 4px; padding: 24px 0 0; border-top: 2px solid var(--play-ink); border-left: 0; }
   }
   @media (min-width: 901px) and (max-width: 980px) {
     .play-desk [data-play-grid] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .play-tile, .play-tile:nth-child(5):nth-last-child(2), .play-tile:nth-child(6):last-child { grid-column: span 1; }
     /* An even tile count leaves the last tile alone in the two-column grid, so it spans the row. */
     .play-tile:first-child, .play-tile:last-child:nth-child(even) { grid-column: 1 / -1; }
-    .play-card, .play-tile:nth-child(5):nth-last-child(2) .play-card, .play-tile:nth-child(6):last-child .play-card { grid-template-rows: 220px 1fr; }
-    .play-tile:first-child .play-card, .play-tile:last-child:nth-child(even) .play-card { grid-template-rows: 300px; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px; }
-    .play-tile:first-child .play-copy, .play-tile:last-child:nth-child(even) .play-copy { padding: 8px 4px 4px 0; }
+    .play-tile:last-child:nth-child(even) .play-card { grid-template-rows: auto; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: 36px; }
   }
-  /* Tablets and phones: a native swipe rail with snap points and no script. */
+  /* Tablets and phones: a native swipe carousel with snap points. rail.js adds
+     the counter, the buttons and arrow keys; without it the rail still swipes. */
   @media (max-width: 900px) {
     .play-desk { padding-bottom: 80px; }
-    .play-desk-header { margin-bottom: 20px; }
+    .play-desk-header { margin-bottom: 12px; }
     .play-desk-actions { display: none; }
-    .play-rail-hint { display: block; margin-top: 16px; }
-    .play-desk [data-play-grid] { margin-right: calc(-1 * var(--play-page-margin)); padding: 18px var(--play-page-margin) 28px 0; display: flex; gap: 18px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 0 var(--play-page-margin); scrollbar-width: none; }
+    .play-rail-hint { display: block; margin-top: 12px; }
+    .play-desk [data-play-grid] { margin-right: calc(-1 * var(--play-page-margin)); padding: 30px var(--play-page-margin) 24px 4px; display: flex; gap: 22px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 4px var(--play-page-margin); scrollbar-width: none; }
     .play-desk [data-play-grid]::-webkit-scrollbar { display: none; }
-    .play-tile, .play-tile:first-child, .play-tile:last-child { flex: 0 0 min(84%, 520px); scroll-snap-align: center; transform: none; }
+    .play-tile, .play-tile:first-child, .play-tile:last-child { flex: 0 0 min(80%, 440px); scroll-snap-align: center; scroll-snap-stop: always; }
     .play-tile:first-child { scroll-snap-align: start; }
-    .play-card, .play-tile:first-child .play-card, .play-tile:last-child .play-card, .play-tile:nth-child(5) .play-card, .play-tile:nth-child(6) .play-card { padding: 16px; grid-template-rows: 220px auto; grid-template-columns: minmax(0, 1fr); gap: 16px; }
-    .play-tile:first-child .play-copy, .play-tile:last-child .play-copy { padding: 0; }
-    .play-tile:first-child .play-copy strong { font-size: clamp(1.75rem, 2.4vw, 2rem); }
-    .play-tile:first-child .play-copy p { font-size: 15px; }
-    .play-tile:first-child .play-pin { left: 50%; transform: translateX(-50%) rotate(-2deg); }
-    .play-tile:first-child .play-pin-right { display: none; }
-    /* Rail cards share the tallest height, so centre the caption in the space
-       instead of leaving one card with a gap under its description. */
-    .play-copy { justify-content: center; }
-    .play-project-footer { margin-top: 4px; }
+    .play-tile:last-child { scroll-snap-align: end; }
+    .play-card, .play-tile:first-child .play-card, .play-tile:last-child .play-card { grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .play-tile:first-child .play-copy strong, .play-copy strong { font-size: clamp(2.25rem, 7vw, 2.75rem); }
+    .play-tile:first-child .play-copy p, .play-copy p { font-size: 23px; }
+    .play-rail-controls { margin-top: 4px; position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 18px; }
+    .play-rail-controls[hidden] { display: none; }
+  }
+  /* Prints beside the current one sit smaller and turned away, and come up to
+     full size as they are swiped to the middle. Browsers without scroll-driven
+     animations get the plain rail. */
+  @supports (animation-timeline: view()) {
+    @media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+      .play-tile { animation: play-slide linear both; animation-timeline: view(inline); }
+    }
   }
   @media (max-width: 620px) {
     .play-world { --play-page-margin: 28px; }
@@ -670,37 +690,32 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-page-number { right: 22px; bottom: 12px; font-size: 20px; }
     .play-hero { padding-top: 22px; padding-bottom: 44px; gap: 28px; }
     .play-hero-header { align-items: start; }
-    .play-hero-index { max-width: 240px; font-size: 13px; }
+    .play-hero-index { max-width: 250px; font-size: 20px; }
     .play-hero-links { display: none; }
     .play-hero-body { gap: 22px; }
-    .play-hero-kicker { font-size: 27px; }
-    .play-hero h1 { font-size: clamp(2.75rem, 13vw, 3.4rem); line-height: 1; }
-    .play-hero h1 > span { display: inline; }
+    .play-hero-kicker { font-size: 30px; }
+    .play-hero h1 { font-size: clamp(3.5rem, 17vw, 4.5rem); line-height: .92; }
     .play-intro { gap: 24px; }
-    .play-intro p { font-size: 17px; }
+    .play-intro p { font-size: 24px; }
     .play-hero-primary { width: 100%; justify-content: center; }
     .play-hero-actions { gap: 8px; }
     .play-hero-header { order: -2; }
     .play-launch { order: -1; margin: 28px 0 36px; }
     .play-launch-note { top: -26px; font-size: 20px; }
-    .play-contact-slot { min-height: 0; margin-top: 8px; }
     .play-desk { padding-top: 40px; padding-bottom: 72px; }
-    .play-desk h2 { font-size: clamp(3rem, 15vw, 3.75rem); }
-    .play-desk [data-play-grid] { margin-right: -22px; padding-right: 22px; scroll-padding-inline: 0 22px; }
-    .play-card, .play-tile:first-child .play-card, .play-tile:last-child .play-card, .play-tile:nth-child(5) .play-card, .play-tile:nth-child(6) .play-card { padding: 14px; grid-template-rows: 180px auto; gap: 14px; }
-    .play-tile:first-child .play-copy strong, .play-copy strong { font-size: 28px; }
+    .play-desk h2 { font-size: clamp(3.4rem, 17vw, 4.25rem); }
+    .play-desk [data-play-grid] { margin-right: -22px; padding-right: 22px; scroll-padding-inline: 4px 22px; }
+    .play-print { padding: 8px 8px 10px; }
+    .play-tile, .play-tile:first-child, .play-tile:last-child { flex-basis: 82%; }
     .play-terminal { padding: 16px; font-size: 12px; gap: 7px; }
     .play-suspended { font-size: 1.75rem; }
     .play-contact { padding-top: 72px; padding-bottom: 88px; padding-left: 36px; }
     .play-contact > .play-divider { top: 24px; left: 36px; }
     .play-contact-sheet { padding: 28px 22px; box-shadow: 7px 9px 0 var(--play-red), 11px 14px 0 rgba(23,23,25,.14); transform: none; }
-    .play-contact-meta { margin-bottom: 28px; flex-direction: column; align-items: start; gap: 8px; }
-    .play-contact-heading h2 { margin: 12px 0 20px; font-size: clamp(2.75rem, 14vw, 3.5rem); }
-    .play-contact-heading > p:last-child { font-size: 16px; }
+    .play-contact-heading h2 { margin: 0 0 14px; font-size: clamp(3rem, 14vw, 3.75rem); }
+    .play-contact-heading > h2 + p { font-size: 22px; }
     .play-contact-reveal { flex-direction: column; }
-    .play-contact-aside nav { grid-template-columns: 1fr; gap: 4px; }
-    .play-contact-social-action { display: inline; }
-    .play-signature { margin: 16px 4px -8px 0; }
+    .play-signature { margin: 8px 0 -6px; }
     .play-drawing { width: min(170px, 42vw); }
     .play-drawing-hero-b { top: auto; bottom: 2%; right: -30px; }
     .play-drawing-desk { top: 74%; left: -40px; }
@@ -763,7 +778,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-desk[data-reel-mode='pinned'] .play-tile {
     --in: max(var(--frame, 1.2), 0);
     --out: min(var(--frame, 1.2), 0);
-    width: min(100%, 68rem);
+    width: min(100%, 70rem);
     height: min(100%, 34rem);
     grid-area: 1 / 1;
     display: grid;
@@ -771,24 +786,27 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     /* The style query below needs a style container, and the tile is the
        closest ancestor that owns --frame. */
     container-type: style;
-    transform:
-      translate3d(calc(var(--in) * 3% + var(--out) * 4%), calc(var(--in) * 92% + var(--out) * 11%), 0)
-      rotate(calc(var(--play-desk-rotation) + var(--in) * 6deg - var(--out) * 3deg))
-      scale(calc(1 + var(--out) * .07));
-    opacity: clamp(0, calc(1 - var(--frame, 1.2) * var(--frame, 1.2)), 1);
   }
+  /* Only the print travels: incoming ones rise from the bottom edge tilted,
+     outgoing ones lift and turn away. The notes stay on the page: the old ones
+     are rubbed out from the left in the first half of the turn and the new ones
+     are written in during the second half, so two sets never share the page. */
+  .play-desk[data-reel-mode='pinned'] .play-print {
+    transform:
+      translate3d(calc(var(--in) * 3% + var(--out) * 4%), calc(var(--in) * 118% + var(--out) * 14%), 0)
+      rotate(calc(var(--play-tilt) + var(--in) * 7deg - var(--out) * 4deg))
+      scale(calc(1 + var(--out) * .08));
+    opacity: clamp(0, calc(1 - var(--frame, 1.2) * var(--frame, 1.2)), 1);
+    transition: none;
+  }
+  .play-desk[data-reel-mode='pinned'] .play-copy { clip-path: inset(-16px calc(min(var(--in) * 2, 1) * 100%) -16px calc(min(var(--out) * -2, 1) * 100%)); }
   .play-desk[data-reel-mode='pinned'] .play-tile:not([data-reel-current]) { pointer-events: none; }
   .play-desk[data-reel-mode='pinned'] .play-tile:hover { z-index: auto; }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-card { height: auto; width: 100%; align-items: center; padding: clamp(16px, 2.4svh, 22px); grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(24px, 3vw, 40px); box-shadow: 6px 8px 0 rgba(23,23,25,.16); }
-  /* Screenshots are 16:10. A portrait frame crops words off the edge of every
-     cover, so the print is a landscape photo instead. */
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-photo { aspect-ratio: 16 / 10; height: auto; }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy { min-height: 0; padding: 14px 8px 4px 0; justify-content: center; gap: 14px; }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-project-footer { margin-top: 6px; }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy strong { font-size: clamp(2rem, 3vw, 2.75rem); }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy p { font-size: 17px; }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-pin { left: 56px; transform: rotate(-3deg); }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-pin-right { display: block; left: auto; right: 56px; transform: rotate(3deg); }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-card { height: auto; width: 100%; align-items: center; grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 56px); }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy { min-height: 0; padding: 8px 8px 4px 0; justify-content: center; gap: 8px; }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-project-footer { margin-top: 10px; }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy strong { font-size: clamp(2.75rem, 4.2vw, 4rem); }
+  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy p { font-size: 26px; }
   .play-desk[data-reel-mode='pinned'] .play-page-number { z-index: 0; bottom: 14px; }
   /* Prints beyond the active one's neighbours are parked at exactly ±1.2 and
      skipped by the rasteriser. Browsers without style queries still hide them
@@ -803,8 +821,8 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-reel-index button { padding-inline: 10px; }
     .play-reel-hint { display: none; }
     .play-desk[data-reel-mode='pinned'] .play-tile .play-card { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
-    .play-desk[data-reel-mode='pinned'] .play-tile .play-copy strong { font-size: clamp(1.75rem, 3vw, 2.25rem); }
-    .play-desk[data-reel-mode='pinned'] .play-tile .play-copy p { font-size: 16px; }
+    .play-desk[data-reel-mode='pinned'] .play-tile .play-copy strong { font-size: clamp(2.5rem, 4vw, 3.25rem); }
+    .play-desk[data-reel-mode='pinned'] .play-tile .play-copy p { font-size: 24px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -827,8 +845,16 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     from { opacity: 0; }
     to { opacity: 1; }
   }
-  @keyframes play-tile-in {
-    from { opacity: 0; transform: translateY(22px) rotate(-.7deg); }
-    to { opacity: 1; transform: translateY(0) rotate(0); }
+  @keyframes play-drop {
+    from { opacity: 0; transform: translateY(-26px) rotate(calc(var(--play-tilt, 0deg) - 5deg)) scale(1.04); }
+  }
+  @keyframes play-write {
+    from { clip-path: inset(-30% 100% -30% -10%); }
+    to { clip-path: inset(-30% -10% -30% -10%); }
+  }
+  @keyframes play-slide {
+    0% { opacity: .45; transform: translateY(18px) rotate(3deg) scale(.9); }
+    38%, 62% { opacity: 1; transform: none; }
+    100% { opacity: .45; transform: translateY(18px) rotate(-3deg) scale(.9); }
   }
 </style>

@@ -25,13 +25,13 @@ async (page) => {
         #play-top .play-hero { height:630px; min-height:630px; padding:44px 72px 50px 112px; gap:0; }
         #play-top .play-hero-header { min-height:40px; }
         #play-top .play-hero-links, .play-skip, #play-top .play-desk, #play-top .play-contact, .play-sr-status, #play-top .play-page-number, #play-top .play-launch, .play-battlefield { display:none; }
-        #play-top .play-hero-index { font-size:24px; font-weight:500; text-transform:none; letter-spacing:0; }
-        #play-top .play-hero-kicker { margin:0 0 6px; font-size:30px; }
-        #play-top .play-hero h1 { max-width:1020px; margin:120px 0 0; font-size:88px; line-height:1.05; letter-spacing:-.03em; text-wrap:initial; }
+        #play-top .play-hero-index { font-size:30px; }
+        #play-top .play-hero-kicker { margin:0 0 6px; font-size:36px; }
+        #play-top .play-hero h1 { max-width:1020px; margin:96px 0 0; font-size:112px; line-height:.95; text-wrap:initial; }
         #play-top .play-intro { margin-top:auto; width:100%; display:flex; justify-content:space-between; align-items:center; }
-        #play-top .play-intro > p { max-width:none; font-size:24px; color:var(--play-ink); }
+        #play-top .play-intro > p { max-width:none; font-size:32px; }
         #play-top .play-hero-actions { display:none; }
-        .og-domain { min-height:52px; padding:8px 18px; display:inline-flex; align-items:center; background:var(--play-yellow); border:1px solid var(--play-ink); box-shadow:3px 3px 0 var(--play-ink); font-size:26px; font-weight:600; }
+        .og-domain { min-height:52px; padding:8px 18px; display:inline-flex; align-items:center; background:var(--play-yellow); border:1px solid var(--play-ink); box-shadow:3px 3px 0 var(--play-ink); font-size:32px; font-weight:600; }
         #play-top .play-drawing-hero-a { top:150px; left:-28px; width:170px; }
         #play-top .play-drawing-hero-b { top:326px; bottom:auto; right:44px; width:190px; opacity:.65; }
       </style></head>`) });
@@ -47,20 +47,16 @@ async (page) => {
       index.textContent = document.querySelector('meta[property="og:site_name"]').content;
       // The card is metadata, so the personal greeting gives way to a plain hello.
       document.querySelector('.play-hero-kicker').textContent = 'Hello!';
-      const title = document.querySelector('.play-hero h1');
-      const headline = title.textContent.trim();
-      const breakAt = headline.lastIndexOf(' for ');
-      if (breakAt >= 0) title.replaceChildren(document.createTextNode(headline.slice(0, breakAt)), document.createElement('br'), document.createTextNode(headline.slice(breakAt + 1)));
       const intro = document.querySelector('.play-intro');
       const role = document.createElement('p');
-      role.textContent = 'Software engineer / Lagos, Nigeria';
+      role.textContent = 'Software engineer / Open-source maintainer';
       const domain = document.createElement('span');
       domain.className = 'og-domain';
       domain.textContent = 'tryraisins.dev';
       intro.replaceChildren(role, domain);
     });
     const fonts = await card.evaluate(() => [...document.fonts].filter(font => font.status === 'loaded').map(font => font.family));
-    if (!fonts.includes('Bricolage Grotesque') || !fonts.includes('DM Sans')) throw Error('Required portfolio fonts did not load');
+    if (!fonts.includes('Caveat')) throw Error('Required portfolio fonts did not load');
     await card.screenshot({ path: 'public/og-notebook.png', animations: 'disabled' });
     return { source, output: 'public/og-notebook.png', width: 1200, height: 630, fonts };
   } finally {

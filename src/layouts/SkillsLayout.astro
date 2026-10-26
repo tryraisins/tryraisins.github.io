@@ -27,7 +27,7 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'} />
-    <meta name="theme-color" content="#e7ddc9" />
+    <meta name="theme-color" content="#f8f7f1" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -40,7 +40,6 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="TryRaisins" />
-    <meta property="og:locale" content="en_NG" />
     <meta property="og:image" content={socialImage} />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
@@ -53,7 +52,7 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     <meta name="twitter:image:alt" content={socialAlt} />
     <meta name="twitter:creator" content="@tryraisins" />
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
-    <link rel="preload" href="/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/caveat-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <slot name="head" />
   </head>
@@ -62,7 +61,7 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     <div class="sk-world">
       <a class="sk-skip" href="#sk-main">Skip to content</a>
       <header class="sk-topbar">
-        <a class="sk-home" href="/"><strong>TryRaisins</strong> / Software engineer / Lagos</a>
+        <a class="sk-home" href="/"><strong>TryRaisins</strong> / Software engineer</a>
         <a class="sk-home sk-home-short" href="/">TryRaisins</a>
         <nav aria-label="Primary">
           <a href="/#play-desk">Work</a>
@@ -87,11 +86,11 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
 </html>
 
 <style is:global>
-  html { min-width: 320px; background: #e7ddc9; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-  body { min-width: 320px; min-height: 100dvh; margin: 0; overflow-x: hidden; background: #e7ddc9; -webkit-tap-highlight-color: transparent; }
+  html { min-width: 320px; background: #f8f7f1; scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { min-width: 320px; min-height: 100dvh; margin: 0; overflow-x: hidden; background: #f8f7f1; -webkit-tap-highlight-color: transparent; }
   ::selection { background: #315fe9; color: #fff; }
   .sk-world {
-    --sk-paper: #fbfaf5;
+    --sk-paper: #ffffff;
     --sk-ink: #171719;
     --sk-muted: rgba(23,23,25,.72);
     --sk-red: #f05c45;
@@ -99,18 +98,22 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     --sk-link: #2346b5;
     --sk-yellow: #f0ce4e;
     --sk-sheet: #f3d665;
-    --sk-section-font: 'Bricolage Grotesque', sans-serif;
-    --sk-title-font: 'DM Sans', sans-serif;
+    /* Headings, titles and labels are handwritten, as on the homepage; long
+       instructions and prompts stay in print so they are easy to read and copy. */
+    --sk-hand: 'Caveat', 'Segoe Print', cursive;
+    --sk-red-pen: #c4352b;
+    --sk-section-font: var(--sk-hand);
+    --sk-title-font: var(--sk-hand);
     --sk-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --sk-margin: max(clamp(32px, 6vw, 96px), calc((100% - 1280px) / 2));
     /* Text starts this far inside the red margin rule, as on the homepage. */
     --sk-inset: calc(var(--sk-margin) + 40px);
     --sk-ease: cubic-bezier(0.23, 1, 0.32, 1);
     min-height: 100dvh;
-    background-color: #e7ddc9;
+    background-color: #f8f7f1;
     background-image:
-      repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(85,126,166,.12) 35px, rgba(85,126,166,.12) 36px),
-      linear-gradient(90deg, transparent 0 calc(var(--sk-margin) - 2px), rgba(210,84,72,.22) calc(var(--sk-margin) - 2px), rgba(210,84,72,.22) var(--sk-margin), transparent var(--sk-margin));
+      repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(52,110,204,.5) 35px, rgba(52,110,204,.5) 36px),
+      linear-gradient(90deg, transparent 0 calc(var(--sk-margin) - 6px), rgba(214,62,56,.55) calc(var(--sk-margin) - 6px), rgba(214,62,56,.55) calc(var(--sk-margin) - 4.5px), transparent calc(var(--sk-margin) - 4.5px) calc(var(--sk-margin) - 1.5px), rgba(214,62,56,.55) calc(var(--sk-margin) - 1.5px), rgba(214,62,56,.55) var(--sk-margin), transparent var(--sk-margin));
     background-size: 100% 36px, 100% 100%;
     color: var(--sk-ink);
     font-family: 'DM Sans', sans-serif;
@@ -129,18 +132,18 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
   .sk-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   .sk-topbar { padding: 28px var(--sk-margin) 0 var(--sk-inset); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .sk-home { min-height: 48px; display: inline-flex; align-items: center; gap: .3em; color: rgba(23,23,25,.76); font-size: 14px; }
-  .sk-home strong { color: var(--sk-ink); font-weight: 600; }
+  .sk-home { min-height: 48px; display: inline-flex; align-items: center; gap: .3em; color: rgba(23,24,29,.62); font: 500 22px/1.2 var(--sk-hand); }
+  .sk-home strong { color: var(--sk-ink); font-weight: 700; }
   .sk-home-short, .sk-short { display: none !important; }
   .sk-topbar nav { display: flex; align-items: center; gap: 8px; }
-  .sk-topbar nav a { min-height: 48px; padding: 0 12px; display: inline-flex; align-items: center; border: 1px solid transparent; font-size: 14px; font-weight: 500; white-space: nowrap; }
-  .sk-topbar nav a.sk-nav-current { border-color: var(--sk-ink); background: var(--sk-yellow); font-weight: 600; }
+  .sk-topbar nav a { min-height: 48px; padding: 0 12px; display: inline-flex; align-items: center; border: 1px solid transparent; font: 600 23px/1 var(--sk-hand); white-space: nowrap; }
+  .sk-topbar nav a.sk-nav-current { border-color: var(--sk-ink); background: var(--sk-yellow); font-weight: 700; }
 
   .sk-section { padding: 0 var(--sk-margin) 0 var(--sk-inset); }
-  .sk-kicker { color: rgba(23,23,25,.76); font-size: 15px; font-weight: 500; }
-  .sk-h1 { font: 600 clamp(2.75rem, 6vw, 5.25rem)/1.02 'Bricolage Grotesque', sans-serif; letter-spacing: -.03em; text-wrap: balance; }
-  .sk-h2 { font: 600 clamp(2.25rem, 4vw, 3.5rem)/1.05 var(--sk-section-font); letter-spacing: -.015em; }
-  .sk-h3 { font: 600 clamp(2rem, 3vw, 2.5rem)/1.05 var(--sk-section-font); letter-spacing: -.012em; }
+  .sk-kicker { color: var(--sk-red-pen); font: 600 28px/1.1 var(--sk-hand); }
+  .sk-h1 { font: 700 clamp(3.5rem, 7.4vw, 6.75rem)/.92 var(--sk-hand); text-wrap: balance; }
+  .sk-h2 { font: 700 clamp(2.75rem, 4.6vw, 4rem)/1 var(--sk-section-font); }
+  .sk-h3 { font: 700 clamp(2.4rem, 3.4vw, 3rem)/1 var(--sk-section-font); }
   .sk-lede { max-width: 46rem; color: rgba(23,23,25,.82); font-size: clamp(1.0625rem, 1.6vw, 1.3125rem); line-height: 1.5; }
 
   .sk-btn, .sk-btn-primary { min-height: 44px; padding: 0 16px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--sk-ink); border-radius: 0; background: var(--sk-paper); color: var(--sk-ink); font: 600 14px/1.2 'DM Sans', sans-serif; text-align: center; cursor: pointer; user-select: none; }
@@ -153,7 +156,7 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
 
   .sk-sheet { position: relative; background: var(--sk-sheet); border: 2px solid var(--sk-ink); box-shadow: 6px 7px 0 var(--sk-red); }
   .sk-paper { background: var(--sk-paper); border: 1px solid var(--sk-ink); box-shadow: 4px 5px 0 rgba(23,23,25,.16); }
-  .sk-meta { color: rgba(23,23,25,.72); font-size: 11px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; }
+  .sk-meta { color: rgba(23,24,29,.68); font: 600 19px/1.2 var(--sk-hand); }
   .sk-code { font-family: var(--sk-mono); }
 
   .sk-prompt { width: 100%; min-height: 15rem; padding: 14px; border: 1px solid var(--sk-ink); border-radius: 0; background: var(--sk-paper); color: var(--sk-ink); font: 500 12.5px/1.55 var(--sk-mono); resize: vertical; }
@@ -174,19 +177,20 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
   }
   @media (max-width: 760px) {
     .sk-home:not(.sk-home-short) { display: none; }
-    .sk-home-short { display: inline-flex !important; color: var(--sk-ink); font-size: 15px; font-weight: 600; }
+    .sk-home-short { display: inline-flex !important; color: var(--sk-ink); font-size: 24px; font-weight: 700; }
   }
   @media (max-width: 620px) {
     .sk-world { --sk-margin: 28px; --sk-inset: 44px; }
     .sk-topbar { padding: 20px 20px 0 var(--sk-inset); gap: 8px; }
     .sk-topbar nav { gap: 2px; }
-    .sk-topbar nav a { padding: 0 9px; }
+    .sk-topbar nav a { padding: 0 7px; font-size: 21px; }
+    .sk-home-short { font-size: 22px; }
     .sk-long { display: none; }
     .sk-short { display: inline !important; }
   }
   @media (max-width: 360px) {
-    .sk-home-short { font-size: 14px; }
-    .sk-topbar nav a { padding: 0 6px; font-size: 13px; }
+    .sk-home-short { font-size: 19px; }
+    .sk-topbar nav a { padding: 0 5px; font-size: 18px; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
