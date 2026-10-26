@@ -34,9 +34,11 @@
 <div class="boot" id="boot-overlay" data-boot-overlay>
   <p class="boot-status" role="status">Loading</p>
   <div class="boot-stage" aria-hidden="true">
-    <svg class="boot-signature" viewBox="0 0 220 96" focusable="false">
-      <path class="boot-ink boot-ink-s" pathLength="1" d="M52 22 C 44 8 18 8 17 25 C 16 42 50 40 49 59 C 48 78 20 80 11 64" />
-      <path class="boot-ink boot-ink-eun" pathLength="1" d="M60 62 C 74 60 90 55 87 46 C 84 37 68 40 65 54 C 62 68 72 76 86 69 C 96 64 100 52 102 42 C 101 58 102 70 114 69 C 124 68 127 54 128 42 C 127 56 127 66 132 70 C 140 68 144 54 146 42 C 145 56 144 64 144 70 C 146 54 156 40 166 43 C 176 47 168 60 168 70 C 168 74 178 70 190 56" />
+    <svg class="boot-signature" viewBox="0 0 250 96" focusable="false">
+      <path class="boot-ink boot-ink-word" pathLength="1" d="M16 20 C 15 34 13 48 14 56 C 15 63 20 63 24 60 C 27 54 28 48 29 42 C 31 40 34 40 36 43 C 36 50 38 58 43 61 C 47 56 49 48 51 42 C 50 54 53 62 59 61 C 64 59 66 50 66 42 C 66 60 66 76 61 85 C 56 92 47 88 53 79 C 59 71 69 66 77 61 C 79 55 80 48 81 42 C 83 40 86 40 88 43 C 88 50 90 58 95 61 C 97 52 101 43 108 42 C 101 41 97 48 98 55 C 99 62 107 62 111 54 C 112 50 113 46 114 42 C 113 52 112 60 119 61 C 122 57 124 50 125 43 C 124 52 124 60 131 61 C 134 56 136 49 139 42 C 144 47 149 52 146 58 C 143 64 135 63 134 60 C 140 63 147 62 152 60 C 155 55 157 48 158 43 C 157 52 157 60 164 61 C 167 56 168 49 169 42 C 168 50 168 56 168 62 C 171 52 177 42 185 43 C 192 45 187 55 189 61 C 191 63 195 62 197 60 C 200 55 202 48 204 42 C 209 47 214 52 211 58 C 208 64 200 64 198 60 C 210 66 224 58 238 46" />
+      <path class="boot-ink boot-ink-mark" pathLength="1" d="M7 36 C 13 35 20 34 27 33" />
+      <path class="boot-ink boot-ink-mark" pathLength="1" d="M125.5 32.5 L 126 32.9" />
+      <path class="boot-ink boot-ink-mark" pathLength="1" d="M159 32.5 L 159.5 32.9" />
     </svg>
     <svg class="boot-rule" viewBox="0 0 220 14" focusable="false">
       <path class="boot-rule-main" pathLength="1" d="M4 8 C 40 4, 80 11, 118 7 S 186 5, 216 8" />
@@ -101,11 +103,12 @@
   .boot-status { position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .boot-stage { min-height: 100%; padding: 0 var(--boot-margin); display: grid; place-content: center; justify-items: center; gap: 6px; }
 
-  .boot-signature { width: clamp(168px, 30vw, 264px); height: auto; display: block; overflow: visible; }
+  .boot-signature { width: clamp(190px, 34vw, 300px); height: auto; display: block; overflow: visible; }
   .boot-ink { fill: none; stroke: rgba(23,23,25,.84); stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1 2; stroke-dashoffset: 1; animation: boot-draw 240ms linear both; }
-  .boot-ink-eun { animation-delay: 210ms; animation-duration: 410ms; }
+  .boot-ink-word { animation-duration: 620ms; }
+  .boot-ink-mark { animation-delay: 600ms; animation-duration: 90ms; }
 
-  .boot-rule { width: clamp(168px, 30vw, 264px); height: auto; display: block; overflow: visible; opacity: .5; }
+  .boot-rule { width: clamp(190px, 34vw, 300px); height: auto; display: block; overflow: visible; opacity: .5; }
   .boot-rule path { fill: none; stroke: var(--boot-ink); stroke-linecap: round; stroke-dasharray: 1 2; stroke-dashoffset: 1; animation: boot-draw 480ms linear 120ms both; }
   .boot-rule .boot-rule-main { stroke-width: 1.6; }
   .boot-rule .boot-rule-faint { stroke-width: 1; animation-duration: 400ms; animation-delay: 200ms; }

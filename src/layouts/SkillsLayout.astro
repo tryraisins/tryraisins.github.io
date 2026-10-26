@@ -4,6 +4,7 @@
 // the same notebook.
 import { SITE_URL } from '../lib/skill-prompt';
 import BootOverlay from '../components/BootOverlay.astro';
+import '../styles/fonts.css';
 
 interface Props {
   title: string;
@@ -30,7 +31,10 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
@@ -49,9 +53,8 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     <meta name="twitter:image:alt" content={socialAlt} />
     <meta name="twitter:creator" content="@tryraisins" />
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Bricolage+Grotesque:wght@600&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Public+Sans:wght@600&display=swap" rel="stylesheet" />
+    <link rel="preload" href="/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/dm-sans-latin.woff2" as="font" type="font/woff2" crossorigin />
     <slot name="head" />
   </head>
   <body>
@@ -59,7 +62,7 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     <div class="sk-world">
       <a class="sk-skip" href="#sk-main">Skip to content</a>
       <header class="sk-topbar">
-        <a class="sk-home" href="/">Seun Sowemimo / Software engineer / Lagos</a>
+        <a class="sk-home" href="/"><strong>TryRaisins</strong> / Software engineer / Lagos</a>
         <a class="sk-home sk-home-short" href="/">TryRaisins</a>
         <nav aria-label="Primary">
           <a href="/#play-desk">Work</a>
@@ -96,10 +99,12 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     --sk-link: #2346b5;
     --sk-yellow: #f0ce4e;
     --sk-sheet: #f3d665;
-    --sk-section-font: 'Barlow Condensed', 'Bricolage Grotesque', sans-serif;
-    --sk-title-font: 'Public Sans', 'DM Sans', sans-serif;
+    --sk-section-font: 'Bricolage Grotesque', sans-serif;
+    --sk-title-font: 'DM Sans', sans-serif;
     --sk-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --sk-margin: max(clamp(32px, 6vw, 96px), calc((100% - 1280px) / 2));
+    /* Text starts this far inside the red margin rule, as on the homepage. */
+    --sk-inset: calc(var(--sk-margin) + 40px);
     --sk-ease: cubic-bezier(0.23, 1, 0.32, 1);
     min-height: 100dvh;
     background-color: #e7ddc9;
@@ -123,15 +128,16 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
   .sk-skip:focus { transform: translateY(0); }
   .sk-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-  .sk-topbar { padding: 28px var(--sk-margin) 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .sk-home { min-height: 48px; display: inline-flex; align-items: center; color: rgba(23,23,25,.76); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+  .sk-topbar { padding: 28px var(--sk-margin) 0 var(--sk-inset); display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .sk-home { min-height: 48px; display: inline-flex; align-items: center; gap: .3em; color: rgba(23,23,25,.76); font-size: 14px; }
+  .sk-home strong { color: var(--sk-ink); font-weight: 600; }
   .sk-home-short, .sk-short { display: none !important; }
   .sk-topbar nav { display: flex; align-items: center; gap: 8px; }
   .sk-topbar nav a { min-height: 48px; padding: 0 12px; display: inline-flex; align-items: center; border: 1px solid transparent; font-size: 14px; font-weight: 500; white-space: nowrap; }
   .sk-topbar nav a.sk-nav-current { border-color: var(--sk-ink); background: var(--sk-yellow); font-weight: 600; }
 
-  .sk-section { padding: 0 var(--sk-margin); }
-  .sk-kicker { color: rgba(23,23,25,.76); font-size: 13px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
+  .sk-section { padding: 0 var(--sk-margin) 0 var(--sk-inset); }
+  .sk-kicker { color: rgba(23,23,25,.76); font-size: 15px; font-weight: 500; }
   .sk-h1 { font: 600 clamp(2.75rem, 6vw, 5.25rem)/1.02 'Bricolage Grotesque', sans-serif; letter-spacing: -.03em; text-wrap: balance; }
   .sk-h2 { font: 600 clamp(2.25rem, 4vw, 3.5rem)/1.05 var(--sk-section-font); letter-spacing: -.015em; }
   .sk-h3 { font: 600 clamp(2rem, 3vw, 2.5rem)/1.05 var(--sk-section-font); letter-spacing: -.012em; }
@@ -157,7 +163,7 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
   .sk-status[data-tone='error'] { border-color: #943614; background: #fff1ea; }
   .sk-status[data-tone='error']::before { border-radius: 0; background: #943614; transform: rotate(45deg); }
 
-  .sk-footer { margin-top: 64px; padding: 40px var(--sk-margin) 56px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; }
+  .sk-footer { margin-top: 64px; padding: 40px var(--sk-margin) 56px var(--sk-inset); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px; }
   .sk-footer p { max-width: 38rem; color: rgba(23,23,25,.72); font-size: 13px; }
   .sk-footer nav { display: flex; flex-wrap: wrap; gap: 4px; margin-left: -8px; }
 
@@ -168,11 +174,11 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
   }
   @media (max-width: 760px) {
     .sk-home:not(.sk-home-short) { display: none; }
-    .sk-home-short { display: inline-flex !important; color: var(--sk-ink); font-size: 15px; font-weight: 600; letter-spacing: 0; text-transform: none; }
+    .sk-home-short { display: inline-flex !important; color: var(--sk-ink); font-size: 15px; font-weight: 600; }
   }
   @media (max-width: 620px) {
-    .sk-world { --sk-margin: 28px; }
-    .sk-topbar { padding: 20px 20px 0 var(--sk-margin); gap: 8px; }
+    .sk-world { --sk-margin: 28px; --sk-inset: 44px; }
+    .sk-topbar { padding: 20px 20px 0 var(--sk-inset); gap: 8px; }
     .sk-topbar nav { gap: 2px; }
     .sk-topbar nav a { padding: 0 9px; }
     .sk-long { display: none; }

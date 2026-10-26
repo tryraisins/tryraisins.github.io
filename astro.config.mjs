@@ -9,5 +9,6 @@ const redirectPages = new Set(redirects.map((redirect) => `${site}/skills/${redi
 
 export default defineConfig({
   site,
-  integrations: [sitemap({ filter: (page) => !redirectPages.has(page) })],
+  // The prototype gallery is noindex, so it stays out of the sitemap too.
+  integrations: [sitemap({ filter: (page) => !redirectPages.has(page) && !page.startsWith(`${site}/prototypes/`) })],
 });

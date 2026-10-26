@@ -22,7 +22,7 @@ async (page) => {
       await route.fulfill({ response, body: html.replace('</head>', `<style>
         html, body { width:1200px; height:630px; overflow:hidden; }
         .play-world { min-height:630px; --play-page-margin:72px; }
-        #play-top .play-hero { height:630px; min-height:630px; padding:44px 72px 50px; gap:0; }
+        #play-top .play-hero { height:630px; min-height:630px; padding:44px 72px 50px 112px; gap:0; }
         #play-top .play-hero-header { min-height:40px; }
         #play-top .play-hero-links, .play-skip, #play-top .play-desk, #play-top .play-contact, .play-sr-status, #play-top .play-page-number, #play-top .play-launch, .play-battlefield { display:none; }
         #play-top .play-hero-index { font-size:24px; font-weight:500; text-transform:none; letter-spacing:0; }
@@ -32,7 +32,7 @@ async (page) => {
         #play-top .play-intro > p { max-width:none; font-size:24px; color:var(--play-ink); }
         #play-top .play-hero-actions { display:none; }
         .og-domain { min-height:52px; padding:8px 18px; display:inline-flex; align-items:center; background:var(--play-yellow); border:1px solid var(--play-ink); box-shadow:3px 3px 0 var(--play-ink); font-size:26px; font-weight:600; }
-        #play-top .play-drawing-hero-a { top:112px; left:-28px; width:200px; }
+        #play-top .play-drawing-hero-a { top:150px; left:-28px; width:170px; }
         #play-top .play-drawing-hero-b { top:326px; bottom:auto; right:44px; width:190px; opacity:.65; }
       </style></head>`) });
     });
@@ -44,9 +44,9 @@ async (page) => {
     await card.waitForFunction(() => document.querySelector('[data-battlefield]')?.dataset.topState);
     await card.evaluate(() => {
       const index = document.querySelector('.play-hero-index');
-      const name = index.textContent.split('/')[0].trim();
-      const brand = document.querySelector('meta[property="og:site_name"]').content;
-      index.textContent = `${name} / ${brand}`;
+      index.textContent = document.querySelector('meta[property="og:site_name"]').content;
+      // The card is metadata, so the personal greeting gives way to a plain hello.
+      document.querySelector('.play-hero-kicker').textContent = 'Hello!';
       const title = document.querySelector('.play-hero h1');
       const headline = title.textContent.trim();
       const breakAt = headline.lastIndexOf(' for ');
