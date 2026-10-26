@@ -6,8 +6,11 @@ create table if not exists skill_installs (
 );
 
 -- Last complete total, served when it is fresh or when an outside source is down.
+-- updated_at is when the Worker last recomputed it, changed_at when the number
+-- itself last moved (npm batches its daily figures, so the two drift apart).
 create table if not exists download_total (
   id integer primary key check (id = 1),
   total integer not null,
-  updated_at integer not null
+  updated_at integer not null,
+  changed_at integer
 );

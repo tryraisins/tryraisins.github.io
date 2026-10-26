@@ -26,9 +26,19 @@ check('OPTIONS allows the site origin', preflight.status === 204 && preflight.he
 const get = await fetch(url, { headers: { Origin: origin } });
 const body = await get.json();
 check('GET returns a combined total', get.status === 200 && Number.isSafeInteger(body.total), `status ${get.status}, body ${JSON.stringify(body)}`);
-check('GET exposes no per-source fields', Object.keys(body).join() === 'total');
+check('GET exposes no per-source fields', Object.keys(body).sort().join() === 'changed,total,updated', Object.keys(body).join());
+check('GET reports when it refreshed and when it changed', Number.isFinite(body.updated) && Number.isFinite(body.changed));
 check('GET is cacheable', /max-age/.test(get.headers.get('cache-control') || ''), get.headers.get('cache-control'));
 check('GET sends CORS for the site', get.headers.get('access-control-allow-origin') === origin);
+if (Number.isFinite(body.updated) && Number.isFinite(body.changed)) {
+  const hours = (ms) => `${Math.round(ms / 36e5)}h ago`;
+  console.log(`total last recomputed ${new Date(body.updated).toISOString().slice(0, 16)} (${hours(Date.now() - body.updated)})`);
+  console.log(`total last changed   ${new Date(body.changed).toISOString().slice(0, 16)} (${hours(Date.now() - body.changed)})`);
+  // Hourly refresh, so a day of silence means the Worker is not recomputing at all.
+  check('the Worker recomputed the total in the last day', Date.now() - body.updated < 26 * 36e5, hours(Date.now() - body.updated));
+  // npm publishes in batches and has known multi-day gaps, but a week of no movement is a stall.
+  check('the total moved in the last week', Date.now() - body.changed < 7 * 24 * 36e5, hours(Date.now() - body.changed));
+}
 if (get.status === 200) {
   // The Worker refreshes its saved total hourly, so allow npm/skills.sh to have moved on since.
   const site = body.total - npmTotal - skillsShTotal;

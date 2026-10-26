@@ -18,12 +18,26 @@ export function recordInstall(skill: string, scope: string) {
   fetch(SKILL_STATS_URL, { method: 'POST', body, keepalive: true }).catch(() => {});
 }
 
-export async function loadDownloadTotal(): Promise<number | null> {
+export type DownloadTotal = {
+  total: number;
+  // When the stored total last moved. npm batches its daily figures, so this
+  // trails the recompute time by up to a few days.
+  changed: number | null;
+};
+
+export async function loadDownloadTotal(fresh = false): Promise<DownloadTotal | null> {
   try {
-    const response = await fetch(SKILL_STATS_URL, { signal: AbortSignal.timeout(8000) });
+    // A fresh read skips the Worker's five minute response cache, for the case
+    // where someone comes back to the library to check the count.
+    const url = fresh ? `${SKILL_STATS_URL}?v=${Date.now()}` : SKILL_STATS_URL;
+    const response = await fetch(url, {
+      signal: AbortSignal.timeout(8000),
+      cache: fresh ? 'no-store' : 'default',
+    });
     if (!response.ok) return null;
-    const { total } = await response.json();
-    return Number.isSafeInteger(total) && total > 0 ? total : null;
+    const { total, changed } = await response.json();
+    if (!Number.isSafeInteger(total) || total <= 0) return null;
+    return { total, changed: Number.isFinite(changed) ? changed : null };
   } catch {
     return null;
   }

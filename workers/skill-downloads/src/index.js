@@ -48,9 +48,14 @@ async function skillsShInstalls(url = SKILLS_SH_URL) {
     .reduce((sum, skill) => sum + skill.installs, 0);
 }
 
+// Returns the total, when it was last recomputed and when it last changed, so the
+// page can tell "npm has not published" apart from "the counter is stuck".
 async function currentTotal(db, skillsShUrl) {
-  const saved = await db.prepare('select total, updated_at from download_total where id = 1').first();
-  if (saved && Date.now() - saved.updated_at < FRESH_MS) return saved.total;
+  const saved = await db.prepare('select total, updated_at, changed_at from download_total where id = 1').first();
+  const carried = saved
+    ? { total: saved.total, updated: saved.updated_at, changed: saved.changed_at ?? saved.updated_at }
+    : null;
+  if (carried && Date.now() - saved.updated_at < FRESH_MS) return carried;
   try {
     const [site, npm, skillsSh] = await Promise.all([
       db.prepare('select count(*) as count from skill_installs').first('count'),
@@ -58,13 +63,15 @@ async function currentTotal(db, skillsShUrl) {
       skillsShInstalls(skillsShUrl),
     ]);
     const total = site + npm + skillsSh;
-    await db.prepare('insert into download_total (id, total, updated_at) values (1, ?1, ?2) on conflict (id) do update set total = ?1, updated_at = ?2')
-      .bind(total, Date.now()).run();
-    return total;
+    const now = Date.now();
+    const changed = carried && carried.total === total ? carried.changed : now;
+    await db.prepare('insert into download_total (id, total, updated_at, changed_at) values (1, ?1, ?2, ?3) on conflict (id) do update set total = ?1, updated_at = ?2, changed_at = ?3')
+      .bind(total, now, changed).run();
+    return { total, updated: now, changed };
   } catch (error) {
     // A missing source would understate the total, so fall back to the last complete one.
     console.error('Skill download count failed', error);
-    if (saved) return saved.total;
+    if (carried) return carried;
     throw error;
   }
 }
@@ -102,9 +109,9 @@ export default {
 
     if (request.method !== 'GET') return respond(405, { error: 'Method not allowed' });
     try {
-      const total = await currentTotal(env.DB, env.SKILLS_SH_URL);
+      const summary = await currentTotal(env.DB, env.SKILLS_SH_URL);
       headers.set('Cache-Control', 'public, max-age=300');
-      return respond(200, { total });
+      return respond(200, summary);
     } catch {
       return respond(502, { error: 'Download count unavailable' });
     }

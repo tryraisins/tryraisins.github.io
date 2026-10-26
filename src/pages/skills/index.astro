@@ -55,6 +55,7 @@ const searchText = (skill: (typeof skills)[number]) =>
       <p class="sk-tally-num" data-downloads-total>0</p>
       <svg class="sk-tally-marks" viewBox="0 0 132 34" aria-hidden="true"><path d="M6 4v26M18 3v27M30 5v25M42 4v26M2 26 48 7M66 4v26M78 3v27M90 5v25M102 4v26M62 27 108 8M122 5v25" /></svg>
       <p class="sk-tally-note">Every install counted together, whether the prompt was copied here, the yeknal package came from npm, or the skill was added through skills.sh.</p>
+      <p class="sk-tally-age" data-downloads-age hidden></p>
     </aside>
   </section>
 
@@ -197,14 +198,29 @@ const searchText = (skill: (typeof skills)[number]) =>
 
   const tally = document.querySelector<HTMLElement>('[data-downloads]');
   const tallyNum = tally?.querySelector<HTMLElement>('[data-downloads-total]');
+  const tallyAge = tally?.querySelector<HTMLElement>('[data-downloads-age]');
   if (tally && tallyNum) {
     const format = new Intl.NumberFormat('en');
-    loadDownloadTotal().then((total) => {
-      // The card keeps its space while loading, and only collapses if there is nothing to show.
-      if (total === null) { tally.hidden = true; return; }
-      tallyNum.setAttribute('aria-label', format.format(total));
+    const date = new Intl.DateTimeFormat(undefined, { day: 'numeric', month: 'short' });
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // npm can go a few days between publications without anything being broken, so
+    // the note only shows once the figure has been still long enough to look stuck.
+    const STALE_MS = 36 * 60 * 60 * 1000;
+    let painted = false;
+
+    const writeAge = (changed: number | null) => {
+      if (!tallyAge) return;
+      if (changed === null || Date.now() - changed <= STALE_MS) { tallyAge.hidden = true; return; }
+      tallyAge.textContent = `Updated ${date.format(new Date(changed))}`;
+      tallyAge.hidden = false;
+    };
+
+    const writeNumber = (total: number, animate: boolean) => {
+      const final = format.format(total);
+      tallyNum.setAttribute('aria-label', final);
       tally.dataset.ready = '';
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { tallyNum.textContent = format.format(total); return; }
+      const settle = () => { tallyNum.textContent = final; };
+      if (!animate || reducedMotion.matches) { settle(); return; }
       const start = performance.now();
       const duration = 1100;
       const step = (now: number) => {
@@ -213,8 +229,33 @@ const searchText = (skill: (typeof skills)[number]) =>
         tallyNum.textContent = format.format(Math.round(total * eased));
         if (progress < 1) requestAnimationFrame(step);
       };
+      tallyNum.textContent = format.format(0);
       requestAnimationFrame(step);
+      // The count-up is decoration. A throttled or occluded tab never gets those
+      // frames, so land the real figure regardless.
+      window.setTimeout(settle, duration + 150);
+    };
+
+    const load = async (fresh: boolean) => {
+      const data = await loadDownloadTotal(fresh);
+      if (!data) {
+        // Keep a figure that already painted; only collapse the card if there is nothing to show.
+        if (!painted) tally.hidden = true;
+        return;
+      }
+      writeNumber(data.total, !painted);
+      writeAge(data.changed);
+      painted = true;
+    };
+
+    // Coming back from a skill page restores the library from the bfcache with the
+    // old figure, which is exactly the moment someone is checking whether it moved.
+    // Both events are deliberate returns, so each one re-reads the total.
+    window.addEventListener('pageshow', (event) => { if (event.persisted) load(true); });
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') load(true);
     });
+    load(false);
   }
 
   const root = document.querySelector<HTMLElement>('[data-library]');
@@ -454,6 +495,9 @@ const searchText = (skill: (typeof skills)[number]) =>
   .sk-tally-marks path { fill: none; stroke: var(--sk-red); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 520; stroke-dashoffset: 520; }
   .sk-tally[data-ready] .sk-tally-marks path { stroke-dashoffset: 0; transition: stroke-dashoffset 1100ms 120ms var(--sk-ease); }
   .sk-tally-note { color: rgba(23,23,25,.82); font-size: 14px; line-height: 1.45; }
+  /* Only appears when the figure has been still for a while, so a quiet npm feed reads as lag. */
+  .sk-tally-age { margin-top: 2px; color: var(--sk-red-pen); font: 700 15px/1.2 var(--sk-hand); }
+  .sk-tally-age[hidden] { display: none; }
   @media (prefers-reduced-motion: reduce) {
     .sk-tally, .sk-tally[data-ready] .sk-tally-marks path { transition: none; }
   }
