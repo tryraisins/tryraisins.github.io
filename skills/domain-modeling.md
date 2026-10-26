@@ -3,7 +3,7 @@
 > Clarifies a project’s domain terms and boundaries and records the decisions in a glossary or architecture decision record.
 
 Canonical: https://tryraisins.dev/skills/domain-modeling/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Clarify a project's domain concepts and record resolved terminology in a glossary or durable decisions in an ADR. Use when terms, relationships, or system boundaries are ambiguous.
 
@@ -25,13 +25,13 @@ Outcome: It maps how each term is used in code and conversation, proposes defini
 Install the Agent Skill "yeknal-domain-modeling" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-domain-modeling
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-domain-modeling
 File list with SHA-256 hashes: https://tryraisins.dev/skills/domain-modeling/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-domain-modeling/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-domain-modeling into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-domain-modeling or ~/.claude/skills/yeknal-domain-modeling, so it is available in every project.
 3. If a yeknal-domain-modeling folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -47,4 +47,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/domain-modeling/fil
 
 ## Source
 
-- [yeknal-domain-modeling on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-domain-modeling)
+- [yeknal-domain-modeling on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-domain-modeling)

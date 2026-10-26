@@ -3,7 +3,7 @@
 > Builds animation for React Native and Expo apps with Reanimated, Gesture Handler, Expo Router and haptics, making the decisions that decide whether motion feels right on a device.
 
 Canonical: https://tryraisins.dev/skills/animate-expo/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Build animations in React Native and Expo with Reanimated, Gesture Handler, Expo Router and expo-haptics, covering gestures, sheets, press feedback, haptics, and screen transitions. For web motion use `yeknal-animate`.
 
@@ -29,13 +29,13 @@ Outcome: It wires the drag with Gesture Handler, runs the motion on the UI threa
 Install the Agent Skill "yeknal-animate-expo" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-animate-expo
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-animate-expo
 File list with SHA-256 hashes: https://tryraisins.dev/skills/animate-expo/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-animate-expo/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-animate-expo into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-animate-expo or ~/.claude/skills/yeknal-animate-expo, so it is available in every project.
 3. If a yeknal-animate-expo folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -54,4 +54,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/animate-expo/files.
 
 ## Source
 
-- [yeknal-animate-expo on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-animate-expo)
+- [yeknal-animate-expo on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-animate-expo)

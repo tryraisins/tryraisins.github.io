@@ -3,7 +3,7 @@
 > Measures what agent work actually costs, finds the sessions and settings that own the spend, and changes one lever at a time without quietly losing review quality along the way.
 
 Canonical: https://tryraisins.dev/skills/agent-cost-control/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Cut agent inference spend without losing quality. Use when an LLM bill or per-task cost is too high, sessions feel expensive, or you are choosing models, effort, or caching.
 
@@ -29,13 +29,13 @@ Outcome: It reads the harness usage log, shows that one long session carried mos
 Install the Agent Skill "yeknal-agent-cost-control" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-agent-cost-control
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-agent-cost-control
 File list with SHA-256 hashes: https://tryraisins.dev/skills/agent-cost-control/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-agent-cost-control/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-agent-cost-control into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-agent-cost-control or ~/.claude/skills/yeknal-agent-cost-control, so it is available in every project.
 3. If a yeknal-agent-cost-control folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -54,4 +54,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/agent-cost-control/
 
 ## Source
 
-- [yeknal-agent-cost-control on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-agent-cost-control)
+- [yeknal-agent-cost-control on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-agent-cost-control)

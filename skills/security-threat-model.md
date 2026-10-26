@@ -3,7 +3,7 @@
 > Builds a threat model grounded in the actual repository, covering assets, trust boundaries, abuse paths and mitigations.
 
 Canonical: https://tryraisins.dev/skills/security-threat-model/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Create a repository-grounded threat model covering assets, trust boundaries, abuse paths, and mitigations. Use only for explicit threat-modeling requests, not for vulnerability hunts or pen tests.
 
@@ -29,13 +29,13 @@ Outcome: It maps assets and trust boundaries from the code, lists likely abuse p
 Install the Agent Skill "yeknal-security-threat-model" for all my projects.
 
 Source, pinned to a published revision (5 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-threat-model
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-security-threat-model
 File list with SHA-256 hashes: https://tryraisins.dev/skills/security-threat-model/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-security-threat-model/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-security-threat-model into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-security-threat-model or ~/.claude/skills/yeknal-security-threat-model, so it is available in every project.
 3. If a yeknal-security-threat-model folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 5 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -56,4 +56,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-threat-mod
 
 ## Source
 
-- [yeknal-security-threat-model on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-threat-model)
+- [yeknal-security-threat-model on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-security-threat-model)

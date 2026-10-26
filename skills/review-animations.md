@@ -3,7 +3,7 @@
 > Checks existing motion against a high craft bar, from easing and duration to interruption and reduced-motion behaviour, and explains each fix.
 
 Canonical: https://tryraisins.dev/skills/review-animations/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Review animation and motion code against a high craft bar derived from Emil Kowalski's design engineering philosophy. Use when auditing interface motion, transitions, easing, or interaction choreography.
 
@@ -25,13 +25,13 @@ Outcome: It checks each animation’s purpose, timing and easing, and suggests c
 Install the Agent Skill "yeknal-review-animations" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-review-animations
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-review-animations
 File list with SHA-256 hashes: https://tryraisins.dev/skills/review-animations/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-review-animations/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-review-animations into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-review-animations or ~/.claude/skills/yeknal-review-animations, so it is available in every project.
 3. If a yeknal-review-animations folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -49,4 +49,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/review-animations/f
 
 ## Source
 
-- [yeknal-review-animations on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-review-animations)
+- [yeknal-review-animations on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-review-animations)

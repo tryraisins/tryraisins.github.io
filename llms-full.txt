@@ -4,7 +4,7 @@
 
 Generated: 2026-10-26
 
-Public pages only. Source revision 95a39b5.
+Public pages only. Source revision 00061b8.
 
 ---
 <!-- source: https://tryraisins.dev/ -->
@@ -13,7 +13,7 @@ Public pages only. Source revision 95a39b5.
 > TryRaisins is a software engineer whose work is used by FTSE 100 companies on four continents, building web products, developer tools and open-source projects, mostly with Next.js, Node.js and Python.
 
 Canonical: https://tryraisins.dev/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 ## Projects
 
@@ -53,7 +53,7 @@ The library has 57 agent skills, and every one has a page and a markdown version
 > 57 free agent skills for Claude Code, Codex, Cursor and other coding agents, grouped by the task each one serves.
 
 Canonical: https://tryraisins.dev/skills/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 ## How to install
 
@@ -186,7 +186,7 @@ Each skill page carries an install prompt pinned to a published revision, with a
 > Takes a scoped feature or fix from plan to working code while keeping the rest of the repository behaving as it did.
 
 Canonical: https://tryraisins.dev/skills/implement/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Implement a scoped feature or fix end to end while preserving repository behavior. Use when the user asks to build, change, add, or repair code; not for the closing gates, review, or publication, which is `yeknal-finalize`.
 
@@ -208,13 +208,13 @@ Outcome: It reads how the page works today, adds the export following existing p
 Install the Agent Skill "yeknal-implement" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-implement
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-implement
 File list with SHA-256 hashes: https://tryraisins.dev/skills/implement/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-implement/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-implement into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-implement or ~/.claude/skills/yeknal-implement, so it is available in every project.
 3. If a yeknal-implement folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -231,7 +231,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/implement/files.jso
 
 ## Source
 
-- [yeknal-implement on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-implement)
+- [yeknal-implement on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-implement)
 
 ---
 <!-- source: https://tryraisins.dev/skills/review/ -->
@@ -240,7 +240,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/implement/files.jso
 > Reads code or a whole system for real defects, regressions and maintainability risks, then sorts what it finds by severity and effort.
 
 Canonical: https://tryraisins.dev/skills/review/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Review code or systems for concrete defects, regressions, and maintainability risks when the user requests an audit or quality assessment.
 
@@ -262,13 +262,13 @@ Outcome: It reports concrete defects with locations and reasons, ranked by sever
 Install the Agent Skill "yeknal-review" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-review
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-review
 File list with SHA-256 hashes: https://tryraisins.dev/skills/review/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-review/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-review into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-review or ~/.claude/skills/yeknal-review, so it is available in every project.
 3. If a yeknal-review folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -285,7 +285,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/review/files.json
 
 ## Source
 
-- [yeknal-review on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-review)
+- [yeknal-review on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-review)
 
 ---
 <!-- source: https://tryraisins.dev/skills/frontend-design/ -->
@@ -294,7 +294,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/review/files.json
 > Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette and interface copy.
 
 Canonical: https://tryraisins.dev/skills/frontend-design/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Create distinctive visual direction for new or substantially reshaped UI. Use for typography, composition, palette, interface copy, and anti-generic frontend design.
 
@@ -316,13 +316,13 @@ Outcome: It sets a visual direction from the product’s content, picks type and
 Install the Agent Skill "yeknal-frontend-design" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-frontend-design
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-frontend-design
 File list with SHA-256 hashes: https://tryraisins.dev/skills/frontend-design/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-frontend-design/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-frontend-design into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-frontend-design or ~/.claude/skills/yeknal-frontend-design, so it is available in every project.
 3. If a yeknal-frontend-design folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -342,7 +342,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/frontend-design/fil
 
 ## Source
 
-- [yeknal-frontend-design on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-frontend-design)
+- [yeknal-frontend-design on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-frontend-design)
 
 ---
 <!-- source: https://tryraisins.dev/skills/troubleshoot/ -->
@@ -351,7 +351,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/frontend-design/fil
 > Works back from a reproducible error, failing build or slowdown to its cause before it suggests a fix.
 
 Canonical: https://tryraisins.dev/skills/troubleshoot/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Diagnose code, build, performance, deployment, or system failures from reproducible evidence when the user reports an error or regression.
 
@@ -373,13 +373,13 @@ Outcome: It reproduces the crash, traces it to the cause, fixes it and confirms 
 Install the Agent Skill "yeknal-troubleshoot" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-troubleshoot
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-troubleshoot
 File list with SHA-256 hashes: https://tryraisins.dev/skills/troubleshoot/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-troubleshoot/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-troubleshoot into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-troubleshoot or ~/.claude/skills/yeknal-troubleshoot, so it is available in every project.
 3. If a yeknal-troubleshoot folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -396,7 +396,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/troubleshoot/files.
 
 ## Source
 
-- [yeknal-troubleshoot on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-troubleshoot)
+- [yeknal-troubleshoot on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-troubleshoot)
 
 ---
 <!-- source: https://tryraisins.dev/skills/playwright/ -->
@@ -405,7 +405,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/troubleshoot/files.
 > Lets your agent open a real browser from the terminal to click through a flow, fill forms, take screenshots and read what’s on the page, so it can show you a change working.
 
 Canonical: https://tryraisins.dev/skills/playwright/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Automate a real browser from the terminal for navigation, forms, snapshots, screenshots, extraction, or UI-flow debugging.
 
@@ -435,13 +435,13 @@ Needs Node.js with npx, which the bundled wrapper uses to run playwright-cli.
 Install the Agent Skill "yeknal-playwright" for all my projects.
 
 Source, pinned to a published revision (9 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-playwright
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-playwright
 File list with SHA-256 hashes: https://tryraisins.dev/skills/playwright/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-playwright/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-playwright into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-playwright or ~/.claude/skills/yeknal-playwright, so it is available in every project.
 3. If a yeknal-playwright folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 9 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -467,7 +467,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/playwright/files.js
 
 ## Source
 
-- [yeknal-playwright on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-playwright)
+- [yeknal-playwright on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-playwright)
 
 ---
 <!-- source: https://tryraisins.dev/skills/testing-strategy/ -->
@@ -476,7 +476,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/playwright/files.js
 > Keeps verification end to end: proves behavior through the real entry point, bans new unit tests, and asks before any isolated check.
 
 Canonical: https://tryraisins.dev/skills/testing-strategy/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Use before writing or running tests to enforce end-to-end-only verification. Do not write unit tests; prove behavior through the real entry point, keep a repeatable artifact, and report what stayed unverified.
 
@@ -498,13 +498,13 @@ Outcome: It maps the flow's real end-to-end path and failure states, then propos
 Install the Agent Skill "yeknal-testing-strategy" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-testing-strategy
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-testing-strategy
 File list with SHA-256 hashes: https://tryraisins.dev/skills/testing-strategy/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-testing-strategy/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-testing-strategy into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-testing-strategy or ~/.claude/skills/yeknal-testing-strategy, so it is available in every project.
 3. If a yeknal-testing-strategy folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -521,7 +521,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/testing-strategy/fi
 
 ## Source
 
-- [yeknal-testing-strategy on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-testing-strategy)
+- [yeknal-testing-strategy on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-testing-strategy)
 
 ---
 <!-- source: https://tryraisins.dev/skills/redesign-existing-projects/ -->
@@ -530,7 +530,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/testing-strategy/fi
 > Refreshes the look or flow of a working site or app without breaking its behaviour or the data behind it.
 
 Canonical: https://tryraisins.dev/skills/redesign-existing-projects/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Redesign an existing website or app without breaking behavior or data flow. Use for visual refreshes, UX improvements, responsive repair, or de-genericization.
 
@@ -552,13 +552,13 @@ Outcome: It inventories every route and state first, then restyles them while ke
 Install the Agent Skill "yeknal-redesign-existing-projects" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-redesign-existing-projects
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-redesign-existing-projects
 File list with SHA-256 hashes: https://tryraisins.dev/skills/redesign-existing-projects/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-redesign-existing-projects/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-redesign-existing-projects into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-redesign-existing-projects or ~/.claude/skills/yeknal-redesign-existing-projects, so it is available in every project.
 3. If a yeknal-redesign-existing-projects folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -576,7 +576,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/redesign-existing-p
 
 ## Source
 
-- [yeknal-redesign-existing-projects on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-redesign-existing-projects)
+- [yeknal-redesign-existing-projects on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-redesign-existing-projects)
 
 ---
 <!-- source: https://tryraisins.dev/skills/animate/ -->
@@ -585,7 +585,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/redesign-existing-p
 > Adds purposeful, accessible motion to components, pages, scrolling, gestures, SVG and canvas, with sensible timing and a reduced-motion fallback.
 
 Canonical: https://tryraisins.dev/skills/animate/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Implement purposeful, accessible web motion. Use for new component, page, scroll, gesture, SVG, or canvas animation; use review-animations to audit existing motion.
 
@@ -611,13 +611,13 @@ Outcome: It picks the properties, duration and easing, builds an interruptible t
 Install the Agent Skill "yeknal-animate" for all my projects.
 
 Source, pinned to a published revision (6 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-animate
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-animate
 File list with SHA-256 hashes: https://tryraisins.dev/skills/animate/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-animate/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-animate into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-animate or ~/.claude/skills/yeknal-animate, so it is available in every project.
 3. If a yeknal-animate folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 6 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -639,7 +639,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/animate/files.json
 
 ## Source
 
-- [yeknal-animate on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-animate)
+- [yeknal-animate on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-animate)
 
 ---
 <!-- source: https://tryraisins.dev/skills/application-security/ -->
@@ -648,7 +648,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/animate/files.json
 > Designs or hardens security across web apps, APIs, cloud setup, CI/CD pipelines and AI features, covering the OWASP-style risks a product is likely to face.
 
 Canonical: https://tryraisins.dev/skills/application-security/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Design or harden application security across web, API, cloud, CI/CD, and AI systems. Use for secure implementation or broad AppSec analysis.
 
@@ -670,13 +670,13 @@ Outcome: It reviews each area against concrete risks, fixes what it can and list
 Install the Agent Skill "yeknal-application-security" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-application-security
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-application-security
 File list with SHA-256 hashes: https://tryraisins.dev/skills/application-security/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-application-security/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-application-security into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-application-security or ~/.claude/skills/yeknal-application-security, so it is available in every project.
 3. If a yeknal-application-security folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -694,7 +694,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/application-securit
 
 ## Source
 
-- [yeknal-application-security on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-application-security)
+- [yeknal-application-security on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-application-security)
 
 ---
 <!-- source: https://tryraisins.dev/skills/git/ -->
@@ -703,7 +703,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/application-securit
 > Handles status, diffs, branches, commits, merges and pushes while leaving unrelated work in your checkout alone.
 
 Canonical: https://tryraisins.dev/skills/git/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Run the specific Git operation the user asked for while preserving unrelated work: status, diff, branch, commit, merge, history, or push. Not the full delivery flow, which is `yeknal-finalize`.
 
@@ -725,13 +725,13 @@ Outcome: It stages just those files, writes a clear commit message, creates the 
 Install the Agent Skill "yeknal-git" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-git
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-git
 File list with SHA-256 hashes: https://tryraisins.dev/skills/git/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-git/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-git into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-git or ~/.claude/skills/yeknal-git, so it is available in every project.
 3. If a yeknal-git folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -748,7 +748,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/git/files.json
 
 ## Source
 
-- [yeknal-git on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-git)
+- [yeknal-git on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-git)
 
 ---
 <!-- source: https://tryraisins.dev/skills/project-handoff/ -->
@@ -757,7 +757,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/git/files.json
 > Keeps a short HANDOFF.md at the root of the repository so the next session, or the next person, can pick up exactly where the work stopped.
 
 Canonical: https://tryraisins.dev/skills/project-handoff/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Create, update, or resume work from a concise repository-root HANDOFF.md so another agent can continue without the current conversation. Use for substantial ongoing projects, milestones, and task handoffs.
 
@@ -779,13 +779,13 @@ Outcome: It records the current state, decisions, how to verify the work and wha
 Install the Agent Skill "yeknal-project-handoff" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-project-handoff
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-project-handoff
 File list with SHA-256 hashes: https://tryraisins.dev/skills/project-handoff/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-project-handoff/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-project-handoff into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-project-handoff or ~/.claude/skills/yeknal-project-handoff, so it is available in every project.
 3. If a yeknal-project-handoff folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -802,7 +802,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/project-handoff/fil
 
 ## Source
 
-- [yeknal-project-handoff on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-project-handoff)
+- [yeknal-project-handoff on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-project-handoff)
 
 ---
 <!-- source: https://tryraisins.dev/skills/gh-address-comments/ -->
@@ -811,7 +811,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/project-handoff/fil
 > Works through the review and issue comments on the open GitHub pull request for your current branch, using the GitHub CLI.
 
 Canonical: https://tryraisins.dev/skills/gh-address-comments/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Address review and issue comments on the open GitHub PR for the current branch using the `gh` CLI. Verifies `gh` auth first and asks the user to authenticate if needed.
 
@@ -837,13 +837,13 @@ Needs the GitHub CLI signed in to your account.
 Install the Agent Skill "yeknal-gh-address-comments" for all my projects.
 
 Source, pinned to a published revision (6 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-gh-address-comments
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-gh-address-comments
 File list with SHA-256 hashes: https://tryraisins.dev/skills/gh-address-comments/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-gh-address-comments/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-gh-address-comments into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-gh-address-comments or ~/.claude/skills/yeknal-gh-address-comments, so it is available in every project.
 3. If a yeknal-gh-address-comments folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 6 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -865,7 +865,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/gh-address-comments
 
 ## Source
 
-- [yeknal-gh-address-comments on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-gh-address-comments)
+- [yeknal-gh-address-comments on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-gh-address-comments)
 
 ---
 <!-- source: https://tryraisins.dev/skills/agent-cost-control/ -->
@@ -874,7 +874,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/gh-address-comments
 > Measures what agent work actually costs, finds the sessions and settings that own the spend, and changes one lever at a time without quietly losing review quality along the way.
 
 Canonical: https://tryraisins.dev/skills/agent-cost-control/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Cut agent inference spend without losing quality. Use when an LLM bill or per-task cost is too high, sessions feel expensive, or you are choosing models, effort, or caching.
 
@@ -900,13 +900,13 @@ Outcome: It reads the harness usage log, shows that one long session carried mos
 Install the Agent Skill "yeknal-agent-cost-control" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-agent-cost-control
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-agent-cost-control
 File list with SHA-256 hashes: https://tryraisins.dev/skills/agent-cost-control/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-agent-cost-control/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-agent-cost-control into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-agent-cost-control or ~/.claude/skills/yeknal-agent-cost-control, so it is available in every project.
 3. If a yeknal-agent-cost-control folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -925,7 +925,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/agent-cost-control/
 
 ## Source
 
-- [yeknal-agent-cost-control on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-agent-cost-control)
+- [yeknal-agent-cost-control on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-agent-cost-control)
 
 ---
 <!-- source: https://tryraisins.dev/skills/agent-readable-site/ -->
@@ -934,7 +934,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/agent-cost-control/
 > Gives every public page a markdown version and gives agents the files that explain the site: llms.txt, llms-full.txt, ai.txt, head signals and a crawler policy, plus a checker that separates host-blocked requirements from real failures.
 
 Canonical: https://tryraisins.dev/skills/agent-readable-site/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Use when a public site must be readable and quotable by AI agents: per-page markdown, llms.txt, llms-full.txt, ai.txt, head signals, crawler policy and a coverage check. Not content strategy or keywords.
 
@@ -960,13 +960,13 @@ Outcome: Every public route gets a markdown endpoint from the existing data load
 Install the Agent Skill "yeknal-agent-readable-site" for all my projects.
 
 Source, pinned to a published revision (4 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-agent-readable-site
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-agent-readable-site
 File list with SHA-256 hashes: https://tryraisins.dev/skills/agent-readable-site/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-agent-readable-site/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-agent-readable-site into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-agent-readable-site or ~/.claude/skills/yeknal-agent-readable-site, so it is available in every project.
 3. If a yeknal-agent-readable-site folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 4 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -986,7 +986,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/agent-readable-site
 
 ## Source
 
-- [yeknal-agent-readable-site on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-agent-readable-site)
+- [yeknal-agent-readable-site on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-agent-readable-site)
 
 ---
 <!-- source: https://tryraisins.dev/skills/animate-expo/ -->
@@ -995,7 +995,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/agent-readable-site
 > Builds animation for React Native and Expo apps with Reanimated, Gesture Handler, Expo Router and haptics, making the decisions that decide whether motion feels right on a device.
 
 Canonical: https://tryraisins.dev/skills/animate-expo/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Build animations in React Native and Expo with Reanimated, Gesture Handler, Expo Router and expo-haptics, covering gestures, sheets, press feedback, haptics, and screen transitions. For web motion use `yeknal-animate`.
 
@@ -1021,13 +1021,13 @@ Outcome: It wires the drag with Gesture Handler, runs the motion on the UI threa
 Install the Agent Skill "yeknal-animate-expo" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-animate-expo
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-animate-expo
 File list with SHA-256 hashes: https://tryraisins.dev/skills/animate-expo/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-animate-expo/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-animate-expo into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-animate-expo or ~/.claude/skills/yeknal-animate-expo, so it is available in every project.
 3. If a yeknal-animate-expo folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -1046,7 +1046,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/animate-expo/files.
 
 ## Source
 
-- [yeknal-animate-expo on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-animate-expo)
+- [yeknal-animate-expo on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-animate-expo)
 
 ---
 <!-- source: https://tryraisins.dev/skills/performance/ -->
@@ -1055,7 +1055,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/animate-expo/files.
 > Measures startup, screen navigation, content loading and scrolling on a throttled production build, finds the real bottleneck, then proves each fix with before and after benchmarks rather than intuition.
 
 Canonical: https://tryraisins.dev/skills/performance/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Make an app faster by measuring startup, navigation, content load, and scroll, fixing the real bottleneck, and proving each win with before and after numbers. Use when an app feels slow to start, to change screens, to fill in, or to scroll.
 
@@ -1082,13 +1082,13 @@ Outcome: It records a cold production baseline on a throttled device, traces the
 Install the Agent Skill "yeknal-performance" for all my projects.
 
 Source, pinned to a published revision (8 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-performance
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-performance
 File list with SHA-256 hashes: https://tryraisins.dev/skills/performance/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-performance/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-performance into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-performance or ~/.claude/skills/yeknal-performance, so it is available in every project.
 3. If a yeknal-performance folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 8 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -1114,7 +1114,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/performance/files.j
 
 ## Source
 
-- [yeknal-performance on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-performance)
+- [yeknal-performance on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-performance)
 
 ---
 <!-- source: https://tryraisins.dev/skills/apple-design/ -->
@@ -1123,7 +1123,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/performance/files.j
 > Brings Apple’s approach to fluid, physical motion and interface design to the web, from springs and interruptible gestures to materials, depth and typography.
 
 Canonical: https://tryraisins.dev/skills/apple-design/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Apple-style fluid UI for the web: press response, 1:1 tracking, interruptible springs, velocity handoff, momentum projection, rubber-banding, translucent materials, and optical type. Use for gesture-driven or spring-based interfaces.
 
@@ -1145,13 +1145,13 @@ Outcome: It checks how the gesture tracks the finger, tunes the spring and veloc
 Install the Agent Skill "yeknal-apple-design" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-apple-design
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-apple-design
 File list with SHA-256 hashes: https://tryraisins.dev/skills/apple-design/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-apple-design/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-apple-design into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-apple-design or ~/.claude/skills/yeknal-apple-design, so it is available in every project.
 3. If a yeknal-apple-design folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -1169,7 +1169,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/apple-design/files.
 
 ## Source
 
-- [yeknal-apple-design on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-apple-design)
+- [yeknal-apple-design on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-apple-design)
 
 ---
 <!-- source: https://tryraisins.dev/skills/brandkit/ -->
@@ -1178,7 +1178,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/apple-design/files.
 > Generates polished brand-guideline boards, logo systems and identity presentations as images, with deliberate composition and sparse typography.
 
 Canonical: https://tryraisins.dev/skills/brandkit/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Generate premium brand-kit boards: logo systems, identity decks, and visual-world presentations in a restrained, art-directed style. Use when the user wants a brand kit as an image.
 
@@ -1204,13 +1204,13 @@ Needs an image-generation tool available to your agent.
 Install the Agent Skill "yeknal-brandkit" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-brandkit
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-brandkit
 File list with SHA-256 hashes: https://tryraisins.dev/skills/brandkit/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-brandkit/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-brandkit into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-brandkit or ~/.claude/skills/yeknal-brandkit, so it is available in every project.
 3. If a yeknal-brandkit folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -1228,7 +1228,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/brandkit/files.json
 
 ## Source
 
-- [yeknal-brandkit on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-brandkit)
+- [yeknal-brandkit on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-brandkit)
 
 ---
 <!-- source: https://tryraisins.dev/skills/break-ui/ -->
@@ -1237,7 +1237,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/brandkit/files.json
 > Stress-tests a screen with realistic worst-case data, such as long names, missing fields, huge counts and non-Latin text, and reports every break with its fix.
 
 Canonical: https://tryraisins.dev/skills/break-ui/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Stress-test a component or screen with realistic worst-case data, put the demo and worst-case states behind a dev-only toggle, and report every break with its fix. Use to break, stress-test, or find UI edge cases.
 
@@ -1259,13 +1259,13 @@ Outcome: It fills the table with extreme but realistic data, shows the broken st
 Install the Agent Skill "yeknal-break-ui" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-break-ui
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-break-ui
 File list with SHA-256 hashes: https://tryraisins.dev/skills/break-ui/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-break-ui/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-break-ui into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-break-ui or ~/.claude/skills/yeknal-break-ui, so it is available in every project.
 3. If a yeknal-break-ui folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -1284,7 +1284,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/break-ui/files.json
 
 ## Source
 
-- [yeknal-break-ui on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-break-ui)
+- [yeknal-break-ui on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-break-ui)
 
 ---
 <!-- source: https://tryraisins.dev/skills/add-changelog/ -->
@@ -1293,7 +1293,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/break-ui/files.json
 > Adds or updates a Keep a Changelog entry based on the changes and history that can actually be verified, so release notes describe what shipped.
 
 Canonical: https://tryraisins.dev/skills/add-changelog/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Add or update a Keep a Changelog entry from verified changes and history when preparing release notes or recording shipped work.
 
@@ -1315,13 +1315,13 @@ Outcome: It reads the history since that tag, checks what each change actually d
 Install the Agent Skill "yeknal-add-changelog" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-add-changelog
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-add-changelog
 File list with SHA-256 hashes: https://tryraisins.dev/skills/add-changelog/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-add-changelog/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-add-changelog into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-add-changelog or ~/.claude/skills/yeknal-add-changelog, so it is available in every project.
 3. If a yeknal-add-changelog folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -1338,7 +1338,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/add-changelog/files
 
 ## Source
 
-- [yeknal-add-changelog on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-add-changelog)
+- [yeknal-add-changelog on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-add-changelog)
 
 ---
 <!-- source: https://tryraisins.dev/skills/code-graph/ -->
@@ -1347,7 +1347,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/add-changelog/files
 > Builds a local, model-free index of a repository and answers with a small ranked slice, so an unfamiliar codebase can be entered in one call instead of many searches.
 
 Canonical: https://tryraisins.dev/skills/code-graph/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Use when a task starts in an unfamiliar or large repository and you need the right files in one call instead of many searches. Builds a zero-dependency local index of content terms plus imports, routes and tests, then answers with a small ranked slice inside a token budget. It is retrieval, not GraphRAG, and it never replaces grep for exhaustive matches.
 
@@ -1373,13 +1373,13 @@ Outcome: It builds a local index, returns the parser function and its call sites
 Install the Agent Skill "yeknal-code-graph" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-code-graph
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-code-graph
 File list with SHA-256 hashes: https://tryraisins.dev/skills/code-graph/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-code-graph/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-code-graph into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-code-graph or ~/.claude/skills/yeknal-code-graph, so it is available in every project.
 3. If a yeknal-code-graph folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -1399,7 +1399,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/code-graph/files.js
 
 ## Source
 
-- [yeknal-code-graph on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-code-graph)
+- [yeknal-code-graph on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-code-graph)
 
 ---
 <!-- source: https://tryraisins.dev/skills/yeet/ -->
@@ -1408,7 +1408,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/code-graph/files.js
 > Stages, commits, pushes and opens a GitHub pull request in one flow using the GitHub CLI.
 
 Canonical: https://tryraisins.dev/skills/yeet/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`).
 
@@ -1438,13 +1438,13 @@ Needs the GitHub CLI signed in to your account.
 Install the Agent Skill "yeknal-yeet" for all my projects.
 
 Source, pinned to a published revision (5 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-yeet
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-yeet
 File list with SHA-256 hashes: https://tryraisins.dev/skills/yeet/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-yeet/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-yeet into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-yeet or ~/.claude/skills/yeknal-yeet, so it is available in every project.
 3. If a yeknal-yeet folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 5 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -1465,7 +1465,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/yeet/files.json
 
 ## Source
 
-- [yeknal-yeet on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-yeet)
+- [yeknal-yeet on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-yeet)
 
 ---
 <!-- source: https://tryraisins.dev/skills/content-seo/ -->
@@ -1474,7 +1474,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/yeet/files.json
 > Guides useful content and search visibility together, from keyword patterns and page briefs to metadata, structured data, sitemaps, local search, earned links and AI citations.
 
 Canonical: https://tryraisins.dev/skills/content-seo/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Evidence-led search visibility: target queries, update-or-create decisions, metadata, structured data, crawlability, sitemaps, canonicalization, local search, earned links, AI answers (AEO/GEO), and measured citations. Use for SEO, AEO or GEO strategy.
 
@@ -1499,13 +1499,13 @@ Outcome: It reads the live results, checks existing query and page data, and ret
 Install the Agent Skill "yeknal-content-seo" for all my projects.
 
 Source, pinned to a published revision (9 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-content-seo
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-content-seo
 File list with SHA-256 hashes: https://tryraisins.dev/skills/content-seo/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-content-seo/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-content-seo into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-content-seo or ~/.claude/skills/yeknal-content-seo, so it is available in every project.
 3. If a yeknal-content-seo folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 9 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -1530,7 +1530,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/content-seo/files.j
 
 ## Source
 
-- [yeknal-content-seo on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-content-seo)
+- [yeknal-content-seo on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-content-seo)
 
 ---
 <!-- source: https://tryraisins.dev/skills/deploy/ -->
@@ -1539,7 +1539,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/content-seo/files.j
 > Detects the hosting provider from repository configuration and follows that provider's deploy procedure, so an unnamed "deploy this" request has one entry point instead of four competing ones.
 
 Canonical: https://tryraisins.dev/skills/deploy/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Deploy, host, publish, or push a site live to Cloudflare, Netlify, Render, or Vercel, named by the user or detected from repository config. Use when a deploy is requested; keep the first deploy a preview unless production is explicitly asked for.
 
@@ -1565,13 +1565,13 @@ Outcome: It reads the repository configuration, identifies the provider, follows
 Install the Agent Skill "yeknal-deploy" for all my projects.
 
 Source, pinned to a published revision (10 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-deploy
 File list with SHA-256 hashes: https://tryraisins.dev/skills/deploy/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-deploy/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-deploy into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-deploy or ~/.claude/skills/yeknal-deploy, so it is available in every project.
 3. If a yeknal-deploy folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 10 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -1597,7 +1597,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/deploy/files.json
 
 ## Source
 
-- [yeknal-deploy on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-deploy)
+- [yeknal-deploy on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-deploy)
 
 ---
 <!-- source: https://tryraisins.dev/skills/design-reference-research/ -->
@@ -1606,7 +1606,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/deploy/files.json
 > Researches comparable products and collects references into an evidence ledger and brief, so design decisions come from what works rather than what’s fashionable.
 
 Canonical: https://tryraisins.dev/skills/design-reference-research/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Research interface references into an evidence ledger and implementation brief. Use before design or redesign when references or benchmark evidence should drive direction.
 
@@ -1628,13 +1628,13 @@ Outcome: It studies each flow, records what it saw and what it couldn’t verify
 Install the Agent Skill "yeknal-design-reference-research" for all my projects.
 
 Source, pinned to a published revision (5 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-design-reference-research
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-design-reference-research
 File list with SHA-256 hashes: https://tryraisins.dev/skills/design-reference-research/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-design-reference-research/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-design-reference-research into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-design-reference-research or ~/.claude/skills/yeknal-design-reference-research, so it is available in every project.
 3. If a yeknal-design-reference-research folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 5 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -1655,7 +1655,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/design-reference-re
 
 ## Source
 
-- [yeknal-design-reference-research on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-design-reference-research)
+- [yeknal-design-reference-research on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-design-reference-research)
 
 ---
 <!-- source: https://tryraisins.dev/skills/design-system/ -->
@@ -1664,7 +1664,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/design-reference-re
 > Builds, audits, documents or migrates a product's design system: token layers, mapping hardcoded values onto tokens, component specs, drift detection and an ordered adoption plan.
 
 Canonical: https://tryraisins.dev/skills/design-system/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Build, audit, document, or migrate a product's design system: token layers, mapping hardcoded values onto tokens, component specs, drift detection, and adoption plans. Use when the request names a design system, tokens, component documentation, or inconsistency across an app.
 
@@ -1688,13 +1688,13 @@ Outcome: It inventories the near-duplicate values, clusters them, proposes role-
 Install the Agent Skill "yeknal-design-system" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-design-system
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-design-system
 File list with SHA-256 hashes: https://tryraisins.dev/skills/design-system/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-design-system/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-design-system into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-design-system or ~/.claude/skills/yeknal-design-system, so it is available in every project.
 3. If a yeknal-design-system folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -1711,7 +1711,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/design-system/files
 
 ## Source
 
-- [yeknal-design-system on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-design-system)
+- [yeknal-design-system on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-design-system)
 
 ---
 <!-- source: https://tryraisins.dev/skills/design-taste-frontend/ -->
@@ -1720,7 +1720,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/design-system/files
 > Designs and builds expressive landing pages, portfolios and marketing sites from real product evidence instead of reusable AI layouts.
 
 Canonical: https://tryraisins.dev/skills/design-taste-frontend/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Design and build expressive landing pages, portfolios, and marketing interfaces from product evidence instead of reusable AI recipes, including showcase-level art direction. For an existing product use `yeknal-redesign-existing-projects`.
 
@@ -1746,13 +1746,13 @@ Outcome: It pulls the visual direction from the product itself, then builds a re
 Install the Agent Skill "yeknal-design-taste-frontend" for all my projects.
 
 Source, pinned to a published revision (4 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-design-taste-frontend
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-design-taste-frontend
 File list with SHA-256 hashes: https://tryraisins.dev/skills/design-taste-frontend/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-design-taste-frontend/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-design-taste-frontend into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-design-taste-frontend or ~/.claude/skills/yeknal-design-taste-frontend, so it is available in every project.
 3. If a yeknal-design-taste-frontend folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 4 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -1772,7 +1772,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/design-taste-fronte
 
 ## Source
 
-- [yeknal-design-taste-frontend on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-design-taste-frontend)
+- [yeknal-design-taste-frontend on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-design-taste-frontend)
 
 ---
 <!-- source: https://tryraisins.dev/skills/domain-modeling/ -->
@@ -1781,7 +1781,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/design-taste-fronte
 > Clarifies a project’s domain terms and boundaries and records the decisions in a glossary or architecture decision record.
 
 Canonical: https://tryraisins.dev/skills/domain-modeling/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Clarify a project's domain concepts and record resolved terminology in a glossary or durable decisions in an ADR. Use when terms, relationships, or system boundaries are ambiguous.
 
@@ -1803,13 +1803,13 @@ Outcome: It maps how each term is used in code and conversation, proposes defini
 Install the Agent Skill "yeknal-domain-modeling" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-domain-modeling
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-domain-modeling
 File list with SHA-256 hashes: https://tryraisins.dev/skills/domain-modeling/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-domain-modeling/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-domain-modeling into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-domain-modeling or ~/.claude/skills/yeknal-domain-modeling, so it is available in every project.
 3. If a yeknal-domain-modeling folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -1825,7 +1825,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/domain-modeling/fil
 
 ## Source
 
-- [yeknal-domain-modeling on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-domain-modeling)
+- [yeknal-domain-modeling on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-domain-modeling)
 
 ---
 <!-- source: https://tryraisins.dev/skills/finalize/ -->
@@ -1834,7 +1834,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/domain-modeling/fil
 > Runs the final documentation and quality checks, summarises the diff and handles any Git publishing you asked for.
 
 Canonical: https://tryraisins.dev/skills/finalize/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Run final documentation and quality gates, summarize the diff, and perform requested Git publication. Use when preparing completed work for delivery.
 
@@ -1856,13 +1856,13 @@ Outcome: It runs the repository’s checks, updates documentation that the chang
 Install the Agent Skill "yeknal-finalize" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-finalize
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-finalize
 File list with SHA-256 hashes: https://tryraisins.dev/skills/finalize/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-finalize/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-finalize into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-finalize or ~/.claude/skills/yeknal-finalize, so it is available in every project.
 3. If a yeknal-finalize folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -1879,7 +1879,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/finalize/files.json
 
 ## Source
 
-- [yeknal-finalize on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-finalize)
+- [yeknal-finalize on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-finalize)
 
 ---
 <!-- source: https://tryraisins.dev/skills/find-animation-opportunities/ -->
@@ -1888,7 +1888,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/finalize/files.json
 > Looks through a codebase or interface for places that should animate and rejects those that shouldn’t, proposing motion with exact values but changing nothing.
 
 Canonical: https://tryraisins.dev/skills/find-animation-opportunities/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Search a UI for moments that should animate and reject the rest, with exact values for each surviving suggestion. Read-only; it proposes motion, it does not implement it. For fixes use `yeknal-improve-animations`.
 
@@ -1914,13 +1914,13 @@ Outcome: It lists a few specific opportunities with durations and easing, and ex
 Install the Agent Skill "yeknal-find-animation-opportunities" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-find-animation-opportunities
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-find-animation-opportunities
 File list with SHA-256 hashes: https://tryraisins.dev/skills/find-animation-opportunities/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-find-animation-opportunities/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-find-animation-opportunities into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-find-animation-opportunities or ~/.claude/skills/yeknal-find-animation-opportunities, so it is available in every project.
 3. If a yeknal-find-animation-opportunities folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -1937,7 +1937,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/find-animation-oppo
 
 ## Source
 
-- [yeknal-find-animation-opportunities on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-find-animation-opportunities)
+- [yeknal-find-animation-opportunities on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-find-animation-opportunities)
 
 ---
 <!-- source: https://tryraisins.dev/skills/gh-fix-ci/ -->
@@ -1946,7 +1946,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/find-animation-oppo
 > Inspects failing GitHub Actions checks on a pull request, summarises the logs, drafts a fix plan and only makes changes once you approve.
 
 Canonical: https://tryraisins.dev/skills/gh-fix-ci/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Debug failing GitHub PR checks that run in GitHub Actions: inspect checks and logs with `gh`, summarize the failure, propose a fix, and implement after approval. Use when a PR check fails; external providers are out of scope.
 
@@ -1976,13 +1976,13 @@ Needs the GitHub CLI signed in to your account.
 Install the Agent Skill "yeknal-gh-fix-ci" for all my projects.
 
 Source, pinned to a published revision (6 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-gh-fix-ci
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-gh-fix-ci
 File list with SHA-256 hashes: https://tryraisins.dev/skills/gh-fix-ci/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-gh-fix-ci/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-gh-fix-ci into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-gh-fix-ci or ~/.claude/skills/yeknal-gh-fix-ci, so it is available in every project.
 3. If a yeknal-gh-fix-ci folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 6 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2004,7 +2004,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/gh-fix-ci/files.jso
 
 ## Source
 
-- [yeknal-gh-fix-ci on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-gh-fix-ci)
+- [yeknal-gh-fix-ci on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-gh-fix-ci)
 
 ---
 <!-- source: https://tryraisins.dev/skills/oil-motion/ -->
@@ -2013,7 +2013,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/gh-fix-ci/files.jso
 > Designs and builds scrubbable web animation made from generated or captured frames and driven by scroll, pointer, touch or data, for moments ordinary CSS can’t express.
 
 Canonical: https://tryraisins.dev/skills/oil-motion/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Build continuous interactive web animation from generated or captured frames, driven by scroll, pointer, drag, touch, orientation, audio, data, or state. Use when CSS or component motion cannot express a transformation or a scrub-able timeline.
 
@@ -2043,13 +2043,13 @@ Frame processing may need Python 3, Pillow and ffmpeg.
 Install the Agent Skill "yeknal-oil-motion" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-oil-motion
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-oil-motion
 File list with SHA-256 hashes: https://tryraisins.dev/skills/oil-motion/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-oil-motion/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-oil-motion into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-oil-motion or ~/.claude/skills/yeknal-oil-motion, so it is available in every project.
 3. If a yeknal-oil-motion folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2066,7 +2066,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/oil-motion/files.js
 
 ## Source
 
-- [yeknal-oil-motion on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-oil-motion)
+- [yeknal-oil-motion on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-oil-motion)
 
 ---
 <!-- source: https://tryraisins.dev/skills/frontend-developer/ -->
@@ -2075,7 +2075,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/oil-motion/files.js
 > Implements or repairs accessible web interfaces in React, Vue or Angular, covering components, state, styling and browser behaviour.
 
 Canonical: https://tryraisins.dev/skills/frontend-developer/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Implement or repair web interfaces in React, Vue, or Angular: component architecture, the existing styling system, navigation, and theme persistence. Use for engineering changes, not visual direction.
 
@@ -2097,13 +2097,13 @@ Outcome: It repairs focus handling and labels, tests the keyboard path and keeps
 Install the Agent Skill "yeknal-frontend-developer" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-frontend-developer
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-frontend-developer
 File list with SHA-256 hashes: https://tryraisins.dev/skills/frontend-developer/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-frontend-developer/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-frontend-developer into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-frontend-developer or ~/.claude/skills/yeknal-frontend-developer, so it is available in every project.
 3. If a yeknal-frontend-developer folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -2120,7 +2120,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/frontend-developer/
 
 ## Source
 
-- [yeknal-frontend-developer on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-frontend-developer)
+- [yeknal-frontend-developer on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-frontend-developer)
 
 ---
 <!-- source: https://tryraisins.dev/skills/high-end-visual-design/ -->
@@ -2129,7 +2129,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/frontend-developer/
 > Creates art-directed, showcase-level web interfaces with a product-specific visual idea, expressive type, deliberate composition and considered motion.
 
 Canonical: https://tryraisins.dev/skills/high-end-visual-design/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Create premium, art-directed web interfaces with a product-specific visual thesis, expressive type, deliberate composition, material, imagery, and motion. Use only for showcase-level or agency-style briefs.
 
@@ -2155,13 +2155,13 @@ Outcome: It develops a visual thesis from the product, then builds a page with e
 Install the Agent Skill "yeknal-high-end-visual-design" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-high-end-visual-design
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-high-end-visual-design
 File list with SHA-256 hashes: https://tryraisins.dev/skills/high-end-visual-design/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-high-end-visual-design/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-high-end-visual-design into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-high-end-visual-design or ~/.claude/skills/yeknal-high-end-visual-design, so it is available in every project.
 3. If a yeknal-high-end-visual-design folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2179,7 +2179,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/high-end-visual-des
 
 ## Source
 
-- [yeknal-high-end-visual-design on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-high-end-visual-design)
+- [yeknal-high-end-visual-design on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-high-end-visual-design)
 
 ---
 <!-- source: https://tryraisins.dev/skills/human-ai-interface-design/ -->
@@ -2188,7 +2188,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/high-end-visual-des
 > Designs AI features people can trust, covering suggestions, generation, copilots and agents, along with sources, uncertainty, approvals and recovery.
 
 Canonical: https://tryraisins.dev/skills/human-ai-interface-design/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Design AI-mediated interfaces that earn appropriate reliance: capability, provenance, uncertainty, approval, failure, and recovery. Use when an AI feature proposes, generates, retrieves, or acts, and the user must verify, approve, or undo it.
 
@@ -2210,13 +2210,13 @@ Outcome: It designs a review step with clear sources, editable proposals, approv
 Install the Agent Skill "yeknal-human-ai-interface-design" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-human-ai-interface-design
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-human-ai-interface-design
 File list with SHA-256 hashes: https://tryraisins.dev/skills/human-ai-interface-design/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-human-ai-interface-design/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-human-ai-interface-design into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-human-ai-interface-design or ~/.claude/skills/yeknal-human-ai-interface-design, so it is available in every project.
 3. If a yeknal-human-ai-interface-design folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2235,7 +2235,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/human-ai-interface-
 
 ## Source
 
-- [yeknal-human-ai-interface-design on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-human-ai-interface-design)
+- [yeknal-human-ai-interface-design on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-human-ai-interface-design)
 
 ---
 <!-- source: https://tryraisins.dev/skills/improve-animations/ -->
@@ -2244,7 +2244,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/human-ai-interface-
 > Surveys an app’s existing motion like a senior motion designer would, then writes a prioritised audit with self-contained plans that other agents can carry out.
 
 Canonical: https://tryraisins.dev/skills/improve-animations/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Audit animation and motion code and produce prioritized, self-contained plans for another agent to execute; never edits source. Use when asked to improve or audit the motion, not to review one diff (`yeknal-review-animations`).
 
@@ -2270,13 +2270,13 @@ Outcome: It inventories each animation, ranks the problems and writes a standalo
 Install the Agent Skill "yeknal-improve-animations" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-improve-animations
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-improve-animations
 File list with SHA-256 hashes: https://tryraisins.dev/skills/improve-animations/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-improve-animations/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-improve-animations into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-improve-animations or ~/.claude/skills/yeknal-improve-animations, so it is available in every project.
 3. If a yeknal-improve-animations folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2295,7 +2295,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/improve-animations/
 
 ## Source
 
-- [yeknal-improve-animations on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-improve-animations)
+- [yeknal-improve-animations on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-improve-animations)
 
 ---
 <!-- source: https://tryraisins.dev/skills/industrial-brutalist-ui/ -->
@@ -2304,7 +2304,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/improve-animations/
 > Designs raw, mechanical interfaces that mix Swiss print typography with terminal aesthetics: rigid grids, extreme type contrast and utilitarian colour.
 
 Canonical: https://tryraisins.dev/skills/industrial-brutalist-ui/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Design data-heavy interfaces in industrial brutalism style, fusing Swiss print typography with military terminal aesthetics. Use when the brief asks for rigid grids, extreme type-scale contrast, utilitarian color, or halftones and scanlines.
 
@@ -2326,13 +2326,13 @@ Outcome: It sets a strict grid and type scale, a utilitarian palette and dense b
 Install the Agent Skill "yeknal-industrial-brutalist-ui" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-industrial-brutalist-ui
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-industrial-brutalist-ui
 File list with SHA-256 hashes: https://tryraisins.dev/skills/industrial-brutalist-ui/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-industrial-brutalist-ui/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-industrial-brutalist-ui into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-industrial-brutalist-ui or ~/.claude/skills/yeknal-industrial-brutalist-ui, so it is available in every project.
 3. If a yeknal-industrial-brutalist-ui folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2350,7 +2350,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/industrial-brutalis
 
 ## Source
 
-- [yeknal-industrial-brutalist-ui on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-industrial-brutalist-ui)
+- [yeknal-industrial-brutalist-ui on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-industrial-brutalist-ui)
 
 ---
 <!-- source: https://tryraisins.dev/skills/launch-readiness/ -->
@@ -2359,7 +2359,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/industrial-brutalis
 > Audits a product before it becomes publicly reachable, covering the legal obligations that attach to the data, payments, email and user content it handles, plus the engineering gates no other workflow owns, then returns one register and a go or no-go.
 
 Canonical: https://tryraisins.dev/skills/launch-readiness/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Audit a product for launch readiness before it becomes publicly reachable: legal obligations plus the engineering gates no other workflow owns, then one register and a go or no-go. Use when asked whether an app can ship.
 
@@ -2385,13 +2385,13 @@ Outcome: It builds a data map from the code, checks it against the applicable ob
 Install the Agent Skill "yeknal-launch-readiness" for all my projects.
 
 Source, pinned to a published revision (6 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-launch-readiness
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-launch-readiness
 File list with SHA-256 hashes: https://tryraisins.dev/skills/launch-readiness/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-launch-readiness/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-launch-readiness into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-launch-readiness or ~/.claude/skills/yeknal-launch-readiness, so it is available in every project.
 3. If a yeknal-launch-readiness folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 6 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2415,7 +2415,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/launch-readiness/fi
 
 ## Source
 
-- [yeknal-launch-readiness on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-launch-readiness)
+- [yeknal-launch-readiness on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-launch-readiness)
 
 ---
 <!-- source: https://tryraisins.dev/skills/legacy-sweep/ -->
@@ -2424,7 +2424,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/launch-readiness/fi
 > Audits a whole repository or subsystem for unused legacy code and bloated or worthless tests, proves each candidate is obsolete before deleting it, fixes real defects instead of removing the failing test, and keeps the coverage that still protects behaviour.
 
 Canonical: https://tryraisins.dev/skills/legacy-sweep/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Prove legacy code and tests are obsolete before deleting them, repair real defects instead of removing the test that caught them, and keep the coverage that protects behaviour. Use for a dead-code sweep, "remove unused imports", or a test-suite prune.
 
@@ -2451,13 +2451,13 @@ Outcome: It records a baseline, splits production ownership into read-only and w
 Install the Agent Skill "yeknal-legacy-sweep" for all my projects.
 
 Source, pinned to a published revision (4 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-legacy-sweep
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-legacy-sweep
 File list with SHA-256 hashes: https://tryraisins.dev/skills/legacy-sweep/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-legacy-sweep/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-legacy-sweep into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-legacy-sweep or ~/.claude/skills/yeknal-legacy-sweep, so it is available in every project.
 3. If a yeknal-legacy-sweep folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 4 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2476,7 +2476,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/legacy-sweep/files.
 
 ## Source
 
-- [yeknal-legacy-sweep on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-legacy-sweep)
+- [yeknal-legacy-sweep on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-legacy-sweep)
 
 ---
 <!-- source: https://tryraisins.dev/skills/markdown-management/ -->
@@ -2485,7 +2485,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/legacy-sweep/files.
 > Creates, merges, updates and audits Markdown without losing meaning, links or repository conventions, including README files and Agent Skills.
 
 Canonical: https://tryraisins.dev/skills/markdown-management/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Create, merge, update, or audit Markdown without losing meaning, links, authority, or repository conventions. Use for README, docs, and Agent Skill maintenance.
 
@@ -2507,13 +2507,13 @@ Outcome: It combines them without dropping steps, keeps the links working and fo
 Install the Agent Skill "yeknal-markdown-management" for all my projects.
 
 Source, pinned to a published revision (7 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-markdown-management
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-markdown-management
 File list with SHA-256 hashes: https://tryraisins.dev/skills/markdown-management/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-markdown-management/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-markdown-management into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-markdown-management or ~/.claude/skills/yeknal-markdown-management, so it is available in every project.
 3. If a yeknal-markdown-management folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 7 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2536,7 +2536,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/markdown-management
 
 ## Source
 
-- [yeknal-markdown-management on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-markdown-management)
+- [yeknal-markdown-management on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-markdown-management)
 
 ---
 <!-- source: https://tryraisins.dev/skills/minimalist-ui/ -->
@@ -2545,7 +2545,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/markdown-management
 > Designs clean editorial interfaces with warm monochrome palettes, strong typographic contrast, flat grids and restrained depth.
 
 Canonical: https://tryraisins.dev/skills/minimalist-ui/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Design clean editorial interfaces with warm monochrome palettes, typographic contrast, flat bento grids, and restrained depth. Use when the brief calls for premium utilitarian minimalism.
 
@@ -2567,13 +2567,13 @@ Outcome: It reduces the palette, strengthens the type hierarchy and groups setti
 Install the Agent Skill "yeknal-minimalist-ui" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-minimalist-ui
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-minimalist-ui
 File list with SHA-256 hashes: https://tryraisins.dev/skills/minimalist-ui/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-minimalist-ui/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-minimalist-ui into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-minimalist-ui or ~/.claude/skills/yeknal-minimalist-ui, so it is available in every project.
 3. If a yeknal-minimalist-ui folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2591,7 +2591,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/minimalist-ui/files
 
 ## Source
 
-- [yeknal-minimalist-ui on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-minimalist-ui)
+- [yeknal-minimalist-ui on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-minimalist-ui)
 
 ---
 <!-- source: https://tryraisins.dev/skills/mobile-app-design/ -->
@@ -2600,7 +2600,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/minimalist-ui/files
 > Designs and builds mobile screens and flows that feel native, especially in Expo or React Native, covering navigation, controls, states, accessibility and performance.
 
 Canonical: https://tryraisins.dev/skills/mobile-app-design/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Design and implement native-feeling mobile screens and flows, especially Expo or React Native. Use for navigation, controls, states, accessibility, and performance.
 
@@ -2622,13 +2622,13 @@ Outcome: It plans the screens and navigation, builds them with native-feeling co
 Install the Agent Skill "yeknal-mobile-app-design" for all my projects.
 
 Source, pinned to a published revision (4 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-mobile-app-design
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-mobile-app-design
 File list with SHA-256 hashes: https://tryraisins.dev/skills/mobile-app-design/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-mobile-app-design/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-mobile-app-design into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-mobile-app-design or ~/.claude/skills/yeknal-mobile-app-design, so it is available in every project.
 3. If a yeknal-mobile-app-design folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 4 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2648,7 +2648,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/mobile-app-design/f
 
 ## Source
 
-- [yeknal-mobile-app-design on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-mobile-app-design)
+- [yeknal-mobile-app-design on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-mobile-app-design)
 
 ---
 <!-- source: https://tryraisins.dev/skills/orchestration-specialists/ -->
@@ -2657,7 +2657,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/mobile-app-design/f
 > Organises work across several agents and tools, covering task distribution, context management, evidence synthesis, prompt engineering and MCP design.
 
 Canonical: https://tryraisins.dev/skills/orchestration-specialists/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Organize bounded multi-agent and tool work. Use for task distribution, context management, evidence synthesis, and handoff across agents.
 
@@ -2679,13 +2679,13 @@ Outcome: It divides the work into bounded tasks, defines what each agent returns
 Install the Agent Skill "yeknal-orchestration-specialists" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-orchestration-specialists
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-orchestration-specialists
 File list with SHA-256 hashes: https://tryraisins.dev/skills/orchestration-specialists/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-orchestration-specialists/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-orchestration-specialists into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-orchestration-specialists or ~/.claude/skills/yeknal-orchestration-specialists, so it is available in every project.
 3. If a yeknal-orchestration-specialists folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -2697,7 +2697,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/orchestration-speci
 
 ## Source
 
-- [yeknal-orchestration-specialists on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-orchestration-specialists)
+- [yeknal-orchestration-specialists on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-orchestration-specialists)
 
 ---
 <!-- source: https://tryraisins.dev/skills/pick-ui-library/ -->
@@ -2706,7 +2706,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/orchestration-speci
 > Recommends the right library or inspectable source registry for a frontend need from a curated list, from accessible primitives to charts, toasts and drag and drop.
 
 Canonical: https://tryraisins.dev/skills/pick-ui-library/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Pick a frontend library or inspectable source registry from a curated list of accessible primitives, React components, motion, charts, virtualization, drag and drop, toasts, and styling. Only runs when explicitly invoked.
 
@@ -2732,13 +2732,13 @@ Outcome: It compares a few candidates from its list and recommends one with reas
 Install the Agent Skill "yeknal-pick-ui-library" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-pick-ui-library
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-pick-ui-library
 File list with SHA-256 hashes: https://tryraisins.dev/skills/pick-ui-library/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-pick-ui-library/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-pick-ui-library into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-pick-ui-library or ~/.claude/skills/yeknal-pick-ui-library, so it is available in every project.
 3. If a yeknal-pick-ui-library folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -2754,7 +2754,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/pick-ui-library/fil
 
 ## Source
 
-- [yeknal-pick-ui-library on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-pick-ui-library)
+- [yeknal-pick-ui-library on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-pick-ui-library)
 
 ---
 <!-- source: https://tryraisins.dev/skills/prototype/ -->
@@ -2763,7 +2763,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/pick-ui-library/fil
 > Builds several genuinely different versions of a UI piece behind a visual picker, so you can flip between them live and keep the one that feels right.
 
 Canonical: https://tryraisins.dev/skills/prototype/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Build multiple genuinely different versions of a UI piece you describe, rendered behind a visual picker so you can flip through them live and promote the one that feels right. Only runs when explicitly invoked; it does not trigger on its own.
 
@@ -2789,13 +2789,13 @@ Outcome: It builds three distinct versions with a picker to switch between them,
 Install the Agent Skill "yeknal-prototype" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-prototype
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-prototype
 File list with SHA-256 hashes: https://tryraisins.dev/skills/prototype/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-prototype/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-prototype into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-prototype or ~/.claude/skills/yeknal-prototype, so it is available in every project.
 3. If a yeknal-prototype folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2812,7 +2812,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/prototype/files.jso
 
 ## Source
 
-- [yeknal-prototype on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-prototype)
+- [yeknal-prototype on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-prototype)
 
 ---
 <!-- source: https://tryraisins.dev/skills/ambition/ -->
@@ -2821,7 +2821,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/prototype/files.jso
 > Raises a task or prompt to expert standard before work starts, by finding the real bottleneck and naming the raw material, the method and the outside check that decides whether the result is right.
 
 Canonical: https://tryraisins.dev/skills/ambition/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Raise a task or brief to expert standard before work starts by naming the real bottleneck, the rawest material, the method and the outside check. Use for "be ambitious", "raise the bar", or "what would an expert do here".
 
@@ -2847,13 +2847,13 @@ Outcome: It names the bottleneck, asks for production traces and a measurement o
 Install the Agent Skill "yeknal-ambition" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-ambition
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-ambition
 File list with SHA-256 hashes: https://tryraisins.dev/skills/ambition/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-ambition/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-ambition into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-ambition or ~/.claude/skills/yeknal-ambition, so it is available in every project.
 3. If a yeknal-ambition folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2873,7 +2873,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/ambition/files.json
 
 ## Source
 
-- [yeknal-ambition on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-ambition)
+- [yeknal-ambition on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-ambition)
 
 ---
 <!-- source: https://tryraisins.dev/skills/research-analysis/ -->
@@ -2882,7 +2882,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/ambition/files.json
 > Researches and compares sources, checks them against each other and writes evidence-backed reports for market, competitive, trend or data questions.
 
 Canonical: https://tryraisins.dev/skills/research-analysis/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Research, compare, validate sources, and produce evidence-backed reports. Use for market, competitive, trend, data, or explicit deep research.
 
@@ -2904,13 +2904,13 @@ Outcome: It gathers current sources, compares the tools on the criteria that mat
 Install the Agent Skill "yeknal-research-analysis" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-research-analysis
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-research-analysis
 File list with SHA-256 hashes: https://tryraisins.dev/skills/research-analysis/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-research-analysis/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-research-analysis into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-research-analysis or ~/.claude/skills/yeknal-research-analysis, so it is available in every project.
 3. If a yeknal-research-analysis folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2928,7 +2928,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/research-analysis/f
 
 ## Source
 
-- [yeknal-research-analysis on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-research-analysis)
+- [yeknal-research-analysis on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-research-analysis)
 
 ---
 <!-- source: https://tryraisins.dev/skills/review-animations/ -->
@@ -2937,7 +2937,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/research-analysis/f
 > Checks existing motion against a high craft bar, from easing and duration to interruption and reduced-motion behaviour, and explains each fix.
 
 Canonical: https://tryraisins.dev/skills/review-animations/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Review animation and motion code against a high craft bar derived from Emil Kowalski's design engineering philosophy. Use when auditing interface motion, transitions, easing, or interaction choreography.
 
@@ -2959,13 +2959,13 @@ Outcome: It checks each animation’s purpose, timing and easing, and suggests c
 Install the Agent Skill "yeknal-review-animations" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-review-animations
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-review-animations
 File list with SHA-256 hashes: https://tryraisins.dev/skills/review-animations/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-review-animations/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-review-animations into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-review-animations or ~/.claude/skills/yeknal-review-animations, so it is available in every project.
 3. If a yeknal-review-animations folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -2983,7 +2983,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/review-animations/f
 
 ## Source
 
-- [yeknal-review-animations on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-review-animations)
+- [yeknal-review-animations on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-review-animations)
 
 ---
 <!-- source: https://tryraisins.dev/skills/security-audit/ -->
@@ -2992,7 +2992,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/review-animations/f
 > Runs a multi-phase security audit of a repository, directory or diff with a coverage ledger, adversarial verification and schema-validated findings.
 
 Canonical: https://tryraisins.dev/skills/security-audit/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Run a multi-phase security audit of a repository, directory, or diff with a coverage ledger, adversarial verification, and schema-validated findings. Use only for explicit audit or pen-test requests, not general security questions.
 
@@ -3022,13 +3022,13 @@ Needs Node.js for the two zero-dependency validators. Target code is not execute
 Install the Agent Skill "yeknal-security-audit" for all my projects.
 
 Source, pinned to a published revision (19 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-audit
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-security-audit
 File list with SHA-256 hashes: https://tryraisins.dev/skills/security-audit/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-security-audit/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-security-audit into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-security-audit or ~/.claude/skills/yeknal-security-audit, so it is available in every project.
 3. If a yeknal-security-audit folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 19 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -3065,7 +3065,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-audit/file
 
 ## Source
 
-- [yeknal-security-audit on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-audit)
+- [yeknal-security-audit on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-security-audit)
 
 ---
 <!-- source: https://tryraisins.dev/skills/security-best-practices/ -->
@@ -3074,7 +3074,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-audit/file
 > Reviews Python, JavaScript, TypeScript or Go code for security issues and writes secure-by-default code when you ask for it.
 
 Canonical: https://tryraisins.dev/skills/security-best-practices/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Load per-language and per-framework secure-coding references for Python, JavaScript/TypeScript, or Go. Use as the stack reference library behind yeknal-application-security, not as a full codebase audit.
 
@@ -3100,13 +3100,13 @@ Outcome: It checks validation, storage, paths and permissions, and reports issue
 Install the Agent Skill "yeknal-security-best-practices" for all my projects.
 
 Source, pinned to a published revision (14 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-best-practices
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-security-best-practices
 File list with SHA-256 hashes: https://tryraisins.dev/skills/security-best-practices/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-security-best-practices/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-security-best-practices into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-security-best-practices or ~/.claude/skills/yeknal-security-best-practices, so it is available in every project.
 3. If a yeknal-security-best-practices folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 14 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -3136,7 +3136,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-best-pract
 
 ## Source
 
-- [yeknal-security-best-practices on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-best-practices)
+- [yeknal-security-best-practices on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-security-best-practices)
 
 ---
 <!-- source: https://tryraisins.dev/skills/security-ownership-map/ -->
@@ -3145,7 +3145,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-best-pract
 > Maps who owns sensitive code from Git history and highlights bus-factor risk and code nobody looks after.
 
 Canonical: https://tryraisins.dev/skills/security-ownership-map/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Map sensitive-code ownership and bus-factor risk from Git history with Python 3 and networkx. Use only for explicit security ownership, orphaned-code, or CODEOWNERS risk analysis.
 
@@ -3171,13 +3171,13 @@ Outcome: It analyses commit history for sensitive paths and reports owners, gaps
 Install the Agent Skill "yeknal-security-ownership-map" for all my projects.
 
 Source, pinned to a published revision (8 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-ownership-map
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-security-ownership-map
 File list with SHA-256 hashes: https://tryraisins.dev/skills/security-ownership-map/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-security-ownership-map/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-security-ownership-map into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-security-ownership-map or ~/.claude/skills/yeknal-security-ownership-map, so it is available in every project.
 3. If a yeknal-security-ownership-map folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 8 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -3200,7 +3200,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-ownership-
 
 ## Source
 
-- [yeknal-security-ownership-map on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-ownership-map)
+- [yeknal-security-ownership-map on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-security-ownership-map)
 
 ---
 <!-- source: https://tryraisins.dev/skills/sentry/ -->
@@ -3209,7 +3209,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-ownership-
 > Inspects Sentry issues and events, summarises recent production errors and pulls basic health data, using read-only queries.
 
 Canonical: https://tryraisins.dev/skills/sentry/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Inspect Sentry issues or events, summarize recent production errors, and pull basic Sentry health data through the read-only API. Use when the user names Sentry or asks what is failing in production.
 
@@ -3235,13 +3235,13 @@ Uses Python and needs a SENTRY_AUTH_TOKEN.
 Install the Agent Skill "yeknal-sentry" for all my projects.
 
 Source, pinned to a published revision (6 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-sentry
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-sentry
 File list with SHA-256 hashes: https://tryraisins.dev/skills/sentry/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-sentry/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-sentry into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-sentry or ~/.claude/skills/yeknal-sentry, so it is available in every project.
 3. If a yeknal-sentry folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 6 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -3262,7 +3262,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/sentry/files.json
 
 ## Source
 
-- [yeknal-sentry on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-sentry)
+- [yeknal-sentry on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-sentry)
 
 ---
 <!-- source: https://tryraisins.dev/skills/slopscan/ -->
@@ -3271,7 +3271,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/sentry/files.json
 > Scans a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, and writes a report that explains each finding and how to fix it.
 
 Canonical: https://tryraisins.dev/skills/slopscan/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Scan a codebase locally for AI-slop signs such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, and template leftovers, then act on the report. Use before a launch or when a project reads as generic.
 
@@ -3297,13 +3297,13 @@ Outcome: It reports each indicator with its file and line, a plain explanation a
 Install the Agent Skill "yeknal-slopscan" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-slopscan
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-slopscan
 File list with SHA-256 hashes: https://tryraisins.dev/skills/slopscan/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-slopscan/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-slopscan into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-slopscan or ~/.claude/skills/yeknal-slopscan, so it is available in every project.
 3. If a yeknal-slopscan folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -3311,7 +3311,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/slopscan/files.json
 
 ## Files
 
-- `SKILL.md` (5120 bytes)
+- `SKILL.md` (5209 bytes)
 
 ## Related
 
@@ -3320,7 +3320,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/slopscan/files.json
 
 ## Source
 
-- [yeknal-slopscan on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-slopscan)
+- [yeknal-slopscan on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-slopscan)
 
 ---
 <!-- source: https://tryraisins.dev/skills/security-threat-model/ -->
@@ -3329,7 +3329,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/slopscan/files.json
 > Builds a threat model grounded in the actual repository, covering assets, trust boundaries, abuse paths and mitigations.
 
 Canonical: https://tryraisins.dev/skills/security-threat-model/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Create a repository-grounded threat model covering assets, trust boundaries, abuse paths, and mitigations. Use only for explicit threat-modeling requests, not for vulnerability hunts or pen tests.
 
@@ -3355,13 +3355,13 @@ Outcome: It maps assets and trust boundaries from the code, lists likely abuse p
 Install the Agent Skill "yeknal-security-threat-model" for all my projects.
 
 Source, pinned to a published revision (5 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-threat-model
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-security-threat-model
 File list with SHA-256 hashes: https://tryraisins.dev/skills/security-threat-model/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-security-threat-model/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-security-threat-model into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-security-threat-model or ~/.claude/skills/yeknal-security-threat-model, so it is available in every project.
 3. If a yeknal-security-threat-model folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 5 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -3382,7 +3382,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-threat-mod
 
 ## Source
 
-- [yeknal-security-threat-model on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-security-threat-model)
+- [yeknal-security-threat-model on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-security-threat-model)
 
 ---
 <!-- source: https://tryraisins.dev/skills/ui-ux-designer/ -->
@@ -3391,7 +3391,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-threat-mod
 > Designs user-centred interface systems that balance intuitive flows with a distinctive visual direction, from information architecture to interaction patterns.
 
 Canonical: https://tryraisins.dev/skills/ui-ux-designer/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Design user-centered interface systems that balance intuitive flows with distinctive, non-generic visual direction. Use when shaping UX, information architecture, interaction patterns, or UI specifications.
 
@@ -3413,13 +3413,13 @@ Outcome: It maps the current flow, proposes a clearer structure and specifies th
 Install the Agent Skill "yeknal-ui-ux-designer" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-ui-ux-designer
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-ui-ux-designer
 File list with SHA-256 hashes: https://tryraisins.dev/skills/ui-ux-designer/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-ui-ux-designer/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-ui-ux-designer into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-ui-ux-designer or ~/.claude/skills/yeknal-ui-ux-designer, so it is available in every project.
 3. If a yeknal-ui-ux-designer folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -3436,7 +3436,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/ui-ux-designer/file
 
 ## Source
 
-- [yeknal-ui-ux-designer on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-ui-ux-designer)
+- [yeknal-ui-ux-designer on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-ui-ux-designer)
 
 ---
 <!-- source: https://tryraisins.dev/skills/ui-quality-baseline/ -->
@@ -3445,7 +3445,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/ui-ux-designer/file
 > Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI.
 
 Canonical: https://tryraisins.dev/skills/ui-quality-baseline/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Apply one shared quality contract to any visible UI, covering tokens, spacing and optical centering, typography, icons, responsive containment, states, loading, motion, copy, and rendered QA. Use whenever visible interface work starts.
 
@@ -3467,13 +3467,13 @@ Outcome: It checks spacing, contrast, focus, responsive containment and states, 
 Install the Agent Skill "yeknal-ui-quality-baseline" for all my projects.
 
 Source, pinned to a published revision (13 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-ui-quality-baseline
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-ui-quality-baseline
 File list with SHA-256 hashes: https://tryraisins.dev/skills/ui-quality-baseline/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-ui-quality-baseline/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-ui-quality-baseline into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-ui-quality-baseline or ~/.claude/skills/yeknal-ui-quality-baseline, so it is available in every project.
 3. If a yeknal-ui-quality-baseline folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 13 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -3502,7 +3502,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/ui-quality-baseline
 
 ## Source
 
-- [yeknal-ui-quality-baseline on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-ui-quality-baseline)
+- [yeknal-ui-quality-baseline on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-ui-quality-baseline)
 
 ---
 <!-- source: https://tryraisins.dev/skills/verification-harness/ -->
@@ -3511,7 +3511,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/ui-quality-baseline
 > Generates a project-local skill that launches the real app, drives a feature the way a user would, and captures proof, with a feature map for the next agent to follow.
 
 Canonical: https://tryraisins.dev/skills/verification-harness/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Generate a project-local verification harness that starts a real app, drives a feature like a user, and captures proof. Use only when explicitly asked to build one for a repository with no scripted way to prove behavior.
 
@@ -3537,13 +3537,13 @@ Outcome: It inspects how the app starts and can be driven, writes a verify skill
 Install the Agent Skill "yeknal-verification-harness" for all my projects.
 
 Source, pinned to a published revision (6 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-verification-harness
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-verification-harness
 File list with SHA-256 hashes: https://tryraisins.dev/skills/verification-harness/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-verification-harness/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-verification-harness into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-verification-harness or ~/.claude/skills/yeknal-verification-harness, so it is available in every project.
 3. If a yeknal-verification-harness folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 6 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -3565,5 +3565,5 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/verification-harnes
 
 ## Source
 
-- [yeknal-verification-harness on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-verification-harness)
+- [yeknal-verification-harness on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-verification-harness)
 

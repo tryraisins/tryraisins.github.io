@@ -3,7 +3,7 @@
 > Stages, commits, pushes and opens a GitHub pull request in one flow using the GitHub CLI.
 
 Canonical: https://tryraisins.dev/skills/yeet/
-Source revision: 95a39b5
+Source revision: 00061b8
 
 Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`).
 
@@ -33,13 +33,13 @@ Needs the GitHub CLI signed in to your account.
 Install the Agent Skill "yeknal-yeet" for all my projects.
 
 Source, pinned to a published revision (5 files):
-https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-yeet
+https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-yeet
 File list with SHA-256 hashes: https://tryraisins.dev/skills/yeet/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-yeet/
-   git -C yeknal-skill-src checkout 95a39b5f5552e26ca8493af435f08a8fd34456ce
+   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
 2. Copy skills/yeknal-yeet into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-yeet or ~/.claude/skills/yeknal-yeet, so it is available in every project.
 3. If a yeknal-yeet folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 5 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -60,4 +60,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/yeet/files.json
 
 ## Source
 
-- [yeknal-yeet on GitHub](https://github.com/tryraisins/MD_Files/tree/95a39b5f5552e26ca8493af435f08a8fd34456ce/skills/yeknal-yeet)
+- [yeknal-yeet on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-yeet)
