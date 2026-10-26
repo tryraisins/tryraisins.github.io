@@ -6,14 +6,17 @@ import { createCollisionSparks } from './spinning-top-effects.js';
 // Page coordinates are simulation coordinates; the camera projects an oblique
 // tabletop back into the same pixel space. Each top lands, sleeps, precesses
 // faster as it slows, wobbles, rolls round on its rim and comes to rest.
-export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) {
+// `onPrepared` fires once the shaders are compiled (or WebGL is unavailable);
+// the tops then wait for `until` before they launch, so a page can prepare them
+// behind a loading sheet and drop them in as the sheet lifts.
+export function mountSpinningTops(host, hero, { pad = null, ring = null, until = null, onPrepared = null } = {}) {
   let renderer;
   // Multisampling is the first thing to go on a weak integrated GPU: it costs
   // four samples per pixel. Those tiers render at a slightly higher pixel ratio
   // instead, which looks cleaner and is cheaper than MSAA at this size.
   let tier = detectTier();
   try { renderer = new THREE.WebGLRenderer({ alpha: true, antialias: tier < 2 }); }
-  catch { return () => {}; }
+  catch { onPrepared?.(); return () => {}; }
   // Reading shader status after every link forces the driver to finish
   // compiling on the main thread; compileAsync below does that work off it.
   renderer.debug.checkShaderErrors = false;
@@ -1381,7 +1384,7 @@ export function mountSpinningTops(host, hero, { pad = null, ring = null } = {}) 
     pmrem.dispose();
   }
 
-  prepare().then(() => {
+  prepare().finally(() => onPrepared?.()).then(() => until).then(() => {
     if (disposed) return;
     ready = true;
     host.dataset.ready = '';

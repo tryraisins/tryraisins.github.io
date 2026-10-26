@@ -8,8 +8,13 @@ const STORAGE_KEY = 'tryraisins:boot';
 // `hold` is the beat between starting the sheet's lift and the transform moving:
 // the hero entrance starts at the same moment, so it rises behind a sheet that
 // still covers the page instead of appearing after the page has been uncovered.
-const TIMING = { fontsCap: 1400, min: 700, max: 1600, hold: 200, lift: 620 };
-const REDUCED_TIMING = { fontsCap: 1400, min: 200, max: 800, hold: 0, lift: 150 };
+// `holdCap` bounds how long work registered with holdBoot can keep the sheet up;
+// it stays under the bootstrap failsafe in BootOverlay.astro.
+const TIMING = { fontsCap: 1400, holdCap: 6000, min: 700, max: 1600, hold: 200, lift: 620 };
+const REDUCED_TIMING = { fontsCap: 1400, holdCap: 6000, min: 200, max: 800, hold: 0, lift: 150 };
+
+// Page work the sheet should cover, such as the three.js tops compiling.
+const holds: Promise<unknown>[] = [];
 
 const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
@@ -18,10 +23,15 @@ const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, 
 const settleWithin = (work: Promise<unknown>, cap: number) =>
   Promise.race([work.then(() => {}, () => {}), wait(cap)]);
 
+// readyState is already 'interactive' while module scripts run, before the
+// page's own scripts have registered their holds, so it cannot answer whether
+// DOMContentLoaded has fired. This module always evaluates before that event.
+let contentLoaded = document.readyState === 'complete';
+document.addEventListener('DOMContentLoaded', () => { contentLoaded = true; }, { once: true });
 const domReady = () =>
-  document.readyState === 'loading'
-    ? new Promise<void>((resolve) => document.addEventListener('DOMContentLoaded', () => resolve(), { once: true }))
-    : Promise.resolve();
+  contentLoaded
+    ? Promise.resolve()
+    : new Promise<void>((resolve) => document.addEventListener('DOMContentLoaded', () => resolve(), { once: true }));
 
 async function boot(): Promise<void> {
   const root = document.documentElement;
@@ -60,6 +70,8 @@ async function boot(): Promise<void> {
     domReady(),
   ]);
   await Promise.race([ready, wait(Math.max(0, timing.max - visibleFor()))]);
+  // Module scripts have all run by DOMContentLoaded, so every hold is registered.
+  await settleWithin(Promise.all(holds), Math.max(0, timing.holdCap - visibleFor()));
   await wait(Math.max(0, timing.min - visibleFor()));
 
   // The failsafe in the bootstrap may have already dismissed the sheet.
@@ -74,6 +86,15 @@ async function boot(): Promise<void> {
     document.dispatchEvent(new CustomEvent('boot:done'));
     try { sessionStorage.setItem(STORAGE_KEY, 'seen'); } catch { /* private mode */ }
   }, timing.hold + timing.lift);
+}
+
+// Keeps the sheet up until `work` settles, within TIMING.holdCap. Returns
+// whether this load has a sheet at all, so callers can skip the wait otherwise.
+export function holdBoot(work: Promise<unknown>): boolean {
+  const boot = document.documentElement.dataset.boot;
+  if (boot !== 'pending') return false;
+  holds.push(work);
+  return true;
 }
 
 let booted: Promise<void> | undefined;

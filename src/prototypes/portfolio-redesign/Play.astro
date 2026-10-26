@@ -247,7 +247,6 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       <path d="M2 10 C 44 8, 90 13, 150 11 S 244 7, 296 10 S 366 13, 398 10" />
       <path class="play-divider-faint" d="M14 13 C 70 11, 128 15, 186 12 S 274 10, 330 13 S 380 12, 392 11" />
     </svg>
-    <p>© {year} TryRaisins. Designed and built with Astro and Three.js.</p>
     <nav aria-label="Footer">
       <a href="/skills/">Agent skills</a>
       <a href="#play-top">Back to top</a>
@@ -263,7 +262,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   import { mountReel } from "./reel.js";
   import { mountRail } from "./rail.js";
   import { mountRules } from "../../scripts/notebook-rules";
-  import { whenBootRevealed, whenBootDone } from "../../scripts/boot-overlay";
+  import { whenBootRevealed, holdBoot } from "../../scripts/boot-overlay";
   const root = document.querySelector('[data-play-root]');
 
   if (root instanceof HTMLElement) {
@@ -287,17 +286,18 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       }
     });
 
-    // The hero rises as the sheet lifts. Doodles wait until the sheet is gone,
-    // so the first frame of the entrance is never blocked by the sketch pass.
+    // The hero rises and the doodles start drawing as the sheet lifts, so the
+    // page is already moving the moment it is uncovered.
     let disposeDoodles = () => {};
     document.addEventListener('astro:before-swap', () => disposeDoodles(), { once: true });
+    const revealed = new Promise((resolve) => whenBootRevealed(() => resolve(undefined)));
     whenBootRevealed(() => {
       // Both in one task: the animation starts from its own hidden first frame,
       // so there is no flash between hiding and rising.
       root.setAttribute('data-hero-enter', '');
       root.setAttribute('data-enter', '');
+      requestAnimationFrame(() => { disposeDoodles = mountDoodles(root); });
     });
-    whenBootDone(() => { disposeDoodles = mountDoodles(root); });
 
     if (!reduceMotion.matches) {
       root.dataset.motion = 'ready';
@@ -340,24 +340,26 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     document.addEventListener('astro:before-swap', disposeContact, { once: true });
 
     if (battlefield instanceof HTMLElement && hero instanceof HTMLElement) {
-      // three.js is the heaviest part of the page, so it loads in its own chunk
-      // at the first idle moment instead of holding up every other script.
+      // three.js is the heaviest part of the page, so it loads in its own chunk.
+      // On a first visit it loads and compiles behind the loading sheet, which
+      // waits for it, and the tops launch as the sheet lifts. Without a sheet it
+      // loads at the first idle moment instead of holding up every other script.
       let dispose = () => {};
       let cancelled = false;
-      document.addEventListener('astro:before-swap', () => { cancelled = true; dispose(); }, { once: true });
+      let prepared = () => {};
+      document.addEventListener('astro:before-swap', () => { cancelled = true; prepared(); dispose(); }, { once: true });
       const mountTops = () => import('./spinning-tops.js').then(({ mountSpinningTops }) => {
         if (cancelled) return;
         dispose = mountSpinningTops(battlefield, hero, {
           pad: root.querySelector('[data-launch-pad]'),
           ring: createLaunchRing(root.querySelector('[data-launch-ring]')),
+          until: revealed,
+          onPrepared: () => prepared(),
         });
-      });
-      // After the sheet has gone, so the three.js parse and compile cannot take
-      // the first frame of the entrance while the sheet is still moving.
-      whenBootDone(() => requestAnimationFrame(() => {
-        if ('requestIdleCallback' in window) requestIdleCallback(mountTops, { timeout: 600 });
-        else setTimeout(mountTops, 200);
-      }));
+      }).catch(() => prepared());
+      if (holdBoot(new Promise((resolve) => { prepared = () => resolve(undefined); }))) mountTops();
+      else if ('requestIdleCallback' in window) requestIdleCallback(mountTops, { timeout: 600 });
+      else setTimeout(mountTops, 200);
     }
   }
 </script>
