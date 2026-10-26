@@ -1,20 +1,20 @@
 {
   "name": "yeknal-agent-cost-control",
-  "sourceRevision": "4d5f23650cf23128b33e548478e9960e8cdc694e",
-  "source": "https://github.com/tryraisins/MD_Files/tree/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-agent-cost-control",
+  "sourceRevision": "9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f",
+  "source": "https://github.com/tryraisins/MD_Files/tree/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-agent-cost-control",
   "fileCount": 2,
   "files": [
     {
       "path": "references/measurement.md",
       "sha256": "718dabaa6778d25cae7afaf07cf5c7a0335d263afd83f10b30e4129bdda29571",
       "size": 4627,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-agent-cost-control/references/measurement.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-agent-cost-control/references/measurement.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "b6ecf11ac15eeab1674e56dce52d5a079b2b17cd8392215b15e2b4d1e37d32c8",
       "size": 5493,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/4d5f23650cf23128b33e548478e9960e8cdc694e/skills/yeknal-agent-cost-control/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/9f3d3a63244dac109bbfa4b4fe01857c6d2dae5f/skills/yeknal-agent-cost-control/SKILL.md"
     }
   ]
 }
