@@ -118,7 +118,9 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
     --sk-sheet: #f3d665;
     /* Headings, titles and labels are handwritten, as on the homepage; long
        instructions and prompts stay in print so they are easy to read and copy. */
-    --sk-hand: 'Caveat', 'Segoe Print', cursive;
+    /* Same fallback rule as the homepage: readable handwriting, then print,
+       never the generic `cursive` keyword. */
+    --sk-hand: 'Caveat', 'Segoe Print', 'Chalkboard SE', 'Bradley Hand', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     /* One ruled line. Text written on the paper uses this height (or a multiple)
        and notebook-rules.ts lines up each first baseline with the rules. */
     --sk-rule: 36px;
@@ -202,9 +204,11 @@ const socialAlt = 'Agent skills by TryRaisins: Skills that teach your coding age
   }
   @media (max-width: 620px) {
     .sk-world { --sk-margin: 28px; --sk-inset: 44px; }
-    .sk-topbar { padding: 20px 20px 0 var(--sk-inset); gap: 8px; }
-    .sk-topbar nav { gap: 2px; }
-    .sk-topbar nav a { padding: 0 7px; font-size: 21px; }
+    /* The handwriting fallback is wider than Caveat, so the bar has to be able
+       to wrap instead of pushing the whole page sideways on a phone. */
+    .sk-topbar { padding: 20px 20px 0 var(--sk-inset); gap: 8px; flex-wrap: wrap; }
+    .sk-topbar nav { gap: 2px; flex-wrap: wrap; }
+    .sk-topbar nav a { padding: 0 7px; font-size: 21px; white-space: normal; }
     .sk-home-short { font-size: 22px; }
     .sk-long { display: none; }
     .sk-short { display: inline !important; }

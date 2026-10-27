@@ -350,7 +350,11 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     --play-link-blue: #2346b5;
     --play-yellow: #f0ce4e;
     --play-green: #2f9d70;
-    --play-hand: 'Caveat', 'Segoe Print', cursive;
+    /* Caveat is the intended face. The rest of the stack only matters when it
+       fails to arrive (some in-app browsers block web fonts): fall through
+       readable handwriting, then print. Never the generic `cursive` keyword,
+       which resolves to Snell Roundhand on iOS and Dancing Script on Android. */
+    --play-hand: 'Caveat', 'Segoe Print', 'Chalkboard SE', 'Bradley Hand', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     --play-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --play-page-margin: max(clamp(32px, 6vw, 96px), calc((100% - 1280px) / 2));
     --play-ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -645,7 +649,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-hero-actions { gap: 8px; }
     .play-hero-header { order: -2; }
     .play-launch { order: -1; margin: 28px 0 36px; }
-    .play-launch-note { top: -26px; font-size: 20px; }
+    .play-launch-note { top: -26px; font-size: 20px; max-width: calc(100% - 12px); white-space: normal; }
     .play-desk { padding-top: 40px; padding-bottom: 72px; }
     .play-desk h2 { font-size: clamp(3.4rem, 17vw, 4.25rem); }
     .play-contents { grid-template-columns: minmax(0, 1fr); gap: 56px; }
