@@ -71,10 +71,6 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
         <path d="M3 11 C 48 7, 92 14, 140 10 S 236 7, 284 11 S 362 14, 397 9" />
         <path class="play-divider-faint" d="M12 14 C 60 12, 112 17, 170 13 S 270 10, 322 15 S 378 14, 390 12" />
       </svg>
-      <div class="play-reel" data-reel style={`--reel-count: ${projects.length}`}>
-      <div class="play-reel-stage" data-reel-stage>
-      <span class="play-reel-tape" aria-hidden="true"></span>
-      <span class="play-reel-tape play-reel-tape-right" aria-hidden="true"></span>
       <div class="play-doodle-layer play-doodle-layer-desk" aria-hidden="true">
         <figure class="play-drawing play-drawing-desk" data-doodle>
           <canvas class="play-drawing-canvas" data-doodle-canvas aria-hidden="true" width="240" height="175"></canvas>
@@ -87,111 +83,91 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
         </figure>
       </div>
       <header class="play-desk-header">
-        <div>
-          <p class="play-eyebrow">Web products and developer tools</p>
-          <h2 id="play-work-title">Things I’ve built</h2>
-          <p class="play-margin-note play-rail-hint" aria-hidden="true">swipe sideways to see them all</p>
-        </div>
-        <div class="play-desk-actions">
-          <button type="button" class="play-reel-toggle" data-reel-toggle hidden>Spread them out</button>
-        </div>
+        <p class="play-eyebrow">Web products and developer tools</p>
+        <h2 id="play-work-title">Things I’ve built</h2>
       </header>
 
-      <div class="play-reel-side">
-        <div class="play-reel-index" data-reel-index role="group" aria-label="Jump to a project">
-          {projects.map((project) => (
-            <button type="button">
-              <span class="play-reel-number">{project.number}<svg class="play-reel-circle" viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true"><path d="M14 31 C 4 26, 3 12, 16 7 S 46 2, 54 13 S 50 34, 31 35 S 9 30, 12 18" /></svg></span>
-              {' '}<span class="play-reel-name">{project.name}</span>
-            </button>
-          ))}
-        </div>
-        <p class="play-margin-note play-reel-hint" aria-hidden="true">
-          <span class="play-reel-hint-start">keep scrolling to turn the page</span>
-          <span class="play-reel-hint-end">that’s the last print, contact is next</span>
-        </p>
-      </div>
-
-      <ol data-play-grid aria-label="Projects">
+      <ol class="play-contents" data-play-grid aria-label="Projects" style={`--play-count: ${projects.length}`}>
         {projects.map((project, index) => {
           const internal = project.href.startsWith('/');
-          const Card = project.suspended ? 'div' : 'a';
+          const Entry = project.suspended ? 'div' : 'a';
+          const descriptionId = `play-project-note-${index + 1}`;
           const linkProps = project.suspended
             ? {}
             : internal
-              ? { href: project.href, 'aria-label': `${project.cta ?? 'Open'} ${project.name}` }
-              : { href: project.href, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `Open ${project.name} in a new tab` };
+              ? { href: project.href }
+              : { href: project.href, target: '_blank', rel: 'noopener noreferrer' };
+          const cta = project.suspended ? 'Not live right now' : project.cta ?? 'View project';
           return (
-            <li data-play-tile class={`play-tile play-tile-${index + 1}${project.suspended ? ' play-tile-suspended' : ''}`} style={`--play-tile-index: ${index}`}>
-              <Card class="play-card" {...linkProps}>
-                <span class="play-print">
-                <span class="play-pin" aria-hidden="true"></span>
-                <span class="play-pin play-pin-right" aria-hidden="true"></span>
-                <span class="play-photo">
-                  {project.cover ? (
-                    <Picture
-                      src={project.cover}
-                      alt={project.coverAlt}
-                      widths={[480, 720, 960, 1280]}
-                      sizes="(max-width: 900px) min(76vw, 500px), 760px"
-                      formats={['avif', 'webp']}
-                      loading={index === 0 ? 'eager' : 'lazy'}
-                      fetchpriority={index === 0 ? 'high' : undefined}
-                    />
-                  ) : project.placeholder === 'terminal' ? (
-                    <span class="play-terminal" role="img" aria-label={`A terminal running npx yeknal@latest setup for ${project.name}`}>
-                      <span class="play-terminal-bar" aria-hidden="true"><i></i><i></i><i></i><small>~/projects/client-app</small></span>
-                      <code aria-hidden="true"><b>$</b> npx yeknal@latest setup</code>
-                      <code class="play-terminal-dim" aria-hidden="true">Reading the project…</code>
-                      <code class="play-terminal-ok" aria-hidden="true">✓ review · design · testing · ship</code>
-                      <code class="play-terminal-ok" aria-hidden="true">✓ skills installed for this project</code>
-                      <code aria-hidden="true"><b>$</b> <span class="play-terminal-caret"></span></code>
-                    </span>
-                  ) : project.placeholder === 'slip' ? (
-                    <span class="play-slip-scene" role="img" aria-label={`A blank match slip for ${project.name}`}>
-                      <span class="play-slip" aria-hidden="true">
-                        <small>{project.name} · match slip</small>
-                        {[0, 1, 2, 3, 4].map((row) => <span class="play-slip-row"><i></i><i class={row === 2 ? 'play-slip-pick' : ''}></i></span>)}
-                        <span class="play-slip-total"><small>Picks</small><i></i></span>
-                        <span class="play-slip-code">|| ||| | |||| || | ||| ||</span>
+            <li data-play-tile class={`play-tile play-tile-${index + 1}${project.suspended ? ' play-tile-suspended' : ''}`} data-current={index === 0 ? '' : undefined} style={`--play-tile-index: ${index}; --play-row: ${index + 1}`}>
+              <Entry class="play-entry" {...linkProps} aria-describedby={descriptionId}>
+                <span class="play-copy-number" aria-hidden="true">{project.number}<svg class="play-entry-circle" viewBox="0 0 60 40" preserveAspectRatio="none" aria-hidden="true"><path d="M14 31 C 4 26, 3 12, 16 7 S 46 2, 54 13 S 50 34, 31 35 S 9 30, 12 18" /></svg></span>
+                <strong class="play-entry-name">{project.name}{!project.suspended && !internal && <span class="play-sr-only"> (opens in a new tab)</span>}</strong>
+                <span class="play-entry-type">{project.type}</span>
+                <span class="play-entry-year">{project.year}</span>
+              </Entry>
+              <div class="play-panel">
+                {/* The entry is the link for keyboards and screen readers; the
+                    print and the highlighted label repeat it for the pointer. */}
+                <Entry class="play-panel-print" {...linkProps} tabindex={project.suspended ? undefined : '-1'} aria-hidden="true">
+                  <span class="play-print">
+                  <span class="play-pin" aria-hidden="true"></span>
+                  <span class="play-pin play-pin-right" aria-hidden="true"></span>
+                  <span class="play-photo">
+                    {project.cover ? (
+                      <Picture
+                        src={project.cover}
+                        alt=""
+                        widths={[480, 720, 960, 1280]}
+                        sizes="(max-width: 620px) calc(100vw - 66px), (max-width: 900px) 44vw, 720px"
+                        formats={['avif', 'webp']}
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        fetchpriority={index === 0 ? 'high' : undefined}
+                      />
+                    ) : project.placeholder === 'terminal' ? (
+                      <span class="play-terminal">
+                        <span class="play-terminal-bar"><i></i><i></i><i></i><small>~/projects/client-app</small></span>
+                        <code><b>$</b> npx yeknal@latest setup</code>
+                        <code class="play-terminal-dim">Reading the project…</code>
+                        <code class="play-terminal-ok">✓ review · design · testing · ship</code>
+                        <code class="play-terminal-ok">✓ skills installed for this project</code>
+                        <code><b>$</b> <span class="play-terminal-caret"></span></code>
                       </span>
-                    </span>
-                  ) : (
-                    <span class="play-unexposed" role="img" aria-label={`An intentionally undeveloped camera still for ${project.name}`}>
-                      <span class="play-unexposed-glow" aria-hidden="true"></span>
-                      <small aria-hidden="true">UNEXPOSED / 35MM</small>
-                    </span>
-                  )}
-                  {project.suspended && (
-                    <svg class="play-marker-x" viewBox="0 0 586 300" preserveAspectRatio="none" aria-hidden="true">
-                      <path d="M28 14 C 200 90, 380 190, 560 290" />
-                      <path d="M556 18 C 390 100, 210 190, 26 286" />
-                      <path class="play-marker-pass" d="M34 20 C 205 94, 382 188, 552 284" />
-                      <path class="play-marker-pass" d="M550 24 C 386 104, 214 192, 32 280" />
-                    </svg>
-                  )}
-                  {project.suspended && <span class="play-suspended">Suspended</span>}
-                </span>
-                </span>
-                <span class="play-copy">
-                  <span class="play-copy-meta"><span class="play-copy-number">{project.number}</span> {project.type}</span>
-                  <strong>{project.name}</strong>
-                  <p>{project.description}</p>
-                  <span class="play-project-footer"><span>{project.year}</span><em>{project.suspended ? 'Not live right now' : project.cta ?? 'View project'}</em></span>
-                </span>
-              </Card>
+                    ) : project.placeholder === 'slip' ? (
+                      <span class="play-slip-scene">
+                        <span class="play-slip">
+                          <small>{project.name} · match slip</small>
+                          {[0, 1, 2, 3, 4].map((row) => <span class="play-slip-row"><i></i><i class={row === 2 ? 'play-slip-pick' : ''}></i></span>)}
+                          <span class="play-slip-total"><small>Picks</small><i></i></span>
+                          <span class="play-slip-code">|| ||| | |||| || | ||| ||</span>
+                        </span>
+                      </span>
+                    ) : (
+                      <span class="play-unexposed">
+                        <span class="play-unexposed-glow"></span>
+                        <small>UNEXPOSED / 35MM</small>
+                      </span>
+                    )}
+                    {project.suspended && (
+                      <svg class="play-marker-x" viewBox="0 0 586 300" preserveAspectRatio="none">
+                        <path d="M28 14 C 200 90, 380 190, 560 290" />
+                        <path d="M556 18 C 390 100, 210 190, 26 286" />
+                        <path class="play-marker-pass" d="M34 20 C 205 94, 382 188, 552 284" />
+                        <path class="play-marker-pass" d="M550 24 C 386 104, 214 192, 32 280" />
+                      </svg>
+                    )}
+                    {project.suspended && <span class="play-suspended">Suspended</span>}
+                  </span>
+                  </span>
+                </Entry>
+                <p class="play-panel-note" id={descriptionId}>{project.description}{project.suspended && ' It is not live right now.'}</p>
+                <Entry class="play-panel-cta" {...linkProps} tabindex={project.suspended ? undefined : '-1'} aria-hidden="true"><em>{cta}</em></Entry>
+              </div>
             </li>
           );
         })}
       </ol>
-      <div class="play-rail-controls" data-rail-controls hidden>
-        <button type="button" class="play-rail-button" data-rail-prev aria-label="Previous project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5.5 8 12l6.5 6.5" /></svg></button>
-        <p class="play-rail-count" data-rail-count aria-hidden="true">1 of {projects.length}</p>
-        <button type="button" class="play-rail-button" data-rail-next aria-label="Next project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5.5 16 12l-6.5 6.5" /></svg></button>
-      </div>
       <p class="play-page-number" aria-hidden="true">p. 02</p>
-      </div>
-      </div>
     </section>
 
     <section id="play-contact" class="play-contact" data-play-reveal aria-labelledby="play-contact-title">
@@ -259,8 +235,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   import { createLaunchRing } from "./launch-ring.js";
   import { mountDoodles } from "./doodle-notes.js";
   import { initContactReveal } from "../../scripts/contact-reveal";
-  import { mountReel } from "./reel.js";
-  import { mountRail } from "./rail.js";
+  import { mountContents } from "./contents.js";
   import { mountRules } from "../../scripts/notebook-rules";
   import { whenBootRevealed, holdBoot } from "../../scripts/boot-overlay";
   const root = document.querySelector('[data-play-root]');
@@ -321,18 +296,12 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       revealTargets.forEach((target) => target.setAttribute('data-visible', ''));
     }
 
-    const disposeReel = mountReel(root, (message) => { if (status) status.textContent = message; });
-    document.addEventListener('astro:before-swap', disposeReel, { once: true });
-    const disposeRail = mountRail(root, (message) => { if (status) status.textContent = message; });
-    document.addEventListener('astro:before-swap', disposeRail, { once: true });
+    const disposeContents = mountContents(root);
+    document.addEventListener('astro:before-swap', disposeContents, { once: true });
     // Handwriting written on the page itself (not the yellow contact note) sits on the rules.
-    const desk = root.querySelector('#play-desk');
-    const stage = root.querySelector('[data-reel-stage]');
     const disposeRules = mountRules(root, {
-      selector: '.play-hero-index, .play-hero-links a, .play-hero-kicker, .play-hero h1 > span, .play-intro p, .play-eyebrow, .play-desk h2, .play-rail-hint, .play-copy-meta, .play-copy strong, .play-copy p, .play-project-footer, .play-footer p, .play-footer a',
-      // While the desk is pinned, its stage is a separate sheet with its own rules.
-      paperFor: (block) => (desk?.getAttribute('data-reel-mode') === 'pinned' && stage instanceof HTMLElement && stage.contains(block) ? stage : root),
-      watch: desk ? [{ target: desk, attributes: ['data-reel-mode'] }] : [],
+      selector: '.play-hero-index, .play-hero-links a, .play-hero-kicker, .play-hero h1 > span, .play-intro p, .play-eyebrow, .play-desk h2, .play-entry, .play-panel-note, .play-footer p, .play-footer a',
+      paperFor: () => root,
     });
     document.addEventListener('astro:before-swap', disposeRules, { once: true });
 
@@ -452,27 +421,31 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-launch-note { position: absolute; top: -22px; right: 4%; margin: 0; color: var(--play-graphite); font: 500 22px/1 var(--play-hand); white-space: nowrap; rotate: 2.5deg; opacity: 0; transition: opacity 600ms ease; }
   .play-world:has([data-battlefield][data-ready]) .play-launch-note { opacity: 1; }
 
-  /* Work. Static by default: a grid above 900px and a swipe carousel below it.
-     reel.js adds data-reel-mode="pinned" on wide, tall screens (rules further
-     down) and rail.js adds the carousel controls on narrow ones. Each project is
-     a screenshot taped into the book, with its notes written on the page. */
+  /* Work: a contents page. Each list item holds a project's entry and its
+     taped-in print, so the list reads in order without any script. On wide
+     screens with a mouse, subgrid stacks every print in one spot beside the
+     entries and contents.js moves data-current to the one being pointed at or
+     tabbed to. Narrower screens and touch get the items as stacked cards. */
   .play-desk { padding: 48px var(--play-page-margin) 100px calc(var(--play-page-margin) + 40px); position: relative; }
-  .play-desk-header { position: relative; z-index: 1; margin-bottom: 44px; display: flex; justify-content: space-between; align-items: end; gap: 24px; }
+  .play-desk-header { position: relative; z-index: 1; margin-bottom: 40px; }
   .play-desk h2 { margin: 0; font: 700 clamp(4rem, 7.4vw, 6.5rem)/.95 var(--play-hand); line-height: round(nearest, 1em, var(--play-rule)); letter-spacing: 0; }
-  .play-rail-hint { display: none; }
-  /* Written on the rules, so it sits level, unlike the pencil notes in the margin. */
-  .play-world .play-rail-hint { rotate: none; line-height: var(--play-rule); }
-  .play-reel-toggle { min-width: 132px; min-height: 48px; padding: 0 18px; border: 1px solid var(--play-ink); border-radius: 0; background: var(--play-yellow); color: var(--play-ink); font: 700 22px/1 var(--play-hand); white-space: nowrap; cursor: pointer; box-shadow: 3px 3px 0 var(--play-ink); transition: transform 130ms var(--play-ease-out), box-shadow 130ms var(--play-ease-out); }
-  .play-reel-toggle[hidden] { display: none; }
-  .play-reel-toggle:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--play-ink); }
-  .play-reel-side, .play-reel-tape, .play-rail-controls { display: none; }
-  .play-desk [data-play-grid] { margin: 0; padding: 16px 0 0; position: relative; z-index: 1; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 72px 44px; list-style: none; }
-  .play-tile { min-width: 0; grid-column: span 2; position: relative; }
-  .play-tile:first-child { grid-column: 1 / -1; }
-  /* With six tiles the last two share a row as halves; with seven, two rows of thirds follow the lead tile. */
-  .play-tile:nth-child(5):nth-last-child(2), .play-tile:nth-child(6):last-child { grid-column: span 3; }
-  .play-card { height: 100%; display: grid; grid-template-rows: auto 1fr; align-content: start; gap: 24px; position: relative; }
-  .play-tile:first-child .play-card { grid-template-rows: auto; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: center; gap: 56px; }
+  .play-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .play-contents { margin: 0; padding: 0; position: relative; z-index: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 64px 40px; list-style: none; }
+  .play-tile { min-width: 0; position: relative; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: 4px; }
+  .play-panel { display: contents; }
+  .play-panel-print { order: -1; margin-bottom: 22px; display: block; }
+  .play-entry { min-width: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "num type year" "name name name"; align-items: center; column-gap: 10px; color: var(--play-ink); }
+  .play-entry .play-copy-number { grid-area: num; }
+  .play-entry-name { grid-area: name; min-width: 0; font: 700 clamp(2.25rem, 3vw, 2.75rem)/1 var(--play-hand); line-height: round(up, .9em, var(--play-rule)); }
+  .play-entry-type { grid-area: type; min-width: 0; color: var(--play-red-pen); font: 600 22px/var(--play-rule) var(--play-hand); }
+  .play-entry-year { grid-area: year; color: var(--play-graphite); font: 500 22px/var(--play-rule) var(--play-hand); }
+  .play-entry-circle { width: calc(100% + 26px); height: calc(100% + 22px); position: absolute; top: -11px; left: -13px; overflow: visible; opacity: 0; pointer-events: none; }
+  .play-entry-circle path { fill: none; stroke: var(--play-red); stroke-width: 1.8; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+  .play-panel-note { margin: 2px 0 0; color: var(--play-biro); font: 500 24px/var(--play-rule) var(--play-hand); }
+  /* Links are marked with highlighter rather than underlined. */
+  .play-panel-cta { margin-top: 10px; justify-self: start; display: inline-flex; min-height: 44px; align-items: center; }
+  .play-panel-cta em { padding: 4px 10px 6px; color: var(--play-ink); font: 700 24px/1 var(--play-hand); font-style: normal; white-space: nowrap; background: var(--play-highlight); border-radius: 3px 8px 4px 7px; rotate: -1.5deg; }
+  .play-tile-suspended .play-panel-cta em { color: var(--play-graphite); background: rgba(23,24,29,.07); }
   .play-tile-1 { --play-tilt: -1.4deg; }
   .play-tile-2 { --play-tilt: 1.6deg; }
   .play-tile-3 { --play-tilt: -1.1deg; }
@@ -527,25 +500,9 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-suspended::before { left: -20px; transform: rotate(-30deg); }
   .play-suspended::after { right: -20px; transform: rotate(30deg); }
 
-  /* The notes: number and type in red pen, the name in black, the note in biro. */
-  .play-copy { min-width: 0; padding: 0 6px; display: flex; flex-direction: column; gap: 6px; }
-  .play-copy-meta { display: flex; align-items: center; gap: 10px; color: var(--play-red-pen); font: 600 22px/var(--play-rule) var(--play-hand); }
+  /* The project number, circled in red pen. */
   .play-copy-number { min-width: 2.1em; padding: 1px 6px 2px; display: inline-grid; place-items: center; border: 1.5px solid currentColor; border-radius: 52% 46% 55% 44% / 50% 56% 44% 50%; rotate: -4deg; }
-  .play-copy strong { color: var(--play-ink); font: 700 clamp(2.5rem, 3.3vw, 3rem)/1 var(--play-hand); line-height: round(up, .9em, var(--play-rule)); }
-  .play-copy p { margin: 2px 0 8px; color: var(--play-biro); font: 500 24px/var(--play-rule) var(--play-hand); }
-  .play-tile:first-child .play-copy strong { font-size: clamp(3rem, 4.6vw, 4.25rem); }
-  .play-tile:first-child .play-copy p { font-size: 28px; }
-  .play-project-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 12px; color: var(--play-graphite); font: 500 22px/1.1 var(--play-hand); }
-  /* Links are marked with highlighter rather than underlined. */
-  .play-project-footer em { padding: 4px 10px 6px; color: var(--play-ink); font: 700 24px/1 var(--play-hand); font-style: normal; white-space: nowrap; background: var(--play-highlight); border-radius: 3px 8px 4px 7px; rotate: -1.5deg; }
-  .play-tile-suspended .play-copy em { color: var(--play-graphite); background: rgba(23,24,29,.07); }
 
-  /* Carousel controls under the rail: two pen-drawn buttons and the position. */
-  .play-rail-button { width: 52px; height: 52px; padding: 0; display: grid; place-items: center; border: 1.5px solid var(--play-ink); border-radius: 48% 52% 46% 54% / 54% 46% 52% 48%; background: var(--play-paper); color: var(--play-ink); cursor: pointer; touch-action: manipulation; user-select: none; transition: transform 130ms var(--play-ease-out), opacity 160ms ease, background-color 140ms ease; }
-  .play-rail-button svg { width: 22px; height: 22px; display: block; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
-  .play-rail-button:active { transform: scale(.94); }
-  .play-rail-button:disabled { opacity: .3; cursor: default; }
-  .play-rail-count { min-width: 5.5ch; margin: 0; color: var(--play-ink); font: 700 26px/1 var(--play-hand); text-align: center; }
 
   /* Contact */
   .play-contact { padding: 96px var(--play-page-margin) 120px calc(var(--play-page-margin) + 40px); position: relative; }
@@ -631,20 +588,19 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-hero .play-launch { animation: play-fade 900ms var(--play-ease-out) both 260ms; }
     .play-world[data-motion='ready'] [data-play-reveal]:not([data-visible]) { opacity: 0; transform: translateY(20px); }
     .play-world[data-motion='ready'] [data-play-reveal] { transition: opacity 520ms var(--play-ease-out), transform 520ms var(--play-ease-out); }
-    /* Grid and rail: each print is dropped onto the page, then its notes are written in. */
-    .play-desk[data-visible]:not([data-reel-mode='pinned']) .play-print { animation: play-drop 620ms var(--play-ease-out) backwards; animation-delay: calc(var(--play-tile-index, 0) * 80ms); }
-    .play-desk[data-visible]:not([data-reel-mode='pinned']) .play-copy { animation: play-write 720ms cubic-bezier(.45, 0, .2, 1) backwards; animation-delay: calc(var(--play-tile-index, 0) * 80ms + 220ms); }
+    /* Stacked cards: each print is dropped onto the page as the section comes in. */
+    @media not all and (min-width: 901px) and (hover: hover) and (pointer: fine) {
+      .play-desk[data-visible] .play-print { animation: play-drop 620ms var(--play-ease-out) backwards; animation-delay: calc(var(--play-tile-index, 0) * 70ms); }
+    }
     .play-contact[data-visible] .play-contact-sheet > :not(.play-contact-tape) { animation: play-rise 640ms var(--play-ease-out) both; }
   }
   @media (hover:hover) and (pointer:fine) {
     .play-tile:hover { z-index: 5; }
     .play-tile:hover .play-print { transform: rotate(0deg) translateY(-5px); box-shadow: 0 1px 1px rgba(23,24,29,.12), 10px 20px 28px -12px rgba(23,24,29,.45); }
-    .play-rail-button:hover:not(:disabled) { background: var(--play-highlight); }
     .play-tile:hover .play-photo img { filter: saturate(1); transform: scale(1.02); }
-    .play-hero-primary:hover, .play-reel-toggle:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--play-ink); }
+    .play-hero-primary:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--play-ink); }
     .play-hero-links a:hover,
     .play-world .play-hero-secondary:hover,
-    .play-reel-index button:hover,
     .play-footer a:hover { background: rgba(240,206,78,.62); }
     .play-contact-toggle:hover .play-contact-toggle-main { transform: translateY(calc(-100% - 8px)); }
     .play-contact-toggle:hover .play-contact-toggle-copy { transform: translateY(0); }
@@ -667,38 +623,9 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-contact-sheet { grid-template-columns: 1fr; }
     .play-contact-body { margin-top: 4px; padding: 24px 0 0; border-top: 2px solid var(--play-ink); border-left: 0; }
   }
-  @media (min-width: 901px) and (max-width: 980px) {
-    .play-desk [data-play-grid] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .play-tile, .play-tile:nth-child(5):nth-last-child(2), .play-tile:nth-child(6):last-child { grid-column: span 1; }
-    /* An even tile count leaves the last tile alone in the two-column grid, so it spans the row. */
-    .play-tile:first-child, .play-tile:last-child:nth-child(even) { grid-column: 1 / -1; }
-    .play-tile:last-child:nth-child(even) .play-card { grid-template-rows: auto; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: center; gap: 36px; }
-  }
-  /* Tablets and phones: a native swipe carousel with snap points. rail.js adds
-     the counter, the buttons and arrow keys; without it the rail still swipes. */
   @media (max-width: 900px) {
     .play-desk { padding-bottom: 80px; }
-    .play-desk-header { margin-bottom: 12px; }
-    .play-desk-actions { display: none; }
-    .play-rail-hint { display: block; margin-top: 26px; }
-    .play-desk [data-play-grid] { margin-right: calc(-1 * var(--play-page-margin)); padding: 30px var(--play-page-margin) 24px 4px; display: flex; gap: 22px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 4px var(--play-page-margin); scrollbar-width: none; }
-    .play-desk [data-play-grid]::-webkit-scrollbar { display: none; }
-    .play-tile, .play-tile:first-child, .play-tile:last-child { flex: 0 0 min(80%, 440px); scroll-snap-align: center; scroll-snap-stop: always; }
-    .play-tile:first-child { scroll-snap-align: start; }
-    .play-tile:last-child { scroll-snap-align: end; }
-    .play-card, .play-tile:first-child .play-card, .play-tile:last-child .play-card { grid-template-rows: auto 1fr; grid-template-columns: minmax(0, 1fr); gap: 18px; }
-    .play-tile:first-child .play-copy strong, .play-copy strong { font-size: clamp(2.25rem, 7vw, 2.75rem); }
-    .play-tile:first-child .play-copy p, .play-copy p { font-size: 23px; }
-    .play-rail-controls { margin-top: 4px; position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; gap: 18px; }
-    .play-rail-controls[hidden] { display: none; }
-  }
-  /* Prints beside the current one sit smaller and turned away, and come up to
-     full size as they are swiped to the middle. Browsers without scroll-driven
-     animations get the plain rail. */
-  @supports (animation-timeline: view()) {
-    @media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
-      .play-tile { animation: play-slide linear both; animation-timeline: view(inline); }
-    }
+    .play-desk-header { margin-bottom: 28px; }
   }
   @media (max-width: 620px) {
     .play-world { --play-page-margin: 28px; }
@@ -721,9 +648,8 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-launch-note { top: -26px; font-size: 20px; }
     .play-desk { padding-top: 40px; padding-bottom: 72px; }
     .play-desk h2 { font-size: clamp(3.4rem, 17vw, 4.25rem); }
-    .play-desk [data-play-grid] { margin-right: -22px; padding-right: 22px; scroll-padding-inline: 4px 22px; }
+    .play-contents { grid-template-columns: minmax(0, 1fr); gap: 56px; }
     .play-print { padding: 8px 8px 10px; }
-    .play-tile, .play-tile:first-child, .play-tile:last-child { flex-basis: 82%; }
     .play-terminal { padding: 16px; font-size: 12px; gap: 7px; }
     .play-suspended { font-size: 1.75rem; }
     .play-contact { padding-top: 72px; padding-bottom: 88px; padding-left: 36px; }
@@ -745,101 +671,37 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-contact-channel-icon { width: 48px; height: 48px; }
   }
 
-  /* Pinned print sequence. The track is as tall as the stage plus one step per
-     print, and the stage is a fresh sheet of paper stuck to the viewport. Each
-     print reads --frame (written by reel.js) and derives its pose from it:
-     incoming prints rise from the bottom edge tilted, outgoing ones lift and
-     turn away. Only transform and opacity change while scrolling. */
-  .play-desk[data-reel-mode='pinned'] { padding: 48px 0 0; }
-  .play-desk[data-reel-mode='pinned'] .play-reel { height: calc(100vh + (var(--reel-count) - 1) * var(--reel-step, 62vh)); height: calc(100svh + (var(--reel-count) - 1) * var(--reel-step, 62svh)); }
-  .play-desk[data-reel-mode='pinned'] .play-reel-stage {
-    height: 100vh;
-    height: 100svh;
-    padding: clamp(30px, 5.5svh, 56px) var(--play-page-margin) clamp(44px, 7svh, 64px) calc(var(--play-page-margin) + 40px);
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    overflow: hidden;
-    overflow: clip;
-    /* The sheet paints its own paper and never changes size, so isolating it
-       lets the browser skip repainting the page behind it while prints move. */
-    contain: layout paint;
-    display: grid;
-    grid-template-columns: minmax(176px, 232px) minmax(0, 1fr);
-    grid-template-rows: auto minmax(0, 1fr);
-    gap: clamp(12px, 2.4svh, 28px) clamp(28px, 4vw, 64px);
-    background-color: var(--play-sheet);
-    background-image: var(--play-grain), var(--play-rules), var(--play-margin-rule);
-    background-size: 160px 160px, 100% 36px, 100% 100%;
-    box-shadow: 0 -1px 0 rgba(23,23,25,.16), 0 -18px 30px -22px rgba(23,23,25,.55), 0 1px 0 rgba(23,23,25,.12);
+  /* The contents page itself, for wide screens with a mouse. Every item spans
+     the whole list as a subgrid: its entry drops into its own row on the left
+     and its print into the shared cell on the right, where only the current
+     one is visible. Items let pointer events through to their entry and print,
+     so overlapping item boxes never steal a hover. */
+  @media (min-width: 901px) and (hover: hover) and (pointer: fine) {
+    .play-contents { grid-template-columns: minmax(250px, .8fr) minmax(0, 1.6fr); grid-template-rows: repeat(var(--play-count), auto) 1fr; gap: 0 clamp(40px, 5vw, 80px); }
+    .play-tile { grid-column: 1 / -1; grid-row: 1 / -1; grid-template-columns: subgrid; grid-template-rows: subgrid; gap: inherit; pointer-events: none; }
+    .play-entry { grid-column: 1; grid-row: var(--play-row); min-height: calc(var(--play-rule) * 2); padding: 0 14px 0 6px; grid-template-columns: 2.6em minmax(0, 1fr) auto; grid-template-areas: "num name year" "num type year"; align-items: start; pointer-events: auto; border-radius: 3px 8px 4px 7px; transition: background-color 140ms ease; }
+    .play-entry .play-copy-number { min-width: 0; margin-top: 18px; padding: 0; position: relative; justify-self: center; border: 0; color: var(--play-graphite); font: 600 22px/1 var(--play-hand); rotate: none; }
+    .play-entry-name { font-size: 31px; line-height: var(--play-rule); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .play-entry-type { font-size: 21px; font-weight: 500; }
+    .play-entry-year { font-size: 21px; }
+    .play-tile[data-current] .play-entry { background: var(--play-highlight); }
+    .play-tile[data-current] .play-copy-number { color: var(--play-ink); }
+    .play-tile[data-current] .play-entry-circle { opacity: 1; }
+    .play-panel { grid-column: 2; grid-row: 1 / -1; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-content: start; gap: 4px 32px; pointer-events: auto; }
+    .play-panel-print { grid-column: 1 / -1; order: 0; margin-bottom: 26px; }
+    .play-panel-note { font-size: 26px; }
+    .play-panel-cta { margin-top: 0; }
+    .play-tile:not([data-current]) .play-panel { visibility: hidden; }
+    .play-tile:hover { z-index: auto; }
   }
-  .play-desk[data-reel-mode='pinned'] .play-reel-tape { width: 104px; height: 24px; position: absolute; z-index: 2; top: 12px; left: calc(var(--play-page-margin) + 64px); display: block; border: 1px solid rgba(23,23,25,.25); background: rgba(240,206,78,.72); rotate: -4deg; box-shadow: 2px 3px 0 rgba(23,23,25,.08); }
-  .play-desk[data-reel-mode='pinned'] .play-reel-tape-right { left: auto; right: calc(var(--play-page-margin) + 24px); rotate: 3deg; }
-  .play-desk[data-reel-mode='pinned'] .play-desk-header { grid-column: 1 / -1; z-index: 2; margin: 0; }
-  .play-desk[data-reel-mode='pinned'] h2 { font-size: min(clamp(3.75rem, 6.8vw, 6rem), 11svh); }
-  .play-desk[data-reel-mode='pinned'] .play-reel-side { min-height: 0; position: relative; z-index: 1; display: grid; align-content: center; gap: 28px; }
-  .play-reel-index { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
-  .play-reel-index button { max-width: 100%; min-height: 44px; padding: 0 12px 0 10px; position: relative; display: inline-flex; align-items: center; gap: 12px; border: 0; background: none; color: rgba(23,23,25,.58); font: 600 24px/1 var(--play-hand); text-align: left; cursor: pointer; transition: background-color 140ms ease, color 140ms ease; }
-  .play-reel-number { min-width: 1.3em; position: relative; }
-  .play-reel-circle { width: calc(100% + 26px); height: calc(100% + 22px); position: absolute; top: -11px; left: -13px; overflow: visible; opacity: 0; pointer-events: none; }
-  .play-reel-circle path { fill: none; stroke: var(--play-red); stroke-width: 1.8; stroke-linecap: round; vector-effect: non-scaling-stroke; }
-  .play-reel-name { width: 1px; height: 1px; position: absolute; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .play-reel-index button[aria-current='true'] { color: var(--play-ink); }
-  .play-reel-index button[aria-current='true'] .play-reel-circle { opacity: 1; }
-  .play-reel-index button[aria-current='true'] .play-reel-name { width: auto; height: auto; min-width: 0; position: static; overflow: hidden; clip: auto; text-overflow: ellipsis; }
-  .play-reel-hint { display: grid; }
-  .play-reel-hint > span { grid-area: 1 / 1; }
-  .play-reel-hint-start { opacity: calc(1 - var(--reel-tail, 0)); }
-  .play-reel-hint-end { opacity: var(--reel-tail, 0); }
-  .play-desk[data-reel-mode='pinned'] [data-play-grid] { min-height: 0; margin: 0; padding: 0; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; gap: 0; }
-  .play-desk[data-reel-mode='pinned'] .play-tile {
-    --in: max(var(--frame, 1.2), 0);
-    --out: min(var(--frame, 1.2), 0);
-    width: min(100%, 70rem);
-    height: min(100%, 34rem);
-    grid-area: 1 / 1;
-    display: grid;
-    place-items: center;
-    /* The style query below needs a style container, and the tile is the
-       closest ancestor that owns --frame. */
-    container-type: style;
+  @media (min-width: 901px) and (max-width: 1180px) and (hover: hover) and (pointer: fine) {
+    .play-contents { grid-template-columns: minmax(230px, .85fr) minmax(0, 1.3fr); }
+    .play-panel { grid-template-columns: minmax(0, 1fr); }
   }
-  /* Only the print travels: incoming ones rise from the bottom edge tilted,
-     outgoing ones lift and turn away. The notes stay on the page: the old ones
-     are rubbed out from the left in the first half of the turn and the new ones
-     are written in during the second half, so two sets never share the page. */
-  .play-desk[data-reel-mode='pinned'] .play-print {
-    transform:
-      translate3d(calc(var(--in) * 3% + var(--out) * 4%), calc(var(--in) * 118% + var(--out) * 14%), 0)
-      rotate(calc(var(--play-tilt) + var(--in) * 7deg - var(--out) * 4deg))
-      scale(calc(1 + var(--out) * .08));
-    opacity: clamp(0, calc(1 - var(--frame, 1.2) * var(--frame, 1.2)), 1);
-    transition: none;
-  }
-  .play-desk[data-reel-mode='pinned'] .play-copy { clip-path: inset(-16px calc(min(var(--in) * 2, 1) * 100%) -16px calc(min(var(--out) * -2, 1) * 100%)); }
-  .play-desk[data-reel-mode='pinned'] .play-tile:not([data-reel-current]) { pointer-events: none; }
-  .play-desk[data-reel-mode='pinned'] .play-tile:hover { z-index: auto; }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-card { height: auto; width: 100%; align-items: center; grid-template-rows: minmax(0, 1fr); grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 56px); }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy { min-height: 0; padding: 8px 8px 4px 0; justify-content: center; gap: 8px; }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-project-footer { margin-top: 10px; }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy strong { font-size: clamp(2.75rem, 4.2vw, 4rem); }
-  .play-desk[data-reel-mode='pinned'] .play-tile .play-copy p { font-size: 26px; }
-  .play-desk[data-reel-mode='pinned'] .play-page-number { z-index: 0; bottom: 14px; }
-  /* Prints beyond the active one's neighbours are parked at exactly ±1.2 and
-     skipped by the rasteriser. Browsers without style queries still hide them
-     through opacity. */
-  @container style(--frame: 1.2) or style(--frame: -1.2) {
-    .play-desk[data-reel-mode='pinned'] .play-card { visibility: hidden; }
-  }
-  @media (max-width: 1180px) {
-    .play-desk[data-reel-mode='pinned'] .play-reel-stage { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr); }
-    .play-desk[data-reel-mode='pinned'] .play-reel-side { display: block; }
-    .play-reel-index { flex-direction: row; flex-wrap: wrap; align-items: center; }
-    .play-reel-index button { padding-inline: 10px; }
-    .play-reel-hint { display: none; }
-    .play-desk[data-reel-mode='pinned'] .play-tile .play-card { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
-    .play-desk[data-reel-mode='pinned'] .play-tile .play-copy strong { font-size: clamp(2.5rem, 4vw, 3.25rem); }
-    .play-desk[data-reel-mode='pinned'] .play-tile .play-copy p { font-size: 24px; }
+  /* Swapping prints: the new one settles onto the page and its note fades in. */
+  @media (min-width: 901px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .play-tile[data-current] .play-print { animation: play-swap 300ms var(--play-ease-out) backwards; }
+    .play-tile[data-current] :is(.play-panel-note, .play-panel-cta) { animation: play-fade 260ms ease backwards 60ms; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -869,9 +731,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     from { clip-path: inset(-30% 100% -30% -10%); }
     to { clip-path: inset(-30% -10% -30% -10%); }
   }
-  @keyframes play-slide {
-    0% { opacity: .45; transform: translateY(18px) rotate(3deg) scale(.9); }
-    38%, 62% { opacity: 1; transform: none; }
-    100% { opacity: .45; transform: translateY(18px) rotate(-3deg) scale(.9); }
+  @keyframes play-swap {
+    from { opacity: 0; transform: translateY(10px) rotate(calc(var(--play-tilt, 0deg) - 2.5deg)) scale(.985); }
   }
 </style>
