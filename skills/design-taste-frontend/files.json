@@ -1,32 +1,32 @@
 {
   "name": "yeknal-design-taste-frontend",
-  "sourceRevision": "00061b828e01544f48d56e626569f3a70272311a",
-  "source": "https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-design-taste-frontend",
+  "sourceRevision": "f9d54a7328469fdaa4e19120a94a22ccb3d97160",
+  "source": "https://github.com/tryraisins/MD_Files/tree/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-design-taste-frontend",
   "fileCount": 4,
   "files": [
     {
       "path": "LICENSE.txt",
       "sha256": "4575a543ab88dad12ccea7d97e563d0bce5b448b06072e65d3264497dad326df",
       "size": 1065,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-design-taste-frontend/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-design-taste-frontend/LICENSE.txt"
     },
     {
       "path": "references/dials-and-arsenal.md",
       "sha256": "528dfaba52d98475b1e19a831c8fc543fee854b55214c1a78fdaa53374d9eaa0",
       "size": 7252,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-design-taste-frontend/references/dials-and-arsenal.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-design-taste-frontend/references/dials-and-arsenal.md"
     },
     {
       "path": "references/patterns-redesign-and-sources.md",
       "sha256": "f3e205d926dd0919c5514e326567f47505a9ce0da9826427b86b2d0a5a66ba97",
       "size": 6509,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-design-taste-frontend/references/patterns-redesign-and-sources.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-design-taste-frontend/references/patterns-redesign-and-sources.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "9281701cacdd3fc33ca89be765db1fd18e86898def7882d3d1d0a8b85143f5a4",
       "size": 7587,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-design-taste-frontend/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-design-taste-frontend/SKILL.md"
     }
   ]
 }

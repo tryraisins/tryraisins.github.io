@@ -3,7 +3,7 @@
 > Builds a local, model-free index of a repository and answers with a small ranked slice, so an unfamiliar codebase can be entered in one call instead of many searches.
 
 Canonical: https://tryraisins.dev/skills/code-graph/
-Source revision: 00061b8
+Source revision: f9d54a7
 
 Use when a task starts in an unfamiliar or large repository and you need the right files in one call instead of many searches. Builds a zero-dependency local index of content terms plus imports, routes and tests, then answers with a small ranked slice inside a token budget. It is retrieval, not GraphRAG, and it never replaces grep for exhaustive matches.
 
@@ -29,13 +29,13 @@ Outcome: It builds a local index, returns the parser function and its call sites
 Install the Agent Skill "yeknal-code-graph" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-code-graph
+https://github.com/tryraisins/MD_Files/tree/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-code-graph
 File list with SHA-256 hashes: https://tryraisins.dev/skills/code-graph/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-code-graph/
-   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
+   git -C yeknal-skill-src checkout f9d54a7328469fdaa4e19120a94a22ccb3d97160
 2. Copy skills/yeknal-code-graph into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-code-graph or ~/.claude/skills/yeknal-code-graph, so it is available in every project.
 3. If a yeknal-code-graph folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -55,4 +55,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/code-graph/files.js
 
 ## Source
 
-- [yeknal-code-graph on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-code-graph)
+- [yeknal-code-graph on GitHub](https://github.com/tryraisins/MD_Files/tree/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-code-graph)

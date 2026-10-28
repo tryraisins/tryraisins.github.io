@@ -1,32 +1,32 @@
 {
   "name": "yeknal-mobile-app-design",
-  "sourceRevision": "00061b828e01544f48d56e626569f3a70272311a",
-  "source": "https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-mobile-app-design",
+  "sourceRevision": "f9d54a7328469fdaa4e19120a94a22ccb3d97160",
+  "source": "https://github.com/tryraisins/MD_Files/tree/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-mobile-app-design",
   "fileCount": 4,
   "files": [
     {
       "path": "agents/openai.yaml",
       "sha256": "b50516fe4b887db69fa7dfbbd86ce4314ea31b03b021cc3fb894a2e98cfabd08",
       "size": 242,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-mobile-app-design/agents/openai.yaml"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-mobile-app-design/agents/openai.yaml"
     },
     {
       "path": "LICENSE.txt",
       "sha256": "14cffee850f5c761273dfc49798cddc96786b4520c23f3ed1da727c334f07476",
       "size": 1103,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-mobile-app-design/LICENSE.txt"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-mobile-app-design/LICENSE.txt"
     },
     {
       "path": "references/appllama-research.md",
       "sha256": "5b325fbb76983d7cef28244f2bc5617140c172a1baac73e4dd8b80991a4c3361",
       "size": 4100,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-mobile-app-design/references/appllama-research.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-mobile-app-design/references/appllama-research.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "82abf9db53904213550eb5d6c28d8d97d09a06c155e62d0f561ed267ceb014e5",
       "size": 8016,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-mobile-app-design/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-mobile-app-design/SKILL.md"
     }
   ]
 }

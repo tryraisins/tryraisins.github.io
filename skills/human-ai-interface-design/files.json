@@ -1,26 +1,26 @@
 {
   "name": "yeknal-human-ai-interface-design",
-  "sourceRevision": "00061b828e01544f48d56e626569f3a70272311a",
-  "source": "https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-human-ai-interface-design",
+  "sourceRevision": "f9d54a7328469fdaa4e19120a94a22ccb3d97160",
+  "source": "https://github.com/tryraisins/MD_Files/tree/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-human-ai-interface-design",
   "fileCount": 3,
   "files": [
     {
       "path": "agents/openai.yaml",
       "sha256": "980908b63bfe944d07ea0934354060d91b067ea331411e7df8b8e046cf580f8e",
       "size": 314,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-human-ai-interface-design/agents/openai.yaml"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-human-ai-interface-design/agents/openai.yaml"
     },
     {
       "path": "references/lifecycle-and-patterns.md",
       "sha256": "fc459f9b732de81796d8fee9f7caed9d0f4de5cc13278c0d1384b9cc8bf64173",
       "size": 4536,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-human-ai-interface-design/references/lifecycle-and-patterns.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-human-ai-interface-design/references/lifecycle-and-patterns.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "d75ea8a7d82cf2d25b3215ccbf72815c20888cca6d53ed1f58cba7a5d67358f7",
       "size": 6417,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-human-ai-interface-design/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-human-ai-interface-design/SKILL.md"
     }
   ]
 }

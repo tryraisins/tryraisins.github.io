@@ -3,7 +3,7 @@
 > Inspects Sentry issues and events, summarises recent production errors and pulls basic health data, using read-only queries.
 
 Canonical: https://tryraisins.dev/skills/sentry/
-Source revision: 00061b8
+Source revision: f9d54a7
 
 Inspect Sentry issues or events, summarize recent production errors, and pull basic Sentry health data through the read-only API. Use when the user names Sentry or asks what is failing in production.
 
@@ -29,13 +29,13 @@ Uses Python and needs a SENTRY_AUTH_TOKEN.
 Install the Agent Skill "yeknal-sentry" for all my projects.
 
 Source, pinned to a published revision (6 files):
-https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-sentry
+https://github.com/tryraisins/MD_Files/tree/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-sentry
 File list with SHA-256 hashes: https://tryraisins.dev/skills/sentry/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-sentry/
-   git -C yeknal-skill-src checkout 00061b828e01544f48d56e626569f3a70272311a
+   git -C yeknal-skill-src checkout f9d54a7328469fdaa4e19120a94a22ccb3d97160
 2. Copy skills/yeknal-sentry into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-sentry or ~/.claude/skills/yeknal-sentry, so it is available in every project.
 3. If a yeknal-sentry folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 6 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -56,4 +56,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/sentry/files.json
 
 ## Source
 
-- [yeknal-sentry on GitHub](https://github.com/tryraisins/MD_Files/tree/00061b828e01544f48d56e626569f3a70272311a/skills/yeknal-sentry)
+- [yeknal-sentry on GitHub](https://github.com/tryraisins/MD_Files/tree/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-sentry)

@@ -4,7 +4,7 @@
 
 The library has 57 agent skills, and every one has a page and a markdown version at the same path with a `.md` suffix so an agent does not have to parse HTML.
 
-Source revision: 00061b8. Repository: https://github.com/tryraisins/MD_Files. Contact: tryraisins@gmail.com.
+Source revision: f9d54a7. Repository: https://github.com/tryraisins/MD_Files. Contact: tryraisins@gmail.com.
 
 ## Pages
 
