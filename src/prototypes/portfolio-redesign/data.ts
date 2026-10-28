@@ -1,6 +1,6 @@
 import quickBillzCover from '../../assets/images/quickbillz-cover.png';
 import terrorTrackerCover from '../../assets/images/terror-tracker-cover.png';
-import talentHunterCover from '../../assets/images/talent-hunter-cover.png';
+import dyaadCover from '../../assets/images/dyaad-cover.png';
 import streamSlipCover from '../../assets/images/streamslip-cover.png';
 
 export const projects = [
@@ -28,14 +28,14 @@ export const projects = [
   },
   {
     number: '03',
-    name: 'Talent Hunter',
+    name: 'Dyaad',
     type: 'Applied NLP',
     description: 'Ranks resumes against a job brief for faster, clearer shortlists.',
     note: 'The software can narrow the pile of resumes, while people stay in charge of the hiring decisions that matter.',
     year: '2026',
-    href: 'https://talenthunter.tryraisins.dev/',
-    cover: talentHunterCover,
-    coverAlt: 'Talent Hunter resume screening interface',
+    href: 'https://dyaad.tryraisins.dev/',
+    cover: dyaadCover,
+    coverAlt: 'Dyaad resume screening interface',
   },
   {
     number: '04',
