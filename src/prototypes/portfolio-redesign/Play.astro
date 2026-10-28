@@ -178,17 +178,21 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
       </div>
       <div class="play-contact-sheet">
         <div class="play-contact-stamp">
-          <p class="play-contact-availability"><span aria-hidden="true"></span> Available for project work.</p>
+          <p class="play-contact-availability">Available for project work.</p>
           <svg class="play-postmark" viewBox="0 0 200 90" aria-hidden="true" focusable="false">
-            <g fill="none" stroke="currentColor" stroke-linecap="round">
-              <circle cx="58" cy="45" r="37" stroke-width="2.4" />
-              <circle cx="58" cy="45" r="19" stroke-width="1.4" />
-              <path d="M97 29 C 117 23, 129 37, 149 30 S 179 27, 197 32" stroke-width="2.4" />
-              <path d="M98 45 C 119 39, 131 53, 151 46 S 181 43, 199 48" stroke-width="2.4" />
-              <path d="M97 61 C 117 55, 129 69, 149 62 S 179 59, 197 64" stroke-width="2.4" />
-              <path id="play-postmark-ring" d="M58 45 m -28 0 a 28 28 0 1 1 56 0 a 28 28 0 1 1 -56 0" stroke="none" />
+            <g class="play-postmark-seal">
+              <g fill="none" stroke="currentColor" stroke-linecap="round">
+                <circle cx="58" cy="45" r="37" stroke-width="2.4" />
+                <circle cx="58" cy="45" r="19" stroke-width="1.4" />
+                <path id="play-postmark-ring" d="M58 45 m -28 0 a 28 28 0 1 1 56 0 a 28 28 0 1 1 -56 0" stroke="none" />
+              </g>
+              <text fill="currentColor" font-size="10.5" font-weight="700" letter-spacing=".4"><textPath href="#play-postmark-ring" textLength="170" lengthAdjust="spacing">TRYRAISINS · SOFTWARE ENGINEER ·</textPath></text>
             </g>
-            <text fill="currentColor" font-size="10.5" font-weight="700" letter-spacing=".4"><textPath href="#play-postmark-ring" textLength="170" lengthAdjust="spacing">TRYRAISINS · SOFTWARE ENGINEER ·</textPath></text>
+            <g class="play-postmark-waves" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+              <path class="play-postmark-wave" d="M97 29 C 117 23, 129 37, 149 30 S 179 27, 197 32" />
+              <path class="play-postmark-wave" d="M98 45 C 119 39, 131 53, 151 46 S 181 43, 199 48" />
+              <path class="play-postmark-wave" d="M97 61 C 117 55, 129 69, 149 62 S 179 59, 197 64" />
+            </g>
           </svg>
         </div>
         <div class="play-contact-heading">
@@ -379,7 +383,6 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-hero-index strong { color: var(--play-ink); font-weight: 700; }
   .play-hero-links { display: flex; align-items: center; gap: 4px; }
   .play-hero-links a { min-height: 48px; padding: 0 12px; display: inline-flex; align-items: center; font-size: 23px; font-weight: 600; white-space: nowrap; transition: background-color 140ms ease; }
-  .play-contact-availability > span { width: 8px; height: 8px; flex-shrink: 0; border-radius: 50%; background: var(--play-green); }
   .play-hero-body { position: relative; z-index: 1; margin-top: auto; display: grid; gap: 28px; }
   .play-hero-kicker { margin: 0 0 -6px; color: var(--play-red-pen); font: 600 34px/var(--play-rule) var(--play-hand); }
   .play-hero h1 { max-width: 1080px; margin: 0; font: 700 clamp(4.75rem, 8.4vw, 7.75rem)/.92 var(--play-hand); line-height: round(nearest, .92em, var(--play-rule)); letter-spacing: 0; }
@@ -491,8 +494,7 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
   .play-contact-sheet::after { right: 9%; transform: rotate(5deg); }
   .play-contact-sheet > * { position: relative; z-index: 1; }
   .play-contact-sheet > .play-contact-stamp { width: 132px; position: absolute; top: 30px; right: clamp(26px, 3.6vw, 46px); z-index: 2; rotate: 3deg; }
-  .play-contact-availability { min-height: 160px; margin: 0; padding: 22px 16px 18px; display: flex; flex-direction: column; justify-content: space-between; gap: 12px; border: 6px dotted var(--card); background: #fff1b8; outline: 2px solid var(--play-red-pen); outline-offset: -15px; color: var(--play-ink); font: 700 23px/1.08 var(--play-hand); box-shadow: 0 1px 2px rgba(23,24,29,.28); }
-  .play-contact-availability > span { width: 14px; height: 14px; border: 1px solid var(--play-ink); }
+  .play-contact-availability { min-height: 160px; margin: 0; padding: 22px 16px 18px; display: flex; flex-direction: column; justify-content: flex-end; border: 6px dotted var(--card); background: #fff1b8; outline: 2px solid var(--play-red-pen); outline-offset: -15px; color: var(--play-ink); font: 700 23px/1.08 var(--play-hand); box-shadow: 0 1px 2px rgba(23,24,29,.28); }
   .play-postmark { width: 194px; height: auto; position: absolute; top: -14px; left: -70px; overflow: visible; color: rgba(35,63,143,.55); rotate: -9deg; font-family: var(--play-hand); pointer-events: none; }
   .play-contact-heading { min-width: 0; }
   .play-contact-label { margin: 8px 0 0; color: rgba(23,23,25,.72); font: 600 22px/1.1 var(--play-hand); }
@@ -685,6 +687,24 @@ const emailDestination = obscureContactDestination(`mailto:${email}`);
     .play-contact-toggle-main, .play-contact-arrow-motion, .play-contact-channel, .play-contact-channel-icon { transform: none !important; }
   }
 
+  /* The postmark is struck again on a slow interval: the seal makes one full turn while the
+     three cancellation lines ripple, then everything rests. */
+  @media (prefers-reduced-motion: no-preference) {
+    .play-postmark-seal { transform-origin: 58px 45px; animation: play-postmark-spin 7s ease-in-out infinite; }
+    .play-postmark-wave { animation: play-postmark-ripple 7s ease-in-out infinite; }
+    .play-postmark-wave:nth-child(2) { animation-delay: 90ms; }
+    .play-postmark-wave:nth-child(3) { animation-delay: 180ms; }
+  }
+  @keyframes play-postmark-spin {
+    0%, 55% { transform: rotate(0deg); }
+    80%, 100% { transform: rotate(360deg); }
+  }
+  @keyframes play-postmark-ripple {
+    0%, 55%, 80%, 100% { transform: translate(0, 0); }
+    61% { transform: translate(7px, -3px); }
+    67% { transform: translate(-5px, 3px); }
+    73% { transform: translate(5px, -2px); }
+  }
   @keyframes play-rise {
     from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: translateY(0); }
