@@ -45,15 +45,6 @@
       <path class="boot-rule-faint" pathLength="1" d="M22 11 C 64 9, 104 13, 142 10 S 194 9, 204 11" />
     </svg>
     <p class="boot-caption">
-      <span class="boot-top">
-        <svg viewBox="0 0 32 40" focusable="false">
-          <path d="M16 2 V8" fill="none" />
-          <ellipse cx="16" cy="11" rx="12" ry="3.6" />
-          <path d="M4 11 C 6 22 12 30 16 38 C 20 30 26 22 28 11 C 24 14.6 8 14.6 4 11 Z" />
-          <path d="M7.2 18 C 12 20.6 20 20.6 24.8 18" fill="none" />
-          <circle cx="12" cy="24" r="1.3" class="boot-top-dot" />
-        </svg>
-      </span>
       <span>laying out the page</span>
     </p>
   </div>
@@ -114,17 +105,14 @@
   .boot-rule .boot-rule-faint { stroke-width: 1; animation-duration: 400ms; animation-delay: 200ms; }
 
   .boot-caption { margin: 14px 0 0; display: inline-flex; align-items: center; gap: 10px; color: rgba(23,24,29,.62); font: 600 24px/1 'Caveat', 'Segoe Print', 'Chalkboard SE', 'Bradley Hand', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; }
-  .boot-top { width: 22px; height: 28px; flex: none; display: block; transform-origin: 50% 100%; animation: boot-wobble 900ms ease-in-out infinite alternate; }
-  .boot-top svg { width: 100%; height: 100%; display: block; overflow: visible; fill: var(--boot-yellow); stroke: var(--boot-ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; animation: boot-spin 1100ms ease-in-out infinite alternate; }
-  .boot-top .boot-top-dot { fill: var(--boot-ink); stroke: none; }
 
   @media (max-width: 620px) {
     .boot { --boot-margin: 28px; }
   }
 
-  /* Reduced motion: no drawing, no spinning, no lift. The sheet fades once. */
+  /* Reduced motion: no drawing, no lift. The sheet fades once. */
   @media (prefers-reduced-motion: reduce) {
-    .boot-ink, .boot-rule path, .boot-top, .boot-top svg { animation: none; }
+    .boot-ink, .boot-rule path { animation: none; }
     .boot-ink, .boot-rule path { stroke-dashoffset: 0; }
     .boot { transition: opacity 150ms linear, visibility 0s linear 0s; }
     :global(html[data-boot='revealing']) .boot { transform: none; opacity: 0; box-shadow: none; transition: opacity 150ms linear, visibility 0s linear 150ms; }
@@ -133,13 +121,5 @@
   @keyframes boot-draw {
     from { stroke-dashoffset: 1; }
     to { stroke-dashoffset: 0; }
-  }
-  @keyframes boot-wobble {
-    from { transform: rotate(-9deg); }
-    to { transform: rotate(9deg); }
-  }
-  @keyframes boot-spin {
-    from { transform: perspective(160px) rotateY(-22deg); }
-    to { transform: perspective(160px) rotateY(22deg); }
   }
 </style>

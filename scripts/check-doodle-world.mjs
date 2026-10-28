@@ -91,8 +91,8 @@ for (const scenario of scenarios.filter((s) => !only.length || only.includes(s.n
     await page.evaluate((selector) => document.querySelector(selector).closest('section').scrollIntoView({ block: 'start' }), layer);
     await page.waitForSelector(`${layer} [data-doodle][data-doodle-state]`, { timeout: 20000 });
   }
-  // Sampling runs inside the page: round trips from here take seconds while
-  // the three.js tops render in software, which would miss whole collisions.
+  // Sampling runs inside the page: round trips from here are slower than
+  // a frame, which would miss whole collisions.
   await page.evaluate((selector) => {
     const started = performance.now();
     window.__doodleStart = started;

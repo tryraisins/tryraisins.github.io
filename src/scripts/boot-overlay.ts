@@ -13,7 +13,7 @@ const STORAGE_KEY = 'tryraisins:boot';
 const TIMING = { fontsCap: 1400, holdCap: 6000, min: 700, max: 1600, hold: 200, lift: 620 };
 const REDUCED_TIMING = { fontsCap: 1400, holdCap: 6000, min: 200, max: 800, hold: 0, lift: 150 };
 
-// Page work the sheet should cover, such as the three.js tops compiling.
+// Page work the sheet should cover, such as heavy decorative scripts.
 const holds: Promise<unknown>[] = [];
 
 const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
@@ -113,7 +113,7 @@ export function whenBootRevealed(callback: () => void): void {
 }
 
 // Fires once the sheet has finished lifting and left the DOM, or immediately
-// when this load has no sheet. Heavy decorative work (doodles, three.js) belongs
+// when this load has no sheet. Heavy decorative work (the doodles) belongs
 // here: mounting it during the lift blocks the first frame of the entrance while
 // the sheet keeps moving on the compositor, which leaves a blank page behind it.
 export function whenBootDone(callback: () => void): void {

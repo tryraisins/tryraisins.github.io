@@ -13,9 +13,7 @@ async (page) => {
         return seed / 4294967296;
       };
     });
-    // Install the card layout before the page paints. The card is typographic:
-    // the spinning-top layer and launch ring are hidden because the settled
-    // arrangement collides with the headline at this size.
+    // Install the card layout before the page paints. The card is typographic.
     await card.route((url) => url.href === source, async route => {
       const response = await route.fetch();
       const html = await response.text();
@@ -24,7 +22,7 @@ async (page) => {
         .play-world { min-height:630px; --play-page-margin:72px; }
         #play-top .play-hero { height:630px; min-height:630px; padding:44px 72px 50px 112px; gap:0; }
         #play-top .play-hero-header { min-height:40px; }
-        #play-top .play-hero-links, .play-skip, #play-top .play-desk, #play-top .play-contact, .play-sr-status, #play-top .play-page-number, #play-top .play-launch, .play-battlefield { display:none; }
+        #play-top .play-hero-links, .play-skip, #play-top .play-desk, #play-top .play-contact, .play-sr-status, #play-top .play-page-number { display:none; }
         #play-top .play-hero-index { font-size:30px; }
         #play-top .play-hero-kicker { margin:0 0 6px; font-size:36px; }
         #play-top .play-hero h1 { max-width:1020px; margin:96px 0 0; font-size:112px; line-height:.95; text-wrap:initial; }
@@ -41,7 +39,6 @@ async (page) => {
     // it has painted.
     await card.bringToFront();
     await card.evaluate(() => document.fonts.ready);
-    await card.waitForFunction(() => document.querySelector('[data-battlefield]')?.dataset.topState);
     await card.evaluate(() => {
       const index = document.querySelector('.play-hero-index');
       index.textContent = document.querySelector('meta[property="og:site_name"]').content;
