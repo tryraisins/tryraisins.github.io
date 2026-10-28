@@ -39,7 +39,6 @@ The library has 57 agent skills, and every one has a page and a markdown version
 - Email: tryraisins@gmail.com
 - GitHub: https://github.com/tryraisins
 - LinkedIn: https://www.linkedin.com/in/seun-sowemimo-8518b7249/
-- Medium: https://medium.com/@TryRaisins
 
 ## Related
 
