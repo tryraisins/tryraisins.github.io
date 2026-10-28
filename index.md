@@ -10,7 +10,7 @@ Source revision: f9d54a7
 - [Terror Tracker](https://terrortracker.tryraisins.dev/) (2026, Live incident map): A map for exploring verified security incidents and emerging patterns across Nigeria.
 - [SlopLens](https://sloplens.tryraisins.dev/) (2026, Design audit tool): Scores any web page out of 100 for how template-made it looks, and lists the tells that gave it away.
 - [QuickBillz](https://quickbillz.tryraisins.dev/) (2026, Invoicing product): A straightforward way to create and share invoices, without a monthly subscription.
-- [Talent Hunter](https://talenthunter.tryraisins.dev/) (2026, Resume matching): Compares resumes with a job brief to help teams build a clearer shortlist.
+- [Dyaad](https://dyaad.tryraisins.dev/) (2026, Resume matching): Compares resumes with a job brief to help teams build a clearer shortlist.
 - [StreamSlip](https://streamslip.vercel.app/) (2025, Music utility): Turns YouTube Music listening history into a tidy recap you can share.
 - [yeknal](https://tryraisins.dev/skills/) (2026, Developer tooling): A command-line tool and a library of agent skills that teach coding agents how I review, design, test and ship work.
 - [BetPicks](https://betpicks.tryraisins.dev/) (2026, Sports picks product, currently unavailable): A single place to look through fixtures, odds, and match predictions.
