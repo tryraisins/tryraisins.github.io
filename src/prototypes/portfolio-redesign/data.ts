@@ -75,7 +75,6 @@ export const projects = [
 export const socials = [
   { name: 'GitHub', href: 'https://github.com/tryraisins' },
   { name: 'LinkedIn', href: 'https://www.linkedin.com/in/seun-sowemimo-8518b7249/' },
-  { name: 'Medium', href: 'https://medium.com/@TryRaisins' },
 ];
 
 export const email = 'tryraisins@gmail.com';
