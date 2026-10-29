@@ -1,7 +1,6 @@
 // Drives the page-load sheet from BootOverlay.astro. The inline bootstrap in that
-// component sets <html data-boot="pending"> on every load; paper-ball.ts scrunches
-// the sheet into a ball while the page loads, and this module decides when it
-// opens up again.
+// component sets <html data-boot="pending"> on homepage loads; paper-ball.ts
+// starts with a crumpled ball, and this module decides when it opens.
 //
 // Milliseconds. `max` and `min` are measured from the moment the sheet first
 // painted (the bootstrap's timestamp), not from when this module happened to run.
@@ -14,7 +13,7 @@
 // registered with holdBoot can keep the sheet up; it stays under the bootstrap
 // failsafe in BootOverlay.astro.
 const TIMING = { fontsCap: 1400, holdCap: 6000, min: 600, max: 1400, enter: 1000, lift: 1150, liftCap: 2600, fade: 400 };
-// Reduced motion, or no WebGL2: the flat CSS sheet fades once.
+// Reduced motion, or no WebGL2: the crumpled still fades once.
 const FLAT_TIMING = { fontsCap: 1400, holdCap: 6000, min: 200, max: 800, enter: 0, lift: 150, liftCap: 150, fade: 0 };
 
 // Page work the sheet should cover, such as heavy decorative scripts.
@@ -85,7 +84,7 @@ async function boot(): Promise<void> {
   // The failsafe in the bootstrap may have already dismissed the sheet.
   if (root.dataset.boot !== 'pending') return;
 
-  // The ball hands back to the flat sheet if the machine cannot draw it
+  // The ball hands back to the still if the machine cannot draw it
   // smoothly, so the reveal reads what is on screen now.
   const unfolding = document.getElementById('boot-overlay')?.dataset.paper === 'ball';
   const reveal = unfolding ? TIMING : FLAT_TIMING;

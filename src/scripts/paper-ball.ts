@@ -1,5 +1,5 @@
-// The page-load paper: a full-screen sheet of the notebook that is scrunched
-// into a ball while the page loads, then opened up and smoothed flat when
+// The page-load paper: a crumpled sheet of the notebook that opens and is
+// smoothed flat when
 // boot-overlay.ts starts the reveal. Drawn with WebGL2 so the ball has real
 // depth: the sheet is a grid wrapped onto a sphere and creased by families of
 // fold lines, lit per pixel so every facet catches the light. When the sheet is
@@ -11,13 +11,13 @@
 // the texture, so creases stay sharp without following the triangles.
 //
 // Without hardware WebGL2, or with reduced motion, nothing is mounted and the
-// overlay's CSS paper simply fades (see BootOverlay.astro).
+// overlay's still simply fades (see BootOverlay.astro).
 import { holdBoot } from './boot-overlay';
 
-// Milliseconds. `crumple` is the scrunch into a ball, `rest` the beat the ball
+// Milliseconds. `rest` is the beat the ball
 // sits before it may open, `unfold` the opening and smoothing. Keep `unfold` in
 // step with TIMING.lift in boot-overlay.ts.
-export const PAPER_TIMING = { crumple: 650, rest: 220, unfold: 1150 };
+export const PAPER_TIMING = { rest: 220, unfold: 1150 };
 
 // What the creases leave behind on the smoothed-out sheet: `depth` as a share
 // of the ball's radius, `shade` as a share of the full crease shading.
@@ -174,7 +174,6 @@ void main() {
 type Fold = { dx: number; dy: number; freq: number; phase: number; amp: number };
 
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
 const smoothstep = (a: number, b: number, x: number) => {
   const t = clamp01((x - a) / (b - a));
@@ -287,10 +286,8 @@ function rotation(rx: number, ry: number, rz: number): Float32Array {
   ]);
 }
 
-// Mounts the ball. While its shaders compile the overlay is marked
-// data-paper="loading" and keeps showing the flat CSS sheet, which is exactly
-// the ball's first frame; the scrunch starts once the GPU is ready. If it is
-// not ready in time, or the reveal arrives first, the flat sheet is kept.
+// Mounts the crumpled ball. An embedded still remains visible while shaders
+// compile and is used as the fallback if WebGL cannot run smoothly.
 export function mountPaperBall(): void {
   const root = document.documentElement;
   const overlay = document.getElementById('boot-overlay');
@@ -306,7 +303,7 @@ export function mountPaperBall(): void {
   canvas.width = Math.round(width * dpr);
   canvas.height = Math.round(height * dpr);
   // A software renderer cannot hold this at frame rate and starves the page
-  // beneath, so it is refused and the flat CSS sheet is used instead.
+  // beneath, so it is refused and the crumpled still is used instead.
   const gl = canvas.getContext('webgl2', { antialias: true, alpha: true, premultipliedAlpha: true, powerPreference: 'high-performance', failIfMajorPerformanceCaveat: true });
   if (!gl) return;
   const info = gl.getExtension('WEBGL_debug_renderer_info');
@@ -381,17 +378,17 @@ export function mountPaperBall(): void {
   const lean = { x: 0.16 + Math.random() * 0.08, y: -0.2 + Math.random() * 0.1, z: -(0.5 + Math.random() * 0.5) };
   const mountedAt = performance.now();
   let start = 0;
-  let flat = 1;
+  let flat = 0;
   let unfoldAt = 0;
   let unfoldFrom = 0;
   let done = false;
   let last = 0;
   const gaps: number[] = [];
   let release: () => void = () => {};
-  // The ball must be fully scrunched, and sit for a beat, before it may open.
+  // Let the ball sit for a beat before it opens.
   holdBoot(new Promise<void>((resolve) => { release = resolve; }));
 
-  // Hands the overlay back to the flat CSS sheet. boot-overlay.ts reads
+  // Hands the overlay back to the crumpled still. boot-overlay.ts reads
   // data-paper when the reveal starts, and listens for paper:flat once it has.
   const bail = () => {
     done = true;
@@ -410,8 +407,8 @@ export function mountPaperBall(): void {
   let uRest: WebGLUniformLocation | null = null;
   // How far the sheet has ever been scrunched. Paper that has been balled up
   // never goes back to neat: once it is smoothed out, part of every crease
-  // stays. The opening frame, before any scrunch, is still the neat sheet.
-  let creased = 0;
+  // stays throughout the opening.
+  let creased = 1;
 
   const draw = (now: number) => {
     const t = (now - mountedAt) / 1000;
@@ -438,14 +435,13 @@ export function mountPaperBall(): void {
       gl.getExtension('WEBGL_lose_context')?.loseContext();
       return;
     }
-    // The scrunch is timed from the first frame after the flat one, so any
-    // driver work on that first draw cannot make it jump.
+    // Time the hold from the first animated frame.
     if (!start) {
       start = now;
       last = now;
-      setTimeout(release, PAPER_TIMING.crumple + PAPER_TIMING.rest);
+      setTimeout(release, PAPER_TIMING.rest);
     } else if (gaps.length < 12) {
-      // A machine that cannot draw the ball smoothly gets the flat sheet
+      // A machine that cannot draw the ball smoothly gets the still
       // instead of a stuttering ball and a page starved behind it.
       gaps.push(now - last);
       last = now;
@@ -464,15 +460,13 @@ export function mountPaperBall(): void {
         document.dispatchEvent(new CustomEvent('paper:flat'));
         return;
       }
-    } else {
-      flat = 1 - easeOut(clamp01((now - start) / PAPER_TIMING.crumple));
     }
     draw(now);
     requestAnimationFrame(frame);
   };
 
   // Everything that needs the compiled programs: the crease bake, uniforms
-  // and the first (flat) frame.
+  // and the first crumpled frame.
   const begin = () => {
     if (!linked(gl, program)) {
       bail();
@@ -562,7 +556,7 @@ export function mountPaperBall(): void {
     gl.enable(gl.DEPTH_TEST);
     gl.clearColor(0, 0, 0, 0);
 
-    // The first frame is the flat sheet, identical to the CSS paper beneath it.
+    // Draw the crumpled first frame before replacing the embedded still.
     draw(performance.now());
     overlay.dataset.paper = 'ball';
     requestAnimationFrame(frame);
@@ -581,7 +575,7 @@ export function mountPaperBall(): void {
   requestAnimationFrame(waitForGpu);
 
   document.addEventListener('boot:reveal', () => {
-    // Still compiling when the page is ready: keep the flat sheet.
+    // Still compiling when the page is ready: keep the still.
     if (overlay.dataset.paper === 'loading') {
       bail();
       return;

@@ -1,9 +1,6 @@
 ---
-// Page-load sheet. Every load opens on a flat page of the notebook that is
-// scrunched into a ball while the page loads, then opened up and smoothed flat
-// into the page the visitor is about to read. The ball is drawn by
-// src/scripts/paper-ball.ts; this component holds the flat CSS sheet that is the
-// first frame and the fallback (reduced motion, no WebGL2), which simply fades.
+// Page-load paper starts as a crumpled ball, then opens into the page.
+// An embedded still of the ball covers WebGL startup and serves as the fallback.
 // It must be the first element inside <body> so the bootstrap runs during parse,
 // before anything beneath it can paint. State lives on
 // <html data-boot="pending | revealing | done"> and is driven by
@@ -11,6 +8,7 @@
 // the ball's shaders compile, "ball" while it runs and "flat" once it has
 // opened. With JavaScript off data-boot is never set, so the sheet is never
 // visible.
+import ballStill from './boot-ball.webp?inline';
 ---
 
 <script is:inline>
@@ -30,7 +28,7 @@
   })();
 </script>
 
-<div class="boot" id="boot-overlay" data-boot-overlay>
+<div class="boot" id="boot-overlay" data-boot-overlay style={`--boot-ball-still: url(${ballStill})`}>
   <p class="boot-status" role="status">Loading</p>
 </div>
 
@@ -43,31 +41,23 @@
 
 <style>
   .boot {
-    /* Same paper as the page (blue rules, red margin, grain), repeated here
-       because the sheet sits outside .play-world and .sk-world and cannot read
-       their custom properties. paper-ball.ts draws the same paper into its
-       texture, so swapping from this sheet to the ball is seamless. */
-    --boot-margin: max(clamp(32px, 6vw, 96px), calc((100% - 1280px) / 2));
-    --boot-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .09 0 0 0 0 .08 0 0 0 0 .07 0 0 0 1.6 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.05'/%3E%3C/svg%3E");
     display: none;
     position: fixed;
     inset: 0;
     z-index: 1000;
     overflow: hidden;
-    background-color: #f8f7f1;
-    background-image:
-      var(--boot-grain),
-      repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(52,110,204,.5) 35px, rgba(52,110,204,.5) 36px),
-      linear-gradient(90deg, transparent 0 calc(var(--boot-margin) - 6px), rgba(214,62,56,.55) calc(var(--boot-margin) - 6px), rgba(214,62,56,.55) calc(var(--boot-margin) - 4.5px), transparent calc(var(--boot-margin) - 4.5px) calc(var(--boot-margin) - 1.5px), rgba(214,62,56,.55) calc(var(--boot-margin) - 1.5px), rgba(214,62,56,.55) var(--boot-margin), transparent var(--boot-margin));
-    background-size: 160px 160px, 100% 36px, 100% 100%;
+    background: #e9e6da;
   }
   :global(html[data-boot='pending']) .boot,
   :global(html[data-boot='revealing']) .boot { display: block; }
 
-  /* While the ball runs, the overlay is the desk it lies on. Until its shaders
-     are ready (data-paper="loading") the flat sheet stays, which is exactly
-     the ball's first frame. */
-  .boot:is([data-paper='ball'], [data-paper='flat']) { background: #e9e6da; }
+  /* Show the ball immediately while WebGL prepares. */
+  .boot::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: #e9e6da var(--boot-ball-still) center / calc((min(100vw, 100vh) * .34 + 80px) * 1.4) no-repeat;
+  }
+  .boot:is([data-paper='ball'], [data-paper='flat'])::after { animation: boot-still-out 180ms linear forwards; }
+  @keyframes boot-still-out { to { opacity: 0; visibility: hidden; } }
 
   /* The ball has opened out, still creased: fade onto the page beneath. Keep
      the 400ms in step with TIMING.fade in boot-overlay.ts. The overlay stops
@@ -75,7 +65,7 @@
      invisible sheet over the page. */
   .boot[data-paper='flat'] { animation: boot-fade 400ms linear forwards; }
 
-  /* No ball (reduced motion or no WebGL2): the flat sheet fades once. */
+  /* No ball (reduced motion or no WebGL2): the still fades once. */
   :global(html[data-boot='revealing']) .boot:not([data-paper]) { animation: boot-fade 150ms linear forwards; }
 
   .boot-status { position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -93,10 +83,6 @@
     filter: blur(6px);
     opacity: 0;
     pointer-events: none;
-  }
-
-  @media (max-width: 620px) {
-    .boot { --boot-margin: 28px; }
   }
 
   @keyframes boot-fade {
