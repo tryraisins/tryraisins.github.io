@@ -1,17 +1,18 @@
-// Drives the first-visit loading sheet from BootOverlay.astro. The inline
-// bootstrap in that component decides whether the sheet shows at all by setting
-// <html data-boot="pending">; this module decides when it lifts.
-const STORAGE_KEY = 'tryraisins:boot';
-
+// Drives the page-load sheet from BootOverlay.astro. The inline bootstrap in that
+// component sets <html data-boot="pending"> on every load, which shows the
+// balled-up page; this module decides when it unfolds.
+//
 // Milliseconds. `max` and `min` are measured from the moment the sheet first
 // painted (the bootstrap's timestamp), not from when this module happened to run.
-// `hold` is the beat between starting the sheet's lift and the transform moving:
-// the hero entrance starts at the same moment, so it rises behind a sheet that
-// still covers the page instead of appearing after the page has been uncovered.
-// `holdCap` bounds how long work registered with holdBoot can keep the sheet up;
-// it stays under the bootstrap failsafe in BootOverlay.astro.
-const TIMING = { fontsCap: 1400, holdCap: 6000, min: 700, max: 1600, hold: 200, lift: 620 };
-const REDUCED_TIMING = { fontsCap: 1400, holdCap: 6000, min: 200, max: 800, hold: 0, lift: 150 };
+// `lift` is how long the unfold takes before the node is removed; it matches
+// --boot-unfold in BootOverlay.astro. `enter` is the beat between starting the
+// unfold and releasing the hero entrance: the hero rises while the sheet is still
+// covering most of the page and finishes its fade, so the page is already moving
+// the moment it is uncovered. `holdCap` bounds how long work registered with
+// holdBoot can keep the sheet up; it stays under the bootstrap failsafe in
+// BootOverlay.astro.
+const TIMING = { fontsCap: 1400, holdCap: 6000, min: 600, max: 1400, enter: 440, lift: 800 };
+const REDUCED_TIMING = { fontsCap: 1400, holdCap: 6000, min: 200, max: 800, enter: 0, lift: 150 };
 
 // Page work the sheet should cover, such as heavy decorative scripts.
 const holds: Promise<unknown>[] = [];
@@ -35,8 +36,8 @@ const domReady = () =>
 
 async function boot(): Promise<void> {
   const root = document.documentElement;
-  // Repeat visit, a hash link, or no script: nothing to wait for, and the sheet
-  // should not linger in the DOM.
+  // No sheet on this load (the bootstrap did not run): nothing to wait for, and
+  // the sheet should not linger in the DOM.
   if (root.dataset.boot !== 'pending') {
     document.getElementById('boot-overlay')?.remove();
     return;
@@ -84,8 +85,9 @@ async function boot(): Promise<void> {
     delete root.dataset.bootT0;
     document.getElementById('boot-overlay')?.remove();
     document.dispatchEvent(new CustomEvent('boot:done'));
-    try { sessionStorage.setItem(STORAGE_KEY, 'seen'); } catch { /* private mode */ }
-  }, timing.hold + timing.lift);
+  }, timing.lift);
+  // The promise whenBootRevealed listens to settles after `enter`, not at once.
+  await wait(timing.enter);
 }
 
 // Keeps the sheet up until `work` settles, within TIMING.holdCap. Returns
@@ -99,8 +101,9 @@ export function holdBoot(work: Promise<unknown>): boolean {
 
 let booted: Promise<void> | undefined;
 
-// Idempotent: every importer shares one run. Resolves when the sheet starts to
-// lift (or immediately when there is no sheet), not when it has finished leaving.
+// Idempotent: every importer shares one run. Resolves `enter` ms after the sheet
+// starts to unfold (or immediately when there is no sheet), not when it has
+// finished leaving.
 export function initBootOverlay(): Promise<void> {
   booted ??= boot();
   return booted;

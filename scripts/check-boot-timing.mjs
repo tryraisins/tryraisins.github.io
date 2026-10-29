@@ -1,5 +1,5 @@
-// Measures, on a first visit, when the loading sheet lifts versus when the
-// first doodle starts drawing.
+// Measures when the page-load sheet starts to unfold versus when the first
+// doodle starts drawing.
 // Usage: node scripts/check-boot-timing.mjs [url] [screenshot.png]
 import { chromium } from 'playwright';
 
