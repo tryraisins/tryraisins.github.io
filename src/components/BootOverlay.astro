@@ -1,11 +1,16 @@
 ---
-// Page-load sheet. Every load opens on a balled-up page of the notebook, which
-// unfolds and smooths out into the flat ruled page the visitor is about to read.
+// Page-load sheet. Every load opens on a flat page of the notebook that is
+// scrunched into a ball while the page loads, then opened up and smoothed flat
+// into the page the visitor is about to read. The ball is drawn by
+// src/scripts/paper-ball.ts; this component holds the flat CSS sheet that is the
+// first frame and the fallback (reduced motion, no WebGL2), which simply fades.
 // It must be the first element inside <body> so the bootstrap runs during parse,
 // before anything beneath it can paint. State lives on
 // <html data-boot="pending | revealing | done"> and is driven by
-// src/scripts/boot-overlay.ts. With JavaScript off the attribute is never set,
-// so the sheet is never visible.
+// src/scripts/boot-overlay.ts; the overlay's own data-paper is "loading" while
+// the ball's shaders compile, "ball" while it runs and "flat" once it has
+// opened. With JavaScript off data-boot is never set, so the sheet is never
+// visible.
 ---
 
 <script is:inline>
@@ -27,138 +32,73 @@
 
 <div class="boot" id="boot-overlay" data-boot-overlay>
   <p class="boot-status" role="status">Loading</p>
-  <div class="boot-wad" aria-hidden="true">
-    <div class="boot-sheet">
-      <div class="boot-creases"></div>
-      <div class="boot-volume"></div>
-    </div>
-  </div>
 </div>
 
 <script>
   import { initBootOverlay } from '../scripts/boot-overlay';
+  import { mountPaperBall } from '../scripts/paper-ball';
+  mountPaperBall();
   void initBootOverlay();
 </script>
 
 <style>
   .boot {
-    /* Same paper stack as .play-world in Play.astro, repeated here because the
-       sheet sits outside that element and cannot read its custom properties. The
-       flat end state of the unfold must match that page, so the sheet carries the
-       page's own faint crumple tiles at the page's sizes. */
-    --boot-ink: #171719;
+    /* Same paper as the page (blue rules, red margin, grain), repeated here
+       because the sheet sits outside .play-world and .sk-world and cannot read
+       their custom properties. paper-ball.ts draws the same paper into its
+       texture, so swapping from this sheet to the ball is seamless. */
     --boot-margin: max(clamp(32px, 6vw, 96px), calc((100% - 1280px) / 2));
     --boot-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .09 0 0 0 0 .08 0 0 0 0 .07 0 0 0 1.6 -.35'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.05'/%3E%3C/svg%3E");
-    --boot-crumple: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='c' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='turbulence' baseFrequency='.0042 .0058' numOctaves='3' seed='11' stitchTiles='stitch' result='n'/%3E%3CfeDiffuseLighting in='n' surfaceScale='8' diffuseConstant='1' lighting-color='%23fff' result='l'%3E%3CfeDistantLight azimuth='230' elevation='50'/%3E%3C/feDiffuseLighting%3E%3CfeColorMatrix in='l' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -.45 0 0 0 .345' result='d'/%3E%3CfeColorMatrix in='l' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .9 0 0 0 -.7' result='h'/%3E%3CfeMerge result='m'%3E%3CfeMergeNode in='d'/%3E%3CfeMergeNode in='h'/%3E%3C/feMerge%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0021' numOctaves='2' seed='5' stitchTiles='stitch' result='r'/%3E%3CfeColorMatrix in='r' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3.6 -1.25' result='k'/%3E%3CfeComposite in='m' in2='k' operator='in'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23c%29'/%3E%3C/svg%3E");
-    --boot-crumple-fine: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640'%3E%3Cfilter id='c' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='turbulence' baseFrequency='.0072 .0052' numOctaves='3' seed='29' stitchTiles='stitch' result='n'/%3E%3CfeDiffuseLighting in='n' surfaceScale='6' diffuseConstant='1' lighting-color='%23fff' result='l'%3E%3CfeDistantLight azimuth='230' elevation='50'/%3E%3C/feDiffuseLighting%3E%3CfeColorMatrix in='l' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -.38 0 0 0 .292' result='d'/%3E%3CfeColorMatrix in='l' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 .9 0 0 0 -.7' result='h'/%3E%3CfeMerge result='m'%3E%3CfeMergeNode in='d'/%3E%3CfeMergeNode in='h'/%3E%3C/feMerge%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0029' numOctaves='2' seed='9' stitchTiles='stitch' result='r'/%3E%3CfeColorMatrix in='r' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3.6 -1.25' result='k'/%3E%3CfeComposite in='m' in2='k' operator='in'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23c%29'/%3E%3C/svg%3E");
-    /* Keep in step with TIMING.lift and TIMING.enter in boot-overlay.ts. */
-    --boot-unfold: 800ms;
-    --boot-leave: 280ms;
     display: none;
     position: fixed;
     inset: 0;
     z-index: 1000;
     overflow: hidden;
-    /* The desk the wad lies on. Covered completely once the sheet is flat. */
-    background: #e9e6da;
-    color: var(--boot-ink);
-  }
-  :global(html[data-boot='pending']) .boot,
-  :global(html[data-boot='revealing']) .boot { display: block; }
-  /* The overlay keeps catching pointer events until the sheet has left; the
-     closing keyframe turns them off, so a busy main thread cannot leave an
-     invisible sheet over the page. */
-  :global(html[data-boot='revealing']) .boot { animation: boot-leave var(--boot-leave) linear calc(var(--boot-unfold) - var(--boot-leave)) forwards; }
-
-  .boot-status { position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-
-  /* The shadow lives on a wrapper because clip-path would cut it off the sheet. */
-  .boot-wad {
-    position: absolute;
-    inset: 0;
-    filter: drop-shadow(0 2.2vmin 2.6vmin rgba(23,23,25,.34)) drop-shadow(0 .3vmin .5vmin rgba(23,23,25,.28));
-  }
-  :global(html[data-boot='revealing']) .boot-wad { animation: boot-shadow var(--boot-unfold) linear both; }
-
-  .boot-sheet {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
     background-color: #f8f7f1;
     background-image:
-      var(--boot-crumple),
-      var(--boot-crumple-fine),
       var(--boot-grain),
       repeating-linear-gradient(to bottom, transparent 0, transparent 35px, rgba(52,110,204,.5) 35px, rgba(52,110,204,.5) 36px),
       linear-gradient(90deg, transparent 0 calc(var(--boot-margin) - 6px), rgba(214,62,56,.55) calc(var(--boot-margin) - 6px), rgba(214,62,56,.55) calc(var(--boot-margin) - 4.5px), transparent calc(var(--boot-margin) - 4.5px) calc(var(--boot-margin) - 1.5px), rgba(214,62,56,.55) calc(var(--boot-margin) - 1.5px), rgba(214,62,56,.55) var(--boot-margin), transparent var(--boot-margin));
-    background-size: clamp(560px, 100%, 900px) auto, clamp(400px, 72%, 640px) auto, 160px 160px, 100% 36px, 100% 100%;
-    /* Balled up: a lumpy outline around the middle, shrunk and turned. */
-    clip-path: polygon(calc(50% - 30vmin) calc(50% - 18.7vmin), calc(50% - 34.8vmin) calc(50% - 36.3vmin), calc(50% - 13.7vmin) calc(50% - 42.7vmin), calc(50% + 11.7vmin) calc(50% - 36.5vmin), calc(50% + 29vmin) calc(50% - 30.2vmin), calc(50% + 34.9vmin) calc(50% - 21.8vmin), calc(50% + 38.4vmin) calc(50% - 14.4vmin), calc(50% + 49.1vmin) calc(50% - 6.1vmin), calc(50% + 51vmin) calc(50% + 6.4vmin), calc(50% + 44.9vmin) calc(50% + 16.8vmin), calc(50% + 40.7vmin) calc(50% + 25.4vmin), calc(50% + 30.5vmin) calc(50% + 31.8vmin), calc(50% + 13.1vmin) calc(50% + 40.8vmin), calc(50% - 12.7vmin) calc(50% + 39.6vmin), calc(50% - 31.9vmin) calc(50% + 33.2vmin), calc(50% - 41.6vmin) calc(50% + 26vmin), calc(50% - 43.5vmin) calc(50% + 16.3vmin), calc(50% - 35.2vmin) calc(50% + 4.4vmin), calc(50% - 41.1vmin) calc(50% - 5.1vmin), calc(50% - 36.8vmin) calc(50% - 13.8vmin));
-    transform: scale(.42) rotate(-10deg);
-    transform-origin: 50% 50%;
+    background-size: 160px 160px, 100% 36px, 100% 100%;
   }
-  :global(html[data-boot='revealing']) .boot-sheet { animation: boot-unfold var(--boot-unfold) cubic-bezier(.4, 0, .2, 1) both; }
+  :global(html[data-boot='pending']) .boot,
+  :global(html[data-boot='revealing']) .boot { display: block; }
 
-  /* Heavy creasing for the wad: the page's crease tiles again, smaller and denser,
-     which relaxes to nothing as the paper flattens. */
-  .boot-creases,
-  .boot-volume { position: absolute; inset: 0; pointer-events: none; }
-  .boot-creases {
-    /* The first layer redraws the rules about 2.4px thick: the sheet is at 42%
-       while balled up, and the page's 1px lines would shrink to nothing. */
-    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 33.6px, rgba(52,110,204,.6) 33.6px, rgba(52,110,204,.6) 36px), var(--boot-crumple), var(--boot-crumple-fine), var(--boot-crumple), var(--boot-crumple-fine), var(--boot-crumple);
-    background-size: 100% 36px, 380px auto, 250px auto, 170px auto, 120px auto, 90px auto;
-    background-position: 0 0, 0 0, 70px 40px, 120px 90px, 30px 160px, 200px 20px;
+  /* While the ball runs, the overlay is the desk it lies on. Until its shaders
+     are ready (data-paper="loading") the flat sheet stays, which is exactly
+     the ball's first frame. */
+  .boot:is([data-paper='ball'], [data-paper='flat']) { background: #e9e6da; }
+
+  /* The ball has opened out, still creased: fade onto the page beneath. Keep
+     the 400ms in step with TIMING.fade in boot-overlay.ts. The overlay stops
+     taking pointer events with the fade, so a busy main thread cannot leave an
+     invisible sheet over the page. */
+  .boot[data-paper='flat'] { animation: boot-fade 400ms linear forwards; }
+
+  /* No ball (reduced motion or no WebGL2): the flat sheet fades once. */
+  :global(html[data-boot='revealing']) .boot:not([data-paper]) { animation: boot-fade 150ms linear forwards; }
+
+  .boot-status { position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .boot :global(.boot-ball) { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  /* The ball's contact shadow on the desk, sized and faded by paper-ball.ts. */
+  .boot :global(.boot-ball-shadow) {
+    position: absolute;
+    left: calc(50% + var(--ball) * .1);
+    top: calc(50% + var(--ball) * .34);
+    width: calc(var(--ball) * 1.25);
+    height: calc(var(--ball) * .5);
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(40,34,24,.55), rgba(40,34,24,.22) 55%, rgba(40,34,24,0));
+    filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
   }
-  /* Light from the top left, shade towards the lower right, so the wad has a belly.
-     Kept soft: the ruled lines must still read through it. */
-  .boot-volume {
-    background-image:
-      radial-gradient(circle 30vmin at 40% 38%, rgba(255,255,255,.2), rgba(255,255,255,0) 100%),
-      radial-gradient(circle 52vmin at 54% 54%, rgba(60,50,30,0) 30%, rgba(60,50,30,.5) 100%);
-  }
-  :global(html[data-boot='revealing']) .boot-creases { animation: boot-relax var(--boot-unfold) linear both; }
-  :global(html[data-boot='revealing']) .boot-volume { animation: boot-relax-fast var(--boot-unfold) linear both; }
 
   @media (max-width: 620px) {
     .boot { --boot-margin: 28px; }
   }
 
-  /* Reduced motion: no balled-up paper, no unfolding. A flat sheet fades once. */
-  @media (prefers-reduced-motion: reduce) {
-    .boot-sheet { clip-path: none; transform: none; }
-    .boot-wad { filter: none; }
-    .boot-creases, .boot-volume { display: none; }
-    :global(html[data-boot='revealing']) .boot { animation: boot-fade 150ms linear both; }
-    :global(html[data-boot='revealing']) .boot-sheet,
-    :global(html[data-boot='revealing']) .boot-wad { animation: none; }
-  }
-
-  @keyframes boot-unfold {
-    0% { clip-path: polygon(calc(50% - 30vmin) calc(50% - 18.7vmin), calc(50% - 34.8vmin) calc(50% - 36.3vmin), calc(50% - 13.7vmin) calc(50% - 42.7vmin), calc(50% + 11.7vmin) calc(50% - 36.5vmin), calc(50% + 29vmin) calc(50% - 30.2vmin), calc(50% + 34.9vmin) calc(50% - 21.8vmin), calc(50% + 38.4vmin) calc(50% - 14.4vmin), calc(50% + 49.1vmin) calc(50% - 6.1vmin), calc(50% + 51vmin) calc(50% + 6.4vmin), calc(50% + 44.9vmin) calc(50% + 16.8vmin), calc(50% + 40.7vmin) calc(50% + 25.4vmin), calc(50% + 30.5vmin) calc(50% + 31.8vmin), calc(50% + 13.1vmin) calc(50% + 40.8vmin), calc(50% - 12.7vmin) calc(50% + 39.6vmin), calc(50% - 31.9vmin) calc(50% + 33.2vmin), calc(50% - 41.6vmin) calc(50% + 26vmin), calc(50% - 43.5vmin) calc(50% + 16.3vmin), calc(50% - 35.2vmin) calc(50% + 4.4vmin), calc(50% - 41.1vmin) calc(50% - 5.1vmin), calc(50% - 36.8vmin) calc(50% - 13.8vmin)); transform: scale(.42) rotate(-10deg); }
-    36% { clip-path: polygon(calc(25% - 16.7vmin) calc(25% - 9vmin), calc(35% - 16.3vmin) calc(25% - 20.8vmin), calc(45% - 2.8vmin) calc(25% - 21.8vmin), calc(55% + 9.5vmin) calc(25% - 16.9vmin), calc(65% + 15.8vmin) calc(25% - 14.9vmin), calc(75% + 17.5vmin) calc(25% - 9vmin), calc(75% + 23.6vmin) calc(35% - 8.2vmin), calc(75% + 26.7vmin) calc(45% - 5.6vmin), calc(75% + 26.4vmin) calc(55% + 1.7vmin), calc(75% + 20.7vmin) calc(65% + 7.3vmin), calc(75% + 23.3vmin) calc(75% + 16.5vmin), calc(65% + 11.4vmin) calc(75% + 19.1vmin), calc(55% + 2.3vmin) calc(75% + 19.5vmin), calc(45% - 9.8vmin) calc(75% + 15.6vmin), calc(35% - 11vmin) calc(75% + 13.8vmin), calc(25% - 19.5vmin) calc(75% + 9.5vmin), calc(25% - 22.2vmin) calc(65% + 9.1vmin), calc(25% - 21.2vmin) calc(55% + 6.4vmin), calc(25% - 16.7vmin) calc(45% + 1.3vmin), calc(25% - 14.6vmin) calc(35% - 2.8vmin)); transform: scale(.7) rotate(5deg); }
-    68% { clip-path: polygon(calc(7% - 3.5vmin) calc(7% - 3.3vmin), calc(24.2% - 6.2vmin) calc(7% - 5.8vmin), calc(41.4% - 3.1vmin) calc(7% - 7.4vmin), calc(58.6% + 2vmin) calc(7% - 5.9vmin), calc(75.8% + 4.7vmin) calc(7% - 4.3vmin), calc(93% + 5.4vmin) calc(7% - 3.8vmin), calc(93% + 6.4vmin) calc(24.2% - 2.8vmin), calc(93% + 6.5vmin) calc(41.4% + 0.2vmin), calc(93% + 6.1vmin) calc(58.6% + 0.9vmin), calc(93% + 4.9vmin) calc(75.8% + 3.5vmin), calc(93% + 6.1vmin) calc(93% + 4.7vmin), calc(75.8% + 2.9vmin) calc(93% + 5.6vmin), calc(58.6% + 1vmin) calc(93% + 7vmin), calc(41.4% - 1.6vmin) calc(93% + 6vmin), calc(24.2% - 5.1vmin) calc(93% + 3.9vmin), calc(7% - 6.6vmin) calc(93% + 3.8vmin), calc(7% - 7.3vmin) calc(75.8% + 3vmin), calc(7% - 4.4vmin) calc(58.6% + 1.2vmin), calc(7% - 5.8vmin) calc(41.4% - 2vmin), calc(7% - 6.2vmin) calc(24.2% - 0.8vmin)); transform: scale(.95) rotate(-1.2deg); }
-    100% { clip-path: polygon(0% 0%, 20% 0%, 40% 0%, 60% 0%, 80% 0%, 100% 0%, 100% 20%, 100% 40%, 100% 60%, 100% 80%, 100% 100%, 80% 100%, 60% 100%, 40% 100%, 20% 100%, 0% 100%, 0% 80%, 0% 60%, 0% 40%, 0% 20%); transform: scale(1) rotate(0deg); }
-  }
-  @keyframes boot-relax {
-    0% { opacity: 1; }
-    55% { opacity: .55; }
-    100% { opacity: 0; }
-  }
-  @keyframes boot-relax-fast {
-    0% { opacity: 1; }
-    45% { opacity: .45; }
-    80%, 100% { opacity: 0; }
-  }
-  @keyframes boot-shadow {
-    0% { filter: drop-shadow(0 2.2vmin 2.6vmin rgba(23,23,25,.34)) drop-shadow(0 .3vmin .5vmin rgba(23,23,25,.28)); }
-    70% { filter: drop-shadow(0 .8vmin 1.2vmin rgba(23,23,25,.16)) drop-shadow(0 0 0 rgba(23,23,25,0)); }
-    100% { filter: drop-shadow(0 0 0 rgba(23,23,25,0)) drop-shadow(0 0 0 rgba(23,23,25,0)); }
-  }
-  @keyframes boot-leave {
-    from { opacity: 1; }
-    to { opacity: 0; visibility: hidden; pointer-events: none; }
-  }
   @keyframes boot-fade {
     from { opacity: 1; }
     to { opacity: 0; visibility: hidden; pointer-events: none; }

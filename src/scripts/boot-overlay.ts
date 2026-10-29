@@ -1,18 +1,21 @@
 // Drives the page-load sheet from BootOverlay.astro. The inline bootstrap in that
-// component sets <html data-boot="pending"> on every load, which shows the
-// balled-up page; this module decides when it unfolds.
+// component sets <html data-boot="pending"> on every load; paper-ball.ts scrunches
+// the sheet into a ball while the page loads, and this module decides when it
+// opens up again.
 //
 // Milliseconds. `max` and `min` are measured from the moment the sheet first
 // painted (the bootstrap's timestamp), not from when this module happened to run.
-// `lift` is how long the unfold takes before the node is removed; it matches
-// --boot-unfold in BootOverlay.astro. `enter` is the beat between starting the
-// unfold and releasing the hero entrance: the hero rises while the sheet is still
-// covering most of the page and finishes its fade, so the page is already moving
-// the moment it is uncovered. `holdCap` bounds how long work registered with
-// holdBoot can keep the sheet up; it stays under the bootstrap failsafe in
-// BootOverlay.astro.
-const TIMING = { fontsCap: 1400, holdCap: 6000, min: 600, max: 1400, enter: 440, lift: 800 };
-const REDUCED_TIMING = { fontsCap: 1400, holdCap: 6000, min: 200, max: 800, enter: 0, lift: 150 };
+// `lift` is how long the reveal takes: for the ball, PAPER_TIMING.unfold in
+// paper-ball.ts. The ball's overlay leaves once the paper reports it is flat
+// (`paper:flat`) and the overlay's `fade` in BootOverlay.astro has run, or at
+// `liftCap` if a slow machine never gets there. `enter` is the beat between
+// starting the reveal and releasing the hero entrance, so the hero is writing
+// itself in as the flattened sheet fades away. `holdCap` bounds how long work
+// registered with holdBoot can keep the sheet up; it stays under the bootstrap
+// failsafe in BootOverlay.astro.
+const TIMING = { fontsCap: 1400, holdCap: 6000, min: 600, max: 1400, enter: 1000, lift: 1150, liftCap: 2600, fade: 400 };
+// Reduced motion, or no WebGL2: the flat CSS sheet fades once.
+const FLAT_TIMING = { fontsCap: 1400, holdCap: 6000, min: 200, max: 800, enter: 0, lift: 150, liftCap: 150, fade: 0 };
 
 // Page work the sheet should cover, such as heavy decorative scripts.
 const holds: Promise<unknown>[] = [];
@@ -43,7 +46,11 @@ async function boot(): Promise<void> {
     return;
   }
 
-  const timing = matchMedia('(prefers-reduced-motion: reduce)').matches ? REDUCED_TIMING : TIMING;
+  // paper-ball.ts mounts before this runs and marks the overlay "loading"
+  // while its shaders compile, then "ball" once it draws.
+  const paper = document.getElementById('boot-overlay')?.dataset.paper;
+  const ball = paper === 'loading' || paper === 'ball';
+  const timing = ball ? TIMING : FLAT_TIMING;
   const shownAt = Number(root.dataset.bootT0) || 0;
   const visibleFor = () => performance.now() - shownAt;
 
@@ -78,16 +85,23 @@ async function boot(): Promise<void> {
   // The failsafe in the bootstrap may have already dismissed the sheet.
   if (root.dataset.boot !== 'pending') return;
 
+  // The ball hands back to the flat sheet if the machine cannot draw it
+  // smoothly, so the reveal reads what is on screen now.
+  const unfolding = document.getElementById('boot-overlay')?.dataset.paper === 'ball';
+  const reveal = unfolding ? TIMING : FLAT_TIMING;
+  const flat = unfolding
+    ? new Promise<void>((resolve) => document.addEventListener('paper:flat', () => resolve(), { once: true }))
+    : wait(reveal.lift);
   root.dataset.boot = 'revealing';
   document.dispatchEvent(new CustomEvent('boot:reveal'));
-  setTimeout(() => {
+  void settleWithin(flat.then(() => wait(reveal.fade)), reveal.liftCap).then(() => {
     root.dataset.boot = 'done';
     delete root.dataset.bootT0;
     document.getElementById('boot-overlay')?.remove();
     document.dispatchEvent(new CustomEvent('boot:done'));
-  }, timing.lift);
+  });
   // The promise whenBootRevealed listens to settles after `enter`, not at once.
-  await wait(timing.enter);
+  await wait(reveal.enter);
 }
 
 // Keeps the sheet up until `work` settles, within TIMING.holdCap. Returns
