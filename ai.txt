@@ -2,7 +2,7 @@
 
 Lang: en
 Website: https://tryraisins.dev
-Last Updated: 2026-10-28
+Last Updated: 2026-10-29
 
 ## Permissions
 
