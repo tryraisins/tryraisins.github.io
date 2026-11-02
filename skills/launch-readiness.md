@@ -3,7 +3,7 @@
 > Audits a product before it becomes publicly reachable, covering the legal obligations that attach to the data, payments, email and user content it handles, plus the engineering gates no other workflow owns, then returns one register and a go or no-go.
 
 Canonical: https://tryraisins.dev/skills/launch-readiness/
-Source revision: 5ea4411
+Source revision: 30afa1d
 
 Audit a product for launch readiness before it becomes publicly reachable: legal obligations plus the engineering gates no other workflow owns, then one register and a go or no-go. Use when asked whether an app can ship.
 
@@ -15,7 +15,7 @@ Audit a product for launch readiness before it becomes publicly reachable: legal
 
 ## When not to use
 
-It is not legal advice and it is not a code review. It never states a statutory maximum as a likely outcome, and it marks anything it cannot verify as unassessed rather than guessing.
+It is not legal advice and it is not a code review. An age field, a consent banner or renewal text beside the button counts as an open row, not compliance. It never states a statutory maximum as a likely outcome, and it marks anything it cannot verify as unassessed rather than guessing.
 
 ## Example
 
@@ -29,13 +29,13 @@ Outcome: It builds a data map from the code, checks it against the applicable ob
 Install the Agent Skill "yeknal-launch-readiness" for all my projects.
 
 Source, pinned to a published revision (6 files):
-https://github.com/tryraisins/MD_Files/tree/5ea4411d0fe40093abb1c6b22943d3fbba9ed980/skills/yeknal-launch-readiness
+https://github.com/tryraisins/MD_Files/tree/30afa1ddfaaa7f8294e709d0f183eca563daa8a4/skills/yeknal-launch-readiness
 File list with SHA-256 hashes: https://tryraisins.dev/skills/launch-readiness/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-launch-readiness/
-   git -C yeknal-skill-src checkout 5ea4411d0fe40093abb1c6b22943d3fbba9ed980
+   git -C yeknal-skill-src checkout 30afa1ddfaaa7f8294e709d0f183eca563daa8a4
 2. Copy skills/yeknal-launch-readiness into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-launch-readiness or ~/.claude/skills/yeknal-launch-readiness, so it is available in every project.
 3. If a yeknal-launch-readiness folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 6 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -44,11 +44,11 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/launch-readiness/fi
 ## Files
 
 - `references/evidence-and-fixes.md` (6526 bytes)
-- `references/jurisdictions.md` (15339 bytes)
+- `references/jurisdictions.md` (17791 bytes)
 - `references/launch-gates.md` (7325 bytes)
-- `references/obligations.md` (9795 bytes)
+- `references/obligations.md` (10025 bytes)
 - `references/report-template.md` (3143 bytes)
-- `SKILL.md` (10336 bytes)
+- `SKILL.md` (11940 bytes)
 
 ## Related
 
@@ -59,4 +59,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/launch-readiness/fi
 
 ## Source
 
-- [yeknal-launch-readiness on GitHub](https://github.com/tryraisins/MD_Files/tree/5ea4411d0fe40093abb1c6b22943d3fbba9ed980/skills/yeknal-launch-readiness)
+- [yeknal-launch-readiness on GitHub](https://github.com/tryraisins/MD_Files/tree/30afa1ddfaaa7f8294e709d0f183eca563daa8a4/skills/yeknal-launch-readiness)

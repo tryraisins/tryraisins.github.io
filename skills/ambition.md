@@ -3,7 +3,7 @@
 > Raises a task or prompt to expert standard before work starts, by finding the real bottleneck and naming the raw material, the method and the outside check that decides whether the result is right.
 
 Canonical: https://tryraisins.dev/skills/ambition/
-Source revision: 5ea4411
+Source revision: 30afa1d
 
 Raise a task or brief to expert standard before work starts by naming the real bottleneck, the rawest material, the method and the outside check. Use for "be ambitious", "raise the bar", or "what would an expert do here".
 
@@ -29,13 +29,13 @@ Outcome: It names the bottleneck, asks for production traces and a measurement o
 Install the Agent Skill "yeknal-ambition" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/5ea4411d0fe40093abb1c6b22943d3fbba9ed980/skills/yeknal-ambition
+https://github.com/tryraisins/MD_Files/tree/30afa1ddfaaa7f8294e709d0f183eca563daa8a4/skills/yeknal-ambition
 File list with SHA-256 hashes: https://tryraisins.dev/skills/ambition/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-ambition/
-   git -C yeknal-skill-src checkout 5ea4411d0fe40093abb1c6b22943d3fbba9ed980
+   git -C yeknal-skill-src checkout 30afa1ddfaaa7f8294e709d0f183eca563daa8a4
 2. Copy skills/yeknal-ambition into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-ambition or ~/.claude/skills/yeknal-ambition, so it is available in every project.
 3. If a yeknal-ambition folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -55,4 +55,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/ambition/files.json
 
 ## Source
 
-- [yeknal-ambition on GitHub](https://github.com/tryraisins/MD_Files/tree/5ea4411d0fe40093abb1c6b22943d3fbba9ed980/skills/yeknal-ambition)
+- [yeknal-ambition on GitHub](https://github.com/tryraisins/MD_Files/tree/30afa1ddfaaa7f8294e709d0f183eca563daa8a4/skills/yeknal-ambition)
