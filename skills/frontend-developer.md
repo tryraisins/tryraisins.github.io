@@ -3,7 +3,7 @@
 > Implements or repairs accessible web interfaces in React, Vue or Angular, covering components, state, styling and browser behaviour.
 
 Canonical: https://tryraisins.dev/skills/frontend-developer/
-Source revision: 75bdc93
+Source revision: 5ea4411
 
 Implement or repair web interfaces in React, Vue, or Angular: component architecture, the existing styling system, navigation, and theme persistence. Use for engineering changes, not visual direction.
 
@@ -25,13 +25,13 @@ Outcome: It repairs focus handling and labels, tests the keyboard path and keeps
 Install the Agent Skill "yeknal-frontend-developer" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/75bdc93bdcf6226ebcf270c1b5935f736dd52d21/skills/yeknal-frontend-developer
+https://github.com/tryraisins/MD_Files/tree/5ea4411d0fe40093abb1c6b22943d3fbba9ed980/skills/yeknal-frontend-developer
 File list with SHA-256 hashes: https://tryraisins.dev/skills/frontend-developer/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-frontend-developer/
-   git -C yeknal-skill-src checkout 75bdc93bdcf6226ebcf270c1b5935f736dd52d21
+   git -C yeknal-skill-src checkout 5ea4411d0fe40093abb1c6b22943d3fbba9ed980
 2. Copy skills/yeknal-frontend-developer into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-frontend-developer or ~/.claude/skills/yeknal-frontend-developer, so it is available in every project.
 3. If a yeknal-frontend-developer folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -48,4 +48,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/frontend-developer/
 
 ## Source
 
-- [yeknal-frontend-developer on GitHub](https://github.com/tryraisins/MD_Files/tree/75bdc93bdcf6226ebcf270c1b5935f736dd52d21/skills/yeknal-frontend-developer)
+- [yeknal-frontend-developer on GitHub](https://github.com/tryraisins/MD_Files/tree/5ea4411d0fe40093abb1c6b22943d3fbba9ed980/skills/yeknal-frontend-developer)

@@ -3,7 +3,7 @@
 > Organises work across several agents and tools, covering task distribution, context management, evidence synthesis, prompt engineering and MCP design.
 
 Canonical: https://tryraisins.dev/skills/orchestration-specialists/
-Source revision: 75bdc93
+Source revision: 5ea4411
 
 Organize bounded multi-agent and tool work. Use for task distribution, context management, evidence synthesis, and handoff across agents.
 
@@ -25,13 +25,13 @@ Outcome: It divides the work into bounded tasks, defines what each agent returns
 Install the Agent Skill "yeknal-orchestration-specialists" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/75bdc93bdcf6226ebcf270c1b5935f736dd52d21/skills/yeknal-orchestration-specialists
+https://github.com/tryraisins/MD_Files/tree/5ea4411d0fe40093abb1c6b22943d3fbba9ed980/skills/yeknal-orchestration-specialists
 File list with SHA-256 hashes: https://tryraisins.dev/skills/orchestration-specialists/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-orchestration-specialists/
-   git -C yeknal-skill-src checkout 75bdc93bdcf6226ebcf270c1b5935f736dd52d21
+   git -C yeknal-skill-src checkout 5ea4411d0fe40093abb1c6b22943d3fbba9ed980
 2. Copy skills/yeknal-orchestration-specialists into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-orchestration-specialists or ~/.claude/skills/yeknal-orchestration-specialists, so it is available in every project.
 3. If a yeknal-orchestration-specialists folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -43,4 +43,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/orchestration-speci
 
 ## Source
 
-- [yeknal-orchestration-specialists on GitHub](https://github.com/tryraisins/MD_Files/tree/75bdc93bdcf6226ebcf270c1b5935f736dd52d21/skills/yeknal-orchestration-specialists)
+- [yeknal-orchestration-specialists on GitHub](https://github.com/tryraisins/MD_Files/tree/5ea4411d0fe40093abb1c6b22943d3fbba9ed980/skills/yeknal-orchestration-specialists)
