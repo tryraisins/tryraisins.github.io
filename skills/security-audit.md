@@ -3,7 +3,7 @@
 > Runs a multi-phase security audit of a repository, directory or diff with a coverage ledger, adversarial verification and schema-validated findings.
 
 Canonical: https://tryraisins.dev/skills/security-audit/
-Source revision: fb49e8e
+Source revision: ae2fa4e
 
 Run a multi-phase security audit of a repository, directory, or diff with a coverage ledger, adversarial verification, and schema-validated findings. Use only for explicit audit or pen-test requests, not general security questions.
 
@@ -33,13 +33,13 @@ Needs Node.js for the two zero-dependency validators. Target code is not execute
 Install the Agent Skill "yeknal-security-audit" for all my projects.
 
 Source, pinned to a published revision (19 files):
-https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-security-audit
+https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-security-audit
 File list with SHA-256 hashes: https://tryraisins.dev/skills/security-audit/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-security-audit/
-   git -C yeknal-skill-src checkout fb49e8e59d708829546ea34a51f3feca50424eea
+   git -C yeknal-skill-src checkout ae2fa4e4ee981ac184880fad8de8b8474748a198
 2. Copy skills/yeknal-security-audit into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-security-audit or ~/.claude/skills/yeknal-security-audit, so it is available in every project.
 3. If a yeknal-security-audit folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 19 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -76,4 +76,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-audit/file
 
 ## Source
 
-- [yeknal-security-audit on GitHub](https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-security-audit)
+- [yeknal-security-audit on GitHub](https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-security-audit)

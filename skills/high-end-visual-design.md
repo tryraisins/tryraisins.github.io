@@ -3,7 +3,7 @@
 > Creates art-directed, showcase-level web interfaces with a product-specific visual idea, expressive type, deliberate composition and considered motion.
 
 Canonical: https://tryraisins.dev/skills/high-end-visual-design/
-Source revision: fb49e8e
+Source revision: ae2fa4e
 
 Create premium, art-directed web interfaces with a product-specific visual thesis, expressive type, deliberate composition, material, imagery, and motion. Use only for showcase-level or agency-style briefs.
 
@@ -29,13 +29,13 @@ Outcome: It develops a visual thesis from the product, then builds a page with e
 Install the Agent Skill "yeknal-high-end-visual-design" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-high-end-visual-design
+https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-high-end-visual-design
 File list with SHA-256 hashes: https://tryraisins.dev/skills/high-end-visual-design/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-high-end-visual-design/
-   git -C yeknal-skill-src checkout fb49e8e59d708829546ea34a51f3feca50424eea
+   git -C yeknal-skill-src checkout ae2fa4e4ee981ac184880fad8de8b8474748a198
 2. Copy skills/yeknal-high-end-visual-design into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-high-end-visual-design or ~/.claude/skills/yeknal-high-end-visual-design, so it is available in every project.
 3. If a yeknal-high-end-visual-design folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -49,8 +49,8 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/high-end-visual-des
 ## Related
 
 - [Design taste for the web](https://tryraisins.dev/skills/design-taste-frontend/): Designs and builds expressive landing pages, portfolios and marketing sites from real product evidence instead of reusable AI layouts.
-- [Frontend design](https://tryraisins.dev/skills/frontend-design/): Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette and interface copy.
+- [Frontend design](https://tryraisins.dev/skills/frontend-design/): Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette, interface copy, and where the visual richness goes.
 
 ## Source
 
-- [yeknal-high-end-visual-design on GitHub](https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-high-end-visual-design)
+- [yeknal-high-end-visual-design on GitHub](https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-high-end-visual-design)

@@ -1,9 +1,9 @@
 # Frontend design
 
-> Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette and interface copy.
+> Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette, interface copy, and where the visual richness goes.
 
 Canonical: https://tryraisins.dev/skills/frontend-design/
-Source revision: fb49e8e
+Source revision: ae2fa4e
 
 Create distinctive visual direction for new or substantially reshaped UI. Use for typography, composition, palette, interface copy, and anti-generic frontend design.
 
@@ -25,13 +25,13 @@ Outcome: It sets a visual direction from the product’s content, picks type and
 Install the Agent Skill "yeknal-frontend-design" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-frontend-design
+https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-frontend-design
 File list with SHA-256 hashes: https://tryraisins.dev/skills/frontend-design/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-frontend-design/
-   git -C yeknal-skill-src checkout fb49e8e59d708829546ea34a51f3feca50424eea
+   git -C yeknal-skill-src checkout ae2fa4e4ee981ac184880fad8de8b8474748a198
 2. Copy skills/yeknal-frontend-design into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-frontend-design or ~/.claude/skills/yeknal-frontend-design, so it is available in every project.
 3. If a yeknal-frontend-design folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -41,14 +41,14 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/frontend-design/fil
 
 - `agents/openai.yaml` (326 bytes)
 - `LICENSE.txt` (10775 bytes)
-- `SKILL.md` (7821 bytes)
+- `SKILL.md` (8021 bytes)
 
 ## Related
 
-- [UI quality baseline](https://tryraisins.dev/skills/ui-quality-baseline/): Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI.
+- [UI quality baseline](https://tryraisins.dev/skills/ui-quality-baseline/): Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI, including where the visual richness belongs.
 - [Design reference research](https://tryraisins.dev/skills/design-reference-research/): Researches comparable products and collects references into an evidence ledger and brief, so design decisions come from what works rather than what’s fashionable.
-- [Redesign an existing product](https://tryraisins.dev/skills/redesign-existing-projects/): Refreshes the look or flow of a working site or app without breaking its behaviour or the data behind it.
+- [Redesign an existing product](https://tryraisins.dev/skills/redesign-existing-projects/): Refreshes the look or flow of a working site or app without breaking its behaviour or the data behind it, after deciding whether the screen needs a redesign or a targeted repair.
 
 ## Source
 
-- [yeknal-frontend-design on GitHub](https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-frontend-design)
+- [yeknal-frontend-design on GitHub](https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-frontend-design)

@@ -3,7 +3,7 @@
 > Designs clean editorial interfaces with warm monochrome palettes, strong typographic contrast, flat grids and restrained depth.
 
 Canonical: https://tryraisins.dev/skills/minimalist-ui/
-Source revision: fb49e8e
+Source revision: ae2fa4e
 
 Design clean editorial interfaces with warm monochrome palettes, typographic contrast, flat bento grids, and restrained depth. Use when the brief calls for premium utilitarian minimalism.
 
@@ -25,13 +25,13 @@ Outcome: It reduces the palette, strengthens the type hierarchy and groups setti
 Install the Agent Skill "yeknal-minimalist-ui" for all my projects.
 
 Source, pinned to a published revision (2 files):
-https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-minimalist-ui
+https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-minimalist-ui
 File list with SHA-256 hashes: https://tryraisins.dev/skills/minimalist-ui/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-minimalist-ui/
-   git -C yeknal-skill-src checkout fb49e8e59d708829546ea34a51f3feca50424eea
+   git -C yeknal-skill-src checkout ae2fa4e4ee981ac184880fad8de8b8474748a198
 2. Copy skills/yeknal-minimalist-ui into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-minimalist-ui or ~/.claude/skills/yeknal-minimalist-ui, so it is available in every project.
 3. If a yeknal-minimalist-ui folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 2 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -45,8 +45,8 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/minimalist-ui/files
 ## Related
 
 - [Industrial brutalist UI](https://tryraisins.dev/skills/industrial-brutalist-ui/): Designs raw, mechanical interfaces that mix Swiss print typography with terminal aesthetics: rigid grids, extreme type contrast and utilitarian colour.
-- [Frontend design](https://tryraisins.dev/skills/frontend-design/): Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette and interface copy.
+- [Frontend design](https://tryraisins.dev/skills/frontend-design/): Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette, interface copy, and where the visual richness goes.
 
 ## Source
 
-- [yeknal-minimalist-ui on GitHub](https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-minimalist-ui)
+- [yeknal-minimalist-ui on GitHub](https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-minimalist-ui)

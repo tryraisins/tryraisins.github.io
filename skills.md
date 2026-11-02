@@ -3,7 +3,7 @@
 > 57 free agent skills for Claude Code, Codex, Cursor and other coding agents, grouped by the task each one serves.
 
 Canonical: https://tryraisins.dev/skills/
-Source revision: fb49e8e
+Source revision: ae2fa4e
 
 ## How to install
 
@@ -27,8 +27,8 @@ Each skill page carries an install prompt pinned to a published revision, with a
 
 ## Design interfaces
 
-- [Frontend design](https://tryraisins.dev/skills/frontend-design.md): Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette and interface copy.
-- [Redesign an existing product](https://tryraisins.dev/skills/redesign-existing-projects.md): Refreshes the look or flow of a working site or app without breaking its behaviour or the data behind it.
+- [Frontend design](https://tryraisins.dev/skills/frontend-design.md): Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette, interface copy, and where the visual richness goes.
+- [Redesign an existing product](https://tryraisins.dev/skills/redesign-existing-projects.md): Refreshes the look or flow of a working site or app without breaking its behaviour or the data behind it, after deciding whether the screen needs a redesign or a targeted repair.
 - [Apple-style interface design](https://tryraisins.dev/skills/apple-design.md): Brings Apple’s approach to fluid, physical motion and interface design to the web, from springs and interruptible gestures to materials, depth and typography.
 - [Brand kit images](https://tryraisins.dev/skills/brandkit.md): Generates polished brand-guideline boards, logo systems and identity presentations as images, with deliberate composition and sparse typography.
 - [Break UI](https://tryraisins.dev/skills/break-ui.md): Stress-tests a screen with realistic worst-case data, such as long names, missing fields, huge counts and non-Latin text, and reports every break with its fix.
@@ -44,9 +44,9 @@ Each skill page carries an install prompt pinned to a published revision, with a
 - [Mobile app design](https://tryraisins.dev/skills/mobile-app-design.md): Designs and builds mobile screens and flows that feel native, especially in Expo or React Native, covering navigation, controls, states, accessibility and performance.
 - [Pick a UI library](https://tryraisins.dev/skills/pick-ui-library.md): Recommends the right library or inspectable source registry for a frontend need from a curated list, from accessible primitives to charts, toasts and drag and drop.
 - [Prototype variants](https://tryraisins.dev/skills/prototype.md): Builds several genuinely different versions of a UI piece behind a visual picker, so you can flip between them live and keep the one that feels right.
-- [Slop scan](https://tryraisins.dev/skills/slopscan.md): Scans a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, and writes a report that explains each finding and how to fix it.
+- [Slop scan](https://tryraisins.dev/skills/slopscan.md): Scans a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, and writes a report that explains each finding, the class it falls into, and how to fix it.
 - [UI and UX design](https://tryraisins.dev/skills/ui-ux-designer.md): Designs user-centred interface systems that balance intuitive flows with a distinctive visual direction, from information architecture to interaction patterns.
-- [UI quality baseline](https://tryraisins.dev/skills/ui-quality-baseline.md): Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI.
+- [UI quality baseline](https://tryraisins.dev/skills/ui-quality-baseline.md): Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI, including where the visual richness belongs.
 
 ## Motion
 
@@ -77,8 +77,8 @@ Each skill page carries an install prompt pinned to a published revision, with a
 - [Security audit](https://tryraisins.dev/skills/security-audit.md): Runs a multi-phase security audit of a repository, directory or diff with a coverage ledger, adversarial verification and schema-validated findings.
 - [Security best practices](https://tryraisins.dev/skills/security-best-practices.md): Reviews Python, JavaScript, TypeScript or Go code for security issues and writes secure-by-default code when you ask for it.
 - [Sentry errors](https://tryraisins.dev/skills/sentry.md): Inspects Sentry issues and events, summarises recent production errors and pulls basic health data, using read-only queries.
-- [Slop scan](https://tryraisins.dev/skills/slopscan.md): Scans a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, and writes a report that explains each finding and how to fix it.
-- [UI quality baseline](https://tryraisins.dev/skills/ui-quality-baseline.md): Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI.
+- [Slop scan](https://tryraisins.dev/skills/slopscan.md): Scans a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, and writes a report that explains each finding, the class it falls into, and how to fix it.
+- [UI quality baseline](https://tryraisins.dev/skills/ui-quality-baseline.md): Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI, including where the visual richness belongs.
 - [Verification harness](https://tryraisins.dev/skills/verification-harness.md): Generates a project-local skill that launches the real app, drives a feature the way a user would, and captures proof, with a feature map for the next agent to follow.
 
 ## Security

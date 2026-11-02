@@ -1,16 +1,17 @@
 # UI quality baseline
 
-> Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI.
+> Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI, including where the visual richness belongs.
 
 Canonical: https://tryraisins.dev/skills/ui-quality-baseline/
-Source revision: fb49e8e
+Source revision: ae2fa4e
 
-Apply one shared quality contract to any visible UI, covering tokens, spacing and optical centering, typography, icons, responsive containment, states, loading, motion, copy, and rendered QA. Use whenever visible interface work starts.
+Apply one shared quality contract to any visible UI, covering tokens, spacing and optical centering, typography, icons, responsive containment, states, loading, motion, copy, where the visual richness belongs, and rendered QA. Use whenever visible interface work starts.
 
 ## When to use
 
 - You want every UI change held to the same standard.
 - Layouts break at small widths or with large text.
+- A screen is clean but could belong to any product.
 - Loading, empty and error states keep getting forgotten.
 
 ## Example
@@ -25,13 +26,13 @@ Outcome: It checks spacing, contrast, focus, responsive containment and states, 
 Install the Agent Skill "yeknal-ui-quality-baseline" for all my projects.
 
 Source, pinned to a published revision (14 files):
-https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-ui-quality-baseline
+https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-ui-quality-baseline
 File list with SHA-256 hashes: https://tryraisins.dev/skills/ui-quality-baseline/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-ui-quality-baseline/
-   git -C yeknal-skill-src checkout fb49e8e59d708829546ea34a51f3feca50424eea
+   git -C yeknal-skill-src checkout ae2fa4e4ee981ac184880fad8de8b8474748a198
 2. Copy skills/yeknal-ui-quality-baseline into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-ui-quality-baseline or ~/.claude/skills/yeknal-ui-quality-baseline, so it is available in every project.
 3. If a yeknal-ui-quality-baseline folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 14 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -52,13 +53,13 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/ui-quality-baseline
 - `references/page-and-flow.md` (5088 bytes)
 - `references/typeface-options.md` (3304 bytes)
 - `references/typography.md` (5735 bytes)
-- `SKILL.md` (28827 bytes)
+- `SKILL.md` (30955 bytes)
 
 ## Related
 
-- [Frontend design](https://tryraisins.dev/skills/frontend-design/): Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette and interface copy.
+- [Frontend design](https://tryraisins.dev/skills/frontend-design/): Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette, interface copy, and where the visual richness goes.
 - [Break UI](https://tryraisins.dev/skills/break-ui/): Stress-tests a screen with realistic worst-case data, such as long names, missing fields, huge counts and non-Latin text, and reports every break with its fix.
 
 ## Source
 
-- [yeknal-ui-quality-baseline on GitHub](https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-ui-quality-baseline)
+- [yeknal-ui-quality-baseline on GitHub](https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-ui-quality-baseline)

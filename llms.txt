@@ -4,7 +4,7 @@
 
 The library has 57 agent skills, and every one has a page and a markdown version at the same path with a `.md` suffix so an agent does not have to parse HTML.
 
-Source revision: fb49e8e. Repository: https://github.com/tryraisins/MD_Files. Contact: tryraisins@gmail.com.
+Source revision: ae2fa4e. Repository: https://github.com/tryraisins/MD_Files. Contact: tryraisins@gmail.com.
 
 ## Pages
 
@@ -17,11 +17,11 @@ Source revision: fb49e8e. Repository: https://github.com/tryraisins/MD_Files. Co
 
 - [Implement](https://tryraisins.dev/skills/implement.md): Takes a scoped feature or fix from plan to working code while keeping the rest of the repository behaving as it did.
 - [Code review](https://tryraisins.dev/skills/review.md): Reads code or a whole system for real defects, regressions and maintainability risks, then sorts what it finds by severity and effort.
-- [Frontend design](https://tryraisins.dev/skills/frontend-design.md): Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette and interface copy.
+- [Frontend design](https://tryraisins.dev/skills/frontend-design.md): Sets a distinctive visual direction for new or heavily reshaped UI, from typography and composition to palette, interface copy, and where the visual richness goes.
 - [Troubleshoot](https://tryraisins.dev/skills/troubleshoot.md): Works back from a reproducible error, failing build or slowdown to its cause before it suggests a fix.
 - [Browser automation](https://tryraisins.dev/skills/playwright.md): Lets your agent open a real browser from the terminal to click through a flow, fill forms, take screenshots and read what’s on the page, so it can show you a change working.
 - [Testing strategy](https://tryraisins.dev/skills/testing-strategy.md): Keeps verification end to end: proves behavior through the real entry point, bans new unit tests, and asks before any isolated check.
-- [Redesign an existing product](https://tryraisins.dev/skills/redesign-existing-projects.md): Refreshes the look or flow of a working site or app without breaking its behaviour or the data behind it.
+- [Redesign an existing product](https://tryraisins.dev/skills/redesign-existing-projects.md): Refreshes the look or flow of a working site or app without breaking its behaviour or the data behind it, after deciding whether the screen needs a redesign or a targeted repair.
 - [Web animation](https://tryraisins.dev/skills/animate.md): Adds purposeful, accessible motion to components, pages, scrolling, gestures, SVG and canvas, with sensible timing and a reduced-motion fallback.
 - [Application security](https://tryraisins.dev/skills/application-security.md): Designs or hardens security across web apps, APIs, cloud setup, CI/CD pipelines, payments and AI features, covering the OWASP-style risks a product is likely to face.
 - [Git](https://tryraisins.dev/skills/git.md): Handles status, diffs, branches, commits, merges and pushes while leaving unrelated work in your checkout alone.
@@ -67,10 +67,10 @@ Source revision: fb49e8e. Repository: https://github.com/tryraisins/MD_Files. Co
 - [Security best practices](https://tryraisins.dev/skills/security-best-practices.md): Reviews Python, JavaScript, TypeScript or Go code for security issues and writes secure-by-default code when you ask for it.
 - [Security ownership map](https://tryraisins.dev/skills/security-ownership-map.md): Maps who owns sensitive code from Git history and highlights bus-factor risk and code nobody looks after.
 - [Sentry errors](https://tryraisins.dev/skills/sentry.md): Inspects Sentry issues and events, summarises recent production errors and pulls basic health data, using read-only queries.
-- [Slop scan](https://tryraisins.dev/skills/slopscan.md): Scans a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, and writes a report that explains each finding and how to fix it.
+- [Slop scan](https://tryraisins.dev/skills/slopscan.md): Scans a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, and writes a report that explains each finding, the class it falls into, and how to fix it.
 - [Threat model](https://tryraisins.dev/skills/security-threat-model.md): Builds a threat model grounded in the actual repository, covering assets, trust boundaries, abuse paths and mitigations.
 - [UI and UX design](https://tryraisins.dev/skills/ui-ux-designer.md): Designs user-centred interface systems that balance intuitive flows with a distinctive visual direction, from information architecture to interaction patterns.
-- [UI quality baseline](https://tryraisins.dev/skills/ui-quality-baseline.md): Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI.
+- [UI quality baseline](https://tryraisins.dev/skills/ui-quality-baseline.md): Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI, including where the visual richness belongs.
 - [Verification harness](https://tryraisins.dev/skills/verification-harness.md): Generates a project-local skill that launches the real app, drives a feature the way a user would, and captures proof, with a feature map for the next agent to follow.
 
 ## Machine-readable

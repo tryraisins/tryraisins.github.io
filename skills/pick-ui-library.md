@@ -3,7 +3,7 @@
 > Recommends the right library or inspectable source registry for a frontend need from a curated list, from accessible primitives to charts, toasts and drag and drop.
 
 Canonical: https://tryraisins.dev/skills/pick-ui-library/
-Source revision: fb49e8e
+Source revision: ae2fa4e
 
 Pick a frontend library or inspectable source registry from a curated list of accessible primitives, React components, motion, charts, virtualization, drag and drop, toasts, and styling. Only runs when explicitly invoked.
 
@@ -29,13 +29,13 @@ Outcome: It compares a few candidates from its list and recommends one with reas
 Install the Agent Skill "yeknal-pick-ui-library" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-pick-ui-library
+https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-pick-ui-library
 File list with SHA-256 hashes: https://tryraisins.dev/skills/pick-ui-library/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-pick-ui-library/
-   git -C yeknal-skill-src checkout fb49e8e59d708829546ea34a51f3feca50424eea
+   git -C yeknal-skill-src checkout ae2fa4e4ee981ac184880fad8de8b8474748a198
 2. Copy skills/yeknal-pick-ui-library into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-pick-ui-library or ~/.claude/skills/yeknal-pick-ui-library, so it is available in every project.
 3. If a yeknal-pick-ui-library folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -51,4 +51,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/pick-ui-library/fil
 
 ## Source
 
-- [yeknal-pick-ui-library on GitHub](https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-pick-ui-library)
+- [yeknal-pick-ui-library on GitHub](https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-pick-ui-library)
