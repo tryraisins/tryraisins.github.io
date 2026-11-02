@@ -3,7 +3,7 @@
 > Keeps verification end to end: proves behavior through the real entry point, bans new unit tests, and asks before any isolated check.
 
 Canonical: https://tryraisins.dev/skills/testing-strategy/
-Source revision: 30afa1d
+Source revision: fb49e8e
 
 Use before writing or running tests to enforce end-to-end-only verification. Do not write unit tests; prove behavior through the real entry point, keep a repeatable artifact, and report what stayed unverified.
 
@@ -25,13 +25,13 @@ Outcome: It maps the flow's real end-to-end path and failure states, then propos
 Install the Agent Skill "yeknal-testing-strategy" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/30afa1ddfaaa7f8294e709d0f183eca563daa8a4/skills/yeknal-testing-strategy
+https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-testing-strategy
 File list with SHA-256 hashes: https://tryraisins.dev/skills/testing-strategy/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-testing-strategy/
-   git -C yeknal-skill-src checkout 30afa1ddfaaa7f8294e709d0f183eca563daa8a4
+   git -C yeknal-skill-src checkout fb49e8e59d708829546ea34a51f3feca50424eea
 2. Copy skills/yeknal-testing-strategy into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-testing-strategy or ~/.claude/skills/yeknal-testing-strategy, so it is available in every project.
 3. If a yeknal-testing-strategy folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -48,4 +48,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/testing-strategy/fi
 
 ## Source
 
-- [yeknal-testing-strategy on GitHub](https://github.com/tryraisins/MD_Files/tree/30afa1ddfaaa7f8294e709d0f183eca563daa8a4/skills/yeknal-testing-strategy)
+- [yeknal-testing-strategy on GitHub](https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-testing-strategy)

@@ -3,7 +3,7 @@
 > Designs and builds mobile screens and flows that feel native, especially in Expo or React Native, covering navigation, controls, states, accessibility and performance.
 
 Canonical: https://tryraisins.dev/skills/mobile-app-design/
-Source revision: 30afa1d
+Source revision: fb49e8e
 
 Design and implement native-feeling mobile screens and flows, especially Expo or React Native. Use for navigation, controls, states, accessibility, and performance.
 
@@ -25,13 +25,13 @@ Outcome: It plans the screens and navigation, builds them with native-feeling co
 Install the Agent Skill "yeknal-mobile-app-design" for all my projects.
 
 Source, pinned to a published revision (4 files):
-https://github.com/tryraisins/MD_Files/tree/30afa1ddfaaa7f8294e709d0f183eca563daa8a4/skills/yeknal-mobile-app-design
+https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-mobile-app-design
 File list with SHA-256 hashes: https://tryraisins.dev/skills/mobile-app-design/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-mobile-app-design/
-   git -C yeknal-skill-src checkout 30afa1ddfaaa7f8294e709d0f183eca563daa8a4
+   git -C yeknal-skill-src checkout fb49e8e59d708829546ea34a51f3feca50424eea
 2. Copy skills/yeknal-mobile-app-design into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-mobile-app-design or ~/.claude/skills/yeknal-mobile-app-design, so it is available in every project.
 3. If a yeknal-mobile-app-design folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 4 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -51,4 +51,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/mobile-app-design/f
 
 ## Source
 
-- [yeknal-mobile-app-design on GitHub](https://github.com/tryraisins/MD_Files/tree/30afa1ddfaaa7f8294e709d0f183eca563daa8a4/skills/yeknal-mobile-app-design)
+- [yeknal-mobile-app-design on GitHub](https://github.com/tryraisins/MD_Files/tree/fb49e8e59d708829546ea34a51f3feca50424eea/skills/yeknal-mobile-app-design)
