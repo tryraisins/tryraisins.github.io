@@ -3,7 +3,7 @@
 > Runs a multi-phase security audit of a repository, directory or diff with a coverage ledger, adversarial verification and schema-validated findings.
 
 Canonical: https://tryraisins.dev/skills/security-audit/
-Source revision: f9d54a7
+Source revision: 75bdc93
 
 Run a multi-phase security audit of a repository, directory, or diff with a coverage ledger, adversarial verification, and schema-validated findings. Use only for explicit audit or pen-test requests, not general security questions.
 
@@ -33,13 +33,13 @@ Needs Node.js for the two zero-dependency validators. Target code is not execute
 Install the Agent Skill "yeknal-security-audit" for all my projects.
 
 Source, pinned to a published revision (19 files):
-https://github.com/tryraisins/MD_Files/tree/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-security-audit
+https://github.com/tryraisins/MD_Files/tree/75bdc93bdcf6226ebcf270c1b5935f736dd52d21/skills/yeknal-security-audit
 File list with SHA-256 hashes: https://tryraisins.dev/skills/security-audit/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-security-audit/
-   git -C yeknal-skill-src checkout f9d54a7328469fdaa4e19120a94a22ccb3d97160
+   git -C yeknal-skill-src checkout 75bdc93bdcf6226ebcf270c1b5935f736dd52d21
 2. Copy skills/yeknal-security-audit into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-security-audit or ~/.claude/skills/yeknal-security-audit, so it is available in every project.
 3. If a yeknal-security-audit folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 19 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -69,11 +69,11 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-audit/file
 
 ## Related
 
-- [Application security](https://tryraisins.dev/skills/application-security/): Designs or hardens security across web apps, APIs, cloud setup, CI/CD pipelines and AI features, covering the OWASP-style risks a product is likely to face.
+- [Application security](https://tryraisins.dev/skills/application-security/): Designs or hardens security across web apps, APIs, cloud setup, CI/CD pipelines, payments and AI features, covering the OWASP-style risks a product is likely to face.
 - [Threat model](https://tryraisins.dev/skills/security-threat-model/): Builds a threat model grounded in the actual repository, covering assets, trust boundaries, abuse paths and mitigations.
 - [Security best practices](https://tryraisins.dev/skills/security-best-practices/): Reviews Python, JavaScript, TypeScript or Go code for security issues and writes secure-by-default code when you ask for it.
 - [Security ownership map](https://tryraisins.dev/skills/security-ownership-map/): Maps who owns sensitive code from Git history and highlights bus-factor risk and code nobody looks after.
 
 ## Source
 
-- [yeknal-security-audit on GitHub](https://github.com/tryraisins/MD_Files/tree/f9d54a7328469fdaa4e19120a94a22ccb3d97160/skills/yeknal-security-audit)
+- [yeknal-security-audit on GitHub](https://github.com/tryraisins/MD_Files/tree/75bdc93bdcf6226ebcf270c1b5935f736dd52d21/skills/yeknal-security-audit)

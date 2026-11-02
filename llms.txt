@@ -4,7 +4,7 @@
 
 The library has 57 agent skills, and every one has a page and a markdown version at the same path with a `.md` suffix so an agent does not have to parse HTML.
 
-Source revision: f9d54a7. Repository: https://github.com/tryraisins/MD_Files. Contact: tryraisins@gmail.com.
+Source revision: 75bdc93. Repository: https://github.com/tryraisins/MD_Files. Contact: tryraisins@gmail.com.
 
 ## Pages
 
@@ -23,7 +23,7 @@ Source revision: f9d54a7. Repository: https://github.com/tryraisins/MD_Files. Co
 - [Testing strategy](https://tryraisins.dev/skills/testing-strategy.md): Keeps verification end to end: proves behavior through the real entry point, bans new unit tests, and asks before any isolated check.
 - [Redesign an existing product](https://tryraisins.dev/skills/redesign-existing-projects.md): Refreshes the look or flow of a working site or app without breaking its behaviour or the data behind it.
 - [Web animation](https://tryraisins.dev/skills/animate.md): Adds purposeful, accessible motion to components, pages, scrolling, gestures, SVG and canvas, with sensible timing and a reduced-motion fallback.
-- [Application security](https://tryraisins.dev/skills/application-security.md): Designs or hardens security across web apps, APIs, cloud setup, CI/CD pipelines and AI features, covering the OWASP-style risks a product is likely to face.
+- [Application security](https://tryraisins.dev/skills/application-security.md): Designs or hardens security across web apps, APIs, cloud setup, CI/CD pipelines, payments and AI features, covering the OWASP-style risks a product is likely to face.
 - [Git](https://tryraisins.dev/skills/git.md): Handles status, diffs, branches, commits, merges and pushes while leaving unrelated work in your checkout alone.
 - [Project handoff](https://tryraisins.dev/skills/project-handoff.md): Keeps a short HANDOFF.md at the root of the repository so the next session, or the next person, can pick up exactly where the work stopped.
 - [Address PR comments](https://tryraisins.dev/skills/gh-address-comments.md): Works through the review and issue comments on the open GitHub pull request for your current branch, using the GitHub CLI.

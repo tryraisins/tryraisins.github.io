@@ -3,7 +3,7 @@
 > 57 free agent skills for Claude Code, Codex, Cursor and other coding agents, grouped by the task each one serves.
 
 Canonical: https://tryraisins.dev/skills/
-Source revision: f9d54a7
+Source revision: 75bdc93
 
 ## How to install
 
@@ -83,7 +83,7 @@ Each skill page carries an install prompt pinned to a published revision, with a
 
 ## Security
 
-- [Application security](https://tryraisins.dev/skills/application-security.md): Designs or hardens security across web apps, APIs, cloud setup, CI/CD pipelines and AI features, covering the OWASP-style risks a product is likely to face.
+- [Application security](https://tryraisins.dev/skills/application-security.md): Designs or hardens security across web apps, APIs, cloud setup, CI/CD pipelines, payments and AI features, covering the OWASP-style risks a product is likely to face.
 - [Launch readiness](https://tryraisins.dev/skills/launch-readiness.md): Audits a product before it becomes publicly reachable, covering the legal obligations that attach to the data, payments, email and user content it handles, plus the engineering gates no other workflow owns, then returns one register and a go or no-go.
 - [Security audit](https://tryraisins.dev/skills/security-audit.md): Runs a multi-phase security audit of a repository, directory or diff with a coverage ledger, adversarial verification and schema-validated findings.
 - [Security best practices](https://tryraisins.dev/skills/security-best-practices.md): Reviews Python, JavaScript, TypeScript or Go code for security issues and writes secure-by-default code when you ask for it.
