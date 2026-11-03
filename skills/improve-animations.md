@@ -3,7 +3,7 @@
 > Surveys an app’s existing motion like a senior motion designer would, then writes a prioritised audit with self-contained plans that other agents can carry out.
 
 Canonical: https://tryraisins.dev/skills/improve-animations/
-Source revision: ae2fa4e
+Source revision: 2459c7d
 
 Audit animation and motion code and produce prioritized, self-contained plans for another agent to execute; never edits source. Use when asked to improve or audit the motion, not to review one diff (`yeknal-review-animations`).
 
@@ -29,13 +29,13 @@ Outcome: It inventories each animation, ranks the problems and writes a standalo
 Install the Agent Skill "yeknal-improve-animations" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-improve-animations
+https://github.com/tryraisins/MD_Files/tree/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-improve-animations
 File list with SHA-256 hashes: https://tryraisins.dev/skills/improve-animations/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-improve-animations/
-   git -C yeknal-skill-src checkout ae2fa4e4ee981ac184880fad8de8b8474748a198
+   git -C yeknal-skill-src checkout 2459c7d4a4cb5f057943ff049c85c44ac24d0b8d
 2. Copy skills/yeknal-improve-animations into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-improve-animations or ~/.claude/skills/yeknal-improve-animations, so it is available in every project.
 3. If a yeknal-improve-animations folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -54,4 +54,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/improve-animations/
 
 ## Source
 
-- [yeknal-improve-animations on GitHub](https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-improve-animations)
+- [yeknal-improve-animations on GitHub](https://github.com/tryraisins/MD_Files/tree/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-improve-animations)

@@ -1,9 +1,9 @@
 # Agent skills
 
-> 57 free agent skills for Claude Code, Codex, Cursor and other coding agents, grouped by the task each one serves.
+> 58 free agent skills for Claude Code, Codex, Cursor and other coding agents, grouped by the task each one serves.
 
 Canonical: https://tryraisins.dev/skills/
-Source revision: ae2fa4e
+Source revision: 2459c7d
 
 ## How to install
 
@@ -17,6 +17,7 @@ Each skill page carries an install prompt pinned to a published revision, with a
 - [Design system](https://tryraisins.dev/skills/design-system.md): Builds, audits, documents or migrates a product's design system: token layers, mapping hardcoded values onto tokens, component specs, drift detection and an ordered adoption plan.
 - [Domain modeling](https://tryraisins.dev/skills/domain-modeling.md): Clarifies a project’s domain terms and boundaries and records the decisions in a glossary or architecture decision record.
 - [Frontend developer](https://tryraisins.dev/skills/frontend-developer.md): Implements or repairs accessible web interfaces in React, Vue or Angular, covering components, state, styling and browser behaviour.
+- [Hot-path audit](https://tryraisins.dev/skills/hot-path-audit.md): Reads the code paths that run on every request and prices the cost hiding in ordinary code: serialized I/O, whole rows and JSONB documents fetched for a few fields, repeated URL parsing and regex construction, hot keys trapped in large JSONB, and state that is really an undocumented state machine.
 - [Legacy sweep](https://tryraisins.dev/skills/legacy-sweep.md): Audits a whole repository or subsystem for unused legacy code and bloated or worthless tests, proves each candidate is obsolete before deleting it, fixes real defects instead of removing the failing test, and keeps the coverage that still protects behaviour.
 - [Mobile app design](https://tryraisins.dev/skills/mobile-app-design.md): Designs and builds mobile screens and flows that feel native, especially in Expo or React Native, covering navigation, controls, states, accessibility and performance.
 - [Orchestration specialists](https://tryraisins.dev/skills/orchestration-specialists.md): Organises work across several agents and tools, covering task distribution, context management, evidence synthesis, prompt engineering and MCP design.
@@ -70,6 +71,7 @@ Each skill page carries an install prompt pinned to a published revision, with a
 - [Content and SEO](https://tryraisins.dev/skills/content-seo.md): Guides useful content and search visibility together, from keyword patterns and page briefs to metadata, structured data, sitemaps, local search, earned links and AI citations.
 - [Find animation opportunities](https://tryraisins.dev/skills/find-animation-opportunities.md): Looks through a codebase or interface for places that should animate and rejects those that shouldn’t, proposing motion with exact values but changing nothing.
 - [Fix failing CI](https://tryraisins.dev/skills/gh-fix-ci.md): Inspects failing GitHub Actions checks on a pull request, summarises the logs, drafts a fix plan and only makes changes once you approve.
+- [Hot-path audit](https://tryraisins.dev/skills/hot-path-audit.md): Reads the code paths that run on every request and prices the cost hiding in ordinary code: serialized I/O, whole rows and JSONB documents fetched for a few fields, repeated URL parsing and regex construction, hot keys trapped in large JSONB, and state that is really an undocumented state machine.
 - [Improve animations](https://tryraisins.dev/skills/improve-animations.md): Surveys an app’s existing motion like a senior motion designer would, then writes a prioritised audit with self-contained plans that other agents can carry out.
 - [Launch readiness](https://tryraisins.dev/skills/launch-readiness.md): Audits a product before it becomes publicly reachable, covering the legal obligations that attach to the data, payments, email and user content it handles, plus the engineering gates no other workflow owns, then returns one register and a go or no-go.
 - [Legacy sweep](https://tryraisins.dev/skills/legacy-sweep.md): Audits a whole repository or subsystem for unused legacy code and bloated or worthless tests, proves each candidate is obsolete before deleting it, fixes real defects instead of removing the failing test, and keeps the coverage that still protects behaviour.

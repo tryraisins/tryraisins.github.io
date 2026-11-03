@@ -3,7 +3,7 @@
 > Reviews Python, JavaScript, TypeScript or Go code for security issues and writes secure-by-default code when you ask for it.
 
 Canonical: https://tryraisins.dev/skills/security-best-practices/
-Source revision: ae2fa4e
+Source revision: 2459c7d
 
 Load per-language and per-framework secure-coding references for Python, JavaScript/TypeScript, or Go. Use as the stack reference library behind yeknal-application-security, not as a full codebase audit.
 
@@ -29,13 +29,13 @@ Outcome: It checks validation, storage, paths and permissions, and reports issue
 Install the Agent Skill "yeknal-security-best-practices" for all my projects.
 
 Source, pinned to a published revision (14 files):
-https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-security-best-practices
+https://github.com/tryraisins/MD_Files/tree/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-security-best-practices
 File list with SHA-256 hashes: https://tryraisins.dev/skills/security-best-practices/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-security-best-practices/
-   git -C yeknal-skill-src checkout ae2fa4e4ee981ac184880fad8de8b8474748a198
+   git -C yeknal-skill-src checkout 2459c7d4a4cb5f057943ff049c85c44ac24d0b8d
 2. Copy skills/yeknal-security-best-practices into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-security-best-practices or ~/.claude/skills/yeknal-security-best-practices, so it is available in every project.
 3. If a yeknal-security-best-practices folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 14 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -65,4 +65,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-best-pract
 
 ## Source
 
-- [yeknal-security-best-practices on GitHub](https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-security-best-practices)
+- [yeknal-security-best-practices on GitHub](https://github.com/tryraisins/MD_Files/tree/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-security-best-practices)

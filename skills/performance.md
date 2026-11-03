@@ -3,7 +3,7 @@
 > Measures startup, screen navigation, content loading and scrolling on a throttled production build, finds the real bottleneck, then proves each fix with before and after benchmarks rather than intuition.
 
 Canonical: https://tryraisins.dev/skills/performance/
-Source revision: ae2fa4e
+Source revision: 2459c7d
 
 Make an app faster by measuring startup, navigation, content load, and scroll, fixing the real bottleneck, and proving each win with before and after numbers. Use when an app feels slow to start, to change screens, to fill in, or to scroll.
 
@@ -30,13 +30,13 @@ Outcome: It records a cold production baseline on a throttled device, traces the
 Install the Agent Skill "yeknal-performance" for all my projects.
 
 Source, pinned to a published revision (8 files):
-https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-performance
+https://github.com/tryraisins/MD_Files/tree/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-performance
 File list with SHA-256 hashes: https://tryraisins.dev/skills/performance/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-performance/
-   git -C yeknal-skill-src checkout ae2fa4e4ee981ac184880fad8de8b8474748a198
+   git -C yeknal-skill-src checkout 2459c7d4a4cb5f057943ff049c85c44ac24d0b8d
 2. Copy skills/yeknal-performance into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-performance or ~/.claude/skills/yeknal-performance, so it is available in every project.
 3. If a yeknal-performance folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 8 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -44,7 +44,7 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/performance/files.j
 
 ## Files
 
-- `references/fix-catalog.md` (6762 bytes)
+- `references/fix-catalog.md` (8281 bytes)
 - `references/measuring.md` (5991 bytes)
 - `references/report-template.md` (2776 bytes)
 - `references/screens-and-content.md` (5492 bytes)
@@ -62,4 +62,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/performance/files.j
 
 ## Source
 
-- [yeknal-performance on GitHub](https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-performance)
+- [yeknal-performance on GitHub](https://github.com/tryraisins/MD_Files/tree/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-performance)

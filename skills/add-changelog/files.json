@@ -1,14 +1,14 @@
 {
   "name": "yeknal-add-changelog",
-  "sourceRevision": "ae2fa4e4ee981ac184880fad8de8b8474748a198",
-  "source": "https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-add-changelog",
+  "sourceRevision": "2459c7d4a4cb5f057943ff049c85c44ac24d0b8d",
+  "source": "https://github.com/tryraisins/MD_Files/tree/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-add-changelog",
   "fileCount": 1,
   "files": [
     {
       "path": "SKILL.md",
       "sha256": "dbed2afdbea30b08a69882e5f4f7bf6e403d348a1e1b2c460b6d0e703679f7d8",
       "size": 1066,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-add-changelog/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-add-changelog/SKILL.md"
     }
   ]
 }

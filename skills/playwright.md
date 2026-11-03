@@ -3,7 +3,7 @@
 > Lets your agent open a real browser from the terminal to click through a flow, fill forms, take screenshots and read what’s on the page, so it can show you a change working.
 
 Canonical: https://tryraisins.dev/skills/playwright/
-Source revision: ae2fa4e
+Source revision: 2459c7d
 
 Automate a real browser from the terminal for navigation, forms, snapshots, screenshots, extraction, or UI-flow debugging.
 
@@ -33,13 +33,13 @@ Needs Node.js with npx, which the bundled wrapper uses to run playwright-cli.
 Install the Agent Skill "yeknal-playwright" for all my projects.
 
 Source, pinned to a published revision (9 files):
-https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-playwright
+https://github.com/tryraisins/MD_Files/tree/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-playwright
 File list with SHA-256 hashes: https://tryraisins.dev/skills/playwright/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-playwright/
-   git -C yeknal-skill-src checkout ae2fa4e4ee981ac184880fad8de8b8474748a198
+   git -C yeknal-skill-src checkout 2459c7d4a4cb5f057943ff049c85c44ac24d0b8d
 2. Copy skills/yeknal-playwright into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-playwright or ~/.claude/skills/yeknal-playwright, so it is available in every project.
 3. If a yeknal-playwright folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 9 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -65,4 +65,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/playwright/files.js
 
 ## Source
 
-- [yeknal-playwright on GitHub](https://github.com/tryraisins/MD_Files/tree/ae2fa4e4ee981ac184880fad8de8b8474748a198/skills/yeknal-playwright)
+- [yeknal-playwright on GitHub](https://github.com/tryraisins/MD_Files/tree/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-playwright)
