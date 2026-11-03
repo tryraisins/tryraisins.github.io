@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "repository": "tryraisins/MD_Files",
-  "sourceRevision": "ae2fa4e4ee981ac184880fad8de8b8474748a198",
-  "catalogCommit": "e4871a2f5c9d26956cdd43817be1a04fbdd836b4",
+  "sourceRevision": "2459c7d4a4cb5f057943ff049c85c44ac24d0b8d",
+  "catalogCommit": "8838e92e2070fe79ae92f2fcfddf7d9e93ef11f1",
   "cliVersion": "2.10.0",
   "counts": {
-    "skills": 57,
+    "skills": 58,
     "internal": 6
   },
   "tasks": [
@@ -13,7 +13,7 @@
       "id": "build",
       "label": "Plan and build",
       "description": "Shape an idea, then turn it into working code.",
-      "count": 13
+      "count": 14
     },
     {
       "id": "design",
@@ -31,7 +31,7 @@
       "id": "review",
       "label": "Review and test",
       "description": "Find defects, check flows in a browser and debug failures.",
-      "count": 20
+      "count": 21
     },
     {
       "id": "security",
@@ -129,14 +129,14 @@
         "review",
         "testing-strategy"
       ],
-      "version": "3f090e546238c870edcd9c60c1158af86ab6930012b9dda883deb9a6c61f3b6e",
+      "version": "6eb50e8e61e8974a5c385a972f68d113542baa32de679c6abd382aca7a0bc21d",
       "fileCount": 1,
-      "totalBytes": 3102,
+      "totalBytes": 4592,
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "d315cf4f821c49d626c6877997437446b436f0cc5ec3d61883ecad08248c06dd",
-          "size": 3102
+          "sha256": "1594343218910a6fda1d056d9067220804e82eba68b4d3a0d7ab4e80091cc791",
+          "size": 4592
         }
       ]
     },
@@ -172,14 +172,14 @@
         "testing-strategy",
         "security-best-practices"
       ],
-      "version": "78fc177a82594536e98108784c694b00261ce35ff52b3b016fe09f89502fc678",
+      "version": "51d2899de67e6f6b1ce5f4bc6b670f3b6705e35c54c464e113af47bccaf53053",
       "fileCount": 1,
-      "totalBytes": 4001,
+      "totalBytes": 5525,
       "files": [
         {
           "path": "SKILL.md",
-          "sha256": "f0bf88b3f14fdbbff83904db083c7aa611e85e57036cc24d987d7b68472e6aa0",
-          "size": 4001
+          "sha256": "84331fd9629646ca401e08bc7db18384fb60935e74c9c4cd1a615d1c6aa8aad9",
+          "size": 5525
         }
       ]
     },
@@ -932,14 +932,14 @@
         "launch-readiness",
         "playwright"
       ],
-      "version": "6a5f98076857a5d34a599332efcd41de844ccf0e4929039e8db4877b31708e68",
+      "version": "784e18eec438c93177906718ae6e0711c323492ec013d088da6e09fb613e5677",
       "fileCount": 8,
-      "totalBytes": 54492,
+      "totalBytes": 56011,
       "files": [
         {
           "path": "references/fix-catalog.md",
-          "sha256": "ab7d6b837b64bb1850efaa0bf63d3843c050750277f66e64256053c489a004b8",
-          "size": 6762
+          "sha256": "3431ff32eeaf411a2d7b34143b8617930b1648c3dbe95f77e9a2170d9ab8d09c",
+          "size": 8281
         },
         {
           "path": "references/measuring.md",
@@ -1978,6 +1978,53 @@
           "path": "SKILL.md",
           "sha256": "dc5296d8e434caf2ed2b0f25f6f51830fe63f8c9bf4e9f98f0949e0d3f4e53bc",
           "size": 6169
+        }
+      ]
+    },
+    {
+      "name": "yeknal-hot-path-audit",
+      "slug": "hot-path-audit",
+      "title": "Hot-path audit",
+      "purpose": "Reads the code paths that run on every request and prices the cost hiding in ordinary code: serialized I/O, whole rows and JSONB documents fetched for a few fields, repeated URL parsing and regex construction, hot keys trapped in large JSONB, and state that is really an undocumented state machine.",
+      "description": "Audit the code paths that run on every request for cost that hides in ordinary code: serialized I/O that could be one round trip, whole rows and JSONB documents fetched for a few fields, redundant URL parsing and regex construction, single hot keys trapped in large JSONB, and state that is really an undocumented state machine. Use for a hot-path review, a why-is-this-slow pass, or before a refactor that touches durable state.",
+      "tasks": [
+        "build",
+        "review"
+      ],
+      "featuredRank": -1,
+      "compatibility": false,
+      "internal": false,
+      "whenToUse": [
+        "Something feels slow and you suspect the code path rather than the screen.",
+        "You are about to touch durable state and want the implicit state machine named first.",
+        "A query loads a whole row or a large document to read two fields.",
+        "You want the micro-optimizations rejected out loud instead of argued about later."
+      ],
+      "avoid": "It does not produce the before and after numbers, and it does not diagnose a broken feature. Use App performance when the claim needs a measurement, and Troubleshoot when something does not work.",
+      "requirements": null,
+      "example": {
+        "ask": "Audit the checkout request path and tell me what is structurally expensive.",
+        "outcome": "It records a baseline, prices each finding by call site and frequency, splits the three genuinely unordered calls, projects two over-wide queries, and lists the regex hoists it rejected as noise."
+      },
+      "attribution": {
+        "credit": "Written for this catalog.",
+        "license": null,
+        "sourceUrl": null
+      },
+      "related": [
+        "performance",
+        "review",
+        "troubleshoot",
+        "domain-modeling"
+      ],
+      "version": "cb69894faf271cb4df05a47b0543d8b17161be40986db46ea36dc3b3144198a6",
+      "fileCount": 1,
+      "totalBytes": 13440,
+      "files": [
+        {
+          "path": "SKILL.md",
+          "sha256": "8e0992b28a14b8f040c66a2c8bf55d8de722219cbd8f5f3beebbb504aca7a507",
+          "size": 13440
         }
       ]
     },
@@ -3456,5 +3503,5 @@
       ]
     }
   ],
-  "snapshotHash": "44cc90ff6d59c6fc9982a4e5c33212beafcb934c746e4457b4ab6051465d9b1a"
+  "snapshotHash": "6858b96e522f0732671e6d45c791ad0990488ddb587c8f36c7dd87a3e31aeb42"
 }
