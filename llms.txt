@@ -2,14 +2,14 @@
 
 > TryRaisins is a software engineer whose work is used by FTSE 100 companies on four continents, building web products, developer tools and open-source projects, mostly with Next.js, Node.js and Python.
 
-The library has 58 agent skills, and every one has a page and a markdown version at the same path with a `.md` suffix so an agent does not have to parse HTML.
+The library has 59 agent skills, and every one has a page and a markdown version at the same path with a `.md` suffix so an agent does not have to parse HTML.
 
-Source revision: 2459c7d. Repository: https://github.com/tryraisins/MD_Files. Contact: tryraisins@gmail.com.
+Source revision: 070549f. Repository: https://github.com/tryraisins/MD_Files. Contact: tryraisins@gmail.com.
 
 ## Pages
 
 - [Portfolio](https://tryraisins.dev/index.md): the projects, the stack, and how to get in touch.
-- [Agent skills](https://tryraisins.dev/skills.md): 58 free agent skills for coding agents, grouped by task.
+- [Agent skills](https://tryraisins.dev/skills.md): 59 free agent skills for coding agents, grouped by task.
 - [Skills source on GitHub](https://github.com/tryraisins/MD_Files): the files each skill installs.
 - [yeknal on npm](https://www.npmjs.com/package/yeknal): the command-line tool that installs the same skills.
 
@@ -60,6 +60,7 @@ Source revision: 2459c7d. Repository: https://github.com/tryraisins/MD_Files. Co
 - [Mobile app design](https://tryraisins.dev/skills/mobile-app-design.md): Designs and builds mobile screens and flows that feel native, especially in Expo or React Native, covering navigation, controls, states, accessibility and performance.
 - [Orchestration specialists](https://tryraisins.dev/skills/orchestration-specialists.md): Organises work across several agents and tools, covering task distribution, context management, evidence synthesis, prompt engineering and MCP design.
 - [Pick a UI library](https://tryraisins.dev/skills/pick-ui-library.md): Recommends the right library or inspectable source registry for a frontend need from a curated list, from accessible primitives to charts, toasts and drag and drop.
+- [Product scenes](https://tryraisins.dev/skills/product-scenes.md): Builds authored faux product UI for marketing and social surfaces, such as hero stills, feature cards, cursor demos and bento grids, derived from the real product and labelled so a picture is never mistaken for a live screenshot.
 - [Prototype variants](https://tryraisins.dev/skills/prototype.md): Builds several genuinely different versions of a UI piece behind a visual picker, so you can flip between them live and keep the one that feels right.
 - [Raise the bar on a brief](https://tryraisins.dev/skills/ambition.md): Raises a task or prompt to expert standard before work starts, by finding the real bottleneck and naming the raw material, the method and the outside check that decides whether the result is right.
 - [Research and analysis](https://tryraisins.dev/skills/research-analysis.md): Researches and compares sources, checks them against each other and writes evidence-backed reports for market, competitive, trend or data questions.

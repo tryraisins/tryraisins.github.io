@@ -3,7 +3,7 @@
 > TryRaisins is a software engineer whose work is used by FTSE 100 companies on four continents, building web products, developer tools and open-source projects, mostly with Next.js, Node.js and Python.
 
 Canonical: https://tryraisins.dev/
-Source revision: 2459c7d
+Source revision: 070549f
 
 ## Projects
 
@@ -17,7 +17,7 @@ Source revision: 2459c7d
 
 ## Agent skills
 
-The library has 58 agent skills, and every one has a page and a markdown version at the same path with a `.md` suffix.
+The library has 59 agent skills, and every one has a page and a markdown version at the same path with a `.md` suffix.
 
 - [Agent skills library](https://tryraisins.dev/skills/): every skill, grouped by the task it serves.
 - [Library as markdown](https://tryraisins.dev/skills.md): the same list in one fetch.

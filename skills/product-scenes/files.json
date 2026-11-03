@@ -1,0 +1,26 @@
+{
+  "name": "yeknal-product-scenes",
+  "sourceRevision": "070549f58da0bcf15136705a39552a5b74c20f5b",
+  "source": "https://github.com/tryraisins/MD_Files/tree/070549f58da0bcf15136705a39552a5b74c20f5b/skills/yeknal-product-scenes",
+  "fileCount": 3,
+  "files": [
+    {
+      "path": "references/scene-composition.md",
+      "sha256": "7080a7b1f613a671c274f0c91cbe3d6e061e75531d50b433d3cbb71879dc5b55",
+      "size": 5988,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/070549f58da0bcf15136705a39552a5b74c20f5b/skills/yeknal-product-scenes/references/scene-composition.md"
+    },
+    {
+      "path": "references/scene-motion-and-capture.md",
+      "sha256": "8e8b68b2c649fd6e0150bd888bdb99c5f4056f50b65eaeb030a4fa717332818c",
+      "size": 5619,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/070549f58da0bcf15136705a39552a5b74c20f5b/skills/yeknal-product-scenes/references/scene-motion-and-capture.md"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "8a2a6601e1e241cd39cb6fcfb032139dbb384672495374e7879a58fcae35e0fe",
+      "size": 8146,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/070549f58da0bcf15136705a39552a5b74c20f5b/skills/yeknal-product-scenes/SKILL.md"
+    }
+  ]
+}

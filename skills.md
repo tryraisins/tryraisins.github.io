@@ -1,9 +1,9 @@
 # Agent skills
 
-> 58 free agent skills for Claude Code, Codex, Cursor and other coding agents, grouped by the task each one serves.
+> 59 free agent skills for Claude Code, Codex, Cursor and other coding agents, grouped by the task each one serves.
 
 Canonical: https://tryraisins.dev/skills/
-Source revision: 2459c7d
+Source revision: 070549f
 
 ## How to install
 
@@ -44,6 +44,7 @@ Each skill page carries an install prompt pinned to a published revision, with a
 - [Minimalist UI](https://tryraisins.dev/skills/minimalist-ui.md): Designs clean editorial interfaces with warm monochrome palettes, strong typographic contrast, flat grids and restrained depth.
 - [Mobile app design](https://tryraisins.dev/skills/mobile-app-design.md): Designs and builds mobile screens and flows that feel native, especially in Expo or React Native, covering navigation, controls, states, accessibility and performance.
 - [Pick a UI library](https://tryraisins.dev/skills/pick-ui-library.md): Recommends the right library or inspectable source registry for a frontend need from a curated list, from accessible primitives to charts, toasts and drag and drop.
+- [Product scenes](https://tryraisins.dev/skills/product-scenes.md): Builds authored faux product UI for marketing and social surfaces, such as hero stills, feature cards, cursor demos and bento grids, derived from the real product and labelled so a picture is never mistaken for a live screenshot.
 - [Prototype variants](https://tryraisins.dev/skills/prototype.md): Builds several genuinely different versions of a UI piece behind a visual picker, so you can flip between them live and keep the one that feels right.
 - [Slop scan](https://tryraisins.dev/skills/slopscan.md): Scans a codebase locally for AI-slop indicators such as stock marketing copy, placeholder text, gradient headline text, decorative emoji, stock icon sets and kit default colors, and writes a report that explains each finding, the class it falls into, and how to fix it.
 - [UI and UX design](https://tryraisins.dev/skills/ui-ux-designer.md): Designs user-centred interface systems that balance intuitive flows with a distinctive visual direction, from information architecture to interaction patterns.

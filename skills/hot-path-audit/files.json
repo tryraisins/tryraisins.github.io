@@ -1,14 +1,14 @@
 {
   "name": "yeknal-hot-path-audit",
-  "sourceRevision": "2459c7d4a4cb5f057943ff049c85c44ac24d0b8d",
-  "source": "https://github.com/tryraisins/MD_Files/tree/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-hot-path-audit",
+  "sourceRevision": "070549f58da0bcf15136705a39552a5b74c20f5b",
+  "source": "https://github.com/tryraisins/MD_Files/tree/070549f58da0bcf15136705a39552a5b74c20f5b/skills/yeknal-hot-path-audit",
   "fileCount": 1,
   "files": [
     {
       "path": "SKILL.md",
       "sha256": "8e0992b28a14b8f040c66a2c8bf55d8de722219cbd8f5f3beebbb504aca7a507",
       "size": 13440,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/2459c7d4a4cb5f057943ff049c85c44ac24d0b8d/skills/yeknal-hot-path-audit/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/070549f58da0bcf15136705a39552a5b74c20f5b/skills/yeknal-hot-path-audit/SKILL.md"
     }
   ]
 }
