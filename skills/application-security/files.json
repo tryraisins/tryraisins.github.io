@@ -1,26 +1,26 @@
 {
   "name": "yeknal-application-security",
-  "sourceRevision": "796d3bc2c70059fc861465d1156e2bdfed50b6d7",
-  "source": "https://github.com/tryraisins/MD_Files/tree/796d3bc2c70059fc861465d1156e2bdfed50b6d7/skills/yeknal-application-security",
+  "sourceRevision": "3a0f804eeb2f07300b23b50f57b489af326cae0a",
+  "source": "https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-application-security",
   "fileCount": 3,
   "files": [
     {
       "path": "references/PAYMENT-CALLBACKS.md",
       "sha256": "6228094477a8cca51cf1cb1caa0377046820d2d5b13a491ab2e56817dc077039",
       "size": 8716,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/796d3bc2c70059fc861465d1156e2bdfed50b6d7/skills/yeknal-application-security/references/PAYMENT-CALLBACKS.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-application-security/references/PAYMENT-CALLBACKS.md"
     },
     {
       "path": "Security-Master.md",
       "sha256": "d9642a6c23299d4e00ccb1c129607ec12540e029b4e503b322f8271679d6515f",
       "size": 18549,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/796d3bc2c70059fc861465d1156e2bdfed50b6d7/skills/yeknal-application-security/Security-Master.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-application-security/Security-Master.md"
     },
     {
       "path": "SKILL.md",
       "sha256": "863b08751e4813cfd612500c156e18accd706ce67fc1bf20195089022d803f19",
       "size": 12914,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/796d3bc2c70059fc861465d1156e2bdfed50b6d7/skills/yeknal-application-security/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-application-security/SKILL.md"
     }
   ]
 }

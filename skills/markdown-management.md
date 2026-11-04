@@ -3,7 +3,7 @@
 > Creates, merges, updates and audits Markdown without losing meaning, links or repository conventions, including README files and Agent Skills.
 
 Canonical: https://tryraisins.dev/skills/markdown-management/
-Source revision: 796d3bc
+Source revision: 3a0f804
 
 Create, merge, update, or audit Markdown without losing meaning, links, authority, or repository conventions. Use for README, docs, and Agent Skill maintenance.
 
@@ -25,13 +25,13 @@ Outcome: It combines them without dropping steps, keeps the links working and fo
 Install the Agent Skill "yeknal-markdown-management" for all my projects.
 
 Source, pinned to a published revision (7 files):
-https://github.com/tryraisins/MD_Files/tree/796d3bc2c70059fc861465d1156e2bdfed50b6d7/skills/yeknal-markdown-management
+https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-markdown-management
 File list with SHA-256 hashes: https://tryraisins.dev/skills/markdown-management/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-markdown-management/
-   git -C yeknal-skill-src checkout 796d3bc2c70059fc861465d1156e2bdfed50b6d7
+   git -C yeknal-skill-src checkout 3a0f804eeb2f07300b23b50f57b489af326cae0a
 2. Copy skills/yeknal-markdown-management into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-markdown-management or ~/.claude/skills/yeknal-markdown-management, so it is available in every project.
 3. If a yeknal-markdown-management folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 7 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -54,4 +54,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/markdown-management
 
 ## Source
 
-- [yeknal-markdown-management on GitHub](https://github.com/tryraisins/MD_Files/tree/796d3bc2c70059fc861465d1156e2bdfed50b6d7/skills/yeknal-markdown-management)
+- [yeknal-markdown-management on GitHub](https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-markdown-management)

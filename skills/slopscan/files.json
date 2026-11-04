@@ -1,14 +1,14 @@
 {
   "name": "yeknal-slopscan",
-  "sourceRevision": "796d3bc2c70059fc861465d1156e2bdfed50b6d7",
-  "source": "https://github.com/tryraisins/MD_Files/tree/796d3bc2c70059fc861465d1156e2bdfed50b6d7/skills/yeknal-slopscan",
+  "sourceRevision": "3a0f804eeb2f07300b23b50f57b489af326cae0a",
+  "source": "https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-slopscan",
   "fileCount": 1,
   "files": [
     {
       "path": "SKILL.md",
       "sha256": "b51be6ffde0c20683ad62996b599f4adf7402a589ec0190888f625df5b50c7dc",
       "size": 6974,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/796d3bc2c70059fc861465d1156e2bdfed50b6d7/skills/yeknal-slopscan/SKILL.md"
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-slopscan/SKILL.md"
     }
   ]
 }

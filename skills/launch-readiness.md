@@ -3,7 +3,7 @@
 > Audits a product before it becomes publicly reachable, covering the legal obligations that attach to the data, payments, email and user content it handles, plus the engineering gates no other workflow owns, then returns one register and a go or no-go.
 
 Canonical: https://tryraisins.dev/skills/launch-readiness/
-Source revision: 796d3bc
+Source revision: 3a0f804
 
 Audit a product for launch readiness before it becomes publicly reachable: legal obligations plus the engineering gates no other workflow owns, then one register and a go or no-go. Use when asked whether an app can ship.
 
@@ -29,13 +29,13 @@ Outcome: It builds a data map from the code, checks it against the applicable ob
 Install the Agent Skill "yeknal-launch-readiness" for all my projects.
 
 Source, pinned to a published revision (6 files):
-https://github.com/tryraisins/MD_Files/tree/796d3bc2c70059fc861465d1156e2bdfed50b6d7/skills/yeknal-launch-readiness
+https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-launch-readiness
 File list with SHA-256 hashes: https://tryraisins.dev/skills/launch-readiness/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-launch-readiness/
-   git -C yeknal-skill-src checkout 796d3bc2c70059fc861465d1156e2bdfed50b6d7
+   git -C yeknal-skill-src checkout 3a0f804eeb2f07300b23b50f57b489af326cae0a
 2. Copy skills/yeknal-launch-readiness into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-launch-readiness or ~/.claude/skills/yeknal-launch-readiness, so it is available in every project.
 3. If a yeknal-launch-readiness folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 6 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -59,4 +59,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/launch-readiness/fi
 
 ## Source
 
-- [yeknal-launch-readiness on GitHub](https://github.com/tryraisins/MD_Files/tree/796d3bc2c70059fc861465d1156e2bdfed50b6d7/skills/yeknal-launch-readiness)
+- [yeknal-launch-readiness on GitHub](https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-launch-readiness)
