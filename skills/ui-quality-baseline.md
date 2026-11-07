@@ -3,7 +3,7 @@
 > Applies a shared set of visual, responsive, accessibility, state, motion and copy checks whenever an agent creates or changes visible UI, including where the visual richness belongs.
 
 Canonical: https://tryraisins.dev/skills/ui-quality-baseline/
-Source revision: 3a0f804
+Source revision: 317a7b0
 
 Apply one shared quality contract to any visible UI, covering tokens, spacing and optical centering, typography, icons, responsive containment, states, loading, motion, copy, where the visual richness belongs, and rendered QA. Use whenever visible interface work starts.
 
@@ -26,13 +26,13 @@ Outcome: It checks spacing, contrast, focus, responsive containment and states, 
 Install the Agent Skill "yeknal-ui-quality-baseline" for all my projects.
 
 Source, pinned to a published revision (14 files):
-https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-ui-quality-baseline
+https://github.com/tryraisins/MD_Files/tree/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-ui-quality-baseline
 File list with SHA-256 hashes: https://tryraisins.dev/skills/ui-quality-baseline/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-ui-quality-baseline/
-   git -C yeknal-skill-src checkout 3a0f804eeb2f07300b23b50f57b489af326cae0a
+   git -C yeknal-skill-src checkout 317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d
 2. Copy skills/yeknal-ui-quality-baseline into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-ui-quality-baseline or ~/.claude/skills/yeknal-ui-quality-baseline, so it is available in every project.
 3. If a yeknal-ui-quality-baseline folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 14 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -62,4 +62,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/ui-quality-baseline
 
 ## Source
 
-- [yeknal-ui-quality-baseline on GitHub](https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-ui-quality-baseline)
+- [yeknal-ui-quality-baseline on GitHub](https://github.com/tryraisins/MD_Files/tree/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-ui-quality-baseline)

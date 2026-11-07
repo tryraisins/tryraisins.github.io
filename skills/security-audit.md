@@ -3,9 +3,9 @@
 > Runs a multi-phase security audit of a repository, directory or diff with a coverage ledger, adversarial verification and schema-validated findings.
 
 Canonical: https://tryraisins.dev/skills/security-audit/
-Source revision: 3a0f804
+Source revision: 317a7b0
 
-Run a multi-phase security audit of a repository, directory, or diff with a coverage ledger, adversarial verification, and schema-validated findings. Use only for explicit audit or pen-test requests, not general security questions.
+Run a multi-phase security audit of a repository, directory, or diff: coverage ledger, adversarial verification, schema-validated findings. Use for explicit audits, pen tests, and requests to prove which vulnerabilities are real, not quality reviews.
 
 ## When to use
 
@@ -25,7 +25,7 @@ Outcome: It plans coverage, hunts in isolated units, has every candidate indepen
 
 ## Requirements
 
-Needs Node.js for the two zero-dependency validators. Target code is not executed without an OS-enforced sandbox.
+Needs Node.js for the two zero-dependency validators. Source-only by default; executing target code needs explicit per-run authorization or an OS-enforced sandbox.
 
 ## Install
 
@@ -33,13 +33,13 @@ Needs Node.js for the two zero-dependency validators. Target code is not execute
 Install the Agent Skill "yeknal-security-audit" for all my projects.
 
 Source, pinned to a published revision (19 files):
-https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-security-audit
+https://github.com/tryraisins/MD_Files/tree/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-security-audit
 File list with SHA-256 hashes: https://tryraisins.dev/skills/security-audit/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-security-audit/
-   git -C yeknal-skill-src checkout 3a0f804eeb2f07300b23b50f57b489af326cae0a
+   git -C yeknal-skill-src checkout 317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d
 2. Copy skills/yeknal-security-audit into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-security-audit or ~/.claude/skills/yeknal-security-audit, so it is available in every project.
 3. If a yeknal-security-audit folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 19 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -54,18 +54,18 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-audit/file
 - `references/CLOUD-AND-DEPLOYMENT.md` (8291 bytes)
 - `references/DATA-ISOLATION-AND-LIFECYCLE.md` (7798 bytes)
 - `references/DESKTOP-MOBILE-AND-LOCAL-IPC.md` (8739 bytes)
-- `references/HUNTING.md` (22446 bytes)
+- `references/HUNTING.md` (23582 bytes)
 - `references/MEMORY-SAFETY-AND-BINARY.md` (10513 bytes)
 - `references/PROTOCOLS-RPC-AND-MESSAGING.md` (7483 bytes)
-- `references/RECONNAISSANCE.md` (15902 bytes)
+- `references/RECONNAISSANCE.md` (16002 bytes)
 - `references/RESOURCE-EXHAUSTION-AND-AVAILABILITY.md` (7476 bytes)
 - `references/SUPPLY-CHAIN-AND-RELEASE.md` (7258 bytes)
-- `references/VALIDATION-AND-REPORTING.md` (18175 bytes)
+- `references/VALIDATION-AND-REPORTING.md` (19605 bytes)
 - `references/WEB-PROTOCOL-AND-AUTH.md` (12300 bytes)
-- `scripts/report-schema.json` (14494 bytes)
+- `scripts/report-schema.json` (15383 bytes)
 - `scripts/validate-coverage-ledger.cjs` (34011 bytes)
-- `scripts/validate-findings.cjs` (29379 bytes)
-- `SKILL.md` (19111 bytes)
+- `scripts/validate-findings.cjs` (32356 bytes)
+- `SKILL.md` (23156 bytes)
 
 ## Related
 
@@ -76,4 +76,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/security-audit/file
 
 ## Source
 
-- [yeknal-security-audit on GitHub](https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-security-audit)
+- [yeknal-security-audit on GitHub](https://github.com/tryraisins/MD_Files/tree/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-security-audit)

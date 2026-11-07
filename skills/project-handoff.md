@@ -3,7 +3,7 @@
 > Keeps a short HANDOFF.md at the root of the repository so the next session, or the next person, can pick up exactly where the work stopped.
 
 Canonical: https://tryraisins.dev/skills/project-handoff/
-Source revision: 3a0f804
+Source revision: 317a7b0
 
 Create, update, or resume work from a concise repository-root HANDOFF.md so another agent can continue without the current conversation. Use for substantial ongoing projects, milestones, and task handoffs.
 
@@ -25,13 +25,13 @@ Outcome: It records the current state, decisions, how to verify the work and wha
 Install the Agent Skill "yeknal-project-handoff" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-project-handoff
+https://github.com/tryraisins/MD_Files/tree/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-project-handoff
 File list with SHA-256 hashes: https://tryraisins.dev/skills/project-handoff/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-project-handoff/
-   git -C yeknal-skill-src checkout 3a0f804eeb2f07300b23b50f57b489af326cae0a
+   git -C yeknal-skill-src checkout 317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d
 2. Copy skills/yeknal-project-handoff into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-project-handoff or ~/.claude/skills/yeknal-project-handoff, so it is available in every project.
 3. If a yeknal-project-handoff folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -48,4 +48,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/project-handoff/fil
 
 ## Source
 
-- [yeknal-project-handoff on GitHub](https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-project-handoff)
+- [yeknal-project-handoff on GitHub](https://github.com/tryraisins/MD_Files/tree/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-project-handoff)

@@ -1,14 +1,14 @@
 {
   "name": "yeknal-review",
-  "sourceRevision": "3a0f804eeb2f07300b23b50f57b489af326cae0a",
-  "source": "https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-review",
+  "sourceRevision": "317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d",
+  "source": "https://github.com/tryraisins/MD_Files/tree/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-review",
   "fileCount": 1,
   "files": [
     {
       "path": "SKILL.md",
-      "sha256": "84331fd9629646ca401e08bc7db18384fb60935e74c9c4cd1a615d1c6aa8aad9",
-      "size": 5525,
-      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-review/SKILL.md"
+      "sha256": "792a6d606bea32f7aa425e07d3da815bbd89702d63c1fbcf7747058ac7f10d25",
+      "size": 5580,
+      "url": "https://raw.githubusercontent.com/tryraisins/MD_Files/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-review/SKILL.md"
     }
   ]
 }

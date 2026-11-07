@@ -3,7 +3,7 @@
 > 59 free agent skills for Claude Code, Codex, Cursor and other coding agents, grouped by the task each one serves.
 
 Canonical: https://tryraisins.dev/skills/
-Source revision: 3a0f804
+Source revision: 317a7b0
 
 ## How to install
 

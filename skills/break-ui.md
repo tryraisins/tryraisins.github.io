@@ -3,7 +3,7 @@
 > Stress-tests a screen with realistic worst-case data, such as long names, missing fields, huge counts and non-Latin text, and reports every break with its fix.
 
 Canonical: https://tryraisins.dev/skills/break-ui/
-Source revision: 3a0f804
+Source revision: 317a7b0
 
 Stress-test a component or screen with realistic worst-case data, put the demo and worst-case states behind a dev-only toggle, and report every break with its fix. Use to break, stress-test, or find UI edge cases.
 
@@ -25,13 +25,13 @@ Outcome: It fills the table with extreme but realistic data, shows the broken st
 Install the Agent Skill "yeknal-break-ui" for all my projects.
 
 Source, pinned to a published revision (3 files):
-https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-break-ui
+https://github.com/tryraisins/MD_Files/tree/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-break-ui
 File list with SHA-256 hashes: https://tryraisins.dev/skills/break-ui/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-break-ui/
-   git -C yeknal-skill-src checkout 3a0f804eeb2f07300b23b50f57b489af326cae0a
+   git -C yeknal-skill-src checkout 317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d
 2. Copy skills/yeknal-break-ui into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-break-ui or ~/.claude/skills/yeknal-break-ui, so it is available in every project.
 3. If a yeknal-break-ui folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that all 3 files match the listed hashes, then delete the temporary yeknal-skill-src checkout.
@@ -50,4 +50,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/break-ui/files.json
 
 ## Source
 
-- [yeknal-break-ui on GitHub](https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-break-ui)
+- [yeknal-break-ui on GitHub](https://github.com/tryraisins/MD_Files/tree/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-break-ui)

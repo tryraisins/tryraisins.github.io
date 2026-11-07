@@ -3,7 +3,7 @@
 > Reads the code paths that run on every request and prices the cost hiding in ordinary code: serialized I/O, whole rows and JSONB documents fetched for a few fields, repeated URL parsing and regex construction, hot keys trapped in large JSONB, and state that is really an undocumented state machine.
 
 Canonical: https://tryraisins.dev/skills/hot-path-audit/
-Source revision: 3a0f804
+Source revision: 317a7b0
 
 Audit the code paths that run on every request for cost that hides in ordinary code: serialized I/O that could be one round trip, whole rows and JSONB documents fetched for a few fields, redundant URL parsing and regex construction, single hot keys trapped in large JSONB, and state that is really an undocumented state machine. Use for a hot-path review, a why-is-this-slow pass, or before a refactor that touches durable state.
 
@@ -30,13 +30,13 @@ Outcome: It records a baseline, prices each finding by call site and frequency, 
 Install the Agent Skill "yeknal-hot-path-audit" for all my projects.
 
 Source, pinned to a published revision (1 file):
-https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-hot-path-audit
+https://github.com/tryraisins/MD_Files/tree/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-hot-path-audit
 File list with SHA-256 hashes: https://tryraisins.dev/skills/hot-path-audit/files.json
 
 1. Fetch that exact folder, including every supporting file and license notice. One way to do it:
    git clone -c core.autocrlf=false --filter=blob:none --no-checkout https://github.com/tryraisins/MD_Files.git yeknal-skill-src
    git -C yeknal-skill-src sparse-checkout set --no-cone /skills/yeknal-hot-path-audit/
-   git -C yeknal-skill-src checkout 3a0f804eeb2f07300b23b50f57b489af326cae0a
+   git -C yeknal-skill-src checkout 317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d
 2. Copy skills/yeknal-hot-path-audit into the user-level skills folder your agent reads, such as ~/.agents/skills/yeknal-hot-path-audit or ~/.claude/skills/yeknal-hot-path-audit, so it is available in every project.
 3. If a yeknal-hot-path-audit folder already exists there and any file differs from the source, stop and show me the differences instead of overwriting it. Do not change or remove any other skill.
 4. Check that the file matches its listed hash, then delete the temporary yeknal-skill-src checkout.
@@ -55,4 +55,4 @@ File list with SHA-256 hashes: https://tryraisins.dev/skills/hot-path-audit/file
 
 ## Source
 
-- [yeknal-hot-path-audit on GitHub](https://github.com/tryraisins/MD_Files/tree/3a0f804eeb2f07300b23b50f57b489af326cae0a/skills/yeknal-hot-path-audit)
+- [yeknal-hot-path-audit on GitHub](https://github.com/tryraisins/MD_Files/tree/317a7b0d085a9a6c1e4c404d4bfbd1946a966c2d/skills/yeknal-hot-path-audit)
