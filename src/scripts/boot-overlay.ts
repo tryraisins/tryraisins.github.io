@@ -12,7 +12,7 @@
 // itself in as the flattened sheet fades away. `holdCap` bounds how long work
 // registered with holdBoot can keep the sheet up; it stays under the bootstrap
 // failsafe in BootOverlay.astro.
-const TIMING = { fontsCap: 1400, holdCap: 6000, min: 600, max: 1400, enter: 1000, lift: 1150, liftCap: 2600, fade: 400 };
+const TIMING = { fontsCap: 1400, holdCap: 6000, min: 600, max: 1400, enter: 1350, lift: 1600, liftCap: 3000, fade: 400 };
 // Reduced motion, or no WebGL2: the crumpled still fades once.
 const FLAT_TIMING = { fontsCap: 1400, holdCap: 6000, min: 200, max: 800, enter: 0, lift: 150, liftCap: 150, fade: 0 };
 
