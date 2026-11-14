@@ -1,8 +1,6 @@
 ---
-// Page-load paper starts as a flat ruled sheet on the desk, is crumpled into
-// a ball, then opens into the page. The sheet is drawn here in CSS so it is in
-// the first paint, covers WebGL startup and serves as the fallback. With
-// reduced motion nothing moves, and an embedded still of the ball stands in.
+// Page-load paper starts as a crumpled ball, then opens into the page.
+// An embedded still of the ball covers WebGL startup and serves as the fallback.
 // It must be the first element inside <body> so the bootstrap runs during parse,
 // before anything beneath it can paint. State lives on
 // <html data-boot="pending | revealing | done"> and is driven by
@@ -53,21 +51,10 @@ import ballStill from './boot-ball.webp?inline';
   :global(html[data-boot='pending']) .boot,
   :global(html[data-boot='revealing']) .boot { display: block; }
 
-  /* Show the flat sheet immediately while WebGL prepares. It is the same
-     ruled paper paper-ball.ts draws (paperTexture), so the canvas takes over
-     without a jump. */
+  /* Show the ball immediately while WebGL prepares. */
   .boot::after {
-    --margin: max(min(max(32px, 6vw), 96px), (100vw - 1280px) / 2);
     content: ''; position: absolute; inset: 0; pointer-events: none;
-    background:
-      linear-gradient(90deg, transparent calc(var(--margin) - 6px), rgba(214,62,56,.55) calc(var(--margin) - 6px) calc(var(--margin) - 4.5px), transparent calc(var(--margin) - 4.5px) calc(var(--margin) - 1.5px), rgba(214,62,56,.55) calc(var(--margin) - 1.5px) var(--margin), transparent var(--margin)),
-      repeating-linear-gradient(to bottom, transparent 0 35px, rgba(52,110,204,.5) 35px 36px),
-      #f1f0ea; /* #f8f7f1 under the texture's grain */
-  }
-  @media (max-width: 620px) { .boot::after { --margin: 28px; } }
-  /* Reduced motion: the ball, still. */
-  @media (prefers-reduced-motion: reduce) {
-    .boot::after { background: #e9e6da var(--boot-ball-still) center / calc((min(100vw, 100vh) * .34 + 80px) * 1.4) no-repeat; }
+    background: #e9e6da var(--boot-ball-still) center / calc((min(100vw, 100vh) * .34 + 80px) * 1.4) no-repeat;
   }
   .boot:is([data-paper='ball'], [data-paper='flat'])::after { animation: boot-still-out 180ms linear forwards; }
   @keyframes boot-still-out { to { opacity: 0; visibility: hidden; } }
@@ -78,7 +65,7 @@ import ballStill from './boot-ball.webp?inline';
      invisible sheet over the page. */
   .boot[data-paper='flat'] { animation: boot-fade 400ms linear forwards; }
 
-  /* No ball (reduced motion or no WebGL2): what is showing fades once. */
+  /* No ball (reduced motion or no WebGL2): the still fades once. */
   :global(html[data-boot='revealing']) .boot:not([data-paper]) { animation: boot-fade 150ms linear forwards; }
 
   .boot-status { position: absolute; width: 1px; height: 1px; margin: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

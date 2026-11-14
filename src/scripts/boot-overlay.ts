@@ -1,6 +1,6 @@
 // Drives the page-load sheet from BootOverlay.astro. The inline bootstrap in that
 // component sets <html data-boot="pending"> on homepage loads; paper-ball.ts
-// crumples the sheet into a ball, and this module decides when it opens.
+// starts with a crumpled ball, and this module decides when it opens.
 //
 // Milliseconds. `max` and `min` are measured from the moment the sheet first
 // painted (the bootstrap's timestamp), not from when this module happened to run.
@@ -13,7 +13,7 @@
 // registered with holdBoot can keep the sheet up; it stays under the bootstrap
 // failsafe in BootOverlay.astro.
 const TIMING = { fontsCap: 1400, holdCap: 6000, min: 600, max: 1400, enter: 1350, lift: 1600, liftCap: 3000, fade: 400 };
-// Reduced motion, or no WebGL2: what the overlay is showing fades once.
+// Reduced motion, or no WebGL2: the crumpled still fades once.
 const FLAT_TIMING = { fontsCap: 1400, holdCap: 6000, min: 200, max: 800, enter: 0, lift: 150, liftCap: 150, fade: 0 };
 
 // Page work the sheet should cover, such as heavy decorative scripts.

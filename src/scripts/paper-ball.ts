@@ -13,35 +13,22 @@
 // - The CAGE is the hand: a dome of planes closed round that stack, which folds
 //   back anything that reaches it and so packs the stack into a ball whose
 //   ridges lie on the dome. The desk under the paper folds it back the same way.
-// The load starts on the flat sheet and crumples it (see CRUMPLE): the flaps
-// are folded in, the hand closes round them and squeezes. Opening runs it in
-// reverse (see STAGES): the hand lets go and the wad springs loose, the flaps
-// swing out on their hinges a pair at a time, and a palm presses down what is
-// left.
+// Opening runs it in reverse (see STAGES): the hand lets go and the wad springs
+// loose, the flaps swing out on their hinges a pair at a time, and a palm
+// presses down what is left.
 //
 // The small creases never change, so their depth and slope are baked once into
 // a float texture (on the GPU where it can render floats, otherwise here) and
 // each pixel reads its crease from that.
 //
-// Without hardware WebGL2 nothing is mounted and the overlay's flat sheet
-// simply fades; with reduced motion its still of the ball does (see
-// BootOverlay.astro).
+// Without hardware WebGL2, or with reduced motion, nothing is mounted and the
+// overlay's still simply fades (see BootOverlay.astro).
 import { holdBoot } from './boot-overlay';
 
-// Milliseconds. `crumple` is the sheet being balled up, `rest` the beat the
-// ball then sits before it may open, `unfold` the whole opening below. Keep
-// `unfold` in step with TIMING.lift in boot-overlay.ts.
-export const PAPER_TIMING = { crumple: 780, rest: 200, unfold: 1600 };
-
-// Milliseconds from the first frame, while the sheet is balled up.
-const CRUMPLE = {
-  crease: [0, 420],     // the first creases come up in the flat sheet
-  fold: [40, 560],      // the flaps are folded in, first to last
-  flap: 340,            // how long one flap takes to come over
-  close: [300, 700],    // the hand closes round the stack
-  squeeze: [600, 780],  // a last squeeze, and the ball springs back a little
-  turn: [120, 720],     // the ball rolls to how it will sit
-} as const;
+// Milliseconds. `rest` is the beat the ball sits before it may open, `unfold`
+// the whole opening below. Keep `unfold` in step with TIMING.lift in
+// boot-overlay.ts.
+export const PAPER_TIMING = { rest: 220, unfold: 1600 };
 
 // Milliseconds from the start of the reveal. The stages overlap so the motion
 // never stops between them.
@@ -179,7 +166,6 @@ uniform vec4 uCage[${CAGE}];
 uniform float uCageSoft;
 uniform vec4 uCore;     // middle of the wad, and its radius
 uniform float uDeep;    // how much shade the inside of the wad holds
-uniform float uCreased; // 0 = a fresh sheet, 1 = its small creases are in
 uniform mat3 uRot;
 uniform vec3 uPivot;
 uniform vec3 uScale;
@@ -234,8 +220,8 @@ void main() {
   vCuv = 0.5 + aP / (2.0 * uHalf);
   float sm = smoothedAt(aP);
   float depth = mix(mix(${PAPER_DEPTH.open}, ${PAPER_DEPTH.ball}, pow(1.0 - uU, 1.25)), ${PAPER_DEPTH.rest}, sm);
-  vA = uR * depth * uCreased;
-  vCrumple = mix(max(1.0 - uU, ${PAPER_SHADE.open}), ${PAPER_SHADE.rest}, sm) * uCreased;
+  vA = uR * depth;
+  vCrumple = mix(max(1.0 - uU, ${PAPER_SHADE.open}), ${PAPER_SHADE.rest}, sm);
   vDeep = uDeep * (1.0 - smoothstep(0.5, 1.05, length(p - uCore.xyz) / uCore.w));
   vec4 crease = textureLod(uCrease, vCuv, 0.0);
   float h = mix(crease.x, crease.w * 1.7, pow(1.0 - uU, 1.5));
@@ -307,9 +293,8 @@ type Hinge = { mx: number; my: number; reach: number; shut: number; ajar: number
 // middle of the wad, and how long after the release it lets go (ms).
 type CageFace = { n: [number, number, number]; reach: number; at: number };
 // `folds` are the hinge angles, `cage` how far each face of the hand has moved
-// out (px), `deep` how much shade the inside of the wad holds, `creased` how
-// far the small creases have come up in a fresh sheet.
-type Pose = { open: number; sweep: number; deep: number; creased: number; folds: number[]; cage: number[]; scale: [number, number, number]; rot: [number, number, number] };
+// out (px), `deep` how much shade the inside of the wad holds.
+type Pose = { open: number; sweep: number; deep: number; folds: number[]; cage: number[]; scale: [number, number, number]; rot: [number, number, number] };
 
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -464,8 +449,8 @@ function rotation(rx: number, ry: number, rz: number): Float32Array {
   ]);
 }
 
-// Mounts the paper. The overlay's own flat sheet stays visible while shaders
-// compile, and simply fades if WebGL cannot run smoothly.
+// Mounts the crumpled ball. An embedded still remains visible while shaders
+// compile and is used as the fallback if WebGL cannot run smoothly.
 export function mountPaperBall(): void {
   const root = document.documentElement;
   const overlay = document.getElementById('boot-overlay');
@@ -621,36 +606,7 @@ export function mountPaperBall(): void {
       rx += tw.rx * s; ry += tw.ry * s; rz += tw.rz * s;
       out[tw.face] = Math.min(out[tw.face] + tw.creep * s, radius * 0.09);
     }
-    return { open: 0, sweep: 0, deep: 1, creased: 1, folds: hinges.map((h) => h.shut), cage: out, scale: [1, 1, 1], rot: [lean.x + rx, lean.y + ry, lean.z + rz] };
-  };
-
-  // `ms` since the first frame: the flat sheet is balled up. The flaps come
-  // over in the order they will later open in reverse, so the ones across the
-  // long side land on top, and the hand closes as the last of them arrive.
-  const openSpan = STAGES.open[1] - STAGES.open[0];
-  const foldSpan = CRUMPLE.fold[1] - CRUMPLE.fold[0] - CRUMPLE.flap;
-  const crumplePose = (ms: number): Pose => {
-    let shutAll = 0;
-    const folds = hinges.map((h) => {
-      const first = clamp01((h.at - STAGES.open[0]) / openSpan);
-      const t = clamp01((ms - CRUMPLE.fold[0] - (1 - first) * foldSpan) / CRUMPLE.flap);
-      // Pushed over faster and faster, with a small rebound as it lands.
-      const over = t * t * (3 - 2 * t) - 0.05 * Math.sin(Math.PI * t) * t;
-      shutAll += over / HINGES;
-      return h.shut * over;
-    });
-    const squeeze = Math.sin(Math.PI * stage(ms, CRUMPLE.squeeze));
-    const out = cage.map((face) => {
-      const r = clamp01((ms - CRUMPLE.close[0] - face.at * 0.6) / (CRUMPLE.close[1] - CRUMPLE.close[0] - 66));
-      return r <= 0 ? 1e7 : radius * (9 * Math.pow(1 - r, 3) - 0.07 * squeeze);
-    });
-    const turn = easeInOut(stage(ms, CRUMPLE.turn));
-    return {
-      open: clamp01(1 - shutAll), sweep: 0, deep: shutAll, folds, cage: out,
-      creased: easeOut(stage(ms, CRUMPLE.crease)),
-      scale: [1, 1, 1],
-      rot: [lean.x * turn, lean.y * turn, lean.z * turn],
-    };
+    return { open: 0, sweep: 0, deep: 1, folds: hinges.map((h) => h.shut), cage: out, scale: [1, 1, 1], rot: [lean.x + rx, lean.y + ry, lean.z + rz] };
   };
 
   // `ms` since the reveal started, layered over how the ball sat at `t`.
@@ -686,7 +642,6 @@ export function mountPaperBall(): void {
     const turn = 1 - easeInOut(stage(ms, STAGES.turn));
     return {
       open, sweep, folds, cage: out,
-      creased: 1,
       deep: 1 - swung,
       scale: [sx, sx, 1 - 0.04 * squeeze * wad],
       rot: [idle.rot[0] * turn, idle.rot[1] * turn, (idle.rot[2] - 0.08 * squeeze) * turn],
@@ -722,7 +677,6 @@ export function mountPaperBall(): void {
   let uCage: WebGLUniformLocation | null = null;
   let uCore: WebGLUniformLocation | null = null;
   let uDeep: WebGLUniformLocation | null = null;
-  let uCreased: WebGLUniformLocation | null = null;
   let uHingeSoft: WebGLUniformLocation | null = null;
   let uCageSoft: WebGLUniformLocation | null = null;
   const hingeSoft = new Float32Array(HINGES);
@@ -755,7 +709,6 @@ export function mountPaperBall(): void {
     gl.uniform4fv(uCage, cagePlanes);
     gl.uniform4f(uCore, core[0], core[1], core[2], radius + slack);
     gl.uniform1f(uDeep, pose.deep);
-    gl.uniform1f(uCreased, pose.creased);
     gl.uniform1f(uU, Math.min(pose.open, 1));
     gl.uniform1f(uSweep, pose.sweep);
     gl.uniformMatrix3fv(uRot, false, rotation(...pose.rot));
@@ -773,11 +726,11 @@ export function mountPaperBall(): void {
       gl.getExtension('WEBGL_lose_context')?.loseContext();
       return;
     }
-    // Time the crumple and the hold from the first animated frame.
+    // Time the hold from the first animated frame.
     if (!start) {
       start = now;
       last = now;
-      setTimeout(release, PAPER_TIMING.crumple + PAPER_TIMING.rest);
+      setTimeout(release, PAPER_TIMING.rest);
     } else if (gaps.length < 12) {
       // A machine that cannot draw the ball smoothly gets the still
       // instead of a stuttering ball and a page starved behind it.
@@ -788,16 +741,8 @@ export function mountPaperBall(): void {
         return;
       }
     }
-    // The ball's wait is timed from the end of the crumple. A reveal that
-    // comes early (the hold was capped) waits for the ball to be made.
-    const made = start + PAPER_TIMING.crumple;
-    if (now < made) {
-      draw(crumplePose(now - start));
-    } else if (unfoldAt) {
-      if (unfoldAt < made) {
-        unfoldAt = now;
-        revealIdle = 0;
-      }
+    const t = (now - mountedAt) / 1000;
+    if (unfoldAt) {
       const ms = now - unfoldAt;
       draw(openPose(ms, revealIdle));
       if (ms >= PAPER_TIMING.unfold) {
@@ -807,7 +752,7 @@ export function mountPaperBall(): void {
         return;
       }
     } else {
-      draw(idlePose((now - made) / 1000));
+      draw(idlePose(t));
     }
     requestAnimationFrame(frame);
   };
@@ -901,7 +846,6 @@ export function mountPaperBall(): void {
     uCageSoft = u('uCageSoft');
     uCore = u('uCore');
     uDeep = u('uDeep');
-    uCreased = u('uCreased');
     uSweep = u('uSweep');
     uRot = u('uRot');
     uPivot = u('uPivot');
@@ -911,8 +855,8 @@ export function mountPaperBall(): void {
     gl.enable(gl.DEPTH_TEST);
     gl.clearColor(0, 0, 0, 0);
 
-    // Draw the flat sheet before taking over from the overlay's own.
-    draw(crumplePose(0));
+    // Draw the crumpled first frame before replacing the embedded still.
+    draw(idlePose(0));
     overlay.dataset.paper = 'ball';
     if (scrub) {
       // Out of reach of boot-overlay.ts, which removes the overlay by id.
@@ -920,11 +864,8 @@ export function mountPaperBall(): void {
       (window as unknown as { __paperBall: unknown }).__paperBall = {
         unfold: PAPER_TIMING.unfold,
         stages: STAGES,
-        crumple: PAPER_TIMING.crumple,
         // Draws the ball `idle` seconds into its wait, or `ms` into the reveal.
         pose: (idle: number, ms?: number) => draw(ms === undefined ? idlePose(idle) : openPose(ms, idle)),
-        // Draws the sheet `ms` into being balled up.
-        crumpling: (ms: number) => draw(crumplePose(ms)),
       };
       return;
     }
@@ -950,7 +891,7 @@ export function mountPaperBall(): void {
       return;
     }
     if (scrub) return;
+    revealIdle = (performance.now() - mountedAt) / 1000;
     unfoldAt = performance.now();
-    revealIdle = start ? Math.max(0, (unfoldAt - start - PAPER_TIMING.crumple) / 1000) : 0;
   }, { once: true });
 }

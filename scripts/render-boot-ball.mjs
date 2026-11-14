@@ -1,6 +1,6 @@
-// Renders src/components/boot-ball.webp, the still that stands in for the
-// paper ball with reduced motion. It is the live ball as it first comes to
-// rest at 1440x900 for one fixed seed, cropped to the square
+// Renders src/components/boot-ball.webp, the still that shows while the paper
+// ball's shaders compile and stands in for it without WebGL. It is the live
+// ball's first frame at 1440x900 for one fixed seed, cropped to the square
 // BootOverlay.astro sizes it to (1.4x the ball's diameter).
 // Needs the dev server (the seed hook is dev only) and a real GPU: the ball
 // refuses software renderers.
@@ -17,7 +17,7 @@ const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 
 const page = await browser.newPage({ viewport: { width: w, height: h } });
 await page.goto(`${url}?paper-seed=${seed}&paper-scrub`, { waitUntil: 'domcontentloaded' });
 await page.waitForFunction(() => window.__paperBall, null, { timeout: 15000 });
-await page.addStyleTag({ content: '#boot-overlay-scrub { display: block !important; animation: none !important; } #boot-overlay-scrub::after { display: none; } .boot-status { display: none; }' });
+await page.addStyleTag({ content: '#boot-overlay-scrub { display: block !important; animation: none !important; } .boot-status { display: none; }' });
 await page.evaluate(() => window.__paperBall.pose(0));
 await page.waitForTimeout(400);
 
