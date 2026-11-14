@@ -214,8 +214,10 @@ const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 
 const fallback = async (name, ctx, extraBrowser) => {
   const page = await ctx.newPage({ viewport: { width: w, height: h } });
   try {
-    await page.goto(url, { waitUntil: 'domcontentloaded' });
-    const done = await page.waitForFunction(() => document.documentElement.dataset.boot === 'done', null, { timeout: 9000 }).then(() => true, () => false);
+    // A software-rendered Chrome can take over 20s to load the dev server's
+    // unbundled page on a slow machine, long before the overlay is involved.
+    await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    const done = await page.waitForFunction(() => document.documentElement.dataset.boot === 'done', null, { timeout: 30000 }).then(() => true, () => false);
     const canvas = await page.evaluate(() => !!document.querySelector('.boot-ball'));
     pass(name, done && !canvas, { bootDone: done, canvasMounted: canvas });
   } catch (e) {
