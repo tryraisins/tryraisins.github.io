@@ -1,8 +1,9 @@
 // End-to-end check of the page-load paper ball, on the real GPU.
 // Usage: node scripts/check-paper-ball.mjs [dev url] [outDir]
 //
-// 1. Scrub: loads ?paper-seed&paper-scrub (dev server only), steps the ball
-//    through its wait and every stage of the opening, and writes a contact
+// 1. Scrub: loads ?paper-seed&paper-scrub (dev server only), steps the sheet
+//    through being balled up, its wait and every stage of the opening, checks
+//    the first frame is the flat sheet the overlay starts on, and writes a contact
 //    sheet plus the flat frame's rule alignment against the page.
 // 2. Live: a normal load, timing the frames while the ball waits and opens,
 //    and checking that paper:flat fires and the overlay leaves.
@@ -48,7 +49,9 @@ const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 
     await page.addStyleTag({ content: '#boot-overlay-scrub { display: block !important; animation: none !important; }' });
     // Let the still finish fading under the live ball.
     await page.waitForTimeout(300);
+    const crumple = await page.evaluate(() => window.__paperBall.crumple);
     const frames = [
+      ...[0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1].map((k) => [`crumple ${Math.round(k * crumple)}ms`, -1, Math.round(k * crumple)]),
       ['idle 0s', 0], ['idle 0.6s', 0.6], ['idle 1.2s', 1.2],
       ...[0, 80, 150, 230, 320, 420, 540, 660, 780, 900, 1020, 1140, 1260, 1380, 1500, 1600].map((ms) => [`${ms}ms`, 1.2, ms]),
     ];
@@ -56,7 +59,8 @@ const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 
     let missing = 0;
     for (const [label, idle, ms] of frames) {
       const shown = await page.evaluate(([i, m]) => {
-        window.__paperBall.pose(i, m ?? undefined);
+        if (i < 0) window.__paperBall.crumpling(m);
+        else window.__paperBall.pose(i, m ?? undefined);
         const c = document.querySelector('#boot-overlay-scrub .boot-ball');
         return !!c && getComputedStyle(c.parentElement).display !== 'none';
       }, [idle, ms ?? null]);
@@ -66,7 +70,7 @@ const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 
       shots.push({ label, data: fs.readFileSync(file).toString('base64') });
     }
     pass('every scrub frame shows the paper', missing === 0, { frames: frames.length, missing });
-    fs.copyFileSync(path.join(out, 'frames', '00-idle0s.png'), path.join(out, 'ball.png'));
+    fs.copyFileSync(path.join(out, 'frames', '08-idle0s.png'), path.join(out, 'ball.png'));
 
     // Rules on the flat frame against the rules on the page: rows that are
     // clearly blue, sampled down a column clear of the hero.
@@ -100,6 +104,38 @@ const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 
     const offsets = rules.page.map((y) => Math.min(...rules.flat.map((f) => Math.abs(f - y))));
     const worst = Math.max(...offsets);
     pass('flat frame rules line up with the page', rules.page.length > 5 && worst <= 3, { pageRules: rules.page.length, flatRules: rules.flat.length, worstOffsetPx: worst });
+
+    // The crumple's first frame against the sheet the overlay paints before
+    // WebGL is ready: the canvas must take over from it without a jump.
+    await page.goto(`${url}?paper-seed=${seed}&paper-scrub`);
+    await page.waitForFunction(() => window.__paperBall, null, { timeout: 5000 });
+    await page.addStyleTag({ content: '#boot-overlay-scrub { display: block !important; animation: none !important; } #boot-overlay-scrub::after { animation: none !important; } .boot-ball { visibility: hidden; }' });
+    await page.waitForTimeout(100);
+    const cssShot = (await page.screenshot()).toString('base64');
+    const start = await page.evaluate(async ([a, b, w]) => {
+      const load = async (src) => {
+        const img = new Image();
+        img.src = `data:image/png;base64,${src}`;
+        await img.decode();
+        const c = new OffscreenCanvas(img.width, img.height);
+        const x = c.getContext('2d');
+        x.drawImage(img, 0, 0);
+        return x.getImageData(0, 0, img.width, img.height);
+      };
+      const [gl, css] = [await load(a), await load(b)];
+      let sum = 0, far = 0;
+      for (let i = 0; i < gl.data.length; i += 4) {
+        const d = Math.max(Math.abs(gl.data[i] - css.data[i]), Math.abs(gl.data[i + 1] - css.data[i + 1]), Math.abs(gl.data[i + 2] - css.data[i + 2]));
+        sum += d;
+        if (d > 40) far++;
+      }
+      const px = gl.data.length / 4;
+      return { meanDiff: +(sum / px).toFixed(2), farPixelsPct: +((100 * far) / px).toFixed(3) };
+    }, [shots[0].data, cssShot, w]);
+    // The 1.5px margin lines are antialiased differently by the two, which
+    // on a phone is about half a percent of the screen; a margin in the
+    // wrong place would be three times that, and misplaced rules far more.
+    pass('crumple starts on the overlay\'s flat sheet', start.meanDiff < 4 && start.farPixelsPct < 1, start);
 
     // Contact sheet, four across.
     const sheet = await page.evaluate(async (list) => {
@@ -165,8 +201,10 @@ const browser = await chromium.launch({ channel: process.env.BROWSER_CHANNEL ?? 
   };
   const opening = stat(log.gaps.opening);
   const flatAfter = log.marks.flat - log.marks.reveal;
-  pass('live load opens and hands over the page', finished && overlayGone && !!log.marks.ball && flatAfter >= 1500 && flatAfter < 2400 && errors.length === 0, {
-    marks: log.marks, revealToFlatMs: flatAfter, waiting: stat(log.gaps.ball), opening, errors,
+  // The ball must have been made before it opens: the crumple and its rest.
+  const ballFor = log.marks.reveal - log.marks.ball;
+  pass('live load opens and hands over the page', finished && overlayGone && !!log.marks.ball && ballFor >= 900 && flatAfter >= 1500 && flatAfter < 2400 && errors.length === 0, {
+    marks: log.marks, ballToRevealMs: ballFor, revealToFlatMs: flatAfter, waiting: stat(log.gaps.ball), opening, errors,
   });
   pass('opening holds frame rate', opening.median <= 20 && opening.p95 <= 34, opening);
   await page.close();

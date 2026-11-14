@@ -1,44 +1,77 @@
 // The page-load paper: a crumpled sheet of the notebook that opens and is
 // smoothed flat when boot-overlay.ts starts the reveal. Drawn with WebGL2 so the
-// ball has real depth: the sheet is a grid wrapped onto a sphere and creased
-// into flat facets, lit per pixel so every facet catches the light. When the
-// sheet is flat it lines up pixel for pixel with the page beneath.
+// wad has real depth, and when the sheet is flat it lines up pixel for pixel
+// with the page beneath.
 //
-// The creases never change, so their depth and slope are baked once into a
-// small float texture (on the GPU where it can render floats, otherwise here).
-// The mesh only carries the silhouette, and each pixel reads its crease from
-// the texture, so creases stay sharp without following the triangles.
+// The sheet is never stretched. It is folded by mirroring it across planes,
+// and a mirror moves every point of the paper rigidly, so each fold is a sharp
+// straight crease between flat pieces that keep their true size:
+// - HINGES are creases fixed in the sheet, ringed round its middle. Each one's
+//   plane pivots on its crease, which swings the paper beyond it over like a
+//   flap on a hinge. Whatever a flap pushes through another plane is folded
+//   back again, so the long flaps of the sheet zigzag into a stack.
+// - The CAGE is the hand: a dome of planes closed round that stack, which folds
+//   back anything that reaches it and so packs the stack into a ball whose
+//   ridges lie on the dome. The desk under the paper folds it back the same way.
+// The load starts on the flat sheet and crumples it (see CRUMPLE): the flaps
+// are folded in, the hand closes round them and squeezes. Opening runs it in
+// reverse (see STAGES): the hand lets go and the wad springs loose, the flaps
+// swing out on their hinges a pair at a time, and a palm presses down what is
+// left.
 //
-// The opening is staged (see STAGES): while the page loads the ball relaxes in
-// small jumps, then it is squeezed, springs loose, opens one region at a time
-// and is pressed flat by a sweep across the sheet.
+// The small creases never change, so their depth and slope are baked once into
+// a float texture (on the GPU where it can render floats, otherwise here) and
+// each pixel reads its crease from that.
 //
-// Without hardware WebGL2, or with reduced motion, nothing is mounted and the
-// overlay's still simply fades (see BootOverlay.astro).
+// Without hardware WebGL2 nothing is mounted and the overlay's flat sheet
+// simply fades; with reduced motion its still of the ball does (see
+// BootOverlay.astro).
 import { holdBoot } from './boot-overlay';
 
-// Milliseconds. `rest` is the beat the ball sits before it may open, `unfold`
-// the whole opening below. Keep `unfold` in step with TIMING.lift in
-// boot-overlay.ts.
-export const PAPER_TIMING = { rest: 220, unfold: 1600 };
+// Milliseconds. `crumple` is the sheet being balled up, `rest` the beat the
+// ball then sits before it may open, `unfold` the whole opening below. Keep
+// `unfold` in step with TIMING.lift in boot-overlay.ts.
+export const PAPER_TIMING = { crumple: 780, rest: 200, unfold: 1600 };
+
+// Milliseconds from the first frame, while the sheet is balled up.
+const CRUMPLE = {
+  crease: [0, 420],     // the first creases come up in the flat sheet
+  fold: [40, 560],      // the flaps are folded in, first to last
+  flap: 340,            // how long one flap takes to come over
+  close: [300, 700],    // the hand closes round the stack
+  squeeze: [600, 780],  // a last squeeze, and the ball springs back a little
+  turn: [120, 720],     // the ball rolls to how it will sit
+} as const;
 
 // Milliseconds from the start of the reveal. The stages overlap so the motion
 // never stops between them.
 const STAGES = {
-  grip: [0, 150],       // the ball is squeezed before it is pulled apart
-  pop: [110, 460],      // it springs loose and the first flaps come out
-  spread: [360, 1100],  // the sheet opens out and turns to face the viewer
-  smooth: [880, 1600],  // a palm sweeps across and presses the creases down
+  grip: [0, 150],       // the ball is squeezed before it is let go
+  release: [110, 600],  // the hand opens and the wad springs loose
+  open: [320, 860],     // when the flaps start to swing out, first to last
+  turn: [200, 1200],    // the sheet turns square to the viewer
+  smooth: [1000, 1600],  // a palm sweeps across and presses the creases down
 } as const;
+
+const HINGES = 8;
+const CAGE = 14;
+// How many times the sheet is taken round the hinges and the cage. A long flap
+// crosses the wad several times before all of it is tucked inside.
+const HINGE_PASSES = 4;
+const CAGE_PASSES = 2;
+// A flap swinging open is a damped spring: it starts slowly, swings a little
+// past where it will rest and settles. Per second.
+const SWING = { decay: 6.6, rate: 6.9 };
+// Width of the palm's sweep, as a share of the sheet.
+const SWEEP_WIDTH = 0.24;
 
 // Crease depth as a share of the ball's radius, and how much of the full
 // crease shading shows: balled up, opened out, and smoothed. Paper that has
 // been balled up never goes back to neat, so part of every crease stays.
-const PAPER_DEPTH = { ball: 0.3, open: 0.14, rest: 0.07 };
+const PAPER_DEPTH = { ball: 0.07, open: 0.14, rest: 0.07 };
+// How round a fold is, as a share of the ball's radius.
+const FOLD_SOFT = 0.035;
 const PAPER_SHADE = { open: 0.45, rest: 0.28 };
-// How unevenly the sheet opens: the share of the opening some regions wait
-// before they start to move.
-const STAGGER = 0.34;
 
 // Facet layers, coarse to fine. Each is a field of cells whose centres rise or
 // sink into flat-sided pyramids, so the sheet breaks into planar facets with
@@ -138,11 +171,15 @@ uniform sampler2D uCrease;
 uniform float uU;       // 0 = balled up, 1 = open (but still crumpled)
 uniform float uSweep;   // how far the smoothing palm has crossed the sheet
 uniform vec2 uSweepDir;
-uniform float uSeed;
-uniform float uC;       // curvature of the ball (1/px)
 uniform float uR;       // radius of the ball (px)
 uniform vec2 uHalf;     // half the sheet size (px)
-uniform float uWrap;    // how far round the ball the corners reach (radians)
+uniform vec4 uHinge[${HINGES}]; // fold planes: unit normal, offset
+uniform float uHingeSoft[${HINGES}];
+uniform vec4 uCage[${CAGE}];
+uniform float uCageSoft;
+uniform vec4 uCore;     // middle of the wad, and its radius
+uniform float uDeep;    // how much shade the inside of the wad holds
+uniform float uCreased; // 0 = a fresh sheet, 1 = its small creases are in
 uniform mat3 uRot;
 uniform vec3 uPivot;
 uniform vec3 uScale;
@@ -155,76 +192,54 @@ out vec3 vTx;
 out vec3 vTy;
 out float vA;
 out float vCrumple;
-${NOISE_GLSL}
+out float vDeep;
 
-float sinc(float x) { return abs(x) < 1e-4 ? 1.0 - x * x / 6.0 : sin(x) / x; }
-
-// How far this part of the sheet has opened. A smooth random field holds some
-// regions back, so flaps come loose one after another.
-float openAt(vec2 p) {
-  vec2 n = p / uHalf;
-  // The corners wait a little longer, so they do not shoot out as horns.
-  float corner = smoothstep(0.75, 1.0, length(n) * 0.70710678);
-  float d = (0.62 * noise(n * 2.3 + uSeed) + 0.38 * noise(n * 4.8 + uSeed * 1.7 + 11.0) + 0.45 * corner) / 1.45;
-  return clamp((uU - ${STAGGER} * d) / (1.0 - ${STAGGER}), 0.0, 1.0);
+// Folds whatever lies beyond the plane back across it. The sheet's two
+// tangents are mirrored with it, so every piece carries its exact normal.
+// Within \`soft\` px of the plane the fold is rounded, as paper is where it has
+// been bent and not pressed; at zero the crease is sharp and a sheet lying in
+// the plane is left exactly alone.
+void fold(vec4 plane, float soft, inout vec3 p, inout vec3 tx, inout vec3 ty) {
+  float s = dot(p, plane.xyz) - plane.w;
+  if (s <= -soft) return;
+  float over = s, turn = 1.0;
+  if (s < soft) {
+    turn = (s + soft) / (2.0 * soft);
+    over = soft * turn * turn;
+  }
+  p -= 2.0 * over * plane.xyz;
+  tx -= 2.0 * turn * dot(tx, plane.xyz) * plane.xyz;
+  ty -= 2.0 * turn * dot(ty, plane.xyz) * plane.xyz;
 }
 
 // How far the smoothing palm has pressed this part of the sheet.
 float smoothedAt(vec2 p) {
   vec2 n = p / uHalf;
   float s = 0.5 + 0.5 * dot(n, uSweepDir) / (abs(uSweepDir.x) + abs(uSweepDir.y));
-  const float w = 0.24;
-  float front = mix(-w, 1.0 + w, uSweep);
-  return 1.0 - smoothstep(front - w, front + w, s);
-}
-
-// Where a point of the flat sheet sits before creasing. Balled up, the sheet is
-// wrapped onto a sphere so its corners reach just past the back. The rectangle
-// is mostly scaled evenly, so its creases keep their shape, and only partly
-// normalised to a disc, so the short edges of a phone or a wide screen still
-// reach round the back. Opening, the wrap angle relaxes while the sheet
-// regains its full size, so it reads as a bowl spreading out rather than a
-// ball growing.
-vec3 sheet(vec2 p, out vec3 nrm) {
-  float u = openAt(p);
-  vec2 span = mix(uHalf, vec2(length(uHalf) * 0.70710678), 0.65);
-  vec2 n = p / span;
-  float r = length(n) / length(uHalf / span);
-  vec2 dir = r > 0.0 ? normalize(n) : vec2(0.0);
-  // A region peels back at ball size first and only then spreads out, so
-  // early flaps curl open instead of stretching away from the ball.
-  float grow = smoothstep(0.18, 1.0, u);
-  vec2 q = mix(dir * (r * uWrap / uC), p, grow);
-  float corner = mix(uWrap / uC, length(uHalf), grow);
-  // The wrap lets go well before the sheet reaches full size, so the ball
-  // breaks open into a bowl early instead of swelling.
-  float c = uWrap * pow(1.0 - u, 3.2) / corner;
-  float s = length(q);
-  vec2 qd = s > 0.0 ? q / s : vec2(0.0);
-  float th = s * c;
-  nrm = vec3(qd * sin(th), cos(th));
-  // sin(th) / c and (cos(th) - 1) / c, written so they stay exact as the
-  // curvature falls to zero; the plain forms lose all precision near flat.
-  float half_ = 0.5 * th;
-  float sh = sinc(half_);
-  return vec3(q * sinc(th), -0.5 * s * th * sh * sh);
+  float front = mix(-${SWEEP_WIDTH}, 1.0 + ${SWEEP_WIDTH}, uSweep);
+  return 1.0 - smoothstep(front - ${SWEEP_WIDTH}, front + ${SWEEP_WIDTH}, s);
 }
 
 void main() {
-  vec3 nrm, nn;
-  vec3 base = sheet(aP, nrm);
-  const float e = 1.5;
-  vec3 tx = (sheet(aP + vec2(e, 0.0), nn) - sheet(aP - vec2(e, 0.0), nn)) / (2.0 * e);
-  vec3 ty = (sheet(aP + vec2(0.0, e), nn) - sheet(aP - vec2(0.0, e), nn)) / (2.0 * e);
+  vec3 p = vec3(aP, 0.0), tx = vec3(1.0, 0.0, 0.0), ty = vec3(0.0, 1.0, 0.0);
+  for (int i = 0; i < ${HINGE_PASSES}; i++)
+    for (int k = 0; k < ${HINGES}; k++) fold(uHinge[k], uHingeSoft[k], p, tx, ty);
+  for (int i = 0; i < ${CAGE_PASSES}; i++) {
+    for (int k = 0; k < ${CAGE}; k++) fold(uCage[k], uCageSoft, p, tx, ty);
+    // The desk.
+    if (p.z < 0.0) { p.z = -p.z; tx.z = -tx.z; ty.z = -ty.z; }
+  }
+  vec3 nrm = normalize(cross(tx, ty));
+
   vCuv = 0.5 + aP / (2.0 * uHalf);
-  float u = openAt(aP);
   float sm = smoothedAt(aP);
-  float depth = mix(mix(${PAPER_DEPTH.open}, ${PAPER_DEPTH.ball}, pow(1.0 - u, 1.25)), ${PAPER_DEPTH.rest}, sm);
-  vA = uR * depth;
-  vCrumple = mix(max(1.0 - u, ${PAPER_SHADE.open}), ${PAPER_SHADE.rest}, sm);
+  float depth = mix(mix(${PAPER_DEPTH.open}, ${PAPER_DEPTH.ball}, pow(1.0 - uU, 1.25)), ${PAPER_DEPTH.rest}, sm);
+  vA = uR * depth * uCreased;
+  vCrumple = mix(max(1.0 - uU, ${PAPER_SHADE.open}), ${PAPER_SHADE.rest}, sm) * uCreased;
+  vDeep = uDeep * (1.0 - smoothstep(0.5, 1.05, length(p - uCore.xyz) / uCore.w));
   vec4 crease = textureLod(uCrease, vCuv, 0.0);
-  float h = mix(crease.x, crease.w * 1.7, pow(1.0 - u, 1.5));
-  vec3 pos = uRot * ((base + nrm * h * vA - uPivot) * uScale) + uPivot;
+  float h = mix(crease.x, crease.w * 1.7, pow(1.0 - uU, 1.5));
+  vec3 pos = uRot * ((p + nrm * h * vA - uPivot) * uScale) + uPivot;
 
   vUv = vec2(vCuv.x, 1.0 - vCuv.y);
   vPos = pos;
@@ -244,6 +259,7 @@ in vec3 vTx;
 in vec3 vTy;
 in float vA;
 in float vCrumple;
+in float vDeep;
 uniform sampler2D uTex;
 uniform sampler2D uCrease;
 uniform vec3 uEye;
@@ -263,26 +279,49 @@ void main() {
   float k = vCrumple;
   // Neutral (exactly 1.0) for a flat sheet facing the viewer.
   float lit = dot(n, uLight) - uLight.z;
+  // Paper is matte and passes light on, so a facet turned away from the
+  // light dims gently instead of going black.
+  // Turned towards it, white paper has almost nowhere brighter to go.
+  lit /= 1.0 + (lit < 0.0 ? -2.4 : 16.0) * lit;
   float shade = 1.0 + lit * (0.9 + 0.45 * k);
   // Valleys between creases sit in shadow, ridges catch a little more light,
   // and the rim of the ball turns away into shade.
   shade *= 1.0 - 0.38 * k * smoothstep(0.02, -0.45, crease.x);
   shade *= 1.0 + 0.05 * k * smoothstep(0.05, 0.45, crease.x);
   shade *= 1.0 - 0.32 * k * pow(1.0 - clamp(dot(n, v), 0.0, 1.0), 2.0);
-  // Folds tucked behind the front of the ball get less light.
+  // The back of the sheet gets a little less light, and paper deep inside
+  // the wad sits in the shade of the folds round it.
   if (under) shade *= 0.88;
+  shade *= 1.0 - 0.45 * vDeep;
   // Paper has a faint sheen where a facet tips towards the light.
   float sheen = pow(max(dot(n, normalize(uLight + v)), 0.0), 28.0) * 0.08 * k;
-  outColor = vec4(paper * clamp(shade, 0.34, 1.12) + sheen, 1.0);
+  outColor = vec4(paper * clamp(shade, 0.3, 1.12) + sheen, 1.0);
 }`;
 
 type Layer = { cos: number; sin: number; cell: number; stretch: number; amp: number; cap: number };
-type Pose = { open: number; sweep: number; scale: [number, number, number]; rot: [number, number, number] };
+// A crease fixed in the sheet: it runs square to (mx, my), `reach` px from the
+// centre. `shut` and `ajar` are its fold angle balled up and opened out,
+// `at` when it starts to open (ms) and `press` where the palm's sweep meets it.
+type Hinge = { mx: number; my: number; reach: number; shut: number; ajar: number; at: number; press: number };
+// One face of the hand round the wad: its normal, how far it sits from the
+// middle of the wad, and how long after the release it lets go (ms).
+type CageFace = { n: [number, number, number]; reach: number; at: number };
+// `folds` are the hinge angles, `cage` how far each face of the hand has moved
+// out (px), `deep` how much shade the inside of the wad holds, `creased` how
+// far the small creases have come up in a fresh sheet.
+type Pose = { open: number; sweep: number; deep: number; creased: number; folds: number[]; cage: number[]; scale: [number, number, number]; rot: [number, number, number] };
 
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 // Overshoots a little before it lands, like paper springing loose.
 const easeOutBack = (t: number) => 1 + 2.4 * Math.pow(t - 1, 3) + 1.4 * Math.pow(t - 1, 2);
+const smoothstep = (a: number, b: number, x: number) => {
+  const t = clamp01((x - a) / (b - a));
+  return t * t * (3 - 2 * t);
+};
+// 0 to 1 as a damped spring, `dt` seconds after it is let go.
+const swing = (dt: number) =>
+  dt <= 0 ? 0 : 1 - Math.exp(-SWING.decay * dt) * (Math.cos(SWING.rate * dt) + (SWING.decay / SWING.rate) * Math.sin(SWING.rate * dt));
 const clamp01 = (t: number) => Math.min(1, Math.max(0, t));
 const stage = (ms: number, [from, to]: readonly [number, number]) => clamp01((ms - from) / (to - from));
 
@@ -425,8 +464,8 @@ function rotation(rx: number, ry: number, rz: number): Float32Array {
   ]);
 }
 
-// Mounts the crumpled ball. An embedded still remains visible while shaders
-// compile and is used as the fallback if WebGL cannot run smoothly.
+// Mounts the paper. The overlay's own flat sheet stays visible while shaders
+// compile, and simply fades if WebGL cannot run smoothly.
 export function mountPaperBall(): void {
   const root = document.documentElement;
   const overlay = document.getElementById('boot-overlay');
@@ -475,10 +514,11 @@ export function mountPaperBall(): void {
   const norm = CREASE_NORM * sheetScale;
   const shaderSeed = Math.floor(rng() * 90) + 3;
 
-  // Mesh: about 7px cells. It only carries the silhouette; the light comes
-  // from the crease texture.
-  const cols = Math.min(240, Math.max(60, Math.round(width / 7)));
-  const rows = Math.min(240, Math.max(60, Math.round(height / 7)));
+  // Mesh: about 4.5px cells, so a fold crossing them at any angle stays a
+  // clean line. The small creases come from the crease texture.
+  const cell = Math.max(4.5, Math.sqrt((width * height) / 90000));
+  const cols = Math.max(60, Math.round(width / cell));
+  const rows = Math.max(60, Math.round(height / cell));
   const verts = new Float32Array((cols + 1) * (rows + 1) * 2);
   for (let j = 0, k = 0; j <= rows; j++) {
     for (let i = 0; i <= cols; i++) {
@@ -521,42 +561,135 @@ export function mountPaperBall(): void {
   // and the direction the smoothing palm travels.
   const lean = { x: 0.16 + rng() * 0.08, y: -0.2 + rng() * 0.1, z: -(0.5 + rng() * 0.5) };
   const sweepAngle = rng() * Math.PI * 2;
+  const sweepDir = [Math.cos(sweepAngle), Math.sin(sweepAngle)];
+  // Where the palm's sweep meets a point of the sheet, as smoothedAt in VERT.
+  const pressAt = (x: number, y: number) =>
+    clamp01(0.5 + (0.5 * ((x / (width / 2)) * sweepDir[0] + (y / (height / 2)) * sweepDir[1])) / (Math.abs(sweepDir[0]) + Math.abs(sweepDir[1])));
+
+  // The hinges ring the middle of the sheet, unevenly. Those across the long
+  // side of the sheet open first, as two hands pulling it apart would, and
+  // they are folded last so their flaps lie on top of the others.
+  const wide = width >= height;
+  const turn0 = rng() * Math.PI * 2;
+  const hinges: Hinge[] = Array.from({ length: HINGES }, (_, k) => {
+    const a = turn0 + ((k + (rng() - 0.5) * 0.6) * Math.PI * 2) / HINGES;
+    const mx = Math.cos(a), my = Math.sin(a);
+    const reach = radius * (0.45 + rng() * 0.3);
+    const across = Math.abs(wide ? mx : my);
+    return {
+      mx, my, reach,
+      // The flaps folded last lie flattest, so they close the top of the wad.
+      shut: Math.PI - (0.3 + (1 - across) * 0.5 + rng() * 0.3),
+      ajar: 0.16 + rng() * 0.16,
+      at: STAGES.open[0] + (1 - across) * (STAGES.open[1] - STAGES.open[0]) * 0.8 + rng() * (STAGES.open[1] - STAGES.open[0]) * 0.2,
+      press: pressAt(mx * reach, my * reach),
+    };
+  }).sort((a, b) => b.at - a.at);
+
+  // The hand: one face over the top, a ring of five round the shoulders and
+  // a ring of eight round the sides, all a little out of true. Its middle sits low, so the
+  // ball rests on the desk on a flat foot.
+  const core: [number, number, number] = [0, 0, radius * 0.35];
+  const cage: CageFace[] = Array.from({ length: CAGE }, (_, j) => {
+    const ring = j === 0 ? 0 : j < 6 ? 1 : 2;
+    const rise = ring === 0 ? 1.3 + rng() * 0.25 : ring === 1 ? 0.8 + rng() * 0.3 : 0.1 + rng() * 0.35;
+    const round = ring === 1 ? (j - 1 + rng() * 0.5) / 5 : (j - 6 + rng() * 0.5) / 8;
+    const a = turn0 + 0.4 + round * Math.PI * 2;
+    return {
+      n: [Math.cos(rise) * Math.cos(a), Math.cos(rise) * Math.sin(a), Math.sin(rise)],
+      reach: radius * (0.86 + rng() * 0.18),
+      at: rng() * 110,
+    };
+  });
+
   // While it waits, the scrunched paper relaxes in small jumps: each one
-  // nudges the ball round and lets it swell a little, with a quick settle.
-  const twitches: { at: number; rx: number; ry: number; rz: number; grow: number }[] = [];
+  // nudges the ball round and lets one side of it creep out, with a quick
+  // settle.
+  const twitches: { at: number; rx: number; ry: number; rz: number; face: number; creep: number }[] = [];
   for (let at = 0.18 + rng() * 0.2; at < 9; at += 0.28 + rng() * 0.55) {
     const size = 0.4 + rng() * 0.6;
-    twitches.push({ at, rx: (rng() - 0.5) * 0.05 * size, ry: (rng() - 0.5) * 0.06 * size, rz: (rng() - 0.5) * 0.05 * size, grow: 0.007 * size });
+    twitches.push({ at, rx: (rng() - 0.5) * 0.05 * size, ry: (rng() - 0.5) * 0.06 * size, rz: (rng() - 0.5) * 0.05 * size, face: Math.floor(rng() * CAGE), creep: radius * 0.035 * size });
   }
   const settle = (dt: number) => (dt <= 0 ? 0 : 1 - Math.exp(-dt * 16) * Math.cos(dt * 24));
 
   const idlePose = (t: number): Pose => {
-    let rx = 0, ry = 0, rz = 0, grow = 0;
+    let rx = 0, ry = 0, rz = 0;
+    const out = cage.map(() => 0);
     for (const tw of twitches) {
       if (tw.at > t) break;
       const s = settle(t - tw.at);
-      rx += tw.rx * s; ry += tw.ry * s; rz += tw.rz * s; grow += Math.min(tw.grow * s, 0.06 - grow);
+      rx += tw.rx * s; ry += tw.ry * s; rz += tw.rz * s;
+      out[tw.face] = Math.min(out[tw.face] + tw.creep * s, radius * 0.09);
     }
-    const g = 1 + grow;
-    return { open: 0, sweep: 0, scale: [g, g, g], rot: [lean.x + rx, lean.y + ry, lean.z + rz] };
+    return { open: 0, sweep: 0, deep: 1, creased: 1, folds: hinges.map((h) => h.shut), cage: out, scale: [1, 1, 1], rot: [lean.x + rx, lean.y + ry, lean.z + rz] };
+  };
+
+  // `ms` since the first frame: the flat sheet is balled up. The flaps come
+  // over in the order they will later open in reverse, so the ones across the
+  // long side land on top, and the hand closes as the last of them arrive.
+  const openSpan = STAGES.open[1] - STAGES.open[0];
+  const foldSpan = CRUMPLE.fold[1] - CRUMPLE.fold[0] - CRUMPLE.flap;
+  const crumplePose = (ms: number): Pose => {
+    let shutAll = 0;
+    const folds = hinges.map((h) => {
+      const first = clamp01((h.at - STAGES.open[0]) / openSpan);
+      const t = clamp01((ms - CRUMPLE.fold[0] - (1 - first) * foldSpan) / CRUMPLE.flap);
+      // Pushed over faster and faster, with a small rebound as it lands.
+      const over = t * t * (3 - 2 * t) - 0.05 * Math.sin(Math.PI * t) * t;
+      shutAll += over / HINGES;
+      return h.shut * over;
+    });
+    const squeeze = Math.sin(Math.PI * stage(ms, CRUMPLE.squeeze));
+    const out = cage.map((face) => {
+      const r = clamp01((ms - CRUMPLE.close[0] - face.at * 0.6) / (CRUMPLE.close[1] - CRUMPLE.close[0] - 66));
+      return r <= 0 ? 1e7 : radius * (9 * Math.pow(1 - r, 3) - 0.07 * squeeze);
+    });
+    const turn = easeInOut(stage(ms, CRUMPLE.turn));
+    return {
+      open: clamp01(1 - shutAll), sweep: 0, deep: shutAll, folds, cage: out,
+      creased: easeOut(stage(ms, CRUMPLE.crease)),
+      scale: [1, 1, 1],
+      rot: [lean.x * turn, lean.y * turn, lean.z * turn],
+    };
   };
 
   // `ms` since the reveal started, layered over how the ball sat at `t`.
+  const releaseMs = STAGES.release[1] - STAGES.release[0];
   const openPose = (ms: number, t: number): Pose => {
     const idle = idlePose(t);
     const grip = easeOut(stage(ms, STAGES.grip));
-    const pop = stage(ms, STAGES.pop);
-    const squeeze = grip * (1 - easeOut(pop));
-    const open = 0.22 * easeOutBack(pop) + 0.78 * easeInOut(stage(ms, STAGES.spread));
-    const wad = clamp01(1 - open);
-    const swell = 0.05 * Math.sin(Math.PI * pop) * wad;
-    const sx = idle.scale[0] * (1 - 0.07 * squeeze + swell);
-    const sz = idle.scale[2] * (1 - 0.04 * squeeze + swell);
+    const sweep = easeInOut(stage(ms, STAGES.smooth));
+    const front = -SWEEP_WIDTH + (1 + 2 * SWEEP_WIDTH) * sweep;
+
+    // The hand: each face eases off, then is gone.
+    let letGo = 0;
+    const out = cage.map((face, j) => {
+      const r = clamp01((ms - STAGES.release[0] - face.at) / releaseMs);
+      letGo += r / CAGE;
+      return r >= 1 ? 1e7 : idle.cage[j] + radius * (0.28 * easeOutBack(Math.min(1, r * 2.2)) + 9 * r * r * r);
+    });
+
+    // The flaps: each swings from shut to ajar, and the palm presses it flat
+    // when the sweep reaches its crease.
+    let swung = 0;
+    const folds = hinges.map((h) => {
+      const s = swing((ms - h.at) / 1000);
+      swung += clamp01(s) / HINGES;
+      const pressed = smoothstep(front - SWEEP_WIDTH, front + SWEEP_WIDTH, h.press);
+      return Math.max(0, h.ajar + (h.shut - h.ajar) * (1 - s)) * pressed;
+    });
+
+    const open = clamp01(0.12 * letGo + 0.88 * swung);
+    const wad = 1 - open;
+    const squeeze = grip * (1 - easeOut(stage(ms, STAGES.release)));
+    const sx = 1 - 0.07 * squeeze * wad;
+    const turn = 1 - easeInOut(stage(ms, STAGES.turn));
     return {
-      open,
-      sweep: easeInOut(stage(ms, STAGES.smooth)),
-      scale: [1 + (sx - 1) * wad, 1 + (sx - 1) * wad, 1 + (sz - 1) * wad],
-      rot: [idle.rot[0] * wad, idle.rot[1] * wad, (idle.rot[2] - 0.08 * squeeze) * wad],
+      open, sweep, folds, cage: out,
+      creased: 1,
+      deep: 1 - swung,
+      scale: [sx, sx, 1 - 0.04 * squeeze * wad],
+      rot: [idle.rot[0] * turn, idle.rot[1] * turn, (idle.rot[2] - 0.08 * squeeze) * turn],
     };
   };
 
@@ -585,16 +718,48 @@ export function mountPaperBall(): void {
 
   let uU: WebGLUniformLocation | null = null;
   let uSweep: WebGLUniformLocation | null = null;
+  let uHinge: WebGLUniformLocation | null = null;
+  let uCage: WebGLUniformLocation | null = null;
+  let uCore: WebGLUniformLocation | null = null;
+  let uDeep: WebGLUniformLocation | null = null;
+  let uCreased: WebGLUniformLocation | null = null;
+  let uHingeSoft: WebGLUniformLocation | null = null;
+  let uCageSoft: WebGLUniformLocation | null = null;
+  const hingeSoft = new Float32Array(HINGES);
+  const hingePlanes = new Float32Array(HINGES * 4);
+  const cagePlanes = new Float32Array(CAGE * 4);
   let uRot: WebGLUniformLocation | null = null;
   let uPivot: WebGLUniformLocation | null = null;
   let uScale: WebGLUniformLocation | null = null;
 
   const draw = (pose: Pose) => {
     const wad = clamp01(1 - pose.open);
+    // A hinge's plane halves the angle between the sheet and its flap, and
+    // passes through its crease. Opened flat it lies in the sheet and folds
+    // nothing.
+    hinges.forEach((h, k) => {
+      const tilt = (Math.PI - pose.folds[k]) / 2;
+      hingePlanes.set([h.mx * Math.cos(tilt), h.my * Math.cos(tilt), -Math.sin(tilt), h.reach * Math.cos(tilt)], k * 4);
+      // A fold loses its roundness as it is opened and pressed.
+      hingeSoft[k] = radius * FOLD_SOFT * Math.min(1, pose.folds[k] / 0.6);
+    });
+    gl.uniform1fv(uHingeSoft, hingeSoft);
+    gl.uniform1f(uCageSoft, radius * FOLD_SOFT);
+    let slack = 0;
+    cage.forEach((face, j) => {
+      const [x, y, z] = face.n;
+      cagePlanes.set([x, y, z, x * core[0] + y * core[1] + z * core[2] + face.reach + pose.cage[j]], j * 4);
+      slack += Math.min(pose.cage[j], radius * 0.5) / CAGE;
+    });
+    gl.uniform4fv(uHinge, hingePlanes);
+    gl.uniform4fv(uCage, cagePlanes);
+    gl.uniform4f(uCore, core[0], core[1], core[2], radius + slack);
+    gl.uniform1f(uDeep, pose.deep);
+    gl.uniform1f(uCreased, pose.creased);
     gl.uniform1f(uU, Math.min(pose.open, 1));
     gl.uniform1f(uSweep, pose.sweep);
     gl.uniformMatrix3fv(uRot, false, rotation(...pose.rot));
-    gl.uniform3f(uPivot, 0, 0, -radius * wad);
+    gl.uniform3f(uPivot, 0, 0, core[2] * wad);
     gl.uniform3f(uScale, ...pose.scale);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.drawElements(gl.TRIANGLES, index.length, gl.UNSIGNED_INT, 0);
@@ -608,11 +773,11 @@ export function mountPaperBall(): void {
       gl.getExtension('WEBGL_lose_context')?.loseContext();
       return;
     }
-    // Time the hold from the first animated frame.
+    // Time the crumple and the hold from the first animated frame.
     if (!start) {
       start = now;
       last = now;
-      setTimeout(release, PAPER_TIMING.rest);
+      setTimeout(release, PAPER_TIMING.crumple + PAPER_TIMING.rest);
     } else if (gaps.length < 12) {
       // A machine that cannot draw the ball smoothly gets the still
       // instead of a stuttering ball and a page starved behind it.
@@ -623,8 +788,16 @@ export function mountPaperBall(): void {
         return;
       }
     }
-    const t = (now - mountedAt) / 1000;
-    if (unfoldAt) {
+    // The ball's wait is timed from the end of the crumple. A reveal that
+    // comes early (the hold was capped) waits for the ball to be made.
+    const made = start + PAPER_TIMING.crumple;
+    if (now < made) {
+      draw(crumplePose(now - start));
+    } else if (unfoldAt) {
+      if (unfoldAt < made) {
+        unfoldAt = now;
+        revealIdle = 0;
+      }
       const ms = now - unfoldAt;
       draw(openPose(ms, revealIdle));
       if (ms >= PAPER_TIMING.unfold) {
@@ -634,7 +807,7 @@ export function mountPaperBall(): void {
         return;
       }
     } else {
-      draw(idlePose(t));
+      draw(idlePose((now - made) / 1000));
     }
     requestAnimationFrame(frame);
   };
@@ -712,11 +885,8 @@ export function mountPaperBall(): void {
 
     const u = (name: string) => gl.getUniformLocation(program, name);
     gl.uniform2f(u('uHalf'), width / 2, height / 2);
-    gl.uniform1f(u('uC'), 1 / radius);
     gl.uniform1f(u('uR'), radius);
-    gl.uniform1f(u('uWrap'), Math.PI * 1.22);
-    gl.uniform1f(u('uSeed'), shaderSeed);
-    gl.uniform2f(u('uSweepDir'), Math.cos(sweepAngle), Math.sin(sweepAngle));
+    gl.uniform2f(u('uSweepDir'), sweepDir[0], sweepDir[1]);
     gl.uniformMatrix4fv(u('uMvp'), false, mvp);
     gl.uniform3f(u('uEye'), 0, 0, dist);
     const light = [-0.42, 0.55, 0.72];
@@ -725,6 +895,13 @@ export function mountPaperBall(): void {
     gl.uniform1i(u('uTex'), 0);
     gl.uniform1i(u('uCrease'), 1);
     uU = u('uU');
+    uHinge = u('uHinge');
+    uCage = u('uCage');
+    uHingeSoft = u('uHingeSoft');
+    uCageSoft = u('uCageSoft');
+    uCore = u('uCore');
+    uDeep = u('uDeep');
+    uCreased = u('uCreased');
     uSweep = u('uSweep');
     uRot = u('uRot');
     uPivot = u('uPivot');
@@ -734,8 +911,8 @@ export function mountPaperBall(): void {
     gl.enable(gl.DEPTH_TEST);
     gl.clearColor(0, 0, 0, 0);
 
-    // Draw the crumpled first frame before replacing the embedded still.
-    draw(idlePose(0));
+    // Draw the flat sheet before taking over from the overlay's own.
+    draw(crumplePose(0));
     overlay.dataset.paper = 'ball';
     if (scrub) {
       // Out of reach of boot-overlay.ts, which removes the overlay by id.
@@ -743,8 +920,11 @@ export function mountPaperBall(): void {
       (window as unknown as { __paperBall: unknown }).__paperBall = {
         unfold: PAPER_TIMING.unfold,
         stages: STAGES,
+        crumple: PAPER_TIMING.crumple,
         // Draws the ball `idle` seconds into its wait, or `ms` into the reveal.
         pose: (idle: number, ms?: number) => draw(ms === undefined ? idlePose(idle) : openPose(ms, idle)),
+        // Draws the sheet `ms` into being balled up.
+        crumpling: (ms: number) => draw(crumplePose(ms)),
       };
       return;
     }
@@ -770,7 +950,7 @@ export function mountPaperBall(): void {
       return;
     }
     if (scrub) return;
-    revealIdle = (performance.now() - mountedAt) / 1000;
     unfoldAt = performance.now();
+    revealIdle = start ? Math.max(0, (unfoldAt - start - PAPER_TIMING.crumple) / 1000) : 0;
   }, { once: true });
 }
